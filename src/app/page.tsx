@@ -1,7 +1,7 @@
-import { IndexSection } from "@/components/Index/IndexSection";
+import { ProfileSection } from "@/components/Index/ProfileSection";
 
 export default function Home() {
   return (
-    <IndexSection/>
+    <ProfileSection/>
   );
 }

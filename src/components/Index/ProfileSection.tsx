@@ -1,7 +1,7 @@
 import { profile } from "@/lib/profile";
 import Image from "next/image";
 
-export const IndexSection = () => {
+export const ProfileSection = () => {
   return (
     <section>
       <div className="container d-flex justify-center" style={{ gap: "1em" }}>
