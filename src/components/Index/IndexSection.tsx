@@ -1,9 +1,10 @@
+import { profile } from "@/lib/profile";
 import Image from "next/image";
 
 export const IndexSection = () => {
   return (
     <section>
-      <div className="container d-flex justify-center" style={{gap: "1em"}}>
+      <div className="container d-flex justify-center" style={{ gap: "1em" }}>
         <div
           className="card d-flex flex-column align-items-center"
           style={{
@@ -24,16 +25,17 @@ export const IndexSection = () => {
               borderRadius: "100%",
             }}
           />
-          <div className="label">范余振富</div>
+          <div className="label d-flex flex-column">
+            {profile.name.chinese}
+            <div className="hint">{profile.name.english}</div>
+          </div>
         </div>
         <div
-          className="card bordered"
+          className="card bordered shadow"
           style={{
             flex: 1,
           }}
-        >
-          
-        </div>
+        ></div>
       </div>
     </section>
   );
