@@ -1,10 +1,6 @@
 :root {
   --background-color: #222222;
   --text-color: #FFFFFF;
-  --space-small: 5px;
-  --space-medium: 10px;
-  --space-large: 20px;
-  --space-ultra: 30px;
 }
 
 * {
@@ -33,6 +29,8 @@ header{
   height: 6em;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
+  border-bottom: 2px solid #444;
+  margin-bottom: 1em;
 }
 
 section{
@@ -80,6 +78,7 @@ section{
 
 .d-flex{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .flex-column {
@@ -94,22 +93,21 @@ section{
   align-items: center;
 }
 
+
 .card{
-  color: white;
-  border: #878787 solid 1px;
-  border-radius: 10px;
-  padding: var(--space-medium);
+  color: var(--text-color);
+  border-radius: 12px;
+  padding: var(--space-md);
+}
+
+
+.bordered{
+  border: 2px solid #444;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 
 @media (max-width: 768px) {
-  :root{
-    --space-small: 4px;
-    --space-medium: 8px;
-    --space-large: 18px;
-    --space-ultra: 24px;
-  }
-
   .title {
     font-size: 32px;
   }
@@ -128,5 +126,9 @@ section{
 
   .hint{
     font-size: 16px;
+  }
+
+  .card {
+    width: 100% !important;
   }
 }

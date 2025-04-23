@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { Header } from '@/components/Header';
 
 export const metadata: Metadata={
-  title: "IDK",
+  title: "飯魚 FanYu",
   icons:{
     icon:[
       { rel: "icon", url: "/favicon.ico" }
