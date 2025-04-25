@@ -104,10 +104,9 @@ export const HomeSection = () => {
             style={{
               maxWidth: "100%",
               padding: "1.5em",
+              whiteSpace: "pre-wrap",
               fontFamily: "Montserrat, sans-serif",
-              whiteSpace: "wrap",
               overflow: "auto",
-
             }}
           >
             <p className="hint">TypeScript</p>
