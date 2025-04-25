@@ -44,7 +44,7 @@ export const Header = () => {
             }}
           />
         </Link>
-        <div className="nav-collapse content text-bold">
+        <div className="nav-collapse note text-bold">
           {Routes.map((item, index) => (
             <Link key={index} href={item.href}>
               {item.label[Language.Current]}

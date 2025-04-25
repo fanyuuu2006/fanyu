@@ -8,7 +8,7 @@ export const LanguageSwitchButton = () => {
 
   return (
     <Language.Switch
-      className="btn text-center label"
+      className="btn text-center content"
       style={{
         position: "fixed",
         bottom: "1em",

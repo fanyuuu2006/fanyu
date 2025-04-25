@@ -89,23 +89,23 @@ a:hover{
 }
 
 .title {
-  font-size: 40px;
+  font-size: 50px;
 }
 
 .label {
-  font-size: 35px;
+  font-size: 45px;
 }
 
 .content {
-  font-size: 25px;
+  font-size: 35px;
 }
 
 .note {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .hint {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .text-center {
@@ -192,23 +192,23 @@ a:hover{
   }
 
   .title {
-    font-size: 35px;
+    font-size: 40px;
   }
 
   .label {
-    font-size: 30px;
+    font-size: 35px;
   }
 
   .content {
-    font-size: 22px;
+    font-size: 25px;
   }
 
   .note {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .hint {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .card, .card-glass{
