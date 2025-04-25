@@ -104,19 +104,25 @@ export const HomeSection = () => {
             style={{
               maxWidth: "100%",
               padding: "1.5em",
-              whiteSpace: "pre-wrap",
               fontFamily: "Montserrat, sans-serif",
               overflow: "auto",
             }}
           >
             <p className="hint">TypeScript</p>
-            <code className="note">
+            <div className="note d-flex flex-column">
               {codeLines.map((line, index) => (
-                <div key={index}>
-                  <span style={{ color: "#888" }}>{index + 1}</span> {line}
+                <div key={index} className="d-flex" style={{flexWrap: "nowrap", gap: "0.5em"}}>
+                  <span style={{ color: "#888" }}>{index + 1}</span>
+                  <code
+                    style={{
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {line}
+                  </code>
                 </div>
               ))}
-            </code>
+            </div>
           </pre>
         </div>
       </div>
