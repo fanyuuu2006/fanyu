@@ -1,11 +1,10 @@
 "use client";
-import { LanguageOption, useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { LanguageContent } from "@/types/language";
 import Link from "next/link";
 
 const Routes: {
-  label: {
-    [key in LanguageOption]: string;
-  };
+  label: LanguageContent<string>;
   href: string;
 }[] = [
   {
@@ -26,13 +25,12 @@ export const Header = () => {
         style={{ height: "6em", color: "white", padding: "0.5em 2em" }}
       >
         <div className="nav-brand"></div>
-        <div className="nav-collapse content">
+        <div className="nav-collapse content text-bold">
           {Routes.map((item, index) => (
             <Link key={index} href={item.href}>
               {item.label[Language.Current]}
             </Link>
           ))}
-          
         </div>
       </nav>
     </header>

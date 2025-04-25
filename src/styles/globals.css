@@ -9,7 +9,6 @@
 *, *::before, *::after {
   box-sizing: border-box;
   color: var(--text-color);
-  font-weight: bold !important;
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
@@ -105,7 +104,7 @@ a:hover{
 }
 
 .hint {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .text-center {
@@ -142,9 +141,13 @@ a:hover{
 }
 
 .card {
-  background-color: var(--background-color);
+  background-color: var(--background-color-dark);
   color: var(--text-color);
   border-radius: 12px;
+}
+
+.text-bold{
+  font-weight: bold;
 }
 
 .bordered {
@@ -155,6 +158,27 @@ a:hover{
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
+
+/* 設定滾動條的寬度 */
+::-webkit-scrollbar {
+  width: 3px; /* 垂直滾動條的寬度 */
+  height: 3px;
+}
+
+/* 設定滾動條的背景 */
+::-webkit-scrollbar-track {
+  background: none; /* 滾動條背景顏色 */
+}
+
+/* 設定滾動條的顏色 */
+::-webkit-scrollbar-thumb {
+  background: #ffffff; /* 滾動條顏色 */
+}
+
+/* 滾動條滑塊 hover 時的顏色 */
+::-webkit-scrollbar-thumb:hover {
+  background: #878787; /* 滑塊 hover 時的顏色 */
+}
 
 @media (max-width: 768px) {
   .title {
@@ -174,7 +198,7 @@ a:hover{
   }
 
   .hint {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .card {
