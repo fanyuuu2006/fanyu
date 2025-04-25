@@ -18,7 +18,7 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
         hello: "哈囉，",
         iAm: "我是",
         intro: "一名熱愛編程的大學生開發者",
-        coding: "程式設計",
+        coding: "寫程式",
         drawing: "繪畫",
       },
       english: {
