@@ -2,9 +2,14 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { profile } from "@/lib/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { GithubOutlined, InstagramOutlined } from "@ant-design/icons";
-import { Tooltip } from "antd";
+import {
+  CopyOutlined,
+  GithubOutlined,
+  InstagramOutlined,
+} from "@ant-design/icons";
+import { Button, Tooltip } from "antd";
 import { OutsideLink } from "fanyucomponents";
+import { Toast } from "../common/Toast";
 
 type HomeContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
@@ -111,7 +116,29 @@ export const HomeSection = () => {
               overflow: "auto",
             }}
           >
-            <p className="hint">TypeScript</p>
+            <div className="hint d-flex">
+              <span>TypeScript</span>
+              <Button
+                type="text"
+                className="btn"
+                icon={<CopyOutlined />}
+                style={{ marginLeft: "auto" }}
+                onClick={async () => {
+                  await navigator.clipboard
+                    .writeText(codeLines.join("\n"))
+                    .then(() => {
+                      Toast.fire({
+                        icon: "success",
+                        text: "已複製到剪貼簿",
+                      });
+                    })
+                    .catch((err) => {
+                      console.error("複製代碼失敗", err);
+                      Toast.fire({ icon: "error", text: "複製代碼失敗" });
+                    });
+                }}
+              />
+            </div>
             <div className="note d-flex flex-column text-bold">
               {codeLines.map((line, index) => (
                 <div
@@ -119,7 +146,9 @@ export const HomeSection = () => {
                   className="d-flex"
                   style={{ flexWrap: "nowrap", gap: "0.5em" }}
                 >
-                  <span style={{ color: "#888", userSelect: "none" }}>{index + 1}</span>
+                  <span style={{ color: "#888", userSelect: "none" }}>
+                    {index + 1}
+                  </span>
                   <code
                     style={{
                       whiteSpace: "pre-wrap",
