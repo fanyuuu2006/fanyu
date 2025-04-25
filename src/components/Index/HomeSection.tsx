@@ -1,21 +1,47 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import { profile } from "@/lib/profile";
+import { LanguageContent, LanguageOption } from "@/types/language";
 import { OutsideLink } from "fanyucomponents";
+
+type HomeContent = Record<
+  "hello" | "iAm" | "intro" | "coding" | "drawing",
+  string
+>;
+
+const getHomeContent = (language: LanguageOption): HomeContent =>
+  ((
+    {
+      chinese: {
+        hello: "哈囉，",
+        iAm: "我是",
+        intro: "一名熱愛編程的大學生開發者",
+        coding: "編程",
+        drawing: "繪畫",
+      },
+      english: {
+        hello: "Hello,",
+        iAm: "I'm ",
+        intro: "A passionate coding student developer.",
+        coding: "Coding",
+        drawing: "Drawing",
+      },
+    } as LanguageContent<HomeContent>
+  )[language]);
 
 export const HomeSection = () => {
   const Language = useLanguage();
 
+  const homeContent = getHomeContent(Language.Current);
+
   const codeLines: string[] = [
-    "const Fanyu = {",
+    "const FanYu = {",
     `    name: ${profile[Language.Current].name},`,
     `    age: ${
       new Date().getFullYear() - new Date(profile.birthday).getFullYear()
     },`,
-    `    Interests: ['${
-      { chinese: "編程", english: "Coding" }[Language.Current]
-    }', '${{ chinese: "繪畫", english: "Drawing" }[Language.Current]}'],`,
-    "} as const",
+    `    Interests: ['${homeContent.coding}', '${homeContent.drawing}'],`,
+    "} as const;",
   ];
 
   return (
@@ -30,21 +56,12 @@ export const HomeSection = () => {
           }}
         >
           <div>
-            <div className="label text-bold">
-              {{ chinese: "哈囉，", english: "Hello," }[Language.Current]}
-            </div>
+            <div className="label text-bold">{homeContent.hello}</div>
             <div className="title text-bold">
-              {{ chinese: "我是", english: "I'm " }[Language.Current]}
+              {homeContent.iAm}
               {profile[Language.Current].nickname}❗
             </div>
-            <div className="note">
-              {
-                {
-                  chinese: "一名熱愛編程的大學生開發者",
-                  english: "A passionate coding student developer.",
-                }[Language.Current]
-              }
-            </div>
+            <div className="note">{homeContent.intro}</div>
           </div>
         </div>
         <div
