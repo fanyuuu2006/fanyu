@@ -86,7 +86,7 @@ export const HomeSection = () => {
             </div>
             <div className="note">{homeContent.intro}</div>
             <div
-              className="content d-flex"
+              className="label d-flex"
               style={{
                 gap: "0.5em",
               }}
@@ -119,7 +119,7 @@ export const HomeSection = () => {
                   className="d-flex"
                   style={{ flexWrap: "nowrap", gap: "0.5em" }}
                 >
-                  <span style={{ color: "#888" }}>{index + 1}</span>
+                  <span style={{ color: "#888", userSelect: "none" }}>{index + 1}</span>
                   <code
                     style={{
                       whiteSpace: "pre-wrap",
