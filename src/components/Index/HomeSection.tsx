@@ -102,9 +102,12 @@ export const HomeSection = () => {
           <pre
             className="card shadow"
             style={{
+              maxWidth: "100%",
               padding: "1.5em",
               fontFamily: "Montserrat, sans-serif",
+              whiteSpace: "wrap",
               overflow: "auto",
+
             }}
           >
             <p className="hint">TypeScript</p>
