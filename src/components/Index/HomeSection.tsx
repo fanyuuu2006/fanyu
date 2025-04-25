@@ -31,6 +31,23 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
     } as LanguageContent<HomeContent>
   )[language]);
 
+const links: {
+  label: string;
+  icon: React.ReactNode;
+  href: string;
+}[] = [
+  {
+    label: "GitHub",
+    icon: <GithubOutlined />,
+    href: "https://github.com/fanyuuu2006",
+  },
+  {
+    label: "Instagram",
+    icon: <InstagramOutlined />,
+    href: "https://www.instagram.com/fan._.yuuu",
+  },
+];
+
 export const HomeSection = () => {
   const Language = useLanguage();
 
@@ -42,32 +59,15 @@ export const HomeSection = () => {
     `    age: ${
       new Date().getFullYear() - new Date(profile.birthday).getFullYear()
     },`,
-    `    Interests: ['${homeContent.coding}', '${homeContent.drawing}'],`,
+    `    interests: ['${homeContent.coding}', '${homeContent.drawing}'],`,
     "} as const;",
-  ];
-
-  const links: {
-    label: string;
-    icon: React.ReactNode;
-    href: string;
-  }[] = [
-    {
-      label: "GitHub",
-      icon: <GithubOutlined />,
-      href: "https://github.com/fanyuuu2006",
-    },
-    {
-      label: "Instagram",
-      icon: <InstagramOutlined />,
-      href: "https://www.instagram.com/fan._.yuuu",
-    },
   ];
 
   return (
     <section id="home">
       <div className="container d-flex justify-center" style={{ gap: "1em" }}>
         <div
-          className="d-flex flex-column align-items-center justify-center"
+          className="card-glass d-flex flex-column align-items-center justify-center"
           style={{
             width: "50%",
             padding: "1em",
@@ -82,7 +82,7 @@ export const HomeSection = () => {
             </div>
             <div className="note">{homeContent.intro}</div>
             <div
-              className="note d-flex"
+              className="content d-flex"
               style={{
                 gap: "0.5em",
               }}

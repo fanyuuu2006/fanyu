@@ -142,7 +142,11 @@ a:hover{
 
 .card {
   background-color: var(--background-color-dark);
-  color: var(--text-color);
+  border-radius: 12px;
+}
+
+.card-glass{
+  background-color: transparent;
   border-radius: 12px;
 }
 
@@ -201,7 +205,7 @@ a:hover{
     font-size: 10px;
   }
 
-  .card {
+  .card, .card-glass{
     width: 100% !important;
   }
 }
