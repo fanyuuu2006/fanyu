@@ -68,7 +68,7 @@ export const HomeSection = () => {
     <section id="home">
       <div
         className="container d-flex justify-center"
-        style={{ gap: "1em", minHeight: "80vh" }}
+        style={{ minHeight: "80vh" }}
       >
         <div
           className="card-glass d-flex flex-column align-items-center justify-center"
