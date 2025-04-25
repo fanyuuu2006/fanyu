@@ -2,6 +2,8 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { profile } from "@/lib/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
+import { GithubOutlined, InstagramOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
 import { OutsideLink } from "fanyucomponents";
 
 type HomeContent = Record<
@@ -44,13 +46,30 @@ export const HomeSection = () => {
     "} as const;",
   ];
 
+  const links: {
+    label: string;
+    icon: React.ReactNode;
+    href: string;
+  }[] = [
+    {
+      label: "GitHub",
+      icon: <GithubOutlined />,
+      href: "https://github.com/fanyuuu2006",
+    },
+    {
+      label: "Instagram",
+      icon: <InstagramOutlined />,
+      href: "https://www.instagram.com/fan._.yuuu",
+    },
+  ];
+
   return (
     <section id="home">
       <div className="container d-flex justify-center" style={{ gap: "1em" }}>
         <div
           className="d-flex flex-column align-items-center justify-center"
           style={{
-            flexGrow: 1,
+            width: "50%",
             padding: "1em",
             gap: "1em",
           }}
@@ -62,11 +81,23 @@ export const HomeSection = () => {
               {profile[Language.Current].nickname}❗
             </div>
             <div className="note">{homeContent.intro}</div>
+            <div
+              className="note d-flex"
+              style={{
+                gap: "0.5em",
+              }}
+            >
+              {links.map((item, index) => (
+                <Tooltip key={index} title={item.label} placement="bottom">
+                  <OutsideLink href={item.href}>{item.icon}</OutsideLink>
+                </Tooltip>
+              ))}
+            </div>
           </div>
         </div>
         <div
           className="d-flex flex-column align-items-center justify-center"
-          style={{ width: "50%" }}
+          style={{ flexGrow: 1 }}
         >
           <pre
             className="card shadow"
