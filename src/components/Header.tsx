@@ -26,7 +26,7 @@ export const Header = () => {
         style={{ height: "6em", color: "white", padding: "0.5em 2em" }}
       >
         <div className="nav-brand"></div>
-        <div className="nav-collapse label">
+        <div className="nav-collapse content">
           {Routes.map((item, index) => (
             <Link key={index} href={item.href}>
               {item.label[Language.Current]}

@@ -1,9 +1,9 @@
 :root {
-  --background-color: #222222;
-  --background-color-dark: #111111;
+  --background-color: #101528;
+  --background-color-dark: #080829;
   --text-color: #ffffff;
-  --text-color-primary: #006aff;
-  --border-color: #383838;
+  --text-color-primary: #0087ff;
+  --border-color: #3d4da4;
 }
 
 *, *::before, *::after {
@@ -32,6 +32,7 @@ header {
   width: 100%;
   background-color: var(--background-color);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 1em;
 }
 
@@ -63,12 +64,20 @@ button {
   margin-left: auto;
 }
 
+.nav-collapse > a:hover{
+  color: var(--text-color-primary);
+}
+
 table {
   border-collapse: collapse;
 }
 
 a{
   text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline solid;
 }
 
 .container {
@@ -80,11 +89,11 @@ a{
 }
 
 .title {
-  font-size: 36px;
+  font-size: 40px;
 }
 
 .label {
-  font-size: 32px;
+  font-size: 35px;
 }
 
 .content {
@@ -92,11 +101,11 @@ a{
 }
 
 .note {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .hint {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .text-center {
@@ -109,6 +118,10 @@ a{
 
 .text-right {
   text-align: right;
+}
+
+.text-primary{
+  color: var(--text-color-primary);
 }
 
 .d-flex {
@@ -135,7 +148,7 @@ a{
 }
 
 .bordered {
-  border: 2px solid var(--border-color);
+  border: 3px solid var(--border-color);
 }
 
 .shadow {
@@ -145,11 +158,11 @@ a{
 
 @media (max-width: 768px) {
   .title {
-    font-size: 32px;
+    font-size: 35px;
   }
 
   .label {
-    font-size: 28px;
+    font-size: 30px;
   }
 
   .content {
