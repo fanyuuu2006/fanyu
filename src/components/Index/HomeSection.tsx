@@ -104,7 +104,7 @@ export const HomeSection = () => {
           style={{ flexGrow: 1 }}
         >
           <pre
-            className="card shadow"
+            className="card shadow bordered"
             style={{
               maxWidth: "100%",
               padding: "1.5em",
