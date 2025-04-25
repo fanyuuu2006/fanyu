@@ -54,6 +54,7 @@ button {
 }
 
 .nav-brand {
+  height: 100%;
   width: auto;
 }
 
@@ -185,6 +186,11 @@ a:hover{
 }
 
 @media (max-width: 768px) {
+
+  .nav-collapse {
+    display: none;
+  }
+
   .title {
     font-size: 35px;
   }
