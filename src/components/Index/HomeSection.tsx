@@ -18,7 +18,7 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
         hello: "哈囉，",
         iAm: "我是",
         intro: "一名熱愛編程的大學生開發者",
-        coding: "編程",
+        coding: "程式設計",
         drawing: "繪畫",
       },
       english: {
@@ -55,17 +55,21 @@ export const HomeSection = () => {
 
   const codeLines: string[] = [
     "const FanYu = {",
-    `    name: '${profile[Language.Current].name}',`,
-    `    age: ${
+    `  name: '${profile[Language.Current].name}',`,
+    `  nickname: '${profile[Language.Current].nickname}',`,
+    `  age: ${
       new Date().getFullYear() - new Date(profile.birthday).getFullYear()
     },`,
-    `    interests: ['${homeContent.coding}', '${homeContent.drawing}'],`,
+    `  interests: ['${homeContent.coding}', '${homeContent.drawing}'],`,
     "} as const;",
   ];
 
   return (
     <section id="home">
-      <div className="container d-flex justify-center" style={{ gap: "1em" }}>
+      <div
+        className="container d-flex justify-center"
+        style={{ gap: "1em", minHeight: "80vh" }}
+      >
         <div
           className="card-glass d-flex flex-column align-items-center justify-center"
           style={{
@@ -104,14 +108,17 @@ export const HomeSection = () => {
             style={{
               maxWidth: "100%",
               padding: "1.5em",
-              fontFamily: "Montserrat, monospace, sans-serif",
               overflow: "auto",
             }}
           >
             <p className="hint">TypeScript</p>
-            <div className="note d-flex flex-column">
+            <div className="note d-flex flex-column text-bold">
               {codeLines.map((line, index) => (
-                <div key={index} className="d-flex" style={{flexWrap: "nowrap", gap: "0.5em"}}>
+                <div
+                  key={index}
+                  className="d-flex"
+                  style={{ flexWrap: "nowrap", gap: "0.5em" }}
+                >
                   <span style={{ color: "#888" }}>{index + 1}</span>
                   <code
                     style={{

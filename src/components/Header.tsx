@@ -14,6 +14,13 @@ const Routes: {
     },
     href: "/#home",
   },
+  {
+    label: {
+      chinese: "關於我",
+      english: "About Me",
+    },
+    href: "/#aboutMe",
+  },
 ];
 
 export const Header = () => {

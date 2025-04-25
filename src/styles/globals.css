@@ -59,7 +59,7 @@ button {
 
 .nav-collapse {
   display: flex;
-  gap: 0.5em;
+  gap: 1.5em;
   margin-left: auto;
 }
 
