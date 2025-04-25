@@ -55,7 +55,7 @@ export const HomeSection = () => {
 
   const codeLines: string[] = [
     "const FanYu = {",
-    `    name: ${profile[Language.Current].name},`,
+    `    name: '${profile[Language.Current].name}',`,
     `    age: ${
       new Date().getFullYear() - new Date(profile.birthday).getFullYear()
     },`,
@@ -104,7 +104,7 @@ export const HomeSection = () => {
             style={{
               maxWidth: "100%",
               padding: "1.5em",
-              fontFamily: "Montserrat, sans-serif",
+              fontFamily: "Montserrat, monospace, sans-serif",
               overflow: "auto",
             }}
           >

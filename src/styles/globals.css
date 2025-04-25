@@ -3,7 +3,7 @@
   --background-color-dark: #080829;
   --text-color: #ffffff;
   --text-color-primary: #0087ff;
-  --border-color: #3d4da4;
+  --border-color: #3d3fb4;
 }
 
 *, *::before, *::after {
@@ -42,7 +42,7 @@ button {
 
 .btn{
   background: var(--background-color-dark);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   cursor: pointer;
 }
 
