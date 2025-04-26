@@ -169,16 +169,3 @@ export const HomeSection = () => {
   );
 };
 
-/* <Image
-  loading="lazy"
-  src="/CampPhoto.jpg"
-  className="bordered shadow"
-  width={1080}
-  height={1080}
-  alt="Camp Photo"
-  style={{
-    width: "300px",
-    height: "auto",
-    borderRadius: "100%",
-  }}
-/> */
