@@ -29,7 +29,7 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
       english: {
         hello: "Hello,",
         iAm: "I'm ",
-        intro: "A student developer passionate about coding",
+        intro: "A student developer who loves coding",
         coding: "Coding",
         drawing: "Drawing",
       },
@@ -96,8 +96,8 @@ export const HomeSection = () => {
                 gap: "0.5em",
               }}
             >
-              {links.map((item, index) => (
-                <Tooltip key={index} title={item.label} placement="bottom">
+              {links.map((item) => (
+                <Tooltip key={item.label} title={item.label} placement="bottom">
                   <OutsideLink href={item.href}>{item.icon}</OutsideLink>
                 </Tooltip>
               ))}
@@ -105,8 +105,7 @@ export const HomeSection = () => {
           </div>
         </div>
         <div
-          className="d-flex flex-column align-items-center justify-center"
-          style={{ flexGrow: 1 }}
+          className="d-flex flex-column align-items-center justify-center flex-grow"
         >
           <pre
             className="card shadow bordered"
