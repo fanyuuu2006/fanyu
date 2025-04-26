@@ -24,9 +24,6 @@ export const AboutMeSection = () => {
   return (
     <section
       id="aboutMe"
-      style={{
-        backgroundColor: "#fff",
-      }}
     >
       <div className="container d-flex flex-column align-items-center" style={{color: "var(--background-color)"}}>
         <div className="title text-bold" style={{color: "var(--background-color)"}}>{aboutMeContent.aboutMe}</div>

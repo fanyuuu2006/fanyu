@@ -98,11 +98,7 @@ export const HomeSection = () => {
             >
               {links.map((item, index) => (
                 <Tooltip key={index} title={item.label} placement="bottom">
-                  <OutsideLink
-                    href={item.href}
-                  >
-                    {item.icon}
-                  </OutsideLink>
+                  <OutsideLink href={item.href}>{item.icon}</OutsideLink>
                 </Tooltip>
               ))}
             </div>
@@ -124,7 +120,11 @@ export const HomeSection = () => {
               <span>TypeScript</span>
               <button
                 className="btn text-center"
-                style={{ marginLeft: "auto", width: "1.5em", borderRadius: "10%"}}
+                style={{
+                  marginLeft: "auto",
+                  width: "1.5em",
+                  borderRadius: "10%",
+                }}
                 onClick={async () => {
                   await navigator.clipboard
                     .writeText(codeLines.join("\n"))
