@@ -5,7 +5,8 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { Tooltip } from "antd";
 import React from "react";
 
-type SkillsContent = Record<"skills" | "frontend" | "backend", string>;
+type SkillCategory = "frontend" | "backend" | "devtools";
+type SkillsContent = Record<"skills" | SkillCategory, string>;
 
 const getSkillsContent = (language: LanguageOption): SkillsContent =>
   ((
@@ -14,21 +15,18 @@ const getSkillsContent = (language: LanguageOption): SkillsContent =>
         skills: "技能",
         frontend: "前端",
         backend: "後端",
-        devtools: "開發工具"
+        devtools: "開發工具",
       },
       english: {
         skills: "Skills",
         frontend: "Frontend",
         backend: "Backend",
-        devtools: "Development tools"
+        devtools: "Development tools",
       },
     } as LanguageContent<SkillsContent>
   )[language]);
 
-const skillItems: Record<
-  "frontend" | "backend"| "devtools",
-  { src: string; title: string }[]
-> = {
+const skillItems: Record<SkillCategory, { src: string; title: string }[]> = {
   frontend: [
     {
       title: "TypeScript",
@@ -70,11 +68,20 @@ const skillItems: Record<
     { title: "Python", src: "/Skills/python.svg" },
     { title: "Flask", src: "/Skills/flask.svg" },
   ],
-  devtools:[
-    {title: "Git", src: "/Skills/git.svg"},
-    {title: "Visual Studio Code", src: "/Skills/vscode.svg"},
-  ]
-  
+  devtools: [
+    {
+      title: "Git",
+      src: "/Skills/git.svg",
+    },
+    {
+      title: "Visual Studio Code",
+      src: "/Skills/vscode.svg",
+    },
+    {
+      title: "ESLint",
+      src: "/Skills/eslint.svg",
+    },
+  ],
 };
 
 export const SkillsSection = () => {
@@ -97,6 +104,7 @@ export const SkillsSection = () => {
                 {items.map((item) => (
                   <Tooltip key={item.title} title={item.title}>
                     <Image
+                      draggable={false}
                       alt={item.title}
                       src={item.src}
                       width={300}
