@@ -30,7 +30,7 @@ export const Header = () => {
     <header>
       <nav
         className="container d-flex align-items-center justify-center"
-        style={{ height: "6em", color: "white", padding: "0.5em 2em" }}
+        style={{ height: "6em", padding: "0.5em 2em" }}
       >
         <Link href="/#home" className="nav-brand">
           <Image
@@ -44,9 +44,15 @@ export const Header = () => {
             }}
           />
         </Link>
-        <div className="nav-collapse note text-bold">
+        <div className="nav-collapse note text-bold ">
           {Routes.map((item, index) => (
-            <Link key={index} href={item.href}>
+            <Link
+              key={index}
+              href={item.href}
+              style={{
+                color: "var(--text-color)",
+              }}
+            >
               {item.label[Language.Current]}
             </Link>
           ))}

@@ -7,7 +7,7 @@ import {
   GithubOutlined,
   InstagramOutlined,
 } from "@ant-design/icons";
-import { Button, Tooltip } from "antd";
+import { Tooltip } from "antd";
 import { OutsideLink } from "fanyucomponents";
 import { Toast } from "../common/Toast";
 
@@ -29,7 +29,7 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
       english: {
         hello: "Hello,",
         iAm: "I'm ",
-        intro: "A passionate coding student developer.",
+        intro: "A student developer passionate about coding",
         coding: "Coding",
         drawing: "Drawing",
       },
@@ -56,7 +56,7 @@ const links: {
 export const HomeSection = () => {
   const Language = useLanguage();
 
-  const homeContent = getHomeContent(Language.Current);
+  const homeContent: HomeContent = getHomeContent(Language.Current);
 
   const codeLines: string[] = [
     "const FanYu = {",
@@ -73,7 +73,7 @@ export const HomeSection = () => {
     <section id="home">
       <div
         className="container d-flex justify-center"
-        style={{ minHeight: "80vh" }}
+        style={{ color: "var(--text-color)", minHeight: "80vh" }}
       >
         <div
           className="card-glass d-flex flex-column align-items-center justify-center"
@@ -98,7 +98,14 @@ export const HomeSection = () => {
             >
               {links.map((item, index) => (
                 <Tooltip key={index} title={item.label} placement="bottom">
-                  <OutsideLink href={item.href}>{item.icon}</OutsideLink>
+                  <OutsideLink
+                    href={item.href}
+                    style={{
+                      color: "var(--text-color)",
+                    }}
+                  >
+                    {item.icon}
+                  </OutsideLink>
                 </Tooltip>
               ))}
             </div>
@@ -118,11 +125,9 @@ export const HomeSection = () => {
           >
             <div className="hint d-flex">
               <span>TypeScript</span>
-              <Button
-                type="text"
-                className="btn"
-                icon={<CopyOutlined />}
-                style={{ marginLeft: "auto" }}
+              <button
+                className="btn text-center"
+                style={{ marginLeft: "auto", width: "1.5em", borderRadius: "10%"}}
                 onClick={async () => {
                   await navigator.clipboard
                     .writeText(codeLines.join("\n"))
@@ -137,7 +142,9 @@ export const HomeSection = () => {
                       Toast.fire({ icon: "error", text: "複製代碼失敗" });
                     });
                 }}
-              />
+              >
+                <CopyOutlined />
+              </button>
             </div>
             <div className="note d-flex flex-column text-bold">
               {codeLines.map((line, index) => (
