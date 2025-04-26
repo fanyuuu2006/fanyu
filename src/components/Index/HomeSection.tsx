@@ -29,7 +29,7 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
       english: {
         hello: "Hello,",
         iAm: "I'm ",
-        intro: "A student developer who loves coding",
+        intro: "A student developer who loves coding.",
         coding: "Coding",
         drawing: "Drawing",
       },
