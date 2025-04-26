@@ -58,7 +58,7 @@ export const AboutMeSection = () => {
             style={{ width: "35%" }}
           >
             <Image
-              className="bordered shadow"
+              className="bordered"
               alt="頭貼"
               src="/GameShow.jpg"
               width={1000}
@@ -80,11 +80,11 @@ export const AboutMeSection = () => {
                     color: "var(--background-color)",
                     textIndent: "2em", // 首行縮排
                     textJustify: "inter-word",
+                    marginBottom: "1em", // 增加段落間距
                   }}
                 >
                   {part}
                 </p>
-                <br />
               </React.Fragment>
             ))}
           </div>

@@ -66,7 +66,8 @@ export const HomeSection = () => {
       (new Date().getTime() - new Date(profile.birthday).getTime()) /
         (365.25 * 24 * 60 * 60 * 1000)
     )},`,
-    `  interests: ['${homeContent.coding}', '${homeContent.drawing}'],`,
+    `  hobbies: ['${homeContent.coding}', '${homeContent.drawing}'],`,
+    "  skills: ['React', 'Next.js', 'TypeScript']",
     "} as const;",
   ];
 
