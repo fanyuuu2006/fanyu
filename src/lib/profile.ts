@@ -11,7 +11,7 @@ export const profile = {
     },
   },
   english: {
-    name: "Fan-Yu, Zhen-Fu",
+    name: "Fan-Yu Zhen-Fu",
     nickname: "FanYu",
     nationality: "Republic of China (Taiwan)",
     from: "Guanxi Township, Hsinchu County, Taiwan",

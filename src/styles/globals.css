@@ -36,25 +36,25 @@ header {
   border-bottom: 1px solid var(--border-color);
 }
 
-#home{
+#home {
   position: relative;
-  background:url("/cbg.jpg") center/cover no-repeat;
+  background: url("/cbg.jpg") center/cover no-repeat;
 }
 
-#home::before{
+#home::before {
   content: "";
   position: absolute;
-  inset: 0 ; /*是 top: 0; right: 0; bottom: 0; left: 0; 的簡寫。*/
+  inset: 0; /*是 top: 0; right: 0; bottom: 0; left: 0; 的簡寫。*/
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 0;
 }
 
-#home>.container {
+#home > .container {
   position: relative;
   z-index: 1; /* 確保內容蓋在遮罩上 */
 }
 
-#aboutMe{
+#aboutMe {
   background-color: var(--text-color);
 }
 
@@ -136,6 +136,10 @@ a:hover {
   text-align: center;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 .text-left {
   text-align: left;
 }
@@ -161,7 +165,7 @@ a:hover {
   justify-content: center;
 }
 
-.flex-grow{
+.flex-grow {
   flex-grow: 1;
 }
 

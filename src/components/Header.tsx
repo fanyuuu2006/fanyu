@@ -34,6 +34,7 @@ export const Header = () => {
       >
         <Link href="/#home" className="nav-brand">
           <Image
+            draggable={false}
             alt="Logo"
             src="/logo.png"
             width={1500}
