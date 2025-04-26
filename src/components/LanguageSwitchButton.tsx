@@ -16,6 +16,7 @@ export const LanguageSwitchButton = () => {
         width: "1.5em",
         height: "1.5em",
         borderRadius: "100%",
+        zIndex: "100",
       }}
     >
       <Tooltip title="切換語言">
