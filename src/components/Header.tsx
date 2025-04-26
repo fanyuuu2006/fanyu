@@ -22,6 +22,15 @@ const Routes: {
     },
     href: "/#aboutMe",
   },
+
+  
+  {
+    label: {
+      chinese: "技能",
+      english: "Skills",
+    },
+    href: "/#skills",
+  },
 ];
 
 export const Header = () => {

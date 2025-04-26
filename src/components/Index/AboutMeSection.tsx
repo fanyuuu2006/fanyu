@@ -42,7 +42,6 @@ export const AboutMeSection = () => {
     <section id="aboutMe">
       <div
         className="container d-flex flex-column align-items-center"
-        style={{ color: "var(--background-color)" }}
       >
         <div
           className="title text-bold text-center"
