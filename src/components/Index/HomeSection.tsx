@@ -73,7 +73,7 @@ export const HomeSection = () => {
     <section id="home">
       <div
         className="container d-flex justify-center"
-        style={{ color: "var(--text-color)", minHeight: "80vh" }}
+        style={{ minHeight: "80vh" }}
       >
         <div
           className="card-glass d-flex flex-column align-items-center justify-center"
@@ -100,9 +100,6 @@ export const HomeSection = () => {
                 <Tooltip key={index} title={item.label} placement="bottom">
                   <OutsideLink
                     href={item.href}
-                    style={{
-                      color: "var(--text-color)",
-                    }}
                   >
                     {item.icon}
                   </OutsideLink>
