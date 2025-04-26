@@ -67,7 +67,7 @@ export const HomeSection = () => {
         (365.25 * 24 * 60 * 60 * 1000)
     )},`,
     `  hobbies: ['${homeContent.coding}', '${homeContent.drawing}'],`,
-    "  skills: ['React', 'Next.js', 'TypeScript']",
+    "  skills: ['React', 'Next.js', 'TypeScript'],",
     "} as const;",
   ];
 
