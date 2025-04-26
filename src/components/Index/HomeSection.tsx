@@ -62,9 +62,10 @@ export const HomeSection = () => {
     "const FanYu = {",
     `  name: '${profile[Language.Current].name}',`,
     `  nickname: '${profile[Language.Current].nickname}',`,
-    `  age: ${
-      new Date().getFullYear() - new Date(profile.birthday).getFullYear()
-    },`,
+    `  age: ${Math.floor(
+      (new Date().getTime() - new Date(profile.birthday).getTime()) /
+        (365.25 * 24 * 60 * 60 * 1000)
+    )},`,
     `  interests: ['${homeContent.coding}', '${homeContent.drawing}'],`,
     "} as const;",
   ];
@@ -104,9 +105,7 @@ export const HomeSection = () => {
             </div>
           </div>
         </div>
-        <div
-          className="d-flex flex-column align-items-center justify-center flex-grow"
-        >
+        <div className="d-flex flex-column align-items-center justify-center flex-grow">
           <pre
             className="card shadow bordered"
             style={{
@@ -168,4 +167,3 @@ export const HomeSection = () => {
     </section>
   );
 };
-
