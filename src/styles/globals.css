@@ -49,11 +49,6 @@ header {
   z-index: 0;
 }
 
-#home > .container {
-  position: relative;
-  z-index: 1; /* 確保內容蓋在遮罩上 */
-}
-
 #aboutMe {
   background-color: var(--text-color);
 }
@@ -105,6 +100,8 @@ a:hover {
 }
 
 .container {
+  position: relative;
+  z-index: 1; /* 確保內容蓋在遮罩上 */
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;

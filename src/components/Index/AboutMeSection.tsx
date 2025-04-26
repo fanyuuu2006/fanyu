@@ -42,9 +42,7 @@ export const AboutMeSection = () => {
         <div
           className="title text-bold text-center"
           style={{
-            width: "40%",
             color: "var(--background-color)",
-            borderBottom: "1px solid var(--background-color)",
           }}
         >
           {aboutMeContent.aboutMe}
