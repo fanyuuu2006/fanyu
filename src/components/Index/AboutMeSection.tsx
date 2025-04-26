@@ -40,24 +40,31 @@ export const AboutMeSection = () => {
         style={{ color: "var(--background-color)" }}
       >
         <div
-          className="title text-bold"
-          style={{ color: "var(--background-color)" }}
+          className="title text-bold text-center"
+          style={{
+            width: "40%",
+            color: "var(--background-color)",
+            borderBottom: "1px solid var(--background-color)",
+          }}
         >
           {aboutMeContent.aboutMe}
         </div>
-        <div className="d-flex" style={{ gap: "1em" }}>
-          <div className="card-glass d-flex justify-center align-items-center" style={{ width: "40%" }}>
+        <div className="d-flex align-items-center" style={{ gap: "1em" }}>
+          <div
+            className="card-glass d-flex justify-center align-items-center"
+            style={{ width: "40%" }}
+          >
             <Image
               className="bordered shadow"
               alt="頭貼"
               src="/GameShow.jpg"
               width={1000}
               height={1000}
-              style={{ width: "80%", height: "auto", borderRadius: "12px" }}
+              style={{ width: "80%", height: "auto", borderRadius: "10%" }}
             />
           </div>
           <div
-            className="card-glass d-flex flex-column flex-grow align-items-center"
+            className="card-glass d-flex flex-column align-items-center"
             style={{
               width: "50%",
             }}
@@ -66,6 +73,8 @@ export const AboutMeSection = () => {
               className="note bold text-justify"
               style={{
                 color: "var(--background-color)",
+                textIndent: "2em",  // 首行縮排
+                textJustify: "inter-word",
               }}
             >
               {aboutMeContent.article}
