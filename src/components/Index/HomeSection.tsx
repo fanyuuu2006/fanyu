@@ -75,7 +75,7 @@ export const HomeSection = () => {
     <section id="home">
       <div
         className="container d-flex justify-center"
-        style={{ minHeight: "80vh" }}
+        style={{ minHeight: "648px" }}
       >
         <div
           className="card-glass d-flex flex-column align-items-center justify-center"
