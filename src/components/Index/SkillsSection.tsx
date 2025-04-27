@@ -38,11 +38,11 @@ const skillItems: Record<SkillCategory, { src: string; title: string }[]> = {
     },
 
     {
-      title: "HTML",
+      title: "HTML 5",
       src: "/Skills/html.svg",
     },
     {
-      title: "CSS",
+      title: "CSS 3",
       src: "/Skills/css.svg",
     },
     {
@@ -92,7 +92,7 @@ export const SkillsSection = () => {
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{skillsContent.skills}</div>
         <div
-          className="card-glass d-flex flex-column"
+          className="d-flex flex-column"
           style={{ width: "100%", padding: "0 1em", gap: "1em" }}
         >
           {Object.entries(skillItems).map(([category, items]) => (

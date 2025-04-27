@@ -82,10 +82,10 @@ button {
   gap: 1.5em;
   margin-left: auto;
 }
-
+/* 
 .nav-collapse > a:hover {
   color: var(--text-color-primary);
-}
+} */
 
 table {
   border-collapse: collapse;
@@ -96,7 +96,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline solid;
+  transform: scale(1.2);
 }
 
 .container {
@@ -118,7 +118,7 @@ a:hover {
 }
 
 .content {
-  font-size: 35px;
+  font-size: 32px;
 }
 
 .note {

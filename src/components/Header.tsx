@@ -23,13 +23,19 @@ const Routes: {
     href: "/#aboutMe",
   },
 
-  
   {
     label: {
       chinese: "技能",
       english: "Skills",
     },
     href: "/#skills",
+  },
+  {
+    label: {
+      chinese: "作品集",
+      english: "Portfolio",
+    },
+    href: "/#portfolio",
   },
 ];
 
