@@ -37,18 +37,14 @@ export const PortfolioSection = () => {
     <section id="portfolio">
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{portfolioContent.portfolio}</div>
-        <div
-          className="d-flex"
-          style={{ width: "100%", padding: "0 1em", gap: "1em" }}
-        >
+        <div className="d-flex" style={{ width: "100%", gap: "1em" }}>
           {portfolio.map((item: PortfolioItem) => (
             <div
               key={item.title.english}
-              className="card bordered shadow d-flex content"
+              className="card bordered shadow d-flex"
               style={{
                 width: "100%",
-                flexWrap: "nowrap",
-                padding: "1em 1.5em",
+                padding: "1em",
                 gap: "1em",
               }}
             >
@@ -71,18 +67,24 @@ export const PortfolioSection = () => {
                 <div className="label text-bold">
                   {item.title[Language.Current]}
                 </div>
-                <div className="note">
+                <div className="hint">
                   <ClockCircleOutlined /> {item.time}
                 </div>
-                <div className="content">{item.about[Language.Current]}</div>
+                <div className="note">{item.about[Language.Current]}</div>
                 {item.links.map((link) => (
                   <OutsideLink
                     key={link.href}
                     href={link.href}
-                    className="hint"
-                    style={{ opacity: "0.7", transformOrigin: "left" }}
+                    className="hint d-flex"
+                    style={{
+                      flexWrap: "nowrap",
+                      gap: "0.5em",
+                      opacity: "0.7",
+                      transformOrigin: "left",
+                    }}
                   >
-                    {categoryIcon[link.category]} {link.href}
+                    {categoryIcon[link.category]}
+                    <span>{link.href}</span>
                   </OutsideLink>
                 ))}
               </div>

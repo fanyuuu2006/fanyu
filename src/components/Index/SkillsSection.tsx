@@ -93,7 +93,7 @@ export const SkillsSection = () => {
         <div className="title text-bold">{skillsContent.skills}</div>
         <div
           className="d-flex flex-column"
-          style={{ width: "100%", padding: "0 1em", gap: "1em" }}
+          style={{ width: "100%", padding: "1em", gap: "1em" }}
         >
           {Object.entries(skillItems).map(([category, items]) => (
             <div key={category}>
