@@ -74,15 +74,13 @@ export const PortfolioSection = () => {
                 <div className="note">
                   <ClockCircleOutlined /> {item.time}
                 </div>
-                <div className="content text-justify">
-                  {item.about[Language.Current]}
-                </div>
+                <div className="content">{item.about[Language.Current]}</div>
                 {item.links.map((link) => (
                   <OutsideLink
                     key={link.href}
                     href={link.href}
                     className="hint"
-                    style={{ opacity: "0.7" }}
+                    style={{ opacity: "0.7", transformOrigin: "left" }}
                   >
                     {categoryIcon[link.category]} {link.href}
                   </OutsideLink>
