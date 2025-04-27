@@ -124,6 +124,10 @@ export const portfolio: PortfolioItem[] = [
     links: [
       {
         category: "demo",
+        href: "https://line.me/R/ti/p/@458roass",
+      },
+      {
+        category: "demo",
         href: "https://dobujio.vercel.app/",
       },
       {
