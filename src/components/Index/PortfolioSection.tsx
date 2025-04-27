@@ -48,27 +48,30 @@ export const PortfolioSection = () => {
                 gap: "1em",
               }}
             >
-              <Image
-                className="title shadow"
-                src={item.imageSrc}
-                alt={`${item.title.english} icon`}
-                width={300}
-                height={300}
-                style={{
-                  height: "1.5em",
-                  width: "auto",
-                  borderRadius: "100%",
-                }}
-              />
+              <div className="card-glass">
+                <Image
+                  className="title shadow"
+                  src={item.imageSrc}
+                  alt={`${item.title.english} icon`}
+                  width={300}
+                  height={300}
+                  style={{
+                    height: "1.5em",
+                    width: "auto",
+                    borderRadius: "100%",
+                  }}
+                />
+              </div>
               <div
                 className="d-flex flex-column flex-grow"
                 style={{ gap: "0.5em" }}
               >
-                <div className="label text-bold">
+                <div className="content text-bold">
                   {item.title[Language.Current]}
                 </div>
-                <div className="hint">
-                  <ClockCircleOutlined /> {item.time}
+                <div className="hint d-flex" style={{ gap: "0.5em" }}>
+                  <ClockCircleOutlined />
+                  {item.time}
                 </div>
                 <div className="note">{item.about[Language.Current]}</div>
                 {item.links.map((link) => (
@@ -77,6 +80,7 @@ export const PortfolioSection = () => {
                     href={link.href}
                     className="hint d-flex"
                     style={{
+                      width: "fit-content",
                       flexWrap: "nowrap",
                       gap: "0.5em",
                       opacity: "0.7",

@@ -58,10 +58,106 @@ export const portfolio: PortfolioItem[] = [
       "CSS",
       "Frontend",
       "Express",
-      "Google Sheet",
+      "Node.js",
+      "Google Sheets",
       "Backend",
       "Fullstack",
       "TypeScript",
+      "Git",
+      "Github",
+      "NPM",
+    ],
+  },
+  {
+    imageSrc: "/Portfolio/toolsformetainformation.jpg",
+    title: {
+      chinese: "Meta 資訊處理工具",
+      english: "Tools For Meta Information",
+    },
+    links: [
+      {
+        category: "demo",
+        href: "https://meta-infomation-tools.vercel.app",
+      },
+      {
+        category: "github",
+        href: "https://github.com/fanyuuu2006/Tools-For-Meta-Infomation",
+      },
+    ],
+    time: "2025-03",
+    about: {
+      chinese:
+        "一個專為整理 Meta 帳號管理中心提供之可下載資料而設計的工具網站。",
+      english:
+        "A web tool designed to organize and process downloadable data from the Meta Accounts Center.",
+    },
+    description: {
+      chinese: [
+        "前端使用 Next.js 和 React 開發，提供流暢且直覺的使用者體驗。",
+        "採用 TypeScript 強化程式碼可讀性與維護性，提升開發品質。",
+        "純前端運作，無需後端支援，所有資料僅在本地端處理，不會傳送或儲存任何使用者資訊，保障隱私安全。",
+        "專案部署於 Vercel，確保網站快速穩定地運行。",
+      ],
+      english: [
+        "Frontend developed with Next.js and React, offering a smooth and intuitive user experience.",
+        "TypeScript was used to improve code readability, maintainability, and overall code quality.",
+        "Operates entirely on the frontend without any backend services; all data is processed locally to ensure user privacy and security.",
+        "Deployed on Vercel for fast and reliable web hosting.",
+      ],
+    },
+    tags: [
+      "Next.js",
+      "React",
+      "CSS",
+      "Frontend",
+      "TypeScript",
+      "Git",
+      "Github",
+    ],
+  },
+  {
+    imageSrc: "/Portfolio/dobujio.jpg",
+    title: {
+      chinese: "玩股票都不揪",
+      english: "Do Bu Jio",
+    },
+    links: [
+      {
+        category: "demo",
+        href: "https://dobujio.vercel.app/",
+      },
+      {
+        category: "github",
+        href: "https://github.com/fanyuuu2006/NTUST-1132-Software-Programming-Final-Project",
+      },
+    ],
+    time: "2025-04",
+    about: {
+      chinese: "一款結合爬蟲與資料視覺化的指令式股票查詢 Line 機器人。",
+      english:
+        "A command-based Line bot for stock information queries, integrating web scraping and data visualization.",
+    },
+    description: {
+      chinese: [
+        "以 Python 開發，串接 Line Bot 平台，提供即時股票資訊查詢功能。",
+        "利用 Requests 爬取台灣證交所公開資料。",
+        "使用 Matplotlib 動態生成視覺化圖表。",
+        "後端以 Flask 架設，並部署於 Vercel，處理 Line webhook 請求與回應。",
+      ],
+      english: [
+        "Developed with Python and integrated with the Line Bot platform for real-time stock queries.",
+        "Scraped public data from the Taiwan Stock Exchange using the Requests library.",
+        "Generated dynamic visualizations with Matplotlib.",
+        "Backend built with Flask and deployed on Vercel to handle Line webhook requests and responses.",
+      ],
+    },
+    tags: [
+      "Python",
+      "Requests",
+      "Crawler",
+      "Flask",
+      "Line Bot SDK",
+      "Matplotlib",
       "Git",
       "Github",
     ],
