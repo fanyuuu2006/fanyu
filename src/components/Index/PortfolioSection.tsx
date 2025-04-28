@@ -32,7 +32,7 @@ export const PortfolioSection = () => {
           {portfolio.slice(0, 3).map((item: PortfolioItem, index: number) => (
             <Link
               key={item.title.english}
-              href={`/portfolio/${index + 1}`}
+              href={`/portfolio/#${index}`}
               className="card card-link bordered shadow d-flex flex-column align-items-center"
               style={{
                 flex: "1 1 30%",
