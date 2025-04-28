@@ -32,14 +32,18 @@ const categoryIcon: Record<PortfolioLinkCategory, React.ReactNode> = {
   github: <GithubOutlined />,
 };
 
-export const PortfolioSection = () => {
+export const PortfolioSection = ({ index }: { index?: string | null }) => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
+
+  const filteredPortfolio = index
+    ? portfolio.filter((_, idx) => idx + 1 === parseInt(index ?? "-1"))
+    : portfolio;
   return (
     <section>
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{portfolioContent.portfolio}</div>
-        {portfolio.map((item: PortfolioItem) => (
+        {filteredPortfolio.map((item: PortfolioItem) => (
           <div
             key={item.title.english}
             className="card bordered shadow d-flex no-wrap-on-desktop"

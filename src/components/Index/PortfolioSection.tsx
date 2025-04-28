@@ -29,10 +29,10 @@ export const PortfolioSection = () => {
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{portfolioContent.portfolio}</div>
         <div className="d-flex justify-content-between" style={{ gap: "1em" }}>
-          {portfolio.slice(0, 3).map((item: PortfolioItem) => (
+          {portfolio.slice(0, 3).map((item: PortfolioItem, index: number) => (
             <Link
               key={item.title.english}
-              href={`/portfolio/${item.title.english}`}
+              href={`/portfolio/${index + 1}`}
               className="card card-link bordered shadow d-flex flex-column align-items-center"
               style={{
                 flex: "1 1 30%",
