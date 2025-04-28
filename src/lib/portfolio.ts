@@ -128,7 +128,7 @@ export const portfolio: PortfolioItem[] = [
       },
       {
         category: "demo",
-        href: "https://dobujio.vercel.app/",
+        href: "https://dobujio.vercel.app",
       },
       {
         category: "github",

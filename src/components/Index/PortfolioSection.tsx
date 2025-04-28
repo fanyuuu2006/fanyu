@@ -10,6 +10,7 @@ import {
   LinkOutlined,
 } from "@ant-design/icons";
 import { OutsideLink } from "fanyucomponents";
+import Link from "next/link";
 
 type PortfolioContent = Record<"portfolio", string>;
 
@@ -41,7 +42,7 @@ export const PortfolioSection = () => {
           {portfolio.map((item: PortfolioItem) => (
             <div
               key={item.title.english}
-              className="card bordered shadow d-flex"
+              className="card bordered shadow d-flex no-wrap-on-desktop"
               style={{
                 width: "100%",
                 padding: "1em",
@@ -95,6 +96,7 @@ export const PortfolioSection = () => {
             </div>
           ))}
         </div>
+        <Link className="note" href="/portfolio">查看更多</Link>
       </div>
     </section>
   );

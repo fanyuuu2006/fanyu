@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import React from "react";
 
 type AboutMeContent = {
   aboutMe: string;
@@ -40,9 +39,7 @@ export const AboutMeSection = () => {
 
   return (
     <section id="aboutMe">
-      <div
-        className="container d-flex flex-column align-items-center"
-      >
+      <div className="container d-flex flex-column align-items-center">
         <div
           className="title text-bold text-center"
           style={{
@@ -72,19 +69,18 @@ export const AboutMeSection = () => {
             }}
           >
             {aboutMeContent.article.map((part, index) => (
-              <React.Fragment key={index}>
-                <p
-                  className="note bold text-justify"
-                  style={{
-                    color: "var(--background-color)",
-                    textIndent: "2em", // 首行縮排
-                    textJustify: "inter-word",
-                    marginBottom: "1em", // 增加段落間距
-                  }}
-                >
-                  {part}
-                </p>
-              </React.Fragment>
+              <p
+                key={index}
+                className="note bold text-justify"
+                style={{
+                  color: "var(--background-color)",
+                  textIndent: "2em", // 首行縮排
+                  textJustify: "inter-word",
+                  marginBottom: "1em", // 增加段落間距
+                }}
+              >
+                {part}
+              </p>
             ))}
           </div>
         </div>

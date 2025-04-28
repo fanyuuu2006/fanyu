@@ -70,7 +70,7 @@ export const Header = () => {
           ))}
         </div>
         <button
-          className="btn"
+          className="btn nav-menu"
           style={{ borderRadius: "5px", padding: "0.5em" }}
           onClick={() => {
             Modal.Open();
@@ -80,7 +80,7 @@ export const Header = () => {
         </button>
         <Modal.Container>
           <div
-            className="card bordered d-flex flex-column note text-bold text-center"
+            className="pop card bordered d-flex flex-column note text-bold text-center"
             style={{ padding: "1em", gap: "1em" }}
           >
             {Routes.map((item, index) => (
@@ -89,7 +89,7 @@ export const Header = () => {
                 href={item.href}
                 className="card-glass bordered"
                 style={{ padding: "0.5em 1em" }}
-                onClick={()=>{
+                onClick={() => {
                   Modal.Close();
                 }}
               >
