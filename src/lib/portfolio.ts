@@ -61,7 +61,7 @@ export const portfolio: PortfolioItem[] = [
       "Node.js",
       "Google Sheets",
       "Backend",
-      "Fullstack",
+      "Full Stack",
       "TypeScript",
       "Git",
       "Github",

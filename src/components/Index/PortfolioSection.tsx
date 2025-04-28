@@ -3,13 +3,8 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { portfolio } from "@/lib/portfolio";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { PortfolioItem, PortfolioLinkCategory } from "@/types/portfolio";
-import {
-  ClockCircleOutlined,
-  GithubOutlined,
-  LinkOutlined,
-} from "@ant-design/icons";
-import { OutsideLink } from "fanyucomponents";
+import { PortfolioItem } from "@/types/portfolio";
+import { ClockCircleOutlined, TagOutlined } from "@ant-design/icons";
 import Link from "next/link";
 
 type PortfolioContent = Record<"portfolio", string>;
@@ -26,11 +21,6 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
     } as LanguageContent<PortfolioContent>
   )[language]);
 
-const categoryIcon: Record<PortfolioLinkCategory, React.ReactNode> = {
-  demo: <LinkOutlined />,
-  github: <GithubOutlined />,
-};
-
 export const PortfolioSection = () => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
@@ -38,31 +28,31 @@ export const PortfolioSection = () => {
     <section id="portfolio">
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{portfolioContent.portfolio}</div>
-        <div className="d-flex" style={{ width: "100%", gap: "1em" }}>
-          {portfolio.map((item: PortfolioItem) => (
-            <div
+        <div className="d-flex justify-content-between" style={{ gap: "1em" }}>
+          {portfolio.slice(0, 3).map((item: PortfolioItem) => (
+            <Link
               key={item.title.english}
-              className="card bordered shadow d-flex no-wrap-on-desktop"
+              href={`/portfolio/${item.title.english}`}
+              className="card card-link bordered shadow d-flex flex-column align-items-center"
               style={{
-                width: "100%",
+                flex: "1 1 30%",
                 padding: "1em",
                 gap: "1em",
               }}
             >
-              <div className="card-glass">
-                <Image
-                  className="title shadow"
-                  src={item.imageSrc}
-                  alt={`${item.title.english} icon`}
-                  width={300}
-                  height={300}
-                  style={{
-                    height: "1.5em",
-                    width: "auto",
-                    borderRadius: "100%",
-                  }}
-                />
-              </div>
+              <Image
+                className="title shadow"
+                src={item.imageSrc}
+                alt={`${item.title.english} icon`}
+                width={300}
+                height={300}
+                style={{
+                  width: "60%",
+                  height: "auto",
+                  borderRadius: "100%",
+                  objectFit: "cover", // 確保圖片不變形
+                }}
+              />
               <div
                 className="d-flex flex-column flex-grow"
                 style={{ gap: "0.5em" }}
@@ -75,28 +65,41 @@ export const PortfolioSection = () => {
                   {item.time}
                 </div>
                 <div className="note">{item.about[Language.Current]}</div>
-                {item.links.map((link) => (
-                  <OutsideLink
-                    key={link.href}
-                    href={link.href}
-                    className="hint d-flex"
+
+                <div
+                  className="hint d-flex"
+                  style={{ flexWrap: "nowrap", gap: "0.5em" }}
+                >
+                  <TagOutlined />
+                  <div
+                    className="d-flex"
                     style={{
-                      width: "fit-content",
-                      flexWrap: "nowrap",
+                      flexWrap: "wrap",
                       gap: "0.5em",
-                      opacity: "0.7",
-                      transformOrigin: "left",
                     }}
                   >
-                    {categoryIcon[link.category]}
-                    <span>{link.href}</span>
-                  </OutsideLink>
-                ))}
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        style={{
+                          borderRadius: "5px",
+                          whiteSpace: "nowrap",
+                          padding: "0 0.5em",
+                          backgroundColor: "var(--background-color)",
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
-        <Link className="note" href="/portfolio">查看更多</Link>
+        <Link className="note" href="/portfolio">
+          查看更多
+        </Link>
       </div>
     </section>
   );

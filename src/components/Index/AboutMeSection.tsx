@@ -50,7 +50,7 @@ export const AboutMeSection = () => {
         </div>
         <div className="d-flex align-items-center" style={{ gap: "1em" }}>
           <div
-            className="card-glass d-flex justify-center align-items-center"
+            className="card-glass d-flex justify-content-center align-items-center"
             style={{ width: "30%" }}
           >
             <Image

@@ -88,7 +88,6 @@ ol {
 .nav-collapse {
   display: flex;
   gap: 1.5em;
-  margin-left: auto;
 }
 
 .nav-menu {
@@ -166,8 +165,12 @@ a:hover {
   flex-direction: column;
 }
 
-.justify-center {
+.justify-content-center {
   justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
 }
 
 .flex-grow {
@@ -187,6 +190,11 @@ a:hover {
   border-radius: 12px;
 }
 
+.card-link:hover{
+  text-decoration: none;
+  transform: scale(1.01);
+}
+
 .card-glass {
   background-color: transparent;
   border-radius: 12px;
@@ -201,7 +209,7 @@ a:hover {
 }
 
 .shadow {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
 }
 
 /* 設定滾動條的寬度 */
@@ -274,7 +282,7 @@ a:hover {
 
   .card,
   .card-glass {
-    width: 100% !important;
+    flex: 1 1 100% !important;
   }
 
   .no-wrap-on-desktop {

@@ -74,11 +74,11 @@ export const HomeSection = () => {
   return (
     <section id="home">
       <div
-        className="container d-flex justify-center"
+        className="container d-flex justify-content-center"
         style={{ minHeight: "648px" }}
       >
         <div
-          className="card-glass d-flex flex-column align-items-center justify-center"
+          className="card-glass d-flex flex-column align-items-center justify-content-center"
           style={{
             width: "50%",
             padding: "1em",
@@ -106,7 +106,7 @@ export const HomeSection = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column align-items-center justify-center flex-grow">
+        <div className="d-flex flex-column align-items-center justify-content-center flex-grow">
           <pre
             className="card shadow bordered"
             style={{

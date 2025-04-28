@@ -47,7 +47,7 @@ export const Header = () => {
   return (
     <header>
       <nav
-        className="container d-flex align-items-center justify-center"
+        className="container d-flex align-items-center justify-content-between"
         style={{ flexWrap: "nowrap", height: "6em", padding: "0.5em 2em" }}
       >
         <Link href="/#home" className="nav-brand">
