@@ -190,7 +190,7 @@ a:hover {
   border-radius: 12px;
 }
 
-.card-link:hover{
+.card-link:hover {
   text-decoration: none;
   transform: scale(1.01);
 }
@@ -282,6 +282,10 @@ a:hover {
 
   .card,
   .card-glass {
+    width: 100%;
+  }
+
+  .flex-responsive {
     flex: 1 1 100% !important;
   }
 

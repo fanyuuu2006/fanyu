@@ -33,7 +33,7 @@ export const PortfolioSection = () => {
             <Link
               key={item.title.english}
               href={`/portfolio/#${index}`}
-              className="card card-link bordered shadow d-flex flex-column align-items-center"
+              className="card card-link flex-responsive bordered shadow d-flex flex-column align-items-center"
               style={{
                 flex: "1 1 30%",
                 padding: "1em",

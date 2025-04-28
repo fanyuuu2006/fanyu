@@ -87,7 +87,7 @@ export const Header = () => {
               <Link
                 key={index}
                 href={item.href}
-                className="card-glass bordered"
+                className="card-glass card-link bordered"
                 style={{ padding: "0.5em 1em" }}
                 onClick={() => {
                   Modal.Close();
