@@ -22,12 +22,12 @@ body {
   width: 100dvw;
   height: 100dvh;
   overflow-x: hidden;
-
+  margin-top: 6em;
   background: var(--background-color);
 }
 
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 100;
   width: 100%;
@@ -83,7 +83,7 @@ button {
   margin-left: auto;
 }
 
-.nav-menu{
+.nav-menu {
   display: none;
 }
 
@@ -217,8 +217,8 @@ a:hover {
   .nav-collapse {
     display: none;
   }
-  .nav-menu{
-    display:initial;
+  .nav-menu {
+    display: initial;
   }
 
   .title {
