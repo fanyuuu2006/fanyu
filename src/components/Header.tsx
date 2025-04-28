@@ -3,6 +3,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent } from "@/types/language";
 import Link from "next/link";
 import Image from "next/image";
+import { MenuOutlined } from "@ant-design/icons";
+import { useModal } from "fanyucomponents";
 
 const Routes: {
   label: LanguageContent<string>;
@@ -41,11 +43,12 @@ const Routes: {
 
 export const Header = () => {
   const Language = useLanguage();
+  const Modal = useModal();
   return (
     <header>
       <nav
         className="container d-flex align-items-center justify-center"
-        style={{ height: "6em", padding: "0.5em 2em" }}
+        style={{ flexWrap: "nowrap", height: "6em", padding: "0.5em 2em" }}
       >
         <Link href="/#home" className="nav-brand">
           <Image
@@ -66,6 +69,35 @@ export const Header = () => {
             </Link>
           ))}
         </div>
+        <button
+          className="btn"
+          style={{ borderRadius: "5px", padding: "0.5em" }}
+          onClick={() => {
+            Modal.Open();
+          }}
+        >
+          <MenuOutlined />
+        </button>
+        <Modal.Container>
+          <div
+            className="card bordered d-flex flex-column note text-bold text-center"
+            style={{ padding: "1em", gap: "1em" }}
+          >
+            {Routes.map((item, index) => (
+              <Link
+                key={index}
+                href={item.href}
+                className="card-glass bordered"
+                style={{ padding: "0.5em 1em" }}
+                onClick={()=>{
+                  Modal.Close();
+                }}
+              >
+                {item.label[Language.Current]}
+              </Link>
+            ))}
+          </div>
+        </Modal.Container>
       </nav>
     </header>
   );

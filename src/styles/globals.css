@@ -82,10 +82,10 @@ button {
   gap: 1.5em;
   margin-left: auto;
 }
-/* 
-.nav-collapse > a:hover {
-  color: var(--text-color-primary);
-} */
+
+.nav-menu{
+  display: none;
+}
 
 table {
   border-collapse: collapse;
@@ -216,6 +216,9 @@ a:hover {
 @media (max-width: 768px) {
   .nav-collapse {
     display: none;
+  }
+  .nav-menu{
+    display:initial;
   }
 
   .title {
