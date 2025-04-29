@@ -2,11 +2,12 @@ import { PortfolioItem } from "@/types/portfolio";
 
 export const portfolio: PortfolioItem[] = [
   {
-    imageSrc: "/Portfolio/labag.jpg",
     title: {
       chinese: "啦八機",
       english: "LaBaG",
     },
+    imageSrc: "/Portfolio/labag.jpg",
+
     links: [
       {
         category: "demo",
@@ -69,11 +70,12 @@ export const portfolio: PortfolioItem[] = [
     ],
   },
   {
-    imageSrc: "/Portfolio/toolsformetainformation.jpg",
     title: {
       chinese: "Meta 資訊處理工具",
       english: "Tools For Meta Information",
     },
+    imageSrc: "/Portfolio/toolsformetainformation.jpg",
+
     links: [
       {
         category: "demo",
@@ -116,11 +118,12 @@ export const portfolio: PortfolioItem[] = [
     ],
   },
   {
-    imageSrc: "/Portfolio/dobujio.jpg",
     title: {
       chinese: "玩股票都不揪",
       english: "Do Bu Jio",
     },
+    imageSrc: "/Portfolio/dobujio.jpg",
+
     links: [
       {
         category: "demo",
@@ -143,13 +146,13 @@ export const portfolio: PortfolioItem[] = [
     },
     description: {
       chinese: [
-        "以 Python 開發，串接 Line Bot 平台，提供即時股票資訊查詢功能。",
+        "以 Python 開發，串接 Line Messaging API ，提供即時股票資訊查詢功能。",
         "利用 Requests 爬取台灣證交所公開資料。",
         "使用 Matplotlib 動態生成視覺化圖表。",
         "後端以 Flask 架設，並部署於 Vercel，處理 Line webhook 請求與回應。",
       ],
       english: [
-        "Developed with Python and integrated with the Line Bot platform for real-time stock queries.",
+        "Developed with Python and integrated with the LINE Messaging API to provide real-time stock information query functionality.",
         "Scraped public data from the Taiwan Stock Exchange using the Requests library.",
         "Generated dynamic visualizations with Matplotlib.",
         "Backend built with Flask and deployed on Vercel to handle Line webhook requests and responses.",
@@ -157,11 +160,61 @@ export const portfolio: PortfolioItem[] = [
     },
     tags: [
       "Python",
+      "Backend",
       "Requests",
       "Crawler",
       "Flask",
       "Line Bot SDK",
       "Matplotlib",
+      "Git",
+      "Github",
+    ],
+  },
+  {
+    imageSrc: "/Portfolio/aojiao.jpg",
+    title: {
+      chinese: "小傲驕",
+      english: "Aojiao",
+    },
+    links: [
+      {
+        category: "demo",
+        href: "https://line.me/R/ti/p/@819olsro",
+      },
+      {
+        category: "demo",
+        href: "https://ntust-board-game-club-bot.vercel.app",
+      },
+      {
+        category: "github",
+        href: "https://github.com/fanyuuu2006/NTUST-BoardGameClub-Bot",
+      },
+    ],
+    time: "2025-04",
+    about: {
+      chinese:
+        "臺科大桌遊社專屬的 Line Bot，協助幹部管理社務並提升社員互動體驗。",
+      english:
+        "A custom Line Bot for NTUST Board Game Club, assist club management and boost member engagement.",
+    },
+    description: {
+      chinese: [
+        "使用 Express 架設伺服器，處理 Line webhook 請求。",
+        "使用 Google Sheets 作為資料儲存與查詢後端。",
+        "部署於 Vercel，快速穩定地提供服務。",
+      ],
+      english: [
+        "Built with Express to handle Line webhook requests.",
+        "Integrated with Google Sheets for data storage and retrieval.",
+        "Deployed on Vercel for fast and reliable performance.",
+      ],
+    },
+    tags: [
+      "Express",
+      "Node.js",
+      "Backend",
+      "Line Bot SDK",
+      "Google Sheets",
       "Git",
       "Github",
     ],
