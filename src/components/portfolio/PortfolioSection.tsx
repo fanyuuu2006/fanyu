@@ -39,10 +39,10 @@ export const PortfolioSection = () => {
     <section>
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{portfolioContent.portfolio}</div>
-        {portfolio.map((item: PortfolioItem, index) => (
+        {portfolio.map((item: PortfolioItem) => (
           <div
-          key={item.title.english}
-            id={index.toString()}  
+            key={item.title.english}
+            id={item.title.english.replace(/ /g, "")}
             className="card bordered shadow d-flex no-wrap-on-desktop"
             style={{
               width: "100%",

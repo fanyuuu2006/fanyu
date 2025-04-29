@@ -6,6 +6,7 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { PortfolioItem } from "@/types/portfolio";
 import { ClockCircleOutlined, TagOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 type PortfolioContent = Record<"portfolio", string>;
 
@@ -24,15 +25,25 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
 export const PortfolioSection = () => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
+
+  const [shuffledPortfolio, setShuffledPortfolio] = useState<PortfolioItem[]>(
+    []
+  );
+
+  useEffect(() => {
+    const shuffled = [...portfolio].toSorted(() => Math.random() - 0.5).slice(0, 3);
+    setShuffledPortfolio(shuffled);
+  }, []);
+
   return (
     <section id="portfolio">
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{portfolioContent.portfolio}</div>
         <div className="d-flex justify-content-between" style={{ gap: "1em" }}>
-          {portfolio.slice(0, 3).map((item: PortfolioItem, index: number) => (
+          {shuffledPortfolio.map((item: PortfolioItem) => (
             <Link
               key={item.title.english}
-              href={`/portfolio/#${index}`}
+              href={`/portfolio/#${item.title.english.replace(/ /g, "")}`}
               className="card card-link flex-responsive bordered shadow d-flex flex-column align-items-center"
               style={{
                 flex: "1 1 30%",
