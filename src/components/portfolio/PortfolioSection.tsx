@@ -6,6 +6,7 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { PortfolioItem, PortfolioLinkCategory } from "@/types/portfolio";
 import {
   ClockCircleOutlined,
+  CodeSandboxOutlined,
   GithubOutlined,
   LinkOutlined,
   TagOutlined,
@@ -30,6 +31,7 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
 const categoryIcon: Record<PortfolioLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
   github: <GithubOutlined />,
+  package: <CodeSandboxOutlined/>
 };
 
 export const PortfolioSection = () => {

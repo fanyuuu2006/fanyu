@@ -18,7 +18,7 @@ export const portfolio: PortfolioItem[] = [
         href: "https://labag-backend.vercel.app",
       },
       {
-        category: "demo",
+        category: 'package',
         href: "https://www.npmjs.com/package/labag",
       },
       {

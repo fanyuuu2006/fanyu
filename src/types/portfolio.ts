@@ -1,6 +1,6 @@
 import { LanguageContent } from "./language";
 
-export type PortfolioLinkCategory = "demo" | "github";
+export type PortfolioLinkCategory = "demo" | "github" | "package";
 
 export type PortfolioItem = {
   imageSrc: string;
