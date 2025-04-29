@@ -18,7 +18,7 @@ export const portfolio: PortfolioItem[] = [
         href: "https://labag-backend.vercel.app",
       },
       {
-        category: 'package',
+        category: "package",
         href: "https://www.npmjs.com/package/labag",
       },
       {
@@ -64,8 +64,7 @@ export const portfolio: PortfolioItem[] = [
       "Backend",
       "Full Stack",
       "TypeScript",
-      "Git",
-      "Github",
+      "Git / GitHub",
       "NPM",
     ],
   },
@@ -113,8 +112,7 @@ export const portfolio: PortfolioItem[] = [
       "CSS",
       "Frontend",
       "TypeScript",
-      "Git",
-      "Github",
+      "Git / GitHub",
     ],
   },
   {
@@ -128,10 +126,6 @@ export const portfolio: PortfolioItem[] = [
       {
         category: "demo",
         href: "https://line.me/R/ti/p/@458roass",
-      },
-      {
-        category: "demo",
-        href: "https://dobujio.vercel.app",
       },
       {
         category: "github",
@@ -166,8 +160,7 @@ export const portfolio: PortfolioItem[] = [
       "Flask",
       "Line Bot SDK",
       "Matplotlib",
-      "Git",
-      "Github",
+      "Git / GitHub",
     ],
   },
   {
@@ -180,10 +173,6 @@ export const portfolio: PortfolioItem[] = [
       {
         category: "demo",
         href: "https://line.me/R/ti/p/@819olsro",
-      },
-      {
-        category: "demo",
-        href: "https://ntust-board-game-club-bot.vercel.app",
       },
       {
         category: "github",
@@ -215,8 +204,7 @@ export const portfolio: PortfolioItem[] = [
       "Backend",
       "Line Bot SDK",
       "Google Sheets",
-      "Git",
-      "Github",
+      "Git / GitHub",
     ],
   },
 ];
