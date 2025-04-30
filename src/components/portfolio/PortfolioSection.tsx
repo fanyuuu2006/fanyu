@@ -99,7 +99,11 @@ export const PortfolioSection = () => {
         <div className="title text-bold">{portfolioContent.portfolio}</div>
         <div
           className="note d-flex flex-column"
-          style={{ width: "100%", padding: "0 1em", gap: "0.5em" }}
+          style={{
+            width: "100%",
+            padding: "0 1em",
+            gap: "0.5em",
+          }}
         >
           <button
             onClick={() => {
@@ -113,56 +117,63 @@ export const PortfolioSection = () => {
           </button>
 
           <div
-            ref={contentRef}
             className="slide-toggle-wrapper"
             style={{ maxHeight: `${contentHeight}px` }}
           >
-            <div className="d-flex">
-              <button
-                onClick={() => {
-                  setCurrentTag(null);
-                }}
-                className="btn card-link"
-                style={{
-                  padding: "0 0.5em",
-                  borderRadius: "5px",
-                  ...(!currentTag ? { filter: "brightness(2)" } : {}),
-                }}
-              >
-                {portfolioContent.all}
-              </button>
-            </div>
-            {Object.entries(portfolioTagCategories).map(([category, tags]) => (
-              <div
-                key={category}
-                className="d-flex flex-column"
-                style={{ gap: "0.5em" }}
-              >
-                <span className="text-bold">
-                  {portfolioContent[category as keyof PortfolioContent]}
-                </span>
-                <div className="d-flex" style={{ gap: "0.5em" }}>
-                  {tags.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => {
-                        setCurrentTag(tag);
-                      }}
-                      className="btn card-link"
-                      style={{
-                        padding: "0 0.5em",
-                        borderRadius: "5px",
-                        ...(tag === currentTag
-                          ? { filter: "brightness(2)" }
-                          : {}),
-                      }}
-                    >
-                      {tag}
-                    </button>
-                  ))}
-                </div>
+            <div
+              ref={contentRef}
+              className="d-flex flex-column"
+              style={{ gap: "0.5em" }}
+            >
+              <div>
+                <button
+                  onClick={() => {
+                    setCurrentTag(null);
+                  }}
+                  className="btn card-link"
+                  style={{
+                    padding: "0 0.5em",
+                    borderRadius: "5px",
+                    ...(!currentTag ? { filter: "brightness(2)" } : {}),
+                  }}
+                >
+                  {portfolioContent.all}
+                </button>
               </div>
-            ))}
+              {Object.entries(portfolioTagCategories).map(
+                ([category, tags]) => (
+                  <div
+                    key={category}
+                    className="d-flex flex-column"
+                    style={{ gap: "0.5em" }}
+                  >
+                    <span className="text-bold">
+                      {portfolioContent[category as keyof PortfolioContent]}
+                    </span>
+                    <div className="d-flex" style={{ gap: "0.5em" }}>
+                      {tags.map((tag) => (
+                        <button
+                          key={tag}
+                          onClick={() => {
+                            setCurrentTag(tag);
+                          }}
+                          className="btn card-link"
+                          style={{
+                            padding: "0 0.5em",
+                            borderRadius: "5px",
+                            ...(tag === currentTag
+                              ? { filter: "brightness(2)" }
+                              : {}),
+                          }}
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
 
@@ -266,19 +277,3 @@ export const PortfolioSection = () => {
     </section>
   );
 };
-{
-  /* <button
-  key={tag}
-  onClick={() => {
-    setCurrentTag(tag);
-  }}
-  className="btn card-link"
-  style={{
-    padding: "0 0.5em",
-    borderRadius: "5px",
-    ...(tag === currentTag ? { filter: "brightness(2)" } : {}),
-  }}
->
-  {tag}
-</button> */
-}
