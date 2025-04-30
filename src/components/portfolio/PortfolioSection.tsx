@@ -15,7 +15,7 @@ import {
   DownOutlined,
   GithubOutlined,
   LinkOutlined,
-  RightOutlined,
+  MenuOutlined,
   TagOutlined,
 } from "@ant-design/icons";
 import { OutsideLink } from "fanyucomponents";
@@ -113,7 +113,7 @@ export const PortfolioSection = () => {
             style={{ gap: "0.5em" }}
           >
             {portfolioContent.category}
-            {showCategory ? <DownOutlined /> : <RightOutlined />}
+            {showCategory ? <DownOutlined /> : <MenuOutlined />}
           </button>
 
           <div
