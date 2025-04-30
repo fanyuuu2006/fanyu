@@ -18,7 +18,6 @@ import {
 import { OutsideLink } from "fanyucomponents";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { slugify } from "@/utils/url";
 
 type PortfolioContent = Record<"portfolio" | "nofound"| "all", string>;
@@ -52,14 +51,6 @@ export const PortfolioSection = () => {
   const [filteredPortfolio, setFilteredPortfolio] = useState<PortfolioItem[]>(
     []
   );
-
-  const Params = useSearchParams();
-
-  useEffect(() => {
-    const tagParam = Params.get("tag") as ProfileTag | null;
-
-    setCurrentTag(tagParam);
-  }, [Params]);
 
   useEffect(() => {
     setFilteredPortfolio(
