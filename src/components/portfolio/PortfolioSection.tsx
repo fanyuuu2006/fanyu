@@ -49,7 +49,7 @@ export const PortfolioSection = () => {
   const portfolioContent = getPortfolioContent(Language.Current);
   const [currentTag, setCurrentTag] = useState<ProfileTag | null>(null);
   const [filteredPortfolio, setFilteredPortfolio] = useState<PortfolioItem[]>(
-    []
+    portfolio
   );
 
   useEffect(() => {
