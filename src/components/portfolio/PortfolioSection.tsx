@@ -73,6 +73,8 @@ export const PortfolioSection = () => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [filteredPortfolio, setFilteredPortfolio] =
     useState<PortfolioItem[]>(portfolio);
+  const catrgoryContentRef = useRef<HTMLDivElement>(null);
+  const [catrgoryContent, setCategoryContentHeight] = useState<number>(0);
 
   useEffect(() => {
     setFilteredPortfolio(
@@ -82,14 +84,11 @@ export const PortfolioSection = () => {
     );
   }, [currentTag]);
 
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [contentHeight, setContentHeight] = useState(0);
-
   useEffect(() => {
-    if (showCategory && contentRef.current) {
-      setContentHeight(contentRef.current.scrollHeight);
+    if (showCategory && catrgoryContentRef.current) {
+      setCategoryContentHeight(catrgoryContentRef.current.scrollHeight);
     } else {
-      setContentHeight(0);
+      setCategoryContentHeight(0);
     }
   }, [showCategory]);
 
@@ -118,10 +117,10 @@ export const PortfolioSection = () => {
 
           <div
             className="slide-toggle-wrapper"
-            style={{ maxHeight: `${contentHeight}px` }}
+            style={{ maxHeight: `${catrgoryContent}px` }}
           >
             <div
-              ref={contentRef}
+              ref={catrgoryContentRef}
               className="d-flex flex-column"
               style={{ gap: "0.5em" }}
             >

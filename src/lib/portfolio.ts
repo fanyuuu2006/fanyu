@@ -1,10 +1,10 @@
 import { PortfolioItem } from "@/types/portfolio";
 
 export const portfolioTagCategories = {
-  language: ["TypeScript", "Python", "JavaScript"],
+  language: ["TypeScript", "Python", "JavaScript", "CSS"],
   roles: ["Frontend", "Backend", "Full Stack"], // ← 職能/開發角色分類
   domains: ["Crawler"], // 專長領域
-  frameworks: ["React", "Next.js", "Express", "CSS", "Node.js", "Flask"],
+  frameworks: ["React", "Next.js", "Express", "Node.js", "Flask"],
   libraries: ["Line Bot SDK", "Matplotlib", "Requests"],
   tools: ["Git / GitHub", "NPM", "Google Sheets"],
   other: ["Vercel"],

@@ -4,7 +4,7 @@ import { LanguageContent } from "@/types/language";
 import Link from "next/link";
 import Image from "next/image";
 import { MenuOutlined } from "@ant-design/icons";
-import { useModal } from "fanyucomponents";
+import { useRef, useState } from "react";
 
 const Routes: {
   label: LanguageContent<string>;
@@ -43,61 +43,72 @@ const Routes: {
 
 export const Header = () => {
   const Language = useLanguage();
-  const Modal = useModal();
+
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   return (
     <header>
-      <nav
-        className="container d-flex align-items-center justify-content-between"
-        style={{ flexWrap: "nowrap", height: "6em", padding: "0.5em 2em" }}
-      >
-        <Link href="/" className="nav-brand">
-          <Image
-            alt="Logo"
-            src="/logo.png"
-            width={1500}
-            height={500}
-            style={{
-              height: "100%",
-              width: "auto",
+      <nav className="d-flex flex-column">
+        <div
+          className="container d-flex align-items-center justify-content-between"
+          style={{ width: "100%", flexWrap: "nowrap", padding: "0.5em 2em" }}
+        >
+          <Link href="/" className="nav-brand">
+            <Image
+              alt="Logo"
+              src="/logo.png"
+              width={1500}
+              height={500}
+              style={{
+                height: "6em",
+                width: "auto",
+              }}
+            />
+          </Link>
+          <button
+            className="btn nav-menu"
+            style={{ borderRadius: "5px", padding: "0.5em" }}
+            onClick={() => {
+              setShowMenu((prev) => !prev);
             }}
-          />
-        </Link>
-        <div className="nav-collapse note text-bold ">
-          {Routes.map((item, index) => (
-            <Link key={index} href={item.href}>
-              {item.label[Language.Current]}
-            </Link>
-          ))}
+          >
+            <MenuOutlined />
+          </button>
+          <div className="nav-collapse note text-bold ">
+            {Routes.map((item, index) => (
+              <Link key={index} href={item.href}>
+                {item.label[Language.Current]}
+              </Link>
+            ))}
+          </div>
         </div>
-        <button
-          className="btn nav-menu"
-          style={{ borderRadius: "5px", padding: "0.5em" }}
-          onClick={() => {
-            Modal.Open();
+        <div
+          className="slide-toggle-wrapper"
+          style={{
+            maxHeight: showMenu ? `${menuRef.current?.scrollHeight}px` : "0",
           }}
         >
-          <MenuOutlined />
-        </button>
-        <Modal.Container>
           <div
-            className="pop card bordered d-flex flex-column note text-bold text-center"
-            style={{ padding: "1em", gap: "1em" }}
+            ref={menuRef}
+            className="note text-bold text-center d-flex flex-column "
+            style={{ width: "100%" }}
           >
             {Routes.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
-                className="card-glass card-link bordered"
+                className="card-glass card-link"
                 style={{ padding: "0.5em 1em" }}
                 onClick={() => {
-                  Modal.Close();
+                  setShowMenu(false);
                 }}
               >
                 {item.label[Language.Current]}
               </Link>
             ))}
           </div>
-        </Modal.Container>
+        </div>
       </nav>
     </header>
   );
