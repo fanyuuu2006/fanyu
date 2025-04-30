@@ -192,7 +192,8 @@ a:hover {
 
 .card-link:hover {
   text-decoration: none;
-  transform: scale(1.01);
+  transition: 0.1s ease-in-out;
+  transform: scale(1.05);
 }
 
 .card-glass {
