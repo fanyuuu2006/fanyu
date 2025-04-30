@@ -74,7 +74,6 @@ export const PortfolioSection = () => {
   const [filteredPortfolio, setFilteredPortfolio] =
     useState<PortfolioItem[]>(portfolio);
   const catrgoryContentRef = useRef<HTMLDivElement>(null);
-  const [catrgoryContent, setCategoryContentHeight] = useState<number>(0);
 
   useEffect(() => {
     setFilteredPortfolio(
@@ -83,14 +82,6 @@ export const PortfolioSection = () => {
         : portfolio.filter((item) => item.tags.includes(currentTag))
     );
   }, [currentTag]);
-
-  useEffect(() => {
-    if (showCategory && catrgoryContentRef.current) {
-      setCategoryContentHeight(catrgoryContentRef.current.scrollHeight);
-    } else {
-      setCategoryContentHeight(0);
-    }
-  }, [showCategory]);
 
   return (
     <section>
@@ -117,7 +108,11 @@ export const PortfolioSection = () => {
 
           <div
             className="slide-toggle-wrapper"
-            style={{ maxHeight: `${catrgoryContent}px` }}
+            style={{
+              maxHeight: `${
+                showCategory ? catrgoryContentRef.current?.scrollHeight : 0
+              }px`,
+            }}
           >
             <div
               ref={catrgoryContentRef}
