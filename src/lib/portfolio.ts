@@ -1,7 +1,9 @@
 import { PortfolioItem } from "@/types/portfolio";
 
 export const portfolioTags = [
+  "TypeScript",
   "Python",
+  "JavaScript",
   "Next.js",
   "React",
   "CSS",
@@ -11,7 +13,6 @@ export const portfolioTags = [
   "Google Sheets",
   "Backend",
   "Full Stack",
-  "TypeScript",
   "Git / GitHub",
   "NPM",
   "Crawler",
@@ -85,6 +86,7 @@ export const portfolio: PortfolioItem[] = [
       "Backend",
       "Full Stack",
       "TypeScript",
+      "JavaScript",
       "Git / GitHub",
       "NPM",
     ],
@@ -132,6 +134,7 @@ export const portfolio: PortfolioItem[] = [
       "React",
       "CSS",
       "Frontend",
+      "JavaScript",
       "TypeScript",
       "Git / GitHub",
     ],
@@ -221,6 +224,8 @@ export const portfolio: PortfolioItem[] = [
     },
     tags: [
       "Express",
+      "TypeScript",
+      "JavaScript",
       "Node.js",
       "Backend",
       "Line Bot SDK",

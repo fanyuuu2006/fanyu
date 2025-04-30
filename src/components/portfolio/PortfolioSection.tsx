@@ -19,18 +19,21 @@ import { OutsideLink } from "fanyucomponents";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { slugify } from "@/utils/url";
 
-type PortfolioContent = Record<"portfolio" | "nofound", string>;
+type PortfolioContent = Record<"portfolio" | "nofound"| "all", string>;
 
 const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
   ((
     {
       chinese: {
         portfolio: "作品集",
+        all: "全部",
         nofound: "暫無符合條件的作品",
       },
       english: {
         portfolio: "Portfolio",
+        all: "All",
         nofound: "No matching portfolio found",
       },
     } as LanguageContent<PortfolioContent>
@@ -82,7 +85,7 @@ export const PortfolioSection = () => {
               ...(!currentTag ? { filter: "brightness(2)" } : {}),
             }}
           >
-            全部
+            {portfolioContent.all}
           </button>
           {portfolioTags.map((tag) => (
             <button
@@ -107,7 +110,7 @@ export const PortfolioSection = () => {
           filteredPortfolio.map((item: PortfolioItem) => (
             <div
               key={item.title.english}
-              id={item.title.english.replace(/ /g, "")}
+              id={slugify(item.title.english)}
               className="card bordered shadow d-flex no-wrap-on-desktop"
               style={{
                 width: "100%",

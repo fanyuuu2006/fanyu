@@ -7,6 +7,7 @@ import { PortfolioItem } from "@/types/portfolio";
 import { ClockCircleOutlined, TagOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useEffect, useState} from "react";
+import { slugify } from "@/utils/url";
 
 type PortfolioContent = Record<"portfolio", string>;
 
@@ -43,7 +44,7 @@ export const PortfolioSection = () => {
           {shuffledPortfolio.map((item: PortfolioItem) => (
             <Link
               key={item.title.english}
-              href={`/portfolio/#${item.title.english.replace(/ /g, "")}`}
+              href={`/portfolio/#${slugify(item.title.english)}`}
               className="card card-link flex-responsive bordered shadow d-flex flex-column align-items-center"
               style={{
                 flex: "1 1 30%",
