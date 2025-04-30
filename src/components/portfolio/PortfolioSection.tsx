@@ -24,7 +24,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { slugify } from "@/utils/url";
 
 type PortfolioContent = Record<
-  "portfolio" | "nofound" | "all" | "category" | PortfolioTagCategory,
+  "portfolio" | "nofound" | "all" | "categories" | PortfolioTagCategory,
   string
 >;
 
@@ -35,7 +35,7 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         portfolio: "作品集",
         all: "全部",
         nofound: "暫無符合條件的作品",
-        category: "分類",
+        categories: "類別",
         language: "語言",
         roles: "開發角色",
         domains: "領域",
@@ -48,7 +48,7 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         portfolio: "Portfolio",
         all: "All",
         nofound: "No matching portfolio found",
-        category: "Category",
+        categories: "Categories",
         language: "Language",
         roles: "Development Role",
         domains: "Domain Expertise",
@@ -112,7 +112,7 @@ export const PortfolioSection = () => {
             className="btn-text d-flex align-items-center"
             style={{ gap: "0.5em" }}
           >
-            {portfolioContent.category}
+            {portfolioContent.categories}
             {showCategory ? <DownOutlined /> : <MenuOutlined />}
           </button>
 

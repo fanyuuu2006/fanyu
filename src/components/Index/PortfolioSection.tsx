@@ -6,7 +6,7 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { PortfolioItem } from "@/types/portfolio";
 import { ClockCircleOutlined, TagOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { slugify } from "@/utils/url";
 
 type PortfolioContent = Record<"portfolio", string>;
@@ -32,7 +32,7 @@ export const PortfolioSection = () => {
   );
 
   useEffect(() => {
-    const shuffled = [...portfolio].toSorted(() => Math.random() - 0.5).slice(0, 3);
+    const shuffled = portfolio.toSorted(() => Math.random() - 0.5).slice(0, 3);
     setShuffledPortfolio(shuffled);
   }, []);
 
