@@ -1,5 +1,26 @@
 import { PortfolioItem } from "@/types/portfolio";
 
+export const portfolioTags = [
+  "Python",
+  "Next.js",
+  "React",
+  "CSS",
+  "Frontend",
+  "Express",
+  "Node.js",
+  "Google Sheets",
+  "Backend",
+  "Full Stack",
+  "TypeScript",
+  "Git / GitHub",
+  "NPM",
+  "Crawler",
+  "Flask",
+  "Line Bot SDK",
+  "Matplotlib",
+  "Requests"
+] as const
+
 export const portfolio: PortfolioItem[] = [
   {
     title: {

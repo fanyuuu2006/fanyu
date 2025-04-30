@@ -6,7 +6,7 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { PortfolioItem } from "@/types/portfolio";
 import { ClockCircleOutlined, TagOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 
 type PortfolioContent = Record<"portfolio", string>;
 
