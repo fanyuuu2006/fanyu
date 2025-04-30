@@ -67,10 +67,16 @@ ol {
 
 .btn {
   all: unset;
+  cursor: pointer;
   color: var(--text-color);
   background: var(--background-color-dark);
   border: 1px solid var(--border-color);
   text-align: center;
+}
+
+.btn-text{
+  all: unset;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -232,6 +238,11 @@ a:hover {
 /* 滾動條滑塊 hover 時的顏色 */
 ::-webkit-scrollbar-thumb:hover {
   background: #878787; /* 滑塊 hover 時的顏色 */
+}
+
+.slide-toggle-wrapper {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
 }
 
 .pop {

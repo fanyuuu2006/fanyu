@@ -12,17 +12,19 @@ import {
 import {
   ClockCircleOutlined,
   CodeSandboxOutlined,
+  DownOutlined,
   GithubOutlined,
   LinkOutlined,
+  RightOutlined,
   TagOutlined,
 } from "@ant-design/icons";
 import { OutsideLink } from "fanyucomponents";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { slugify } from "@/utils/url";
 
 type PortfolioContent = Record<
-  "portfolio" | "nofound" | "all" | PortfolioTagCategory,
+  "portfolio" | "nofound" | "all" | "category" | PortfolioTagCategory,
   string
 >;
 
@@ -33,8 +35,9 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         portfolio: "作品集",
         all: "全部",
         nofound: "暫無符合條件的作品",
+        category: "分類",
         language: "語言",
-        roles: "",
+        roles: "開發角色",
         domains: "領域",
         frameworks: "框架",
         libraries: "函式庫",
@@ -45,6 +48,7 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         portfolio: "Portfolio",
         all: "All",
         nofound: "No matching portfolio found",
+        category: "Category",
         language: "Language",
         roles: "Development Role",
         domains: "Domain Expertise",
@@ -66,6 +70,7 @@ export const PortfolioSection = () => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
   const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
+  const [showCategory, setShowCategory] = useState<boolean>(false);
   const [filteredPortfolio, setFilteredPortfolio] =
     useState<PortfolioItem[]>(portfolio);
 
@@ -77,57 +82,88 @@ export const PortfolioSection = () => {
     );
   }, [currentTag]);
 
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  useEffect(() => {
+    if (showCategory && contentRef.current) {
+      setContentHeight(contentRef.current.scrollHeight);
+    } else {
+      setContentHeight(0);
+    }
+  }, [showCategory]);
+
   return (
     <section>
       <div className="container d-flex flex-column align-items-center">
         <div className="title text-bold">{portfolioContent.portfolio}</div>
         <div
           className="note d-flex flex-column"
-          style={{ width: "100%", padding: "0 1em", gap: "0.5em 1em" }}
+          style={{ width: "100%", padding: "0 1em", gap: "0.5em" }}
         >
           <button
             onClick={() => {
-              setCurrentTag(null);
+              setShowCategory((prev) => !prev);
             }}
-            className="btn card-link"
-            style={{
-              width: "fit-content",
-              padding: "0 0.5em",
-              borderRadius: "5px",
-              ...(!currentTag ? { filter: "brightness(2)" } : {}),
-            }}
+            className="btn-text d-flex align-items-center"
+            style={{ gap: "0.5em" }}
           >
-            {portfolioContent.all}
+            {portfolioContent.category}
+            {showCategory ? <DownOutlined /> : <RightOutlined />}
           </button>
-          {Object.entries(portfolioTagCategories).map(([category, tags]) => (
-            <div
-              key={category}
-              className="d-flex flex-column"
-              style={{ gap: "0.5em" }}
-            >
-              <div>{portfolioContent[category as keyof PortfolioContent]}</div>
-              <div className="d-flex" style={{ gap: "0.5em" }}>
-                {tags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => {
-                      setCurrentTag(tag);
-                    }}
-                    className="btn card-link"
-                    style={{
-                      padding: "0 0.5em",
-                      borderRadius: "5px",
-                      ...(tag === currentTag
-                        ? { filter: "brightness(2)" }
-                        : {}),
-                    }}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
+
+          <div
+            ref={contentRef}
+            className="slide-toggle-wrapper"
+            style={{ maxHeight: `${contentHeight}px` }}
+          >
+            <div className="d-flex">
+              <button
+                onClick={() => {
+                  setCurrentTag(null);
+                }}
+                className="btn card-link"
+                style={{
+                  padding: "0 0.5em",
+                  borderRadius: "5px",
+                  ...(!currentTag ? { filter: "brightness(2)" } : {}),
+                }}
+              >
+                {portfolioContent.all}
+              </button>
             </div>
-          ))}
+            {Object.entries(portfolioTagCategories).map(([category, tags]) => (
+              <div
+                key={category}
+                className="d-flex flex-column"
+                style={{ gap: "0.5em" }}
+              >
+                <span className="text-bold">
+                  {portfolioContent[category as keyof PortfolioContent]}
+                </span>
+                <div className="d-flex" style={{ gap: "0.5em" }}>
+                  {tags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => {
+                        setCurrentTag(tag);
+                      }}
+                      className="btn card-link"
+                      style={{
+                        padding: "0 0.5em",
+                        borderRadius: "5px",
+                        ...(tag === currentTag
+                          ? { filter: "brightness(2)" }
+                          : {}),
+                      }}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {filteredPortfolio.length === 0 ? (
