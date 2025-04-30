@@ -67,7 +67,7 @@ export const Header = () => {
             />
           </Link>
           <button
-            className="btn nav-menu"
+            className="btn-text label nav-menu"
             style={{ borderRadius: "5px", padding: "0.5em" }}
             onClick={() => {
               setShowMenu((prev) => !prev);
@@ -84,7 +84,7 @@ export const Header = () => {
           </div>
         </div>
         <div
-          className="slide-toggle-wrapper"
+          className="slide-toggle-wrapper nav-menu"
           style={{
             maxHeight: showMenu ? `${menuRef.current?.scrollHeight}px` : "0",
           }}
