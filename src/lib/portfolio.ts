@@ -1,26 +1,14 @@
 import { PortfolioItem } from "@/types/portfolio";
 
-export const portfolioTags = [
-  "TypeScript",
-  "Python",
-  "JavaScript",
-  "Next.js",
-  "React",
-  "CSS",
-  "Frontend",
-  "Express",
-  "Node.js",
-  "Google Sheets",
-  "Backend",
-  "Full Stack",
-  "Git / GitHub",
-  "NPM",
-  "Crawler",
-  "Flask",
-  "Line Bot SDK",
-  "Matplotlib",
-  "Requests"
-] as const
+export const portfolioTagCategories = {
+  language: ["TypeScript", "Python", "JavaScript"],
+  roles: ["Frontend", "Backend", "Full Stack"], // ← 職能/開發角色分類
+  domains: ["Crawler"], // 專長領域
+  frameworks: ["React", "Next.js", "Express", "CSS", "Node.js", "Flask"],
+  libraries: ["Line Bot SDK", "Matplotlib", "Requests"],
+  tools: ["Git / GitHub", "NPM", "Google Sheets"],
+  other: ["Vercel"],
+} as const;
 
 export const portfolio: PortfolioItem[] = [
   {
@@ -89,6 +77,7 @@ export const portfolio: PortfolioItem[] = [
       "JavaScript",
       "Git / GitHub",
       "NPM",
+      "Vercel",
     ],
   },
   {
@@ -137,6 +126,7 @@ export const portfolio: PortfolioItem[] = [
       "JavaScript",
       "TypeScript",
       "Git / GitHub",
+      "Vercel",
     ],
   },
   {
@@ -185,6 +175,7 @@ export const portfolio: PortfolioItem[] = [
       "Line Bot SDK",
       "Matplotlib",
       "Git / GitHub",
+      "Vercel",
     ],
   },
   {
@@ -231,6 +222,7 @@ export const portfolio: PortfolioItem[] = [
       "Line Bot SDK",
       "Google Sheets",
       "Git / GitHub",
+      "Vercel",
     ],
   },
 ];
