@@ -80,7 +80,7 @@ export const PortfolioSection = () => {
               setShowCategory((prev) => !prev);
             }}
             className="btn-text d-flex align-items-center"
-            style={{ gap: "0.5em" }}
+            style={{ width:"contain", gap: "0.5em" }}
           >
             {portfolioContent.categories}
             {showCategory ? <DownOutlined /> : <MenuOutlined />}
@@ -92,13 +92,12 @@ export const PortfolioSection = () => {
               maxHeight: `${
                 showCategory ? categoryContentRef.current?.scrollHeight : 0
               }px`,
-              ...(showCategory ? { overflow: "visible" } : {}),
             }}
           >
             <div
               ref={categoryContentRef}
               className="d-flex flex-column"
-              style={{ gap: "0.5em" }}
+              style={{ gap: "0.5em", }}
             >
               <div>
                 <button

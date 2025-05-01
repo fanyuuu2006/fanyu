@@ -245,7 +245,7 @@ a:hover {
 }
 
 .slide-toggle-wrapper {
-  overflow: hidden;
+  overflow: auto;
   transition: max-height 0.4s ease;
 }
 

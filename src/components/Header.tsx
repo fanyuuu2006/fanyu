@@ -84,7 +84,7 @@ export const Header = () => {
           </div>
         </div>
         <div
-          className="slide-toggle-wrapper nav-menu"
+          className="slide-toggle-wrapper  nav-menu"
           style={{
             maxHeight: showMenu ? `${menuRef.current?.scrollHeight}px` : "0",
           }}
