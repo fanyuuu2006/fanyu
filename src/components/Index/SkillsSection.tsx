@@ -97,7 +97,7 @@ export const SkillsSection = () => {
               <div className="content font-bold">
                 {skillsContent[category as keyof SkillsContent]}:
               </div>
-              <div className="label flex flex-wrap gap-1">
+              <div className="label flex flex-wrap gap-2">
                 {items.map((item) => (
                   <Tooltip key={item.title} title={item.title}>
                     <Image

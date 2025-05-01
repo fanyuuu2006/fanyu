@@ -186,10 +186,6 @@ button {
   .card-glass {
     width: 100% !important;
   }
-
-  .no-wrap-on-desktop {
-    flex-wrap: wrap;
-  }
 }
 
 /* Scrollbar styling */
