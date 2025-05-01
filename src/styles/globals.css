@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer base {
+  body {
+    font-family: "Noto Sans TC", sans-serif; /* 或你想要的字型 */
+  }
+}
+
 :root {
   --background-color: #171c4e;
   --background-color-dark: #05053b;
