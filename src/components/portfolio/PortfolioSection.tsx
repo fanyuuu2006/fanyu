@@ -20,7 +20,7 @@ import {
 } from "@ant-design/icons";
 import { OutsideLink } from "fanyucomponents";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { slugify } from "@/utils/url";
 
 type PortfolioContent = Record<
@@ -71,16 +71,13 @@ export const PortfolioSection = () => {
   const portfolioContent = getPortfolioContent(Language.Current);
   const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
   const [showCategory, setShowCategory] = useState<boolean>(false);
-  const [filteredPortfolio, setFilteredPortfolio] =
-    useState<PortfolioItem[]>(portfolio);
-  const catrgoryContentRef = useRef<HTMLDivElement>(null);
+  useState<PortfolioItem[]>(portfolio);
+  const categoryContentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setFilteredPortfolio(
-      !currentTag
-        ? portfolio
-        : portfolio.filter((item) => item.tags.includes(currentTag))
-    );
+  const filteredPortfolio = useMemo(() => {
+    return !currentTag
+      ? portfolio
+      : portfolio.filter((item) => item.tags.includes(currentTag));
   }, [currentTag]);
 
   return (
@@ -110,12 +107,13 @@ export const PortfolioSection = () => {
             className="slide-toggle-wrapper"
             style={{
               maxHeight: `${
-                showCategory ? catrgoryContentRef.current?.scrollHeight : 0
+                showCategory ? categoryContentRef.current?.scrollHeight : 0
               }px`,
+              ...(showCategory ? { overflow: "visible" } : {}),
             }}
           >
             <div
-              ref={catrgoryContentRef}
+              ref={categoryContentRef}
               className="d-flex flex-column"
               style={{ gap: "0.5em" }}
             >
