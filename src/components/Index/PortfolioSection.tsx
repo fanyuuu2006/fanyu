@@ -38,67 +38,39 @@ export const PortfolioSection = () => {
 
   return (
     <section id="portfolio">
-      <div className="container d-flex flex-column align-items-center">
-        <div className="title text-bold">{portfolioContent.portfolio}</div>
-        <div className="d-flex justify-content-between" style={{ gap: "1em" }}>
+      <div className="container flex flex-col items-center">
+        <div className="title font-bold">{portfolioContent.portfolio}</div>
+        <div className="flex flex-wrap justify-between gap-4">
           {shuffledPortfolio.map((item: PortfolioItem) => (
             <Link
               key={item.title.english}
               href={`/portfolio/#${slugify(item.title.english)}`}
-              className="card card-link flex-responsive bordered shadow d-flex flex-column align-items-center"
-              style={{
-                flex: "1 1 30%",
-                padding: "1em",
-                gap: "1em",
-              }}
+              className="card card-link bordered shadow flex flex-col items-center p-4 gap-4 flex-1 basis-full md:basis-3/10"
             >
               <Image
-                className="title shadow"
+                className="title shadow w-3/5 h-auto rounded-full object-cover"
                 src={item.imageSrc}
                 alt={`${item.title.english} icon`}
                 width={300}
                 height={300}
-                style={{
-                  width: "60%",
-                  height: "auto",
-                  borderRadius: "100%",
-                  objectFit: "cover", // 確保圖片不變形
-                }}
               />
-              <div
-                className="d-flex flex-column flex-grow"
-                style={{ gap: "0.5em" }}
-              >
-                <div className="content text-bold">
+              <div className="flex flex-col gap-2">
+                <div className="content font-bold">
                   {item.title[Language.Current]}
                 </div>
-                <div className="hint d-flex" style={{ gap: "0.5em" }}>
+                <div className="hint flex gap-2">
                   <ClockCircleOutlined />
                   {item.time}
                 </div>
                 <div className="note">{item.about[Language.Current]}</div>
 
-                <div
-                  className="hint d-flex"
-                  style={{ flexWrap: "nowrap", gap: "0.5em" }}
-                >
+                <div className="hint flex flex-nowrap gap-2">
                   <TagOutlined />
-                  <div
-                    className="d-flex"
-                    style={{
-                      flexWrap: "wrap",
-                      gap: "0.5em",
-                    }}
-                  >
+                  <div className="flex flex-wrap gap-2">
                     {item.tags.map((tag) => (
                       <span
+                        className="rounded-sm whitespace-nowrap px-2 bg-[var(--background-color)]"
                         key={tag}
-                        style={{
-                          borderRadius: "5px",
-                          whiteSpace: "nowrap",
-                          padding: "0 0.5em",
-                          backgroundColor: "var(--background-color)",
-                        }}
                       >
                         {tag}
                       </span>

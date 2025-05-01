@@ -7,18 +7,7 @@ export const LanguageSwitchButton = () => {
   const Language = useLanguage();
 
   return (
-    <Language.Switch
-      className="btn text-center content"
-      style={{
-        position: "fixed",
-        bottom: "1em",
-        right: "1em",
-        width: "1.5em",
-        height: "1.5em",
-        borderRadius: "100%",
-        zIndex: "100",
-      }}
-    >
+    <Language.Switch className="btn content text-center fixed bottom-4 right-4 z-[100] w-12 h-12 flex items-center justify-center rounded-full">
       <Tooltip title="切換語言">
         <GlobalOutlined />
       </Tooltip>

@@ -27,29 +27,19 @@ export const PortfolioCard = ({ item, ...rest }: PortfolioCardProps) => {
   return (
     <div
       id={slugify(item.title.english)}
-      className="card bordered shadow d-flex no-wrap-on-desktop"
-      style={{
-        width: "100%",
-        padding: "1em",
-        gap: "1em",
-      }}
+      className="card bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"
       {...rest}
     >
       <Image
-        className="title shadow"
+        className="title shadow h-16 w-fit  rounded-full"
         src={item.imageSrc}
         alt={`${item.title.english} icon`}
         width={300}
         height={300}
-        style={{
-          height: "1.5em",
-          width: "auto",
-          borderRadius: "100%",
-        }}
       />
-      <div className="d-flex flex-column flex-grow" style={{ gap: "0.5em" }}>
-        <div className="content text-bold">{item.title[Language.Current]}</div>
-        <div className="hint d-flex" style={{ gap: "0.5em" }}>
+      <div className="flex flex-col flex-1 gap-2">
+        <div className="content font-bold">{item.title[Language.Current]}</div>
+        <div className="hint flex gap-2">
           <ClockCircleOutlined />
           {item.time}
         </div>
@@ -58,47 +48,24 @@ export const PortfolioCard = ({ item, ...rest }: PortfolioCardProps) => {
           <OutsideLink
             key={link.href}
             href={link.href}
-            className="hint d-flex"
-            style={{
-              width: "fit-content",
-              flexWrap: "nowrap",
-              gap: "0.5em",
-              opacity: "0.7",
-            }}
+            className="hint w-fit flex flex-nowrap gap-2 opacity-70"
           >
             {categoryIcon[link.category]}
             <span>{link.href}</span>
           </OutsideLink>
         ))}
-        <ul className="note">
+        <ul className="note list-disc ps-6">
           {item.description[Language.Current].map((part, index) => (
             <li key={index}>{part}</li>
           ))}
         </ul>
-        <div
-          className="hint d-flex"
-          style={{
-            flexWrap: "nowrap",
-            gap: "0.5em",
-          }}
-        >
+        <div className="hint flex flex-nowrap gap-2">
           <TagOutlined />
-          <div
-            className="d-flex"
-            style={{
-              flexWrap: "wrap",
-              gap: "0.5em",
-            }}
-          >
+          <div className="flex flex-wrap gap-2">
             {item.tags.map((tag) => (
               <span
+                className="whitespace-nowrap px-2 rounded-sm bg-[var(--background-color)]"
                 key={tag}
-                style={{
-                  borderRadius: "5px",
-                  whiteSpace: "nowrap",
-                  padding: "0 0.5em",
-                  backgroundColor: "var(--background-color)",
-                }}
               >
                 {tag}
               </span>

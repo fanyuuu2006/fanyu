@@ -89,18 +89,15 @@ export const SkillsSection = () => {
   const skillsContent = getSkillsContent(Language.Current);
   return (
     <section id="skills">
-      <div className="container d-flex flex-column align-items-center">
-        <div className="title text-bold">{skillsContent.skills}</div>
-        <div
-          className="d-flex flex-column"
-          style={{ width: "100%", padding: "1em", gap: "1em" }}
-        >
+      <div className="container flex flex-col items-center">
+        <div className="title font-bold">{skillsContent.skills}</div>
+        <div className="flex flex-col w-full p-4 gap-4">
           {Object.entries(skillItems).map(([category, items]) => (
             <div key={category}>
-              <div className="content text-bold">
+              <div className="content font-bold">
                 {skillsContent[category as keyof SkillsContent]}:
               </div>
-              <div className="label d-flex" style={{ gap: "0.3em" }}>
+              <div className="label flex flex-wrap gap-1">
                 {items.map((item) => (
                   <Tooltip key={item.title} title={item.title}>
                     <Image
@@ -109,7 +106,7 @@ export const SkillsSection = () => {
                       src={item.src}
                       width={300}
                       height={300}
-                      style={{ height: "1.5em", width: "auto" }}
+                      className="h-12 w-auto"
                     />
                   </Tooltip>
                 ))}

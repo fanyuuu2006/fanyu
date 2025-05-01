@@ -49,33 +49,24 @@ export const Header = () => {
 
   return (
     <header>
-      <nav className="d-flex flex-column">
-        <div
-          className="container d-flex align-items-center justify-content-between"
-          style={{ width: "100%", flexWrap: "nowrap", padding: "0.5em 2em" }}
-        >
-          <Link href="/" className="nav-brand">
+      <nav className="flex flex-col">
+        <div className="container flex items-center justify-between flex-nowrap px-8 py-2 w-full">
+          <Link href="/" className="h-full">
             <Image
               alt="Logo"
               src="/logo.png"
               width={1500}
               height={500}
-              style={{
-                height: "6em",
-                width: "auto",
-              }}
+              className="h-24 w-auto object-contain"
             />
           </Link>
           <button
-            className="btn-text label nav-menu"
-            style={{ borderRadius: "5px", padding: "0.5em" }}
-            onClick={() => {
-              setShowMenu((prev) => !prev);
-            }}
+            className="md:hidden label px-2 py-1"
+            onClick={() => setShowMenu((prev) => !prev)}
           >
             <MenuOutlined />
           </button>
-          <div className="nav-collapse note text-bold ">
+          <div className="hidden md:flex note font-bold gap-6">
             {Routes.map((item, index) => (
               <Link key={index} href={item.href}>
                 {item.label[Language.Current]}
@@ -84,25 +75,21 @@ export const Header = () => {
           </div>
         </div>
         <div
-          className="slide-toggle-wrapper  nav-menu"
+          className="md:hidden overflow-hidden transition-all duration-300"
           style={{
-            maxHeight: showMenu ? `${menuRef.current?.scrollHeight}px` : "0",
+            maxHeight: showMenu ? `${menuRef.current?.scrollHeight}px` : "0px",
           }}
         >
           <div
             ref={menuRef}
-            className="note text-bold text-center d-flex flex-column "
-            style={{ width: "100%" }}
+            className="flex flex-col w-full note font-bold text-center"
           >
             {Routes.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
-                className="card-glass card-link"
-                style={{ padding: "0.5em 1em" }}
-                onClick={() => {
-                  setShowMenu(false);
-                }}
+                className="w-full py-2 px-4 hover:scale-105 transition transform"
+                onClick={() => setShowMenu(false)}
               >
                 {item.label[Language.Current]}
               </Link>

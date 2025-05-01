@@ -65,22 +65,14 @@ export const PortfolioSection = () => {
 
   return (
     <section>
-      <div className="container d-flex flex-column align-items-center">
-        <div className="title text-bold">{portfolioContent.portfolio}</div>
-        <div
-          className="note d-flex flex-column"
-          style={{
-            width: "100%",
-            padding: "0 1em",
-            gap: "0.5em",
-          }}
-        >
+      <div className="container flex flex-col items-center">
+        <div className="title font-bold">{portfolioContent.portfolio}</div>
+        <div className="note flex flex-col w-full px-4 gap-2">
           <button
             onClick={() => {
               setShowCategory((prev) => !prev);
             }}
-            className="btn-text d-flex align-items-center"
-            style={{ width:"contain", gap: "0.5em" }}
+            className="btn-text flex items-center w-fit gap-2"
           >
             {portfolioContent.categories}
             {showCategory ? <DownOutlined /> : <MenuOutlined />}
@@ -94,37 +86,27 @@ export const PortfolioSection = () => {
               }px`,
             }}
           >
-            <div
-              ref={categoryContentRef}
-              className="d-flex flex-column"
-              style={{ gap: "0.5em", }}
-            >
+            <div ref={categoryContentRef} className="flex flex-col gap-2">
               <div>
                 <button
                   onClick={() => {
                     setCurrentTag(null);
                     setShowCategory(false);
                   }}
-                  className={`btn card-link ${!currentTag ? "active" : ""}`}
-                  style={{
-                    padding: "0 0.5em",
-                    borderRadius: "5px",
-                  }}
+                  className={`btn card-link ${
+                    !currentTag ? "active" : ""
+                  } px-2 rounded-sm`}
                 >
                   {portfolioContent.all}
                 </button>
               </div>
               {Object.entries(portfolioTagCategories).map(
                 ([category, tags]) => (
-                  <div
-                    key={category}
-                    className="d-flex flex-column"
-                    style={{ gap: "0.5em" }}
-                  >
-                    <span className="text-bold">
+                  <div key={category} className="flex flex-col gap-2">
+                    <span className="font-bold">
                       {portfolioContent[category as keyof PortfolioContent]}
                     </span>
-                    <div className="d-flex" style={{ gap: "0.5em" }}>
+                    <div className="flex gap-2">
                       {tags.map((tag) => (
                         <button
                           key={tag}
@@ -134,11 +116,7 @@ export const PortfolioSection = () => {
                           }}
                           className={`btn card-link ${
                             tag === currentTag ? "active" : ""
-                          }`}
-                          style={{
-                            padding: "0 0.5em",
-                            borderRadius: "5px",
-                          }}
+                          } px-2 rounded-sm`}
                         >
                           {tag}
                         </button>

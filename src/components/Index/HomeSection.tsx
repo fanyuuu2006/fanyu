@@ -73,31 +73,16 @@ export const HomeSection = () => {
 
   return (
     <section id="home">
-      <div
-        className="container d-flex justify-content-center"
-        style={{ minHeight: "648px" }}
-      >
-        <div
-          className="card-glass d-flex flex-column align-items-center justify-content-center"
-          style={{
-            width: "50%",
-            padding: "1em",
-            gap: "1em",
-          }}
-        >
+      <div className="container flex flex-wrap justify-center min-h-162">
+        <div className="card-glass flex flex-col items-center justify-center flex-grow p-4 gap-4">
           <div>
-            <div className="label text-bold">{homeContent.hello}</div>
-            <div className="title text-bold">
+            <div className="label font-bold">{homeContent.hello}</div>
+            <div className="title font-bold">
               {homeContent.iAm}
               {profile[Language.Current].nickname}❗
             </div>
             <div className="note">{homeContent.intro}</div>
-            <div
-              className="label d-flex"
-              style={{
-                gap: "0.5em",
-              }}
-            >
+            <div className="label flex gap-4">
               {links.map((item) => (
                 <Tooltip key={item.label} title={item.label} placement="bottom">
                   <OutsideLink href={item.href}>{item.icon}</OutsideLink>
@@ -106,24 +91,12 @@ export const HomeSection = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column align-items-center justify-content-center flex-grow">
-          <pre
-            className="card shadow bordered"
-            style={{
-              maxWidth: "100%",
-              padding: "1.5em",
-              overflow: "auto",
-            }}
-          >
-            <div className="hint d-flex">
+        <div className="flex flex-col items-center justify-center flex-grow">
+          <pre className="card shadow bordered p-6 overflow-auto">
+            <div className="hint flex">
               <span>TypeScript</span>
               <button
-                className="btn text-center"
-                style={{
-                  marginLeft: "auto",
-                  width: "1.5em",
-                  borderRadius: "10%",
-                }}
+                className="btn flex items-center justify-center ml-auto w-6 h-6 rounded-sm"
                 onClick={async () => {
                   await navigator.clipboard
                     .writeText(codeLines.join("\n"))
@@ -142,23 +115,11 @@ export const HomeSection = () => {
                 <CopyOutlined />
               </button>
             </div>
-            <div className="note d-flex flex-column text-bold">
+            <div className="note flex flex-col font-bold">
               {codeLines.map((line, index) => (
-                <div
-                  key={index}
-                  className="d-flex"
-                  style={{ flexWrap: "nowrap", gap: "0.5em" }}
-                >
-                  <span style={{ color: "#888", userSelect: "none" }}>
-                    {index + 1}
-                  </span>
-                  <code
-                    style={{
-                      whiteSpace: "pre-wrap",
-                    }}
-                  >
-                    {line}
-                  </code>
+                <div key={index} className="flex flex-nowrap gap-2">
+                  <span className="text-[#888] select-none">{index + 1}</span>
+                  <code className="font-mono whitespace-pre-wrap">{line}</code>
                 </div>
               ))}
             </div>

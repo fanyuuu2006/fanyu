@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --background-color: #171c4e;
   --background-color-dark: #05053b;
@@ -9,33 +11,29 @@
   --hover-brightness: 1.2;
 }
 
-*,
-*::before,
-*::after {
-  color: var(--text-color);
+* {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
   scroll-behavior: smooth;
   scroll-margin: 6em;
   line-height: 1.4em;
 }
 
 body {
-  width: 100dvw;
-  height: 100dvh;
+  width: 100%;
+  height: 100%;
   overflow-x: hidden;
   margin-top: 6em;
+  color: var(--text-color);
   background: var(--background-color);
 }
 
 header {
   position: fixed;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   background-color: var(--background-color);
-  box-shadow: 0 0 15px #000;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -47,26 +45,21 @@ header {
 #home::before {
   content: "";
   position: absolute;
-  inset: 0; /*是 top: 0; right: 0; bottom: 0; left: 0; 的簡寫。*/
-  background-color: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background-color: var(--background-overlay);
   z-index: 0;
 }
 
 #aboutMe {
   background-color: var(--text-color);
+  color: var(--background-color);
 }
 
 button {
   cursor: pointer;
 }
 
-ul,
-ol {
-  padding-left: 1.5em;
-}
-
 .btn {
-  all: unset;
   cursor: pointer;
   color: var(--text-color);
   background: var(--background-color-dark);
@@ -74,121 +67,16 @@ ol {
   text-align: center;
 }
 
-.btn-text {
-  all: unset;
-  cursor: pointer;
-}
-
 .btn:hover {
   filter: brightness(var(--hover-brightness));
 }
+
 .btn:active {
   scale: 0.9;
 }
 
-.nav-brand {
-  height: 100%;
-  width: auto;
-}
-
-.nav-collapse {
-  display: flex;
-  gap: 1.5em;
-}
-
-.nav-menu {
-  display: none;
-}
-
-table {
-  border-collapse: collapse;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.container {
-  position: relative;
-  z-index: 1; /* 確保內容蓋在遮罩上 */
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1.5em;
-  gap: 1em;
-}
-
-.title {
-  font-size: 50px;
-}
-
-.label {
-  font-size: 42px;
-}
-
-.content {
-  font-size: 32px;
-}
-
-.note {
-  font-size: 20px;
-}
-
-.hint {
-  font-size: 14px;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-justify {
-  text-align: justify;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-primary {
-  color: var(--text-color-primary);
-}
-
-.d-flex {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.justify-content-between {
-  justify-content: space-between;
-}
-
-.flex-grow {
-  flex-grow: 1;
-}
-
-.no-wrap-on-desktop {
-  flex-wrap: nowrap;
-}
-
-.align-items-center {
-  align-items: center;
+.btn-text {
+  cursor: pointer;
 }
 
 .card {
@@ -211,10 +99,6 @@ a:hover {
   border-radius: 12px;
 }
 
-.text-bold {
-  font-weight: bold;
-}
-
 .bordered {
   border: 3px solid var(--border-color);
 }
@@ -223,25 +107,34 @@ a:hover {
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
 }
 
-/* 設定滾動條的寬度 */
-::-webkit-scrollbar {
-  width: 3px; /* 垂直滾動條的寬度 */
-  height: 3px;
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+  gap: 1em;
 }
 
-/* 設定滾動條的背景 */
-::-webkit-scrollbar-track {
-  background: none; /* 滾動條背景顏色 */
+.title {
+  font-size: 50px;
 }
 
-/* 設定滾動條的顏色 */
-::-webkit-scrollbar-thumb {
-  background: #ffffff; /* 滾動條顏色 */
+.label {
+  font-size: 42px;
 }
 
-/* 滾動條滑塊 hover 時的顏色 */
-::-webkit-scrollbar-thumb:hover {
-  background: #878787; /* 滑塊 hover 時的顏色 */
+.content {
+  font-size: 32px;
+}
+
+.note {
+  font-size: 20px;
+}
+
+.hint {
+  font-size: 14px;
 }
 
 .slide-toggle-wrapper {
@@ -269,13 +162,6 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  .nav-collapse {
-    display: none;
-  }
-  .nav-menu {
-    display: initial;
-  }
-
   .title {
     font-size: 40px;
   }
@@ -301,11 +187,25 @@ a:hover {
     width: 100% !important;
   }
 
-  .flex-responsive {
-    flex: 1 1 100% !important;
-  }
-
   .no-wrap-on-desktop {
     flex-wrap: wrap;
   }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #878787;
 }

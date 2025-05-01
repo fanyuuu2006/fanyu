@@ -39,44 +39,29 @@ export const AboutMeSection = () => {
 
   return (
     <section id="aboutMe">
-      <div className="container d-flex flex-column align-items-center">
-        <div
-          className="title text-bold text-center"
-          style={{
-            color: "var(--background-color)",
-          }}
-        >
+      <div className="container flex flex-col items-center">
+        <div className="title font-bold text-center">
           {aboutMeContent.aboutMe}
         </div>
-        <div className="d-flex align-items-center" style={{ gap: "1em" }}>
-          <div
-            className="card-glass d-flex justify-content-center align-items-center"
-            style={{ width: "30%" }}
-          >
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="card-glass flex justify-center items-center w-3/10">
             <Image
-              className="bordered"
+              className="bordered w-4/5 h-auto rounded-xl"
               alt="頭貼"
               src="/GameShow.jpg"
               width={1000}
               height={1000}
-              style={{ width: "80%", height: "auto", borderRadius: "10%" }}
             />
           </div>
           <div
-            className="card-glass d-flex flex-column align-items-center"
-            style={{
-              width: "60%",
-            }}
+            className="card-glass flex flex-col items-center w-3/5"
           >
             {aboutMeContent.article.map((part, index) => (
               <p
                 key={index}
-                className="note bold text-justify"
+                className="note bold text-justify mb-4 indent-8 "
                 style={{
-                  color: "var(--background-color)",
-                  textIndent: "2em", // 首行縮排
                   textJustify: "inter-word",
-                  marginBottom: "1em", // 增加段落間距
                 }}
               >
                 {part}
