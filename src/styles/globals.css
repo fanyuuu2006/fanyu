@@ -74,7 +74,7 @@ ol {
   text-align: center;
 }
 
-.btn-text{
+.btn-text {
   all: unset;
   cursor: pointer;
 }
@@ -200,6 +200,10 @@ a:hover {
   text-decoration: none;
   transition: 0.1s ease-in-out;
   transform: scale(1.05);
+}
+
+.card-link.active {
+  filter: brightness(2);
 }
 
 .card-glass {

@@ -121,12 +121,12 @@ export const PortfolioSection = () => {
                 <button
                   onClick={() => {
                     setCurrentTag(null);
+                    setShowCategory(false);
                   }}
-                  className="btn card-link"
+                  className={`btn card-link ${!currentTag ? "active" : ""}`}
                   style={{
                     padding: "0 0.5em",
                     borderRadius: "5px",
-                    ...(!currentTag ? { filter: "brightness(2)" } : {}),
                   }}
                 >
                   {portfolioContent.all}
@@ -148,14 +148,14 @@ export const PortfolioSection = () => {
                           key={tag}
                           onClick={() => {
                             setCurrentTag(tag);
+                            setShowCategory(false);
                           }}
-                          className="btn card-link"
+                          className={`btn card-link ${
+                            tag === currentTag ? "active" : ""
+                          }`}
                           style={{
                             padding: "0 0.5em",
                             borderRadius: "5px",
-                            ...(tag === currentTag
-                              ? { filter: "brightness(2)" }
-                              : {}),
                           }}
                         >
                           {tag}
