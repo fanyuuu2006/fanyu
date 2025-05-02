@@ -24,7 +24,7 @@ export const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <footer>
-      <div className="container flex flex-col">
+      <div className="container flex flex-col items-center">
         <div className="note">
           <CopyrightOutlined /> {year}, {profile[Langauge.Current].nickname}{" "}
           {footerContent.copyright}
