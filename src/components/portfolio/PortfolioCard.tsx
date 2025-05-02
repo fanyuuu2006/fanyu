@@ -42,10 +42,9 @@ export const PortfolioCard = ({
   return (
     <div
       id={slugify(item.title.english)}
-      className={
-        className +
-        " card bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row"
-      }
+      className={`${
+        className ?? ""
+      } card bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       {...rest}
     >
       <Image

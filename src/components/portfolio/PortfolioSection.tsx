@@ -57,12 +57,12 @@ export const PortfolioSection = () => {
   const [showCategory, setShowCategory] = useState<boolean>(false);
   useState<PortfolioItem[]>(portfolio);
   const categoryContentRef = useRef<HTMLDivElement>(null);
-
   const filteredPortfolio = useMemo(() => {
     return !currentTag
       ? portfolio
       : portfolio.filter((item) => item.tags.includes(currentTag));
   }, [currentTag]);
+  
 
   return (
     <section>

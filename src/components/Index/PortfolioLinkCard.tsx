@@ -1,0 +1,59 @@
+import { useLanguage } from "@/context/LanguageContext";
+import { PortfolioItem } from "@/types/portfolio";
+import { slugify } from "@/utils/url";
+import { ClockCircleOutlined, TagOutlined } from "@ant-design/icons";
+import Link from "next/link";
+import Image from "next/image";
+import { DistributiveOmit } from "fanyucomponents";
+
+export interface PortfolioLinkCardProps
+  extends DistributiveOmit<React.ComponentProps<typeof Link>, "href"> {
+  item: PortfolioItem;
+}
+
+export const PortfolioLinkCard = ({
+  item,
+  className,
+  ...rest
+}: PortfolioLinkCardProps) => {
+  const Language = useLanguage();
+  return (
+    <Link
+      href={`/portfolio/#${slugify(item.title.english)}`}
+      className={`${
+        className ?? ""
+      } card card-link bordered shadow flex flex-col items-center p-4 gap-4 flex-1 basis-full md:basis-3/10`}
+      {...rest}
+    >
+      <Image
+        className="title shadow w-3/5 h-auto rounded-full object-cover"
+        src={item.imageSrc}
+        alt={`${item.title.english} icon`}
+        width={300}
+        height={300}
+      />
+      <div className="flex flex-col gap-2">
+        <div className="content font-bold">{item.title[Language.Current]}</div>
+        <div className="hint flex gap-2">
+          <ClockCircleOutlined />
+          {item.time}
+        </div>
+        <div className="note">{item.about[Language.Current]}</div>
+
+        <div className="hint flex flex-nowrap gap-2">
+          <TagOutlined />
+          <div className="flex flex-wrap gap-2">
+            {item.tags.map((tag) => (
+              <span
+                className="rounded-sm whitespace-nowrap px-2 bg-[var(--background-color)]"
+                key={tag}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
