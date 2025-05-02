@@ -24,7 +24,7 @@ export const PortfolioTagButton = ({
         setShowCategory?.(false);
       }}
       className={`${className} btn card-link ${
-        tag === currentTag ? "active" : ""
+        tag === currentTag ? 'brightness-200' : ""
       } px-2 rounded-sm whitespace-nowrap`}
       {...rest}
     >

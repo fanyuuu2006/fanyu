@@ -60,9 +60,6 @@ export const AboutMeSection = () => {
               <p
                 key={index}
                 className="note bold text-justify mb-4 indent-8 "
-                style={{
-                  textJustify: "inter-word",
-                }}
               >
                 {part}
               </p>

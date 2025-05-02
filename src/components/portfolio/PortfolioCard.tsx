@@ -44,7 +44,7 @@ export const PortfolioCard = ({
       id={slugify(item.title.english)}
       className={
         className +
-        " card bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"
+        " card text-justify bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"
       }
       {...rest}
     >
@@ -72,7 +72,7 @@ export const PortfolioCard = ({
             <span>{link.href}</span>
           </OutsideLink>
         ))}
-        <ul className="note list-disc ps-6">
+        <ul className="note list-disc ps-4">
           {item.description[Language.Current].map((part, index) => (
             <li key={index}>{part}</li>
           ))}
