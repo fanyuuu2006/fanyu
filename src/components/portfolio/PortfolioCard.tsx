@@ -49,7 +49,7 @@ export const PortfolioCard = ({
       {...rest}
     >
       <Image
-        className="title shadow h-16 w-fit  rounded-full"
+        className="title shadow h-20 w-fit  rounded-full"
         src={item.imageSrc}
         alt={`${item.title.english} icon`}
         width={300}
