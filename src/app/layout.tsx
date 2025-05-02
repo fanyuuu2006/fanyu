@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { LanguageSwitchButton } from "@/components/LanguageSwitchButton";
+import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "飯魚 FanYu",
@@ -21,11 +22,11 @@ export default function RootLayout({
       <body>
         <LanguageProvider>
           <Header />
-          {children}
-          <LanguageSwitchButton/>
+          <main>{children}</main>
+          <LanguageSwitchButton />
+          {/* <Footer /> */}
         </LanguageProvider>
       </body>
     </html>
   );
 }
-
