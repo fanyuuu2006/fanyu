@@ -1,5 +1,9 @@
 import Image from "next/image";
-import { PortfolioItem, PortfolioLinkCategory } from "@/types/portfolio";
+import {
+  PortfolioItem,
+  PortfolioLinkCategory,
+  PortfolioTag,
+} from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { useLanguage } from "@/context/LanguageContext";
 import { OutsideLink } from "fanyucomponents";
@@ -10,6 +14,7 @@ import {
   LinkOutlined,
   TagOutlined,
 } from "@ant-design/icons";
+import { PortfolioTagButton } from "./PortfolioTagButton";
 
 const categoryIcon: Record<PortfolioLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
@@ -20,14 +25,27 @@ const categoryIcon: Record<PortfolioLinkCategory, React.ReactNode> = {
 export interface PortfolioCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
   item: PortfolioItem;
+  currentTag: PortfolioTag | null;
+  setCurrentTag: React.Dispatch<React.SetStateAction<PortfolioTag | null>>;
+  setShowCategory: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const PortfolioCard = ({ item, className, ...rest }: PortfolioCardProps) => {
+export const PortfolioCard = ({
+  item,
+  currentTag,
+  setCurrentTag,
+  setShowCategory,
+  className,
+  ...rest
+}: PortfolioCardProps) => {
   const Language = useLanguage();
   return (
     <div
       id={slugify(item.title.english)}
-      className= {className+" card bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"}
+      className={
+        className +
+        " card bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"
+      }
       {...rest}
     >
       <Image
@@ -63,12 +81,15 @@ export const PortfolioCard = ({ item, className, ...rest }: PortfolioCardProps) 
           <TagOutlined />
           <div className="flex flex-wrap gap-2">
             {item.tags.map((tag) => (
-              <span
-                className="whitespace-nowrap px-2 rounded-sm bg-[var(--background-color)]"
+              <PortfolioTagButton
                 key={tag}
+                tag={tag}
+                currentTag={currentTag}
+                setCurrentTag={setCurrentTag}
+                setShowCategory={setShowCategory}
               >
                 {tag}
-              </span>
+              </PortfolioTagButton>
             ))}
           </div>
         </div>

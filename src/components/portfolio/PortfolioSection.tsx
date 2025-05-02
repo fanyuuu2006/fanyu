@@ -128,7 +128,13 @@ export const PortfolioSection = () => {
           <>{portfolioContent.nofound}</>
         ) : (
           filteredPortfolio.map((item: PortfolioItem) => (
-            <PortfolioCard key={item.title.english} item={item} />
+            <PortfolioCard
+              key={item.title.english}
+              item={item}
+              currentTag={currentTag}
+              setCurrentTag={setCurrentTag}
+              setShowCategory={setShowCategory}
+            />
           ))
         )}
         <Link className="note" href="/#portfolio">

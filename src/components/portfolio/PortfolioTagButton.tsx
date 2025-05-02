@@ -20,8 +20,8 @@ export const PortfolioTagButton = ({
   return (
     <button
       onClick={() => {
-        setCurrentTag(tag);
-        setShowCategory(false);
+        setCurrentTag?.(tag);
+        setShowCategory?.(false);
       }}
       className={`${className} btn card-link ${
         tag === currentTag ? "active" : ""
