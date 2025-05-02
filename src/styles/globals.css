@@ -153,7 +153,7 @@ button {
 }
 
 .slide-toggle-wrapper {
-  overflow: auto;
+  overflow-y: hidden;
   transition: max-height 0.4s ease;
 }
 
