@@ -22,12 +22,12 @@ export interface PortfolioCardProps
   item: PortfolioItem;
 }
 
-export const PortfolioCard = ({ item, ...rest }: PortfolioCardProps) => {
+export const PortfolioCard = ({ item, className, ...rest }: PortfolioCardProps) => {
   const Language = useLanguage();
   return (
     <div
       id={slugify(item.title.english)}
-      className="card bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"
+      className= {className+" card bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"}
       {...rest}
     >
       <Image

@@ -11,6 +11,7 @@ import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import React, { useMemo, useRef, useState } from "react";
 import { PortfolioCard } from "./PortfolioCard";
+import { PortfolioTagButton } from "./PortfolioTagButton";
 
 type PortfolioContent = Record<
   "portfolio" | "nofound" | "all" | "categories" | PortfolioTagCategory,
@@ -88,17 +89,14 @@ export const PortfolioSection = () => {
           >
             <div ref={categoryContentRef} className="flex flex-col gap-2">
               <div>
-                <button
-                  onClick={() => {
-                    setCurrentTag(null);
-                    setShowCategory(false);
-                  }}
-                  className={`btn card-link ${
-                    !currentTag ? "active" : ""
-                  } px-2 rounded-sm`}
+                <PortfolioTagButton
+                  tag={null}
+                  currentTag={currentTag}
+                  setCurrentTag={setCurrentTag}
+                  setShowCategory={setShowCategory}
                 >
                   {portfolioContent.all}
-                </button>
+                </PortfolioTagButton>
               </div>
               {Object.entries(portfolioTagCategories).map(
                 ([category, tags]) => (
@@ -106,20 +104,17 @@ export const PortfolioSection = () => {
                     <span className="font-bold">
                       {portfolioContent[category as keyof PortfolioContent]}
                     </span>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {tags.map((tag) => (
-                        <button
+                        <PortfolioTagButton
                           key={tag}
-                          onClick={() => {
-                            setCurrentTag(tag);
-                            setShowCategory(false);
-                          }}
-                          className={`btn card-link ${
-                            tag === currentTag ? "active" : ""
-                          } px-2 rounded-sm`}
+                          tag={tag}
+                          currentTag={currentTag}
+                          setCurrentTag={setCurrentTag}
+                          setShowCategory={setShowCategory}
                         >
                           {tag}
-                        </button>
+                        </PortfolioTagButton>
                       ))}
                     </div>
                   </div>
