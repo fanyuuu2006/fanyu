@@ -87,7 +87,7 @@ export const PortfolioSection = () => {
               }px`,
             }}
           >
-            <div ref={categoryContentRef} className="flex flex-col gap-2">
+            <div ref={categoryContentRef} className="flex flex-col ms-2 gap-2">
               <div>
                 <PortfolioTagButton
                   tag={null}
