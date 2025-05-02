@@ -44,7 +44,7 @@ export const PortfolioCard = ({
       id={slugify(item.title.english)}
       className={
         className +
-        " card text-justify bordered shadow w-full p-4 gap-4 flex flex-col md:flex-row"
+        " card text-justify bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row"
       }
       {...rest}
     >
