@@ -195,7 +195,7 @@ const AoJiao: PortfolioItem = {
       href: "https://github.com/fanyuuu2006/NTUST-BoardGameClub-Bot",
     },
   ],
-  time: "2025-04",
+  time: "2025-03",
   about: {
     chinese:
       "臺科大桌遊社專屬的 Line Bot，協助幹部管理社務並提升社員互動體驗。",
