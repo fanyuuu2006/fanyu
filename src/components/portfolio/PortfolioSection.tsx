@@ -107,6 +107,7 @@ export const PortfolioSection = () => {
                   tag={null}
                   currentTag={currentTag}
                   setCurrentTag={setCurrentTag}
+                  setCategoriesShow={setCategoriesShow}
                 >
                   {portfolioContent.all}
                 </PortfolioTagButton>
@@ -124,6 +125,7 @@ export const PortfolioSection = () => {
                           tag={tag}
                           currentTag={currentTag}
                           setCurrentTag={setCurrentTag}
+                          setCategoriesShow={setCategoriesShow}
                         >
                           {tag}
                         </PortfolioTagButton>
