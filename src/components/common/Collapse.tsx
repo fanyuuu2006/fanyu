@@ -16,7 +16,7 @@ export const Collapse = ({
   return (
     <div
       ref={innerRef}
-      className={`overflow-hidden ${className ?? ""}`}
+      className={`overflow-hidden ${className ?? ""} transition-[max-height] duration-300`}
       style={{
         maxHeight: show ? `${innerRef.current?.scrollHeight ?? 0}px` : "0px",
         ...style,

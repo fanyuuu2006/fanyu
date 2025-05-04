@@ -4,7 +4,7 @@ import { EducationCard } from "./EducationCard";
 import { profile } from "@/lib/profile";
 import { Collapse } from "@/components/common/Collapse";
 import { useState } from "react";
-import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 type EductionContent = Record<"eduction" | "viewAll" | "collapse", string>;
 
@@ -41,10 +41,7 @@ export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
       <div className="content font-bold ">{eductionContent.eduction}</div>
       <div className={`flex flex-col w-full ${allShow && "gap-4"}`}>
         <EducationCard item={nowEducationItem} />
-        <Collapse
-          state={allShow}
-          className="transtion-[max-height] duration-300 flex flex-col w-full gap-4"
-        >
+        <Collapse state={allShow} className="flex flex-col w-full gap-4">
           {pastEducationItems.map((item) => (
             <EducationCard key={item.school.english} item={item} />
           ))}
@@ -59,11 +56,11 @@ export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
         >
           {allShow ? (
             <>
-              <CaretUpOutlined /> {eductionContent.collapse}
+              <UpOutlined /> {eductionContent.collapse}
             </>
           ) : (
             <>
-              <CaretDownOutlined /> {eductionContent.viewAll}
+              <DownOutlined /> {eductionContent.viewAll}
             </>
           )}
         </button>

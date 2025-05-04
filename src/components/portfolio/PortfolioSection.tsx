@@ -13,7 +13,7 @@ import {
   MenuOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { PortfolioCard } from "./PortfolioCard";
 import { PortfolioTagButton } from "./PortfolioTagButton";
 import { profile } from "../../lib/profile";
@@ -67,10 +67,27 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
 
 export const PortfolioSection = () => {
   const Language = useLanguage();
-  const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const portfolioContent = getPortfolioContent(Language.Current);
 
   const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
+  const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const pointerEventHandler = (e: PointerEvent) => {
+      if (
+        categoriesShow &&
+        categoriesRef.current &&
+        !categoriesRef.current.contains(e.target as Node)
+      )
+        setCategoriesShow(false);
+    };
+
+    document.addEventListener("pointerdown", pointerEventHandler);
+    return () => {
+      document.removeEventListener("pointerdown", pointerEventHandler);
+    };
+  }, [categoriesShow]);
 
   const filteredPortfolio = useMemo(() => {
     return !currentTag
@@ -83,13 +100,10 @@ export const PortfolioSection = () => {
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{portfolioContent.portfolio}</div>
         <div className="note flex flex-col w-full px-4 gap-2">
-          <div className="flex flex-nowrap gap-4 justify-between">
+          <div className="relative flex flex-nowrap gap-4 justify-between">
             <button
               onClick={() => {
-                setCategoriesShow((prev) => {
-                  console.log(prev);
-                  return !prev;
-                });
+                setCategoriesShow((prev) => !prev);
               }}
               className="btn-text flex items-center w-fit gap-2"
             >
@@ -104,17 +118,16 @@ export const PortfolioSection = () => {
             </span>
           </div>
 
-          <Collapse
-            className="transition-[max-height] duration-300"
-            state={categoriesShow}
-          >
-            <div className="flex flex-col ms-2 gap-2">
+          <Collapse className="absolute z-10 mt-8" state={categoriesShow}>
+            <div
+              className="flex flex-col p-4 gap-2 card bordered"
+              ref={categoriesRef}
+            >
               <div>
                 <PortfolioTagButton
                   tag={null}
                   currentTag={currentTag}
                   setCurrentTag={setCurrentTag}
-                  setCatrgoriesShow={setCategoriesShow}
                 >
                   {portfolioContent.all}
                 </PortfolioTagButton>
@@ -132,7 +145,6 @@ export const PortfolioSection = () => {
                           tag={tag}
                           currentTag={currentTag}
                           setCurrentTag={setCurrentTag}
-                          setCatrgoriesShow={setCategoriesShow}
                         >
                           {tag}
                         </PortfolioTagButton>

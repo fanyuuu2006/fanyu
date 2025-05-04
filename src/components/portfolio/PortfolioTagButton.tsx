@@ -4,8 +4,8 @@ export interface PortfolioTagButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   tag: PortfolioTag | null;
   currentTag: PortfolioTag | null;
-  setCurrentTag: React.Dispatch<React.SetStateAction<PortfolioTag | null>>;
-  setCatrgoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentTag?: React.Dispatch<React.SetStateAction<PortfolioTag | null>>;
+  setCatrgoriesShow?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const PortfolioTagButton = ({

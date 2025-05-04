@@ -83,7 +83,7 @@ export const Header = () => {
         </div>
         <Collapse
           state={menuShow}
-          className="transition-[max-height] duration-300 md:hidden"
+          className="md:hidden"
         >
           <div className="flex flex-col w-full note font-bold text-center">
             {Routes.map((item, index) => (
