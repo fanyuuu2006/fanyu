@@ -227,9 +227,59 @@ const AoJiao: PortfolioItem = {
   ],
 };
 
+const FanYuComponents: PortfolioItem = {
+  title: {
+    chinese: "Fanyu Components",
+    english: "Fanyu Components",
+  },
+  imageSrc: "/Portfolio/fanyucomponents.png",
+  links: [
+    {
+      category: "package",
+      href: "https://www.npmjs.com/package/fanyucomponents",
+    },
+    {
+      category: "github",
+      href: "https://github.com/fanyuuu2006/fanyu-components",
+    },
+  ],
+  time: "2025-04",
+  about: {
+    chinese:
+      "一款以純邏輯為核心、無樣式綁定的 React 組件套件，強調自由度與擴充性。",
+    english:
+      "A logic-first, unstyled React component library designed for flexibility and extensibility.",
+  },
+  description: {
+    chinese: [
+      "使用 React 開發，專注於封裝純邏輯互動元件，無綁定樣式，適用於多樣化 UI 設計。",
+      "完整支援 TypeScript，提供嚴謹的型別定義與 IntelliSense 輔助，提高開發效率與穩定性。",
+      "支援 `as` props，強化組件彈性與可組合性。",
+      "套件本體極為輕量，未引入額外 UI 函式庫，適合需要高度客製化的應用場景。",
+      "已發布於 npm，便於前端專案快速整合與重複使用。",
+    ],
+    english: [
+      "Developed with React, focusing on encapsulating logic-only, style-free interactive components adaptable to any UI framework.",
+      "Fully typed with TypeScript, ensuring strict type safety and enhanced developer experience via IntelliSense.",
+      "Supports `as` props, enabling flexible composition and reuse.",
+      "Lightweight package with no external UI library dependencies, ideal for highly customizable applications.",
+      "Published on npm for easy integration and reuse in frontend projects.",
+    ],
+  },
+  tags: [
+    "TypeScript",
+    "React",
+    "Frontend",
+    "NPM",
+    "JavaScript",
+    "Git / GitHub",
+  ],
+};
+
 export const portfolio: PortfolioItem[] = [
   LabaG,
   ToolsForMetaInformation,
   DoBuJio,
   AoJiao,
+  FanYuComponents,
 ];
