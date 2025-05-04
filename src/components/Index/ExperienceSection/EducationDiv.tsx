@@ -6,9 +6,9 @@ import { Collapse } from "@/components/common/Collapse";
 import { useState } from "react";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-type EductionContent = Record<"eduction" | "viewAll" | "collapse", string>;
+type EducationContent = Record<"eduction" | "viewAll" | "collapse", string>;
 
-const getEductionContent = (language: LanguageOption): EductionContent =>
+const getEduationContent = (language: LanguageOption): EducationContent =>
   ((
     {
       chinese: {
@@ -21,14 +21,14 @@ const getEductionContent = (language: LanguageOption): EductionContent =>
         viewAll: "View all",
         collapse: "Collapse",
       },
-    } as LanguageContent<EductionContent>
+    } as LanguageContent<EducationContent>
   )[language]);
 
 export type EducationDivProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
   const Language = useLanguage();
-  const eductionContent = getEductionContent(Language.Current);
+  const educationContent = getEduationContent(Language.Current);
   const nowEducationItem = profile.experience.education[0];
   const pastEducationItems = profile.experience.education.slice(1);
 
@@ -38,12 +38,12 @@ export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
       className={`${className ?? ""} flex flex-col w-full items-start gap-4`}
       {...rest}
     >
-      <div className="content font-bold ">{eductionContent.eduction}</div>
+      <div className="content font-bold ">{educationContent.eduction}</div>
       <div className={`flex flex-col w-full ${allShow && "gap-4"}`}>
         <EducationCard item={nowEducationItem} />
         <Collapse state={allShow} className="flex flex-col w-full gap-4">
           {pastEducationItems.map((item) => (
-            <EducationCard key={item.school.english} item={item} />
+            <EducationCard key={item.name.english} item={item} />
           ))}
         </Collapse>
       </div>
@@ -56,11 +56,11 @@ export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
         >
           {allShow ? (
             <>
-              <UpOutlined /> {eductionContent.collapse}
+              <UpOutlined /> {educationContent.collapse}
             </>
           ) : (
             <>
-              <DownOutlined /> {eductionContent.viewAll}
+              <DownOutlined /> {educationContent.viewAll}
             </>
           )}
         </button>

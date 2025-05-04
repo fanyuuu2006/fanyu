@@ -29,37 +29,35 @@ export const EducationCard = ({
     >
       <Image
         src={item.imageSrc}
-        alt={item.school.english}
+        alt={item.name.english}
         className="h-30 w-fit bg-[#fff] rounded-full bordered"
         width={600}
         height={600}
       />
       <div className="card-glass flex flex-col flex-grow gap-1">
-        <span className="content font-bold">
-          {item.school[Language.Current]}
-        </span>
-        <OutsideLink
-          href={item.href}
-          className="hint opacity-75 w-fit flex gap-2"
-        >
-          <LinkOutlined />
-          {item.href}
-        </OutsideLink>
-        <div className="flex flex-wrap gap-x-4 hint whitespace-nowrap opacity-75">
-          <span className="flex gap-2">
-            <ClockCircleOutlined />
-            {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
-          </span>
-          <OutsideLink href={item.location.href} className="flex gap-2">
-            <EnvironmentOutlined />
-            {item.location[Language.Current]}
-          </OutsideLink>
-        </div>
+        <span className="content font-bold">{item.name[Language.Current]}</span>
         {item.department && (
-          <span className="note font-bold">
+          <span className="note font-bold opacity-75">
             {item.department?.[Language.Current]}
           </span>
         )}
+        <div className="flex flex-col hint opacity-75">
+          <OutsideLink href={item.href} className=" w-fit flex gap-2">
+            <LinkOutlined />
+            {item.href}
+          </OutsideLink>
+          <div className="flex flex-wrap gap-x-4 whitespace-nowrap">
+            <span className="flex gap-2">
+              <ClockCircleOutlined />
+              {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
+            </span>
+            <OutsideLink href={item.location.href} className="flex gap-2">
+              <EnvironmentOutlined />
+              {item.location[Language.Current]}
+            </OutsideLink>
+          </div>
+        </div>
+
         <span>{degreeMap[Language.Current][item.degree]}</span>
       </div>
     </div>

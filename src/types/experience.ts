@@ -20,7 +20,7 @@ export type LinkContent<T> = {
 } & LanguageContent<T>;
 
 export type EducationItem = {
-  school: LanguageContent<string>;
+  name: LanguageContent<string>;
   degree: DegreeOption;
   department?: LanguageContent<string>;
   duration: Duration;
@@ -32,8 +32,10 @@ export type EducationItem = {
 
 export type ClubItem = {
   name: LanguageContent<string>;
+  organization?: EducationItem;
   role: LanguageContent<string>;
   duration: Duration;
   description?: string;
   imageSrc: string;
+  href: string;
 };

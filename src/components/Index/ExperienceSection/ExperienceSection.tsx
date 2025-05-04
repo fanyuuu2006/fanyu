@@ -2,6 +2,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { EducationDiv } from "./EducationDiv";
+import { ClubDiv } from "./ClubDiv";
 
 type ExperienceContent = Record<"experience", string>;
 
@@ -26,6 +27,7 @@ export const ExperienceSection = () => {
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{ExperienceContent.experience}</div>
         <EducationDiv/>
+        <ClubDiv/>
       </div>
     </section>
   );

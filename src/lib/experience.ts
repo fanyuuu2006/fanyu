@@ -25,7 +25,7 @@ export const degreeMap: LanguageContent<Record<DegreeOption, string>> = {
 };
 
 const NTUST: EducationItem = {
-  school: {
+  name: {
     chinese: "國立臺灣科技大學",
     english: "National Taiwan University of Science and Technology",
   },
@@ -45,7 +45,7 @@ const NTUST: EducationItem = {
 };
 
 const CPSHS: EducationItem = {
-  school: {
+  name: {
     chinese: "私立治平高級中學",
     english: "Chih Ping Senior High School",
   },
@@ -65,7 +65,7 @@ const CPSHS: EducationItem = {
 };
 
 const FGJH: EducationItem = {
-  school: {
+  name: {
     chinese: "新竹縣立富光國民中學",
     english: "Fu Guang Junior High School",
   },
@@ -81,7 +81,7 @@ const FGJH: EducationItem = {
 };
 
 const GSES: EducationItem = {
-  school: {
+  name: {
     chinese: "新竹縣立關西國民小學",
     english: "Guan Shi Elementary School",
   },
@@ -98,17 +98,18 @@ const GSES: EducationItem = {
 
 const NTUST_BGC: ClubItem = {
   name: {
-    chinese: "桌遊社 (國立臺灣科技大學)",
-    english:
-      "BoardGame Club (National Taiwan University of Science and Technology)",
+    chinese: "桌遊社",
+    english: "BoardGame Club",
   },
   role: {
     chinese: "社員",
     english: "Member",
   },
+  organization: NTUST,
   duration: { start: "2024-09", end: null },
 
   imageSrc: "/Experience/Club/NTUST_BGC.jpg",
+  href: "https://www.instagram.com/ntust_boardgame/",
 };
 
 export const experience: {
