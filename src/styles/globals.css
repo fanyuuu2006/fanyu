@@ -30,19 +30,16 @@ body {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   overflow-x: hidden;
   color: var(--text-color);
   background: var(--background-color);
 }
 main {
   flex: 1;
-  margin-top: 6em;
 }
 
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 1000;
   width: 100%;
@@ -125,7 +122,7 @@ button {
 .container {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   padding: 1em;

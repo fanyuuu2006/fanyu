@@ -12,7 +12,7 @@ import {
   CodeSandboxOutlined,
   GithubOutlined,
   LinkOutlined,
-  TagOutlined,
+  TagsOutlined,
 } from "@ant-design/icons";
 import { PortfolioTagButton } from "./PortfolioTagButton";
 
@@ -77,7 +77,7 @@ export const PortfolioCard = ({
           ))}
         </ul>
         <div className="hint flex flex-nowrap gap-2">
-          <TagOutlined />
+          <TagsOutlined />
           <div className="flex flex-wrap gap-2">
             {item.tags.map((tag) => (
               <PortfolioTagButton

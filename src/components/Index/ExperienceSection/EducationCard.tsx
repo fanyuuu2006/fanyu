@@ -55,9 +55,11 @@ export const EducationCard = ({
             {item.location[Language.Current]}
           </OutsideLink>
         </div>
-        <span className="note font-bold">
-          {item.department?.[Language.Current]}
-        </span>
+        {item.department && (
+          <span className="note font-bold">
+            {item.department?.[Language.Current]}
+          </span>
+        )}
         <span>{degreeMap[Language.Current][item.degree]}</span>
       </div>
     </div>

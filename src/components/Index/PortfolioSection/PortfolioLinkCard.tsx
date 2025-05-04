@@ -1,7 +1,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { PortfolioItem } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
-import { ClockCircleOutlined, TagOutlined } from "@ant-design/icons";
+import { ClockCircleOutlined, TagsOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 import { DistributiveOmit } from "fanyucomponents";
@@ -41,7 +41,7 @@ export const PortfolioLinkCard = ({
         <div className="note">{item.about[Language.Current]}</div>
 
         <div className="hint flex flex-nowrap gap-2">
-          <TagOutlined />
+          <TagsOutlined />
           <div className="flex flex-wrap gap-2">
             {item.tags.map((tag) => (
               <span
