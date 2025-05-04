@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PortfolioLinkCard } from "./PortfolioLinkCard";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { profile } from '../../../lib/profile';
+import { profile } from "../../../lib/profile";
 
 type PortfolioContent = Record<"portfolio" | "viewMore", string>;
 
@@ -33,7 +33,9 @@ export const PortfolioSection = () => {
   );
 
   useEffect(() => {
-    const shuffled = profile.portfolio.toSorted(() => Math.random() - 0.5).slice(0, 3);
+    const shuffled = profile.portfolio
+      .toSorted(() => Math.random() - 0.5)
+      .slice(0, 3);
     setShuffledPortfolio(shuffled);
   }, []);
 
@@ -47,7 +49,8 @@ export const PortfolioSection = () => {
           ))}
         </div>
         <Link className="note" href="/portfolio">
-          {portfolioContent.viewMore} <ArrowRightOutlined />
+          {portfolioContent.viewMore}{" "}
+          <ArrowRightOutlined className="rotate-315" />
         </Link>
       </div>
     </section>

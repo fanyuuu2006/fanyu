@@ -68,7 +68,7 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
 export const PortfolioSection = () => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
-  
+
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
 
@@ -82,8 +82,8 @@ export const PortfolioSection = () => {
     <section>
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{portfolioContent.portfolio}</div>
-        <div className="note flex flex-col w-full px-4 gap-2">
-          <div className="relative flex flex-nowrap gap-4 justify-between">
+        <div className="note flex flex-col w-full gap-2">
+          <div className="relative flex flex-nowrap px-4 gap-4 justify-between">
             <button
               onClick={() => {
                 setCategoriesShow((prev) => !prev);
@@ -100,7 +100,6 @@ export const PortfolioSection = () => {
               )}
             </span>
           </div>
-
           <Collapse className="absolute z-10 mt-8" state={categoriesShow}>
             <div className="flex flex-col p-4 gap-2 card bordered">
               <div>

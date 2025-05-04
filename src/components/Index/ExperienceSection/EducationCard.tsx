@@ -49,14 +49,8 @@ export const EducationCard = ({
             <EnvironmentOutlined /> {item.location[Language.Current]}
           </span>
         </div>
-        <div className="flex flex-wrap items-center note gap-x-4 whitespace-nowrap">
-          {item.department && (
-            <span className="font-bold">
-              {item.department?.[Language.Current]}
-            </span>
-          )}
-          <span>{degreeMap[Language.Current][item.degree]}</span>
-        </div>
+        <span className="note font-bold">{item.department?.[Language.Current]}</span>
+        <span>{degreeMap[Language.Current][item.degree]}</span>
       </div>
     </div>
   );
