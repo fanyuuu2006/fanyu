@@ -34,10 +34,11 @@ const NTUST: EducationItem = {
     english: "Department of Information Management",
   },
   degree: "In Progress",
-  duration: "2024-09 ~",
+  duration: { start: "2024-09", end: null },
   location: {
     chinese: "臺灣省臺北市大安區",
     english: "Da'an District, Taipei City, Taiwan",
+    href: "https://maps.app.goo.gl/Rzro8g26H8Pb1f1EA",
   },
   imageSrc: "/Experience/Education/NTUST.png",
   href: "https://www.ntust.edu.tw/",
@@ -53,10 +54,11 @@ const CPSHS: EducationItem = {
     english: "Department of Electronic Commerce",
   },
   degree: "Vocational High School Diploma",
-  duration: "2021-09 ~ 2024-06",
+  duration: { start: "2021-09", end: "2024-06" },
   location: {
     chinese: "臺灣省桃園市楊梅區",
     english: "Yangmei District, Taoyuan City, Taiwan",
+    href: "https://maps.app.goo.gl/PoxfwWMvbdLbpSMH8",
   },
   imageSrc: "/Experience/Education/CPSHS.png",
   href: "https://www.cpshs.tyc.edu.tw/",
@@ -68,10 +70,11 @@ const FGJH: EducationItem = {
     english: "Fu Guang Junior High School",
   },
   degree: "Junior High School Diploma",
-  duration: "2018-09 ~ 2021-06",
+  duration: { start: "2018-09", end: "2021-06" },
   location: {
     chinese: "臺灣省新竹縣關西鎮",
     english: "Guanxi Township, Hsinchu County, Taiwan",
+    href: "https://maps.app.goo.gl/FZ1kwUBVNgYHk8Uj8",
   },
   imageSrc: "/Experience/Education/FGJH.png",
   href: "https://fgjh.hcc.edu.tw/",
@@ -83,10 +86,11 @@ const GSES: EducationItem = {
     english: "Guan Shi Elementary School",
   },
   degree: "Elementary School Diploma",
-  duration: "2012-09 ~ 2018-06",
+  duration: { start: "2012-09", end: "2018-06" },
   location: {
     chinese: "臺灣省新竹縣關西鎮",
     english: "Guanxi Township, Hsinchu County, Taiwan",
+    href: "https://maps.app.goo.gl/Rpe6AUrEDmfryADM8",
   },
   imageSrc: "/Experience/Education/GSES.png",
   href: "https://gses.hcc.edu.tw/",
@@ -102,7 +106,8 @@ const NTUST_BGC: ClubItem = {
     chinese: "社員",
     english: "Member",
   },
-  duration: "2024-9 ~",
+  duration: { start: "2024-09", end: null },
+
   imageSrc: "/Experience/Club/NTUST_BGC.jpg",
 };
 
