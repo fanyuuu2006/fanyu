@@ -13,7 +13,7 @@ import {
   MenuOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { PortfolioCard } from "./PortfolioCard";
 import { PortfolioTagButton } from "./PortfolioTagButton";
 import { profile } from "../../lib/profile";
@@ -68,26 +68,9 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
 export const PortfolioSection = () => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
-
-  const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
+  
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
-  const categoriesRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const pointerEventHandler = (e: PointerEvent) => {
-      if (
-        categoriesShow &&
-        categoriesRef.current &&
-        !categoriesRef.current.contains(e.target as Node)
-      )
-        setCategoriesShow(false);
-    };
-
-    document.addEventListener("pointerdown", pointerEventHandler);
-    return () => {
-      document.removeEventListener("pointerdown", pointerEventHandler);
-    };
-  }, [categoriesShow]);
+  const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
 
   const filteredPortfolio = useMemo(() => {
     return !currentTag
@@ -119,10 +102,7 @@ export const PortfolioSection = () => {
           </div>
 
           <Collapse className="absolute z-10 mt-8" state={categoriesShow}>
-            <div
-              className="flex flex-col p-4 gap-2 card bordered"
-              ref={categoriesRef}
-            >
+            <div className="flex flex-col p-4 gap-2 card bordered">
               <div>
                 <PortfolioTagButton
                   tag={null}
@@ -166,7 +146,7 @@ export const PortfolioSection = () => {
               item={item}
               currentTag={currentTag}
               setCurrentTag={setCurrentTag}
-              setCatrgoriesShow={setCategoriesShow}
+              setCategoriesShow={setCategoriesShow}
             />
           ))
         )}

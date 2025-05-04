@@ -5,14 +5,14 @@ export interface PortfolioTagButtonProps
   tag: PortfolioTag | null;
   currentTag: PortfolioTag | null;
   setCurrentTag?: React.Dispatch<React.SetStateAction<PortfolioTag | null>>;
-  setCatrgoriesShow?: React.Dispatch<React.SetStateAction<boolean>>;
+  setCategoriesShow?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const PortfolioTagButton = ({
   tag,
   currentTag,
   setCurrentTag,
-  setCatrgoriesShow,
+  setCategoriesShow,
   className,
   children,
   ...rest
@@ -21,7 +21,7 @@ export const PortfolioTagButton = ({
     <button
       onClick={() => {
         setCurrentTag?.(tag);
-        setCatrgoriesShow?.(false);
+        setCategoriesShow?.(false);
       }}
       className={`${className ?? ""} btn card-link ${
         tag === currentTag ? "brightness-200" : ""
