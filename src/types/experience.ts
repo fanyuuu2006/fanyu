@@ -18,6 +18,7 @@ export type EducationItem = {
   description?: string;
   imageSrc: string;
   href: string;
+  location: LanguageContent<string>;
 };
 
 export type ClubItem = {

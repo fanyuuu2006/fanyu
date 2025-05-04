@@ -35,6 +35,10 @@ const NTUST: EducationItem = {
   },
   degree: "In Progress",
   duration: "2024-09 ~",
+  location: {
+    chinese: "臺灣省臺北市大安區",
+    english: "Da'an District, Taipei City, Taiwan",
+  },
   imageSrc: "/Experience/Education/NTUST.png",
   href: "https://www.ntust.edu.tw/",
 };
@@ -50,6 +54,10 @@ const CPSHS: EducationItem = {
   },
   degree: "Vocational High School Diploma",
   duration: "2021-09 ~ 2024-06",
+  location: {
+    chinese: "臺灣省桃園市楊梅區",
+    english: "Yangmei District, Taoyuan City, Taiwan",
+  },
   imageSrc: "/Experience/Education/CPSHS.png",
   href: "https://www.cpshs.tyc.edu.tw/",
 };
@@ -61,6 +69,10 @@ const FGJH: EducationItem = {
   },
   degree: "Junior High School Diploma",
   duration: "2018-09 ~ 2021-06",
+  location: {
+    chinese: "臺灣省新竹縣關西鎮",
+    english: "Guanxi Township, Hsinchu County, Taiwan",
+  },
   imageSrc: "/Experience/Education/FGJH.png",
   href: "https://fgjh.hcc.edu.tw/",
 };
@@ -72,6 +84,10 @@ const GSES: EducationItem = {
   },
   degree: "Elementary School Diploma",
   duration: "2012-09 ~ 2018-06",
+  location: {
+    chinese: "臺灣省新竹縣關西鎮",
+    english: "Guanxi Township, Hsinchu County, Taiwan",
+  },
   imageSrc: "/Experience/Education/GSES.png",
   href: "https://gses.hcc.edu.tw/",
 };
@@ -87,7 +103,7 @@ const NTUST_BGC: ClubItem = {
     english: "Member",
   },
   duration: "2024-9 ~",
-  imageSrc: "/Experience/Club/GSES.png",
+  imageSrc: "/Experience/Club/NTUST_BGC.jpg",
 };
 
 export const experience: {
