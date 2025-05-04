@@ -27,14 +27,14 @@ export interface PortfolioCardProps
   item: PortfolioItem;
   currentTag: PortfolioTag | null;
   setCurrentTag: React.Dispatch<React.SetStateAction<PortfolioTag | null>>;
-  setShowCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  setCatrgoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const PortfolioCard = ({
   item,
   currentTag,
   setCurrentTag,
-  setShowCategory,
+  setCatrgoriesShow,
   className,
   ...rest
 }: PortfolioCardProps) => {
@@ -85,7 +85,7 @@ export const PortfolioCard = ({
                 tag={tag}
                 currentTag={currentTag}
                 setCurrentTag={setCurrentTag}
-                setShowCategory={setShowCategory}
+                setCatrgoriesShow={setCatrgoriesShow}
               >
                 {tag}
               </PortfolioTagButton>

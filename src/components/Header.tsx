@@ -4,7 +4,8 @@ import { LanguageContent } from "@/types/language";
 import Link from "next/link";
 import Image from "next/image";
 import { MenuOutlined } from "@ant-design/icons";
-import { useRef, useState } from "react";
+import { Collapse } from "./common/Collapse";
+import { useState } from "react";
 
 const Routes: {
   label: LanguageContent<string>;
@@ -39,13 +40,19 @@ const Routes: {
     },
     href: "/#portfolio",
   },
+  {
+    label: {
+      chinese: "經歷",
+      english: "Experience",
+    },
+    href: "/#experience",
+  },
 ];
 
 export const Header = () => {
   const Language = useLanguage();
 
-  const [showMenu, setShowMenu] = useState<boolean>(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [menuShow, setMenuShow] = useState<boolean>(false);
 
   return (
     <header>
@@ -62,7 +69,7 @@ export const Header = () => {
           </Link>
           <button
             className="md:hidden label px-2 py-1"
-            onClick={() => setShowMenu((prev) => !prev)}
+            onClick={() => setMenuShow((prev) => !prev)}
           >
             <MenuOutlined />
           </button>
@@ -74,28 +81,23 @@ export const Header = () => {
             ))}
           </div>
         </div>
-        <div
-          className="md:hidden overflow-hidden transition-all duration-300"
-          style={{
-            maxHeight: showMenu ? `${menuRef.current?.scrollHeight}px` : "0px",
-          }}
+        <Collapse
+          state={menuShow}
+          className="transition-[max-height] duration-300 md:hidden"
         >
-          <div
-            ref={menuRef}
-            className="flex flex-col w-full note font-bold text-center"
-          >
+          <div className="flex flex-col w-full note font-bold text-center">
             {Routes.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
                 className="w-full pb-4 px-4 hover:scale-105 transition transform"
-                onClick={() => setShowMenu(false)}
+                onClick={() => setMenuShow(false)}
               >
                 {item.label[Language.Current]}
               </Link>
             ))}
           </div>
-        </div>
+        </Collapse>
       </nav>
     </header>
   );

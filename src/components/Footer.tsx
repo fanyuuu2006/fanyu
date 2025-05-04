@@ -26,7 +26,7 @@ export const Footer = () => {
     <footer>
       <div className="container flex flex-col items-center">
         <div className="note">
-          <CopyrightOutlined /> {year}, {profile[Langauge.Current].nickname}{" "}
+          <CopyrightOutlined /> {year}, {profile.nickname[Langauge.Current]}{" "}
           {footerContent.copyright}
         </div>
       </div>

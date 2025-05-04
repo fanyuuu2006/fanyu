@@ -1,20 +1,31 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
-import { portfolio, portfolioTagCategories } from "@/lib/portfolio";
+import { portfolioTagCategories } from "@/lib/portfolio";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import {
   PortfolioItem,
   PortfolioTag,
   PortfolioTagCategory,
 } from "@/types/portfolio";
-import { DownOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  ArrowLeftOutlined,
+  DownOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { PortfolioCard } from "./PortfolioCard";
 import { PortfolioTagButton } from "./PortfolioTagButton";
-
+import { profile } from "../../lib/profile";
+import { Collapse } from "../common/Collapse";
 type PortfolioContent = Record<
-  "portfolio" | "nofound" | "all" | "categories" | PortfolioTagCategory,
+  | "portfolio"
+  | "nofound"
+  | "all"
+  | "categories"
+  | "back"
+  | "count"
+  | PortfolioTagCategory,
   string
 >;
 
@@ -33,6 +44,8 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         libraries: "函式庫",
         tools: "工具",
         other: "其他／雜項",
+        back: "返回",
+        count: "共 {count} 筆",
       },
       english: {
         portfolio: "Portfolio",
@@ -46,54 +59,62 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         libraries: "Libraries",
         tools: "Tools",
         other: "Other / Miscellaneous",
+        back: "Back",
+        count: "Total: {count}",
       },
     } as LanguageContent<PortfolioContent>
   )[language]);
 
 export const PortfolioSection = () => {
   const Language = useLanguage();
+  const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const portfolioContent = getPortfolioContent(Language.Current);
+
   const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
-  const [showCategory, setShowCategory] = useState<boolean>(false);
-  useState<PortfolioItem[]>(portfolio);
-  const categoryContentRef = useRef<HTMLDivElement>(null);
+
   const filteredPortfolio = useMemo(() => {
     return !currentTag
-      ? portfolio
-      : portfolio.filter((item) => item.tags.includes(currentTag));
+      ? profile.portfolio
+      : profile.portfolio.filter((item) => item.tags.includes(currentTag));
   }, [currentTag]);
-  
 
   return (
     <section>
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{portfolioContent.portfolio}</div>
         <div className="note flex flex-col w-full px-4 gap-2">
-          <button
-            onClick={() => {
-              setShowCategory((prev) => !prev);
-            }}
-            className="btn-text flex items-center w-fit gap-2"
-          >
-            {portfolioContent.categories}
-            {showCategory ? <DownOutlined /> : <MenuOutlined />}
-          </button>
+          <div className="flex flex-nowrap gap-4 justify-between">
+            <button
+              onClick={() => {
+                setCategoriesShow((prev) => {
+                  console.log(prev);
+                  return !prev;
+                });
+              }}
+              className="btn-text flex items-center w-fit gap-2"
+            >
+              {portfolioContent.categories}
+              {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
+            </button>
+            <span>
+              {portfolioContent.count.replace(
+                "{count}",
+                filteredPortfolio.length.toString()
+              )}
+            </span>
+          </div>
 
-          <div
-            className="slide-toggle-wrapper"
-            style={{
-              maxHeight: `${
-                showCategory ? categoryContentRef.current?.scrollHeight : 0
-              }px`,
-            }}
+          <Collapse
+            className="transition-[max-height] duration-300"
+            state={categoriesShow}
           >
-            <div ref={categoryContentRef} className="flex flex-col ms-2 gap-2">
+            <div className="flex flex-col ms-2 gap-2">
               <div>
                 <PortfolioTagButton
                   tag={null}
                   currentTag={currentTag}
                   setCurrentTag={setCurrentTag}
-                  setShowCategory={setShowCategory}
+                  setCatrgoriesShow={setCategoriesShow}
                 >
                   {portfolioContent.all}
                 </PortfolioTagButton>
@@ -111,7 +132,7 @@ export const PortfolioSection = () => {
                           tag={tag}
                           currentTag={currentTag}
                           setCurrentTag={setCurrentTag}
-                          setShowCategory={setShowCategory}
+                          setCatrgoriesShow={setCategoriesShow}
                         >
                           {tag}
                         </PortfolioTagButton>
@@ -121,7 +142,7 @@ export const PortfolioSection = () => {
                 )
               )}
             </div>
-          </div>
+          </Collapse>
         </div>
 
         {filteredPortfolio.length === 0 ? (
@@ -133,12 +154,12 @@ export const PortfolioSection = () => {
               item={item}
               currentTag={currentTag}
               setCurrentTag={setCurrentTag}
-              setShowCategory={setShowCategory}
+              setCatrgoriesShow={setCategoriesShow}
             />
           ))
         )}
         <Link className="note" href="/#portfolio">
-          返回
+          <ArrowLeftOutlined /> {portfolioContent.back}
         </Link>
       </div>
     </section>

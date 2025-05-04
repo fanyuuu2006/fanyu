@@ -1,22 +1,25 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
-import { portfolio } from "@/lib/portfolio";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { PortfolioItem } from "@/types/portfolio";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PortfolioLinkCard } from "./PortfolioLinkCard";
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { profile } from '../../../lib/profile';
 
-type PortfolioContent = Record<"portfolio", string>;
+type PortfolioContent = Record<"portfolio" | "viewMore", string>;
 
 const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
   ((
     {
       chinese: {
         portfolio: "作品集",
+        viewMore: "查看全部",
       },
       english: {
         portfolio: "Portfolio",
+        viewMore: "View all",
       },
     } as LanguageContent<PortfolioContent>
   )[language]);
@@ -30,7 +33,7 @@ export const PortfolioSection = () => {
   );
 
   useEffect(() => {
-    const shuffled = portfolio.toSorted(() => Math.random() - 0.5).slice(0, 3);
+    const shuffled = profile.portfolio.toSorted(() => Math.random() - 0.5).slice(0, 3);
     setShuffledPortfolio(shuffled);
   }, []);
 
@@ -44,7 +47,7 @@ export const PortfolioSection = () => {
           ))}
         </div>
         <Link className="note" href="/portfolio">
-          查看更多
+          {portfolioContent.viewMore} <ArrowRightOutlined />
         </Link>
       </div>
     </section>

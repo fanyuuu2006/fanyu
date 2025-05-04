@@ -61,6 +61,10 @@ const skillItems: Record<SkillCategory, { src: string; title: string }[]> = {
       title: "Tailwind CSS",
       src: "/Skills/tailwindcss.svg",
     },
+    {
+      title: "ESLint",
+      src: "/Skills/eslint.svg",
+    },
   ],
   backend: [
     { title: "Node.js", src: "/Skills/nodejs.svg" },
@@ -77,10 +81,6 @@ const skillItems: Record<SkillCategory, { src: string; title: string }[]> = {
       title: "Visual Studio Code",
       src: "/Skills/vscode.svg",
     },
-    {
-      title: "ESLint",
-      src: "/Skills/eslint.svg",
-    },
   ],
 };
 
@@ -91,7 +91,7 @@ export const SkillsSection = () => {
     <section id="skills">
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{skillsContent.skills}</div>
-        <div className="flex flex-col w-full p-4 gap-4">
+        <div className="flex flex-col w-full gap-4">
           {Object.entries(skillItems).map(([category, items]) => (
             <div key={category}>
               <div className="content font-bold">

@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import { OutsideLink } from "fanyucomponents";
-import { Toast } from "../common/Toast";
+import { Toast } from "../../common/Toast";
 
 type HomeContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
@@ -60,8 +60,8 @@ export const HomeSection = () => {
 
   const codeLines: string[] = [
     "const FanYu = {",
-    `  name: '${profile[Language.Current].name}',`,
-    `  nickname: '${profile[Language.Current].nickname}',`,
+    `  name: '${profile.name[Language.Current]}',`,
+    `  nickname: '${profile.nickname[Language.Current]}',`,
     `  age: ${Math.floor(
       (new Date().getTime() - new Date(profile.birthday).getTime()) /
         (365.25 * 24 * 60 * 60 * 1000)
@@ -79,7 +79,7 @@ export const HomeSection = () => {
             <div className="label font-bold">{homeContent.hello}</div>
             <div className="title font-bold">
               {homeContent.iAm}
-              {profile[Language.Current].nickname}❗
+              {profile.nickname[Language.Current]}❗
             </div>
             <div className="note">{homeContent.intro}</div>
             <div className="label flex gap-4">

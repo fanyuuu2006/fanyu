@@ -1,0 +1,52 @@
+import { useLanguage } from "@/context/LanguageContext";
+import { degreeMap } from "@/lib/experience";
+import { EducationItem } from "@/types/experience";
+import { ClockCircleOutlined, LinkOutlined } from "@ant-design/icons";
+import { OutsideLink } from "fanyucomponents";
+import Image from "next/image";
+
+export interface EducationCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  item: EducationItem;
+}
+
+export const EducationCard = ({
+  item,
+  className,
+  ...rest
+}: EducationCardProps) => {
+  const Language = useLanguage();
+  return (
+    <div
+      className={`${
+        className ?? ""
+      } card bordered w-full p-4 gap-4 flex flex-wrap md:flex-nowrap`}
+      {...rest}
+    >
+      <div className="flex items-center">
+        <Image
+          src={item.imageSrc}
+          alt={item.school.english}
+          className="h-30 w-fit bg-[#fff] rounded-full bordered"
+          width={600}
+          height={600}
+        />
+      </div>
+      <div className="card-glass flex flex-col flex-grow">
+        <span className="content font-bold">
+          {item.school[Language.Current]}
+        </span>
+        <OutsideLink href={item.href} className="hint opacity-75 w-fit">
+          <LinkOutlined /> {item.href}
+        </OutsideLink>
+        <span className="note font-bold">
+          {item.department?.[Language.Current]}
+        </span>
+        <span className="hint font-bold">
+          <ClockCircleOutlined /> {item.duration}
+        </span>
+        <span className="note">{degreeMap[Language.Current][item.degree]}</span>
+      </div>
+    </div>
+  );
+};

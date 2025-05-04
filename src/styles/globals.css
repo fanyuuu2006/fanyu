@@ -152,11 +152,6 @@ button {
   font-size: 14px;
 }
 
-.slide-toggle-wrapper {
-  overflow-y: hidden;
-  transition: max-height 0.4s ease;
-}
-
 .pop {
   animation: Pop 0.2s ease-out;
 }
