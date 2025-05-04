@@ -229,7 +229,7 @@ const AoJiao: PortfolioItem = {
 
 const FanYuComponents: PortfolioItem = {
   title: {
-    chinese: "Fanyu Components",
+    chinese: "飯魚的組件",
     english: "Fanyu Components",
   },
   imageSrc: "/Portfolio/fanyucomponents.png",
