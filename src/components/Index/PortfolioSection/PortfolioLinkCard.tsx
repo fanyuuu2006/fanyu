@@ -26,7 +26,7 @@ export const PortfolioLinkCard = ({
       {...rest}
     >
       <Image
-        className="title shadow w-3/5 h-auto rounded-full object-cover"
+        className="title bg-[#fff] bordered w-3/5 h-auto rounded-full object-cover"
         src={item.imageSrc}
         alt={`${item.title.english} icon`}
         width={300}
