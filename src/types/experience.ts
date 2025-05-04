@@ -1,15 +1,15 @@
 import { LanguageContent } from "./language";
 
-export type DegreeOption =
-  | "In Progress"
-  | "Bachelor"
-  | "Master"
-  | "Doctor"
-  | "High School Diploma"
-  | "Vocational High School Diploma"
-  | "Junior High School Diploma"
-  | "Elementary School Diploma";
-
+export enum DegreeOption {
+  InProgress = "In Progress",
+  Bachelor = "Bachelor",
+  Master = "Master",
+  Doctor = "Doctor",
+  HighSchool = "High School Diploma",
+  VocationalHighSchool = "Vocational High School Diploma",
+  JuniorHigh = "Junior High School Diploma",
+  Elementary = "Elementary School Diploma",
+}
 export type Duration = {
   start: string | null;
   end: string | null;

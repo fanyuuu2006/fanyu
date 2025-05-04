@@ -3,24 +3,24 @@ import { ClubItem, DegreeOption, EducationItem } from "../types/experience";
 
 export const degreeMap: LanguageContent<Record<DegreeOption, string>> = {
   chinese: {
-    "In Progress": "就讀中",
-    Bachelor: "學士",
-    Master: "碩士",
-    Doctor: "博士",
-    "High School Diploma": "高中畢業",
-    "Vocational High School Diploma": "高職畢業",
-    "Junior High School Diploma": "國中畢業",
-    "Elementary School Diploma": "國小畢業",
+    [DegreeOption.InProgress]: "就讀中",
+    [DegreeOption.Bachelor]: "學士",
+    [DegreeOption.Master]: "碩士",
+    [DegreeOption.Doctor]: "博士",
+    [DegreeOption.HighSchool]: "高中畢業",
+    [DegreeOption.VocationalHighSchool]: "高職畢業",
+    [DegreeOption.JuniorHigh]: "國中畢業",
+    [DegreeOption.Elementary]: "國小畢業",
   },
   english: {
-    "In Progress": "In Progress",
-    Bachelor: "Bachelor's",
-    Master: "Master's",
-    Doctor: "Doctorate",
-    "High School Diploma": "High School Diploma",
-    "Vocational High School Diploma": "Vocational High School Diploma",
-    "Junior High School Diploma": "Junior High School Diploma",
-    "Elementary School Diploma": "Elementary School Diploma",
+    [DegreeOption.InProgress]: "In Progress",
+    [DegreeOption.Bachelor]: "Bachelor's",
+    [DegreeOption.Master]: "Master's",
+    [DegreeOption.Doctor]: "Doctorate",
+    [DegreeOption.HighSchool]: "High School Diploma",
+    [DegreeOption.VocationalHighSchool]: "Vocational High School Diploma",
+    [DegreeOption.JuniorHigh]: "Junior High School Diploma",
+    [DegreeOption.Elementary]: "Elementary School Diploma",
   },
 };
 
@@ -33,7 +33,7 @@ const NTUST: EducationItem = {
     chinese: "資訊管理系",
     english: "Department of Information Management",
   },
-  degree: "In Progress",
+  degree: DegreeOption.InProgress,
   duration: { start: "2024-09", end: null },
   location: {
     chinese: "臺灣省臺北市大安區",
@@ -53,7 +53,7 @@ const CPSHS: EducationItem = {
     chinese: "電子商務科",
     english: "Department of Electronic Commerce",
   },
-  degree: "Vocational High School Diploma",
+  degree: DegreeOption.VocationalHighSchool,
   duration: { start: "2021-09", end: "2024-06" },
   location: {
     chinese: "臺灣省桃園市楊梅區",
@@ -69,7 +69,7 @@ const FGJH: EducationItem = {
     chinese: "新竹縣立富光國民中學",
     english: "Fu Guang Junior High School",
   },
-  degree: "Junior High School Diploma",
+  degree: DegreeOption.JuniorHigh,
   duration: { start: "2018-09", end: "2021-06" },
   location: {
     chinese: "臺灣省新竹縣關西鎮",
@@ -85,7 +85,7 @@ const GSES: EducationItem = {
     chinese: "新竹縣立關西國民小學",
     english: "Guan Shi Elementary School",
   },
-  degree: "Elementary School Diploma",
+  degree: DegreeOption.Elementary,
   duration: { start: "2012-09", end: "2018-06" },
   location: {
     chinese: "臺灣省新竹縣關西鎮",
