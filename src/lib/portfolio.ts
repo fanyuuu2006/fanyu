@@ -279,7 +279,7 @@ const FanYuComponents: PortfolioItem = {
 export const portfolio: PortfolioItem[] = [
   LabaG,
   ToolsForMetaInformation,
-  DoBuJio,
   AoJiao,
   FanYuComponents,
+  DoBuJio,
 ];
