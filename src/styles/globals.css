@@ -153,6 +153,10 @@ button {
   animation: Pop 0.2s ease-out;
 }
 
+.slide-collapse {
+  transition: max-height 0.3s;
+}
+
 @keyframes Pop {
   0% {
     opacity: 0;

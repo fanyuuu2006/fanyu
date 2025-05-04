@@ -4,8 +4,8 @@ import { LanguageContent } from "@/types/language";
 import Link from "next/link";
 import Image from "next/image";
 import { MenuOutlined } from "@ant-design/icons";
-import { Collapse } from "./common/Collapse";
 import { useState } from "react";
+import { Collapse } from "fanyucomponents";
 
 const Routes: {
   label: LanguageContent<string>;
@@ -83,7 +83,7 @@ export const Header = () => {
         </div>
         <Collapse
           state={menuShow}
-          className="md:hidden"
+          className="slide-collapse md:hidden"
         >
           <div className="flex flex-col w-full note font-bold text-center">
             {Routes.map((item, index) => (

@@ -17,7 +17,7 @@ import React, { useMemo, useState } from "react";
 import { PortfolioCard } from "./PortfolioCard";
 import { PortfolioTagButton } from "./PortfolioTagButton";
 import { profile } from "../../lib/profile";
-import { Collapse } from "../common/Collapse";
+import { Collapse } from "fanyucomponents";
 type PortfolioContent = Record<
   | "portfolio"
   | "nofound"
@@ -100,7 +100,7 @@ export const PortfolioSection = () => {
               )}
             </span>
           </div>
-          <Collapse className="absolute z-10 mt-8" state={categoriesShow}>
+          <Collapse className="slide-collapse absolute z-10 mt-8" state={categoriesShow}>
             <div className="flex flex-col p-4 gap-2 card bordered">
               <div>
                 <PortfolioTagButton
