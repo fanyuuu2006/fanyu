@@ -20,10 +20,9 @@ export const EducationCard = ({
     <div
       className={`${
         className ?? ""
-      } card bordered w-full p-4 gap-4 flex flex-wrap md:flex-nowrap`}
+      } card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
-      <div className="flex items-center">
         <Image
           src={item.imageSrc}
           alt={item.school.english}
@@ -31,7 +30,6 @@ export const EducationCard = ({
           width={600}
           height={600}
         />
-      </div>
       <div className="card-glass flex flex-col flex-grow">
         <span className="content font-bold">
           {item.school[Language.Current]}
