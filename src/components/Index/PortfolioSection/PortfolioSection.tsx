@@ -31,9 +31,9 @@ export const PortfolioSection = () => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
 
-  const [shuffledPortfolio, setShuffledPortfolio] = useState<PortfolioItem[]>(
-    []
-  );
+  const [shuffledPortfolio, setShuffledPortfolio] = useState<
+    PortfolioItem[] | null
+  >(null);
 
   const shufflePortfolio = () => {
     const shuffled = profile.portfolio
@@ -45,6 +45,8 @@ export const PortfolioSection = () => {
   useEffect(() => {
     shufflePortfolio();
   }, []);
+
+  if (!shuffledPortfolio) return null;
 
   return (
     <section id="portfolio">
@@ -61,8 +63,10 @@ export const PortfolioSection = () => {
             {portfolioContent.viewMore}
             <ArrowRightOutlined className="rotate-315" />
           </Link>
-          <button className="btn p-1 rounded-sm" onClick={shufflePortfolio}>
-            <Tooltip title={portfolioContent.shuffle}><ReloadOutlined /></Tooltip>
+          <button className="btn flex items-center justify-center w-8 h-8 p-1 rounded-sm" onClick={shufflePortfolio}>
+            <Tooltip title={portfolioContent.shuffle}>
+              <ReloadOutlined />
+            </Tooltip>
           </button>
         </div>
       </div>
