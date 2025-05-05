@@ -50,21 +50,11 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   if (!shuffledProject) return null;
 
   return (
-    <div className={`flex flex-col gap-4 ${className}`} {...rest}>
-      <div className="content font-bold">{projectsContent.projects}</div>
-      <div className="flex flex-wrap justify-between gap-4">
-        {shuffledProject.map((item: ProjectItem) => (
-          <ProjectLinkCard key={item.title.english} item={item} />
-        ))}
-      </div>
-      <div className="w-full flex justify-between note items-center">
-        <span /> {/**分散對齊用*/}
-        <Link className="flex gap-1" href="/projects">
-          {projectsContent.viewMore}
-          <ArrowRightOutlined className="rotate-315" />
-        </Link>
+    <div className={`flex flex-col gap-4 items-center ${className}`} {...rest}>
+      <div className="content w-full flex justify-between">
+        <div className="font-bold">{projectsContent.projects}</div>
         <button
-          className="btn flex items-center justify-center w-10 h-10 p-1 rounded-sm"
+          className="flex items-center justify-center w-10 h-10 p-1 rounded-sm"
           onClick={shuffleProject}
         >
           <Tooltip title={projectsContent.shuffle}>
@@ -72,6 +62,15 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           </Tooltip>
         </button>
       </div>
+      <div className="flex flex-wrap justify-between gap-4">
+        {shuffledProject.map((item: ProjectItem) => (
+          <ProjectLinkCard key={item.title.english} item={item} />
+        ))}
+      </div>
+      <Link className="note flex gap-1" href="/projects">
+        {projectsContent.viewMore}
+        <ArrowRightOutlined className="rotate-315" />
+      </Link>
     </div>
   );
 };
