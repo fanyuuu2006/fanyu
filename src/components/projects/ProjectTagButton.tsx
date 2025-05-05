@@ -26,9 +26,7 @@ export const ProjectTagButton = ({
   return (
     <button
       onClick={() => {
-        if (isActive) {
-          setCurrentTag(tag);
-        }
+        if (!isActive) setCurrentTag(tag);
         if (categoriesShow) setCategoriesShow(false);
       }}
       className={`btn card-link ${
