@@ -1,14 +1,14 @@
-import { PortfolioTag } from "@/types/portfolio";
+import { ProjectTag } from "@/types/portfolio";
 
-export interface PortfolioTagButtonProps
+export interface ProjectTagButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  tag: PortfolioTag | null;
-  currentTag: PortfolioTag | null;
-  setCurrentTag?: React.Dispatch<React.SetStateAction<PortfolioTag | null>>;
+  tag: ProjectTag | null;
+  currentTag: ProjectTag | null;
+  setCurrentTag?: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
   setCategoriesShow?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const PortfolioTagButton = ({
+export const ProjectTagButton = ({
   tag,
   currentTag,
   setCurrentTag,
@@ -16,7 +16,7 @@ export const PortfolioTagButton = ({
   className,
   children,
   ...rest
-}: PortfolioTagButtonProps) => {
+}: ProjectTagButtonProps) => {
   return (
     <button
       onClick={() => {

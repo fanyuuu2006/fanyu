@@ -1,6 +1,6 @@
-import { PortfolioItem } from "@/types/portfolio";
+import { ProjectItem } from "@/types/portfolio";
 
-export const portfolioTagCategories = {
+export const projectTagCategories = {
   language: ["TypeScript", "Python", "JavaScript", "CSS"],
   roles: ["Frontend", "Backend", "Full Stack"], // ← 職能/開發角色分類
   domains: ["Crawler"], // 專長領域
@@ -10,7 +10,7 @@ export const portfolioTagCategories = {
   other: ["Vercel"],
 } as const;
 
-const LabaG: PortfolioItem = {
+const LabaG: ProjectItem = {
   title: {
     chinese: "啦八機",
     english: "LaBaG",
@@ -80,7 +80,7 @@ const LabaG: PortfolioItem = {
   ],
 };
 
-const ToolsForMetaInformation: PortfolioItem = {
+const ToolsForMetaInformation: ProjectItem = {
   title: {
     chinese: "Meta 資訊處理工具",
     english: "Tools For Meta Information",
@@ -129,7 +129,7 @@ const ToolsForMetaInformation: PortfolioItem = {
   ],
 };
 
-const DoBuJio: PortfolioItem = {
+const DoBuJio: ProjectItem = {
   title: {
     chinese: "玩股票都不揪",
     english: "Do Bu Jio",
@@ -179,7 +179,7 @@ const DoBuJio: PortfolioItem = {
   ],
 };
 
-const AoJiao: PortfolioItem = {
+const AoJiao: ProjectItem = {
   imageSrc: "/Portfolio/aojiao.jpg",
   title: {
     chinese: "小傲驕",
@@ -227,7 +227,7 @@ const AoJiao: PortfolioItem = {
   ],
 };
 
-const FanYuComponents: PortfolioItem = {
+const FanYuComponents: ProjectItem = {
   title: {
     chinese: "飯魚的組件",
     english: "Fanyu Components",
@@ -276,7 +276,7 @@ const FanYuComponents: PortfolioItem = {
   ],
 };
 
-export const portfolio: PortfolioItem[] = [
+export const projects: ProjectItem[] = [
   LabaG,
   ToolsForMetaInformation,
   AoJiao,

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import {
-  PortfolioItem,
-  PortfolioLinkCategory,
-  PortfolioTag,
+  ProjectItem,
+  ProjectLinkCategory,
+  ProjectTag,
 } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { useLanguage } from "@/context/LanguageContext";
@@ -14,30 +14,29 @@ import {
   LinkOutlined,
   TagsOutlined,
 } from "@ant-design/icons";
-import { PortfolioTagButton } from "./PortfolioTagButton";
+import { ProjectTagButton } from "./ProjectTagButton";
 
-const categoryIcon: Record<PortfolioLinkCategory, React.ReactNode> = {
+const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
   github: <GithubOutlined />,
   package: <CodeSandboxOutlined />,
 };
 
-export interface PortfolioCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  item: PortfolioItem;
-  currentTag: PortfolioTag | null;
-  setCurrentTag: React.Dispatch<React.SetStateAction<PortfolioTag | null>>;
+export interface ProjectCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  item: ProjectItem;
+  currentTag: ProjectTag | null;
+  setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
   setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const PortfolioCard = ({
+export const ProjectCard = ({
   item,
   currentTag,
   setCurrentTag,
   setCategoriesShow,
   className,
   ...rest
-}: PortfolioCardProps) => {
+}: ProjectCardProps) => {
   const Language = useLanguage();
   return (
     <div
@@ -80,7 +79,7 @@ export const PortfolioCard = ({
           <TagsOutlined />
           <div className="flex flex-wrap gap-2">
             {item.tags.map((tag) => (
-              <PortfolioTagButton
+              <ProjectTagButton
                 key={tag}
                 tag={tag}
                 currentTag={currentTag}
@@ -88,7 +87,7 @@ export const PortfolioCard = ({
                 setCategoriesShow={setCategoriesShow}
               >
                 {tag}
-              </PortfolioTagButton>
+              </ProjectTagButton>
             ))}
           </div>
         </div>

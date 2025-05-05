@@ -1,5 +1,5 @@
 import { experience } from "./experience";
-import { portfolio } from "./portfolio";
+import { projects } from "./projects";
 
 export const profile = {
   name: {
@@ -25,5 +25,7 @@ export const profile = {
   birthday: "2006/05/26 UTC+08:00",
   email: ["bingxiao526@gmail.com"],
   experience,
-  portfolio,
+  portfolio: {
+    projects,
+  },
 } as const;

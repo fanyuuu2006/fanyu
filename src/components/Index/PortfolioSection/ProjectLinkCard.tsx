@@ -1,25 +1,25 @@
 import { useLanguage } from "@/context/LanguageContext";
-import { PortfolioItem } from "@/types/portfolio";
+import { ProjectItem } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { ClockCircleOutlined, TagsOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 import { DistributiveOmit } from "fanyucomponents";
 
-export interface PortfolioLinkCardProps
+export interface ProjectLinkCardProps
   extends DistributiveOmit<React.ComponentProps<typeof Link>, "href"> {
-  item: PortfolioItem;
+  item: ProjectItem;
 }
 
-export const PortfolioLinkCard = ({
+export const ProjectLinkCard = ({
   item,
   className,
   ...rest
-}: PortfolioLinkCardProps) => {
+}: ProjectLinkCardProps) => {
   const Language = useLanguage();
   return (
     <Link
-      href={`/portfolio/#${slugify(item.title.english)}`}
+      href={`/projects/#${slugify(item.title.english)}`}
       className={`${
         className ?? ""
       } card card-link bordered shadow flex flex-col items-center p-4 gap-4 flex-1 basis-full md:basis-3/10`}

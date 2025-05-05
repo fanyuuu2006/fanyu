@@ -1,12 +1,8 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
-import { portfolioTagCategories } from "@/lib/portfolio";
+import { projectTagCategories } from "@/lib/projects";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import {
-  PortfolioItem,
-  PortfolioTag,
-  PortfolioTagCategory,
-} from "@/types/portfolio";
+import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";
 import {
   ArrowLeftOutlined,
   DownOutlined,
@@ -14,26 +10,26 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
-import { PortfolioCard } from "./PortfolioCard";
-import { PortfolioTagButton } from "./PortfolioTagButton";
+import { ProjectCard } from "./ProjectCard";
+import { ProjectTagButton } from "./ProjectTagButton";
 import { profile } from "../../lib/profile";
 import { Collapse } from "fanyucomponents";
-type PortfolioContent = Record<
-  | "portfolio"
+type ProjectContent = Record<
+  | "Project"
   | "nofound"
   | "all"
   | "categories"
   | "back"
   | "count"
-  | PortfolioTagCategory,
+  | ProjectTagCategory,
   string
 >;
 
-const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
+const getProjectContent = (language: LanguageOption): ProjectContent =>
   ((
     {
       chinese: {
-        portfolio: "作品集",
+        Project: "作品集",
         all: "全部",
         nofound: "暫無符合條件的作品",
         categories: "類別",
@@ -48,9 +44,9 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         count: "共 {count} 筆",
       },
       english: {
-        portfolio: "Portfolio",
+        Project: "Project",
         all: "All",
-        nofound: "No matching portfolio found",
+        nofound: "No matching Project found",
         categories: "Categories",
         language: "Language",
         roles: "Development Role",
@@ -62,26 +58,28 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
         back: "Back",
         count: "Total: {count}",
       },
-    } as LanguageContent<PortfolioContent>
+    } as LanguageContent<ProjectContent>
   )[language]);
 
-export const PortfolioSection = () => {
+export const ProjectsSection = () => {
   const Language = useLanguage();
-  const portfolioContent = getPortfolioContent(Language.Current);
+  const ProjectContent = getProjectContent(Language.Current);
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
-  const [currentTag, setCurrentTag] = useState<PortfolioTag | null>(null);
+  const [currentTag, setCurrentTag] = useState<ProjectTag | null>(null);
 
-  const filteredPortfolio = useMemo(() => {
+  const filteredProject = useMemo(() => {
     return !currentTag
-      ? profile.portfolio
-      : profile.portfolio.filter((item) => item.tags.includes(currentTag));
+      ? profile.portfolio.projects
+      : profile.portfolio.projects.filter((item) =>
+          item.tags.includes(currentTag)
+        );
   }, [currentTag]);
 
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <div className="title font-bold">{portfolioContent.portfolio}</div>
+        <div className="title font-bold">{ProjectContent.Project}</div>
         <div className="note flex flex-col w-full gap-2">
           <div className="relative flex flex-nowrap px-4 gap-4 justify-between">
             <button
@@ -90,59 +88,60 @@ export const PortfolioSection = () => {
               }}
               className="btn-text flex items-center w-fit gap-2"
             >
-              {portfolioContent.categories}
+              {ProjectContent.categories}
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
             </button>
             <span>
-              {portfolioContent.count.replace(
+              {ProjectContent.count.replace(
                 "{count}",
-                filteredPortfolio.length.toString()
+                filteredProject.length.toString()
               )}
             </span>
           </div>
-          <Collapse className="slide-collapse absolute z-10 mt-8" state={categoriesShow}>
+          <Collapse
+            className="slide-collapse absolute z-10 mt-8"
+            state={categoriesShow}
+          >
             <div className="flex flex-col p-4 gap-2 card bordered">
               <div>
-                <PortfolioTagButton
+                <ProjectTagButton
                   tag={null}
                   currentTag={currentTag}
                   setCurrentTag={setCurrentTag}
                   setCategoriesShow={setCategoriesShow}
                 >
-                  {portfolioContent.all}
-                </PortfolioTagButton>
+                  {ProjectContent.all}
+                </ProjectTagButton>
               </div>
-              {Object.entries(portfolioTagCategories).map(
-                ([category, tags]) => (
-                  <div key={category} className="flex flex-col gap-2">
-                    <span className="font-bold">
-                      {portfolioContent[category as keyof PortfolioContent]}
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {tags.map((tag) => (
-                        <PortfolioTagButton
-                          key={tag}
-                          tag={tag}
-                          currentTag={currentTag}
-                          setCurrentTag={setCurrentTag}
-                          setCategoriesShow={setCategoriesShow}
-                        >
-                          {tag}
-                        </PortfolioTagButton>
-                      ))}
-                    </div>
+              {Object.entries(projectTagCategories).map(([category, tags]) => (
+                <div key={category} className="flex flex-col gap-2">
+                  <span className="font-bold">
+                    {ProjectContent[category as keyof ProjectContent]}
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {tags.map((tag) => (
+                      <ProjectTagButton
+                        key={tag}
+                        tag={tag}
+                        currentTag={currentTag}
+                        setCurrentTag={setCurrentTag}
+                        setCategoriesShow={setCategoriesShow}
+                      >
+                        {tag}
+                      </ProjectTagButton>
+                    ))}
                   </div>
-                )
-              )}
+                </div>
+              ))}
             </div>
           </Collapse>
         </div>
 
-        {filteredPortfolio.length === 0 ? (
-          <>{portfolioContent.nofound}</>
+        {filteredProject.length === 0 ? (
+          <>{ProjectContent.nofound}</>
         ) : (
-          filteredPortfolio.map((item: PortfolioItem) => (
-            <PortfolioCard
+          filteredProject.map((item: ProjectItem) => (
+            <ProjectCard
               key={item.title.english}
               item={item}
               currentTag={currentTag}
@@ -152,7 +151,7 @@ export const PortfolioSection = () => {
           ))
         )}
         <Link className="note" href="/#portfolio">
-          <ArrowLeftOutlined /> {portfolioContent.back}
+          <ArrowLeftOutlined /> {ProjectContent.back}
         </Link>
       </div>
     </section>
