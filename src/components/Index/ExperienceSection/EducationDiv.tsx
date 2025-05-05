@@ -39,9 +39,12 @@ export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
       {...rest}
     >
       <div className="content font-bold ">{educationContent.eduction}</div>
-      <div className={`flex flex-col w-full ${allShow && "gap-4"}`}>
+      <div className={`flex flex-col w-full ${allShow ? "gap-4" : ""}`}>
         <EducationCard item={nowEducationItem} />
-        <Collapse state={allShow} className="flex flex-col w-full gap-4 slide-collapse">
+        <Collapse
+          state={allShow}
+          className="flex flex-col w-full gap-4 slide-collapse"
+        >
           {pastEducationItems.map((item) => (
             <EducationCard key={item.name.english} item={item} />
           ))}
