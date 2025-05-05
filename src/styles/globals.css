@@ -35,9 +35,6 @@ body {
   color: var(--text-color);
   background: var(--background-color);
 }
-main {
-  flex: 1;
-}
 
 header {
   position: sticky;
@@ -50,6 +47,7 @@ header {
 }
 
 footer {
+  flex: 1;
   width: 100%;
   background-color: var(--background-color-dark);
 }
