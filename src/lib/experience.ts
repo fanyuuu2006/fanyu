@@ -98,7 +98,7 @@ const GSES: EducationItem = {
 
 const NTUST_BGC: ClubItem = {
   name: {
-    chinese: "桌遊社",
+    chinese: "桌上遊戲研究社",
     english: "BoardGame Club",
   },
   role: {
