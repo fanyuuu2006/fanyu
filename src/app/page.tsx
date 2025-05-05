@@ -9,9 +9,9 @@ export default function Home() {
     <>
       <HomeSection />
       <AboutMeSection />
-      <SkillsSection/>
-      <PortfolioSection/>
-      <ExperienceSection/>
+      <SkillsSection />
+      <PortfolioSection />
+      <ExperienceSection />
     </>
   );
 }
