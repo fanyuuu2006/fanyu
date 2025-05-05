@@ -51,7 +51,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
 
   return (
     <div className={`flex flex-col gap-4 items-center ${className}`} {...rest}>
-      <div className="content w-full flex justify-between">
+      <div className="content w-full flex justify-between items-center">
         <div className="font-bold">{projectsContent.projects}</div>
         <button
           className="flex items-center justify-center w-10 h-10 p-1 rounded-sm"
