@@ -1,12 +1,15 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { ClubItem } from "@/types/experience";
 import { ClockCircleOutlined, InstagramOutlined } from "@ant-design/icons";
-import { OutsideLink } from "fanyucomponents";
+import { OutsideLink, OverrideProps } from "fanyucomponents";
 import Image from "next/image";
 
-export interface ClubCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  item: ClubItem;
-}
+export type ClubCardProps = OverrideProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    item: ClubItem;
+  }
+>;
 
 export const ClubCard = ({ item, className, ...rest }: ClubCardProps) => {
   const Language = useLanguage();

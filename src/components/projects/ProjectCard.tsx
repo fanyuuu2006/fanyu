@@ -6,7 +6,7 @@ import {
 } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { useLanguage } from "@/context/LanguageContext";
-import { OutsideLink } from "fanyucomponents";
+import { OutsideLink, OverrideProps } from "fanyucomponents";
 import {
   ClockCircleOutlined,
   CodeSandboxOutlined,
@@ -22,12 +22,15 @@ const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   package: <CodeSandboxOutlined />,
 };
 
-export interface ProjectCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  item: ProjectItem;
-  currentTag: ProjectTag | null;
-  setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
-  setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
-}
+export type ProjectCardProps = OverrideProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    item: ProjectItem;
+    currentTag: ProjectTag | null;
+    setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
+    setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+>;
 
 export const ProjectCard = ({
   item,

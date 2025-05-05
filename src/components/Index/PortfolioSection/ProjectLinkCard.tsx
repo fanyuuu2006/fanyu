@@ -4,13 +4,14 @@ import { slugify } from "@/utils/url";
 import { ClockCircleOutlined, TagsOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
-import { DistributiveOmit } from "fanyucomponents";
+import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 
-export interface ProjectLinkCardProps
-  extends DistributiveOmit<React.ComponentProps<typeof Link>, "href"> {
-  item: ProjectItem;
-}
-
+export type ProjectLinkCardProps = OverrideProps<
+  DistributiveOmit<React.ComponentProps<typeof Link>, "href">,
+  {
+    item: ProjectItem;
+  }
+>;
 export const ProjectLinkCard = ({
   item,
   className,

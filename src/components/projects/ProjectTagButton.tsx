@@ -1,12 +1,15 @@
 import { ProjectTag } from "@/types/portfolio";
+import { OverrideProps } from "fanyucomponents";
 
-export interface ProjectTagButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
-  tag: ProjectTag | null;
-  currentTag: ProjectTag | null;
-  setCurrentTag?: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
-  setCategoriesShow?: React.Dispatch<React.SetStateAction<boolean>>;
-}
+export type ProjectTagButtonProps = OverrideProps<
+  React.HTMLAttributes<HTMLButtonElement>,
+  {
+    tag: ProjectTag | null;
+    currentTag: ProjectTag | null;
+    setCurrentTag?: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
+    setCategoriesShow?: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+>;
 
 export const ProjectTagButton = ({
   tag,

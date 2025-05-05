@@ -6,13 +6,15 @@ import {
   EnvironmentOutlined,
   LinkOutlined,
 } from "@ant-design/icons";
-import { OutsideLink } from "fanyucomponents";
+import { OutsideLink, OverrideProps } from "fanyucomponents";
 import Image from "next/image";
 
-export interface EducationCardProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  item: EducationItem;
-}
+export type EducationCardProps = OverrideProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    item: EducationItem;
+  }
+>;
 
 export const EducationCard = ({
   item,

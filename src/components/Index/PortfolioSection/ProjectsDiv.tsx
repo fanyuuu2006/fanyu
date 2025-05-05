@@ -50,11 +50,8 @@ export const ProjectsDiv = ({ className, ...rest }: ProjectsDivProps) => {
   if (!shuffledProject) return null;
 
   return (
-    <div
-      className={`flex flex-col items-center gap-4 ${className ?? ""}`}
-      {...rest}
-    >
-      <div className="content font-bold w-full text-left">{projectsContent.projects}</div>
+    <div className={`flex flex-col gap-4 ${className ?? ""}`} {...rest}>
+      <div className="content font-bold">{projectsContent.projects}</div>
       <div className="flex flex-wrap justify-between gap-4">
         {shuffledProject.map((item: ProjectItem) => (
           <ProjectLinkCard key={item.title.english} item={item} />
