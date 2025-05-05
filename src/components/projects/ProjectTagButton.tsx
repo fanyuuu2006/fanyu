@@ -6,8 +6,9 @@ export type ProjectTagButtonProps = OverrideProps<
   {
     tag: ProjectTag | null;
     currentTag: ProjectTag | null;
-    setCurrentTag?: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
-    setCategoriesShow?: React.Dispatch<React.SetStateAction<boolean>>;
+    setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
+    categoriesShow: boolean;
+    setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
   }
 >;
 
@@ -15,20 +16,24 @@ export const ProjectTagButton = ({
   tag,
   currentTag,
   setCurrentTag,
+  categoriesShow,
   setCategoriesShow,
-  className,
+  className = "",
   children,
   ...rest
 }: ProjectTagButtonProps) => {
+  const isActive = tag === currentTag;
   return (
     <button
       onClick={() => {
-        setCurrentTag?.(tag);
-        setCategoriesShow?.(false);
+        if (isActive) {
+          setCurrentTag(tag);
+        }
+        if (categoriesShow) setCategoriesShow(false);
       }}
-      className={`${className ?? ""} btn card-link ${
-        tag === currentTag ? "brightness-200" : ""
-      } px-2 rounded-sm whitespace-nowrap`}
+      className={`btn card-link ${
+        isActive ? "brightness-200" : ""
+      } px-2 rounded-sm whitespace-nowrap ${className} `}
       {...rest}
     >
       {children}

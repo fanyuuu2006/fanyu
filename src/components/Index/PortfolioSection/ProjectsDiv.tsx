@@ -28,7 +28,7 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
 
 export type ProjectsDivProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const ProjectsDiv = ({ className, ...rest }: ProjectsDivProps) => {
+export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   const Language = useLanguage();
   const projectsContent = getProjectsContent(Language.Current);
 
@@ -50,7 +50,7 @@ export const ProjectsDiv = ({ className, ...rest }: ProjectsDivProps) => {
   if (!shuffledProject) return null;
 
   return (
-    <div className={`flex flex-col gap-4 ${className ?? ""}`} {...rest}>
+    <div className={`flex flex-col gap-4 ${className}`} {...rest}>
       <div className="content font-bold">{projectsContent.projects}</div>
       <div className="flex flex-wrap justify-between gap-4">
         {shuffledProject.map((item: ProjectItem) => (

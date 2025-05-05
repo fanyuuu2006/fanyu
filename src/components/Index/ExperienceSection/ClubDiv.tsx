@@ -19,13 +19,13 @@ const getClubContent = (language: LanguageOption): ClubContent =>
 
 export type ClubDivProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const ClubDiv = ({ className, ...rest }: ClubDivProps) => {
+export const ClubDiv = ({ className = "", ...rest }: ClubDivProps) => {
   const Language = useLanguage();
   const ClubContent = getClubContent(Language.Current);
 
   return (
     <div
-      className={`${className ?? ""} flex flex-col w-full items-start gap-4`}
+      className={`flex flex-col w-full items-start gap-4 ${className}`}
       {...rest}
     >
       <div className="content font-bold ">{ClubContent.club}</div>

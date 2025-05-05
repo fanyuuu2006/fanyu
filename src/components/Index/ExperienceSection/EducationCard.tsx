@@ -18,15 +18,13 @@ export type EducationCardProps = OverrideProps<
 
 export const EducationCard = ({
   item,
-  className,
+  className = "",
   ...rest
 }: EducationCardProps) => {
   const Language = useLanguage();
   return (
     <div
-      className={`${
-        className ?? ""
-      } card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
+      className={`${className} card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
       <Image

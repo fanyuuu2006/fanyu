@@ -108,6 +108,7 @@ export const ProjectsSection = () => {
                   tag={null}
                   currentTag={currentTag}
                   setCurrentTag={setCurrentTag}
+                  categoriesShow={categoriesShow}
                   setCategoriesShow={setCategoriesShow}
                 >
                   {ProjectContent.all}
@@ -125,6 +126,7 @@ export const ProjectsSection = () => {
                         tag={tag}
                         currentTag={currentTag}
                         setCurrentTag={setCurrentTag}
+                        categoriesShow={categoriesShow}
                         setCategoriesShow={setCategoriesShow}
                       >
                         {tag}
@@ -146,6 +148,7 @@ export const ProjectsSection = () => {
               item={item}
               currentTag={currentTag}
               setCurrentTag={setCurrentTag}
+              categoriesShow={categoriesShow}
               setCategoriesShow={setCategoriesShow}
             />
           ))

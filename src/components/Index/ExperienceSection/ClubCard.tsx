@@ -11,13 +11,11 @@ export type ClubCardProps = OverrideProps<
   }
 >;
 
-export const ClubCard = ({ item, className, ...rest }: ClubCardProps) => {
+export const ClubCard = ({ item, className = "", ...rest }: ClubCardProps) => {
   const Language = useLanguage();
   return (
     <div
-      className={`${
-        className ?? ""
-      } card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
+      className={`${className} card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
       <Image

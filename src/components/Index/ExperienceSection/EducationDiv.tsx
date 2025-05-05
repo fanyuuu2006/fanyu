@@ -26,7 +26,10 @@ const getEduationContent = (language: LanguageOption): EducationContent =>
 
 export type EducationDivProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
+export const EducationDiv = ({
+  className = "",
+  ...rest
+}: EducationDivProps) => {
   const Language = useLanguage();
   const educationContent = getEduationContent(Language.Current);
   const nowEducationItem = profile.experience.education[0];
@@ -35,7 +38,7 @@ export const EducationDiv = ({ className, ...rest }: EducationDivProps) => {
   const [allShow, setAllShow] = useState<boolean>(false);
   return (
     <div
-      className={`${className ?? ""} flex flex-col w-full items-start gap-4`}
+      className={`flex flex-col w-full items-start gap-4 ${className} `}
       {...rest}
     >
       <div className="content font-bold ">{educationContent.eduction}</div>

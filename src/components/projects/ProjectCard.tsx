@@ -28,6 +28,7 @@ export type ProjectCardProps = OverrideProps<
     item: ProjectItem;
     currentTag: ProjectTag | null;
     setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
+    categoriesShow: boolean;
     setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
   }
 >;
@@ -36,17 +37,16 @@ export const ProjectCard = ({
   item,
   currentTag,
   setCurrentTag,
+  categoriesShow,
   setCategoriesShow,
-  className,
+  className = "",
   ...rest
 }: ProjectCardProps) => {
   const Language = useLanguage();
   return (
     <div
       id={slugify(item.title.english)}
-      className={`${
-        className ?? ""
-      } card bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
+      className={`${className} card bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       {...rest}
     >
       <Image
@@ -87,6 +87,7 @@ export const ProjectCard = ({
                 tag={tag}
                 currentTag={currentTag}
                 setCurrentTag={setCurrentTag}
+                categoriesShow={categoriesShow}
                 setCategoriesShow={setCategoriesShow}
               >
                 {tag}

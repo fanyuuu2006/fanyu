@@ -14,16 +14,14 @@ export type ProjectLinkCardProps = OverrideProps<
 >;
 export const ProjectLinkCard = ({
   item,
-  className,
+  className = "",
   ...rest
 }: ProjectLinkCardProps) => {
   const Language = useLanguage();
   return (
     <Link
       href={`/projects/#${slugify(item.title.english)}`}
-      className={`${
-        className ?? ""
-      } card card-link bordered shadow flex flex-col items-center p-4 gap-4 flex-1 basis-full md:basis-3/10`}
+      className={`${className} card card-link bordered shadow flex flex-col items-center p-4 gap-4 flex-1 basis-full md:basis-3/10`}
       {...rest}
     >
       <Image
