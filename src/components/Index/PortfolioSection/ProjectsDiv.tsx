@@ -64,7 +64,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           <ArrowRightOutlined className="rotate-315" />
         </Link>
         <button
-          className="btn flex items-center justify-center w-8 h-8 p-1 rounded-sm"
+          className="btn flex items-center justify-center w-10 h-10 p-1 rounded-sm"
           onClick={shuffleProject}
         >
           <Tooltip title={projectsContent.shuffle}>
