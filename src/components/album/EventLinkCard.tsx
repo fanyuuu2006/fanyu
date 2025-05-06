@@ -31,7 +31,7 @@ export const EventLinkCard = ({
         alt={eventName}
         className="aspect-square w-full h-full object-cover transition duration-300 group-hover:brightness-50"
       />
-      <span className="absolute w-full bg-[#000] opacity-50 bottom-0 note font-bold text-center group-hover:opacity-100 transition-opacity">
+      <span className="absolute w-full bg-[#000] opacity-50 bottom-0 hint font-bold text-center group-hover:opacity-100 transition-opacity">
         {eventName}
       </span>
     </Link>
