@@ -6,6 +6,7 @@ import { Toast } from "@/components/common/Toast";
 import { LoadingOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
+import { ImageCard } from "./ImageCard";
 
 type ImagesContent = Record<
   "noImages" | "albumLoadFailed" | "imageLoadFailed",
@@ -18,12 +19,10 @@ const getImagesContent = (language: LanguageOption): ImagesContent =>
       chinese: {
         noImages: "沒有圖片",
         albumLoadFailed: "載入相簿失敗",
-        imageLoadFailed: "載入圖片失敗",
       },
       english: {
         noImages: "No Images",
         albumLoadFailed: "Album Load Failed",
-        imageLoadFailed: "Image Load Failed",
       },
     } as LanguageContent<ImagesContent>
   )[language]);
@@ -63,21 +62,8 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
           </div>
         ) : (
           <div className="w-full flex flex-wrap">
-            {imageSrcs.map((src, index) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={src}
-                src={src}
-                alt={`Image ${index + 1} from ${eventName}`}
-                className="w-1/4 aspect-square object-cover rounded outline md:w-1/5"
-                onError={(e) => {
-                  console.error(e);
-                  Toast.fire({
-                    icon: "error",
-                    text: imagesContent.imageLoadFailed,
-                  });
-                }}
-              />
+            {imageSrcs.map((src) => (
+              <ImageCard key={src} src={src}/>
             ))}
           </div>
         )}
