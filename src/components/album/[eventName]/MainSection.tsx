@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Toast } from "@/components/common/Toast";
-import { LoadingOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { ImageCard } from "./ImageCard";
+import Link from "next/link";
 
 type ImagesContent = Record<
   "noImages" | "albumLoadFailed" | "imageLoadFailed",
@@ -57,6 +58,7 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
   return (
     <section>
       <div className="container flex flex-col items-center">
+        <Link href="/album" className="w-full text-left content"><ArrowLeftOutlined/></Link>
         <div className="title font-bold">{eventName}</div>
         {!imageSrcs || imageSrcs.length === 0 ? (
           <div className="content font-bold">

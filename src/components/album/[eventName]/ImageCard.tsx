@@ -50,7 +50,7 @@ export const ImageCard = ({
         <img
           src={src}
           alt={src?.toString()}
-          className="max-w-[100vw] max-h-[100vh] object-contain"
+          className="max-w-[90vw] max-h-[80vh] object-contain"
           onError={(e) => {
             console.error(e);
             Toast.fire({ icon: "error", text: imageContent.imageLoadFailed });
