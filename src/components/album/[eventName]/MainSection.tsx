@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAlbumData } from "../../../utils/ablum";
 import { Toast } from "@/components/common/Toast";
 import { LoadingOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
@@ -35,7 +34,11 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
 
   useEffect(() => {
     setLoading(true);
-    getAlbumData()
+    fetch("/api/album")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch album data");
+        return res.json();
+      })
       .then((data) => {
         setImageSrcs(data[eventName]);
       })

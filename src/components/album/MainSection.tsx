@@ -4,7 +4,6 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { EventLinkCard } from "./EventLinkCard";
 import { useEffect, useState } from "react";
 import { AlbumData } from "@/types/ablum";
-import { getAlbumData } from "@/utils/ablum";
 import { Toast } from "@/components/common/Toast";
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -34,10 +33,12 @@ export const MainSection = () => {
 
   useEffect(() => {
     setLoading(true);
-    getAlbumData()
-      .then((data) => {
-        setAlbum(data);
+    fetch("/api/album")
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch album data');
+        return res.json();
       })
+      .then(setAlbum)
       .catch((err) => {
         console.error(err);
         Toast.fire({
