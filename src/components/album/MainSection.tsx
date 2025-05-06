@@ -61,7 +61,7 @@ export const MainSection = () => {
             {loading ? <LoadingOutlined /> : albumContent.noAlbum}
           </div>
         ) : (
-          <div className="w-full flex flex-wrap gap-2">
+          <div className="w-full flex flex-wrap">
             {Object.entries(album).map(([eventName, items]) => (
               <EventLinkCard
                 key={eventName}

@@ -19,7 +19,7 @@ export const EventLinkCard = ({
 }: EventLinkCardProps) => {
   return (
     <Link
-      className="card bordered w-64 relative overflow-hidden group"
+      className="bordered relative overflow-hidden group w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
       href={`/album/${slugify(eventName)}`}
       {...rest}
     >
