@@ -47,6 +47,13 @@ const Routes: {
     },
     href: "/#experience",
   },
+  {
+    label: {
+      chinese: "相簿",
+      english: "Album",
+    },
+    href: "/album",
+  },
 ];
 
 export const Header = () => {
@@ -60,6 +67,7 @@ export const Header = () => {
         <div className="container flex items-center justify-between flex-nowrap px-8 py-2 w-full">
           <Link href="/" className="h-full">
             <Image
+              priority
               alt="Logo"
               src="/logo.png"
               width={1500}
@@ -81,10 +89,7 @@ export const Header = () => {
             ))}
           </div>
         </div>
-        <Collapse
-          state={menuShow}
-          className="slide-collapse md:hidden"
-        >
+        <Collapse state={menuShow} className="slide-collapse md:hidden">
           <div className="flex flex-col w-full note font-bold text-center">
             {Routes.map((item, index) => (
               <Link

@@ -61,7 +61,7 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
     } as LanguageContent<ProjectContent>
   )[language]);
 
-export const ProjectsSection = () => {
+export const MainSection = () => {
   const Language = useLanguage();
   const ProjectContent = getProjectContent(Language.Current);
 

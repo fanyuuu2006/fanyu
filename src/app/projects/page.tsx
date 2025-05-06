@@ -1,5 +1,5 @@
-import { ProjectsSection } from "@/components/projects/ProjectsSection";
+import { MainSection } from "@/components/projects/MainSection";
 
 export default function Page(){
-    return <ProjectsSection/>
+    return <MainSection/>
 }
