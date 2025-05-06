@@ -30,6 +30,7 @@ export const ImageCard = ({
     <div className="p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group">
       {/* eslint-disable-next-line @next/next/no-img-element*/}
       <img
+        draggable={false}
         src={src}
         alt={src?.toString()}
         className="cursor-pointer w-full aspect-square  object-cover group-hover:outline"
@@ -44,21 +45,15 @@ export const ImageCard = ({
           });
         }}
       />
-      <Modal.Container className='mt-24'>
-        {/* eslint-disable-next-line @next/next/no-img-element*/}
+      <Modal.Container className="pt-24">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={src?.toString()}
-          className="w-4/5 h-auto mh-4/5  object-cover"
-          onClick={() => {
-            Modal.Open();
-          }}
+          className="max-w-[100vw] max-h-[100vh] object-contain"
           onError={(e) => {
             console.error(e);
-            Toast.fire({
-              icon: "error",
-              text: imageContent.imageLoadFailed,
-            });
+            Toast.fire({ icon: "error", text: imageContent.imageLoadFailed });
           }}
         />
       </Modal.Container>
