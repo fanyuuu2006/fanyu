@@ -34,7 +34,7 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
   const imagesContent = getImagesContent(Language.Current);
 
   useEffect(() => {
-    setLoading(true); // Set loading true before starting the fetch
+    setLoading(true);
     getAlbumData()
       .then((data) => {
         setImageSrcs(data[eventName]);
@@ -55,7 +55,6 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
     <section>
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{eventName}</div>
-
         {!imageSrcs || imageSrcs.length === 0 ? (
           <div className="label font-bold">
             {loading ? <LoadingOutlined /> : imagesContent.noImages}
