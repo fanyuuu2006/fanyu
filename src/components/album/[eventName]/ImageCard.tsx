@@ -1,6 +1,7 @@
 import { Toast } from "@/components/common/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
+import { useModal } from "fanyucomponents";
 
 type ImageContent = Record<
   "noImages" | "albumLoadFailed" | "imageLoadFailed",
@@ -24,19 +25,43 @@ export const ImageCard = ({
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const Language = useLanguage();
   const imageContent = getImageContent(Language.Current);
+  const Modal = useModal();
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={src?.toString()}
-      className="w-1/4 aspect-square object-cover rounded outline md:w-1/5"
-      onError={(e) => {
-        console.error(e);
-        Toast.fire({
-          icon: "error",
-          text: imageContent.imageLoadFailed,
-        });
-      }}
-    />
+    <div className="p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group">
+      {/* eslint-disable-next-line @next/next/no-img-element*/}
+      <img
+        src={src}
+        alt={src?.toString()}
+        className="cursor-pointer w-full aspect-square  object-cover group-hover:outline"
+        onClick={() => {
+          Modal.Open();
+        }}
+        onError={(e) => {
+          console.error(e);
+          Toast.fire({
+            icon: "error",
+            text: imageContent.imageLoadFailed,
+          });
+        }}
+      />
+      <Modal.Container>
+        {/* eslint-disable-next-line @next/next/no-img-element*/}
+        <img
+          src={src}
+          alt={src?.toString()}
+          className="w-4/5 h-auto  object-cover"
+          onClick={() => {
+            Modal.Open();
+          }}
+          onError={(e) => {
+            console.error(e);
+            Toast.fire({
+              icon: "error",
+              text: imageContent.imageLoadFailed,
+            });
+          }}
+        />
+      </Modal.Container>
+    </div>
   );
 };

@@ -62,7 +62,7 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
         ) : (
           <div className="w-full flex flex-wrap">
             {imageSrcs.map((src) => (
-              <ImageCard key={src} src={src}/>
+              <ImageCard key={src} src={src} />
             ))}
           </div>
         )}
