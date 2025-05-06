@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 
 export const getAlbumData = async (): Promise<AlbumData> => {
-  const albumDir = path.join(process.cwd(), "public", "album");
+  const albumDir = path.join(process.cwd(), "public", "Album");
 
   try {
     const albumDirStat = await fs.stat(albumDir);
@@ -23,14 +23,14 @@ export const getAlbumData = async (): Promise<AlbumData> => {
       const files = await fs.readdir(eventPath);
       const imageSrc = files
         .filter((file) => /\.(jpe?g|png)$/i.test(file))
-        .map((file) => `/album/${eventName}/${file}`);
+        .map((file) => `/Album/${eventName}/${file}`);
 
       data[eventName] = imageSrc;
     }
 
     return data;
   } catch (error) {
-    console.warn("⚠️ 讀取 album 資料夾時發生錯誤:", error);
+    console.warn("⚠️ 讀取 Album 資料夾時發生錯誤:", error);
     return {};
   }
 };

@@ -44,12 +44,12 @@ export const ImageCard = ({
           });
         }}
       />
-      <Modal.Container>
+      <Modal.Container className='mt-24'>
         {/* eslint-disable-next-line @next/next/no-img-element*/}
         <img
           src={src}
           alt={src?.toString()}
-          className="w-4/5 h-auto  object-cover"
+          className="w-4/5 h-auto mh-4/5  object-cover"
           onClick={() => {
             Modal.Open();
           }}
