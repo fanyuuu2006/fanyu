@@ -57,7 +57,7 @@ export const MainSection = () => {
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{albumContent.album}</div>
         {!album || Object.keys(album).length === 0 ? (
-          <div className="label font-bold">
+          <div className="content font-bold">
             {loading ? <LoadingOutlined /> : albumContent.noAlbum}
           </div>
         ) : (

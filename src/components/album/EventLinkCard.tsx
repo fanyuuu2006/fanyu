@@ -18,7 +18,11 @@ export const EventLinkCard = ({
   ...rest
 }: EventLinkCardProps) => {
   return (
-    <Link className="card bordered w-64 relative overflow-hidden group" href={slugify(`/album/${eventName}`)} {...rest}>
+    <Link
+      className="card bordered w-64 relative overflow-hidden group"
+      href={`/album/${slugify(eventName)}`}
+      {...rest}
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={items[0]}

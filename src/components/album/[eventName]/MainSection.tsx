@@ -56,7 +56,7 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{eventName}</div>
         {!imageSrcs || imageSrcs.length === 0 ? (
-          <div className="label font-bold">
+          <div className="content font-bold">
             {loading ? <LoadingOutlined /> : imagesContent.noImages}
           </div>
         ) : (
