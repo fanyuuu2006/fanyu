@@ -5,30 +5,32 @@ export type EventLinkCardProps = DistributiveOmit<
   OverrideProps<
     React.ComponentPropsWithRef<typeof Link>,
     {
+      year: string;
       eventName: string;
-      items: string[];
+      imageSrcs: string[];
     }
   >,
   "href"
 >;
 
 export const EventLinkCard = ({
+  year,
   eventName,
-  items,
+  imageSrcs,
   ...rest
 }: EventLinkCardProps) => {
   return (
     <Link
       aria-label={`前往 ${eventName} 相簿`}
-      className="select-none bordered relative overflow-hidden group w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
-      href={`/album/${slugify(eventName)}`}
+      className="select-none bordered relative overflow-hidden group min-h-64 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
+      href={`/album/${slugify(year)}/${slugify(eventName)}`}
       {...rest}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         draggable={false}
         loading="lazy"
-        src={items[0]}
+        src={imageSrcs[0]}
         alt={eventName}
         className="aspect-square w-full h-full object-cover transition duration-300 group-hover:brightness-50"
       />

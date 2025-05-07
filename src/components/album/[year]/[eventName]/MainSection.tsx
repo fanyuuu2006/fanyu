@@ -27,7 +27,13 @@ const getImagesContent = (language: LanguageOption): ImagesContent =>
     } as LanguageContent<ImagesContent>
   )[language]);
 
-export const MainSection = ({ eventName }: { eventName: string }) => {
+export const MainSection = ({
+  year,
+  eventName,
+}: {
+  year: string;
+  eventName: string;
+}) => {
   const [imageSrcs, setImageSrcs] = useState<string[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const Language = useLanguage();
@@ -41,7 +47,7 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
         return res.json();
       })
       .then((data) => {
-        setImageSrcs(data[eventName]);
+        setImageSrcs(data[year][eventName]);
       })
       .catch((err) => {
         console.error(err);
@@ -53,13 +59,17 @@ export const MainSection = ({ eventName }: { eventName: string }) => {
       .finally(() => {
         setLoading(false);
       });
-  }, [eventName, imagesContent.albumLoadFailed]);
+  }, [eventName, imagesContent.albumLoadFailed, year]);
 
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <Link href="/album" className="w-full text-left content"><ArrowLeftOutlined/></Link>
-        <div className="title font-bold">{eventName}</div>
+        <Link href="/album" className="w-full text-left content">
+          <ArrowLeftOutlined />
+        </Link>
+        <div className="title font-bold">
+          {year} {eventName}
+        </div>
         {!imageSrcs || imageSrcs.length === 0 ? (
           <div className="content font-bold">
             {loading ? <LoadingOutlined /> : imagesContent.noImages}
