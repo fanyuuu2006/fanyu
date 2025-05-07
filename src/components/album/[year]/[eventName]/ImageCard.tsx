@@ -33,7 +33,7 @@ export const ImageCard = ({
         draggable={false}
         src={src}
         alt={src?.toString()}
-        className="cursor-pointer select-none w-full aspect-square bg-[#888] object-cover group-hover:outline"
+        className="cursor-pointer select-none w-full aspect-square bg-[#888] object-cover bordered group-hover:outline"
         onClick={() => {
           Modal.Open();
         }}
