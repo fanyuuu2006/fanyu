@@ -45,12 +45,12 @@ export const ImageCard = ({
           });
         }}
       />
-      <Modal.Container className="pt-24">
+      <Modal.Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={src?.toString()}
-          className="max-w-[90vw] max-h-[80vh] object-contain"
+          className="max-w-[95vw] max-h-[80vh] object-contain"
           onError={(e) => {
             console.error(e);
             Toast.fire({ icon: "error", text: imageContent.imageLoadFailed });
