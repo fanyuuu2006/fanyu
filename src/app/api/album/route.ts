@@ -37,10 +37,8 @@ export async function GET() {
           `'${eventId}' in parents and mimeType contains 'image/'`
         );
         // 7️⃣ 轉成前端可用的公開 URL
-        const imageSrcs = eventImages.map(
-          (file) => `/api/image/${file.id}`
-        );
-        yearData[eventName] = imageSrcs;
+        const imageSrcs = eventImages.map((file) => `/api/image/${file.id}`);
+        yearData[eventName] = imageSrcs.toReversed();
       }
 
       // 8️⃣ 把「年份資料夾下但不在任何事件子資料夾內」的圖片歸到 otherImages
@@ -50,9 +48,7 @@ export async function GET() {
            and not mimeType = 'application/vnd.google-apps.folder'`
       );
       otherImages.push(
-        ...otherImagesFiles.map(
-          (file) => `/api/image/${file.id}`
-        )
+        ...otherImagesFiles.map((file) => `/api/image/${file.id}`)
       );
 
       // 9️⃣ 最後把這一年份的所有事件與「其他」組成物件，放入 data
