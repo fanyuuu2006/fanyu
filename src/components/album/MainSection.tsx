@@ -39,14 +39,6 @@ export const MainSection = ({ year }: { year: string | null }) => {
     fetch(url).then((res) => res.json())
   );
 
-  if (isLoading) {
-    return (
-      <section className="flex justify-center items-center p-4">
-        <LoadingOutlined className="title" />
-      </section>
-    );
-  }
-
   if (error) {
     Toast.fire({
       icon: "error",
@@ -54,19 +46,6 @@ export const MainSection = ({ year }: { year: string | null }) => {
     });
     return null;
   }
-
-  if (!album || Object.keys(album).length === 0)
-    return (
-      <section className="container flex flex-col items-center">
-        {year && (
-          <Link href="/album" className="w-full text-left content">
-            <ArrowLeftOutlined />
-          </Link>
-        )}
-        <div className="title font-bold">{albumContent.album}</div>
-        <div className="content font-bold">{albumContent.noAlbum}</div>
-      </section>
-    );
 
   return (
     <section>
@@ -77,26 +56,34 @@ export const MainSection = ({ year }: { year: string | null }) => {
           </Link>
         )}
         <div className="title font-bold">{albumContent.album}</div>
-        {Object.entries(album as AlbumData)
-          .toSorted(([aYear], [bYear]) => parseInt(bYear) - parseInt(aYear))
-          .map(([year, events]) => (
-            <div key={year} className="w-full flex flex-col gap-2">
-              <div className="label font-bold">{year}</div>
-              <div className="w-full flex flex-wrap">
-                {Object.entries(events).map(
-                  ([eventName, imageSrcs]) =>
-                    imageSrcs.length > 0 && (
-                      <EventLinkCard
-                        key={eventName}
-                        year={year}
-                        eventName={eventName}
-                        imageSrcs={imageSrcs}
-                      />
-                    )
-                )}
+        
+        {isLoading ? (
+          <LoadingOutlined className="title" />
+        ) : !album || Object.keys(album).length === 0 ? (
+          <div className="content font-bold">{albumContent.noAlbum}</div>
+        ) : (
+          Object.entries(album as AlbumData)
+            .filter(([y]) => (year ? y === year : true))
+            .toSorted(([aYear], [bYear]) => parseInt(bYear) - parseInt(aYear))
+            .map(([y, events]) => (
+              <div key={y} className="w-full flex flex-col gap-2">
+                <div className="label font-bold">{y}</div>
+                <div className="w-full flex flex-wrap">
+                  {Object.entries(events).map(
+                    ([eventName, imageSrcs]) =>
+                      imageSrcs.length > 0 && (
+                        <EventLinkCard
+                          key={eventName}
+                          year={y}
+                          eventName={eventName}
+                          imageSrcs={imageSrcs}
+                        />
+                      )
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+        )}
       </div>
     </section>
   );
