@@ -32,7 +32,7 @@ export const EventLinkCard = ({
         loading="lazy"
         src={imageSrcs[0]}
         alt={eventName}
-        className="aspect-square w-full object-cover transition duration-300 group-hover:brightness-50"
+        className="aspect-square w-full bg-[#888] object-cover transition duration-300 group-hover:brightness-50"
       />
       <span className="absolute w-full bg-[#000] opacity-50 bottom-0 hint font-bold text-center group-hover:opacity-100 transition-opacity">
         {eventName}
