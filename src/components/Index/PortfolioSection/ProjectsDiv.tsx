@@ -8,7 +8,7 @@ import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 
-type ProjectsContent = Record<"projects" | "viewMore" | "shuffle", string>;
+type ProjectsContent = Record<"projects" | "viewMore" | "refresh", string>;
 
 const getProjectsContent = (language: LanguageOption): ProjectsContent =>
   ((
@@ -16,12 +16,12 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
       chinese: {
         projects: "專案",
         viewMore: "查看全部",
-        shuffle: "換一批",
+        refresh: "換一批",
       },
       english: {
         projects: "Projects",
         viewMore: "View all",
-        shuffle: "Shuffle",
+        refresh: "Refresh",
       },
     } as LanguageContent<ProjectsContent>
   )[language]);
@@ -57,7 +57,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           className="flex items-center justify-center w-10 h-10 p-1 rounded-sm"
           onClick={shuffleProject}
         >
-          <Tooltip title={projectsContent.shuffle}>
+          <Tooltip title={projectsContent.refresh}>
             <ReloadOutlined />
           </Tooltip>
         </button>
