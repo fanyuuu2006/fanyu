@@ -2,11 +2,11 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { EventLinkCard } from "./EventLinkCard";
-import { useEffect, useState } from "react";
 import { AlbumData } from "@/types/ablum";
 import { Toast } from "@/components/common/Toast";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import useSWR from "swr";
 
 type AlbumContent = Record<"album" | "noAlbum" | "albumLoadFailed", string>;
 
@@ -26,40 +26,34 @@ const getAlbumContent = (language: LanguageOption): AlbumContent =>
     } as LanguageContent<AlbumContent>
   )[language]);
 
+// const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export const MainSection = ({ year }: { year: string | null }) => {
   const Language = useLanguage();
   const albumContent = getAlbumContent(Language.Current);
-  const [album, setAlbum] = useState<AlbumData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const {
+    data: album,
+    error,
+    isLoading,
+  } = useSWR("/api/album", (url: string) =>
+    fetch(url).then((res) => res.json())
+  );
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/album")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch album data");
-        return res.json();
-      })
-      .then((data) => {
-        setAlbum(year && year in data ? { [year]: data[year] } : data);
-      })
-      .catch((err) => {
-        console.error(err);
-        Toast.fire({
-          icon: "error",
-          text: albumContent.albumLoadFailed,
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [albumContent.albumLoadFailed, year]);
-
-  if (loading)
+  if (isLoading) {
     return (
       <section className="flex justify-center items-center p-4">
         <LoadingOutlined className="title" />
       </section>
     );
+  }
+
+  if (error) {
+    Toast.fire({
+      icon: "error",
+      text: albumContent.albumLoadFailed,
+    });
+    return null;
+  }
 
   if (!album || Object.keys(album).length === 0)
     return (
@@ -83,7 +77,7 @@ export const MainSection = ({ year }: { year: string | null }) => {
           </Link>
         )}
         <div className="title font-bold">{albumContent.album}</div>
-        {Object.entries(album)
+        {Object.entries(album as AlbumData)
           .toSorted(([aYear], [bYear]) => parseInt(bYear) - parseInt(aYear))
           .map(([year, events]) => (
             <div key={year} className="w-full flex flex-col gap-2">

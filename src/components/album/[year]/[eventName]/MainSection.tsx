@@ -1,12 +1,12 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import { Toast } from "@/components/common/Toast";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { ImageCard } from "./ImageCard";
 import Link from "next/link";
+import useSWR from "swr";
+import { AlbumData } from "@/types/ablum";
 
 type ImagesContent = Record<
   "noImages" | "albumLoadFailed" | "imageLoadFailed",
@@ -34,32 +34,33 @@ export const MainSection = ({
   year: string;
   eventName: string;
 }) => {
-  const [imageSrcs, setImageSrcs] = useState<string[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const {
+    data: album,
+    error,
+    isLoading,
+  } = useSWR("/api/album", (url: string) =>
+    fetch(url).then((res) => res.json())
+  );
   const Language = useLanguage();
   const imagesContent = getImagesContent(Language.Current);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/album")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch album data");
-        return res.json();
-      })
-      .then((data) => {
-        setImageSrcs(data[year][eventName]);
-      })
-      .catch((err) => {
-        console.error(err);
-        Toast.fire({
-          icon: "error",
-          text: imagesContent.albumLoadFailed,
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [eventName, imagesContent.albumLoadFailed, year]);
+  if (isLoading) {
+    return (
+      <section className="flex justify-center items-center p-4">
+        <LoadingOutlined className="title" />
+      </section>
+    );
+  }
+
+  if (error) {
+    Toast.fire({
+      icon: "error",
+      text: imagesContent.albumLoadFailed,
+    });
+    return null;
+  }
+
+  const imageSrcs = (album as AlbumData)[year][eventName];
 
   return (
     <section>
@@ -70,17 +71,11 @@ export const MainSection = ({
         <div className="title font-bold">
           {year} {eventName}
         </div>
-        {!imageSrcs || imageSrcs.length === 0 ? (
-          <div className="content font-bold">
-            {loading ? <LoadingOutlined /> : imagesContent.noImages}
-          </div>
-        ) : (
-          <div className="w-full flex flex-wrap">
-            {imageSrcs.map((src) => (
-              <ImageCard key={src} src={src} />
-            ))}
-          </div>
-        )}
+        <div className="w-full flex flex-wrap">
+          {imageSrcs.map((src) => (
+            <ImageCard key={src} src={src} />
+          ))}
+        </div>
       </div>
     </section>
   );
