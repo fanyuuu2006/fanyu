@@ -23,27 +23,27 @@ const getFooterContent = (language: LanguageOption): FooterContent =>
 
 const githubBadgeItems: {
   title: string;
-  href: string;
+  url: string;
 }[] = [
   {
     title: "License",
-    href: "https://img.shields.io/github/license/fanyuuu2006/fanyu?style=flat-square",
+    url: "license",
   },
   {
     title: "Stars",
-    href: "https://img.shields.io/github/stars/fanyuuu2006/fanyu?style=flat-square",
+    url: "stars",
   },
   {
     title: "Last commit",
-    href: "https://img.shields.io/github/last-commit/fanyuuu2006/fanyu?style=flat-square",
+    url: "last-commit",
   },
   {
     title: "Created at",
-    href: "https://img.shields.io/github/created-at/fanyuuu2006/fanyu?style=flat-square",
+    url: "created-at",
   },
   {
     title: "Repository size",
-    href: "https://img.shields.io/github/repo-size/fanyuuu2006/fanyu?style=flat-square",
+    url: "repo-size",
   },
 ];
 
@@ -54,7 +54,7 @@ export const Footer = () => {
   return (
     <footer>
       <div className="container flex flex-col items-center">
-        <div className="hint flex flex-col gap-2">
+        <div className="hint flex flex-col gap-2 text-[#aaa]">
           <div className="flex gap-2">
             <CopyrightOutlined /> {year}, {profile.nickname[Langauge.Current]}
             {footerContent.copyright}
@@ -72,7 +72,7 @@ export const Footer = () => {
                 {/* eslint-disable-next-line @next/next/no-img-element*/}
                 <img
                   key={item.title}
-                  src={item.href}
+                  src={`https://img.shields.io/github/${item.url}/fanyuuu2006/fanyu?style=flat-square`}
                   alt={item.title}
                   title={item.title}
                   className="h-fit"
