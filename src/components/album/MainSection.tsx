@@ -7,6 +7,7 @@ import { Toast } from "@/components/common/Toast";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import useSWR from "swr";
+import { useEffect } from "react";
 
 type AlbumContent = Record<"album" | "noAlbum" | "albumLoadFailed", string>;
 
@@ -35,17 +36,27 @@ export const MainSection = ({ year }: { year: string | null }) => {
     data: album,
     error,
     isLoading,
-  } = useSWR("/api/album", (url: string) =>
-    fetch(url).then((res) => res.json())
+  } = useSWR<AlbumData>("/api/album", (url: string) =>
+    fetch(url).then((res) => {
+      if (!res.ok) throw new Error("Fetch album failed");
+      return res.json();
+    })
   );
 
-  if (error) {
-    Toast.fire({
-      icon: "error",
-      text: albumContent.albumLoadFailed,
-    });
-    return null;
-  }
+  useEffect(() => {
+    if (error) {
+      Toast.fire({
+        icon: "error",
+        text: albumContent.albumLoadFailed,
+      });
+    }
+  }, [error, albumContent.albumLoadFailed]);
+
+  const filteredSortedAlbums = album
+    ? Object.entries(album)
+        .filter(([y]) => !year || y === year)
+        .sort(([a], [b]) => parseInt(b) - parseInt(a))
+    : [];
 
   return (
     <section>
@@ -56,33 +67,32 @@ export const MainSection = ({ year }: { year: string | null }) => {
           </Link>
         )}
         <div className="title font-bold">{albumContent.album}</div>
-        
+
         {isLoading ? (
           <LoadingOutlined className="title" />
         ) : !album || Object.keys(album).length === 0 ? (
           <div className="content font-bold">{albumContent.noAlbum}</div>
+        ) : filteredSortedAlbums.length === 0 ? (
+          <div className="content font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
         ) : (
-          Object.entries(album as AlbumData)
-            .filter(([y]) => (year ? y === year : true))
-            .toSorted(([aYear], [bYear]) => parseInt(bYear) - parseInt(aYear))
-            .map(([y, events]) => (
-              <div key={y} className="w-full flex flex-col gap-2">
-                <div className="label font-bold">{y}</div>
-                <div className="w-full flex flex-wrap">
-                  {Object.entries(events).map(
-                    ([eventName, imageSrcs]) =>
-                      imageSrcs.length > 0 && (
-                        <EventLinkCard
-                          key={eventName}
-                          year={y}
-                          eventName={eventName}
-                          imageSrcs={imageSrcs}
-                        />
-                      )
-                  )}
-                </div>
+          filteredSortedAlbums.map(([y, events]) => (
+            <div key={y} className="w-full flex flex-col gap-2">
+              <div className="label font-bold">{y}</div>
+              <div className="w-full flex flex-wrap">
+                {Object.entries(events).map(
+                  ([eventName, imageSrcs]) =>
+                    imageSrcs.length > 0 && (
+                      <EventLinkCard
+                        key={eventName}
+                        year={y}
+                        eventName={eventName}
+                        imageSrcs={imageSrcs}
+                      />
+                    )
+                )}
               </div>
-            ))
+            </div>
+          ))
         )}
       </div>
     </section>

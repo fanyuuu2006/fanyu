@@ -7,6 +7,7 @@ import { ImageCard } from "./ImageCard";
 import Link from "next/link";
 import useSWR from "swr";
 import { AlbumData } from "@/types/ablum";
+import { useEffect } from "react";
 
 type ImagesContent = Record<
   "noImages" | "albumLoadFailed" | "imageLoadFailed",
@@ -38,29 +39,22 @@ export const MainSection = ({
     data: album,
     error,
     isLoading,
-  } = useSWR("/api/album", (url: string) =>
+  } = useSWR<AlbumData>("/api/album", (url: string) =>
     fetch(url).then((res) => res.json())
   );
   const Language = useLanguage();
   const imagesContent = getImagesContent(Language.Current);
 
-  if (isLoading) {
-    return (
-      <section className="flex justify-center items-center p-4">
-        <LoadingOutlined className="title" />
-      </section>
-    );
-  }
+  useEffect(() => {
+    if (error) {
+      Toast.fire({
+        icon: "error",
+        text: imagesContent.albumLoadFailed,
+      });
+    }
+  }, [error, imagesContent.albumLoadFailed]);
 
-  if (error) {
-    Toast.fire({
-      icon: "error",
-      text: imagesContent.albumLoadFailed,
-    });
-    return null;
-  }
-
-  const imageSrcs = (album as AlbumData)[year][eventName];
+  const imageSrcs = album?.[year][eventName];
 
   return (
     <section>
@@ -71,11 +65,17 @@ export const MainSection = ({
         <div className="title font-bold">
           {year} {eventName}
         </div>
-        <div className="w-full flex flex-wrap">
-          {imageSrcs.map((src) => (
-            <ImageCard key={src} src={src} />
-          ))}
-        </div>
+        {isLoading ? (
+          <LoadingOutlined className="title" />
+        ) : !imageSrcs || imageSrcs.length === 0 ? (
+          <div className="content font-bold">{imagesContent.noImages}</div>
+        ) : (
+          <div className="w-full flex flex-wrap">
+            {imageSrcs.map((src) => (
+              <ImageCard key={src} src={src} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
