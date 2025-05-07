@@ -71,11 +71,12 @@ export const Footer = () => {
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element*/}
                 <img
+                  draggable={false}
                   key={item.title}
                   src={`https://img.shields.io/github/${item.url}/fanyuuu2006/fanyu?style=flat-square`}
                   alt={item.title}
                   title={item.title}
-                  className="h-fit"
+                  className="h-fit select-none"
                 />
               </>
             ))}
