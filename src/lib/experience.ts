@@ -102,8 +102,8 @@ const NTUST_BGC: ClubItem = {
     english: "BoardGame Club",
   },
   role: {
-    chinese: "社員",
-    english: "Member",
+    chinese: "儲備幹部",
+    english: "Prospective Cadre",
   },
   organization: NTUST,
   duration: { start: "2024-09", end: null },

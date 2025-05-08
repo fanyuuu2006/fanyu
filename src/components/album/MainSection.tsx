@@ -64,7 +64,7 @@ export const MainSection = ({ year }: { year: string | null }) => {
 
         {isLoading ? (
           <LoadingOutlined className="title" />
-        ) : !years || years.length === 0 ? (
+        ) : !filteredYears || filteredYears.length === 0 ? (
           <div className="content font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
         ) : (
           filteredYears.map((y) => <YearDiv key={y} year={y} />)
