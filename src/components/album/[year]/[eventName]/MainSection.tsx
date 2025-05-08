@@ -6,9 +6,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ImageCard } from "./ImageCard";
 import Link from "next/link";
 import useSWR from "swr";
-import { AlbumData } from "@/types/ablum";
 import { useEffect } from "react";
 import { fetcher } from "@/utils/fetcher";
+import { slugify } from "@/utils/url";
 
 type ImagesContent = Record<
   "noImages" | "eventsLoadFailed" | "imageLoadFailed",
@@ -37,10 +37,13 @@ export const MainSection = ({
   eventName: string;
 }) => {
   const {
-    data: events,
+    data: images,
     error,
     isLoading,
-  } = useSWR<AlbumData[keyof AlbumData]>(`/api/album/${year}`, fetcher);
+  } = useSWR<string[]>(
+    `/api/album/${slugify(year)}/${slugify(eventName)}`,
+    fetcher
+  );
   const Language = useLanguage();
   const imagesContent = getImagesContent(Language.Current);
 
@@ -53,8 +56,6 @@ export const MainSection = ({
     }
   }, [error, imagesContent.eventsLoadFailed]);
 
-  const imageSrcs = events?.[eventName];
-
   return (
     <section>
       <div className="container flex flex-col items-center">
@@ -65,11 +66,11 @@ export const MainSection = ({
         <div className="label font-bold">{eventName}</div>
         {isLoading ? (
           <LoadingOutlined className="title" />
-        ) : !imageSrcs || imageSrcs.length === 0 ? (
+        ) : !images || images.length === 0 ? (
           <div className="content font-bold">{imagesContent.noImages}</div>
         ) : (
           <div className="w-full flex flex-wrap">
-            {imageSrcs.map((src) => (
+            {images.map((src) => (
               <ImageCard key={src} src={src} />
             ))}
           </div>

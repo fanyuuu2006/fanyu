@@ -2,6 +2,7 @@ import { Toast } from "@/components/common/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { LoadingOutlined } from "@ant-design/icons";
+import { OverrideProps } from "fanyucomponents";
 import { useState } from "react";
 
 type LazyImageContent = Record<"imageLoadFailed", string>;
@@ -14,22 +15,31 @@ const getLazyImageContent = (language: LanguageOption): LazyImageContent =>
     } as LanguageContent<LazyImageContent>
   )[language]);
 
-export type LazyImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
+export type LazyImageProps = OverrideProps<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  { loading?: boolean }
+>;
 
-export const LazyImage = ({ src, alt, className, ...rest }: LazyImageProps) => {
+export const LazyImage = ({
+  loading = false,
+  src,
+  alt,
+  className,
+  ...rest
+}: LazyImageProps) => {
   const Language = useLanguage();
   const lazyImageContent = getLazyImageContent(Language.Current);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleError = (e: React.SyntheticEvent) => {
     console.error(e);
     Toast.fire({ icon: "error", text: lazyImageContent.imageLoadFailed });
-    setLoading(false);
+    setIsLoading(false);
   };
 
   return (
     <>
-      {loading && (
+      {(isLoading || loading) && (
         <div className={`flex items-center justify-center ${className}`}>
           <LoadingOutlined />
         </div>
@@ -38,10 +48,10 @@ export const LazyImage = ({ src, alt, className, ...rest }: LazyImageProps) => {
       <img
         src={src}
         alt={alt ?? src?.toString()}
-        className={`${className} ${loading ? "hidden" : ""}`}
-        onLoad={() => setLoading(false)}
+        className={`${className} ${isLoading ? "hidden" : ""}`}
+        onLoad={() => setIsLoading(false)}
         onError={handleError}
-        draggable={!loading}
+        draggable={!isLoading}
         {...rest}
       />
     </>
