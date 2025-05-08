@@ -32,10 +32,12 @@ const getYearsContent = (language: LanguageOption): YearsContent =>
 
 export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   const {
-    data: eventNamess,
+    data: eventNames,
     error,
     isLoading,
-  } = useSWR<string[]>(`/api/album/${slugify(year)}`, fetcher);
+  } = useSWR<string[]>(`/api/album/${slugify(year)}`, fetcher, {
+    fallbackData: ["其他"],
+  });
 
   const Language = useLanguage();
   const yearsContent = getYearsContent(Language.Current);
@@ -53,12 +55,12 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
     <div id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <div className="w-full flex flex-wrap">
-        {isLoading ? (
+        {!eventNames && isLoading ? (
           <LoadingOutlined className="title" />
-        ) : !eventNamess || eventNamess.length === 0 ? (
+        ) : !eventNames || eventNames.length === 0 ? (
           <div className="content font-bold">{`${year} - ${yearsContent.noEvents}`}</div>
         ) : (
-          eventNamess.map((eventName) => (
+          eventNames.map((eventName) => (
             <EventLinkCard key={eventName} year={year} eventName={eventName} />
           ))
         )}

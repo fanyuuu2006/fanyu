@@ -35,7 +35,9 @@ export const MainSection = ({ year }: { year: string | null }) => {
     data: years,
     error,
     isLoading,
-  } = useSWR<string[]>("/api/album", fetcher);
+  } = useSWR<string[]>("/api/album", fetcher, {
+    fallbackData: year ? [year] : undefined,
+  });
 
   useEffect(() => {
     if (error) {
@@ -58,11 +60,14 @@ export const MainSection = ({ year }: { year: string | null }) => {
         {year && (
           <Link href="/album" className="w-full text-left content">
             <ArrowLeftOutlined />
+            <span className="sr-only">
+              {Language.Current === "chinese" ? "返回" : "Back"}
+            </span>
           </Link>
         )}
         <div className="title font-bold">{albumContent.album}</div>
 
-        {isLoading ? (
+        {!years && isLoading ? (
           <LoadingOutlined className="title" />
         ) : !filteredYears || filteredYears.length === 0 ? (
           <div className="content font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
