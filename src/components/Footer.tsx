@@ -68,17 +68,15 @@ export const Footer = () => {
           </div>
           <div className="flex flex-wrap gap-2">
             {githubBadgeItems.map((item) => (
-              <>
-                {/* eslint-disable-next-line @next/next/no-img-element*/}
-                <img
-                  draggable={false}
-                  key={item.title}
-                  src={`https://img.shields.io/github/${item.url}/fanyuuu2006/fanyu?style=flat-square`}
-                  alt={item.title}
-                  title={item.title}
-                  className="h-fit select-none"
-                />
-              </>
+              /* eslint-disable-next-line @next/next/no-img-element*/
+              <img
+                draggable={false}
+                key={item.title}
+                src={`https://img.shields.io/github/${item.url}/fanyuuu2006/fanyu?style=flat-square`}
+                alt={item.title}
+                title={item.title}
+                className="h-fit select-none"
+              />
             ))}
           </div>
         </div>

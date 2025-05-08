@@ -1,12 +1,10 @@
+import { LazyImage } from "@/components/common/LazyImage";
 import { Toast } from "@/components/common/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useModal } from "fanyucomponents";
 
-type ImageContent = Record<
-  "noImages" | "albumLoadFailed" | "imageLoadFailed",
-  string
->;
+type ImageContent = Record<"imageLoadFailed", string>;
 
 const getImageContent = (language: LanguageOption): ImageContent =>
   ((
@@ -26,23 +24,19 @@ export const ImageCard = ({
   const Language = useLanguage();
   const imageContent = getImageContent(Language.Current);
   const Modal = useModal();
+
   return (
-    <div className="p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group">
-      {/* eslint-disable-next-line @next/next/no-img-element*/}
-      <img
+    <>
+      <LazyImage
+        containerProps={{
+          className: "p-[1px] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group",
+        }}
         draggable={false}
         src={src}
         alt={src?.toString()}
-        className="cursor-pointer select-none w-full aspect-square bg-[#888] object-cover bordered group-hover:outline"
+        className="cursor-pointer select-none w-full aspect-square object-cover group-hover:outline"
         onClick={() => {
           Modal.Open();
-        }}
-        onError={(e) => {
-          console.error(e);
-          Toast.fire({
-            icon: "error",
-            text: imageContent.imageLoadFailed,
-          });
         }}
       />
       <Modal.Container>
@@ -51,12 +45,12 @@ export const ImageCard = ({
           src={src}
           alt={src?.toString()}
           className="max-w-[95vw] max-h-[80vh] object-contain"
-          onError={(e) => {
+          onError={(e: React.SyntheticEvent) => {
             console.error(e);
             Toast.fire({ icon: "error", text: imageContent.imageLoadFailed });
           }}
         />
       </Modal.Container>
-    </div>
+    </>
   );
 };
