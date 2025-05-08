@@ -29,7 +29,7 @@ export const ImageCard = ({
     <div className="relative bg-[#888] p-[1px] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group">
       <LazyImage
         src={src}
-        className="cursor-pointer select-none w-full aspect-square object-cover group-hover:outline"
+        className="title cursor-pointer select-none w-full aspect-square object-cover group-hover:outline"
         onClick={() => {
           Modal.Open();
         }}

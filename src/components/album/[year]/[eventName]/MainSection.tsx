@@ -8,9 +8,10 @@ import Link from "next/link";
 import useSWR from "swr";
 import { AlbumData } from "@/types/ablum";
 import { useEffect } from "react";
+import { fetcher } from "@/utils/fetcher";
 
 type ImagesContent = Record<
-  "noImages" | "albumLoadFailed" | "imageLoadFailed",
+  "noImages" | "eventsLoadFailed" | "imageLoadFailed",
   string
 >;
 
@@ -19,11 +20,11 @@ const getImagesContent = (language: LanguageOption): ImagesContent =>
     {
       chinese: {
         noImages: "沒有圖片",
-        albumLoadFailed: "載入相簿失敗",
+        eventsLoadFailed: "載入相簿失敗",
       },
       english: {
         noImages: "No Images",
-        albumLoadFailed: "Album Load Failed",
+        eventsLoadFailed: "Album Load Failed",
       },
     } as LanguageContent<ImagesContent>
   )[language]);
@@ -36,12 +37,10 @@ export const MainSection = ({
   eventName: string;
 }) => {
   const {
-    data: album,
+    data: events,
     error,
     isLoading,
-  } = useSWR<AlbumData>("/api/album", (url: string) =>
-    fetch(url).then((res) => res.json())
-  );
+  } = useSWR<AlbumData[keyof AlbumData]>(`/api/album/${year}`, fetcher);
   const Language = useLanguage();
   const imagesContent = getImagesContent(Language.Current);
 
@@ -49,12 +48,12 @@ export const MainSection = ({
     if (error) {
       Toast.fire({
         icon: "error",
-        text: imagesContent.albumLoadFailed,
+        text: imagesContent.eventsLoadFailed,
       });
     }
-  }, [error, imagesContent.albumLoadFailed]);
+  }, [error, imagesContent.eventsLoadFailed]);
 
-  const imageSrcs = album?.[year][eventName];
+  const imageSrcs = events?.[eventName];
 
   return (
     <section>
