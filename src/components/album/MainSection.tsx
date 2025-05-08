@@ -1,15 +1,15 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { EventLinkCard } from "./EventLinkCard";
-import { AlbumData } from "@/types/ablum";
 import { Toast } from "@/components/common/Toast";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import useSWR from "swr";
 import { useEffect } from "react";
+import { fetcher } from "@/utils/fetcher";
+import { YearDiv } from "./YearDiv";
 
-type AlbumContent = Record<"album" | "noAlbum" | "albumLoadFailed", string>;
+type AlbumContent = Record<"album" | "noAlbum" | "yearsLoadFailed", string>;
 
 const getAlbumContent = (language: LanguageOption): AlbumContent =>
   ((
@@ -17,45 +17,39 @@ const getAlbumContent = (language: LanguageOption): AlbumContent =>
       chinese: {
         album: "相簿",
         noAlbum: "沒有相簿",
-        albumLoadFailed: "載入相簿失敗",
+        yearsLoadFailed: "載入年份失敗",
       },
       english: {
         album: "Album",
         noAlbum: "No Album",
-        albumLoadFailed: "Album Load Failed",
+        yearsLoadFailed: "Years Load Failed",
       },
     } as LanguageContent<AlbumContent>
   )[language]);
 
-// const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export const MainSection = ({ year }: { year: string | null }) => {
   const Language = useLanguage();
   const albumContent = getAlbumContent(Language.Current);
+
   const {
-    data: album,
+    data: years,
     error,
     isLoading,
-  } = useSWR<AlbumData>("/api/album", (url: string) =>
-    fetch(url).then((res) => {
-      if (!res.ok) throw new Error("Fetch album failed");
-      return res.json();
-    })
-  );
+  } = useSWR<string[]>("/api/album/years", fetcher);
 
   useEffect(() => {
     if (error) {
       Toast.fire({
         icon: "error",
-        text: albumContent.albumLoadFailed,
+        text: albumContent.yearsLoadFailed,
       });
     }
-  }, [error, albumContent.albumLoadFailed]);
+  }, [albumContent.yearsLoadFailed, error]);
 
-  const filteredSortedAlbums = album
-    ? Object.entries(album)
-        .filter(([y]) => !year || y === year)
-        .sort(([a], [b]) => parseInt(b) - parseInt(a))
+  const filteredYears = years
+    ? years
+        .filter((y) => !year || y === year)
+        .sort((a, b) => parseInt(b) - parseInt(a))
     : [];
 
   return (
@@ -70,29 +64,10 @@ export const MainSection = ({ year }: { year: string | null }) => {
 
         {isLoading ? (
           <LoadingOutlined className="title" />
-        ) : !album || Object.keys(album).length === 0 ? (
-          <div className="content font-bold">{albumContent.noAlbum}</div>
-        ) : filteredSortedAlbums.length === 0 ? (
+        ) : !years || years.length === 0 ? (
           <div className="content font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
         ) : (
-          filteredSortedAlbums.map(([y, events]) => (
-            <div key={y} className="w-full flex flex-col gap-2">
-              <div className="label font-bold">{y}</div>
-              <div className="w-full flex flex-wrap">
-                {Object.entries(events).map(
-                  ([eventName, imageSrcs]) =>
-                    imageSrcs.length > 0 && (
-                      <EventLinkCard
-                        key={eventName}
-                        year={y}
-                        eventName={eventName}
-                        imageSrcs={imageSrcs}
-                      />
-                    )
-                )}
-              </div>
-            </div>
-          ))
+          filteredYears.map((y) => <YearDiv key={y} year={y} />)
         )}
       </div>
     </section>
