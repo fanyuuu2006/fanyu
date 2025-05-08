@@ -59,7 +59,7 @@ export const MainSection = ({
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <Link href="/album" className="w-full text-left content">
+        <Link href={`/album#${year}`} className="w-full text-left content">
           <ArrowLeftOutlined />
         </Link>
         <div className="title font-bold">{year}</div>

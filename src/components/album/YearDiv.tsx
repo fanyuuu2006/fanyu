@@ -50,7 +50,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   }, [yearsContent.eventsLoadFailed, error]);
 
   return (
-    <div className="w-full flex flex-col gap-2" {...rest}>
+    <div id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <div className="w-full flex flex-wrap">
         {isLoading ? (
