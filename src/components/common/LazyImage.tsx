@@ -48,10 +48,10 @@ export const LazyImage = ({
       <img
         src={src}
         alt={alt ?? src?.toString()}
-        className={`${className} ${isLoading ? "hidden" : ""}`}
+        className={`${className} ${isLoading || loading ? "hidden" : ""}`}
         onLoad={() => setIsLoading(false)}
         onError={handleError}
-        draggable={!isLoading}
+        draggable={!(isLoading || loading)}
         {...rest}
       />
     </>
