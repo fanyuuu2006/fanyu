@@ -10,6 +10,7 @@ export enum DegreeOption {
   JuniorHigh = "Junior High School Diploma",
   Elementary = "Elementary School Diploma",
 }
+
 export type Duration = {
   start: string | null;
   end: string | null;

@@ -83,12 +83,12 @@ export const Header = () => {
             />
           </Link>
           <button
-            className="md:hidden label px-2 py-1"
+            className="lg:hidden label px-2 py-1"
             onClick={() => setMenuShow((prev) => !prev)}
           >
             <MenuOutlined />
           </button>
-          <div className="hidden md:flex note font-bold gap-6">
+          <div className="hidden lg:flex note font-bold gap-6">
             {Routes.map((item, index) => (
               <Link key={index} href={item.href}>
                 {item.label[Language.Current]}
@@ -96,7 +96,7 @@ export const Header = () => {
             ))}
           </div>
         </div>
-        <Collapse state={menuShow} className="slide-collapse md:hidden">
+        <Collapse state={menuShow} className="slide-collapse lg:hidden">
           <div className="flex flex-col w-full note font-bold text-center">
             {Routes.map((item, index) => (
               <Link
