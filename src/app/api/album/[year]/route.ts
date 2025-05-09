@@ -27,8 +27,15 @@ export async function GET(
     );
     const eventNames = eventFolders.map((f) => f.name);
 
+    const otherimages = await listAllFiles(
+      `'${yearFolder.id}' in parents and mimeType contains 'image/'`
+    );
+
+    if (otherimages.length > 0) {
+      eventNames.push("其他");
+    }
+
     // 加上「其他」類別
-    eventNames.push("其他");
 
     return NextResponse.json(eventNames);
   } catch (error) {
