@@ -1,14 +1,15 @@
 import { ContactCategory, ContactItem } from "@/types/contact";
 import { LanguageContent } from "@/types/language";
 import {
-  FacebookFilled,
+  FacebookOutlined,
   GithubFilled,
   InstagramOutlined,
   MailOutlined,
   TikTokOutlined,
-  YoutubeFilled,
+  YoutubeOutlined,
 } from "@ant-design/icons";
-import { FaThreads, FaLine, FaNpm } from "react-icons/fa6";
+import { FaThreads, FaLine } from "react-icons/fa6";
+import { SiNpm, SiWakatime } from "react-icons/si";
 export const contactCategorieMap: LanguageContent<
   Record<ContactCategory, string>
 > = {
@@ -50,19 +51,19 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     },
     {
       label: "Youtube",
-      icon: <YoutubeFilled />,
+      icon: <YoutubeOutlined />,
       id: "閃火",
       href: "https://www.youtube.com/@fan_yuuu",
     },
     {
       label: "NPM",
-      icon: <FaNpm/>,
+      icon: <SiNpm />,
       id: "fan._.yuuu",
       href: "https://www.npmjs.com/~fan._.yuuu",
     },
     {
       label: "Facebook",
-      icon: <FacebookFilled />,
+      icon: <FacebookOutlined />,
       id: "范振富",
       href: "https://www.facebook.com/share/1MpEQ1faFk/",
     },
@@ -71,6 +72,12 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       icon: <TikTokOutlined />,
       id: "fan._.yuuu",
       href: "https://www.tiktok.com/@fan._.yuuu",
+    },
+    {
+      label: "WakaTime",
+      icon: <SiWakatime />,
+      id: "fanyuuu2006",
+      href: "https://wakatime.com/@fanyuuu2006",
     },
   ],
   [ContactCategory.InstantMessaging]: [

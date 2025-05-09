@@ -62,8 +62,10 @@ export const MainSection = ({
         <Link href={`/album#${year}`} className="w-full text-left content">
           <ArrowLeftOutlined />
         </Link>
-        <div className="title font-bold">{year}</div>
-        <div className="label font-bold">{eventName}</div>
+        <div className="flex flex-col items-center">
+          <span className="title font-bold">{year}</span>
+          <span className="label font-bold">{eventName}</span>
+        </div>
         {isLoading ? (
           <LoadingOutlined className="title" />
         ) : !images || images.length === 0 ? (

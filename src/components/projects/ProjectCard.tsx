@@ -14,12 +14,12 @@ import {
   TagsOutlined,
 } from "@ant-design/icons";
 import { ProjectTagButton } from "./ProjectTagButton";
-import { FaNpm } from "react-icons/fa6";
+import { SiNpm } from "react-icons/si";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
   github: <GithubOutlined />,
-  package: <FaNpm />,
+  package: <SiNpm />,
 };
 
 export type ProjectCardProps = OverrideProps<
