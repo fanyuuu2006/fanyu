@@ -66,7 +66,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       label: "Line",
       icon: <FaLine />,
       id: "fan._.yuuu",
-      href: "https://www.tiktok.com/@fan._.yuuu",
+      href: "https://line.me/ti/p/IqB3QvjIlU",
     },
     {
       label: "Email",
