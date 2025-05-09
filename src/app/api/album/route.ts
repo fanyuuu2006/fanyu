@@ -10,6 +10,6 @@ export async function GET() {
     return NextResponse.json(years.map((folder) => folder.name));
   } catch (error) {
     console.warn("⚠️ 讀取 Album 資料夾時發生錯誤:", error);
-    return NextResponse.json({}, { status: 500 });
+    return NextResponse.json([], { status: 500 });
   }
 }

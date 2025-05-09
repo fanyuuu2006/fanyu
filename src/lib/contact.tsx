@@ -8,7 +8,7 @@ import {
   TikTokOutlined,
   YoutubeFilled,
 } from "@ant-design/icons";
-import { FaThreads, FaLine } from "react-icons/fa6";
+import { FaThreads, FaLine, FaNpm } from "react-icons/fa6";
 export const contactCategorieMap: LanguageContent<
   Record<ContactCategory, string>
 > = {
@@ -25,16 +25,22 @@ export const contactCategorieMap: LanguageContent<
 export const ContactData: Record<ContactCategory, ContactItem[]> = {
   [ContactCategory.SocialNetwork]: [
     {
-      label: "Instagram",
-      icon: <InstagramOutlined />,
-      id: "fan._.yuuu",
-      href: "https://www.instagram.com/fan._.yuuu/",
-    },
-    {
       label: "GitHub",
       icon: <GithubFilled />,
       id: "fanyuuu2006",
       href: "https://github.com/fanyuuu2006",
+    },
+    {
+      label: "Instagram",
+      icon: <InstagramOutlined />,
+      id: "fan._.yuuu",
+      href: "https://www.instagram.com/fan._.yuuu",
+    },
+    {
+      label: "Instagram",
+      icon: <InstagramOutlined />,
+      id: "fanyu_draw",
+      href: "https://www.instagram.com/fanyu._.draw",
     },
     {
       label: "Threads",
@@ -47,6 +53,12 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       icon: <YoutubeFilled />,
       id: "閃火",
       href: "https://www.youtube.com/@fan_yuuu",
+    },
+    {
+      label: "NPM",
+      icon: <FaNpm/>,
+      id: "fan._.yuuu",
+      href: "https://www.npmjs.com/~fan._.yuuu",
     },
     {
       label: "Facebook",
@@ -70,7 +82,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     },
     {
       label: "Email",
-      icon: <MailOutlined/>,
+      icon: <MailOutlined />,
       id: "bingxiao526@gmail.com",
       href: "bingxiao526@gmail.com",
     },

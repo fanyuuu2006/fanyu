@@ -42,8 +42,8 @@ export const ContactSection = () => {
               }
             </div>
             <div className="flex flex-wrap w-full gap-2">
-              {items.map((item) => (
-                <Tooltip key={item.label} title={item.label}>
+              {items.map((item, index) => (
+                <Tooltip key={index} title={item.label}>
                   <OutsideLink
                     href={item.href}
                     className="btn card-link note rounded-md flex items-center px-4 py-1 gap-2"

@@ -9,17 +9,17 @@ import { useLanguage } from "@/context/LanguageContext";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import {
   ClockCircleOutlined,
-  CodeSandboxOutlined,
   GithubOutlined,
   LinkOutlined,
   TagsOutlined,
 } from "@ant-design/icons";
 import { ProjectTagButton } from "./ProjectTagButton";
+import { FaNpm } from "react-icons/fa6";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
   github: <GithubOutlined />,
-  package: <CodeSandboxOutlined />,
+  package: <FaNpm />,
 };
 
 export type ProjectCardProps = OverrideProps<
@@ -67,7 +67,7 @@ export const ProjectCard = ({
           <OutsideLink
             key={link.href}
             href={link.href}
-            className="hint w-fit flex flex-nowrap gap-2 opacity-70"
+            className="hint w-fit flex flex-nowrap items-center gap-2 opacity-70"
           >
             {categoryIcon[link.category]}
             <span>{link.href}</span>
