@@ -49,6 +49,13 @@ const Routes: {
   },
   {
     label: {
+      chinese: "聯繫",
+      english: "Contact",
+    },
+    href: "/#contact",
+  },
+  {
+    label: {
       chinese: "相簿",
       english: "Album",
     },

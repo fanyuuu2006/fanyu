@@ -20,14 +20,14 @@ const getExperienceContent = (language: LanguageOption): ExperienceContent =>
 
 export const ExperienceSection = () => {
   const Language = useLanguage();
-  const ExperienceContent = getExperienceContent(Language.Current);
+  const experienceContent = getExperienceContent(Language.Current);
 
   return (
     <section id="experience">
       <div className="container flex flex-col items-center">
-        <div className="title font-bold">{ExperienceContent.experience}</div>
-        <EducationDiv/>
-        <ClubDiv/>
+        <div className="title font-bold">{experienceContent.experience}</div>
+        <EducationDiv />
+        <ClubDiv />
       </div>
     </section>
   );

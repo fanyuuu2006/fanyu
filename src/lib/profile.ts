@@ -1,3 +1,4 @@
+import { ContactData } from "./contact";
 import { experience } from "./experience";
 import { projects } from "./projects";
 
@@ -23,9 +24,9 @@ export const profile = {
     english: "Da'an Dist, Taipei City, Taiwan",
   },
   birthday: "2006/05/26 UTC+08:00",
-  email: ["bingxiao526@gmail.com"],
   experience,
   portfolio: {
     projects,
   },
+  contact: ContactData,
 } as const;

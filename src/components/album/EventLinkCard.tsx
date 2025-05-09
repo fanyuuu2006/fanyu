@@ -62,8 +62,6 @@ export const EventLinkCard = ({
     }
   }, [eventsContent.imagesLoadFailed, error]);
 
-  if (!images || images.length === 0) return null;
-
   return (
     <Link
       aria-label={`前往 ${eventName} 相簿`}
@@ -74,7 +72,7 @@ export const EventLinkCard = ({
       <LazyImage
         draggable={false}
         loading={isLoading}
-        src={images[0]}
+        src={images?.[0]}
         alt={eventName}
         className="aspect-square title bg-[#888] w-full object-cover transition duration-300 group-hover:brightness-50"
       />
