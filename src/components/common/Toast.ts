@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import "@/styles/Alert.css";
 
-export const Toast = Swal.mixin({
+export const Toast: typeof Swal = Swal.mixin({
   toast: true,
   position: "center",
   timer: 3000,

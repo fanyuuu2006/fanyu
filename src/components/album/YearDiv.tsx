@@ -55,7 +55,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
     <div id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <div className="w-full flex flex-wrap">
-        {!eventNames && isLoading ? (
+        {isLoading ? (
           <LoadingOutlined className="title" />
         ) : !eventNames || eventNames.length === 0 ? (
           <div className="content font-bold">{`${year} - ${yearsContent.noEvents}`}</div>

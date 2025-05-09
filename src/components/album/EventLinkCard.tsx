@@ -15,8 +15,8 @@ const getEventsContent = (language: LanguageOption): EventsContent =>
   ((
     {
       chinese: {
-        noImages: "沒有事件",
-        imagesLoadFailed: "載入事件失敗",
+        noImages: "沒有圖片",
+        imagesLoadFailed: "載入圖片失敗",
       },
       english: {
         noImages: "No Images",
@@ -42,11 +42,11 @@ export const EventLinkCard = ({
   ...rest
 }: EventLinkCardProps) => {
   const {
-    data: images,
+    data: image,
     error,
     isLoading,
-  } = useSWR<string[]>(
-    `/api/album/${slugify(year)}/${slugify(eventName)}`,
+  } = useSWR<string>(
+    `/api/album/${slugify(year)}/${slugify(eventName)}/0`,
     fetcher
   );
 
@@ -72,7 +72,7 @@ export const EventLinkCard = ({
       <LazyImage
         draggable={false}
         loading={isLoading}
-        src={images?.[0]}
+        src={image}
         alt={eventName}
         className="aspect-square title bg-[#888] w-full object-cover transition duration-300 group-hover:brightness-50"
       />

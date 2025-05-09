@@ -24,14 +24,14 @@ export const LazyImage = ({
   loading = false,
   src,
   alt,
-  className,
+  className = "",
   ...rest
 }: LazyImageProps) => {
   const Language = useLanguage();
   const lazyImageContent = getLazyImageContent(Language.Current);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleError = (e: React.SyntheticEvent) => {
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     console.error(e);
     Toast.fire({ icon: "error", text: lazyImageContent.imageLoadFailed });
     setIsLoading(false);
