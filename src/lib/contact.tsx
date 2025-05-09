@@ -3,8 +3,8 @@ import { LanguageContent } from "@/types/language";
 import {
   FacebookFilled,
   GithubFilled,
-  InstagramFilled,
-  MailFilled,
+  InstagramOutlined,
+  MailOutlined,
   TikTokOutlined,
   YoutubeFilled,
 } from "@ant-design/icons";
@@ -26,7 +26,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
   [ContactCategory.SocialNetwork]: [
     {
       label: "Instagram",
-      icon: <InstagramFilled />,
+      icon: <InstagramOutlined />,
       id: "fan._.yuuu",
       href: "https://www.instagram.com/fan._.yuuu/",
     },
@@ -70,7 +70,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     },
     {
       label: "Email",
-      icon: <MailFilled/>,
+      icon: <MailOutlined/>,
       id: "bingxiao526@gmail.com",
       href: "bingxiao526@gmail.com",
     },

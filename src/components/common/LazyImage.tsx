@@ -41,22 +41,21 @@ export const LazyImage = ({
 
   return (
     <>
-      {showLoader ? (
+      {showLoader && (
         <div className={`flex items-center justify-center ${className}`}>
           <LoadingOutlined />
         </div>
-      ) : (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
-          src={src}
-          alt={alt ?? src?.toString()}
-          className={className}
-          onLoad={() => setIsLoading(false)}
-          onError={handleError}
-          draggable={!showLoader}
-          {...rest}
-        />
       )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt ?? src?.toString()}
+        className={`${className} ${showLoader ? "hidden" : ""}`}
+        onLoad={() => setIsLoading(false)}
+        onError={handleError}
+        draggable={!showLoader}
+        {...rest}
+      />
     </>
   );
 };
