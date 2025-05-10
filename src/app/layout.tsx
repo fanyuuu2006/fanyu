@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     "Fan-Yu Zhen-Fu",
     "范余振富",
     "飯魚正負",
-    "昌维cw",
     "fan._.yuu",
     "fanyuuu2006",
     "范振富",
