@@ -10,6 +10,7 @@ import {
 import { Tooltip } from "antd";
 import { OutsideLink } from "fanyucomponents";
 import { Toast } from "../../common/Toast";
+import { TypeWriterText } from "@/components/common/TypeWriterText";
 
 type HomeContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
@@ -22,7 +23,7 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
       chinese: {
         hello: "哈囉，",
         iAm: "我是",
-        intro: "一名熱愛寫程式的大學生開發者",
+        intro: "一名熱愛寫程式的大學生開發者。",
         coding: "寫程式",
         drawing: "繪畫",
       },
@@ -81,7 +82,9 @@ export const HomeSection = () => {
               {homeContent.iAm}
               {profile.nickname[Language.Current]}❗
             </div>
-            <div className="note">{homeContent.intro}</div>
+            <TypeWriterText className="note">
+              {homeContent.intro}
+            </TypeWriterText>
             <div className="label flex gap-4">
               {links.map((item) => (
                 <Tooltip key={item.label} title={item.label} placement="bottom">

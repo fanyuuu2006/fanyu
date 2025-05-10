@@ -36,8 +36,12 @@ body {
   background: var(--background-color);
 }
 
+main{
+  margin-top: 6em;
+}
+
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   width: 100%;
