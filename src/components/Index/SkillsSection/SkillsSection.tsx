@@ -106,7 +106,7 @@ export const SkillsSection = () => {
                       src={item.src}
                       width={300}
                       height={300}
-                      className="h-14 w-auto"
+                      className="h-15 w-auto"
                     />
                   </Tooltip>
                 ))}
