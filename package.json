@@ -11,7 +11,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "antd": "^5.24.9",
-    "fanyucomponents": "^2.3.15",
+    "fanyucomponents": "^2.4.3",
     "gaxios": "^6.7.1",
     "googleapis": "^148.0.0",
     "next": "15.3.1",

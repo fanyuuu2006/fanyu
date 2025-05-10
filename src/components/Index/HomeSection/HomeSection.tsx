@@ -81,7 +81,11 @@ export const HomeSection = () => {
               {homeContent.iAm}
               {profile.nickname[Language.Current]}❗
             </div>
-            <TypeWriterText className="note" speed={25}>
+            <TypeWriterText
+              startDelay={500}
+              className="note"
+              speed={homeContent.intro.length * 1.5}
+            >
               {homeContent.intro}
             </TypeWriterText>
             <div className="label flex gap-4">
