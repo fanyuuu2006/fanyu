@@ -8,9 +8,8 @@ import {
   InstagramOutlined,
 } from "@ant-design/icons";
 import { Tooltip } from "antd";
-import { OutsideLink } from "fanyucomponents";
+import { OutsideLink, TypeWriterText } from "fanyucomponents";
 import { Toast } from "../../common/Toast";
-import { TypeWriterText } from "@/components/common/TypeWriterText";
 
 type HomeContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
