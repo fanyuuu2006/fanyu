@@ -70,12 +70,12 @@ export const Header = () => {
 
   return (
     <header>
-      <nav className="flex flex-col">
+      <nav className="flex flex-col" aria-label="主導航">
         <div className="container flex items-center justify-between flex-nowrap px-8 py-2 w-full">
           <Link href="/" className="h-full">
             <Image
               priority
-              alt="Logo"
+              alt="FanYu Logo"
               src="/logo.png"
               width={1500}
               height={500}
@@ -85,6 +85,7 @@ export const Header = () => {
           <button
             className="lg:hidden label px-2 py-1"
             onClick={() => setMenuShow((prev) => !prev)}
+            aria-label={menuShow ? "關閉選單" : "開啟選單"}
           >
             <MenuOutlined />
           </button>
