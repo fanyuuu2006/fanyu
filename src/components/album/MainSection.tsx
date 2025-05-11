@@ -15,12 +15,12 @@ const getAlbumContent = (language: LanguageOption): AlbumContent =>
   ((
     {
       chinese: {
-        album: "相簿",
+        album: "我的相簿",
         noAlbum: "沒有相簿",
         yearsLoadFailed: "載入年份失敗",
       },
       english: {
-        album: "Album",
+        album: "My Album",
         noAlbum: "No Album",
         yearsLoadFailed: "Years Load Failed",
       },

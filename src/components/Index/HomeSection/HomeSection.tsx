@@ -6,6 +6,7 @@ import {
   CopyOutlined,
   GithubOutlined,
   InstagramOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import { OutsideLink, TypeWriterText } from "fanyucomponents";
@@ -50,6 +51,11 @@ const links: {
     label: "Instagram",
     icon: <InstagramOutlined />,
     href: "https://www.instagram.com/fan._.yuuu",
+  },
+  {
+    label: "E-Mail",
+    icon: <MailOutlined />,
+    href: "mailto:bingxiao526@gmail.com",
   },
 ];
 
