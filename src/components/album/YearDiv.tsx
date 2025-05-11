@@ -65,7 +65,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
         <motion.div
           variants={staggerContainer}
           initial="hiddenBottom"
-          whileInView="show"
+          animate="show"
           viewport={{ once: true, amount: 0.5 }}
           className="w-full flex flex-wrap"
         >
