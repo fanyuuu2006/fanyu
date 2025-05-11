@@ -4,6 +4,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { Tooltip } from "antd";
 import React from "react";
+import { motion } from "framer-motion";
+import { fadeInItem, staggerContainer } from "@/lib/motion";
 
 type SkillCategory = "frontend" | "backend" | "devtools";
 type SkillsContent = Record<"skills" | SkillCategory, string>;
@@ -91,29 +93,40 @@ export const SkillsSection = () => {
     <section id="skills">
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{skillsContent.skills}</div>
-        <div className="flex flex-col w-full gap-4">
+        <motion.div
+          variants={staggerContainer}
+          initial="hiddenBottom"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="flex flex-col w-full gap-4"
+        >
           {Object.entries(skillItems).map(([category, items]) => (
-            <div key={category}>
+            <motion.div variants={fadeInItem} key={category}>
               <div className="content font-bold">
                 {skillsContent[category as keyof SkillsContent]}:
               </div>
-              <div className="label flex flex-wrap gap-2">
+              <motion.div
+                variants={staggerContainer}
+                className="label flex flex-wrap gap-2"
+              >
                 {items.map((item) => (
-                  <Tooltip key={item.title} title={item.title}>
-                    <Image
-                      draggable={false}
-                      alt={item.title}
-                      src={item.src}
-                      width={300}
-                      height={300}
-                      className="h-15 w-auto"
-                    />
-                  </Tooltip>
+                  <motion.div key={item.title} variants={fadeInItem}>
+                    <Tooltip title={item.title}>
+                      <Image
+                        draggable={false}
+                        alt={item.title}
+                        src={item.src}
+                        width={300}
+                        height={300}
+                        className="h-15 w-auto"
+                      />
+                    </Tooltip>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
