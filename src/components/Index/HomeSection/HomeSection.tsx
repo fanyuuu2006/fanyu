@@ -11,7 +11,8 @@ import {
 import { Tooltip } from "antd";
 import { OutsideLink, TypeWriterText } from "fanyucomponents";
 import { Toast } from "../../common/Toast";
-import { useIsInView } from "@/hooks/useIsInView";
+import { motion } from "framer-motion";
+import { fadeInItem, staggerContainer } from "@/lib/motion";
 
 type HomeContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
@@ -62,11 +63,6 @@ const links: {
 
 export const HomeSection = () => {
   const Language = useLanguage();
-  const { ref: inViewRef, isInView } = useIsInView({
-    threshold: 0.1,
-    direction: "bottom",
-    times: 1,
-  });
 
   const homeContent: HomeContent = getHomeContent(Language.Current);
 
@@ -74,10 +70,7 @@ export const HomeSection = () => {
     "const FanYu = {",
     `  name: '${profile.name[Language.Current]}',`,
     `  nickname: '${profile.nickname[Language.Current]}',`,
-    `  age: ${Math.floor(
-      (new Date().getTime() - new Date(profile.birthday).getTime()) /
-        (365.25 * 24 * 60 * 60 * 1000)
-    )},`,
+    `  age: ${profile.age()},`,
     `  hobbies: ['${homeContent.coding}', '${homeContent.drawing}'],`,
     "  skills: ['TypeScript', 'Next.js', 'Python'],",
     "} as const;",
@@ -110,11 +103,12 @@ export const HomeSection = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center flex-grow">
-          <pre
-            ref={inViewRef}
-            className={`${
-              isInView ? "animate-slide-up" : "opacity-0"
-            } card shadow bordered p-6 overflow-auto`}
+          <motion.pre
+            variants={fadeInItem}
+            initial="hiddenBottom"
+            whileInView="show"
+            viewport={{ once: true }}
+            className={`card shadow bordered p-6 overflow-auto`}
           >
             <div className="hint flex">
               <span>TypeScript</span>
@@ -138,15 +132,26 @@ export const HomeSection = () => {
                 <CopyOutlined />
               </button>
             </div>
-            <div className="note flex flex-col font-bold">
+            <motion.div
+              variants={staggerContainer}
+              initial="hiddenLeft"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="note flex flex-col font-bold"
+            >
               {codeLines.map((line, index) => (
                 <div key={index} className="flex flex-nowrap gap-2">
                   <span className="text-[#888] select-none">{index + 1}</span>
-                  <code className="font-mono whitespace-pre-wrap">{line}</code>
+                  <motion.code
+                    variants={fadeInItem}
+                    className="font-mono whitespace-pre-wrap"
+                  >
+                    {line}
+                  </motion.code>
                 </div>
               ))}
-            </div>
-          </pre>
+            </motion.div>
+          </motion.pre>
         </div>
       </div>
     </section>

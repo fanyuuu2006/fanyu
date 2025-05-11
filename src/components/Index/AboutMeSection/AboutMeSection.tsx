@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
+import { motion } from "framer-motion";
+import { fadeInItem } from "@/lib/motion";
 
 type AboutMeContent = {
   aboutMe: string;
@@ -44,7 +46,13 @@ export const AboutMeSection = () => {
           {aboutMeContent.aboutMe}
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <div className="card-glass flex justify-center items-center w-3/10">
+          <motion.div
+            variants={fadeInItem}
+            initial="hiddenLeft"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="card-glass flex justify-center items-center w-3/10"
+          >
             <Image
               className="bordered w-4/5 h-auto rounded-xl"
               alt="頭貼"
@@ -52,19 +60,20 @@ export const AboutMeSection = () => {
               width={1000}
               height={1000}
             />
-          </div>
-          <div
+          </motion.div>
+          <motion.div
+            variants={fadeInItem}
+            initial="hiddenRight"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
             className="card-glass flex flex-col items-center w-3/5"
           >
             {aboutMeContent.article.map((part, index) => (
-              <p
-                key={index}
-                className="note bold text-justify mb-4 indent-8 "
-              >
+              <p key={index} className="note bold text-justify mb-4 indent-8 ">
                 {part}
               </p>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

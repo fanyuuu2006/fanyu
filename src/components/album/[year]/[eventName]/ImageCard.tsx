@@ -1,9 +1,10 @@
 import { LazyImage } from "@/components/common/LazyImage";
 import { Toast } from "@/components/common/Toast";
 import { useLanguage } from "@/context/LanguageContext";
+import { fadeInItem } from "@/lib/motion";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useModal } from "fanyucomponents";
-
+import { motion } from "framer-motion";
 type ImageContent = Record<"imageLoadFailed", string>;
 
 const getImageContent = (language: LanguageOption): ImageContent =>
@@ -26,7 +27,13 @@ export const ImageCard = ({
   const Modal = useModal();
 
   return (
-    <div className="relative p-[1px] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group">
+    <motion.div
+      variants={fadeInItem}
+      initial="hiddenBottom"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative p-[1px] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group"
+    >
       <LazyImage
         src={src}
         className="title bg-[#888] cursor-pointer select-none w-full aspect-square object-cover group-hover:outline"
@@ -46,6 +53,6 @@ export const ImageCard = ({
           }}
         />
       </Modal.Container>
-    </div>
+    </motion.div>
   );
 };

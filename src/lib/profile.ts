@@ -24,6 +24,11 @@ export const profile = {
     english: "Da'an Dist, Taipei City, Taiwan",
   },
   birthday: "2006/05/26 UTC+08:00",
+  age: () =>
+    Math.floor(
+      (new Date().getTime() - new Date(profile.birthday).getTime()) /
+        (365.25 * 24 * 60 * 60 * 1000)
+    ),
   experience,
   portfolio: {
     projects,
