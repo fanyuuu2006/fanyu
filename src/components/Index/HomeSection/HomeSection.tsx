@@ -64,6 +64,8 @@ export const HomeSection = () => {
   const Language = useLanguage();
   const { ref: inViewRef, isInView } = useIsInView({
     threshold: 0.1,
+    direction: "bottom",
+    times: 1,
   });
 
   const homeContent: HomeContent = getHomeContent(Language.Current);

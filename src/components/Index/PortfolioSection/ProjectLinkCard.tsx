@@ -21,6 +21,8 @@ export const ProjectLinkCard = ({
   const Language = useLanguage();
   const { ref, isInView } = useIsInView({
     threshold: 0.1,
+    direction: "bottom",
+    times: 1,
   });
   return (
     <Link
