@@ -5,6 +5,7 @@ import { ClockCircleOutlined, TagsOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Image from "next/image";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
+import { useIsInView } from "@/hooks/useIsInView";
 
 export type ProjectLinkCardProps = OverrideProps<
   DistributiveOmit<React.ComponentProps<typeof Link>, "href">,
@@ -18,10 +19,16 @@ export const ProjectLinkCard = ({
   ...rest
 }: ProjectLinkCardProps) => {
   const Language = useLanguage();
+  const { ref, isInView } = useIsInView({
+    threshold: 0.1,
+  });
   return (
     <Link
+      ref={ref}
       href={`/projects/#${slugify(item.title.english)}`}
-      className={`${className} card card-link bordered shadow flex flex-col items-center p-4 gap-4 flex-1 basis-full md:basis-3/10`}
+      className={`${className} ${
+        isInView ? "animate-slide-up" : "opacity-0"
+      } card card-link bordered shadow flex flex-col items-center p-4 gap-4 flex-1 basis-full md:basis-3/10`}
       {...rest}
     >
       <Image

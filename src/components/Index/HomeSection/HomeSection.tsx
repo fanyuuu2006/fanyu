@@ -11,6 +11,7 @@ import {
 import { Tooltip } from "antd";
 import { OutsideLink, TypeWriterText } from "fanyucomponents";
 import { Toast } from "../../common/Toast";
+import { useIsInView } from "@/hooks/useIsInView";
 
 type HomeContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
@@ -61,6 +62,9 @@ const links: {
 
 export const HomeSection = () => {
   const Language = useLanguage();
+  const { ref: inViewRef, isInView } = useIsInView({
+    threshold: 0.1,
+  });
 
   const homeContent: HomeContent = getHomeContent(Language.Current);
 
@@ -104,7 +108,12 @@ export const HomeSection = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center flex-grow">
-          <pre className="card shadow bordered p-6 overflow-auto">
+          <pre
+            ref={inViewRef}
+            className={`${
+              isInView ? "animate-slide-up" : "opacity-0"
+            } card shadow bordered p-6 overflow-auto`}
+          >
             <div className="hint flex">
               <span>TypeScript</span>
               <button
