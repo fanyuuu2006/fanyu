@@ -91,7 +91,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       label: "Email",
       icon: <MailOutlined />,
       id: "bingxiao526@gmail.com",
-      href: "bingxiao526@gmail.com",
+      href: "mailto:bingxiao526@gmail.com",
     },
   ],
 };
