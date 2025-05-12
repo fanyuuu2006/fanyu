@@ -77,9 +77,9 @@ export const EventLinkCard = ({
         alt={eventName}
         className="aspect-square title bg-[#888] w-full object-cover transition duration-300 group-hover:brightness-50"
       />
-      <span className="absolute w-full bg-[#000] opacity-50 bottom-0 hint font-bold text-center group-hover:opacity-100 transition-opacity">
-        {eventName}
-      </span>
+      <div className="absolute w-full bg-[#000] flex justify-center opacity-50 bottom-0 group-hover:opacity-100 transition-opacity">
+        <span className="note font-bold">{eventName}</span>
+      </div>
     </Link>
   );
 };
