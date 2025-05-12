@@ -107,10 +107,10 @@ export const SkillsSection = () => {
               </div>
               <motion.div
                 variants={staggerContainer}
-                className="label flex flex-wrap gap-2"
+                className="label flex flex-wrap"
               >
                 {items.map((item) => (
-                  <motion.div key={item.title} variants={fadeInItem}>
+                  <motion.div key={item.title} variants={fadeInItem} className="p-2">
                     <Tooltip title={item.title}>
                       <Image
                         draggable={false}
@@ -118,7 +118,7 @@ export const SkillsSection = () => {
                         src={item.src}
                         width={300}
                         height={300}
-                        className="h-15 w-auto"
+                        className="h-16 w-fit"
                       />
                     </Tooltip>
                   </motion.div>
