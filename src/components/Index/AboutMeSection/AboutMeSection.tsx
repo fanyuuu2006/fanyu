@@ -45,13 +45,13 @@ export const AboutMeSection = () => {
         <div className="title font-bold text-center">
           {aboutMeContent.aboutMe}
         </div>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-4 flex-col md:flex-row">
           <motion.div
             variants={fadeInItem}
             initial="hiddenLeft"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card-glass flex justify-center items-center w-3/10"
+            className="card-glass flex justify-center items-center flex-1"
           >
             <Image
               className="bordered w-4/5 h-auto rounded-xl"
@@ -66,7 +66,7 @@ export const AboutMeSection = () => {
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card-glass flex flex-col items-center w-3/5"
+            className="card-glass flex flex-col items-center flex-1 basis-4/10"
           >
             {aboutMeContent.article.map((part, index) => (
               <p key={index} className="note bold text-justify mb-4 indent-8 ">
