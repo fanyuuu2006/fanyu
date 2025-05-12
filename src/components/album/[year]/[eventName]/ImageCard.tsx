@@ -29,9 +29,6 @@ export const ImageCard = ({
   return (
     <motion.div
       variants={fadeInItem}
-      initial="hiddenBottom"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
       className="relative p-[1px] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group"
     >
       <LazyImage

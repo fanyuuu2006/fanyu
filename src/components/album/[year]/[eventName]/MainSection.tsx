@@ -9,6 +9,8 @@ import useSWR from "swr";
 import { useEffect } from "react";
 import { fetcher } from "@/utils/fetcher";
 import { slugify } from "@/utils/url";
+import { motion } from "framer-motion";
+import { staggerContainer } from "@/lib/motion";
 
 type ImagesContent = Record<
   "noImages" | "eventsLoadFailed" | "imageLoadFailed",
@@ -71,11 +73,17 @@ export const MainSection = ({
         ) : !images || images.length === 0 ? (
           <div className="content font-bold">{imagesContent.noImages}</div>
         ) : (
-          <div className="w-full flex flex-wrap">
+          <motion.div
+            variants={staggerContainer}
+            initial="hiddenBottom"
+            animate="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="w-full flex flex-wrap"
+          >
             {images.map((src) => (
               <ImageCard key={src} src={src} />
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
