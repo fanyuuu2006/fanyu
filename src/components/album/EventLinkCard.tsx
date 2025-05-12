@@ -66,7 +66,7 @@ export const EventLinkCard = ({
   return (
     <Link
       aria-label={`前往 ${eventName} 相簿`}
-      className={`select-none rounded-lg relative overflow-hidden group ${className}`}
+      className={`select-none relative group ${className}`}
       href={`/album/${slugify(year)}/${slugify(eventName)}`}
       {...rest}
     >
