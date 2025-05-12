@@ -87,7 +87,6 @@ export const HomeSection = () => {
               {profile.nickname[Language.Current]}❗
             </div>
             <TypeWriterText
-              startDelay={500}
               className="note"
               speed={homeContent.intro.length * 1.5}
             >

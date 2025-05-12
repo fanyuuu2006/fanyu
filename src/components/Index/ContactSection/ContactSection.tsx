@@ -1,11 +1,13 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import { contactCategorieMap } from "@/lib/contact";
+import { fadeInItem, staggerContainer } from "@/lib/motion";
 import { profile } from "@/lib/profile";
 import { ContactCategory } from "@/types/contact";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { Tooltip } from "antd";
 import { OutsideLink } from "fanyucomponents";
+import { motion } from "framer-motion";
 
 type ContactContent = Record<"contact", string>;
 
@@ -41,19 +43,27 @@ export const ContactSection = () => {
                 ]
               }
             </div>
-            <div className="flex flex-wrap w-full gap-2">
+            <motion.div
+              variants={staggerContainer}
+              initial="hiddenBottom"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="flex flex-wrap w-full gap-2"
+            >
               {items.map((item, index) => (
-                <Tooltip key={index} title={item.label}>
-                  <OutsideLink
-                    href={item.href}
-                    className="btn card-link note rounded-md flex items-center px-4 py-1 gap-2"
-                  >
-                    {item.icon}
-                    <span>{item.id}</span>
-                  </OutsideLink>
-                </Tooltip>
+                <motion.div key={index} variants={fadeInItem}>
+                  <Tooltip title={item.label}>
+                    <OutsideLink
+                      href={item.href}
+                      className="btn card-link note rounded-md flex items-center px-4 py-1 gap-2"
+                    >
+                      {item.icon}
+                      <span>{item.id}</span>
+                    </OutsideLink>
+                  </Tooltip>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         ))}
       </div>

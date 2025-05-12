@@ -15,6 +15,8 @@ import {
 } from "@ant-design/icons";
 import { ProjectTagButton } from "./ProjectTagButton";
 import { SiNpm } from "react-icons/si";
+import { HTMLMotionProps, motion } from "framer-motion";
+import { fadeInItem } from "@/lib/motion";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
@@ -23,7 +25,7 @@ const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
 };
 
 export type ProjectCardProps = OverrideProps<
-  React.HTMLAttributes<HTMLDivElement>,
+  HTMLMotionProps<"div">,
   {
     item: ProjectItem;
     currentTag: ProjectTag | null;
@@ -44,7 +46,11 @@ export const ProjectCard = ({
 }: ProjectCardProps) => {
   const Language = useLanguage();
   return (
-    <div
+    <motion.div
+      variants={fadeInItem}
+      initial="hiddenLeft"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
       id={slugify(item.title.english)}
       className={`${className} card bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       {...rest}
@@ -96,6 +102,6 @@ export const ProjectCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

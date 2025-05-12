@@ -3,9 +3,11 @@ import { ClubItem } from "@/types/experience";
 import { ClockCircleOutlined, InstagramOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import Image from "next/image";
+import { HTMLMotionProps, motion } from "framer-motion";
+import { fadeInItem } from "@/lib/motion";
 
 export type ClubCardProps = OverrideProps<
-  React.HTMLAttributes<HTMLDivElement>,
+  HTMLMotionProps<"div">,
   {
     item: ClubItem;
   }
@@ -14,7 +16,11 @@ export type ClubCardProps = OverrideProps<
 export const ClubCard = ({ item, className = "", ...rest }: ClubCardProps) => {
   const Language = useLanguage();
   return (
-    <div
+    <motion.div
+      variants={fadeInItem}
+      initial="hiddenLeft"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
       className={`${className} card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
@@ -44,6 +50,6 @@ export const ClubCard = ({ item, className = "", ...rest }: ClubCardProps) => {
         </div>
         <span>{item.role[Language.Current]}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };

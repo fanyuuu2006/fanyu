@@ -15,13 +15,7 @@ import { ProjectTagButton } from "./ProjectTagButton";
 import { profile } from "../../lib/profile";
 import { Collapse } from "fanyucomponents";
 type ProjectContent = Record<
-  | "Project"
-  | "nofound"
-  | "all"
-  | "categories"
-  | "back"
-  | "count"
-  | ProjectTagCategory,
+  "Project" | "nofound" | "all" | "back" | "count" | ProjectTagCategory,
   string
 >;
 
@@ -32,7 +26,6 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
         Project: "作品集",
         all: "全部",
         nofound: "暫無符合條件的作品",
-        categories: "類別",
         language: "語言",
         roles: "開發角色",
         domains: "領域",
@@ -47,7 +40,6 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
         Project: "Project",
         all: "All",
         nofound: "No matching Project found",
-        categories: "Categories",
         language: "Language",
         roles: "Development Role",
         domains: "Domain Expertise",
@@ -63,7 +55,7 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
 
 export const MainSection = () => {
   const Language = useLanguage();
-  const ProjectContent = getProjectContent(Language.Current);
+  const projectContent = getProjectContent(Language.Current);
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTag, setCurrentTag] = useState<ProjectTag | null>(null);
@@ -79,7 +71,7 @@ export const MainSection = () => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <div className="title font-bold">{ProjectContent.Project}</div>
+        <div className="title font-bold">{projectContent.Project}</div>
         <div className="note flex flex-col w-full gap-2">
           <div className="relative flex flex-nowrap px-4 gap-4 justify-between">
             <button
@@ -88,11 +80,11 @@ export const MainSection = () => {
               }}
               className="btn-text flex items-center w-fit gap-2"
             >
-              {ProjectContent.categories}
+              {currentTag ?? projectContent.all}
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
             </button>
             <span>
-              {ProjectContent.count.replace(
+              {projectContent.count.replace(
                 "{count}",
                 filteredProject.length.toString()
               )}
@@ -111,13 +103,13 @@ export const MainSection = () => {
                   categoriesShow={categoriesShow}
                   setCategoriesShow={setCategoriesShow}
                 >
-                  {ProjectContent.all}
+                  {projectContent.all}
                 </ProjectTagButton>
               </div>
               {Object.entries(projectTagCategories).map(([category, tags]) => (
                 <div key={category} className="flex flex-col gap-2">
                   <span className="font-bold">
-                    {ProjectContent[category as keyof ProjectContent]}
+                    {projectContent[category as keyof ProjectContent]}
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
@@ -140,7 +132,7 @@ export const MainSection = () => {
         </div>
 
         {filteredProject.length === 0 ? (
-          <>{ProjectContent.nofound}</>
+          <>{projectContent.nofound}</>
         ) : (
           filteredProject.map((item: ProjectItem) => (
             <ProjectCard
@@ -154,7 +146,7 @@ export const MainSection = () => {
           ))
         )}
         <Link className="note" href="/#portfolio">
-          <ArrowLeftOutlined /> {ProjectContent.back}
+          <ArrowLeftOutlined /> {projectContent.back}
         </Link>
       </div>
     </section>

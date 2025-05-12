@@ -8,9 +8,10 @@ import {
 } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import Image from "next/image";
-
+import { HTMLMotionProps, motion } from "framer-motion";
+import { fadeInItem } from "@/lib/motion";
 export type EducationCardProps = OverrideProps<
-  React.HTMLAttributes<HTMLDivElement>,
+  HTMLMotionProps<"div">,
   {
     item: EducationItem;
   }
@@ -23,7 +24,11 @@ export const EducationCard = ({
 }: EducationCardProps) => {
   const Language = useLanguage();
   return (
-    <div
+    <motion.div
+      variants={fadeInItem}
+      initial="hiddenLeft"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
       className={`${className} card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
@@ -60,6 +65,6 @@ export const EducationCard = ({
 
         <span>{degreeMap[Language.Current][item.degree]}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };
