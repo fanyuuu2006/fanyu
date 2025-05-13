@@ -88,9 +88,19 @@ button {
   background: var(--background-color-dark);
   border: 1px solid var(--border-color);
   text-align: center;
+  text-decoration: none !important;
 }
 
-.btn:active {
+.btn-primary {
+  cursor: pointer;
+  color: var(--text-color);
+  background: var(--text-color-primary);
+  text-align: center;
+  text-decoration: none !important;
+}
+
+.btn:active,
+.btn-primary:active {
   scale: 0.9;
 }
 
@@ -103,6 +113,7 @@ button {
   border-radius: 12px;
 }
 
+.btn-primary:hover,
 .card-link:hover {
   text-decoration: none;
   transition: 0.1s ease-in-out;
@@ -205,10 +216,6 @@ button {
   .animate-pop {
     animation: Pop 0.2s ease-out;
   }
-
-  .animate-slide-up {
-    animation: slideUp 0.6s forwards;
-  }
 }
 
 @keyframes Pop {
@@ -223,16 +230,5 @@ button {
   100% {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-@keyframes slideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
