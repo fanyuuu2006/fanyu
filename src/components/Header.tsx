@@ -16,7 +16,7 @@ const Routes: {
       chinese: "首頁",
       english: "Home",
     },
-    href: "/#home",
+    href: "/#hero",
   },
   {
     label: {
@@ -70,7 +70,7 @@ export const Header = () => {
 
   return (
     <header>
-      <nav className="flex flex-col" aria-label="主導航">
+      <nav className="flex flex-col" role="navigation" aria-label="主導航">
         <div className="container flex items-center justify-between flex-nowrap px-8 py-2 w-full">
           <Link href="/" className="h-full">
             <Image
@@ -86,6 +86,8 @@ export const Header = () => {
             className="lg:hidden label px-2 py-1"
             onClick={() => setMenuShow((prev) => !prev)}
             aria-label={menuShow ? "關閉選單" : "開啟選單"}
+            aria-expanded={menuShow}
+            aria-controls="mobile-nav"
           >
             <MenuOutlined />
           </button>
@@ -97,7 +99,7 @@ export const Header = () => {
             ))}
           </div>
         </div>
-        <Collapse state={menuShow} className="slide-collapse lg:hidden">
+        <Collapse state={menuShow} className="slide-collapse lg:hidden" id="mobile-nav">
           <div className="flex flex-col w-full note font-bold text-center">
             {Routes.map((item, index) => (
               <Link

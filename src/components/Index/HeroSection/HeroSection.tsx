@@ -14,12 +14,12 @@ import { Toast } from "../../common/Toast";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 
-type HomeContent = Record<
+type HeroContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
   string
 >;
 
-const getHomeContent = (language: LanguageOption): HomeContent =>
+const getHeroContent = (language: LanguageOption): HeroContent =>
   ((
     {
       chinese: {
@@ -36,7 +36,7 @@ const getHomeContent = (language: LanguageOption): HomeContent =>
         coding: "Coding",
         drawing: "Drawing",
       },
-    } as LanguageContent<HomeContent>
+    } as LanguageContent<HeroContent>
   )[language]);
 
 const links: {
@@ -61,36 +61,36 @@ const links: {
   },
 ];
 
-export const HomeSection = () => {
+export const HeroSection = () => {
   const Language = useLanguage();
 
-  const homeContent: HomeContent = getHomeContent(Language.Current);
+  const heroContent: HeroContent = getHeroContent(Language.Current);
 
   const codeLines: string[] = [
     "const FanYu = {",
     `  name: '${profile.name[Language.Current]}',`,
     `  nickname: '${profile.nickname[Language.Current]}',`,
     `  age: ${profile.age()},`,
-    `  hobbies: ['${homeContent.coding}', '${homeContent.drawing}'],`,
+    `  hobbies: ['${heroContent.coding}', '${heroContent.drawing}'],`,
     "  skills: ['TypeScript', 'Next.js', 'Python'],",
     "} as const;",
   ];
 
   return (
-    <section id="home">
-      <div className="container flex flex-wrap justify-center min-h-162">
-        <div className="card-glass flex flex-col items-center justify-center flex-grow p-4 gap-4">
+    <section id="hero">
+      <div className="container flex flex-wrap justify-center min-h-162 gap-0">
+        <div className="card-glass flex flex-col items-center justify-center p-4 gap-4 md:w-24/50">
           <div>
-            <div className="label font-bold">{homeContent.hello}</div>
+            <div className="label font-bold">{heroContent.hello}</div>
             <div className="title font-bold">
-              {homeContent.iAm}
+              {heroContent.iAm}
               {profile.nickname[Language.Current]}❗
             </div>
             <TypeWriterText
               className="note"
-              speed={homeContent.intro.length * 1.5}
+              speed={heroContent.intro.length * 1.5}
             >
-              {homeContent.intro}
+              {heroContent.intro}
             </TypeWriterText>
             <div className="label flex gap-4">
               {links.map((item) => (
@@ -101,7 +101,7 @@ export const HomeSection = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center flex-grow">
+        <div className="flex flex-col items-center justify-center md:w-24/50">
           <motion.pre
             variants={fadeInItem}
             initial="hiddenBottom"

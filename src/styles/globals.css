@@ -60,12 +60,12 @@ a:hover {
   text-decoration: underline 1px;
 }
 
-#home {
+#hero {
   position: relative;
   background: url("/cbg.jpg") center/cover no-repeat;
 }
 
-#home::before {
+#hero::before {
   content: "";
   position: absolute;
   inset: 0;
