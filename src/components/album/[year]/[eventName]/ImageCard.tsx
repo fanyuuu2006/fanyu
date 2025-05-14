@@ -29,7 +29,7 @@ export const ImageCard = ({
   return (
     <motion.div
       variants={fadeInItem}
-      className="relative p-[1px] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group"
+      className="relative border border-black w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group"
     >
       <LazyImage
         src={src}
