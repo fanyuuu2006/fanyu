@@ -34,9 +34,7 @@ export const ImageCard = ({
       <LazyImage
         src={src}
         className="title bg-[#888] cursor-pointer select-none w-full aspect-square object-cover group-hover:outline"
-        onClick={() => {
-          Modal.Open();
-        }}
+        onClick={Modal.Open}
       />
       <Modal.Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}
