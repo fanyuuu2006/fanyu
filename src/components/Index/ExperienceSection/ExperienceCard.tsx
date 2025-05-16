@@ -53,7 +53,7 @@ export const ExperienceCard = ({
             {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
           </span>
           {item.links && (
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-x-2">
               {item.links.map((link) => (
                 <OutsideLink
                   key={link.href}

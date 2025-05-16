@@ -5,29 +5,6 @@ import {
   LinkOutlined,
 } from "@ant-design/icons";
 
-// export const degreeMap: LanguageContent<Record<DegreeOption, string>> = {
-//   chinese: {
-//     [DegreeOption.InProgress]: "就讀中",
-//     [DegreeOption.Bachelor]: "學士",
-//     [DegreeOption.Master]: "碩士",
-//     [DegreeOption.Doctor]: "博士",
-//     [DegreeOption.HighSchool]: "高中畢業",
-//     [DegreeOption.VocationalHighSchool]: "高職畢業",
-//     [DegreeOption.JuniorHigh]: "國中畢業",
-//     [DegreeOption.Elementary]: "國小畢業",
-//   },
-//   english: {
-//     [DegreeOption.InProgress]: "In Progress",
-//     [DegreeOption.Bachelor]: "Bachelor's",
-//     [DegreeOption.Master]: "Master's",
-//     [DegreeOption.Doctor]: "Doctorate",
-//     [DegreeOption.HighSchool]: "High School Diploma",
-//     [DegreeOption.VocationalHighSchool]: "Vocational High School Diploma",
-//     [DegreeOption.JuniorHigh]: "Junior High School Diploma",
-//     [DegreeOption.Elementary]: "Elementary School Diploma",
-//   },
-// };
-
 const NTUST: ExperienceItem = {
   name: {
     chinese: "國立臺灣科技大學",
