@@ -113,7 +113,7 @@ export const SkillsSection = () => {
                   <motion.div
                     key={item.title}
                     variants={fadeInItem}
-                    className="w-1/5 p-2 md:w-16"
+                    className="p-2 w-1/5 md:w-1/10 lg:w-1/15"
                   >
                     <Tooltip title={item.title}>
                       <Image
