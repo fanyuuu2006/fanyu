@@ -1,19 +1,23 @@
 import { useLanguage } from "@/context/LanguageContext";
-import { ClubItem } from "@/types/experience";
-import { ClockCircleOutlined, InstagramOutlined } from "@ant-design/icons";
+import { ExperienceItem } from "@/types/experience";
+import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import Image from "next/image";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem } from "@/lib/motion";
 
-export type ClubCardProps = OverrideProps<
+export type ExperienceCardProps = OverrideProps<
   HTMLMotionProps<"div">,
   {
-    item: ClubItem;
+    item: ExperienceItem;
   }
 >;
 
-export const ClubCard = ({ item, className = "", ...rest }: ClubCardProps) => {
+export const ExperienceCard = ({
+  item,
+  className = "",
+  ...rest
+}: ExperienceCardProps) => {
   const Language = useLanguage();
   return (
     <motion.div
@@ -38,17 +42,32 @@ export const ClubCard = ({ item, className = "", ...rest }: ClubCardProps) => {
             {item.organization.name[Language.Current]}
           </span>
         )}
+        {item.department && (
+          <span className="note font-bold opacity-75">
+            {item.department[Language.Current]}
+          </span>
+        )}
         <div className="flex flex-col hint opacity-75 ">
           <span className="flex gap-2">
             <ClockCircleOutlined />
             {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
           </span>
-          <OutsideLink href={item.href} className="w-fit flex gap-2">
-            <InstagramOutlined />
-            {item.href}
-          </OutsideLink>
+          {item.links && (
+            <div className="flex gap-2">
+              {item.links.map((link) => (
+                <OutsideLink
+                  key={link.href}
+                  href={link.href}
+                  className="w-fit flex gap-2"
+                >
+                  {link.icon}
+                  {link[Language.Current]}
+                </OutsideLink>
+              ))}
+            </div>
+          )}
         </div>
-        <span>{item.role[Language.Current]}</span>
+        {item.role && <span>{item.role[Language.Current]}</span>}
       </div>
     </motion.div>
   );

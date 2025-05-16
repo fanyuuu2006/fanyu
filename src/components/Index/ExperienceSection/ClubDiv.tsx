@@ -1,7 +1,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { profile } from "@/lib/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { ClubCard } from "./ClubCard";
+import { ExperienceCard } from './ExperienceCard';
 
 type ClubContent = Record<"club", string>;
 
@@ -31,7 +31,7 @@ export const ClubDiv = ({ className = "", ...rest }: ClubDivProps) => {
       <div className="content font-bold ">{ClubContent.club}</div>
       <div className='flex flex-col w-full "gap-4'>
         {profile.experience.club.map((item) => (
-          <ClubCard key={item.name.english} item={item} />
+          <ExperienceCard key={item.name.english} item={item} />
         ))}
       </div>
     </div>
