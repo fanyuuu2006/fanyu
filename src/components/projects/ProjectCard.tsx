@@ -47,11 +47,11 @@ export const ProjectCard = ({
   return (
     <Card
       id={slugify(item.title.english)}
-      className={`${className} bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
+      className={`${className} shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       {...rest}
     >
       <Image
-        className="bg-[#fff] bordered h-25 w-fit  rounded-full"
+        className="bg-[#fff] border border-[var(--border-color)] h-25 w-fit  rounded-full"
         src={item.imageSrc}
         alt={`${item.title.english} icon`}
         width={300}

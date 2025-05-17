@@ -44,7 +44,7 @@ export default function RootLayout({
       <body>
         <LanguageProvider>
           <Header />
-          <main>{children}</main>
+          <main className="mt-24">{children}</main>
           <LanguageSwitchButton />
           <Footer />
         </LanguageProvider>

@@ -27,7 +27,7 @@ export const ProjectLinkCard = ({
         {...rest}
       >
         <Image
-          className="bg-[#fff] bordered w-3/5 h-auto rounded-full object-cover"
+          className="bg-[#fff] border border-[var(--border-color)] w-3/5 h-auto rounded-full object-cover"
           src={item.imageSrc}
           alt={`${item.title.english} icon`}
           width={300}
