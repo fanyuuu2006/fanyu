@@ -209,7 +209,7 @@ const KNSH: ExperienceItem = {
 const LFV: ExperienceItem = {
   name: {
     chinese: "六福村主題遊樂園",
-    english: "Leofoo Village Theme Park",
+    english: "Leofoo Village Theme Paradise",
   },
   role: {
     chinese: "臨時工讀生",
