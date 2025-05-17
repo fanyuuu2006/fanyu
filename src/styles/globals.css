@@ -56,10 +56,6 @@ footer {
   background-color: var(--background-color-dark);
 }
 
-a:hover {
-  text-decoration: underline 1px;
-}
-
 #hero {
   position: relative;
   background: url("/cbg.jpg") center/cover no-repeat;
@@ -108,21 +104,10 @@ button {
   cursor: pointer;
 }
 
-.card {
-  background-color: var(--background-color-dark);
-  border-radius: 12px;
-}
-
-.btn-primary:hover,
-.card-link:hover {
+.btn-primary:hover {
   text-decoration: none;
   transition: 0.1s ease-in-out;
   transform: scale(1.05);
-}
-
-.card-glass {
-  background-color: transparent;
-  border-radius: 12px;
 }
 
 .bordered {
@@ -186,11 +171,6 @@ button {
 
   .hint {
     font-size: 14px;
-  }
-
-  .card,
-  .card-glass {
-    width: 100% !important;
   }
 }
 

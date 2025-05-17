@@ -14,6 +14,7 @@ import { ProjectCard } from "./ProjectCard";
 import { ProjectTagButton } from "./ProjectTagButton";
 import { profile } from "../../lib/profile";
 import { Collapse } from "fanyucomponents";
+import { Card } from "../common/Card";
 type ProjectContent = Record<
   "Project" | "nofound" | "all" | "back" | "count" | ProjectTagCategory,
   string
@@ -78,7 +79,7 @@ export const MainSection = () => {
               onClick={() => {
                 setCategoriesShow((prev) => !prev);
               }}
-              className="btn-text flex items-center w-fit gap-2"
+              className="flex items-center w-fit gap-2"
             >
               {currentTag ?? projectContent.all}
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
@@ -94,7 +95,7 @@ export const MainSection = () => {
             className="slide-collapse absolute z-10 mt-8"
             state={categoriesShow}
           >
-            <div className="flex flex-col p-4 gap-2 card bordered">
+            <Card className="flex flex-col p-4 gap-2 bordered">
               <div>
                 <ProjectTagButton
                   tag={null}
@@ -127,7 +128,7 @@ export const MainSection = () => {
                   </div>
                 </div>
               ))}
-            </div>
+            </Card>
           </Collapse>
         </div>
 

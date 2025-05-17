@@ -23,7 +23,7 @@ export const ProjectLinkCard = ({
   return (
       <Link
         href={`/projects/#${slugify(item.title.english)}`}
-        className={`${className} card card-link bordered shadow flex flex-col items-center p-4 gap-4`}
+        className={`${className} flex flex-col items-center p-4 gap-4`}
         {...rest}
       >
         <Image

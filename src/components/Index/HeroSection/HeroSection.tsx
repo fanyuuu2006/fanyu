@@ -13,6 +13,7 @@ import { OutsideLink, TypeWriterText } from "fanyucomponents";
 import { Toast } from "../../common/Toast";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { Card } from "@/components/common/Card";
 
 type HeroContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
@@ -79,7 +80,7 @@ export const HeroSection = () => {
   return (
     <section id="hero">
       <div className="container flex flex-wrap justify-center min-h-162 gap-0">
-        <div className="card-glass flex flex-col items-center justify-center p-4 gap-4 md:w-24/50">
+        <div className="flex flex-col items-center justify-center p-4 gap-4 w-full md:w-24/50">
           <div>
             <div className="label font-bold">{heroContent.hello}</div>
             <div className="title font-bold">
@@ -101,13 +102,13 @@ export const HeroSection = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center md:w-24/50">
-          <motion.pre
+        <div className="flex flex-col items-center justify-center w-full md:w-24/50">
+          <Card
             variants={fadeInItem}
             initial="hiddenBottom"
             whileInView="show"
             viewport={{ once: true }}
-            className={`card shadow bordered p-6 overflow-auto`}
+            className={`shadow bordered p-6 overflow-auto`}
           >
             <div className="hint flex">
               <span>TypeScript</span>
@@ -131,7 +132,7 @@ export const HeroSection = () => {
                 <CopyOutlined />
               </button>
             </div>
-            <motion.div
+            <motion.pre
               variants={staggerContainer}
               initial="hiddenLeft"
               whileInView="show"
@@ -149,8 +150,8 @@ export const HeroSection = () => {
                   </motion.code>
                 </div>
               ))}
-            </motion.div>
-          </motion.pre>
+            </motion.pre>
+          </Card>
         </div>
       </div>
     </section>

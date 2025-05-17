@@ -3,11 +3,11 @@ import { ExperienceItem } from "@/types/experience";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import Image from "next/image";
-import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem } from "@/lib/motion";
+import { Card, CardProps } from "@/components/common/Card";
 
 export type ExperienceCardProps = OverrideProps<
-  HTMLMotionProps<"div">,
+  CardProps,
   {
     item: ExperienceItem;
   }
@@ -20,12 +20,12 @@ export const ExperienceCard = ({
 }: ExperienceCardProps) => {
   const Language = useLanguage();
   return (
-    <motion.div
+    <Card
       variants={fadeInItem}
       initial="hiddenLeft"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
-      className={`${className} card bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
+      className={`${className} bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
       <Image
@@ -35,7 +35,7 @@ export const ExperienceCard = ({
         width={600}
         height={600}
       />
-      <div className="card-glass flex flex-col flex-grow gap-1">
+      <div className="flex flex-col gap-1 w-full">
         <span className="content font-bold">{item.name[Language.Current]}</span>
         {item.organization && (
           <span className="note font-bold opacity-75">
@@ -69,6 +69,6 @@ export const ExperienceCard = ({
         </div>
         {item.role && <span>{item.role[Language.Current]}</span>}
       </div>
-    </motion.div>
+    </Card>
   );
 };
