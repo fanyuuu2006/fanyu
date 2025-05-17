@@ -241,6 +241,7 @@ const HXL: ExperienceItem = {
     chinese: "工讀生",
     english: "Part-Time Worker",
   },
+  organization: NTUST,
   duration: { start: "2024-10", end: null },
   imageSrc: "/Experience/Work/HXL.jpg",
   links: [

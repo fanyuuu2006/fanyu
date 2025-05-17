@@ -25,7 +25,7 @@ const getHeroContent = (language: LanguageOption): HeroContent =>
       chinese: {
         hello: "哈囉，",
         iAm: "我是",
-        intro: "一名熱愛寫程式的大學生開發者。",
+        intro: "一名熱愛寫程式的學生開發者。",
         coding: "寫程式",
         drawing: "繪畫",
       },

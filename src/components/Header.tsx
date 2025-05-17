@@ -3,7 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent } from "@/types/language";
 import Link from "next/link";
 import Image from "next/image";
-import { MenuOutlined } from "@ant-design/icons";
+import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { Collapse } from "fanyucomponents";
 
@@ -89,7 +89,7 @@ export const Header = () => {
             aria-expanded={menuShow}
             aria-controls="mobile-nav"
           >
-            <MenuOutlined />
+            {menuShow ? <CloseOutlined /> : <MenuOutlined />}
           </button>
           <div className="hidden lg:flex note font-bold gap-6">
             {Routes.map((item, index) => (
@@ -99,7 +99,11 @@ export const Header = () => {
             ))}
           </div>
         </div>
-        <Collapse state={menuShow} className="slide-collapse lg:hidden" id="mobile-nav">
+        <Collapse
+          state={menuShow}
+          className="slide-collapse lg:hidden"
+          id="mobile-nav"
+        >
           <div className="flex flex-col w-full note font-bold text-center">
             {Routes.map((item, index) => (
               <Link
