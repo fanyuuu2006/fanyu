@@ -154,7 +154,7 @@ const NTUST_BGC: ExperienceItem = {
 
 const LFR: ExperienceItem = {
   name: {
-    chinese: "六福莊",
+    chinese: "六福莊生態渡假旅館",
     english: "Leofoo Resort",
   },
   role: {
@@ -208,8 +208,8 @@ const KNSH: ExperienceItem = {
 
 const LFV: ExperienceItem = {
   name: {
-    chinese: "六福村",
-    english: "Leofoo Village",
+    chinese: "六福村主題遊樂園",
+    english: "Leofoo Village Theme Park",
   },
   role: {
     chinese: "臨時工讀生",

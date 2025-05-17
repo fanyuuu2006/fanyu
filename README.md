@@ -1,75 +1,64 @@
-# 飯魚的個人網站
+# FanYu 個人網站（Portfolio Website）
 
-1. Home 首頁
+這是一個由 [FanYu (范余振富)](https://fanyu.vercel.app) 所開發的個人網站，使用 [Next.js](https://nextjs.org/) 和 [TypeScript](https://www.typescriptlang.org/) 建構，並整合了多語言切換、Google Drive 相簿 API、作品集篩選、社群聯繫、SEO 結構化資料、動畫效果等功能。
 
-2. About Me 關於我
+## 🔥 線上預覽
 
-   更詳細介紹你是誰、背景、個人特質、價值觀等
+👉 [https://fanyu.vercel.app](https://fanyu.vercel.app)
 
-   可以放：
+## 📌 功能總覽
 
-   來自哪裡
+- Hero 區塊介紹與社群連結
+- 關於我：多段自我敘述
+- 技能展示：依分類展示技能圖示
+- 作品集區塊：隨機精選＋篩選頁
+- 學經歷切換區塊（Education / Club / Work）
+- Google Drive 相簿整合（年份 / 活動 / 圖片）
+- 聯絡方式整理（社群 / 即時通訊）
+- 中英文語言切換
+- 多項動畫呈現（framer-motion）
+- SEO 結構化資料與社群分享標籤（`<meta>` / Open Graph / Twitter）
 
-   喜歡什麼
+## 🛠 使用技術
 
-   目前在做什麼
+| 類別      | 技術堆疊                        |
+| --------- | ------------------------------- |
+| 框架      | Next.js 14 (App Router)         |
+| 語言      | TypeScript                      |
+| 樣式      | Tailwind CSS + 自訂 CSS 變數    |
+| 動畫      | framer-motion                   |
+| 圖片處理  | Google Drive + 自建 Image Proxy |
+| 社群圖示  | Ant Design Icons + react-icons  |
+| 輔助元件  | fanyucomponents（自訂組件庫）   |
+| 通知      | sweetalert2 (Toast)             |
+| API 整合  | Next.js API Route               |
+| Lazy 圖片 | 自訂 LazyImage 元件             |
 
-   一段個人小故事
+## 🌐 語系切換
 
-3. Skills 技能
-   可以用 icon + bar 或是 badge 樣式展示你會的技術
+語系：中文、英文
 
-   建議分類顯示：
+方法：Context API 控管並對每段內容提供 LanguageContent 雙語對應
 
-   前端（HTML, CSS, JS, React, Next.js）
+可切換內容：頁面標題、說明文字、Toast、按鈕文字、錯誤頁...
 
-   後端（Node.js, Express）
+## 📦 安裝與開發
 
-   其他（Git, Figma, Python, LINE Bot）
+``` bash
+# 安裝依賴
+npm install
 
-4. Projects / Portfolio 專案作品
-   展示你做過的東西，像是學期專題、Side Project、Game、工具...
+# 開發模式
+npm run dev
 
-   每個專案可以簡單介紹：
+# 編譯建置
+npm run build
 
-   名稱、時間
+# 啟動產線伺服器
+npm start
 
-   用了什麼技術
+```
 
-   做什麼功能、為什麼做
+📜 授權
 
-   Demo / GitHub 連結
-
-5. Resume / Experience 經歷
-   如果你想做履歷頁，可以列出：
-
-   學歷
-
-   社團/營隊參與
-
-   實習/打工經驗
-
-   得獎、證照等
-
-6. Blog / Thoughts（可選）
-   如果你喜歡分享，可以加一區 Blog / 想法筆記
-
-7. Contact 聯絡我
-   列出你的聯絡方式或加個表單
-
-   常見項目：
-
-   Email
-
-   GitHub / Instagram / LinkedIn
-
-   LINE Bot 連結（如果有）
-
-8. Footer
-   最下方可放：
-
-    版權宣告（© 2025 飯魚）
-
-    社群 icon
-
-    備註小語
+MIT License

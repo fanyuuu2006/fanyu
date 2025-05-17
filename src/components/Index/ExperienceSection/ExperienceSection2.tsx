@@ -44,7 +44,6 @@ export const ExperienceSection = () => {
           {experienceTabs.map((key) => (
             <button
               role="tab"
-              tabIndex={0}
               aria-selected={Tab === key}
               aria-controls={key}
               aria-label={experienceContent[key]}
