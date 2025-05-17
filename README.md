@@ -50,13 +50,6 @@ npm install
 
 # 開發模式
 npm run dev
-
-# 編譯建置
-npm run build
-
-# 啟動產線伺服器
-npm start
-
 ```
 
 📜 授權
