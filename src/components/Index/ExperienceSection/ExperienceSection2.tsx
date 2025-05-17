@@ -38,7 +38,7 @@ export const ExperienceSection = () => {
         <div className="title font-bold">{experienceContent.experience}</div>
         <div
           role="tablist"
-          className="w-full bg-[var(--background-color-dark)] flex justify-between gap-4 p-2"
+          className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between gap-4 p-2"
         >
           {Object.keys(profile.experience).map((key) => (
             <button
@@ -48,8 +48,8 @@ export const ExperienceSection = () => {
               aria-controls={key}
               aria-label={experienceContent[key as ExperienceTab]}
               key={key}
-              className={`content text-center font-bold flex-1 transition-all duration-200 ${
-                Tab === key ? "bg-[var(--background-color)] rounded-lg" : ""
+              className={`content text-center font-bold rounded-lg flex-1 p-2 transition-all duration-200 ${
+                Tab === key ? "bg-[var(--background-color)]" : ""
               }`}
               onClick={() => {
                 setTab(key as ExperienceTab);
