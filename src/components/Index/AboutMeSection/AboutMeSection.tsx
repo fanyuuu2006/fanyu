@@ -45,7 +45,7 @@ export const AboutMeSection = () => {
         <div className="title font-bold text-center">
           {aboutMeContent.aboutMe}
         </div>
-        <div className="overflow-hidden flex items-center gap-4 flex-col md:flex-row">
+        <div className="overflow-hidden flex items-center gap-4 flex-col lg:flex-row">
           <motion.div
             variants={fadeInItem}
             initial="hiddenLeft"
