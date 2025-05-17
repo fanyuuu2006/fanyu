@@ -23,6 +23,7 @@ export default function RootLayout({
               "@type": "Person",
               name: "Fan-Yu Zhen-Fu",
               alternateName: "FanYu",
+              birthDate: "2006-05-26",
               url: "https://fanyu.vercel.app",
               image: "https://fanyu.vercel.app/GameShow.jpg",
               sameAs: [
@@ -30,11 +31,12 @@ export default function RootLayout({
                 "https://www.instagram.com/fan._.yuuu",
                 "https://www.facebook.com/share/1MpEQ1faFk/",
               ],
-              jobTitle: "Student Developer",
-              worksFor: {
-                "@type": "Organization",
+              jobTitle: "FullStack Developer",
+              alumniOf: {
+                "@type": "CollegeOrUniversity",
                 name: "National Taiwan University of Science and Technology",
               },
+              knowsAbout: ["Web Development", "TypeScript", "React", "Python"],
             }),
           }}
         />
