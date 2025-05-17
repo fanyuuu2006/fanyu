@@ -48,7 +48,7 @@ export const ExperienceSection = () => {
               aria-controls={key}
               aria-label={experienceContent[key as ExperienceTab]}
               key={key}
-              className={`content text-center font-bold rounded-lg flex-1 p-2 transition-all duration-200 ${
+              className={`content font-bold rounded-lg flex-1 p-2 transition-all duration-200 ${
                 Tab === key ? "bg-[var(--background-color)]" : ""
               }`}
               onClick={() => {

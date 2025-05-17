@@ -6,8 +6,10 @@ import { Tooltip } from "antd";
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { SkillCategory } from "@/types/skill";
+import { skillIcons } from "@/lib/skill";
+import { profile } from "@/lib/profile";
 
-type SkillCategory = "frontend" | "backend" | "devtools";
 type SkillsContent = Record<"skills" | SkillCategory, string>;
 
 const getSkillsContent = (language: LanguageOption): SkillsContent =>
@@ -28,64 +30,6 @@ const getSkillsContent = (language: LanguageOption): SkillsContent =>
     } as LanguageContent<SkillsContent>
   )[language]);
 
-const skillItems: Record<SkillCategory, { src: string; title: string }[]> = {
-  frontend: [
-    {
-      title: "TypeScript",
-      src: "/Skills/typescript.svg",
-    },
-    {
-      title: "JavaScript",
-      src: "/Skills/javascript.svg",
-    },
-
-    {
-      title: "HTML 5",
-      src: "/Skills/html.svg",
-    },
-    {
-      title: "CSS 3",
-      src: "/Skills/css.svg",
-    },
-    {
-      title: "React",
-      src: "/Skills/react.svg",
-    },
-    {
-      title: "Next.js",
-      src: "/Skills/nextjs.svg",
-    },
-    {
-      title: "Ant Design",
-      src: "/Skills/antdesign.svg",
-    },
-    {
-      title: "Tailwind CSS",
-      src: "/Skills/tailwindcss.svg",
-    },
-    {
-      title: "ESLint",
-      src: "/Skills/eslint.svg",
-    },
-  ],
-  backend: [
-    { title: "Node.js", src: "/Skills/nodejs.svg" },
-    { title: "Express", src: "/Skills/express.svg" },
-    { title: "Python", src: "/Skills/python.svg" },
-    { title: "Flask", src: "/Skills/flask.svg" },
-  ],
-  devtools: [
-    {
-      title: "Git",
-      src: "/Skills/git.svg",
-    },
-    {
-      title: "Visual Studio Code",
-      src: "/Skills/vscode.svg",
-    },
-  ],
-};
-
 export const SkillsSection = () => {
   const Language = useLanguage();
   const skillsContent = getSkillsContent(Language.Current);
@@ -100,10 +44,11 @@ export const SkillsSection = () => {
           viewport={{ once: true }}
           className="flex flex-col w-full gap-4"
         >
-          {Object.entries(skillItems).map(([category, items]) => (
+          {Object.entries(profile.skills).map(([category, items]) => (
             <motion.div variants={fadeInItem} key={category}>
-              <div className="content font-bold">
-                {skillsContent[category as keyof SkillsContent]}:
+              <div className="content font-bold flex items-center gap-2">
+                {skillIcons[category as SkillCategory]}
+                {skillsContent[category as SkillCategory]}:
               </div>
               <motion.div
                 variants={staggerContainer}

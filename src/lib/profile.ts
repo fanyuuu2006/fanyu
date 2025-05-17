@@ -1,6 +1,7 @@
 import { ContactData } from "./contact";
 import { experience } from "./experience";
 import { projects } from "./projects";
+import { skills } from "./skill";
 
 export const profile = {
   name: {
@@ -34,4 +35,5 @@ export const profile = {
     projects,
   },
   contact: ContactData,
+  skills,
 } as const;
