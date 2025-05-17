@@ -6,34 +6,31 @@ import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Collapse } from "fanyucomponents";
 import { ExperienceCard } from "./ExperienceCard";
 
-type EducationContent = Record<"eduction" | "viewAll" | "collapse", string>;
+type WorkContent = Record<"work" | "viewAll" | "collapse", string>;
 
-const getEducationContent = (language: LanguageOption): EducationContent =>
+const getWorkContent = (language: LanguageOption): WorkContent =>
   ((
     {
       chinese: {
-        eduction: "學歷",
+        work: "工作",
         viewAll: "查看全部",
         collapse: "收回",
       },
       english: {
-        eduction: "Education",
+        work: "Work",
         viewAll: "View all",
         collapse: "Collapse",
       },
-    } as LanguageContent<EducationContent>
+    } as LanguageContent<WorkContent>
   )[language]);
 
-export type EducationDivProps = React.HTMLAttributes<HTMLDivElement>;
+export type WorkDivProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const EducationDiv = ({
-  className = "",
-  ...rest
-}: EducationDivProps) => {
+export const WorkDiv = ({ className = "", ...rest }: WorkDivProps) => {
   const Language = useLanguage();
-  const educationContent = getEducationContent(Language.Current);
-  const nowEducationItem = profile.experience.education[0];
-  const pastEducationItems = profile.experience.education.slice(1);
+  const workContent = getWorkContent(Language.Current);
+  const nowWorkItem = profile.experience.work[0];
+  const pastWorkItems = profile.experience.work.slice(1);
 
   const [allShow, setAllShow] = useState<boolean>(false);
   return (
@@ -41,14 +38,14 @@ export const EducationDiv = ({
       className={`flex flex-col w-full items-start gap-4 ${className} `}
       {...rest}
     >
-      <div className="content font-bold ">{educationContent.eduction}</div>
+      <div className="content font-bold ">{workContent.work}</div>
       <div className={`flex flex-col w-full ${allShow ? "gap-4" : ""}`}>
-        <ExperienceCard item={nowEducationItem} />
+        <ExperienceCard item={nowWorkItem} />
         <Collapse
           state={allShow}
           className="flex flex-col w-full gap-4 slide-collapse"
         >
-          {pastEducationItems.map((item) => (
+          {pastWorkItems.map((item) => (
             <ExperienceCard key={item.name.english} item={item} />
           ))}
         </Collapse>
@@ -62,11 +59,11 @@ export const EducationDiv = ({
         >
           {allShow ? (
             <>
-              <UpOutlined /> {educationContent.collapse}
+              <UpOutlined /> {workContent.collapse}
             </>
           ) : (
             <>
-              <DownOutlined /> {educationContent.viewAll}
+              <DownOutlined /> {workContent.viewAll}
             </>
           )}
         </button>

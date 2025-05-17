@@ -16,7 +16,7 @@ export type ExperienceItem = {
   organization?: ExperienceItem;
   role?: LanguageContent<string>;
   duration: Duration;
-  description?: string;
+  description?: LanguageContent<string>;
   imageSrc: string;
   links?: LinkContent<string>[];
   skills?: string[];

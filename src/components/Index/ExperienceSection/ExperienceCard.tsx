@@ -31,7 +31,7 @@ export const ExperienceCard = ({
       <Image
         src={item.imageSrc}
         alt={item.name.english}
-        className="h-30 w-fit bg-[#fff] rounded-full bordered"
+        className="h-30 w-30 object-cover bg-[#fff] rounded-full bordered"
         width={600}
         height={600}
       />
