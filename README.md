@@ -54,4 +54,4 @@ npm run dev
 
 📜 授權
 
-MIT License
+[MIT License](https://github.com/fanyuuu2006/fanyu/blob/main/LICENSE)
