@@ -6,8 +6,9 @@ import { useState } from "react";
 import { ExperienceCard } from "./ExperienceCard";
 import { AnimatePresence, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { ExperienceTab } from "@/types/experience";
+import { experienceTabIcons, experienceTabs } from "@/lib/experience";
 
-type ExperienceTab = keyof typeof profile.experience;
 type ExperienceContent = Record<"experience" | ExperienceTab, string>;
 const getExperienceContent = (language: LanguageOption): ExperienceContent =>
   ((
@@ -40,22 +41,23 @@ export const ExperienceSection = () => {
           role="tablist"
           className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between gap-4 p-2"
         >
-          {Object.keys(profile.experience).map((key) => (
+          {experienceTabs.map((key) => (
             <button
               role="tab"
               tabIndex={0}
               aria-selected={Tab === key}
               aria-controls={key}
-              aria-label={experienceContent[key as ExperienceTab]}
+              aria-label={experienceContent[key]}
               key={key}
-              className={`content font-bold rounded-lg flex-1 p-2 transition-all duration-200 ${
+              className={`content font-bold rounded-lg flex flex-1 items-center justify-center p-2 gap-2 transition-all duration-200 ${
                 Tab === key ? "bg-[var(--background-color)]" : ""
               }`}
               onClick={() => {
-                setTab(key as ExperienceTab);
+                setTab(key);
               }}
             >
-              {experienceContent[key as ExperienceTab]}
+              {experienceTabIcons[key]}
+              {experienceContent[key]}
             </button>
           ))}
         </div>

@@ -1,3 +1,4 @@
+import { experienceTabs } from "@/lib/experience";
 import { LanguageContent } from "./language";
 
 export type Duration = {
@@ -22,3 +23,5 @@ export type ExperienceItem = {
   skills?: string[];
   tags?: string[];
 };
+
+export type ExperienceTab = (typeof experienceTabs)[number];

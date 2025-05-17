@@ -65,7 +65,7 @@ export const skills: Record<SkillCategory, { src: string; title: string }[]> = {
   ],
 };
 
-export const skillIcons: Record<SkillCategory, React.ReactNode> = {
+export const skillCategoryIcons: Record<SkillCategory, React.ReactNode> = {
   frontend: <LayoutOutlined />,
   backend: <DatabaseOutlined />,
   devtools: <ToolOutlined />,

@@ -7,7 +7,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 import { SkillCategory } from "@/types/skill";
-import { skillIcons } from "@/lib/skill";
+import { skillCategoryIcons } from "@/lib/skill";
 import { profile } from "@/lib/profile";
 
 type SkillsContent = Record<"skills" | SkillCategory, string>;
@@ -47,7 +47,7 @@ export const SkillsSection = () => {
           {Object.entries(profile.skills).map(([category, items]) => (
             <motion.div variants={fadeInItem} key={category}>
               <div className="content font-bold flex items-center gap-2">
-                {skillIcons[category as SkillCategory]}
+                {skillCategoryIcons[category as SkillCategory]}
                 {skillsContent[category as SkillCategory]}:
               </div>
               <motion.div

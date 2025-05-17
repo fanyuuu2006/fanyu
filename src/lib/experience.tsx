@@ -1,4 +1,5 @@
-import { ExperienceItem } from "../types/experience";
+import { LuBriefcase, LuGraduationCap, LuUsers } from "react-icons/lu";
+import { ExperienceItem, ExperienceTab } from "../types/experience";
 import {
   EnvironmentOutlined,
   InstagramOutlined,
@@ -254,11 +255,16 @@ const HXL: ExperienceItem = {
   ],
 };
 
-export const experience: Record<
-  "education" | "club" | "work",
-  ExperienceItem[]
-> = {
+export const experienceTabs = ["education", "club", "work"] as const;
+
+export const experience: Record<ExperienceTab, ExperienceItem[]> = {
   education: [NTUST, CPSHS, FGJH, GSES],
   club: [NTUST_BGC],
   work: [HXL, LFV, KNSH, LFR],
+};
+
+export const experienceTabIcons: Record<ExperienceTab, React.ReactNode> = {
+  education: <LuGraduationCap />,
+  club: <LuUsers />,
+  work: <LuBriefcase />,
 };

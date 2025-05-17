@@ -10,7 +10,7 @@ import {
   YoutubeOutlined,
 } from "@ant-design/icons";
 import { FaThreads, FaLine } from "react-icons/fa6";
-import { SiNpm, SiWakatime } from "react-icons/si";
+import { SiWakatime } from "react-icons/si";
 export const contactCategorieMap: LanguageContent<
   Record<ContactCategory, string>
 > = {
@@ -55,12 +55,6 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       icon: <YoutubeOutlined />,
       id: "閃火",
       href: "https://www.youtube.com/@fan_yuuu",
-    },
-    {
-      label: "NPM",
-      icon: <SiNpm />,
-      id: "fan._.yuuu",
-      href: "https://www.npmjs.com/~fan._.yuuu",
     },
     {
       label: "Facebook",
