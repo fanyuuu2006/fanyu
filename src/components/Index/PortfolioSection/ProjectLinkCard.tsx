@@ -27,7 +27,7 @@ export const ProjectLinkCard = ({
         {...rest}
       >
         <Image
-          className="title bg-[#fff] bordered w-3/5 h-auto rounded-full object-cover"
+          className="bg-[#fff] bordered w-3/5 h-auto rounded-full object-cover"
           src={item.imageSrc}
           alt={`${item.title.english} icon`}
           width={300}
@@ -48,7 +48,7 @@ export const ProjectLinkCard = ({
             <div className="flex flex-wrap gap-2">
               {item.tags.map((tag) => (
                 <span
-                  className="rounded-sm whitespace-nowrap px-2 bg-[var(--background-color)]"
+                  className="rounded-sm whitespace-nowrap px-2 bg-[var(--background-color-dark)] border border-[var(--border-color)]"
                   key={tag}
                 >
                   {tag}

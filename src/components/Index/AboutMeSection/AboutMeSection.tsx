@@ -54,7 +54,7 @@ export const AboutMeSection = () => {
             className="flex justify-center items-center flex-1"
           >
             <Image
-              className="bordered w-4/5 h-auto rounded-xl"
+              className="border border-[var(--border-color)] shadow w-4/5 h-auto rounded-xl"
               alt="頭貼"
               src="/GameShow.jpg"
               width={1000}

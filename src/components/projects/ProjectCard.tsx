@@ -56,7 +56,7 @@ export const ProjectCard = ({
       {...rest}
     >
       <Image
-        className="title bg-[#fff] bordered h-20 w-fit  rounded-full"
+        className="bg-[#fff] bordered h-25 w-fit  rounded-full"
         src={item.imageSrc}
         alt={`${item.title.english} icon`}
         width={300}

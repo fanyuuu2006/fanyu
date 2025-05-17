@@ -25,7 +25,7 @@ export const ExperienceCard = ({
       initial="hiddenLeft"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
-      className={`${className} bordered w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
+      className={`${className} w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
       <Image
@@ -58,7 +58,7 @@ export const ExperienceCard = ({
                 <OutsideLink
                   key={link.href}
                   href={link.href}
-                  className="w-fit flex gap-2"
+                  className="w-fit flex gap-2 items-center"
                 >
                   {link.icon}
                   {link[Language.Current]}

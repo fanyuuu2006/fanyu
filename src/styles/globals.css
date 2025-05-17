@@ -7,14 +7,14 @@
 }
 
 :root {
-  --background-color: #171c4e;
-  --background-color-dark: #05053b;
-  --background-overlay: #171c4ebb;
+  --background-color: #15103c;
+  --background-color-dark: #09082b;
+  --background-color-overlay: #171c4ebb;
   --text-color: #ffffff;
-  --text-color-primary: #0087ff;
-  --text-color-secondary: #878787;
-  --border-color: #3d3fb4;
-  --hover-brightness: 2;
+  --text-color-primary: #1a145d;
+  --text-color-secondary: #312c5b;
+  --border-color: #2c2c69;
+  --brightness-light: 2;
 }
 
 * {
@@ -48,12 +48,6 @@ header {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   background-color: var(--background-color);
   border-bottom: 1px solid var(--border-color);
-}
-
-footer {
-  flex: 1;
-  width: 100%;
-  background-color: var(--background-color-dark);
 }
 
 #hero {
@@ -137,7 +131,7 @@ button {
 }
 
 .content {
-  font-size: 32px;
+  font-size: 31px;
 }
 
 .note {

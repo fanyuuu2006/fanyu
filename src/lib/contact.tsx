@@ -1,6 +1,7 @@
 import { ContactCategory, ContactItem } from "@/types/contact";
 import { LanguageContent } from "@/types/language";
 import {
+  DiscordOutlined,
   FacebookOutlined,
   GithubFilled,
   InstagramOutlined,
@@ -92,6 +93,12 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       icon: <MailOutlined />,
       id: "bingxiao526@gmail.com",
       href: "mailto:bingxiao526@gmail.com",
+    },
+    {
+      label: "Discord",
+      icon: <DiscordOutlined />,
+      id: "fan._.yuuu",
+      href: "https://discord.com/users/959582016431620147",
     },
   ],
 };

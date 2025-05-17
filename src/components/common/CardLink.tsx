@@ -1,6 +1,6 @@
-import { motion, HTMLMotionProps } from "framer-motion";
+import { Card, CardProps } from "./Card";
 
-export type CardLinkProps = HTMLMotionProps<"div">;
+export type CardLinkProps = CardProps;;
 
 export const CardLink = ({
   className = "",
@@ -8,11 +8,11 @@ export const CardLink = ({
   ...rest
 }: CardLinkProps) => {
   return (
-    <motion.div
-      className={`${className} no-underline bg-[var(--background-color-dark)] rounded-lg hover:scale-105 transition-[scale] duration-200 ease-in-out`}
+    <Card
+      className={`${className} no-underline hover:scale-105 hover:shadow-xl transition-[scale] duration-200 ease-in-out`}
       {...rest}
     >
       {children}
-    </motion.div>
+    </Card>
   );
 };

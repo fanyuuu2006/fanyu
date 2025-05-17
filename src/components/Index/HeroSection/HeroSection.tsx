@@ -108,7 +108,7 @@ export const HeroSection = () => {
             initial="hiddenBottom"
             whileInView="show"
             viewport={{ once: true }}
-            className={`shadow bordered p-6 overflow-auto`}
+            className="p-6 overflow-auto"
           >
             <div className="hint flex">
               <span>TypeScript</span>
