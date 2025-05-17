@@ -15,6 +15,8 @@ import { ProjectTagButton } from "./ProjectTagButton";
 import { profile } from "../../lib/profile";
 import { Collapse } from "fanyucomponents";
 import { Card } from "../common/Card";
+import { motion } from "framer-motion";
+import { fadeInItem, staggerContainer } from "@/lib/motion";
 type ProjectContent = Record<
   "Project" | "nofound" | "all" | "back" | "count" | ProjectTagCategory,
   string
@@ -135,16 +137,25 @@ export const MainSection = () => {
         {filteredProject.length === 0 ? (
           <>{projectContent.nofound}</>
         ) : (
-          filteredProject.map((item: ProjectItem) => (
-            <ProjectCard
-              key={item.title.english}
-              item={item}
-              currentTag={currentTag}
-              setCurrentTag={setCurrentTag}
-              categoriesShow={categoriesShow}
-              setCategoriesShow={setCategoriesShow}
-            />
-          ))
+          <motion.div
+            key={currentTag}
+            variants={staggerContainer}
+            initial="hiddenLeft"
+            animate="show"
+            className="w-full flex flex-col gap-4"
+          >
+            {filteredProject.map((item: ProjectItem) => (
+              <ProjectCard
+                variants={fadeInItem}
+                key={item.title.english}
+                item={item}
+                currentTag={currentTag}
+                setCurrentTag={setCurrentTag}
+                categoriesShow={categoriesShow}
+                setCategoriesShow={setCategoriesShow}
+              />
+            ))}
+          </motion.div>
         )}
         <Link className="note" href="/#portfolio">
           <ArrowLeftOutlined /> {projectContent.back}

@@ -15,7 +15,6 @@ import {
 } from "@ant-design/icons";
 import { ProjectTagButton } from "./ProjectTagButton";
 import { SiNpm } from "react-icons/si";
-import { fadeInItem } from "@/lib/motion";
 import { Card, CardProps } from "../common/Card";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
@@ -47,10 +46,6 @@ export const ProjectCard = ({
   const Language = useLanguage();
   return (
     <Card
-      variants={fadeInItem}
-      initial="hiddenLeft"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
       id={slugify(item.title.english)}
       className={`${className} bordered shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       {...rest}

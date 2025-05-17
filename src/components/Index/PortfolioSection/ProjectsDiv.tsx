@@ -77,6 +77,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           <CardLink
             key={item.title.english}
             variants={fadeInItem}
+            viewport={{ once: true, amount: 0.2 }}
             className="flex flex-1 basis-full md:basis-3/10"
           >
             <ProjectLinkCard item={item} />
