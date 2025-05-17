@@ -61,7 +61,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           onClick={shuffleProject}
         >
           <Tooltip title={projectsContent.refresh}>
-            <ReloadOutlined />
+            <ReloadOutlined className="transition-transform duration-200 active:rotate-180" />
           </Tooltip>
         </button>
       </div>

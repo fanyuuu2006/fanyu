@@ -4,7 +4,7 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { profile } from "@/lib/profile";
 import { useState } from "react";
 import { ExperienceCard } from "./ExperienceCard";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 
 type ExperienceTab = keyof typeof profile.experience;
@@ -36,9 +36,17 @@ export const ExperienceSection = () => {
     <section id="experience">
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{experienceContent.experience}</div>
-        <div className="w-full bg-[var(--background-color-dark)] flex justify-between gap-4 p-2">
+        <div
+          role="tablist"
+          className="w-full bg-[var(--background-color-dark)] flex justify-between gap-4 p-2"
+        >
           {Object.keys(profile.experience).map((key) => (
             <button
+              role="tab"
+              tabIndex={0}
+              aria-selected={Tab === key}
+              aria-controls={key}
+              aria-label={experienceContent[key as ExperienceTab]}
               key={key}
               className={`content text-center font-bold flex-1 transition-all duration-200 ${
                 Tab === key ? "bg-[var(--background-color)] rounded-lg" : ""
@@ -51,22 +59,24 @@ export const ExperienceSection = () => {
             </button>
           ))}
         </div>
-        <motion.div
-          key={Tab}
-          className="w-full flex flex-col gap-4"
-          variants={staggerContainer}
-          initial="hiddenLeft"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {profile.experience[Tab].map((item) => (
-            <ExperienceCard
-              variants={fadeInItem}
-              key={item.name.english}
-              item={item}
-            />
-          ))}
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={Tab}
+            className="w-full flex flex-col gap-4"
+            variants={staggerContainer}
+            initial="hiddenLeft"
+            animate="show"
+            exit="hiddenRight"
+          >
+            {profile.experience[Tab].map((item) => (
+              <ExperienceCard
+                variants={fadeInItem}
+                key={item.name.english}
+                item={item}
+              />
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
