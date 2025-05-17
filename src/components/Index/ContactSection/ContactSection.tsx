@@ -56,7 +56,7 @@ export const ContactSection = () => {
                   <Tooltip title={item.label}>
                     <OutsideLink
                       href={item.href}
-                      className="btn note flex items-center px-4 py-1 gap-2"
+                      className="note flex items-center px-4 py-1 gap-2"
                     >
                       {item.icon}
                       <span>{item.id}</span>
