@@ -3,7 +3,6 @@ import { ExperienceItem } from "@/types/experience";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import Image from "next/image";
-import { fadeInItem } from "@/lib/motion";
 import { Card, CardProps } from "@/components/common/Card";
 
 export type ExperienceCardProps = OverrideProps<
@@ -21,10 +20,6 @@ export const ExperienceCard = ({
   const Language = useLanguage();
   return (
     <Card
-      variants={fadeInItem}
-      initial="hiddenLeft"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
       className={`${className} w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >

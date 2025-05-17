@@ -1,11 +1,11 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { EducationDiv } from "./EducationDiv";
-import { ClubDiv } from "./ClubDiv";
-import { WorkDiv } from "./WorkDiv";
 import { profile } from "@/lib/profile";
 import { useState } from "react";
+import { ExperienceCard } from "./ExperienceCard";
+import { motion } from "framer-motion";
+import { fadeInItem, staggerContainer } from "@/lib/motion";
 
 type ExperienceTab = keyof typeof profile.experience;
 type ExperienceContent = Record<"experience" | ExperienceTab, string>;
@@ -40,7 +40,7 @@ export const ExperienceSection = () => {
           {Object.keys(profile.experience).map((key) => (
             <button
               key={key}
-              className={`content text-center font-bold flex-1 ${
+              className={`content text-center font-bold flex-1 transition-all duration-200 ${
                 Tab === key ? "bg-[var(--background-color)] rounded-lg" : ""
               }`}
               onClick={() => {
@@ -51,9 +51,22 @@ export const ExperienceSection = () => {
             </button>
           ))}
         </div>
-        <EducationDiv />
-        <ClubDiv />
-        <WorkDiv />
+        <motion.div
+          key={Tab}
+          className="w-full flex flex-col gap-4"
+          variants={staggerContainer}
+          initial="hiddenLeft"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {profile.experience[Tab].map((item) => (
+            <ExperienceCard
+              variants={fadeInItem}
+              key={item.name.english}
+              item={item}
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
