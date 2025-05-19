@@ -14,7 +14,6 @@ import { ProjectCard } from "./ProjectCard";
 import { ProjectTagButton } from "./ProjectTagButton";
 import { profile } from "../../lib/profile";
 import { Collapse } from "fanyucomponents";
-import { Card } from "../common/Card";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 type ProjectContent = Record<
@@ -97,7 +96,7 @@ export const MainSection = () => {
             className="slide-collapse absolute z-10 mt-8"
             state={categoriesShow}
           >
-            <Card className="flex flex-col p-4 gap-2 bordered">
+            <div className="card flex flex-col p-4 gap-2 bordered">
               <div>
                 <ProjectTagButton
                   tag={null}
@@ -130,7 +129,7 @@ export const MainSection = () => {
                   </div>
                 </div>
               ))}
-            </Card>
+            </div>
           </Collapse>
         </div>
 

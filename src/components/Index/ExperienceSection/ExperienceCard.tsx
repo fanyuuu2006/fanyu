@@ -2,11 +2,11 @@ import { useLanguage } from "@/context/LanguageContext";
 import { ExperienceItem } from "@/types/experience";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
+import { motion, HTMLMotionProps } from "framer-motion";
 import Image from "next/image";
-import { Card, CardProps } from "@/components/common/Card";
 
 export type ExperienceCardProps = OverrideProps<
-  CardProps,
+  HTMLMotionProps<"div">,
   {
     item: ExperienceItem;
   }
@@ -19,8 +19,8 @@ export const ExperienceCard = ({
 }: ExperienceCardProps) => {
   const Language = useLanguage();
   return (
-    <Card
-      className={`${className} w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
+    <motion.div
+      className={`${className} card w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
       <Image
@@ -64,6 +64,6 @@ export const ExperienceCard = ({
         </div>
         {item.role && <span>{item.role[Language.Current]}</span>}
       </div>
-    </Card>
+    </motion.div>
   );
 };

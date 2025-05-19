@@ -1,5 +1,4 @@
 "use client";
-import { CardLink } from "@/components/common/CardLink";
 import { useLanguage } from "@/context/LanguageContext";
 import { contactCategorieMap } from "@/lib/contact";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
@@ -52,17 +51,17 @@ export const ContactSection = () => {
               className="flex flex-wrap w-full gap-2"
             >
               {items.map((item, index) => (
-                <CardLink key={index} variants={fadeInItem}>
+                <motion.div key={index} variants={fadeInItem}>
                   <Tooltip title={item.label}>
                     <OutsideLink
                       href={item.href}
-                      className="note flex items-center px-4 py-1 gap-2"
+                      className="card note flex items-center px-4 py-1 gap-2"
                     >
                       {item.icon}
                       <span>{item.id}</span>
                     </OutsideLink>
                   </Tooltip>
-                </CardLink>
+                </motion.div>
               ))}
             </motion.div>
           </div>

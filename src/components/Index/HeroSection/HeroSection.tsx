@@ -13,7 +13,6 @@ import { OutsideLink, TypeWriterText } from "fanyucomponents";
 import { Toast } from "../../common/Toast";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
-import { Card } from "@/components/common/Card";
 
 type HeroContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing",
@@ -103,12 +102,12 @@ export const HeroSection = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full md:w-24/50">
-          <Card
+          <motion.div
             variants={fadeInItem}
             initial="hiddenBottom"
             whileInView="show"
             viewport={{ once: true }}
-            className="p-6 overflow-auto"
+            className="card p-6 overflow-auto"
           >
             <div className="hint flex">
               <span>TypeScript</span>
@@ -151,7 +150,7 @@ export const HeroSection = () => {
                 </div>
               ))}
             </motion.pre>
-          </Card>
+          </motion.div>
         </div>
       </div>
     </section>

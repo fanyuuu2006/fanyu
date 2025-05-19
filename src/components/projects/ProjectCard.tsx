@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 import { ProjectTagButton } from "./ProjectTagButton";
 import { SiNpm } from "react-icons/si";
-import { Card, CardProps } from "../common/Card";
+import { HTMLMotionProps, motion } from "framer-motion";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
@@ -24,7 +24,7 @@ const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
 };
 
 export type ProjectCardProps = OverrideProps<
-  CardProps,
+  HTMLMotionProps<"div">,
   {
     item: ProjectItem;
     currentTag: ProjectTag | null;
@@ -45,9 +45,9 @@ export const ProjectCard = ({
 }: ProjectCardProps) => {
   const Language = useLanguage();
   return (
-    <Card
+    <motion.div
       id={slugify(item.title.english)}
-      className={`${className} shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
+      className={`${className} card shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       {...rest}
     >
       <Image
@@ -97,6 +97,6 @@ export const ProjectCard = ({
           </div>
         </div>
       </div>
-    </Card>
+    </motion.div>
   );
 };

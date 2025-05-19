@@ -9,7 +9,6 @@ import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
-import { CardLink } from "@/components/common/CardLink";
 
 type ProjectsContent = Record<"projects" | "viewMore" | "refresh", string>;
 
@@ -74,14 +73,14 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
         className="flex flex-wrap justify-between gap-4"
       >
         {shuffledProject.map((item: ProjectItem) => (
-          <CardLink
+          <motion.div
             key={item.title.english}
             variants={fadeInItem}
             viewport={{ once: true, amount: 0.2 }}
             className="flex flex-1 basis-full md:basis-3/10"
           >
             <ProjectLinkCard item={item} />
-          </CardLink>
+          </motion.div>
         ))}
       </motion.div>
       <Link className="note flex gap-1" href="/projects">
