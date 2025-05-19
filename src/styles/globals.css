@@ -11,7 +11,7 @@
   --background-color-dark: #02061f;
   --background-color-overlay: #171c4ebb;
   --text-color: #ffffff;
-  --text-color-primary: #1a145d;
+  --text-color-primary: #1f2bb7;
   --text-color-secondary: #312c5b;
   --border-color: #36367e;
   --brightness-light: 2;
@@ -58,21 +58,19 @@ button {
   cursor: pointer;
 }
 
-.btn {
+.btn,
+.btn-primary,
+.btn-text {
   cursor: pointer;
-  color: var(--text-color);
+}
+
+.btn {
   background: var(--background-color);
   border: 1px solid var(--border-color);
-  text-align: center;
-  text-decoration: none !important;
 }
 
 .btn-primary {
-  cursor: pointer;
-  color: var(--text-color);
   background: var(--text-color-primary);
-  text-align: center;
-  text-decoration: none !important;
 }
 
 .btn:active,
@@ -82,12 +80,6 @@ button {
 
 .btn-text {
   cursor: pointer;
-}
-
-.btn-primary:hover {
-  text-decoration: none;
-  transition: 0.1s ease-in-out;
-  transform: scale(1.05);
 }
 
 .container {

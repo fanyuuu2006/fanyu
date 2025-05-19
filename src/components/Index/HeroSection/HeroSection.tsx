@@ -2,20 +2,15 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { profile } from "@/lib/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import {
-  CopyOutlined,
-  GithubOutlined,
-  InstagramOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
-import { Tooltip } from "antd";
-import { OutsideLink, TypeWriterText } from "fanyucomponents";
+import { CopyOutlined } from "@ant-design/icons";
+import { TypeWriterText } from "fanyucomponents";
 import { Toast } from "../../common/Toast";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
+import Link from "next/link";
 
 type HeroContent = Record<
-  "hello" | "iAm" | "intro" | "coding" | "drawing",
+  "hello" | "iAm" | "intro" | "coding" | "drawing" | "contactMe" | "portfolio",
   string
 >;
 
@@ -28,6 +23,8 @@ const getHeroContent = (language: LanguageOption): HeroContent =>
         intro: "一名熱愛寫程式的學生開發者。",
         coding: "寫程式",
         drawing: "繪畫",
+        contactMe: "聯繫我",
+        portfolio: "作品集",
       },
       english: {
         hello: "Hello,",
@@ -35,31 +32,11 @@ const getHeroContent = (language: LanguageOption): HeroContent =>
         intro: "A student developer who loves coding.",
         coding: "Coding",
         drawing: "Drawing",
+        contactMe: "Contact Me",
+        portfolio: "Portfolio",
       },
     } as LanguageContent<HeroContent>
   )[language]);
-
-const links: {
-  label: string;
-  icon: React.ReactNode;
-  href: string;
-}[] = [
-  {
-    label: "GitHub",
-    icon: <GithubOutlined />,
-    href: "https://github.com/fanyuuu2006",
-  },
-  {
-    label: "Instagram",
-    icon: <InstagramOutlined />,
-    href: "https://www.instagram.com/fan._.yuuu",
-  },
-  {
-    label: "E-Mail",
-    icon: <MailOutlined />,
-    href: "mailto:bingxiao526@gmail.com",
-  },
-];
 
 export const HeroSection = () => {
   const Language = useLanguage();
@@ -92,12 +69,19 @@ export const HeroSection = () => {
             >
               {heroContent.intro}
             </TypeWriterText>
-            <div className="label flex gap-4">
-              {links.map((item) => (
-                <Tooltip key={item.label} title={item.label} placement="bottom">
-                  <OutsideLink href={item.href}>{item.icon}</OutsideLink>
-                </Tooltip>
-              ))}
+            <div className="note flex gap-4 mt-4">
+              <Link
+                href="/#contact"
+                className="btn-primary px-4 py-2 rounded-lg"
+              >
+                {heroContent.contactMe}
+              </Link>
+              <Link
+                href="/#portfolio"
+                className="btn px-4 py-2 rounded-lg"
+              >
+                {heroContent.portfolio}
+              </Link>
             </div>
           </div>
         </div>
