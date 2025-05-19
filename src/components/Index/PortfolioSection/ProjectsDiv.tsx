@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { profile } from "@/lib/profile";
 import { ProjectItem } from "@/types/portfolio";
 import { ArrowRightOutlined, ReloadOutlined } from "@ant-design/icons";
@@ -37,6 +37,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   const [shuffledProject, setShuffledProject] = useState<ProjectItem[] | null>(
     null
   );
+  const turnRef = useRef<HTMLSpanElement>(null);
 
   const shuffleProject = () => {
     const shuffled = profile.portfolio.projects
@@ -60,7 +61,17 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           onClick={shuffleProject}
         >
           <Tooltip title={projectsContent.refresh}>
-            <ReloadOutlined className="transition-transform duration-200 active:rotate-180" />
+            <ReloadOutlined
+              ref={turnRef}
+              className="transition-transform duration-200"
+              onClick={() => {
+                if (!turnRef.current) return;
+                turnRef.current?.classList.add("animate-turn");
+                setTimeout(() => {
+                  turnRef.current?.classList.remove("animate-turn");
+                }, 200);
+              }}
+            />
           </Tooltip>
         </button>
       </div>
