@@ -43,7 +43,7 @@ export const ExperienceSection = () => {
         className="container flex flex-col items-center"
       >
         <div className="title font-bold">{experienceContent.experience}</div>
-        <div className="flex flex-col w-full gap-4">
+        <div className="flex flex-col w-full gap-4 overflow-hidden">
           <div
             role="tablist"
             className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between gap-4 p-2"
