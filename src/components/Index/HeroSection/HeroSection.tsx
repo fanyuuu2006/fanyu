@@ -93,7 +93,7 @@ export const HeroSection = () => {
             viewport={{ once: true }}
             className="card p-6 overflow-auto"
           >
-            <div className="hint flex">
+            <div className="hint flex items-center">
               <span>TypeScript</span>
               <button
                 className="btn flex items-center justify-center ml-auto w-6 h-6 rounded-sm"
@@ -127,7 +127,7 @@ export const HeroSection = () => {
                   <span className="text-[#888] select-none">{index + 1}</span>
                   <motion.code
                     variants={fadeInItem}
-                    className="font-mono whitespace-pre-wrap"
+                    className="whitespace-pre-wrap"
                   >
                     {line}
                   </motion.code>

@@ -99,9 +99,9 @@ const ToolsForMetaInformation: ProjectItem = {
   ],
   time: "2025-03",
   about: {
-    chinese: "一個專為整理 Meta 帳號管理中心提供之可下載資料而設計的工具網站。",
+    chinese: "一個專為整理 Meta 帳號管理中心提供之可下載資料的工具網站。",
     english:
-      "A web tool designed to organize and process downloadable data from the Meta Accounts Center.",
+      "A tool website designed to organize downloadable data from Meta Account Center.",
   },
   description: {
     chinese: [
@@ -148,9 +148,8 @@ const DoBuJio: ProjectItem = {
   ],
   time: "2025-04",
   about: {
-    chinese: "一款結合爬蟲與資料視覺化的指令式股票查詢 Line 機器人。",
-    english:
-      "A command-based Line bot for stock information queries, integrating web scraping and data visualization.",
+    chinese: "一款結指令式股票查詢 Line 機器人。",
+    english: "A command-based Line bot for stock information queries.",
   },
   description: {
     chinese: [
@@ -197,10 +196,8 @@ const AoJiao: ProjectItem = {
   ],
   time: "2025-03",
   about: {
-    chinese:
-      "臺科大桌遊社專屬的 Line Bot，協助幹部管理社務並提升社員互動體驗。",
-    english:
-      "A custom Line Bot for NTUST Board Game Club, assist club management and boost member engagement.",
+    chinese: "臺科大桌遊社專屬的 Line Bot。",
+    english: "A custom Line Bot for NTUST Board Game Club.",
   },
   description: {
     chinese: [
@@ -245,10 +242,9 @@ const FanYuComponents: ProjectItem = {
   ],
   time: "2025-04",
   about: {
-    chinese:
-      "一款以純邏輯為核心、無樣式綁定的 React 組件套件，強調自由度與擴充性。",
+    chinese: "一款以純邏輯為核心、無樣式綁定的 React 組件套件。",
     english:
-      "A logic-first, unstyled React component library designed for flexibility and extensibility.",
+      "A React component library focused on logic-only components without style bindings.",
   },
   description: {
     chinese: [
