@@ -61,7 +61,7 @@ button {
 .btn {
   cursor: pointer;
   color: var(--text-color);
-  background: var(--background-color-dark);
+  background: var(--background-color);
   border: 1px solid var(--border-color);
   text-align: center;
   text-decoration: none !important;
