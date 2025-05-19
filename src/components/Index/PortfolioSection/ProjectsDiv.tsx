@@ -63,7 +63,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           <Tooltip title={projectsContent.refresh}>
             <ReloadOutlined
               ref={turnRef}
-              className="transition-transform duration-200"
+              className="transition-[rolate]"
               onClick={() => {
                 if (!turnRef.current) return;
                 turnRef.current?.classList.add("animate-turn");
@@ -87,7 +87,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           <motion.div
             key={item.title.english}
             variants={fadeInItem}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="flex flex-1 basis-full md:basis-3/10"
           >
             <ProjectLinkCard item={item} />
