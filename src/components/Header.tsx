@@ -56,6 +56,13 @@ const Routes: {
   },
   {
     label: {
+      chinese: "留言版",
+      english: "Guestbook",
+    },
+    href: "/guestbook",
+  },
+  {
+    label: {
       chinese: "相簿",
       english: "Album",
     },
