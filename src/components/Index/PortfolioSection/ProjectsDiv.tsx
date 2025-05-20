@@ -90,7 +90,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
             viewport={{ once: true, amount: 0.1 }}
             className="flex flex-1 basis-full md:basis-3/10"
           >
-            <ProjectLinkCard item={item} />
+            <ProjectLinkCard item={item} className="w-full" />
           </motion.div>
         ))}
       </motion.div>
