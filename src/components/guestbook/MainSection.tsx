@@ -27,7 +27,7 @@ export const MainSection = () => {
       <div className="container flex flex-col items-center">
         <span className="title font-bold">{guestbookContent.guestbook}</span>
         <div
-          className="w-full flex flex-col items-center p-4"
+          className="w-full flex flex-col items-center"
           id="guestbook-container"
         >
           <Giscus

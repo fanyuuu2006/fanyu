@@ -54,6 +54,7 @@ export const ContactSection = () => {
                 <motion.div key={index} variants={fadeInItem}>
                   <Tooltip title={item.label}>
                     <OutsideLink
+                      draggable={true}
                       href={item.href}
                       className="card note flex items-center px-4 py-1 gap-2"
                     >
