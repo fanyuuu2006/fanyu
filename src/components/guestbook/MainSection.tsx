@@ -55,7 +55,7 @@ export const MainSection = () => {
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{guestbookContent.guestbook}</div>
         <div
-          className="card w-full flex flex-col items-center p-4"
+          className="w-full flex flex-col items-center p-4"
           id="guestbook-container"
         >
           <LoadingOutlined className="content" />
