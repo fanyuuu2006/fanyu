@@ -22,7 +22,7 @@ const getExperienceContent = (language: LanguageOption): ExperienceContent =>
         club: "社團",
         work: "工作",
         competition: "競賽",
-        noExperience: "目前沒有經歷資料。",
+        noExperience: "尚無經歷資料。",
       },
       english: {
         experience: "Experience",
@@ -53,7 +53,7 @@ export const ExperienceSection = () => {
         <div className="flex flex-col w-full gap-4 overflow-hidden">
           <div
             role="tablist"
-            className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between gap-4 p-2"
+            className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between p-2"
           >
             {experienceTabs.map((key) => (
               <button

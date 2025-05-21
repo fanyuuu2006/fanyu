@@ -3,12 +3,12 @@ import { EnvironmentOutlined, InstagramOutlined } from "@ant-design/icons";
 
 export const PDAO: ExperienceItem = {
   name: {
-    chinese: "PDAO (Programming Design And Optimization)",
-    english: "PDAO (Programming Design And Optimization)",
+    chinese: "Programming Design And Optimization",
+    english: "Programming Design And Optimization",
   },
   department: {
     chinese: "不知道對不隊",
-    english: "Don’t Know Right Team",
+    english: "Don't Know If It's the Right Team",
   },
   role: {
     chinese: "隊員",
@@ -32,10 +32,7 @@ export const PDAO: ExperienceItem = {
   ],
   description: ({ language }) => (
     <span className="note font-bold">
-      {{ chinese: "第 {{rank}} 名", english: "{{rank}}th" }[language].replace(
-        "{{rank}}",
-        "59"
-      )}
+      {{ chinese: "第 59 名", english: "59th" }[language]}
     </span>
   ),
 };
