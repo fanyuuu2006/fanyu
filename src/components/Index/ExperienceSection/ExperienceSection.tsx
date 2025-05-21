@@ -9,7 +9,10 @@ import { fadeInItem, staggerContainer } from "@/lib/motion";
 import { ExperienceTab } from "@/types/experience";
 import { experienceTabIcons, experienceTabs } from "@/lib/experience";
 
-type ExperienceContent = Record<"experience" | ExperienceTab, string>;
+type ExperienceContent = Record<
+  "experience" | ExperienceTab | "noTabExperience",
+  string
+>;
 const getExperienceContent = (language: LanguageOption): ExperienceContent =>
   ((
     {
@@ -18,12 +21,14 @@ const getExperienceContent = (language: LanguageOption): ExperienceContent =>
         education: "學歷",
         club: "社團",
         work: "工作",
+        noTabExperience: "{{tab}}：目前沒有經歷資料。",
       },
       english: {
         experience: "Experience",
         education: "Education",
         club: "Club",
         work: "Work",
+        noTabExperience: "No experience data for {{tab}}.",
       },
     } as LanguageContent<ExperienceContent>
   )[language]);
@@ -43,7 +48,7 @@ export const ExperienceSection = () => {
         className="container flex flex-col items-center"
       >
         <div className="title font-bold">{experienceContent.experience}</div>
-        <div className="flex flex-col w-full gap-4 overflow-hidden">
+        <div className="flex flex-col w-full items-center gap-4 overflow-hidden">
           <div
             role="tablist"
             className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between gap-4 p-2"
@@ -77,13 +82,19 @@ export const ExperienceSection = () => {
               animate="show"
               exit="hiddenRight"
             >
-              {profile.experience[Tab].map((item) => (
-                <ExperienceCard
-                  variants={fadeInItem}
-                  key={item.name.english}
-                  item={item}
-                />
-              ))}
+              {profile.experience[Tab].length > 0 ? (
+                profile.experience[Tab].map((item) => (
+                  <ExperienceCard
+                    variants={fadeInItem}
+                    key={item.name.english}
+                    item={item}
+                  />
+                ))
+              ) : (
+                <span className="content">
+                  {experienceContent.noTabExperience.replace("{{tab}}", Tab)}
+                </span>
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
