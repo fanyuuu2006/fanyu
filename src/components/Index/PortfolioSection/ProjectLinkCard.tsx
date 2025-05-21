@@ -6,6 +6,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 
+const ProjectTag = ({
+  children,
+  ...rest
+}: React.HTMLAttributes<HTMLSpanElement>) => {
+  return (
+    <span
+      className="rounded-sm whitespace-nowrap px-2 bg-[var(--background-color-dark)] border border-[var(--border-color)]"
+      {...rest}
+    >
+      {children}
+    </span>
+  );
+};
+
 export type ProjectLinkCardProps = OverrideProps<
   DistributiveOmit<React.ComponentProps<typeof Link>, "href">,
   {
@@ -18,11 +32,13 @@ export const ProjectLinkCard = ({
   ...rest
 }: ProjectLinkCardProps) => {
   const Language = useLanguage();
+  const tagLimit = 5;
 
   return (
     <Link
       draggable={true}
       href={`/projects/#${slugify(item.title.english)}`}
+      aria-label={`View project: ${item.title.english}`}
       className={`${className} card flex flex-col items-center p-4 gap-4`}
       {...rest}
     >
@@ -44,14 +60,19 @@ export const ProjectLinkCard = ({
         <div className="hint flex flex-nowrap gap-2">
           <TagsOutlined />
           <div className="flex flex-wrap gap-2">
-            {item.tags.map((tag) => (
-              <span
-                className="rounded-sm whitespace-nowrap px-2 bg-[var(--background-color-dark)] border border-[var(--border-color)]"
-                key={tag}
-              >
-                {tag}
-              </span>
+            {item.tags.slice(0, tagLimit).map((tag) => (
+              <ProjectTag key={tag}>{tag}</ProjectTag>
             ))}
+            {item.tags.length > tagLimit && (
+              <ProjectTag>
+                {
+                  {
+                    english: `+${item.tags.length - tagLimit} more`,
+                    chinese: `還有 ${item.tags.length - tagLimit} 個`,
+                  }[Language.Current]
+                }
+              </ProjectTag>
+            )}
           </div>
         </div>
       </div>

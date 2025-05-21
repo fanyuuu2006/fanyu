@@ -138,8 +138,8 @@ const NTUST_BGC: ExperienceItem = {
   imageSrc: "/Experience/Club/NTUST_BGC.jpg",
   links: [
     {
-      chinese: "桌上遊戲研究社 Instagram",
-      english: "BoardGame Club Instagram",
+      chinese: "台科大桌遊社 Instagram",
+      english: "NTUST BoardGame Club Instagram",
       icon: <InstagramOutlined />,
       href: "https://www.instagram.com/ntust_boardgame/",
     },
