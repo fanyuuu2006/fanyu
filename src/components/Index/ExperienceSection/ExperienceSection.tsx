@@ -62,7 +62,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`note font-bold rounded-lg flex flex-1 items-center justify-center p-2 gap-2 transition-[background-color] duration-200 ${
+                className={`note font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-[background-color] duration-200 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
