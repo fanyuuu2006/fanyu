@@ -17,11 +17,9 @@ export type ExperienceItem = {
   organization?: ExperienceItem;
   role?: LanguageContent<string>;
   duration: Duration;
-  description?: LanguageContent<string>;
+  description?: React.ReactNode;
   imageSrc: string;
   links?: LinkContent<string>[];
-  skills?: string[];
-  tags?: string[];
 };
 
 export type ExperienceTab = (typeof experienceTabs)[number];
