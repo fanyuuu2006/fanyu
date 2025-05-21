@@ -8,7 +8,7 @@ export const PDAO: ExperienceItem = {
   },
   department: {
     chinese: "不知道對不隊",
-    english: "Don't know if it's right team",
+    english: "Don’t Know Right Team",
   },
   role: {
     chinese: "隊員",
@@ -30,4 +30,12 @@ export const PDAO: ExperienceItem = {
       href: "https://maps.app.goo.gl/MvSK9ZHVXD2GiGvA9",
     },
   ],
+  description: ({ language }) => (
+    <span className="note font-bold">
+      {{ chinese: "第 {{rank}} 名", english: "{{rank}}th" }[language].replace(
+        "{{rank}}",
+        "59"
+      )}
+    </span>
+  ),
 };

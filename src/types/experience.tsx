@@ -1,5 +1,5 @@
 import { experienceTabs } from "@/lib/experience";
-import { LanguageContent } from "./language";
+import { LanguageContent, LanguageOption } from "./language";
 
 export type Duration = {
   start: string | null;
@@ -17,7 +17,7 @@ export type ExperienceItem = {
   organization?: ExperienceItem;
   role?: LanguageContent<string>;
   duration: Duration;
-  description?: React.ReactNode;
+  description?: React.FC<{ language: LanguageOption }>;
   imageSrc: string;
   links?: LinkContent<string>[];
 };

@@ -63,6 +63,11 @@ export const ExperienceCard = ({
           )}
         </div>
         {item.role && <span>{item.role[Language.Current]}</span>}
+        {item.description && (
+          <div>
+            <item.description language={Language.Current} />
+          </div>
+        )}
       </div>
     </motion.div>
   );
