@@ -132,6 +132,11 @@ const ToolsForMetaInformation: ProjectItem = {
     "Git / GitHub",
     "Vercel",
   ],
+  giscus: {
+    repo: "fanyuuu2006/Tools-For-Meta-Infomation",
+    repoId: "R_kgDOOCOC7w",
+    categoryId: "DIC_kwDOOCOC784Cqc9L",
+  },
 };
 
 const DoBuJio: ProjectItem = {
