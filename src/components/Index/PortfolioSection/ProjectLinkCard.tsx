@@ -37,7 +37,7 @@ export const ProjectLinkCard = ({
   return (
     <Link
       draggable={true}
-      href={`/projects/#${slugify(item.title.english)}`}
+      href={`/projects/${slugify(item.title.english)}`}
       aria-label={`View project: ${item.title.english}`}
       className={`${className} card flex flex-col items-center p-4 gap-4`}
       {...rest}
