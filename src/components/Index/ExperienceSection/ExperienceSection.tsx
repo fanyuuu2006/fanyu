@@ -85,7 +85,11 @@ export const ExperienceSection = () => {
               exit="hiddenRight"
             >
               {profile.experience[Tab].length > 0 ? (
-                profile.experience[Tab].map((item) => (
+                profile.experience[Tab].sort(
+                  (a, b) =>
+                    new Date(b.duration.start).getTime() -
+                    new Date(a.duration.start).getTime()
+                ).map((item) => (
                   <ExperienceCard
                     variants={fadeInItem}
                     key={item.name.english}

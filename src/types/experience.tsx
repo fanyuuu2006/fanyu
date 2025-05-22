@@ -2,7 +2,7 @@ import { experienceTabs } from "@/lib/experience";
 import { LanguageContent, LanguageOption } from "./language";
 
 export type Duration = {
-  start: string | null;
+  start: string;
   end: string | null;
 };
 

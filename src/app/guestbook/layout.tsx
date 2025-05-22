@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "專案 Project",
+  title: "留言板 Guestbook",
 };
 
 export default function Layout({

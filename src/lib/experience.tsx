@@ -6,10 +6,10 @@ import {
 } from "react-icons/lu";
 import { ExperienceItem, ExperienceTab } from "../types/experience";
 
-import { NTUST_BGC } from "./club";
-import { NTUST, CPSHS, FGJH, GSES } from "./education";
-import { HXL, LFV, KNSH, LFR } from "./work";
-import { PDAO } from "./competition";
+import * as club from "./club";
+import * as education from "./education";
+import * as work from "./work";
+import * as competition from "./competition";
 
 export const experienceTabs = [
   "education",
@@ -26,8 +26,8 @@ export const experienceTabIcons: Record<ExperienceTab, React.ReactNode> = {
 };
 
 export const experience: Record<ExperienceTab, ExperienceItem[]> = {
-  education: [NTUST, CPSHS, FGJH, GSES],
-  club: [NTUST_BGC],
-  work: [HXL, LFV, KNSH, LFR],
-  competition: [PDAO],
+  education: Object.values(education),
+  club: Object.values(club),
+  work: Object.values(work),
+  competition: Object.values(competition),
 };
