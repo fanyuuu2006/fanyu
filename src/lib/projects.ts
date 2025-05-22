@@ -78,6 +78,11 @@ const LabaG: ProjectItem = {
     "NPM",
     "Vercel",
   ],
+  giscus: {
+    repo: "fanyuuu2006/LaBaG-Web",
+    repoId: "R_kgDON9HtXQ",
+    categoryId: "DIC_kwDOOeftZs4CqXwr",
+  },
 };
 
 const ToolsForMetaInformation: ProjectItem = {

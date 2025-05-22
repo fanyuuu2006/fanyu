@@ -7,8 +7,8 @@ import {
 
 export const PDAO: ExperienceItem = {
   name: {
-    chinese: "Programming Design And Optimization",
-    english: "Programming Design And Optimization",
+    chinese: "PDAO 2025",
+    english: "PDAO 2025",
   },
   department: {
     chinese: "不知道對不隊",

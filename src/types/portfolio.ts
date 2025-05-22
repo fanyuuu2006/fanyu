@@ -15,4 +15,9 @@ export type ProjectItem = {
   about: LanguageContent<string>;
   description: LanguageContent<string[]>;
   tags: ProjectTag[];
+  giscus?: {
+    repo: string;
+    repoId: string;
+    categoryId: string;
+  };
 };

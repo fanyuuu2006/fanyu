@@ -4,7 +4,9 @@ import { projectTagCategories } from "@/lib/projects";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";
 import {
-  ArrowLeftOutlined,
+  CaretDownOutlined,
+  CaretLeftOutlined,
+  CaretUpOutlined,
   DownOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
@@ -17,7 +19,14 @@ import { Collapse } from "fanyucomponents";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 type ProjectContent = Record<
-  "Project" | "nofound" | "all" | "back" | "count" | ProjectTagCategory,
+  | "Project"
+  | "nofound"
+  | "all"
+  | "back"
+  | "count"
+  | "orderByNewest"
+  | "orderByOldest"
+  | ProjectTagCategory,
   string
 >;
 
@@ -37,6 +46,8 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
         other: "其他／雜項",
         back: "返回",
         count: "共 {count} 筆",
+        orderByNewest: "由新到舊",
+        orderByOldest: "由舊到新",
       },
       english: {
         Project: "Project",
@@ -51,6 +62,8 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
         other: "Other / Miscellaneous",
         back: "Back",
         count: "Total: {count}",
+        orderByNewest: "Order by Newest",
+        orderByOldest: "Order by Oldest",
       },
     } as LanguageContent<ProjectContent>
   )[language]);
@@ -61,34 +74,52 @@ export const MainSection = () => {
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTag, setCurrentTag] = useState<ProjectTag | null>(null);
+  const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(true);
 
-  const filteredProject = useMemo(() => {
-    return !currentTag
-      ? profile.portfolio.projects
-      : profile.portfolio.projects.filter((item) =>
-          item.tags.includes(currentTag)
-        );
-  }, [currentTag]);
+  const sortedProject = useMemo(() => {
+    return (
+      !currentTag
+        ? profile.portfolio.projects
+        : profile.portfolio.projects.filter((item) =>
+            item.tags.includes(currentTag)
+          )
+    ).sort((a, b) => {
+      const t1 = new Date(a.time).getTime();
+      const t2 = new Date(b.time).getTime();
+      return isOrderByNewest ? t2 - t1 : t1 - t2;
+    });
+  }, [currentTag, isOrderByNewest]);
 
   return (
     <section>
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{projectContent.Project}</div>
         <div className="note flex flex-col w-full gap-2">
-          <div className="relative flex flex-nowrap px-4 gap-4 justify-between">
+          <div className="relative flex flex-nowrap px-4 gap-4">
             <button
               onClick={() => {
                 setCategoriesShow((prev) => !prev);
               }}
-              className="flex items-center w-fit gap-2"
+              className="flex items-center w-fit gap-2 me-auto"
             >
               {currentTag ?? projectContent.all}
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
             </button>
+            <button
+              onClick={() => {
+                setIsOrderByNewest((prev) => !prev);
+              }}
+              className="flex items-center w-fit gap-2"
+            >
+              {isOrderByNewest
+                ? projectContent.orderByNewest
+                : projectContent.orderByOldest}
+              {isOrderByNewest ? <CaretDownOutlined /> : <CaretUpOutlined />}
+            </button>
             <span>
               {projectContent.count.replace(
                 "{count}",
-                filteredProject.length.toString()
+                sortedProject.length.toString()
               )}
             </span>
           </div>
@@ -133,7 +164,7 @@ export const MainSection = () => {
           </Collapse>
         </div>
 
-        {filteredProject.length === 0 ? (
+        {sortedProject.length === 0 ? (
           <>{projectContent.nofound}</>
         ) : (
           <motion.div
@@ -143,7 +174,7 @@ export const MainSection = () => {
             animate="show"
             className="w-full flex flex-col gap-4"
           >
-            {filteredProject.map((item: ProjectItem) => (
+            {sortedProject.map((item: ProjectItem) => (
               <ProjectCard
                 variants={fadeInItem}
                 key={item.title.english}
@@ -157,7 +188,7 @@ export const MainSection = () => {
           </motion.div>
         )}
         <Link className="note" href="/#portfolio">
-          <ArrowLeftOutlined /> {projectContent.back}
+          <CaretLeftOutlined /> {projectContent.back}
         </Link>
       </div>
     </section>
