@@ -5,8 +5,6 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";
 import {
   ArrowLeftOutlined,
-  CaretDownOutlined,
-  CaretUpOutlined,
   DownOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
@@ -24,8 +22,8 @@ type ProjectsContent = Record<
   | "all"
   | "back"
   | "count"
-  | "orderByNewest"
-  | "orderByOldest"
+  | "Newest"
+  | "Oldest"
   | ProjectTagCategory,
   string
 >;
@@ -46,11 +44,11 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
         other: "其他／雜項",
         back: "返回",
         count: "共 {count} 筆",
-        orderByNewest: "由新到舊",
-        orderByOldest: "由舊到新",
+        Newest: "最新",
+        Oldest: "最舊",
       },
       english: {
-        projects: "projects",
+        projects: "Projects",
         all: "All",
         nofound: "No matching projects found",
         language: "Language",
@@ -62,8 +60,8 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
         other: "Other / Miscellaneous",
         back: "Back",
         count: "Total: {count}",
-        orderByNewest: "Order by Newest",
-        orderByOldest: "Order by Oldest",
+        Newest: "Newest",
+        Oldest: "Oldest",
       },
     } as LanguageContent<ProjectsContent>
   )[language]);
@@ -95,26 +93,15 @@ export const MainSection = () => {
       <div className="container flex flex-col items-center">
         <div className="title font-bold">{projectsContent.projects}</div>
         <div className="note flex flex-col w-full gap-2">
-          <div className="relative flex flex-nowrap px-4 gap-4">
+          <div className="relative flex flex-nowrap items-center px-4 gap-4">
             <button
               onClick={() => {
                 setCategoriesShow((prev) => !prev);
               }}
-              className="flex items-center w-fit gap-2 me-auto"
+              className="flex items-center w-fit gap-2"
             >
               {currentTag ?? projectsContent.all}
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
-            </button>
-            <button
-              onClick={() => {
-                setIsOrderByNewest((prev) => !prev);
-              }}
-              className="flex items-center w-fit gap-2"
-            >
-              {isOrderByNewest
-                ? projectsContent.orderByNewest
-                : projectsContent.orderByOldest}
-              {isOrderByNewest ? <CaretDownOutlined /> : <CaretUpOutlined />}
             </button>
             <span>
               {projectsContent.count.replace(
@@ -122,9 +109,34 @@ export const MainSection = () => {
                 sortedProject.length.toString()
               )}
             </span>
+            <div
+              role="tablist"
+              className="ms-auto flex bg-[var(--background-color-dark)] rounded-lg p-2"
+            >
+              {[
+                { label: projectsContent.Newest, value: true },
+                { label: projectsContent.Oldest, value: false },
+              ].map((item) => {
+                const isSelected = isOrderByNewest === item.value;
+                return (
+                  <button
+                    key={item.label}
+                    className={`px-4 py-2 transition-[background-color] duration-200 ${
+                      isSelected ? "btn rounded-lg" : ""
+                    }`}
+                    onClick={() => {
+                      if (isSelected) return;
+                      setIsOrderByNewest(item.value);
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
           <Collapse
-            className="slide-collapse absolute z-10 mt-8"
+            className="slide-collapse absolute z-10 mt-14"
             state={categoriesShow}
           >
             <div className="card flex flex-col p-4 gap-2 bordered">
@@ -188,7 +200,8 @@ export const MainSection = () => {
           </motion.div>
         )}
         <Link className="note" href="/#portfolio">
-          <ArrowLeftOutlined />{projectsContent.back}
+          <ArrowLeftOutlined />
+          {projectsContent.back}
         </Link>
       </div>
     </section>
