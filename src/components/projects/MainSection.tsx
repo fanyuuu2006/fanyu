@@ -4,8 +4,8 @@ import { projectTagCategories } from "@/lib/projects";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";
 import {
+  ArrowLeftOutlined,
   CaretDownOutlined,
-  CaretLeftOutlined,
   CaretUpOutlined,
   DownOutlined,
   MenuOutlined,
@@ -18,8 +18,8 @@ import { profile } from "../../lib/profile";
 import { Collapse } from "fanyucomponents";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
-type ProjectContent = Record<
-  | "Project"
+type ProjectsContent = Record<
+  | "projects"
   | "nofound"
   | "all"
   | "back"
@@ -30,11 +30,11 @@ type ProjectContent = Record<
   string
 >;
 
-const getProjectContent = (language: LanguageOption): ProjectContent =>
+const getProjectsContent = (language: LanguageOption): ProjectsContent =>
   ((
     {
       chinese: {
-        Project: "作品集",
+        projects: "專案",
         all: "全部",
         nofound: "暫無符合條件的作品",
         language: "語言",
@@ -50,9 +50,9 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
         orderByOldest: "由舊到新",
       },
       english: {
-        Project: "Project",
+        projects: "projects",
         all: "All",
-        nofound: "No matching Project found",
+        nofound: "No matching projects found",
         language: "Language",
         roles: "Development Role",
         domains: "Domain Expertise",
@@ -65,12 +65,12 @@ const getProjectContent = (language: LanguageOption): ProjectContent =>
         orderByNewest: "Order by Newest",
         orderByOldest: "Order by Oldest",
       },
-    } as LanguageContent<ProjectContent>
+    } as LanguageContent<ProjectsContent>
   )[language]);
 
 export const MainSection = () => {
   const Language = useLanguage();
-  const projectContent = getProjectContent(Language.Current);
+  const projectsContent = getProjectsContent(Language.Current);
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTag, setCurrentTag] = useState<ProjectTag | null>(null);
@@ -93,7 +93,7 @@ export const MainSection = () => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <div className="title font-bold">{projectContent.Project}</div>
+        <div className="title font-bold">{projectsContent.projects}</div>
         <div className="note flex flex-col w-full gap-2">
           <div className="relative flex flex-nowrap px-4 gap-4">
             <button
@@ -102,7 +102,7 @@ export const MainSection = () => {
               }}
               className="flex items-center w-fit gap-2 me-auto"
             >
-              {currentTag ?? projectContent.all}
+              {currentTag ?? projectsContent.all}
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
             </button>
             <button
@@ -112,12 +112,12 @@ export const MainSection = () => {
               className="flex items-center w-fit gap-2"
             >
               {isOrderByNewest
-                ? projectContent.orderByNewest
-                : projectContent.orderByOldest}
+                ? projectsContent.orderByNewest
+                : projectsContent.orderByOldest}
               {isOrderByNewest ? <CaretDownOutlined /> : <CaretUpOutlined />}
             </button>
             <span>
-              {projectContent.count.replace(
+              {projectsContent.count.replace(
                 "{count}",
                 sortedProject.length.toString()
               )}
@@ -136,13 +136,13 @@ export const MainSection = () => {
                   categoriesShow={categoriesShow}
                   setCategoriesShow={setCategoriesShow}
                 >
-                  {projectContent.all}
+                  {projectsContent.all}
                 </ProjectTagButton>
               </div>
               {Object.entries(projectTagCategories).map(([category, tags]) => (
                 <div key={category} className="flex flex-col gap-2">
                   <span className="font-bold">
-                    {projectContent[category as keyof ProjectContent]}
+                    {projectsContent[category as keyof ProjectsContent]}
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
@@ -165,7 +165,7 @@ export const MainSection = () => {
         </div>
 
         {sortedProject.length === 0 ? (
-          <>{projectContent.nofound}</>
+          <>{projectsContent.nofound}</>
         ) : (
           <motion.div
             key={currentTag}
@@ -188,7 +188,7 @@ export const MainSection = () => {
           </motion.div>
         )}
         <Link className="note" href="/#portfolio">
-          <CaretLeftOutlined /> {projectContent.back}
+          <ArrowLeftOutlined />{projectsContent.back}
         </Link>
       </div>
     </section>

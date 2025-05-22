@@ -1,23 +1,16 @@
 import Image from "next/image";
-import {
-  ProjectItem,
-  ProjectLinkCategory,
-  ProjectTag,
-} from "@/types/portfolio";
+import { ProjectItem, ProjectLinkCategory } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { useLanguage } from "@/context/LanguageContext";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import {
-  ArrowRightOutlined,
   ClockCircleOutlined,
   GithubOutlined,
   LinkOutlined,
   TagsOutlined,
 } from "@ant-design/icons";
-import { ProjectTagButton } from "./ProjectTagButton";
 import { SiNpm } from "react-icons/si";
 import { HTMLMotionProps, motion } from "framer-motion";
-import Link from "next/link";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
@@ -29,19 +22,11 @@ export type ProjectCardProps = OverrideProps<
   HTMLMotionProps<"div">,
   {
     item: ProjectItem;
-    currentTag: ProjectTag | null;
-    setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
-    categoriesShow: boolean;
-    setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
   }
 >;
 
 export const ProjectCard = ({
   item,
-  currentTag,
-  setCurrentTag,
-  categoriesShow,
-  setCategoriesShow,
   className = "",
   ...rest
 }: ProjectCardProps) => {
@@ -86,34 +71,15 @@ export const ProjectCard = ({
           <TagsOutlined />
           <div className="flex flex-wrap gap-2">
             {item.tags.map((tag) => (
-              <ProjectTagButton
+              <span
                 key={tag}
-                tag={tag}
-                currentTag={currentTag}
-                setCurrentTag={setCurrentTag}
-                categoriesShow={categoriesShow}
-                setCategoriesShow={setCategoriesShow}
+                className="rounded-sm whitespace-nowrap px-2 bg-[var(--background-color-dark)] border border-[var(--border-color)]"
               >
                 {tag}
-              </ProjectTagButton>
+              </span>
             ))}
           </div>
         </div>
-        {item.giscus && (
-          <div className="w-full flex justify-end">
-            <Link
-              href={`/projects/${slugify(item.title.english)}`}
-              className="note transition-all duration-200 hover:scale-105"
-            >
-              {
-                { chinese: "查看討論區", english: "View Discussion" }[
-                  Language.Current
-                ]
-              }
-              <ArrowRightOutlined />
-            </Link>
-          </div>
-        )}
       </div>
     </motion.div>
   );

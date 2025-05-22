@@ -81,7 +81,7 @@ const LabaG: ProjectItem = {
   giscus: {
     repo: "fanyuuu2006/LaBaG-Web",
     repoId: "R_kgDON9HtXQ",
-    categoryId: "DIC_kwDOOeftZs4CqXwr",
+    categoryId: "DIC_kwDON9HtXc4Cqct8",
   },
 };
 
