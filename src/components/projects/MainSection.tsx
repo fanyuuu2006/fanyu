@@ -72,7 +72,7 @@ export const MainSection = () => {
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTag, setCurrentTag] = useState<ProjectTag | null>(null);
-  const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(true);
+  const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(false);
 
   const sortedProject = useMemo(() => {
     return (

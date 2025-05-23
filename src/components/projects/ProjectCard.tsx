@@ -80,7 +80,7 @@ export const ProjectCard = ({
               className="hint w-fit flex flex-nowrap items-center gap-2 opacity-70"
             >
               {categoryIcon[link.category]}
-              <span>{link.href}</span>
+              <span className='wrap-anywhere'>{link.href}</span>
             </OutsideLink>
           ))}
           <ul className="note text-justify list-disc ps-4">
@@ -106,7 +106,7 @@ export const ProjectCard = ({
             </div>
           </div>
           {item.giscus && (
-            <div className="w-full flex">
+            <div className="w-full flex mt-2">
               <button
                 onClick={() => {
                   setGiscusShow((prev) => !prev);
