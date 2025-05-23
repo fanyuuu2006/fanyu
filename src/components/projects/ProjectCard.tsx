@@ -110,7 +110,9 @@ export const ProjectCard = ({
                 onClick={() => {
                   setGiscusShow((prev) => !prev);
                 }}
-                className="btn-primary hint px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105"
+                className={`${
+                  giscusShow ? "btn-secondary" : "btn-primary"
+                } hint px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105`}
               >
                 {
                   (giscusShow
@@ -127,9 +129,7 @@ export const ProjectCard = ({
       {item.giscus && (
         <Collapse
           state={giscusShow}
-          className={`w-full slide-collapse ${
-            giscusShow ? "mt-4" : "mt-0"
-          }`}
+          className={`w-full slide-collapse ${giscusShow ? "mt-4" : "mt-0"}`}
           id="giscus-container"
         >
           <Giscus

@@ -11,8 +11,8 @@
   --background-color-dark: #02061f;
   --background-color-overlay: #171c4ebb;
   --text-color: #ffffff;
-  --text-color-primary: #1f2bb7;
-  --text-color-secondary: #312c5b;
+  --text-color-secondary: #1f2bb7;
+  --text-color-primary: #005eff;
   --border-color: #36367e;
   --brightness-light: 2;
 }
@@ -73,8 +73,13 @@ button {
   background: var(--text-color-primary);
 }
 
+.btn-secondary {
+  background: var(--text-color-secondary);
+}
+
 .btn:active,
-.btn-primary:active {
+.btn-primary:active,
+.btn-secondary:active {
   scale: 0.9;
 }
 
