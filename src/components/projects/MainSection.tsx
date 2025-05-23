@@ -111,7 +111,7 @@ export const MainSection = () => {
             </span>
             <div
               role="tablist"
-              className="ms-auto flex bg-[var(--background-color-dark)] rounded-lg p-2"
+              className="ms-auto flex bg-[var(--background-color-dark)] rounded-lg p-1"
             >
               {[
                 { label: projectsContent.Newest, value: true },
@@ -121,7 +121,7 @@ export const MainSection = () => {
                 return (
                   <button
                     key={item.label}
-                    className={`px-4 py-2 transition-[background-color] duration-200 ${
+                    className={`px-4 py-1 transition-[background-color] duration-200 ${
                       isSelected ? "btn rounded-lg" : ""
                     }`}
                     onClick={() => {

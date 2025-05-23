@@ -103,7 +103,7 @@ export const ProjectCard = ({
           <div className="w-full flex justify-end">
             <Link
               href={`/projects/${slugify(item.title.english)}`}
-              className="note transition-all duration-200 hover:scale-105"
+              className="btn-primary hint px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105"
             >
               {
                 { chinese: "查看討論區", english: "View Discussion" }[
