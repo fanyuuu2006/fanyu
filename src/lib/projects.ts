@@ -188,51 +188,51 @@ const DoBuJio: ProjectItem = {
   ],
 };
 
-const AoJiao: ProjectItem = {
-  imageSrc: "/Portfolio/aojiao.jpg",
-  title: {
-    chinese: "小傲驕",
-    english: "Aojiao",
-  },
-  links: [
-    {
-      category: "demo",
-      href: "https://line.me/R/ti/p/@819olsro",
-    },
-    {
-      category: "github",
-      href: "https://github.com/fanyuuu2006/NTUST-BoardGameClub-Bot",
-    },
-  ],
-  time: "2025-03",
-  about: {
-    chinese: "臺科大桌遊社專屬的 Line Bot。",
-    english: "A custom Line Bot for NTUST Board Game Club.",
-  },
-  description: {
-    chinese: [
-      "使用 Express 架設伺服器，處理 Line webhook 請求。",
-      "使用 Google Sheets 作為資料儲存與查詢後端。",
-      "部署於 Vercel，快速穩定地提供服務。",
-    ],
-    english: [
-      "Built with Express to handle Line webhook requests.",
-      "Integrated with Google Sheets for data storage and retrieval.",
-      "Deployed on Vercel for fast and reliable performance.",
-    ],
-  },
-  tags: [
-    "Express",
-    "TypeScript",
-    "JavaScript",
-    "Node.js",
-    "Backend",
-    "Line Bot SDK",
-    "Google Sheets",
-    "Git / GitHub",
-    "Vercel",
-  ],
-};
+// const AoJiao: ProjectItem = {
+//   imageSrc: "/Portfolio/aojiao.jpg",
+//   title: {
+//     chinese: "小傲驕",
+//     english: "Aojiao",
+//   },
+//   links: [
+//     {
+//       category: "demo",
+//       href: "https://line.me/R/ti/p/@819olsro",
+//     },
+//     {
+//       category: "github",
+//       href: "https://github.com/fanyuuu2006/NTUST-BoardGameClub-Bot",
+//     },
+//   ],
+//   time: "2025-03",
+//   about: {
+//     chinese: "臺科大桌遊社專屬的 Line Bot。",
+//     english: "A custom Line Bot for NTUST Board Game Club.",
+//   },
+//   description: {
+//     chinese: [
+//       "使用 Express 架設伺服器，處理 Line webhook 請求。",
+//       "使用 Google Sheets 作為資料儲存與查詢後端。",
+//       "部署於 Vercel，快速穩定地提供服務。",
+//     ],
+//     english: [
+//       "Built with Express to handle Line webhook requests.",
+//       "Integrated with Google Sheets for data storage and retrieval.",
+//       "Deployed on Vercel for fast and reliable performance.",
+//     ],
+//   },
+//   tags: [
+//     "Express",
+//     "TypeScript",
+//     "JavaScript",
+//     "Node.js",
+//     "Backend",
+//     "Line Bot SDK",
+//     "Google Sheets",
+//     "Git / GitHub",
+//     "Vercel",
+//   ],
+// };
 
 const FanYuComponents: ProjectItem = {
   title: {
@@ -285,7 +285,6 @@ const FanYuComponents: ProjectItem = {
 export const projects: ProjectItem[] = [
   LabaG,
   ToolsForMetaInformation,
-  AoJiao,
   FanYuComponents,
   DoBuJio,
 ];
