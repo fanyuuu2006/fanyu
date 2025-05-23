@@ -72,8 +72,7 @@ export const MainSection = ({ title }: { title: string }) => {
               <ProjectCard variants={fadeInItem} item={matchingProject} />
             </motion.div>
             {matchingProject.giscus && (
-              <motion.div
-                variants={fadeInItem}
+              <div
                 className="w-full"
                 id="giscus-container"
               >
@@ -91,7 +90,7 @@ export const MainSection = ({ title }: { title: string }) => {
                   lang={Language.Current === "chinese" ? "zh-TW" : "en"}
                   loading="lazy"
                 />
-              </motion.div>
+              </div>
             )}
           </>
         )}
