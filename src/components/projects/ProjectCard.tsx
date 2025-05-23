@@ -49,11 +49,10 @@ export const ProjectCard = ({
   const [giscusShow, setGiscusShow] = useState<boolean>(false);
 
   return (
-    <>
-      <motion.div
+    <motion.div className="w-full flex flex-col" {...rest}>
+      <div
         id={slugify(item.title.english)}
         className={`${className} card shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
-        {...rest}
       >
         <Image
           className="bg-[#fff] border border-[var(--border-color)] h-25 w-fit  rounded-full"
@@ -80,7 +79,7 @@ export const ProjectCard = ({
               className="hint w-fit flex flex-nowrap items-center gap-2 opacity-70"
             >
               {categoryIcon[link.category]}
-              <span className='wrap-anywhere'>{link.href}</span>
+              <span className="wrap-anywhere">{link.href}</span>
             </OutsideLink>
           ))}
           <ul className="note text-justify list-disc ps-4">
@@ -124,11 +123,13 @@ export const ProjectCard = ({
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
       {item.giscus && (
         <Collapse
           state={giscusShow}
-          className="w-full slide-collapse"
+          className={`w-full slide-collapse ${
+            giscusShow ? "mt-4" : "mt-0"
+          }`}
           id="giscus-container"
         >
           <Giscus
@@ -147,6 +148,6 @@ export const ProjectCard = ({
           />
         </Collapse>
       )}
-    </>
+    </motion.div>
   );
 };
