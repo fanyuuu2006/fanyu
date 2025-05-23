@@ -80,7 +80,7 @@ export const ProjectCard = ({
               className="hint w-fit flex flex-nowrap items-center gap-2 opacity-70"
             >
               {categoryIcon[link.category]}
-              <span className="wrap-anywhere">{link.href}</span>
+              <span className='wrap-anywhere'>{link.href}</span>
             </OutsideLink>
           ))}
           <ul className="note text-justify list-disc ps-4">
@@ -131,22 +131,20 @@ export const ProjectCard = ({
           className="w-full slide-collapse"
           id="giscus-container"
         >
-          {giscusShow && (
-            <Giscus
-              repo={item.giscus.repo}
-              repoId={item.giscus.repoId}
-              categoryId={item.giscus.categoryId}
-              category="Announcements"
-              mapping="pathname"
-              strict="0"
-              reactionsEnabled="1"
-              emitMetadata="0"
-              inputPosition="top"
-              theme="preferred_color_scheme"
-              lang={Language.Current === "chinese" ? "zh-TW" : "en"}
-              loading="lazy"
-            />
-          )}
+          <Giscus
+            repo={item.giscus.repo}
+            repoId={item.giscus.repoId}
+            categoryId={item.giscus.categoryId}
+            category="Announcements"
+            mapping="pathname"
+            strict="0"
+            reactionsEnabled="1"
+            emitMetadata="0"
+            inputPosition="top"
+            theme="preferred_color_scheme"
+            lang={Language.Current === "chinese" ? "zh-TW" : "en"}
+            loading="lazy"
+          />
         </Collapse>
       )}
     </>
