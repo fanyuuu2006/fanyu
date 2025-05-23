@@ -100,7 +100,7 @@ export const MainSection = () => {
               }}
               className="flex items-center w-fit gap-2"
             >
-              {currentTag ?? projectsContent.all}
+              <span>{currentTag ?? projectsContent.all}</span>
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
             </button>
             <span>
@@ -180,7 +180,7 @@ export const MainSection = () => {
           <>{projectsContent.nofound}</>
         ) : (
           <motion.div
-            key={currentTag}
+            key={`${currentTag}${isOrderByNewest}`}
             variants={staggerContainer}
             initial="hiddenLeft"
             animate="show"
