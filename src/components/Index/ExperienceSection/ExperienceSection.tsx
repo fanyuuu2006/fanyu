@@ -53,7 +53,7 @@ export const ExperienceSection = () => {
         <div className="flex flex-col w-full gap-4 overflow-hidden">
           <div
             role="tablist"
-            className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between p-2"
+            className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between p-1"
           >
             {experienceTabs.map((key) => (
               <button
