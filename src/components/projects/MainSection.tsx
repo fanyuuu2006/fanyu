@@ -3,7 +3,11 @@ import { useLanguage } from "@/context/LanguageContext";
 import { projectTagCategories } from "@/lib/projects";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";
-import { ArrowLeftOutlined, FilterOutlined } from "@ant-design/icons";
+import {
+  ArrowLeftOutlined,
+  DownOutlined,
+  FilterOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
@@ -97,10 +101,10 @@ export const MainSection = () => {
               onClick={() => {
                 setCategoriesShow((prev) => !prev);
               }}
-              className="flex items-center w-fit gap-2"
+              className="btn flex items-center w-fit gap-2 px-2 py-1 rounded-lg"
             >
               <span>{projectsContent.filter}</span>
-              <FilterOutlined />
+              {categoriesShow ? <DownOutlined /> : <FilterOutlined />}
             </button>
             <span>
               {projectsContent.count.replace(
@@ -134,11 +138,8 @@ export const MainSection = () => {
               })}
             </div>
           </div>
-          <Collapse
-            className="slide-collapse absolute z-10 mt-14"
-            state={categoriesShow}
-          >
-            <div className="card flex flex-col p-4 gap-2 bordered">
+          <Collapse className="slide-collapse" state={categoriesShow}>
+            <div className="flex flex-col p-4 gap-2 bordered">
               <div>
                 <ProjectTagButton
                   tag={null}
