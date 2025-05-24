@@ -32,7 +32,7 @@ export const ProjectTagButton = ({
             } else {
               newTags.add(tag);
             }
-            return newTags.size > 0 ? newTags : null;
+            return newTags
           });
         } else {
           setCurrentTags(null);

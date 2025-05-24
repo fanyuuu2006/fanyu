@@ -78,7 +78,7 @@ export const MainSection = () => {
       !currentTags
         ? profile.portfolio.projects
         : profile.portfolio.projects.filter((item) =>
-            item.tags.some((tag) => currentTags?.has(tag))
+            [...currentTags].every((tag) => item.tags.includes(tag))
           )
     ).sort((a, b) => {
       const t1 = new Date(a.time).getTime();
