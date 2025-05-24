@@ -5,29 +5,38 @@ export type ProjectTagButtonProps = OverrideProps<
   React.HTMLAttributes<HTMLButtonElement>,
   {
     tag: ProjectTag | null;
-    currentTag: ProjectTag | null;
-    setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
-    categoriesShow: boolean;
-    setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
+    currentTags: Set<ProjectTag> | null;
+    setCurrentTags: React.Dispatch<
+      React.SetStateAction<Set<ProjectTag> | null>
+    >;
   }
 >;
 
 export const ProjectTagButton = ({
   tag,
-  currentTag,
-  setCurrentTag,
-  categoriesShow,
-  setCategoriesShow,
+  currentTags,
+  setCurrentTags,
   className = "",
   children,
   ...rest
 }: ProjectTagButtonProps) => {
-  const isActive = tag === currentTag;
+  const isActive = tag ? currentTags?.has(tag) : currentTags === null;
   return (
     <button
       onClick={() => {
-        if (!isActive) setCurrentTag(tag);
-        if (categoriesShow) setCategoriesShow(false);
+        if (tag) {
+          setCurrentTags((prevTags) => {
+            const newTags = new Set(prevTags ?? []);
+            if (newTags.has(tag)) {
+              newTags.delete(tag);
+            } else {
+              newTags.add(tag);
+            }
+            return newTags.size > 0 ? newTags : null;
+          });
+        } else {
+          setCurrentTags(null);
+        }
       }}
       className={`btn ${
         isActive ? "brightness-[var(--brightness-light)]" : ""

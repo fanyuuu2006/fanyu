@@ -29,19 +29,17 @@ export type ProjectCardProps = OverrideProps<
   HTMLMotionProps<"div">,
   {
     item: ProjectItem;
-    currentTag: ProjectTag | null;
-    setCurrentTag: React.Dispatch<React.SetStateAction<ProjectTag | null>>;
-    categoriesShow: boolean;
-    setCategoriesShow: React.Dispatch<React.SetStateAction<boolean>>;
+    currentTags: Set<ProjectTag> | null;
+    setCurrentTags: React.Dispatch<
+      React.SetStateAction<Set<ProjectTag> | null>
+    >;
   }
 >;
 
 export const ProjectCard = ({
   item,
-  currentTag,
-  setCurrentTag,
-  categoriesShow,
-  setCategoriesShow,
+  currentTags,
+  setCurrentTags,
   className = "",
   ...rest
 }: ProjectCardProps) => {
@@ -94,10 +92,8 @@ export const ProjectCard = ({
                 <ProjectTagButton
                   key={tag}
                   tag={tag}
-                  currentTag={currentTag}
-                  setCurrentTag={setCurrentTag}
-                  categoriesShow={categoriesShow}
-                  setCategoriesShow={setCategoriesShow}
+                  currentTags={currentTags}
+                  setCurrentTags={setCurrentTags}
                 >
                   {tag}
                 </ProjectTagButton>

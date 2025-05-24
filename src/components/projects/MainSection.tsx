@@ -24,6 +24,7 @@ type ProjectsContent = Record<
   | "count"
   | "Newest"
   | "Oldest"
+  | "filter"
   | ProjectTagCategory,
   string
 >;
@@ -46,6 +47,7 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
         count: "共 {count} 筆",
         Newest: "最新",
         Oldest: "最舊",
+        filter: "篩選",
       },
       english: {
         projects: "Projects",
@@ -62,6 +64,7 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
         count: "Total: {count}",
         Newest: "Newest",
         Oldest: "Oldest",
+        filter: "Filter",
       },
     } as LanguageContent<ProjectsContent>
   )[language]);
@@ -71,22 +74,20 @@ export const MainSection = () => {
   const projectsContent = getProjectsContent(Language.Current);
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
-  const [currentTag, setCurrentTag] = useState<ProjectTag | null>(null);
+  const [currentTags, setCurrentTags] = useState<Set<ProjectTag> | null>(null);
   const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(false);
 
   const sortedProject = useMemo(() => {
-    return (
-      !currentTag
-        ? profile.portfolio.projects
-        : profile.portfolio.projects.filter((item) =>
-            item.tags.includes(currentTag)
-          )
-    ).sort((a, b) => {
-      const t1 = new Date(a.time).getTime();
-      const t2 = new Date(b.time).getTime();
-      return isOrderByNewest ? t2 - t1 : t1 - t2;
-    });
-  }, [currentTag, isOrderByNewest]);
+    return !currentTags
+      ? profile.portfolio.projects
+      : profile.portfolio.projects
+          .filter((item) => item.tags.some((tag) => currentTags?.has(tag)))
+          .sort((a, b) => {
+            const t1 = new Date(a.time).getTime();
+            const t2 = new Date(b.time).getTime();
+            return isOrderByNewest ? t2 - t1 : t1 - t2;
+          });
+  }, [currentTags, isOrderByNewest]);
 
   return (
     <section>
@@ -100,7 +101,7 @@ export const MainSection = () => {
               }}
               className="flex items-center w-fit gap-2"
             >
-              <span>{currentTag ?? projectsContent.all}</span>
+              <span>{projectsContent.filter}</span>
               {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
             </button>
             <span>
@@ -143,10 +144,8 @@ export const MainSection = () => {
               <div>
                 <ProjectTagButton
                   tag={null}
-                  currentTag={currentTag}
-                  setCurrentTag={setCurrentTag}
-                  categoriesShow={categoriesShow}
-                  setCategoriesShow={setCategoriesShow}
+                  currentTags={currentTags}
+                  setCurrentTags={setCurrentTags}
                 >
                   {projectsContent.all}
                 </ProjectTagButton>
@@ -161,10 +160,8 @@ export const MainSection = () => {
                       <ProjectTagButton
                         key={tag}
                         tag={tag}
-                        currentTag={currentTag}
-                        setCurrentTag={setCurrentTag}
-                        categoriesShow={categoriesShow}
-                        setCategoriesShow={setCategoriesShow}
+                        currentTags={currentTags}
+                        setCurrentTags={setCurrentTags}
                       >
                         {tag}
                       </ProjectTagButton>
@@ -180,7 +177,7 @@ export const MainSection = () => {
           <>{projectsContent.nofound}</>
         ) : (
           <motion.div
-            key={`${currentTag}${isOrderByNewest}`}
+            key={`${currentTags}${isOrderByNewest}`}
             variants={staggerContainer}
             initial="hiddenLeft"
             animate="show"
@@ -191,10 +188,8 @@ export const MainSection = () => {
                 variants={fadeInItem}
                 key={item.title.english}
                 item={item}
-                currentTag={currentTag}
-                setCurrentTag={setCurrentTag}
-                categoriesShow={categoriesShow}
-                setCategoriesShow={setCategoriesShow}
+                currentTags={currentTags}
+                setCurrentTags={setCurrentTags}
               />
             ))}
           </motion.div>
