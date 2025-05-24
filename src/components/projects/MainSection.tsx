@@ -3,11 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { projectTagCategories } from "@/lib/projects";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";
-import {
-  ArrowLeftOutlined,
-  DownOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
+import { ArrowLeftOutlined, FilterOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
@@ -78,15 +74,17 @@ export const MainSection = () => {
   const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(false);
 
   const sortedProject = useMemo(() => {
-    return !currentTags
-      ? profile.portfolio.projects
-      : profile.portfolio.projects
-          .filter((item) => item.tags.some((tag) => currentTags?.has(tag)))
-          .sort((a, b) => {
-            const t1 = new Date(a.time).getTime();
-            const t2 = new Date(b.time).getTime();
-            return isOrderByNewest ? t2 - t1 : t1 - t2;
-          });
+    return (
+      !currentTags
+        ? profile.portfolio.projects
+        : profile.portfolio.projects.filter((item) =>
+            item.tags.some((tag) => currentTags?.has(tag))
+          )
+    ).sort((a, b) => {
+      const t1 = new Date(a.time).getTime();
+      const t2 = new Date(b.time).getTime();
+      return isOrderByNewest ? t2 - t1 : t1 - t2;
+    });
   }, [currentTags, isOrderByNewest]);
 
   return (
@@ -102,7 +100,7 @@ export const MainSection = () => {
               className="flex items-center w-fit gap-2"
             >
               <span>{projectsContent.filter}</span>
-              {categoriesShow ? <DownOutlined /> : <MenuOutlined />}
+              <FilterOutlined />
             </button>
             <span>
               {projectsContent.count.replace(

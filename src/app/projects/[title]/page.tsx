@@ -1,28 +1,27 @@
 "use client";
-import { MainSection } from "@/components/projects/[title]/MainSection";
 import { deslugify } from "@/utils/url";
+import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface PageProps {
   params: Promise<{ title: string }>;
 }
 
 export default function Page({ params }: PageProps) {
-  const [title, setTitle] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     params.then((res) => {
-      if (res.title) {
-        setTitle(deslugify(res.title));
-      } else {
-        router.replace("/projects");
-      }
+        router.replace(`/projects/#${deslugify(res.title)}`);
     });
   }, [params, router]);
 
-  if (!title) return null;
-
-  return <MainSection title={title} />;
+  return (
+    <div className="container">
+      <div className="flex">
+        <LoadingOutlined className="title mx-auto" />
+      </div>
+    </div>
+  );
 }
