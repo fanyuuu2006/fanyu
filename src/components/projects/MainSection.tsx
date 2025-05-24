@@ -16,6 +16,7 @@ import { profile } from "../../lib/profile";
 import { Collapse } from "fanyucomponents";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { Tooltip } from "antd";
 type ProjectsContent = Record<
   | "projects"
   | "nofound"
@@ -97,15 +98,16 @@ export const MainSection = () => {
         <div className="title font-bold">{projectsContent.projects}</div>
         <div className="note flex flex-col w-full gap-2">
           <div className="relative flex flex-nowrap items-center px-4 gap-4">
-            <button
-              onClick={() => {
-                setCategoriesShow((prev) => !prev);
-              }}
-              className="btn flex items-center w-fit gap-2 px-2 py-1 rounded-lg"
-            >
-              <span>{projectsContent.filter}</span>
-              {categoriesShow ? <DownOutlined /> : <FilterOutlined />}
-            </button>
+            <Tooltip title={projectsContent.filter}>
+              <button
+                onClick={() => {
+                  setCategoriesShow((prev) => !prev);
+                }}
+                className="btn flex items-center w-fit gap-2 p-2 rounded-lg"
+              >
+                {categoriesShow ? <DownOutlined /> : <FilterOutlined />}
+              </button>
+            </Tooltip>
             <span>
               {projectsContent.count.replace(
                 "{count}",
