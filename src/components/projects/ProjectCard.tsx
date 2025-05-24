@@ -111,8 +111,8 @@ export const ProjectCard = ({
                   setGiscusShow((prev) => !prev);
                 }}
                 className={`${
-                  giscusShow ? "btn-secondary" : "btn-primary"
-                } hint px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105`}
+                  giscusShow ? "opacity-70" : ""
+                } btn-primary hint px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105`}
               >
                 {
                   (giscusShow
