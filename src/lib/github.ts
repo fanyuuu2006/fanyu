@@ -4,4 +4,5 @@ export const githubBadges: string[] = [
   "Last commit",
   "Created at",
   "Repo size",
+  "Commit Activity/y",
 ];
