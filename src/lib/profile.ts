@@ -27,21 +27,15 @@ export const profile = {
   birthday: "2006/05/26 UTC+08:00",
   age: () => {
     const today = new Date();
+    const birthday = new Date(profile.birthday);
+    const age = today.getFullYear() - birthday.getFullYear();
 
-    const birthYear = 2006;
-    const birthMonth = 4; // 0-indexed（4 = 5 月）
-    const birthDate = 26;
+    const birthDayNotYet =
+      today.getMonth() < birthday.getMonth() ||
+      (today.getMonth() === birthday.getMonth() &&
+        today.getDate() < birthday.getDate());
 
-    let age = today.getFullYear() - birthYear;
-
-    // 如果今天的日期還沒到生日，就減一歲
-    const birthdayNotYet =
-      today.getMonth() < birthMonth ||
-      (today.getMonth() === birthMonth && today.getDate() < birthDate);
-
-    if (birthdayNotYet) age--;
-
-    return age;
+    return birthDayNotYet ? age - 1 : age;
   },
   experience,
   portfolio: {
