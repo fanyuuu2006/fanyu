@@ -8,6 +8,7 @@ import { Toast } from "../../common/Toast";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type HeroContent = Record<
   "hello" | "iAm" | "intro" | "coding" | "drawing" | "contactMe" | "portfolio",
@@ -39,18 +40,31 @@ const getHeroContent = (language: LanguageOption): HeroContent =>
   )[language]);
 
 export const HeroSection = () => {
+  const router = useRouter();
   const Language = useLanguage();
 
   const heroContent: HeroContent = getHeroContent(Language.Current);
 
-  const codeLines: string[] = [
-    "const FanYu = {",
-    `  name: '${profile.name[Language.Current]}',`,
-    `  nickname: '${profile.nickname[Language.Current]}',`,
-    `  age: ${profile.age()},`,
-    `  hobbies: ['${heroContent.coding}', '${heroContent.drawing}'],`,
-    "  skills: ['TypeScript', 'Next.js', 'Python'],",
-    "} as const;",
+  const codeLines: {
+    label: string;
+    onClick?: React.MouseEventHandler<HTMLElement>;
+  }[] = [
+    {
+      label: "const FanYu = {",
+    },
+    { label: `  name: '${profile.name[Language.Current]}',` },
+    { label: `  nickname: '${profile.nickname[Language.Current]}',` },
+    {
+      label: `  age: ${profile.age()},`,
+      onClick: () => {
+        router.push("/my");
+      },
+    },
+    {
+      label: `  hobbies: ['${heroContent.coding}', '${heroContent.drawing}'],`,
+    },
+    { label: "  skills: ['TypeScript', 'Next.js', 'Python']," },
+    { label: "} as const;" },
   ];
 
   return (
@@ -126,8 +140,14 @@ export const HeroSection = () => {
                     <motion.code
                       variants={fadeInItem}
                       className="whitespace-pre-wrap"
+                      {...(line.onClick
+                        ? {
+                            onClick: line.onClick,
+                            style: { cursor: "pointer" },
+                          }
+                        : {})}
                     >
-                      {line}
+                      {line.label}
                     </motion.code>
                   </div>
                 ))}
