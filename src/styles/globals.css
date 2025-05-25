@@ -102,6 +102,11 @@ button {
   border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 1);
 }
 
 a.card {

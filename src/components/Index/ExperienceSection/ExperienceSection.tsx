@@ -47,10 +47,10 @@ export const ExperienceSection = () => {
         initial="hiddenLeft"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="container flex flex-col items-center"
+        className="container flex flex-col items-center overflow-x-hidden"
       >
         <div className="title font-bold">{experienceContent.experience}</div>
-        <div className="flex flex-col w-full gap-4 overflow-hidden">
+        <div className="flex flex-col w-full gap-4">
           <div
             role="tablist"
             className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between p-1"
