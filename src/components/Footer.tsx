@@ -4,6 +4,7 @@ import { profile } from "@/lib/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { CodeOutlined, CopyrightOutlined } from "@ant-design/icons";
 import { OutsideLink } from "fanyucomponents";
+import { getGithubBadgeSrcs } from "../utils/github";
 
 type FooterContent = Record<"copyright" | "sourceCode", string>;
 
@@ -20,32 +21,6 @@ const getFooterContent = (language: LanguageOption): FooterContent =>
       },
     } as LanguageContent<FooterContent>
   )[language]);
-
-const githubBadgeItems: {
-  title: string;
-  url: string;
-}[] = [
-  {
-    title: "License",
-    url: "license",
-  },
-  {
-    title: "Stars",
-    url: "stars",
-  },
-  {
-    title: "Last commit",
-    url: "last-commit",
-  },
-  {
-    title: "Created at",
-    url: "created-at",
-  },
-  {
-    title: "Repository size",
-    url: "repo-size",
-  },
-];
 
 export const Footer = () => {
   const Langauge = useLanguage();
@@ -67,12 +42,12 @@ export const Footer = () => {
             />
           </div>
           <div className="flex flex-wrap gap-2">
-            {githubBadgeItems.map((item) => (
+            {getGithubBadgeSrcs("fanyuuu2006/fanyu").map((item) => (
               /* eslint-disable-next-line @next/next/no-img-element*/
               <img
                 draggable={false}
                 key={item.title}
-                src={`https://img.shields.io/github/${item.url}/fanyuuu2006/fanyu?style=flat-square`}
+                src={item.url}
                 alt={item.title}
                 title={item.title}
                 className="h-fit select-none"

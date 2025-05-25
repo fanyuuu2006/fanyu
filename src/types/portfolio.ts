@@ -1,5 +1,6 @@
 import { projectTagCategories } from "@/lib/projects";
 import { LanguageContent } from "./language";
+import { RepoString } from "./github";
 
 export type ProjectLinkCategory = "demo" | "github" | "package";
 
@@ -15,8 +16,8 @@ export type ProjectItem = {
   about: LanguageContent<string>;
   description: LanguageContent<string[]>;
   tags: ProjectTag[];
-  giscus?: {
-    repo: `${string}/${string}`;
+  github?: {
+    repo: RepoString;
     repoId: string;
     categoryId: string;
   };

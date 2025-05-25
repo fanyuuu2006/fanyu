@@ -18,12 +18,14 @@ import { SiNpm } from "react-icons/si";
 import { HTMLMotionProps, motion } from "framer-motion";
 import Giscus from "@giscus/react";
 import { useState } from "react";
+import { getGithubBadgeSrcs } from "@/utils/github";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
   github: <GithubOutlined />,
   package: <SiNpm />,
 };
+
 
 export type ProjectCardProps = OverrideProps<
   HTMLMotionProps<"div">,
@@ -100,7 +102,7 @@ export const ProjectCard = ({
               ))}
             </div>
           </div>
-          {item.giscus && (
+          {item.github && (
             <div className="w-full flex mt-2">
               <button
                 onClick={() => {
@@ -122,16 +124,29 @@ export const ProjectCard = ({
           )}
         </div>
       </div>
-      {item.giscus && (
+      {item.github && (
         <Collapse
           state={giscusShow}
-          className={`w-full slide-collapse ${giscusShow ? "mt-4" : "mt-0"}`}
-          id="giscus-container"
+          className={`w-full slide-collapse flex flex-col items-center gap-4 ${giscusShow ? "mt-4" : "mt-0"}`}
+          id="github-container"
         >
+          <div className="flex flex-wrap gap-4">
+            {getGithubBadgeSrcs(item.github.repo).map((item) => (
+              /* eslint-disable-next-line @next/next/no-img-element*/
+              <img
+                draggable={false}
+                key={item.title}
+                src={item.url}
+                alt={item.title}
+                title={item.title}
+                className="h-6 object-cover select-none"
+              />
+            ))}
+          </div>
           <Giscus
-            repo={item.giscus.repo}
-            repoId={item.giscus.repoId}
-            categoryId={item.giscus.categoryId}
+            repo={item.github.repo}
+            repoId={item.github.repoId}
+            categoryId={item.github.categoryId}
             category="Announcements"
             mapping="pathname"
             strict="0"

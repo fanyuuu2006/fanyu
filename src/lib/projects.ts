@@ -78,7 +78,7 @@ const LabaG: ProjectItem = {
     "NPM",
     "Vercel",
   ],
-  giscus: {
+  github: {
     repo: "fanyuuu2006/LaBaG-Web",
     repoId: "R_kgDON9HtXQ",
     categoryId: "DIC_kwDON9HtXc4Cqct8",
@@ -132,7 +132,7 @@ const ToolsForMetaInformation: ProjectItem = {
     "Git / GitHub",
     "Vercel",
   ],
-  giscus: {
+  github: {
     repo: "fanyuuu2006/Tools-For-Meta-Infomation",
     repoId: "R_kgDOOCOC7w",
     categoryId: "DIC_kwDOOCOC784Cqc9L",
