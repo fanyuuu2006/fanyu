@@ -25,11 +25,24 @@ export const profile = {
     english: "Da'an Dist, Taipei City, Taiwan",
   },
   birthday: "2006/05/26 UTC+08:00",
-  age: () =>
-    Math.floor(
-      (new Date().getTime() - new Date(profile.birthday).getTime()) /
-        (365.25 * 24 * 60 * 60 * 1000)
-    ),
+  age: () => {
+    const today = new Date();
+
+    const birthYear = 2006;
+    const birthMonth = 4; // 0-indexed（4 = 5 月）
+    const birthDate = 26;
+
+    let age = today.getFullYear() - birthYear;
+
+    // 如果今天的日期還沒到生日，就減一歲
+    const birthdayNotYet =
+      today.getMonth() < birthMonth ||
+      (today.getMonth() === birthMonth && today.getDate() < birthDate);
+
+    if (birthdayNotYet) age--;
+
+    return age;
+  },
   experience,
   portfolio: {
     projects,
