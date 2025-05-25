@@ -32,7 +32,7 @@ export const ProjectLinkCard = ({
   ...rest
 }: ProjectLinkCardProps) => {
   const Language = useLanguage();
-  const tagLimit = 5;
+  const tagLimit = 10;
 
   return (
     <Link
