@@ -41,18 +41,18 @@ export default function Error({
 
   return (
     <div className="container flex flex-col items-center justify-center min-h-screen">
-      <div className="card-glass p-8 flex flex-col items-center gap-4">
+      <div className="p-8 flex flex-col items-center gap-4">
         <h2 className="title font-bold">{errorContent.title}</h2>
         <span className="note text-center">{errorContent.message}</span>
         <span className="hint text-center">{error.message}</span>
         <div className="flex gap-4">
           <button
             onClick={() => reset()}
-            className="btn card-link note rounded-md px-4 py-2"
+            className="btn note rounded-lg px-4 py-2"
           >
             {errorContent.retry}
           </button>
-          <Link href="/" className="btn card-link note rounded-md px-4 py-2">
+          <Link href="/" className="btn note rounded-lg px-4 py-2">
             {errorContent.home}
           </Link>
         </div>
