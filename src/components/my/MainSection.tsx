@@ -4,6 +4,7 @@ import { profile } from "@/lib/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+import { TimeUnit } from "./TimeUnit";
 
 type MyContent = Record<"birthdayTimer", string>;
 
@@ -54,20 +55,20 @@ export const MainSection = () => {
   }, [nextBirthday]);
 
   return (
-    <section>
-      <div className="container flex flex-col items-center">
-        <span className="title font-bold">{myContent.birthdayTimer}</span>
+    <section id="hero">
+      <div className="container flex flex-col items-center justify-center min-h-screen">
         {timeLeft ? (
-          <div className="card p-4">
-            <span className="label font-bold">{`${timeLeft.days
-              .toString()
-              .padStart(3, "0")} : ${timeLeft.hours
-              .toString()
-              .padStart(2, "0")} : ${timeLeft.minutes
-              .toString()
-              .padStart(2, "0")} : ${timeLeft.seconds
-              .toString()
-              .padStart(2, "0")}`}</span>
+          <div className="card label font-bold flex flex-col gap-2 items-center p-4 brightness-[var(--brightness-light)]">
+            <span className="title font-bold">{myContent.birthdayTimer}</span>
+            <div className="flex gap-2 ">
+              <TimeUnit value={timeLeft.days} maxLength={3} />
+              :
+              <TimeUnit value={timeLeft.hours} maxLength={2} />
+              :
+              <TimeUnit value={timeLeft.minutes} maxLength={2} />
+              :
+              <TimeUnit value={timeLeft.seconds} maxLength={2} />
+            </div>
           </div>
         ) : (
           <LoadingOutlined className="label" />
