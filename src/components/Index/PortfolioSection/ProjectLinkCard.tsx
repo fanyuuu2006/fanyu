@@ -42,9 +42,9 @@ export const ProjectLinkCard = ({
       className={`${className} card flex flex-col items-center gap-4 overflow-hidden`}
       {...rest}
     >
-      <div className="w-full relative aspect-video bg-white">
+      <div className="w-full relative aspect-video bg-white  brightness-80">
         <Image
-          className="absolute inset-0 w-full h-full object-cover brightness-80 transition-transform duration-300 hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           src={item.imageSrc}
           alt={`${item.title.english} icon`}
           width={300}
