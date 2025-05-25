@@ -33,7 +33,7 @@ export const ImageCard = ({
     >
       <LazyImage
         src={src}
-        className="title bg-[#888] cursor-pointer select-none w-full aspect-square object-cover group-hover:outline"
+        className="title bg-[#888] cursor-pointer select-none aspect-square object-cover group-hover:outline"
         onClick={Modal.Open}
       />
       <Modal.Container>

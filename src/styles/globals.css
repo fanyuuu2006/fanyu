@@ -99,7 +99,7 @@ button {
 
 .card {
   background-color: var(--background-color);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border: 1px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease-in-out;
@@ -114,7 +114,7 @@ a.card {
 }
 
 a.card:hover {
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
   transform: scale(1.05);
 }
 

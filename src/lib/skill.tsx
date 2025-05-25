@@ -62,6 +62,14 @@ export const skills: Record<SkillCategory, { src: string; title: string }[]> = {
       title: "Visual Studio Code",
       src: "/Skills/vscode.svg",
     },
+    {
+      title: "Vercel",
+      src: "/Skills/vercel.svg",
+    },
+    {
+      title: "Markdown",
+      src: "/Skills/markdown.svg",
+    },
   ],
 };
 

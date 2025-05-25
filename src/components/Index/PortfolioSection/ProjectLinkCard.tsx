@@ -39,17 +39,19 @@ export const ProjectLinkCard = ({
       draggable={true}
       href={`/projects/#${slugify(item.title.english)}`}
       aria-label={`View project: ${item.title.english}`}
-      className={`${className} card flex flex-col items-center p-4 gap-4`}
+      className={`${className} card flex flex-col items-center gap-4 overflow-hidden`}
       {...rest}
     >
-      <Image
-        className="bg-[#fff] border border-[var(--border-color)] w-3/5 h-auto rounded-full object-cover"
-        src={item.imageSrc}
-        alt={`${item.title.english} icon`}
-        width={300}
-        height={300}
-      />
-      <div className="flex flex-col gap-2">
+      <div className="w-full relative aspect-video bg-white">
+        <Image
+          className="absolute inset-0 w-full h-full object-cover brightness-80 transition-transform duration-300 hover:scale-105"
+          src={item.imageSrc}
+          alt={`${item.title.english} icon`}
+          width={300}
+          height={300}
+        />
+      </div>
+      <div className="flex flex-col gap-2 p-4">
         <div className="content font-bold">{item.title[Language.Current]}</div>
         <div className="hint flex gap-2">
           <ClockCircleOutlined />

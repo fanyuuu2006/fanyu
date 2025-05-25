@@ -75,7 +75,7 @@ export const EventLinkCard = ({
         loading={isLoading}
         src={image}
         alt={eventName}
-        className="aspect-square title bg-[#888] w-full object-cover transition duration-300 group-hover:brightness-50 group-hover:scale-125"
+        className="aspect-square title bg-[#888] object-cover transition duration-300 group-hover:brightness-50 group-hover:scale-125"
       />
       <div className="absolute w-full px-4 py-2 bg-[#000] flex justify-center opacity-50 bottom-0 group-hover:opacity-100 transition-opacity">
         <span className="hint font-bold">{eventName}</span>
