@@ -2,23 +2,24 @@ import { OverrideProps } from "fanyucomponents";
 import { HTMLMotionProps, motion } from "framer-motion";
 
 export type TimeUnitProps = OverrideProps<
-  HTMLMotionProps<"span">,
-  { value: number; maxLength: number }
+  HTMLMotionProps<"div">,
+  { value: number; maxLength: number; label: string }
 >;
 
 export const TimeUnit = ({
   value,
   maxLength,
   className,
+  label,
   ...rest
 }: TimeUnitProps) => (
-  <motion.span
-    key={value}
-    className={`${
-      className ?? ""
-    } bg-[var(--background-color-dark)] p-2 rounded-lg`}
+  <motion.div
+    className={`${className ?? "flex flex-col items-center"} `}
     {...rest}
   >
-    {value.toString().padStart(maxLength, "0")}
-  </motion.span>
+    <span style={{ fontSize: "0.5em" }}>{label}</span>
+    <span className="bg-[var(--background-color-dark)] p-2 rounded-lg">
+      {value.toString().padStart(maxLength, "0")}
+    </span>
+  </motion.div>
 );

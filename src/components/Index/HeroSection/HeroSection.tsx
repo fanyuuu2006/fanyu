@@ -139,11 +139,14 @@ export const HeroSection = () => {
                     <span className="text-[#888] select-none">{index + 1}</span>
                     <motion.code
                       variants={fadeInItem}
-                      className="whitespace-pre-wrap"
+                      className={`whitespace-pre-wrap ${
+                        line.onClick
+                          ? "cursor-pointer hover:text-[var(--text-color-primary)]"
+                          : ""
+                      }`}
                       {...(line.onClick
                         ? {
                             onClick: line.onClick,
-                            style: { cursor: "pointer" },
                           }
                         : {})}
                     >

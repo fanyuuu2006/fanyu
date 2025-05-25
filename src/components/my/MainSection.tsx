@@ -6,16 +6,27 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { TimeUnit } from "./TimeUnit";
 
-type MyContent = Record<"birthdayTimer", string>;
+type MyContent = Record<
+  "birthdayTimer" | "days" | "hours" | "minutes" | "seconds",
+  string
+>;
 
 const getMyContent = (language: LanguageOption): MyContent =>
   ((
     {
       chinese: {
         birthdayTimer: "生日倒計時",
+        days: "天",
+        hours: "時",
+        minutes: "分",
+        seconds: "秒",
       },
       english: {
         birthdayTimer: "Birthday Timer",
+        days: "Days",
+        hours: "Hours",
+        minutes: "Minutes",
+        seconds: "Seconds",
       },
     } as LanguageContent<MyContent>
   )[language]);
@@ -56,18 +67,34 @@ export const MainSection = () => {
 
   return (
     <section id="hero">
-      <div className="container flex flex-col items-center justify-center min-h-screen">
+      <div className="container flex flex-col items-center justify-center min-h-162">
         {timeLeft ? (
-          <div className="card label font-bold flex flex-col gap-2 items-center p-4 brightness-[var(--brightness-light)]">
+          <div className="card flex flex-col gap-2 items-center px-8 py-4 brightness-[var(--brightness-light)]">
             <span className="title font-bold">{myContent.birthdayTimer}</span>
-            <div className="flex gap-2 ">
-              <TimeUnit value={timeLeft.days} maxLength={3} />
+            <div className="flex gap-2 items-end label">
+              <TimeUnit
+                label={myContent.days}
+                value={timeLeft.days}
+                maxLength={3}
+              />
               :
-              <TimeUnit value={timeLeft.hours} maxLength={2} />
+              <TimeUnit
+                label={myContent.hours}
+                value={timeLeft.hours}
+                maxLength={2}
+              />
               :
-              <TimeUnit value={timeLeft.minutes} maxLength={2} />
+              <TimeUnit
+                label={myContent.minutes}
+                value={timeLeft.minutes}
+                maxLength={2}
+              />
               :
-              <TimeUnit value={timeLeft.seconds} maxLength={2} />
+              <TimeUnit
+                label={myContent.seconds}
+                value={timeLeft.seconds}
+                maxLength={2}
+              />
             </div>
           </div>
         ) : (
