@@ -76,6 +76,14 @@ export const SkillsSection = () => {
             </motion.div>
           ))}
         </motion.div>
+        {/* <motion.img
+          variants={fadeInItem}
+          initial="hiddenBottom"
+          whileInView="show"
+          viewport={{ once: true }}
+          src="https://github-readme-stats.vercel.app/api/top-langs?username=fanyuuu2006&layout=compact&langs_count=100"
+          alt="Most Used Languages"
+        /> */}
       </div>
     </section>
   );

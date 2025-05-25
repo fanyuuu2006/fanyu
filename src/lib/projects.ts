@@ -186,6 +186,11 @@ const DoBuJio: ProjectItem = {
     "Git / GitHub",
     "Vercel",
   ],
+  github: {
+    repo: "fanyuuu2006/NTUST-1132-Software-Programming-Final-Project",
+    repoId: "R_kgDOOWe7lg",
+    categoryId: "DIC_kwDOOWe7ls4CqjrG",
+  },
 };
 
 // const AoJiao: ProjectItem = {
@@ -280,6 +285,11 @@ const FanYuComponents: ProjectItem = {
     "JavaScript",
     "Git / GitHub",
   ],
+  github: {
+    repo: "fanyuuu2006/fanyu-components",
+    repoId: "R_kgDOOWqWZA",
+    categoryId: "DIC_kwDOOWqWZM4Cqjq0",
+  },
 };
 
 export const projects: ProjectItem[] = [
