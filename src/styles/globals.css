@@ -7,13 +7,13 @@
 }
 
 :root {
-  --background-color: #0c0a34;
-  --background-color-dark: #02061f;
+  --background-color: #06073d;
+  --background-color-dark: #040a30;
   --background-color-overlay: #171c4ebb;
   --text-color: #ffffff;
   --text-color-primary: #005eff;
   --text-color-secondary: #1f2bb7;
-  --border-color: #36367e;
+  --border-color: #2d3493;
   --brightness-light: 2;
 }
 
@@ -100,7 +100,7 @@ button {
 .card {
   background-color: var(--background-color);
   border-radius: 1rem;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease-in-out;
 }

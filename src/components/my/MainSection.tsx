@@ -69,7 +69,7 @@ export const MainSection = () => {
     <section id="hero">
       <div className="container flex flex-col items-center justify-center min-h-162">
         {timeLeft ? (
-          <div className="card flex flex-col gap-2 items-center px-8 py-4 brightness-[var(--brightness-light)]">
+          <div className="card flex flex-col gap-2 items-center px-8 py-4">
             <span className="title font-bold">{myContent.birthdayTimer}</span>
             <div className="flex gap-2 items-end label">
               <TimeUnit
