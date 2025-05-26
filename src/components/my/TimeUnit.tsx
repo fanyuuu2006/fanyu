@@ -18,7 +18,7 @@ export const TimeUnit = ({
     {...rest}
   >
     <span style={{ fontSize: "0.5em" }}>{label}</span>
-    <span className="bg-[var(--background-color-dark)] p-2 rounded-lg">
+    <span className="font-bold bg-[var(--background-color-dark)] p-2 rounded-lg">
       {value.toString().padStart(maxLength, "0")}
     </span>
   </motion.div>

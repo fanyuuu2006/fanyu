@@ -72,7 +72,6 @@ const Routes: {
 
 export const Header = () => {
   const Language = useLanguage();
-
   const [menuShow, setMenuShow] = useState<boolean>(false);
 
   return (
@@ -90,7 +89,9 @@ export const Header = () => {
             />
           </Link>
           <button
-            className="lg:hidden label px-2 py-1"
+            className={`lg:hidden label px-2 py-1 transition-transform duration-300 ${
+              menuShow ? "-rotate-90" : ""
+            }`}
             onClick={() => setMenuShow((prev) => !prev)}
             aria-label={menuShow ? "關閉選單" : "開啟選單"}
             aria-expanded={menuShow}
