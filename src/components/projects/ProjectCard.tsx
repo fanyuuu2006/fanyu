@@ -153,7 +153,7 @@ export const ProjectCard = ({
             reactionsEnabled="1"
             emitMetadata="0"
             inputPosition="top"
-            theme="preferred_color_scheme"
+            theme="dark"
             lang={Language.Current === "chinese" ? "zh-TW" : "en"}
             loading="lazy"
           />
