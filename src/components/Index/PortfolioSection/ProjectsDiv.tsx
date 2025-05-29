@@ -10,6 +10,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 
+const projectCount = 3;
+
 type ProjectsContent = Record<"projects" | "viewMore" | "refresh", string>;
 
 const getProjectsContent = (language: LanguageOption): ProjectsContent =>
@@ -42,7 +44,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   const shuffleProject = () => {
     const shuffled = profile.portfolio.projects
       .toSorted(() => Math.random() - 0.5)
-      .slice(0, 3);
+      .slice(0, projectCount);
     setShuffledProject(shuffled);
   };
 

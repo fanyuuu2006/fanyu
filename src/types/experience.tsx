@@ -17,7 +17,8 @@ export type ExperienceItem = {
   organization?: ExperienceItem;
   role?: LanguageContent<string>;
   duration: Duration;
-  description?: React.FC<{ language: LanguageOption }>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  description?: React.FC<{ language: LanguageOption, [key: string]: any }>;
   imageSrc: string;
   links?: LinkContent<string>[];
 };

@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 
+const tagLimit = 10;
+
 const ProjectTag = ({
   children,
   ...rest
@@ -32,7 +34,6 @@ export const ProjectLinkCard = ({
   ...rest
 }: ProjectLinkCardProps) => {
   const Language = useLanguage();
-  const tagLimit = 10;
 
   return (
     <Link
