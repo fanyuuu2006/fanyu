@@ -12,7 +12,7 @@ export const LFR: ExperienceItem = {
     english: "Temporary Part-Time Worker",
   },
   duration: { start: "2022-03", end: "2022-03" },
-  imageSrc: "/Experience/Work/LFR.jpg",
+  imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95Iei_oww6g8XyzyLemSlBJCFx9y8srqeBw&s",
   links: [
     {
       chinese: "六福莊官網",
@@ -39,7 +39,7 @@ export const KNSH: ExperienceItem = {
     english: "Summer Part-Time Worker",
   },
   duration: { start: "2024-06", end: "2024-07" },
-  imageSrc: "/Experience/Work/KNSH.jpg",
+  imageSrc: "https://www.knsh.com.tw/Template/2020/Images/fevicon/fevicon.gif",
   links: [
     {
       chinese: "康軒文教集團官網",
@@ -66,7 +66,7 @@ export const LFV: ExperienceItem = {
     english: "Temporary Part-Time Worker",
   },
   duration: { start: "2024-08", end: "2024-08" },
-  imageSrc: "/Experience/Work/LFV.jpg",
+  imageSrc: "https://alumnus.pccu.edu.tw/var/file/264/1264/img/2537/LINE_ALBUM_2022.4.26_220426_3.jpg",
   links: [
     {
       chinese: "六福村官網",
@@ -94,7 +94,7 @@ export const HXL: ExperienceItem = {
   },
   organization: NTUST,
   duration: { start: "2024-10", end: null },
-  imageSrc: "/Experience/Work/HXL.jpg",
+  imageSrc: "https://1.bp.blogspot.com/-4JBaaL7IXuo/XjV47f4Rc9I/AAAAAAAEnBU/g4K3C9kZKbM1P5gvuFJ3RQnygfgHAHrWACKgBGAsYHg/s1600/IMG_9510.HEIC",
   links: [
     {
       chinese: "臺灣省臺北市大安區",

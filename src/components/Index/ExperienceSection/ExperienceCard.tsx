@@ -3,7 +3,6 @@ import { ExperienceItem } from "@/types/experience";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import { motion, HTMLMotionProps } from "framer-motion";
-import Image from "next/image";
 
 export type ExperienceCardProps = OverrideProps<
   HTMLMotionProps<"div">,
@@ -23,7 +22,8 @@ export const ExperienceCard = ({
       className={`${className} card w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
-      <Image
+      {/*eslint-disable-next-line @next/next/no-img-element*/}
+      <img
         src={item.imageSrc}
         alt={item.name.english}
         className="h-30 w-30 object-cover bg-[#fff] rounded-full border border-[var(--border-color)]"

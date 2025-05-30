@@ -19,7 +19,8 @@ export const PDAO: ExperienceItem = {
     english: "Member",
   },
   duration: { start: "2025-04", end: "2025-04" },
-  imageSrc: "/Experience/Competition/PDAO.jpg",
+  imageSrc:
+    "https://megapx-assets.dcard.tw/images/e28d73e6-a9b0-4449-854e-2b8b50dbb6b6/orig.jpeg",
   links: [
     {
       chinese: "PDAO Instagram",
@@ -56,7 +57,8 @@ export const HCCGM: ExperienceItem = {
     english: "Member",
   },
   duration: { start: "2021-01", end: "2021-01" },
-  imageSrc: "/Experience/Competition/HCCGM.jpg",
+  imageSrc:
+    "https://lh3.googleusercontent.com/1JwF4VujKdYtmwSZgc12t0_78SykSGK1bNSZ0eK1D6x_kbeHnqpwgLx-xFKWjFfDYtBtc5Zc1JL3cWm4zOK_QvEsBWK5d2NKIu7kY0jIx3YurR86lOwYH3QtfulTZlcR1A=w1280",
   links: [
     {
       chinese: "金頭腦數學競賽官網",

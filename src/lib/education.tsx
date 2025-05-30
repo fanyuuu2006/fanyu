@@ -30,7 +30,7 @@ export const NTUST: ExperienceItem = {
       href: "https://maps.app.goo.gl/Rzro8g26H8Pb1f1EA",
     },
   ],
-  imageSrc: "/Experience/Education/NTUST.png",
+  imageSrc: "https://upload.wikimedia.org/wikipedia/zh/b/b1/Taiwan_Tech_Logo.svg",
 };
 
 export const CPSHS: ExperienceItem = {
@@ -61,7 +61,7 @@ export const CPSHS: ExperienceItem = {
       href: "https://maps.app.goo.gl/PoxfwWMvbdLbpSMH8",
     },
   ],
-  imageSrc: "/Experience/Education/CPSHS.png",
+  imageSrc: "https://upload.wikimedia.org/wikipedia/zh/8/80/Chih_Ping_Senior_High_School_Logo.gif",
 };
 
 export const FGJH: ExperienceItem = {
@@ -88,7 +88,7 @@ export const FGJH: ExperienceItem = {
       href: "https://maps.app.goo.gl/FZ1kwUBVNgYHk8Uj8",
     },
   ],
-  imageSrc: "/Experience/Education/FGJH.png",
+  imageSrc: "https://fgjh.hcc.edu.tw/var/file/14/1014/img/1/102403877.jpg",
 };
 
 export const GSES: ExperienceItem = {
@@ -115,5 +115,5 @@ export const GSES: ExperienceItem = {
       href: "https://maps.app.goo.gl/Rpe6AUrEDmfryADM8",
     },
   ],
-  imageSrc: "/Experience/Education/GSES.png",
+  imageSrc: "https://gses.hcc.edu.tw/var/file/63/1063/msys_1063_9975114_41652.png",
 };
