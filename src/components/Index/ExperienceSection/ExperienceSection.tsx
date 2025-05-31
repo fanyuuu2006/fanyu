@@ -7,10 +7,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 import { ExperienceTab } from "@/types/experience";
 import { experienceTabIcons, experienceTabs } from "@/lib/experience";
-import { ExperienceListDiv } from "./ExperienceListDiv";
+import { ExperienceCard } from "./ExperienceCard";
+import { Collapse } from "fanyucomponents";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 type ExperienceContent = Record<
-  "experience" | ExperienceTab | "noExperience",
+  "experience" | ExperienceTab | "noExperience" | "viewMore" | "collapse",
   string
 >;
 const getExperienceContent = (language: LanguageOption): ExperienceContent =>
@@ -23,6 +25,8 @@ const getExperienceContent = (language: LanguageOption): ExperienceContent =>
         work: "工作",
         competition: "競賽",
         noExperience: "尚無經歷資料。",
+        viewMore: "查看更多",
+        collapse: "收起",
       },
       english: {
         experience: "Experience",
@@ -31,20 +35,29 @@ const getExperienceContent = (language: LanguageOption): ExperienceContent =>
         work: "Work",
         competition: "Competition",
         noExperience: "No experience data.",
+        viewMore: "View More",
+        collapse: "Collapse",
       },
     } as LanguageContent<ExperienceContent>
   )[language]);
+
+const viewLimit = 4;
 
 export const ExperienceSection = () => {
   const Language = useLanguage();
   const experienceContent = getExperienceContent(Language.Current);
   const [Tab, setTab] = useState<ExperienceTab>("education");
+  const [showMore, setShowMore] = useState(false);
 
   const sortedItems = profile.experience[Tab].sort(
     (a, b) =>
       new Date(b.duration.start).getTime() -
       new Date(a.duration.start).getTime()
   );
+
+  const defaultItems = sortedItems.slice(0, viewLimit);
+  const moreItems = sortedItems.slice(viewLimit);
+  const hasMore = moreItems.length > 0;
 
   return (
     <section id="experience">
@@ -90,8 +103,56 @@ export const ExperienceSection = () => {
               animate="show"
               exit="hiddenRight"
             >
-              {profile.experience[Tab].length > 0 ? (
-                <ExperienceListDiv items={sortedItems} />
+              {sortedItems.length > 0 ? (
+                <>
+                  {defaultItems.map((item) => (
+                    <ExperienceCard
+                      key={item.name.english}
+                      variants={fadeInItem}
+                      item={item}
+                    />
+                  ))}
+                  {hasMore && (
+                    <div
+                      className={`w-full flex flex-col ${
+                        showMore ? "gap-4" : ""
+                      }`}
+                    >
+                      <Collapse
+                        as={"div"}
+                        state={showMore}
+                        className="flex flex-col w-full gap-4 slide-collapse"
+                        {...(showMore ? { style: { overflow: "visible" } } : {})}
+                      >
+                        {moreItems.map((item) => (
+                          <ExperienceCard
+                            key={item.name.english}
+                            variants={fadeInItem}
+                            item={item}
+                          />
+                        ))}
+                      </Collapse>
+                      <div className="w-full text-center">
+                        <button
+                          className="note hover:underline"
+                          onClick={() => {
+                            setShowMore((prev) => !prev);
+                          }}
+                        >
+                          {showMore ? (
+                            <>
+                              <UpOutlined /> {experienceContent.collapse}
+                            </>
+                          ) : (
+                            <>
+                              <DownOutlined /> {experienceContent.viewMore}
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               ) : (
                 <motion.div
                   variants={fadeInItem}
