@@ -139,7 +139,7 @@ a.card:hover {
 }
 
 .slide-collapse {
-  transition: max-height 0.3s;
+  transition: height 0.3s;
 }
 
 @media (max-width: 768px) {

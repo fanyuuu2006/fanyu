@@ -3,11 +3,11 @@ import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { profile } from "@/lib/profile";
 import { useState } from "react";
-import { ExperienceCard } from "./ExperienceCard";
 import { AnimatePresence, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 import { ExperienceTab } from "@/types/experience";
 import { experienceTabIcons, experienceTabs } from "@/lib/experience";
+import { ExperienceListDiv } from "./ExperienceListDiv";
 
 type ExperienceContent = Record<
   "experience" | ExperienceTab | "noExperience",
@@ -39,6 +39,12 @@ export const ExperienceSection = () => {
   const Language = useLanguage();
   const experienceContent = getExperienceContent(Language.Current);
   const [Tab, setTab] = useState<ExperienceTab>("education");
+
+  const sortedItems = profile.experience[Tab].sort(
+    (a, b) =>
+      new Date(b.duration.start).getTime() -
+      new Date(a.duration.start).getTime()
+  );
 
   return (
     <section id="experience">
@@ -85,17 +91,7 @@ export const ExperienceSection = () => {
               exit="hiddenRight"
             >
               {profile.experience[Tab].length > 0 ? (
-                profile.experience[Tab].sort(
-                  (a, b) =>
-                    new Date(b.duration.start).getTime() -
-                    new Date(a.duration.start).getTime()
-                ).map((item) => (
-                  <ExperienceCard
-                    variants={fadeInItem}
-                    key={item.name.english}
-                    item={item}
-                  />
-                ))
+                <ExperienceListDiv items={sortedItems} />
               ) : (
                 <motion.div
                   variants={fadeInItem}
