@@ -24,7 +24,10 @@ export const ExperienceCard = ({
     >
       {/*eslint-disable-next-line @next/next/no-img-element*/}
       <img
-        src={item.imageSrc}
+        src={
+          item.imageSrc ??
+          `https://s2.googleusercontent.com/s2/favicons?domain_url=${item.links?.[0].href}`
+        }
         alt={item.name.english}
         className="h-30 w-30 object-cover bg-[#fff] rounded-full border border-[var(--border-color)]"
         width={600}

@@ -19,7 +19,7 @@ export type ExperienceItem = {
   duration: Duration;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   description?: React.FC<{ language: LanguageOption, [key: string]: any }>;
-  imageSrc: string;
+  imageSrc?: string;
   links?: LinkContent<string>[];
 };
 
