@@ -1,4 +1,4 @@
-import { Toast } from "@/components/common/Toast";
+import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { LoadingOutlined } from "@ant-design/icons";

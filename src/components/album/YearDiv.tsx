@@ -6,7 +6,7 @@ import { OverrideProps } from "fanyucomponents";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useEffect } from "react";
-import { Toast } from "../common/Toast";
+import { Toast } from "../custom/Toast";
 import { slugify } from "@/utils/url";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";

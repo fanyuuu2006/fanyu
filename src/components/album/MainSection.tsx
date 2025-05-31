@@ -1,7 +1,7 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { Toast } from "@/components/common/Toast";
+import { Toast } from "@/components/custom/Toast";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import useSWR from "swr";

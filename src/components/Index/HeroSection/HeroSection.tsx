@@ -4,7 +4,7 @@ import { profile } from "@/lib/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { CopyOutlined } from "@ant-design/icons";
 import { TypeWriterText } from "fanyucomponents";
-import { Toast } from "../../common/Toast";
+import { Toast } from "../../custom/Toast";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 import Link from "next/link";

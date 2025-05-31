@@ -1,13 +1,13 @@
 import { slugify } from "@/utils/url";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
-import { LazyImage } from "../common/LazyImage";
+import { LazyImage } from "../custom/LazyImage";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { fetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
 import useSWR from "swr";
-import { Toast } from "../common/Toast";
+import { Toast } from "../custom/Toast";
 
 type EventsContent = Record<"noImages" | "imagesLoadFailed", string>;
 

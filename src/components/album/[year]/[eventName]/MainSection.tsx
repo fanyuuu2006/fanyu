@@ -1,5 +1,5 @@
 "use client";
-import { Toast } from "@/components/common/Toast";
+import { Toast } from "@/components/custom/Toast";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";

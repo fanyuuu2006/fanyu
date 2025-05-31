@@ -1,5 +1,5 @@
-import { LazyImage } from "@/components/common/LazyImage";
-import { Toast } from "@/components/common/Toast";
+import { LazyImage } from "@/components/custom/LazyImage";
+import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { fadeInItem } from "@/lib/motion";
 import { LanguageOption, LanguageContent } from "@/types/language";
