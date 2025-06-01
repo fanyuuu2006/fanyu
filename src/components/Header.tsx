@@ -109,6 +109,7 @@ export const Header = () => {
         </div>
         <Collapse
           state={menuShow}
+          className="slide-collapse lg:hidden"
           id="mobile-nav"
         >
           <div className="flex flex-col w-full note font-bold text-center">
