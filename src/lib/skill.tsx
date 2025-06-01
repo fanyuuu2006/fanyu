@@ -50,6 +50,10 @@ export const skills: Record<SkillCategory, { src: string; title: string }[]> = {
   backend: [
     { title: "Node.js", src: "https://www.svgrepo.com/show/373929/node.svg" },
     { title: "Python", src: "https://www.svgrepo.com/show/452091/python.svg" },
+    {
+      title: "Flask",
+      src: "https://flask.palletsprojects.com/en/stable/_static/shortcut-icon.png",
+    },
   ],
   devtools: [
     {
