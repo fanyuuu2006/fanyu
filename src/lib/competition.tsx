@@ -11,10 +11,6 @@ export const PDAO: ExperienceItem = {
     chinese: "PDAO 2025",
     english: "PDAO 2025",
   },
-  department: {
-    chinese: "不知道對不隊",
-    english: "Not Sure If It's the Right Team",
-  },
   role: {
     chinese: "隊員",
     english: "Member",
@@ -37,9 +33,24 @@ export const PDAO: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <span className="note font-bold">
-      {{ chinese: "第 59 名", english: "59th" }[language]}
-    </span>
+    <div className="flex flex-col hint font-bold">
+      <span>
+        {
+          {
+            chinese: "隊名: 不知道對不隊",
+            english: "Team Name: Not Sure If It's the Right Team",
+          }[language]
+        }
+      </span>
+      <span>
+        {
+          {
+            chinese: "名次: 59",
+            english: "Rank: 59",
+          }[language]
+        }
+      </span>
+    </div>
   ),
 };
 
@@ -152,14 +163,24 @@ export const XLS: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <span className="note font-bold">
-      {
+    <div className="flex flex-col hint font-bold">
+      <span>
         {
-          chinese: "挑戰完成獎",
-          english: "Challenge Completed Award",
-        }[language]
-      }
-    </span>
+          {
+            chinese: "隊名: 你在偷喵我吼?",
+            english: "Team Name: Are You Secretly Meow-ing at Me?",
+          }[language]
+        }
+      </span>
+      <span>
+        {
+          {
+            chinese: "挑戰完成獎",
+            english: "Challenge Completed Award",
+          }[language]
+        }
+      </span>
+    </div>
   ),
 };
 
