@@ -13,7 +13,7 @@ export const PDAO: ExperienceItem = {
   },
   department: {
     chinese: "不知道對不隊",
-    english: "Don't Know If It's the Right Team",
+    english: "Not Sure If It's the Right Team",
   },
   role: {
     chinese: "隊員",
@@ -68,14 +68,18 @@ export const HCCGM: ExperienceItem = {
     },
     {
       chinese: "臺灣省新竹縣新豐鄉",
-      english: "Hsinchu County, Taiwan",
+      english: "Xinfeng Township, Hsinchu County, Taiwan",
       icon: <EnvironmentOutlined />,
       href: "https://maps.app.goo.gl/KJsTatVSbbJhiCKx8",
     },
   ],
   description: ({ language }) => (
     <span className="note font-bold">
-      {{ chinese: "團體組 第 2 名", english: "Team 2nd Place" }[language]}
+      {
+        { chinese: "團體組 第 2 名", english: "2nd Place, Team Category" }[
+          language
+        ]
+      }
     </span>
   ),
 };
@@ -111,7 +115,7 @@ export const SE: ExperienceItem = {
             chinese:
               '主題名稱:  疫情後消費者對電商平台使用現狀-以"蝦皮購物"為例',
             english:
-              'Topic Name: Consumer Behavior on E-commerce Platforms after the Pandemic - Taking "Shopee" as an Example',
+              "Topic Name: Consumer Usage of E-commerce Platforms after the Pandemic – A Case Study on Shopee",
           }[language]
         }
       </span>
@@ -119,7 +123,7 @@ export const SE: ExperienceItem = {
         {
           {
             chinese: "名次: 甲等",
-            english: "Ranl: Grade A",
+            english: "Rank: Grade A",
           }[language]
         }
       </span>
@@ -167,7 +171,7 @@ export const PVQC2021: ExperienceItem = {
   },
   department: {
     chinese: "商業與管理 類 北二區賽",
-    english: "Business and Management Class North 2 Zone",
+    english: "Business and Management Category, Northern Region 2",
   },
   duration: { start: "2021-11", end: "2021-11" },
   imageSrc:
@@ -190,7 +194,7 @@ export const PVQC2022: ExperienceItem = {
   },
   department: {
     chinese: "資訊(計算機) 類 北二區賽",
-    english: "Information (Computer) Class North 2 Zone",
+    english: "Information(Computer) Category, Northern Region 2",
   },
   duration: { start: "2022-12", end: "2022-12" },
   imageSrc:
