@@ -69,8 +69,7 @@ export const HCCGM: ExperienceItem = {
     english: "Member",
   },
   duration: { start: "2021-01", end: "2021-01" },
-  imageSrc:
-    "https://lh5.googleusercontent.com/eP5jCnEzzEGpcTwk0tXir-tenZ341Q7rNqgWX7Pe0323UNvRdJHOETldF-7g7rnyHP-tllWY0YipEs1w2PISE8vzsNr4H9mhHHLTfy7Ogp9n-KbKU9nhu6Y9qo9y9cpDdA=w1280",
+  imageSrc: "/api/image/1aPifYS-OcfKdp01OCzz6acKKK_3A1Huo",
   links: [
     {
       chinese: "金頭腦數學競賽官網",
