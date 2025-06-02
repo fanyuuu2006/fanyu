@@ -69,7 +69,8 @@ export const HCCGM: ExperienceItem = {
     english: "Member",
   },
   duration: { start: "2021-01", end: "2021-01" },
-  imageSrc: undefined,
+  imageSrc:
+    "https://lh5.googleusercontent.com/eP5jCnEzzEGpcTwk0tXir-tenZ341Q7rNqgWX7Pe0323UNvRdJHOETldF-7g7rnyHP-tllWY0YipEs1w2PISE8vzsNr4H9mhHHLTfy7Ogp9n-KbKU9nhu6Y9qo9y9cpDdA=w1280",
   links: [
     {
       chinese: "金頭腦數學競賽官網",
@@ -204,6 +205,12 @@ export const PVQC2021: ExperienceItem = {
       icon: <LinkOutlined />,
       href: "https://sites.google.com/view/gladworldcontest/%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87/2021%E5%B9%B4%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87",
     },
+    {
+      chinese: "臺灣省桃園市中壢區",
+      english: "Taoyuan City, Zhongli District, Taiwan",
+      icon: <EnvironmentOutlined />,
+      href: "https://maps.app.goo.gl/GLQw8GLzCRiNSCup6",
+    },
   ],
 };
 
@@ -226,6 +233,12 @@ export const PVQC2022: ExperienceItem = {
       english: "Competition Website",
       icon: <LinkOutlined />,
       href: "https://sites.google.com/view/gladworldcontest/%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87/2022%E5%B9%B4%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87",
+    },
+    {
+      chinese: "臺灣省桃園市中壢區",
+      english: "Taoyuan City, Zhongli District, Taiwan",
+      icon: <EnvironmentOutlined />,
+      href: "https://maps.app.goo.gl/GLQw8GLzCRiNSCup6",
     },
   ],
 };
