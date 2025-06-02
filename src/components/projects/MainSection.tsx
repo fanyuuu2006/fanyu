@@ -95,7 +95,7 @@ export const MainSection = () => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <div className="title font-bold">{projectsContent.projects}</div>
+        <h1 className="title font-bold">{projectsContent.projects}</h1>
         <div className="note flex flex-col w-full gap-2">
           <div className="relative flex flex-nowrap items-center px-4 gap-4">
             <Tooltip title={projectsContent.filter}>

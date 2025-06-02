@@ -74,10 +74,10 @@ export const HeroSection = () => {
           <div className="flex flex-col items-center justify-center p-4 gap-4 w-full md:w-24/50">
             <div>
               <div className="label font-bold">{heroContent.hello}</div>
-              <div className="title font-bold">
+              <h1 className="title font-bold">
                 {heroContent.iAm}
                 {profile.nickname[Language.Current]}❗
-              </div>
+              </h1>
               <TypeWriterText
                 className="note"
                 speed={heroContent.intro.length * 1.5}

@@ -61,7 +61,7 @@ export const AboutMeSection = () => {
               height={1000}
             />
           </motion.div>
-          <motion.div
+          <motion.article
             variants={fadeInItem}
             initial="hiddenRight"
             whileInView="show"
@@ -73,7 +73,7 @@ export const AboutMeSection = () => {
                 {part}
               </p>
             ))}
-          </motion.div>
+          </motion.article>
         </div>
       </div>
     </section>
