@@ -59,4 +59,8 @@ export const metadata: Metadata = {
     images: ["/GameShow.jpg"],
   },
   robots: "index, follow",
+
+  verification: {
+  google: "Ycw57oFCY42UuhQhSugtMUYwviiMykaBKoOs4FhnB4c",
+},
 }
