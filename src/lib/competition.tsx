@@ -46,7 +46,7 @@ export const PDAO: ExperienceItem = {
         {
           {
             chinese: "名次: 59",
-            english: "Rank: 59",
+            english: "Placed 59th",
           }[language]
         }
       </span>
@@ -87,9 +87,10 @@ export const HCCGM: ExperienceItem = {
   description: ({ language }) => (
     <span className="note font-bold">
       {
-        { chinese: "團體組 第 2 名", english: "2nd Place, Team Category" }[
-          language
-        ]
+        {
+          chinese: "團體賽(丙組) 第 2 名",
+          english: "2nd Place in Team Competition (Group C)",
+        }[language]
       }
     </span>
   ),
@@ -123,10 +124,9 @@ export const SE: ExperienceItem = {
       <span>
         {
           {
-            chinese:
-              '主題名稱:  疫情後消費者對電商平台使用現狀-以"蝦皮購物"為例',
+            chinese: '主題:  疫情後消費者對電商平台使用現狀-以"蝦皮購物"為例',
             english:
-              "Topic Name: Consumer Usage of E-commerce Platforms after the Pandemic – A Case Study on Shopee",
+              "Topic: Consumer Usage of E-commerce Platforms after the Pandemic – A Case Study on Shopee",
           }[language]
         }
       </span>
