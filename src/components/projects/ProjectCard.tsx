@@ -26,9 +26,8 @@ const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   package: <SiNpm />,
 };
 
-
 export type ProjectCardProps = OverrideProps<
-  HTMLMotionProps<"div">,
+  HTMLMotionProps<"article">,
   {
     item: ProjectItem;
     currentTags: Set<ProjectTag> | null;
@@ -49,7 +48,7 @@ export const ProjectCard = ({
   const [giscusShow, setGiscusShow] = useState<boolean>(false);
 
   return (
-    <motion.div className="w-full flex flex-col" {...rest}>
+    <motion.article className="w-full flex flex-col" {...rest}>
       <div
         id={slugify(item.title.english)}
         className={`${className} card shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
@@ -127,7 +126,9 @@ export const ProjectCard = ({
       {item.github && (
         <Collapse
           state={giscusShow}
-          className={`w-full slide-collapse flex flex-col items-center gap-4 ${giscusShow ? "mt-4" : "mt-0"}`}
+          className={`w-full slide-collapse flex flex-col items-center gap-4 ${
+            giscusShow ? "mt-4" : "mt-0"
+          }`}
           id="github-container"
         >
           <div className="flex flex-wrap gap-4">
@@ -159,6 +160,6 @@ export const ProjectCard = ({
           />
         </Collapse>
       )}
-    </motion.div>
+    </motion.article>
   );
 };
