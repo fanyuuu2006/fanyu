@@ -4,7 +4,15 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { LanguageSwitchButton } from "@/components/LanguageSwitchButton";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 export { metadata } from "./metadata";
+import { Noto_Sans_SC } from "next/font/google";
+
+const notoSansSC = Noto_Sans_SC({
+  subsets: ["latin-ext"],
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -41,13 +49,15 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body className={`${notoSansSC.className}`}>
         <LanguageProvider>
           <Header />
           <main className="mt-24">{children}</main>
           <LanguageSwitchButton />
           <Footer />
         </LanguageProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

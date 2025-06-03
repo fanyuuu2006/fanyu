@@ -19,9 +19,7 @@ export const metadata: Metadata = {
 
   keywords: [
     "FanYu",
-    "FanYu 飯魚",
     "范余",
-    "飯魚 FanYu",
     "飯魚",
     "Fan-Yu Zhen-Fu",
     "范余振富",
@@ -41,11 +39,7 @@ export const metadata: Metadata = {
     "Next.js",
     "Python",
     "啦八機",
-    "雞巴啦",
-    "機八啦",
     "LaBaG",
-    "LABAG",
-    "labag",
     "超級阿禾",
     "陳敬禾",
     "阿禾",
@@ -55,8 +49,19 @@ export const metadata: Metadata = {
     "皮卡丘",
     "PiKaChu",
     "拉霸機",
-    "吃角子老虎機",
-    "角子機",
+    "台科大",
+    "臺科大",
+    "台灣科技大學",
+    "臺灣科技大學",
+    "資訊管理系",
+    "治平高中",
+    "CPSHS",
+    "電子商務科",
+    "富光國中",
+    "FGJH",
+    "關西國小",
+    "GSES",
+    "關西",
   ],
 
   openGraph: {
@@ -84,4 +89,7 @@ export const metadata: Metadata = {
   verification: {
     google: "BPwLDvPkjbND-Djvxq812SdYkm2pHQ18WPWt2KkPiQk",
   },
+  alternates:{
+    canonical: "/",
+  }
 };
