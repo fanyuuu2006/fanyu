@@ -70,7 +70,7 @@ export const HeroSection = () => {
   return (
     <section id="hero">
       <div className="container">
-        <div className="flex flex-wrap justify-center min-h-162 gap-0">
+        <div className="flex flex-wrap justify-center min-h-162">
           <div className="flex flex-col items-center justify-center p-4 gap-4 w-full md:w-24/50">
             <div>
               <div className="label font-bold">{heroContent.hello}</div>

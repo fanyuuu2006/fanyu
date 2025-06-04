@@ -151,25 +151,28 @@ export const MainSection = () => {
                   {projectsContent.all}
                 </ProjectTagButton>
               </div>
-              {Object.entries(projectTagCategories).map(([category, tags]) => (
-                <div key={category} className="flex flex-col gap-2">
-                  <span className="font-bold">
-                    {projectsContent[category as keyof ProjectsContent]}
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {tags.map((tag) => (
-                      <ProjectTagButton
-                        key={tag}
-                        tag={tag}
-                        currentTags={currentTags}
-                        setCurrentTags={setCurrentTags}
-                      >
-                        {tag}
-                      </ProjectTagButton>
-                    ))}
-                  </div>
-                </div>
-              ))}
+              {Object.entries(projectTagCategories).map(
+                ([category, tags]) =>
+                  tags.length > 0 && (
+                    <div key={category} className="flex flex-col gap-2">
+                      <span className="font-bold">
+                        {projectsContent[category as keyof ProjectsContent]}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {tags.map((tag) => (
+                          <ProjectTagButton
+                            key={tag}
+                            tag={tag}
+                            currentTags={currentTags}
+                            setCurrentTags={setCurrentTags}
+                          >
+                            {tag}
+                          </ProjectTagButton>
+                        ))}
+                      </div>
+                    </div>
+                  )
+              )}
             </div>
           </Collapse>
         </div>

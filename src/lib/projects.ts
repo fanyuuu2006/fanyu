@@ -6,8 +6,8 @@ export const projectTagCategories = {
   domains: ["Crawler"], // 專長領域
   frameworks: ["React", "Next.js", "Express", "Node.js", "Flask"],
   libraries: ["Line Bot SDK", "Matplotlib", "Requests"],
-  tools: ["Git / GitHub", "NPM", "Google Sheets"],
-  other: ["Vercel"],
+  tools: ["Git / GitHub", "NPM", "Google Sheets", "Vercel", "Render"],
+  other: [],
 } as const;
 
 const LabaG: ProjectItem = {
@@ -166,13 +166,13 @@ const DoBuJio: ProjectItem = {
       "以 Python 開發，串接 Line Messaging API ，提供即時股票資訊查詢功能。",
       "利用 Requests 爬取台灣證交所公開資料。",
       "使用 Matplotlib 動態生成視覺化圖表。",
-      "後端以 Flask 架設，並部署於 Vercel，處理 Line webhook 請求與回應。",
+      "後端以 Flask 架設，並部署於 Render，處理 Line webhook 請求與回應。",
     ],
     english: [
       "Developed with Python and integrated with the LINE Messaging API to provide real-time stock information query functionality.",
       "Scraped public data from the Taiwan Stock Exchange using the Requests library.",
       "Generated dynamic visualizations with Matplotlib.",
-      "Backend built with Flask and deployed on Vercel to handle Line webhook requests and responses.",
+      "Backend built with Flask and deployed on Render to handle Line webhook requests and responses.",
     ],
   },
   tags: [
@@ -184,7 +184,7 @@ const DoBuJio: ProjectItem = {
     "Line Bot SDK",
     "Matplotlib",
     "Git / GitHub",
-    "Vercel",
+    "Render",
   ],
   github: {
     repo: "fanyuuu2006/NTUST-1132-Software-Programming-Final-Project",
