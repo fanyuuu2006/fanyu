@@ -9,13 +9,12 @@ export const listAllFiles = async (
   let pageToken: string | undefined | null = undefined;
 
   do {
-    const res: GaxiosResponse<drive_v3.Schema$FileList> =
-      await drive.files.list({
-        q: query,
-        fields: "nextPageToken, files(id, name)",
-        pageSize: 1000,
-        pageToken,
-      });
+    const res = (await drive.files.list({
+      q: query,
+      fields: "nextPageToken, files(id, name)",
+      pageSize: 1000,
+      pageToken,
+    })) as unknown as GaxiosResponse<drive_v3.Schema$FileList>;
 
     if (res.data.files) files.push(...res.data.files);
     pageToken = res.data.nextPageToken;
