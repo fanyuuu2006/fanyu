@@ -81,7 +81,7 @@ export const Header = () => {
           <Link href="/" className="h-full">
             <Image
               priority
-              alt="FanYu Logo"
+              alt="Logo"
               src="/logo.png"
               width={1500}
               height={500}

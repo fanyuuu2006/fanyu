@@ -3,7 +3,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { LoadingOutlined } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
-import { useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 
 type LazyImageContent = Record<"imageLoadFailed", string>;
 
@@ -20,42 +20,48 @@ export type LazyImageProps = OverrideProps<
   { loading?: boolean }
 >;
 
-export const LazyImage = ({
-  loading = false,
-  src,
-  alt,
-  className = "",
-  ...rest
-}: LazyImageProps) => {
-  const Language = useLanguage();
-  const lazyImageContent = getLazyImageContent(Language.Current);
-  const [isLoading, setIsLoading] = useState(true);
+export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
+  (
+    { loading = false, src, alt, className = "", ...rest }: LazyImageProps,
+    ref
+  ) => {
+    const Language = useLanguage();
+    const lazyImageContent = getLazyImageContent(Language.Current);
+    const [isLoading, setIsLoading] = useState(true);
 
-  const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    console.error(e);
-    Toast.fire({ icon: "error", text: lazyImageContent.imageLoadFailed });
-    setIsLoading(false);
-  };
+    const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+      console.error(e);
+      Toast.fire({ icon: "error", text: lazyImageContent.imageLoadFailed });
+      setIsLoading(false);
+    };
 
-  const showLoader = isLoading || loading;
+    useEffect(() => {
+      setIsLoading(true);
+    }, [src]);
 
-  return (
-    <>
-      {showLoader && (
-        <div className={`flex items-center justify-center ${className}`}>
-          <LoadingOutlined />
-        </div>
-      )}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt ?? src?.toString()}
-        className={`${className} ${showLoader ? "hidden" : ""}`}
-        onLoad={() => setIsLoading(false)}
-        onError={handleError}
-        draggable={!showLoader}
-        {...rest}
-      />
-    </>
-  );
-};
+    const showLoader = isLoading || loading;
+
+    return (
+      <>
+        {showLoader && (
+          <div className={`flex items-center justify-center ${className}`}>
+            <LoadingOutlined />
+          </div>
+        )}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          ref={ref}
+          src={src}
+          alt={alt ?? src?.toString()}
+          className={`${className} ${showLoader ? "h-0" : ""}`}
+          onLoad={() => setIsLoading(false)}
+          onError={handleError}
+          draggable={!showLoader}
+          {...rest}
+        />
+      </>
+    );
+  }
+);
+
+LazyImage.displayName = "LazyImage";

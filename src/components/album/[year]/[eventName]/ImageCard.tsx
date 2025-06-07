@@ -36,7 +36,7 @@ export const ImageCard = ({
         className="title bg-[#888] cursor-pointer select-none aspect-square object-cover group-hover:outline"
         onClick={Modal.Open}
       />
-      <Modal.Container>
+      <Modal.Container className='backdrop-blur-sm'>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
