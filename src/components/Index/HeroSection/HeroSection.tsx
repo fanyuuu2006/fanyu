@@ -103,58 +103,61 @@ export const HeroSection = () => {
               initial="hiddenBottom"
               whileInView="show"
               viewport={{ once: true }}
-              className="card p-6 overflow-auto"
             >
-              <div className="hint flex items-center">
-                <span>TypeScript</span>
-                <button
-                  className="btn flex items-center justify-center ml-auto w-6 h-6 rounded-sm"
-                  onClick={async () => {
-                    await navigator.clipboard
-                      .writeText(codeLines.join("\n"))
-                      .then(() => {
-                        Toast.fire({
-                          icon: "success",
-                          text: "已複製到剪貼簿",
+              <div className="card p-6 overflow-auto">
+                <div className="hint flex items-center">
+                  <span>TypeScript</span>
+                  <button
+                    className="btn flex items-center justify-center ml-auto w-6 h-6 rounded-sm"
+                    onClick={async () => {
+                      await navigator.clipboard
+                        .writeText(codeLines.join("\n"))
+                        .then(() => {
+                          Toast.fire({
+                            icon: "success",
+                            text: "已複製到剪貼簿",
+                          });
+                        })
+                        .catch((err) => {
+                          console.error("複製代碼失敗", err);
+                          Toast.fire({ icon: "error", text: "複製代碼失敗" });
                         });
-                      })
-                      .catch((err) => {
-                        console.error("複製代碼失敗", err);
-                        Toast.fire({ icon: "error", text: "複製代碼失敗" });
-                      });
-                  }}
+                    }}
+                  >
+                    <CopyOutlined />
+                  </button>
+                </div>
+                <motion.pre
+                  variants={staggerContainer}
+                  initial="hiddenLeft"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="note flex flex-col font-bold"
                 >
-                  <CopyOutlined />
-                </button>
+                  {codeLines.map((line, index) => (
+                    <div key={index} className="flex flex-nowrap gap-2">
+                      <span className="text-[#888] select-none">
+                        {index + 1}
+                      </span>
+                      <motion.code
+                        variants={fadeInItem}
+                        className={`whitespace-pre-wrap ${
+                          line.onClick
+                            ? "cursor-pointer hover:text-[var(--text-color-primary)]"
+                            : ""
+                        }`}
+                        {...(line.onClick
+                          ? {
+                              onClick: line.onClick,
+                            }
+                          : {})}
+                      >
+                        {line.label}
+                      </motion.code>
+                    </div>
+                  ))}
+                </motion.pre>
               </div>
-              <motion.pre
-                variants={staggerContainer}
-                initial="hiddenLeft"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="note flex flex-col font-bold"
-              >
-                {codeLines.map((line, index) => (
-                  <div key={index} className="flex flex-nowrap gap-2">
-                    <span className="text-[#888] select-none">{index + 1}</span>
-                    <motion.code
-                      variants={fadeInItem}
-                      className={`whitespace-pre-wrap ${
-                        line.onClick
-                          ? "cursor-pointer hover:text-[var(--text-color-primary)]"
-                          : ""
-                      }`}
-                      {...(line.onClick
-                        ? {
-                            onClick: line.onClick,
-                          }
-                        : {})}
-                    >
-                      {line.label}
-                    </motion.code>
-                  </div>
-                ))}
-              </motion.pre>
             </motion.div>
           </div>
         </div>

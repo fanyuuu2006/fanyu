@@ -106,11 +106,9 @@ export const ExperienceSection = () => {
               {sortedItems.length > 0 ? (
                 <>
                   {defaultItems.map((item) => (
-                    <ExperienceCard
-                      key={item.name.english}
-                      variants={fadeInItem}
-                      item={item}
-                    />
+                    <motion.div variants={fadeInItem} key={item.name.english} className="w-full">
+                      <ExperienceCard item={item} className="w-full" />
+                    </motion.div>
                   ))}
                   {hasMore && (
                     <div
@@ -122,14 +120,18 @@ export const ExperienceSection = () => {
                         as={"div"}
                         state={showMore}
                         className="flex flex-col w-full gap-4 slide-collapse"
-                        {...(showMore ? { style: { overflow: "visible" } } : {})}
+                        {...(showMore
+                          ? { style: { overflow: "visible" } }
+                          : {})}
                       >
                         {moreItems.map((item) => (
-                          <ExperienceCard
-                            key={item.name.english}
+                          <motion.div
                             variants={fadeInItem}
-                            item={item}
-                          />
+                            key={item.name.english}
+                            className="w-full"
+                          >
+                            <ExperienceCard item={item} className="w-full" />
+                          </motion.div>
                         ))}
                       </Collapse>
                       <div className="w-full text-center">

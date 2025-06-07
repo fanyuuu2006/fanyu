@@ -100,22 +100,20 @@ button {
 .card {
   background-color: var(--background-color);
   border-radius: 1rem;
-  border: 2px solid var(--border-color);
+  border: 3px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.3s ease-in-out;
+  transition-property: transform, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 
 .card:hover {
   box-shadow: 0 0 1rem rgba(0, 0, 0, 1);
+  transform: translateY(-0.25rem);
 }
 
 a.card {
   text-decoration: none;
-}
-
-a.card:hover {
-  transition: 0.3s ease-in-out;
-  transform: scale(1.05);
 }
 
 .title {

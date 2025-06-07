@@ -8,8 +8,8 @@ export const NTUST_BGC: ExperienceItem = {
     english: "BoardGame Club",
   },
   role: {
-    chinese: "儲備幹部",
-    english: "Prospective Cadre",
+    chinese: "第14屆幹部 美宣 & 攝影",
+    english: "Graphic Design & Photography, 14th Leadership Team",
   },
   organization: NTUST,
   duration: { start: "2024-09", end: null },

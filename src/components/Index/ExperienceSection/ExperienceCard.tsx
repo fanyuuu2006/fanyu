@@ -3,10 +3,9 @@ import { ExperienceItem } from "@/types/experience";
 import { slugify } from "@/utils/url";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
-import { motion, HTMLMotionProps } from "framer-motion";
 
 export type ExperienceCardProps = OverrideProps<
-  HTMLMotionProps<"div">,
+  React.HTMLAttributes<HTMLDivElement>,
   {
     item: ExperienceItem;
   }
@@ -19,7 +18,7 @@ export const ExperienceCard = ({
 }: ExperienceCardProps) => {
   const Language = useLanguage();
   return (
-    <motion.div
+    <div
       className={`${className} card w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
@@ -75,6 +74,6 @@ export const ExperienceCard = ({
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
