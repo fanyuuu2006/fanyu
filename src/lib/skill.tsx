@@ -64,14 +64,14 @@ export const skills: Record<SkillCategory, { src: string; title: string }[]> = {
       title: "Visual Studio Code",
       src: "https://www.svgrepo.com/show/452129/vs-code.svg",
     },
-    {
-      title: "Vercel",
-      src: "https://assets.vercel.com/image/upload/front/favicon/vercel/favicon.ico",
-    },
-    {
-      title: "Render",
-      src: "https://render.com/icon.svg?e6fbdd2e217c00645N*czE3NDg5MTkyMTEkbzEkZzEkdDE3NDg5MjE4OTMkajYwJGwwJGgw",
-    },
+    // {
+    //   title: "Vercel",
+    //   src: "https://assets.vercel.com/image/upload/front/favicon/vercel/favicon.ico",
+    // },
+    // {
+    //   title: "Render",
+    //   src: "https://render.com/icon.svg?e6fbdd2e217c00645N*czE3NDg5MTkyMTEkbzEkZzEkdDE3NDg5MjE4OTMkajYwJGwwJGgw",
+    // },
   ],
 };
 
