@@ -42,11 +42,7 @@ export const EventLinkCard = ({
   eventName,
   ...rest
 }: EventLinkCardProps) => {
-  const {
-    data: image,
-    error,
-    isLoading,
-  } = useSWR<string>(
+  const { data: image, error } = useSWR<string>(
     `/api/album/${slugify(year)}/${slugify(eventName)}/0`,
     fetcher
   );
@@ -72,7 +68,6 @@ export const EventLinkCard = ({
     >
       <LazyImage
         draggable={false}
-        loading={isLoading}
         src={image}
         alt={eventName}
         className="aspect-square title bg-[#888] object-cover transition duration-300 group-hover:brightness-50 group-hover:scale-125"

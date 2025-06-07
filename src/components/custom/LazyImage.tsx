@@ -2,7 +2,6 @@ import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { LoadingOutlined } from "@ant-design/icons";
-import { OverrideProps } from "fanyucomponents";
 import { forwardRef, useEffect, useState } from "react";
 
 type LazyImageContent = Record<"imageLoadFailed", string>;
@@ -15,14 +14,12 @@ const getLazyImageContent = (language: LanguageOption): LazyImageContent =>
     } as LanguageContent<LazyImageContent>
   )[language]);
 
-export type LazyImageProps = OverrideProps<
-  React.ImgHTMLAttributes<HTMLImageElement>,
-  { loading?: boolean }
->;
+export type LazyImageProps = 
+  React.ImgHTMLAttributes<HTMLImageElement>
 
 export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
   (
-    { loading = false, src, alt, className = "", ...rest }: LazyImageProps,
+    {  src, alt, className = "", ...rest }: LazyImageProps,
     ref
   ) => {
     const Language = useLanguage();
@@ -39,11 +36,9 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       setIsLoading(true);
     }, [src]);
 
-    const showLoader = isLoading || loading;
-
     return (
       <>
-        {showLoader && (
+        {isLoading && (
           <div className={`flex items-center justify-center ${className}`}>
             <LoadingOutlined />
           </div>
@@ -53,10 +48,10 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
           ref={ref}
           src={src}
           alt={alt ?? src?.toString()}
-          className={`${className} ${showLoader ? "h-0" : ""}`}
+          className={`${className} ${isLoading ? "h-0" : ""}`}
           onLoad={() => setIsLoading(false)}
           onError={handleError}
-          draggable={!showLoader}
+          draggable={!isLoading}
           {...rest}
         />
       </>
