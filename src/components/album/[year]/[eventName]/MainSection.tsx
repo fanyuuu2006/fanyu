@@ -69,7 +69,6 @@ export const MainSection = ({
           <span className="label font-bold">{eventName}</span>
         </div>
         <motion.div
-          key={`${isLoading}`}
           variants={staggerContainer}
           initial="hiddenBottom"
           animate="show"
