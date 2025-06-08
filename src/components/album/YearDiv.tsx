@@ -4,10 +4,10 @@ import { EventLinkCard } from "./EventLinkCard";
 import { OverrideProps } from "fanyucomponents";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Toast } from "../custom/Toast";
 import { slugify } from "@/utils/url";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 
 export type YearDivProps = OverrideProps<
@@ -32,13 +32,24 @@ const getYearsContent = (language: LanguageOption): YearsContent =>
   )[language]);
 
 export const YearDiv = ({ year, ...rest }: YearDivProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.5,
+  });
+
   const {
     data: eventNames,
     error,
     isLoading,
-  } = useSWR<string[]>(`/api/album/${slugify(year)}`, fetcher, {
-    fallbackData: ["其他"],
-  });
+  } = useSWR<string[]>(
+    isInView ? `/api/album/${slugify(year)}` : null,
+    fetcher,
+    {
+      fallbackData: ["其他"],
+    }
+  );
 
   const Language = useLanguage();
   const yearsContent = getYearsContent(Language.Current);
@@ -53,7 +64,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   }, [yearsContent.eventsLoadFailed, error]);
 
   return (
-    <div id={year} className="w-full flex flex-col gap-2" {...rest}>
+    <div ref={ref} id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <motion.div
         key={`${isLoading}`}
@@ -63,7 +74,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
         viewport={{ once: true, amount: 0.5 }}
         className="w-full flex flex-wrap"
       >
-        {isLoading ? (
+        {!isInView || isLoading ? (
           [...Array(5)].map((_, i) => (
             <motion.div
               key={i}
@@ -77,7 +88,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
           eventNames.map((eventName) => (
             <motion.div
               variants={fadeInItem}
-              key={eventName}
+              key={`${year}-${eventName}`}
               className="rounded-lg overflow-hidden w-1/2 border border-black sm:w-1/3 md:w-1/4 lg:w-1/5"
             >
               <EventLinkCard
