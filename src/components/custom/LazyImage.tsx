@@ -2,7 +2,7 @@ import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { OverrideProps } from "fanyucomponents";
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useState } from "react";
 
 type LazyImageContent = Record<"imageLoadFailed", string>;
 
@@ -34,16 +34,14 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       setIsLoading(false);
     };
 
-    useEffect(() => {
-      setIsLoading(true);
-    }, [src]);
-
     const showLoader = isLoading || loading;
 
     return (
       <>
         {showLoader && (
-          <div className={`flex items-center justify-center animate-pulse ${className}`} />
+          <div
+            className={`flex items-center justify-center animate-pulse ${className}`}
+          />
         )}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
