@@ -11,6 +11,7 @@ import { fetcher } from "@/utils/fetcher";
 import { slugify } from "@/utils/url";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { LazyImage } from "@/components/custom/LazyImage";
 
 type ImagesContent = Record<
   "noImages" | "eventsLoadFailed" | "imageLoadFailed",
@@ -58,6 +59,8 @@ export const MainSection = ({
     }
   }, [error, imagesContent.eventsLoadFailed]);
 
+  const skeletonCount = images?.length || 5;
+
   return (
     <section>
       <div className="container flex flex-col items-center">
@@ -76,12 +79,14 @@ export const MainSection = ({
           className="w-full flex flex-wrap"
         >
           {isLoading ? (
-            [...Array(5)].map((_, i) => (
+            [...Array(skeletonCount)].map((_, i) => (
               <motion.div
-                key={i}
+                key={`skeleton-${i}`}
                 variants={fadeInItem}
-                className="rounded-lg bg-[#888] border border-black aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
-              />
+                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
+              >
+                <LazyImage loading={true} className="w-full" />
+              </motion.div>
             ))
           ) : !images || images.length === 0 ? (
             <div className="content font-bold">{imagesContent.noImages}</div>
