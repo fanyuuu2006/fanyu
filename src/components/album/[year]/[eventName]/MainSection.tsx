@@ -1,6 +1,6 @@
 "use client";
 import { Toast } from "@/components/custom/Toast";
-import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { ImageCard } from "./ImageCard";
@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { fetcher } from "@/utils/fetcher";
 import { slugify } from "@/utils/url";
 import { motion } from "framer-motion";
-import { staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/lib/motion";
 
 type ImagesContent = Record<
   "noImages" | "eventsLoadFailed" | "imageLoadFailed",
@@ -68,23 +68,28 @@ export const MainSection = ({
           <span className="title font-bold">{year}</span>
           <span className="label font-bold">{eventName}</span>
         </div>
-        {isLoading ? (
-          <LoadingOutlined className="title" />
-        ) : !images || images.length === 0 ? (
-          <div className="content font-bold">{imagesContent.noImages}</div>
-        ) : (
-          <motion.div
-            variants={staggerContainer}
-            initial="hiddenBottom"
-            animate="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="w-full flex flex-wrap"
-          >
-            {images.map((src) => (
-              <ImageCard key={src} src={src} />
-            ))}
-          </motion.div>
-        )}
+        <motion.div
+          key={`${isLoading}`}
+          variants={staggerContainer}
+          initial="hiddenBottom"
+          animate="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="w-full flex flex-wrap"
+        >
+          {isLoading ? (
+            [...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                variants={fadeInItem}
+                className="rounded-lg bg-[#888] border border-black aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
+              />
+            ))
+          ) : !images || images.length === 0 ? (
+            <div className="content font-bold">{imagesContent.noImages}</div>
+          ) : (
+            images.map((src) => <ImageCard key={src} src={src} />)
+          )}
+        </motion.div>
       </div>
     </section>
   );
