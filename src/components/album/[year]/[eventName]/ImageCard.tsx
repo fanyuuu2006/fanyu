@@ -36,12 +36,12 @@ export const ImageCard = ({
         className="title bg-[#888] cursor-pointer select-none aspect-square object-cover group-hover:outline"
         onClick={Modal.Open}
       />
-      <Modal.Container className='backdrop-blur-sm'>
+      <Modal.Container className="backdrop-blur-sm animate-pop">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={src?.toString()}
-          className="max-w-[95vw] max-h-[80vh] object-contain"
+          className={`max-w-[95vw] max-h-[80vh] object-contain`}
           onError={(e: React.SyntheticEvent) => {
             console.error(e);
             Toast.fire({ icon: "error", text: imageContent.imageLoadFailed });

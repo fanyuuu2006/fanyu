@@ -4,10 +4,10 @@ import { EventLinkCard } from "./EventLinkCard";
 import { OverrideProps } from "fanyucomponents";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Toast } from "../custom/Toast";
 import { slugify } from "@/utils/url";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 
 export type YearDivProps = OverrideProps<
@@ -40,11 +40,6 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
     fallbackData: ["其他"],
   });
 
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once: true,
-  });
-
   const Language = useLanguage();
   const yearsContent = getYearsContent(Language.Current);
 
@@ -58,7 +53,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   }, [yearsContent.eventsLoadFailed, error]);
 
   return (
-    <div ref={ref} id={year} className="w-full flex flex-col gap-2" {...rest}>
+    <div id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <motion.div
         key={`${isLoading}`}
@@ -68,7 +63,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
         viewport={{ once: true, amount: 0.5 }}
         className="w-full flex flex-wrap"
       >
-        {isLoading || !isInView ? (
+        {isLoading ? (
           [...Array(5)].map((_, i) => (
             <motion.div
               key={i}

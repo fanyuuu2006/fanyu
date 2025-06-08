@@ -184,7 +184,7 @@ a.card {
 
 @layer utilities {
   .animate-pop {
-    animation: Pop 0.2s ease-out;
+    animation: Pop 0.1s;
   }
   .animate-turn {
     animation: turn 0.2s forwards;
@@ -197,7 +197,7 @@ a.card {
     transform: scale(0.5);
   }
   80% {
-    opacity: 0.8;
+    opacity: 0.7;
     transform: scale(1.2);
   }
   100% {
