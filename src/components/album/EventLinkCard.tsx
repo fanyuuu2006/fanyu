@@ -5,10 +5,9 @@ import { LazyImage } from "../custom/LazyImage";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { fetcher } from "@/utils/fetcher";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import useSWR from "swr";
 import { Toast } from "../custom/Toast";
-import { useInView } from "framer-motion";
 
 type EventsContent = Record<"noImages" | "imagesLoadFailed", string>;
 
@@ -43,13 +42,8 @@ export const EventLinkCard = ({
   eventName,
   ...rest
 }: EventLinkCardProps) => {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.5,
-  });
   const { data: image, error } = useSWR<string>(
-    isInView ? `/api/album/${slugify(year)}/${slugify(eventName)}/0` : null,
+    `/api/album/${slugify(year)}/${slugify(eventName)}/0`,
     fetcher
   );
 
@@ -67,7 +61,6 @@ export const EventLinkCard = ({
 
   return (
     <Link
-      ref={ref}
       aria-label={`前往 ${eventName} 相簿`}
       className={`select-none relative group ${className}`}
       href={`/album/${slugify(year)}/${slugify(eventName)}`}
@@ -75,7 +68,6 @@ export const EventLinkCard = ({
     >
       <LazyImage
         draggable={false}
-        loading={!isInView}
         src={image}
         alt={eventName}
         className="aspect-square title bg-[#888] object-cover transition duration-300 group-hover:brightness-50 group-hover:scale-125"
