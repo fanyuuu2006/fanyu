@@ -43,7 +43,6 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.2,
   });
 
   const Language = useLanguage();
@@ -59,10 +58,9 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   }, [yearsContent.eventsLoadFailed, error]);
 
   return (
-    <div id={year} className="w-full flex flex-col gap-2" {...rest}>
+    <div ref={ref} id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <motion.div
-        ref={ref}
         key={`${isLoading}`}
         variants={staggerContainer}
         initial="hiddenBottom"
