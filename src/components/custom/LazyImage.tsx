@@ -1,7 +1,7 @@
 import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { LoadingOutlined } from "@ant-design/icons";
+import { OverrideProps } from "fanyucomponents";
 import { forwardRef, useEffect, useState } from "react";
 
 type LazyImageContent = Record<"imageLoadFailed", string>;
@@ -14,12 +14,14 @@ const getLazyImageContent = (language: LanguageOption): LazyImageContent =>
     } as LanguageContent<LazyImageContent>
   )[language]);
 
-export type LazyImageProps = 
-  React.ImgHTMLAttributes<HTMLImageElement>
+export type LazyImageProps = OverrideProps<
+  React.ImgHTMLAttributes<HTMLImageElement>,
+  { loading?: boolean }
+>;
 
 export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
   (
-    {  src, alt, className = "", ...rest }: LazyImageProps,
+    { loading = false, src, alt, className = "", ...rest }: LazyImageProps,
     ref
   ) => {
     const Language = useLanguage();
@@ -36,22 +38,22 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       setIsLoading(true);
     }, [src]);
 
+    const showLoader = isLoading || loading;
+
     return (
       <>
-        {isLoading && (
-          <div className={`flex items-center justify-center ${className}`}>
-            <LoadingOutlined />
-          </div>
+        {showLoader && (
+          <div className={`flex items-center justify-center animate-pulse ${className}`} />
         )}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={ref}
           src={src}
           alt={alt ?? src?.toString()}
-          className={`${className} ${isLoading ? "h-0" : ""}`}
+          className={`${className} ${showLoader ? "h-0" : ""}`}
           onLoad={() => setIsLoading(false)}
           onError={handleError}
-          draggable={!isLoading}
+          draggable={!showLoader}
           {...rest}
         />
       </>

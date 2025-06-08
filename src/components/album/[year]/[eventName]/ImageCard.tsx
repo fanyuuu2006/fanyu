@@ -4,7 +4,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { fadeInItem } from "@/lib/motion";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useModal } from "fanyucomponents";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 type ImageContent = Record<"imageLoadFailed", string>;
 
 const getImageContent = (language: LanguageOption): ImageContent =>
@@ -26,12 +27,20 @@ export const ImageCard = ({
   const imageContent = getImageContent(Language.Current);
   const Modal = useModal();
 
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.5,
+  });
+
   return (
     <motion.div
+      ref={ref}
       variants={fadeInItem}
-      className="relative border border-black w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group"
+      className="relative border border-[var(--border-color)] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group"
     >
       <LazyImage
+        loading={!isInView}
         src={src}
         className="title bg-[#888] cursor-pointer select-none aspect-square object-cover group-hover:outline"
         onClick={Modal.Open}
@@ -44,7 +53,10 @@ export const ImageCard = ({
           className={`max-w-[95vw] max-h-[80vh] object-contain`}
           onError={(e: React.SyntheticEvent) => {
             console.error(e);
-            Toast.fire({ icon: "error", text: imageContent.imageLoadFailed });
+            Toast.fire({
+              icon: "error",
+              text: imageContent.imageLoadFailed,
+            });
           }}
         />
       </Modal.Container>

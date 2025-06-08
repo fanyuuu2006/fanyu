@@ -4,11 +4,12 @@ import { EventLinkCard } from "./EventLinkCard";
 import { OverrideProps } from "fanyucomponents";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Toast } from "../custom/Toast";
 import { slugify } from "@/utils/url";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { LazyImage } from "../custom/LazyImage";
 
 export type YearDivProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -32,24 +33,11 @@ const getYearsContent = (language: LanguageOption): YearsContent =>
   )[language]);
 
 export const YearDiv = ({ year, ...rest }: YearDivProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.5,
-  });
-
   const {
     data: eventNames,
     error,
     isLoading,
-  } = useSWR<string[]>(
-    isInView ? `/api/album/${slugify(year)}` : null,
-    fetcher,
-    {
-      fallbackData: ["其他"],
-    }
-  );
+  } = useSWR<string[]>(`/api/album/${slugify(year)}`, fetcher);
 
   const Language = useLanguage();
   const yearsContent = getYearsContent(Language.Current);
@@ -63,24 +51,28 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
     }
   }, [yearsContent.eventsLoadFailed, error]);
 
+  // 計算骨架屏數量 = 實際數據數量或默認5個
+  const skeletonCount = eventNames?.length || 5;
+
   return (
-    <div ref={ref} id={year} className="w-full flex flex-col gap-2" {...rest}>
+    <div id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <motion.div
-        key={`${isLoading}`}
         variants={staggerContainer}
         initial="hiddenBottom"
         animate="show"
         viewport={{ once: true, amount: 0.5 }}
         className="w-full flex flex-wrap"
       >
-        {!isInView || isLoading ? (
-          [...Array(5)].map((_, i) => (
+        {isLoading ? (
+          [...Array(skeletonCount)].map((_, i) => (
             <motion.div
-              key={i}
+              key={`skeleton-${i}`}
               variants={fadeInItem}
-              className="rounded-lg bg-[#888] border border-black aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
-            />
+              className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
+            >
+              <LazyImage loading={true} className="w-full" />
+            </motion.div>
           ))
         ) : !eventNames || eventNames.length === 0 ? (
           <div className="content font-bold">{`${year} - ${yearsContent.noEvents}`}</div>
@@ -89,7 +81,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
             <motion.div
               variants={fadeInItem}
               key={`${year}-${eventName}`}
-              className="rounded-lg overflow-hidden w-1/2 border border-black sm:w-1/3 md:w-1/4 lg:w-1/5"
+              className="rounded-lg overflow-hidden w-1/2 border border-[var(--border-color)] sm:w-1/3 md:w-1/4 lg:w-1/5"
             >
               <EventLinkCard
                 year={year}
