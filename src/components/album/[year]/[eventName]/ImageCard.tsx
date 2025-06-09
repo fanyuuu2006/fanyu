@@ -42,6 +42,7 @@ export const ImageCard = ({
       <LazyImage
         loading={!isInView}
         src={src}
+        alt={`Event Image ${src}`}
         className="title bg-[#888] cursor-pointer select-none aspect-square object-cover group-hover:outline"
         onClick={Modal.Open}
       />
@@ -49,7 +50,7 @@ export const ImageCard = ({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
-          alt={src?.toString()}
+          alt={`Event Image ${src}`}
           className={`max-w-[95vw] max-h-[80vh] object-contain`}
           onError={(e: React.SyntheticEvent) => {
             console.error(e);
