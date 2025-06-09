@@ -117,7 +117,7 @@ export const Header = () => {
               <Link
                 key={index}
                 href={item.href}
-                className="w-full pb-4 px-4 hover:scale-105 transition transform"
+                className="w-full py-2 px-4 hover:bg-[var(--background-color-primary)]"
                 onClick={() => setMenuShow(false)}
               >
                 {item.label[Language.Current]}

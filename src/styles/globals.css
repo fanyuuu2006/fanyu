@@ -9,10 +9,11 @@
 :root {
   --background-color: #131723;
   --background-color-dark: #0d110d;
+  --background-color-primary: #212830;
   --background-color-overlay: #171c4ebb;
   --text-color: #ffffff;
   --text-color-primary: #1f6feb;
-  --text-color-secondary: #212830;
+  --text-color-secondary: #ffff71;
   --border-color: #3d444d;
   --brightness-light: 2;
 }
@@ -75,7 +76,7 @@ button {
 }
 
 .btn-secondary {
-  background: var(--text-color-secondary);
+  background: var(--background-color-primary);
   border: 2px solid var(--border-color);
 }
 
@@ -114,8 +115,13 @@ button {
   transform: translateY(-0.25rem);
 }
 
-a.card {
+a.card,
+a.card:hover {
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline 1px;
 }
 
 .title {
