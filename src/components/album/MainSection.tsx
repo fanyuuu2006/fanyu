@@ -81,7 +81,7 @@ export const MainSection = ({ year }: { year: string | null }) => {
           <>
             <timeOrder.Div />
             {soetedYears.map((y) => (
-              <YearDiv key={y} year={y} />
+              <YearDiv key={`${y} ${timeOrder.isOrderByNewest}`} year={y} />
             ))}
           </>
         )}

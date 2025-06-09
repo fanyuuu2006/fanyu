@@ -7,12 +7,12 @@ import { LanguageOption, LanguageContent } from "@/types/language";
 import { useEffect } from "react";
 import { Toast } from "../custom/Toast";
 import { slugify } from "@/utils/url";
-import { motion } from "framer-motion";
+import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 import { LazyImage } from "../custom/LazyImage";
 
 export type YearDivProps = OverrideProps<
-  React.HTMLAttributes<HTMLDivElement>,
+  HTMLMotionProps<"div">,
   { year: string }
 >;
 
@@ -51,11 +51,10 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
     }
   }, [yearsContent.eventsLoadFailed, error]);
 
-  // 計算骨架屏數量 = 實際數據數量或默認5個
   const skeletonCount = eventNames?.length || 5;
 
   return (
-    <div id={year} className="w-full flex flex-col gap-2" {...rest}>
+    <motion.div id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div className="label font-bold">{year}</div>
       <motion.div
         variants={staggerContainer}
@@ -92,6 +91,6 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
           ))
         )}
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
