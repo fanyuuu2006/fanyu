@@ -8,6 +8,7 @@ import useSWR from "swr";
 import { useEffect } from "react";
 import { fetcher } from "@/utils/fetcher";
 import { YearDiv } from "./YearDiv";
+import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
 
 type AlbumContent = Record<"album" | "noAlbum" | "yearsLoadFailed", string>;
 
@@ -30,6 +31,7 @@ const getAlbumContent = (language: LanguageOption): AlbumContent =>
 export const MainSection = ({ year }: { year: string | null }) => {
   const Language = useLanguage();
   const albumContent = getAlbumContent(Language.Current);
+  const timeOrder = useTimeOrderTabs();
 
   const {
     data: years,
@@ -48,10 +50,14 @@ export const MainSection = ({ year }: { year: string | null }) => {
     }
   }, [albumContent.yearsLoadFailed, error]);
 
-  const filteredYears = years
+  const soetedYears = years
     ? years
         .filter((y) => !year || y === year)
-        .sort((a, b) => parseInt(b) - parseInt(a))
+        .sort((a, b) => {
+          const yA = parseInt(a);
+          const yB = parseInt(b);
+          return timeOrder.isOrderByNewest ? yB - yA : yA - yB;
+        })
     : [];
 
   return (
@@ -69,10 +75,15 @@ export const MainSection = ({ year }: { year: string | null }) => {
 
         {!years && isLoading ? (
           <LoadingOutlined className="title" />
-        ) : !filteredYears || filteredYears.length === 0 ? (
+        ) : !soetedYears || soetedYears.length === 0 ? (
           <div className="content font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
         ) : (
-          filteredYears.map((y) => <YearDiv key={y} year={y} />)
+          <>
+            <timeOrder.Div />
+            {soetedYears.map((y) => (
+              <YearDiv key={y} year={y} />
+            ))}
+          </>
         )}
       </div>
     </section>

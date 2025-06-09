@@ -17,14 +17,13 @@ import { Collapse } from "fanyucomponents";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/lib/motion";
 import { Tooltip } from "antd";
+import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
 type ProjectsContent = Record<
   | "projects"
   | "nofound"
   | "all"
   | "back"
   | "count"
-  | "Newest"
-  | "Oldest"
   | "filter"
   | ProjectTagCategory,
   string
@@ -46,8 +45,6 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
         other: "其他／雜項",
         back: "返回",
         count: "共 {count} 筆",
-        Newest: "最新",
-        Oldest: "最舊",
         filter: "篩選",
       },
       english: {
@@ -63,8 +60,6 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
         other: "Other / Miscellaneous",
         back: "Back",
         count: "Total: {count}",
-        Newest: "Newest",
-        Oldest: "Oldest",
         filter: "Filter",
       },
     } as LanguageContent<ProjectsContent>
@@ -76,7 +71,7 @@ export const MainSection = () => {
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTags, setCurrentTags] = useState<Set<ProjectTag> | null>(null);
-  const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(false);
+  const timeOrder = useTimeOrderTabs();
 
   const sortedProject = useMemo(() => {
     return (
@@ -88,9 +83,9 @@ export const MainSection = () => {
     ).sort((a, b) => {
       const t1 = new Date(a.time).getTime();
       const t2 = new Date(b.time).getTime();
-      return isOrderByNewest ? t2 - t1 : t1 - t2;
+      return timeOrder.isOrderByNewest ? t2 - t1 : t1 - t2;
     });
-  }, [currentTags, isOrderByNewest]);
+  }, [currentTags, timeOrder.isOrderByNewest]);
 
   return (
     <section>
@@ -114,31 +109,7 @@ export const MainSection = () => {
                 sortedProject.length.toString()
               )}
             </span>
-            <div
-              role="tablist"
-              className="ms-auto flex bg-[var(--background-color-dark)] rounded-lg p-1"
-            >
-              {[
-                { label: projectsContent.Newest, value: true },
-                { label: projectsContent.Oldest, value: false },
-              ].map((item) => {
-                const isSelected = isOrderByNewest === item.value;
-                return (
-                  <button
-                    key={item.label}
-                    className={`px-4 py-1 transition-[background-color] duration-200 ${
-                      isSelected ? "btn rounded-lg" : ""
-                    }`}
-                    onClick={() => {
-                      if (isSelected) return;
-                      setIsOrderByNewest(item.value);
-                    }}
-                  >
-                    {item.label}
-                  </button>
-                );
-              })}
-            </div>
+            <timeOrder.Div className="ms-auto" />
           </div>
           <Collapse className="slide-collapse" state={categoriesShow}>
             <div className="flex flex-col p-4 gap-2 bordered">
@@ -181,7 +152,7 @@ export const MainSection = () => {
           <>{projectsContent.nofound}</>
         ) : (
           <motion.div
-            key={`${currentTags}${isOrderByNewest}`}
+            key={`${currentTags}${timeOrder.isOrderByNewest}`}
             variants={staggerContainer}
             initial="hiddenLeft"
             animate="show"
