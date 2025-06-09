@@ -11,19 +11,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const years = await fetcher<string[]>(`${baseUrl}/api/album`);
 
   for (const year of years) {
-    const events = await fetcher<string[]>(`${baseUrl}/api/album/${slugify(year)}`);
+    const events = await fetcher<string[]>(
+      `${baseUrl}/api/album/${slugify(year)}`
+    );
 
     for (const event of events) {
-      const imgs = await fetcher<string[]>(
-        `${baseUrl}/api/album/${slugify(year)}/${slugify(event)}`
+      const img = await fetcher<string>(
+        `${baseUrl}/api/album/${slugify(year)}/${slugify(event)}/0`
       );
-      dynamicRoutes.push(...imgs);
+      dynamicRoutes.push(img);
     }
   }
 
+  const today = new Date();
+
   return [...staticRoutes, ...dynamicRoutes].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: today,
     changeFrequency: "daily",
     priority: 1,
   }));
