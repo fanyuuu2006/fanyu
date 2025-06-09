@@ -14,7 +14,7 @@ export async function generateMetadata({
   const year = deslugify(rawYear);
   const eventName = deslugify(rawEventName);
 
-  const title = `${year}-${eventName}`;
+  const title = `${year}-${eventName} | 飯魚 FanYu`;
   return {
     title,
     description: `${year}-${eventName}`,
