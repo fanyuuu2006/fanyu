@@ -14,12 +14,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const events = await fetcher<string[]>(
       `${baseUrl}/api/album/${slugify(year)}`
     );
-
     for (const event of events) {
-      const page = await fetcher<string>(
-        `${baseUrl}/album/${slugify(year)}/${slugify(event)}`
-      );
-      dynamicRoutes.push(page);
+      dynamicRoutes.push(`${baseUrl}/album/${slugify(year)}/${slugify(event)}`);
     }
   }
 
