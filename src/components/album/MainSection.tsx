@@ -50,7 +50,7 @@ export const MainSection = ({ year }: { year: string | null }) => {
     }
   }, [albumContent.yearsLoadFailed, error]);
 
-  const soetedYears = years
+  const sortedYears = years
     ? years
         .filter((y) => !year || y === year)
         .sort((a, b) => {
@@ -75,13 +75,13 @@ export const MainSection = ({ year }: { year: string | null }) => {
 
         {!years && isLoading ? (
           <LoadingOutlined className="title" />
-        ) : !soetedYears || soetedYears.length === 0 ? (
+        ) : !sortedYears || sortedYears.length === 0 ? (
           <div className="content font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
         ) : (
           <>
             <timeOrder.Div />
-            {soetedYears.map((y) => (
-              <YearDiv key={`${y} ${timeOrder.isOrderByNewest}`} year={y} />
+            {sortedYears.map((y) => (
+              <YearDiv key={y} year={y} />
             ))}
           </>
         )}
