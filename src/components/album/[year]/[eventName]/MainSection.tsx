@@ -68,10 +68,10 @@ export const MainSection = ({
           <ArrowLeftOutlined />
         </Link>
         <div className="flex flex-col items-center">
-          <span className="title font-bold">{year}</span>
-          <span className="label font-bold">{eventName}</span>
+          <h2 className="title font-bold">{year}</h2>
+          <h2 className="label font-bold">{eventName}</h2>
         </div>
-        <motion.div
+        <motion.article
           variants={staggerContainer}
           initial="hiddenBottom"
           animate="show"
@@ -93,7 +93,7 @@ export const MainSection = ({
           ) : (
             images.map((src) => <ImageCard key={src} src={src} />)
           )}
-        </motion.div>
+        </motion.article>
       </div>
     </section>
   );

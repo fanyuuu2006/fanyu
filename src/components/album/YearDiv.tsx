@@ -13,7 +13,7 @@ import { LazyImage } from "../custom/LazyImage";
 import { CaretRightOutlined } from "@ant-design/icons";
 
 export type YearDivProps = OverrideProps<
-  HTMLMotionProps<"div">,
+  HTMLMotionProps<"article">,
   { year: string }
 >;
 
@@ -56,7 +56,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   const skeletonCount = eventNames?.length || 5;
 
   return (
-    <motion.div id={year} className="w-full flex flex-col gap-2" {...rest}>
+    <motion.article id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div
         className={`flex items-end gap-2 ${
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
@@ -111,6 +111,6 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
           )}
         </motion.div>
       </Collapse>
-    </motion.div>
+    </motion.article>
   );
 };

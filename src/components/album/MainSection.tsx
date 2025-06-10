@@ -71,7 +71,7 @@ export const MainSection = ({ year }: { year: string | null }) => {
             </span>
           </Link>
         )}
-        <div className="title font-bold">{albumContent.album}</div>
+        <h1 className="title font-bold">{albumContent.album}</h1>
 
         {!years && isLoading ? (
           <LoadingOutlined className="title" />
