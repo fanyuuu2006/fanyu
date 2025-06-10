@@ -67,9 +67,10 @@ export const EventLinkCard = ({
 
   return (
     <Link
+      draggable={true}
       ref={ref}
       aria-label={`前往 ${eventName} 相簿`}
-      className={`select-none relative group ${className}`}
+      className={`relative group ${className}`}
       href={`/album/${slugify(year)}/${slugify(eventName)}`}
       {...rest}
     >

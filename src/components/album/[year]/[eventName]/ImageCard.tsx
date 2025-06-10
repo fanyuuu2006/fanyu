@@ -40,6 +40,7 @@ export const ImageCard = ({
       className="relative border border-[var(--border-color)] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 group"
     >
       <LazyImage
+        draggable={true}
         loading={!isInView}
         src={src}
         alt={`Event Image ${src}`}
