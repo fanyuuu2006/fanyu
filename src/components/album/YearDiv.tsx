@@ -57,8 +57,12 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
 
   return (
     <motion.div id={year} className="w-full flex flex-col gap-2" {...rest}>
-      <div className="flex items-end gap-2">
-        <div className="label font-bold">{year}</div>
+      <div
+        className={`flex items-end gap-2 ${
+          isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
+        }`}
+      >
+        <h2 className="label font-bold">{year}</h2>
         <button
           className={`content transition-transform ${
             isCollapseOpen ? "rotate-90" : ""
@@ -70,7 +74,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
           <CaretRightOutlined />
         </button>
       </div>
-      <Collapse state={isCollapseOpen} className="w-full slide-collapse">
+      <Collapse state={isCollapseOpen} className="w-full">
         <motion.div
           variants={staggerContainer}
           initial="hiddenBottom"
