@@ -66,6 +66,13 @@ button {
   cursor: pointer;
 }
 
+.btn:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-text:hover {
+  text-decoration: none;
+}
+
 .btn {
   background: var(--background-color);
   border: 2px solid var(--border-color);

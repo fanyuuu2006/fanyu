@@ -81,7 +81,7 @@ export default function RootLayout({
                     position: index + 1,
                     item: {
                       "@type": "CreativeWork",
-                      headline: project.title.english, // ← 新增
+                      headline: project.title.english,
                       name: project.title.english,
                       description: project.about.english,
                       url:
