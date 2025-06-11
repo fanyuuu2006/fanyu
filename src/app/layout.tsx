@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 export { metadata } from "./metadata";
 import { Noto_Sans_SC } from "next/font/google";
+import { profile } from "@/lib/profile";
 
 // 評估id
 const measurementID = "G-3SGK402751";
@@ -27,28 +28,79 @@ export default function RootLayout({
       <head>
         {/** 結構化資料 */}
         <Script
-          id="structured-data"
+          id="person-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Fan-Yu Zhen-Fu",
-              alternateName: "FanYu",
-              birthDate: "2006-05-26",
-              url: "https://fanyu.vercel.app",
-              image: "https://fanyu.vercel.app/GameShow.jpg",
-              sameAs: [
-                "https://github.com/fanyuuu2006",
-                "https://www.instagram.com/fan._.yuuu",
-                "https://www.facebook.com/share/1MpEQ1faFk/",
-              ],
-              jobTitle: "FullStack Developer",
+              name: profile.name.english,
+              alternateName: profile.nickname.english,
+              birthDate: profile.birthday,
+              url: profile.url,
+              image: `${profile.url}/GameShow.jpg`,
+              sameAs: Object.values(profile.contact)
+                .flat()
+                .map((item) => item.href),
+              jobTitle: "Student Developer",
               alumniOf: {
                 "@type": "CollegeOrUniversity",
-                name: "National Taiwan University of Science and Technology",
+                name: profile.experience.education.sort(
+                  (a, b) =>
+                    new Date(b.duration.start).getTime() -
+                    new Date(a.duration.start).getTime()
+                )[0].name.english,
               },
-              knowsAbout: ["Web Development", "TypeScript", "React", "Python"],
+              knowsAbout: [
+                "Web Development",
+                "TypeScript",
+                "React",
+                "Python",
+                "Node.js",
+              ],
+            }),
+          }}
+        />
+
+        <Script
+          id="webpage-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              name: `${profile.nickname.english} Personal Portfolio`,
+              description:
+                "Personal portfolio site of Fan-Yu Zhen-Fu showcasing projects and skills.",
+              url: "https://fanyu.vercel.app",
+              mainEntity: {
+                "@type": "ItemList",
+                itemListElement: profile.portfolio.projects.map(
+                  (project, index) => ({
+                    "@type": "ListItem",
+                    position: index + 1,
+                    item: {
+                      "@type": "CreativeWork",
+                      headline: project.title.english, // ← 新增
+                      name: project.title.english,
+                      description: project.about.english,
+                      url:
+                        project.links.find((l) => l.category === "demo")
+                          ?.href ?? profile.url,
+                      thumbnailUrl: `${profile.url}${project.imageSrc}`,
+                      dateCreated: `${project.time}-01`,
+                      inLanguage: "en",
+                      programmingLanguage: project.tags[0],
+                      author: {
+                        "@type": "Person",
+                        "@id": profile.url,
+                        name: profile.name.english,
+                        url: profile.url,
+                      },
+                    },
+                  })
+                ),
+              },
             }),
           }}
         />

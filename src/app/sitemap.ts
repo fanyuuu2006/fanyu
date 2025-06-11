@@ -1,8 +1,9 @@
+import { profile } from "@/lib/profile";
 import { fetcher } from "@/utils/fetcher";
 import { slugify } from "@/utils/url";
 import { MetadataRoute } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanyu.vercel.app";
+const baseUrl = profile.url;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = ["/", "/projects", "/guestbook", "/album", "/my"];

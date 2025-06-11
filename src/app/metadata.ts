@@ -1,9 +1,10 @@
+import { profile } from "@/lib/profile";
 import type { Metadata } from "next";
 
 const title = "飯魚 FanYu";
 const description =
   "飯魚的個人網站，包括個人資料、自我介紹、作品集、學經歷以及聯繫方式。FanYu's personal website featuring biography, self-introduction, portfolio, education background, project experience, and contact information.";
-const url = "https://fanyu.vercel.app";
+const url = profile.url;
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),

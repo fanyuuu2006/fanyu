@@ -4,6 +4,7 @@ import { projects } from "./projects";
 import { skills } from "./skill";
 
 export const profile = {
+  url: "https://fanyu.vercel.app",
   name: {
     chinese: "范余振富",
     english: "Fan-Yu Zhen-Fu",
@@ -24,7 +25,7 @@ export const profile = {
     chinese: "臺灣省臺北市大安區",
     english: "Da'an Dist, Taipei City, Taiwan",
   },
-  birthday: "2006/05/26 UTC+08:00",
+  birthday: "2006-05-26",
   age: () => {
     const today = new Date();
     const birthday = new Date(profile.birthday);
