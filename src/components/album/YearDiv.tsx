@@ -58,7 +58,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   return (
     <motion.article id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div
-        className={`flex items-end gap-2 ${
+        className={`flex items-end gap-2 transition-colors ${
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
         }`}
       >
