@@ -9,6 +9,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export { metadata } from "./metadata";
 import { Noto_Sans_SC } from "next/font/google";
 
+// 評估id
+const measurementID = "G-3SGK402751";
+
 const notoSansSC = Noto_Sans_SC({
   subsets: ["latin-ext"],
   display: "swap",
@@ -22,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/** 結構化資料 */}
         <Script
           id="structured-data"
           type="application/ld+json"
@@ -48,6 +52,20 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* GA Script */}
+        <Script
+          id="googletagmanager"
+          src={`https://www.googletagmanager.com/gtag/js?id=${measurementID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${measurementID}');
+          `}
+        </Script>
       </head>
       <body className={`${notoSansSC.className}`}>
         <LanguageProvider>
