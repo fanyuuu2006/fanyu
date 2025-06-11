@@ -5,6 +5,12 @@ import { skills } from "./skill";
 
 export const profile = {
   url: "https://fanyu.vercel.app",
+  description: {
+    chinese:
+      "飯魚的個人網站，包括個人資料、自我介紹、作品集、學經歷以及聯繫方式。",
+    english:
+      "FanYu's personal website featuring biography, self-introduction, portfolio, education background, project experience, and contact information.",
+  },
   name: {
     chinese: "范余振富",
     english: "Fan-Yu Zhen-Fu",

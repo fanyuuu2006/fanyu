@@ -1,9 +1,8 @@
 import { profile } from "@/lib/profile";
 import type { Metadata } from "next";
 
-const title = "飯魚 FanYu";
-const description =
-  "飯魚的個人網站，包括個人資料、自我介紹、作品集、學經歷以及聯繫方式。FanYu's personal website featuring biography, self-introduction, portfolio, education background, project experience, and contact information.";
+const title = `${profile.nickname.chinese} ${profile.nickname.english}`;
+const description = `${profile.description.chinese} ${profile.description.english}`;
 const url = profile.url;
 
 export const metadata: Metadata = {
@@ -16,7 +15,9 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ rel: "icon", url: "/favicon.ico" }],
   },
-  authors: [{ name: "FanYu", url: "https://github.com/fanyuuu2006" }],
+  authors: [
+    { name: profile.nickname.english, url: "https://github.com/fanyuuu2006" },
+  ],
 
   keywords: [
     "FanYu",
@@ -90,7 +91,7 @@ export const metadata: Metadata = {
   verification: {
     google: "BPwLDvPkjbND-Djvxq812SdYkm2pHQ18WPWt2KkPiQk",
   },
-  alternates:{
+  alternates: {
     canonical: "/",
-  }
+  },
 };
