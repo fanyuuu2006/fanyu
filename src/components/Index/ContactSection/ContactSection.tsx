@@ -56,7 +56,7 @@ export const ContactSection = () => {
                     <OutsideLink
                       draggable={true}
                       href={item.href}
-                      className="card note flex items-center px-4 py-2 gap-2"
+                      className="btn-secondary rounded-lg note flex items-center px-4 py-2 gap-2"
                     >
                       {item.icon}
                       <span>{item.id}</span>
