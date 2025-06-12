@@ -1,3 +1,3 @@
-import { skillCategories } from "@/lib/skill";
+import { skillCategories } from "@/libs/skill";
 
 export type SkillCategory = (typeof skillCategories)[number];

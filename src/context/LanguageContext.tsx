@@ -1,5 +1,5 @@
 "use client";
-import { LanguageOptions } from "@/lib/language";
+import { LanguageOptions } from "@/libs/language";
 import { LanguageOption } from "@/types/language";
 import { DistributiveOmit } from "fanyucomponents";
 import { createContext, useContext, useState } from "react";

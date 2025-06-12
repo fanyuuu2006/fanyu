@@ -1,8 +1,8 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
-import { contactCategorieMap } from "@/lib/contact";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
-import { profile } from "@/lib/profile";
+import { contactCategorieMap } from "@/libs/contact";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
+import { profile } from "@/libs/profile";
 import { ContactCategory } from "@/types/contact";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { Tooltip } from "antd";

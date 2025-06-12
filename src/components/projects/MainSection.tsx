@@ -1,6 +1,6 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
-import { projectTagCategories } from "@/lib/projects";
+import { projectTagCategories } from "@/libs/projects";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";
 import {
@@ -12,10 +12,10 @@ import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectTagButton } from "./ProjectTagButton";
-import { profile } from "../../lib/profile";
+import { profile } from "../../libs/profile";
 import { Collapse } from "fanyucomponents";
 import { motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { Tooltip } from "antd";
 import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
 type ProjectsContent = Record<

@@ -4,10 +4,10 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { Tooltip } from "antd";
 import React from "react";
 import { motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { SkillCategory } from "@/types/skill";
-import { skillCategoryIcons } from "@/lib/skill";
-import { profile } from "@/lib/profile";
+import { skillCategoryIcons } from "@/libs/skill";
+import { profile } from "@/libs/profile";
 
 type SkillsContent = Record<"skills" | SkillCategory, string>;
 

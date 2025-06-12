@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { fetcher } from "@/utils/fetcher";
 import { slugify } from "@/utils/url";
 import { motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { LazyImage } from "@/components/custom/LazyImage";
 
 type ImagesContent = Record<
@@ -83,7 +83,7 @@ export const MainSection = ({
               <motion.div
                 key={`skeleton-${i}`}
                 variants={fadeInItem}
-                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
+                className="bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
               >
                 <LazyImage loading={true} className="w-full" />
               </motion.div>

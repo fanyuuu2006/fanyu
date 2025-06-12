@@ -1,4 +1,4 @@
-import { LanguageOptions } from "@/lib/language";
+import { LanguageOptions } from "@/libs/language";
 
 export type LanguageOption = (typeof LanguageOptions)[number];
 

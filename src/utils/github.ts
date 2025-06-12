@@ -1,4 +1,4 @@
-import { githubBadges } from "@/lib/github";
+import { githubBadges } from "@/libs/github";
 import { GitHubBadgeItem, RepoString } from "@/types/github";
 
 export const getGithubBadgeSrcs = (repo: RepoString): GitHubBadgeItem[] => {

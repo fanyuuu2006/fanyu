@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Toast } from "../custom/Toast";
 import { slugify } from "@/utils/url";
 import { HTMLMotionProps, motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { LazyImage } from "../custom/LazyImage";
 import { CaretRightOutlined } from "@ant-design/icons";
 

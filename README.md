@@ -1,6 +1,6 @@
-# FanYu 個人網站（Portfolio Website）
+# 🧑‍💻FanYu 個人網站（Portfolio Website）
 
-這是一個由 [FanYu (范余振富)](https://fanyu.vercel.app) 所開發的個人網站，使用 [Next.js](https://nextjs.org/) 和 [TypeScript](https://www.typescriptlang.org/) 建構，並整合了多語言切換、Google Drive 相簿 API、作品集篩選、社群聯繫、SEO 結構化資料、動畫效果等功能。
+由 FanYu（范余振富） 開發的個人作品展示平台，基於 Next.js + TypeScript，整合多語言切換、Google Drive 相簿 API、動態篩選作品集、動畫效果、SEO 等功能，是一個全方位的個人網站。
 
 ## 🔗 快速前往
 
@@ -49,7 +49,7 @@
 │   ├── app/                 # App Router 各路由頁面與 API Route
 │   ├── components/          # 共用與區塊元件（首頁、作品集、相簿等）
 │   ├── context/             # React Context（如 LanguageContext）
-│   ├── lib/                 # 資料、工具函式與外部整合模組
+│   ├── libs/                 # 資料、工具函式與外部整合模組
 │   ├── styles/              # 全域樣式與 CSS Modules
 │   ├── types/               # TypeScript 型別定義
 │   └── utils/               # 工具方法（資料處理、URL 等）

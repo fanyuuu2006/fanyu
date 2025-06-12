@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { profile } from "@/lib/profile";
+import { profile } from "@/libs/profile";
 import { ProjectItem } from "@/types/portfolio";
 import { ArrowRightOutlined, ReloadOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
@@ -8,7 +8,7 @@ import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 
 const projectCount = 3;
 

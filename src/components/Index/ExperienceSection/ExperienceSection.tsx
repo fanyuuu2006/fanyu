@@ -1,12 +1,12 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { profile } from "@/lib/profile";
+import { profile } from "@/libs/profile";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { ExperienceTab } from "@/types/experience";
-import { experienceTabIcons, experienceTabs } from "@/lib/experience";
+import { experienceTabIcons, experienceTabs } from "@/libs/experience";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";

@@ -1,4 +1,4 @@
-import { experienceTabs } from "@/lib/experience";
+import { experienceTabs } from "@/libs/experience";
 import { LanguageContent, LanguageOption } from "./language";
 
 export type Duration = {

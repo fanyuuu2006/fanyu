@@ -1,6 +1,6 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
-import { profile } from "@/lib/profile";
+import { profile } from "@/libs/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import { profile } from "@/lib/profile";
+import { profile } from "@/libs/profile";
 import type { Metadata } from "next";
 
 const title = `${profile.nickname.chinese} ${profile.nickname.english}`;

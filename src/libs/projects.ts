@@ -238,6 +238,11 @@ const AoJiao: ProjectItem = {
     "Vercel",
     "Git / GitHub",
   ],
+  github: {
+    repo: "fanyuuu2006/NTUST-BoardGameClub-Bot",
+    repoId: "R_kgDOOH0UhA",
+    categoryId: "DIC_kwDOOH0UhM4CrXTj",
+  },
 };
 
 const FanYuComponents: ProjectItem = {

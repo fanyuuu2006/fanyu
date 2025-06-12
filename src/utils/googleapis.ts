@@ -1,4 +1,4 @@
-import drive from "@/lib/googleapis";
+import drive from "@/libs/googleapis";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
 

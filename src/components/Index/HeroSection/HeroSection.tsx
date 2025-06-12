@@ -1,12 +1,12 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
-import { profile } from "@/lib/profile";
+import { profile } from "@/libs/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { CopyOutlined } from "@ant-design/icons";
 import { TypeWriterText } from "fanyucomponents";
 import { Toast } from "../../custom/Toast";
 import { motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/lib/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

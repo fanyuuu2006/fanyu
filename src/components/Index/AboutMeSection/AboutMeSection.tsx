@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { motion } from "framer-motion";
-import { fadeInItem } from "@/lib/motion";
+import { fadeInItem } from "@/libs/motion";
 
 type AboutMeContent = {
   aboutMe: string;

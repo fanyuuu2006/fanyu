@@ -1,4 +1,4 @@
-import { projectTagCategories } from "@/lib/projects";
+import { projectTagCategories } from "@/libs/projects";
 import { LanguageContent } from "./language";
 import { RepoString } from "./github";
 

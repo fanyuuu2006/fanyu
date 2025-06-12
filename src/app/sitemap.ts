@@ -1,4 +1,4 @@
-import { profile } from "@/lib/profile";
+import { profile } from "@/libs/profile";
 import { fetcher } from "@/utils/fetcher";
 import { slugify } from "@/utils/url";
 import { MetadataRoute } from "next";
