@@ -109,7 +109,7 @@ button {
 
 .card {
   background-color: var(--background-color);
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   border: 2px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   transition-property: transform, box-shadow;

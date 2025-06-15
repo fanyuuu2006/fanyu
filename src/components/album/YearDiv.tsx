@@ -87,9 +87,12 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
               <motion.div
                 key={`skeleton-${i}`}
                 variants={fadeInItem}
-                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
+                className=" w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
               >
-                <LazyImage loading={true} className="w-full" />
+                <LazyImage
+                  loading={true}
+                  className="w-full rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square"
+                />
               </motion.div>
             ))
           ) : !eventNames || eventNames.length === 0 ? (
@@ -97,8 +100,8 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
           ) : (
             eventNames.map((eventName) => (
               <motion.div
-                variants={fadeInItem}
                 key={`${year}-${eventName}`}
+                variants={fadeInItem}
                 className="rounded-lg overflow-hidden w-1/2 border border-[var(--border-color)] sm:w-1/3 md:w-1/4 lg:w-1/5"
               >
                 <EventLinkCard

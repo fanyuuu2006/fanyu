@@ -5,9 +5,8 @@ import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { profile } from "@/libs/profile";
 import { ContactCategory } from "@/types/contact";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { Tooltip } from "antd";
-import { OutsideLink } from "fanyucomponents";
 import { motion } from "framer-motion";
+import { ContactCard } from "./ContactCard";
 
 type ContactContent = Record<"contact", string>;
 
@@ -51,18 +50,11 @@ export const ContactSection = () => {
               className="flex flex-wrap w-full gap-2"
             >
               {items.map((item, index) => (
-                <motion.div key={index} variants={fadeInItem}>
-                  <Tooltip title={item.label}>
-                    <OutsideLink
-                      draggable={true}
-                      href={item.href}
-                      className="card note flex items-center px-4 py-2 gap-2"
-                    >
-                      {item.icon}
-                      <span>{item.id}</span>
-                    </OutsideLink>
-                  </Tooltip>
-                </motion.div>
+                <ContactCard
+                  key={`${item.label} ${index}`}
+                  variants={fadeInItem}
+                  item={item}
+                />
               ))}
             </motion.div>
           </div>
