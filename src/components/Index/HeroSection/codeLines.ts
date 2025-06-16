@@ -88,8 +88,8 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
       {
         label: `// <-${
           {
-            chinese: "點我看看",
-            english: "Click me maybe",
+            chinese: "點看看",
+            english: "Try to click",
           }[language]
         }🤫`,
         className: "comment",
