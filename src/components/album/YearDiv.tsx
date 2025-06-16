@@ -9,7 +9,6 @@ import { Toast } from "../custom/Toast";
 import { slugify } from "@/utils/url";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
-import { LazyImage } from "../custom/LazyImage";
 import { CaretRightOutlined } from "@ant-design/icons";
 
 export type YearDivProps = OverrideProps<
@@ -87,12 +86,8 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
               <motion.div
                 key={`skeleton-${i}`}
                 variants={fadeInItem}
-                className=" w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5"
+                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
               >
-                <LazyImage
-                  loading={true}
-                  className="w-full rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square"
-                />
               </motion.div>
             ))
           ) : !eventNames || eventNames.length === 0 ? (
@@ -100,8 +95,8 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
           ) : (
             eventNames.map((eventName) => (
               <motion.div
-                key={`${year}-${eventName}`}
                 variants={fadeInItem}
+                key={`${year}-${eventName}`}
                 className="rounded-lg overflow-hidden w-1/2 border border-[var(--border-color)] sm:w-1/3 md:w-1/4 lg:w-1/5"
               >
                 <EventLinkCard
