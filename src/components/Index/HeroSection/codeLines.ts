@@ -21,6 +21,7 @@ export const generateCodeLines = (
       createToken.variable(`name:`),
       whiteSpace(1),
       createToken.string(`'${profile.name[language]}'`),
+      createToken.default(","),
     ],
     [
       whiteSpace(2),
