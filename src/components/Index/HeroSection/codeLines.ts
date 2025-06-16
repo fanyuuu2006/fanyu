@@ -68,7 +68,6 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
     ],
     [
       indent(1),
-
       {
         label: `age:`,
         className: "variable",

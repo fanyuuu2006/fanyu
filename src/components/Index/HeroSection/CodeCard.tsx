@@ -78,17 +78,16 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
         </button>
       </div>
       <pre className="note flex flex-col">
-        {codeLines.map((lineItems, index) => (
-          <div key={index} className="flex flex-nowrap gap-2">
-            <span className="text-[#888] select-none">{index + 1}</span>
+        {codeLines.map((lineItems, lineIndex) => (
+          <div key={lineIndex} className="flex flex-nowrap gap-2">
+            <span className="text-[#888] select-none">{lineIndex + 1}</span>
             <code className={`whitespace-pre-wrap`}>
               {lineItems.map((item, itemIndex) => {
                 const Tag = item.tag || "span";
-                if (!item.label) return null;
                 const { className, ...rest } = item.props || {};
                 return (
                   <Tag
-                    key={itemIndex}
+                    key={`${itemIndex} ${item.label}`}
                     className={`${
                       codeClassNameMap[item.className || "default"]
                     } ${className || ""}`}
