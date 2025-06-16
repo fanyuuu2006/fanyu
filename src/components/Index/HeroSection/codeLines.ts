@@ -3,10 +3,14 @@ import { CodeItem } from "./CodeCard";
 import { LanguageOption } from "@/types/language";
 import Link from "next/link";
 
-const indent = (level: number): CodeItem => {
+const whiteSpace = (count: number = 1): CodeItem => {
   return {
-    label: "  ".repeat(level),
+    label: " ".repeat(count),
   };
+};
+
+const indent = (level: number = 1): CodeItem => {
+  return whiteSpace(level * 2);
 };
 
 export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
@@ -16,16 +20,12 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: "const",
         className: "keyword-blue",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: profile.nickname.english,
         className: "constant",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: "=",
         className: "operator",
@@ -41,9 +41,7 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: `name:`,
         className: "variable",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: `'${profile.name[language]}'`,
         className: "string",
@@ -59,9 +57,7 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: `nickname:`,
         className: "variable",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: `'${profile.nickname[language]}'`,
         className: "string",
@@ -77,9 +73,7 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: `age:`,
         className: "variable",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: `${profile.age()}`,
         className: "number",
@@ -91,6 +85,16 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
       {
         label: ",",
       },
+      whiteSpace(1),
+      {
+        label: `// <-${
+          {
+            chinese: "點我看看",
+            english: "Click me maybe",
+          }[language]
+        }🤫`,
+        className: "comment",
+      },
     ],
     [
       {
@@ -100,9 +104,7 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: `hobbies:`,
         className: "variable",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: "[",
         className: "brackets-2",
@@ -144,9 +146,7 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: `skills:`,
         className: "variable",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: "[",
         className: "brackets-2",
@@ -159,7 +159,7 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: ", ",
       },
       {
-        label: `'Next.js'`,
+        label: `'React'`,
         className: "string",
       },
       {
@@ -182,16 +182,12 @@ export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
         label: "}",
         className: "brackets-1",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: "as",
         className: "keyword-purple",
       },
-      {
-        label: " ",
-      },
+      whiteSpace(1),
       {
         label: "const",
         className: "type",

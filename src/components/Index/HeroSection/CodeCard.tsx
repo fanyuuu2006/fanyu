@@ -105,3 +105,4 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
     </div>
   );
 };
+CodeCard.displayName = "CodeCard";
