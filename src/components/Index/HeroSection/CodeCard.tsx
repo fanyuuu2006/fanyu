@@ -1,50 +1,12 @@
 import { Toast } from "@/components/custom/Toast";
 import { CopyOutlined } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
-
-type CodeClassName =
-  | "keyword-blue" // const, let, function, if, else class type
-  | "keyword-purple" // import, export, from, as ,return
-  | "string" // string
-  | "number" // number
-  | "comment" // comment ex: //, /* */, /** */
-  | "type" // type, interface, enum
-  | "variable" // variable, function name, class name, method name
-  | "constant" // constant, enum value, static property
-  | `brackets-${1 | 2 | 3}` // (), [], {}, <>, (), [], {}, <
-  | "operator" // +, -, *, /, %, =, ==, ===, !=, !==, <, >, <=, >=
-  | "default"; // ., ,, ;, :, ?, !, @, #, $, %, ^, &, *, (, ), [, ], {, }, <, >, /, \, |, \", ', `;
-
-export type CodeItem<T extends React.ElementType = React.ElementType> = {
-  tag?: T;
-  className?: CodeClassName;
-  label: string;
-  props?: React.ComponentProps<T>;
-};
-
-const codeClassNameMap: Record<
-  CodeClassName,
-  React.HTMLAttributes<React.ElementType>["className"]
-> = {
-  "keyword-blue": "text-[#569cd6]",
-  "keyword-purple": "text-[#c586c0]",
-  string: "text-[#ce9178]",
-  number: "text-[#b5cea8]",
-  comment: "text-[#6a9955]",
-  variable: "text-[#9cdcfe]",
-  constant: "text-[#4fc1ff]",
-  type: "text-[#4ec9b0]",
-  "brackets-1": "text-[#ffd700]",
-  "brackets-2": "text-[#da70d6]",
-  "brackets-3": "text-[#179fff]",
-  operator: "text-[#d4d4d4]",
-  default: "text-[#d4d4d4]",
-};
+import { CodeBlock, CodeTokenProps } from "c063";
 
 export type CodeCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
   {
-    codeLines: CodeItem[][];
+    codeLines: CodeTokenProps<React.ElementType>[][];
   }
 >;
 
@@ -57,7 +19,9 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
           className="btn flex items-center justify-center ml-auto w-6 h-6 rounded-sm"
           onClick={async () => {
             const plainText = codeLines
-              .map((line) => line.map((item) => item.label).join(""))
+              .map((line) =>
+                line.map((item) => item.children?.toString()).join("")
+              )
               .join("\n");
 
             await navigator.clipboard
@@ -77,30 +41,11 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
           <CopyOutlined />
         </button>
       </div>
-      <pre className="note flex flex-col">
-        {codeLines.map((lineItems, lineIndex) => (
-          <div key={lineIndex} className="flex flex-nowrap gap-2 w-full">
-            <span className="text-[#888] select-none">{lineIndex + 1}</span>
-            <code className={`whitespace-pre-wrap`}>
-              {lineItems.map((item, itemIndex) => {
-                const Tag = item.tag || "span";
-                const { className, ...rest } = item.props || {};
-                return (
-                  <Tag
-                    key={`${itemIndex} ${item.label}`}
-                    className={`${
-                      codeClassNameMap[item.className || "default"]
-                    } ${className || ""}`}
-                    {...rest}
-                  >
-                    {item.label}
-                  </Tag>
-                );
-              })}
-            </code>
-          </div>
-        ))}
-      </pre>
+      <CodeBlock
+        showLineNumbers
+        tokenLines={codeLines}
+        className="note flex flex-col"
+      />
     </div>
   );
 };

@@ -18,6 +18,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "antd": "^5.25.4",
+    "c063": "^1.2.0",
     "fanyucomponents": "^2.10.16",
     "framer-motion": "^12.16.0",
     "gaxios": "^6.7.1",

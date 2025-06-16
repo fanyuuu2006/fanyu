@@ -47,7 +47,7 @@ export const HeroSection = () => {
     <section id="hero">
       <div className="container">
         <div className="flex flex-wrap justify-center min-h-162">
-          <div className="flex flex-col items-center justify-center p-4 gap-4 w-full md:w-24/50">
+          <div className="flex flex-col items-center justify-center p-4 gap-4 w-full lg:w-24/50">
             <div className="text-white">
               <div className="label font-bold">{heroContent.hello}</div>
               <h1 className="title font-bold ">
@@ -76,7 +76,7 @@ export const HeroSection = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full md:w-24/50">
+          <div className="flex flex-col items-center justify-center w-full lg:w-24/50">
             <motion.div
               variants={fadeInItem}
               initial="hiddenBottom"

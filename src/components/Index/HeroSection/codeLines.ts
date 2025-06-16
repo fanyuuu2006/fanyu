@@ -1,199 +1,101 @@
 import { profile } from "@/libs/profile";
-import { CodeItem } from "./CodeCard";
 import { LanguageOption } from "@/types/language";
+import { CodeTokenProps, createToken, whiteSpace } from "c063";
 import Link from "next/link";
 
-const whiteSpace = (count: number = 1): CodeItem => {
-  return {
-    label: " ".repeat(count),
-  };
-};
-
-const indent = (level: number = 1): CodeItem => {
-  return whiteSpace(level * 2);
-};
-
-export const generateCodeLines = (language: LanguageOption): CodeItem[][] => {
+export const generateCodeLines = (
+  language: LanguageOption
+): CodeTokenProps<React.ElementType>[][] => {
   return [
     [
-      {
-        label: "const",
-        className: "keyword-blue",
-      },
+      createToken.constant("const"),
       whiteSpace(1),
-      {
-        label: profile.nickname.english,
-        className: "constant",
-      },
+      createToken.constant(profile.nickname.english),
       whiteSpace(1),
-      {
-        label: "=",
-        className: "operator",
-      },
-      {
-        label: " {",
-        className: "brackets-1",
-      },
+      createToken.operator("="),
+      whiteSpace(1),
+      createToken["brackets-1"]("{"),
     ],
     [
-      indent(1),
-      {
-        label: `name:`,
-        className: "variable",
-      },
+      whiteSpace(2),
+      createToken.variable(`name:`),
       whiteSpace(1),
-      {
-        label: `'${profile.name[language]}'`,
-        className: "string",
-      },
-      {
-        label: ",",
-      },
+      createToken.string(`'${profile.name[language]}'`),
     ],
     [
-      indent(1),
-
-      {
-        label: `nickname:`,
-        className: "variable",
-      },
+      whiteSpace(2),
+      createToken.variable(`nickname:`),
       whiteSpace(1),
-      {
-        label: `'${profile.nickname[language]}'`,
-        className: "string",
-      },
-      {
-        label: ",",
-      },
+      createToken.string(`'${profile.nickname[language]}'`),
+      createToken.default(","),
     ],
     [
-      indent(1),
-      {
-        label: `age:`,
-        className: "variable",
-      },
+      whiteSpace(2),
+      createToken.variable(`age:`),
       whiteSpace(1),
-      {
-        label: `${profile.age()}`,
-        className: "number",
-        tag: Link,
-        props: {
-          href: "/my",
-        },
-      },
-      {
-        label: ",",
-      },
+      createToken.number(`${profile.age()}`, {
+        as: Link,
+        href: "/my",
+      }),
+      createToken.default(","),
       whiteSpace(1),
-      {
-        label: `// <-${
+      createToken.comment(
+        `// <-${
           {
             chinese: "點看看",
             english: "Try to click",
           }[language]
-        }🤫`,
-        className: "comment",
-      },
+        }🤫`
+      ),
     ],
     [
-      {
-        label: "  ",
-      }, // 縮排
-      {
-        label: `hobbies:`,
-        className: "variable",
-      },
+      whiteSpace(2),
+      createToken.variable(`hobbies:`),
       whiteSpace(1),
-      {
-        label: "[",
-        className: "brackets-2",
-      },
-      {
-        label: `'${
+      createToken["brackets-2"]("["),
+      createToken.string(
+        `'${
           {
             chinese: "寫程式",
             english: "Coding",
           }[language]
-        }'`,
-        className: "string",
-      },
-      {
-        label: ", ",
-      },
-      {
-        label: `'${
+        }'`
+      ),
+      createToken.default(","),
+      whiteSpace(1),
+      createToken.string(
+        `'${
           {
             chinese: "繪畫",
             english: "Drawing",
           }[language]
-        }'`,
-        className: "string",
-      },
-      {
-        label: "]",
-        className: "brackets-2",
-      },
-      {
-        label: ",",
-      },
+        }'`
+      ),
+      createToken["brackets-2"]("]"),
+      createToken.default(","),
     ],
     [
-      {
-        label: "  ",
-      }, // 縮排
-      {
-        label: `skills:`,
-        className: "variable",
-      },
+      whiteSpace(2),
+      createToken.variable(`skills:`),
       whiteSpace(1),
-      {
-        label: "[",
-        className: "brackets-2",
-      },
-      {
-        label: `'TypeScript'`,
-        className: "string",
-      },
-      {
-        label: ", ",
-      },
-      {
-        label: `'React'`,
-        className: "string",
-      },
-      {
-        label: ", ",
-      },
-      {
-        label: `'Python'`,
-        className: "string",
-      },
-      {
-        label: "]",
-        className: "brackets-2",
-      },
-      {
-        label: ",",
-      },
+      createToken["brackets-2"]("["),
+      createToken.string(`'TypeScript'`),
+      createToken.default(","),
+      whiteSpace(1),
+      createToken.string(`'React'`),
+      createToken.default(","),
+      whiteSpace(1),
+      createToken.string(`'Python'`),
+      createToken["brackets-2"]("]"),
+      createToken.default(","),
     ],
     [
-      {
-        label: "}",
-        className: "brackets-1",
-      },
+      createToken["brackets-1"]("}"),
       whiteSpace(1),
-      {
-        label: "as",
-        className: "keyword-purple",
-      },
+      createToken["keyword-purple"]("as"),
       whiteSpace(1),
-      {
-        label: "const",
-        className: "type",
-      },
-      {
-        label: ";",
-      },
+      createToken.type("const"),
+      createToken.default(";"),
     ],
   ];
 };
