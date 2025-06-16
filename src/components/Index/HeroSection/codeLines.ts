@@ -8,7 +8,7 @@ export const generateCodeLines = (
 ): CodeTokenProps<React.ElementType>[][] => {
   return [
     [
-      createToken.constant("const"),
+      createToken["keyword-blue"]("const"),
       whiteSpace(1),
       createToken.constant(profile.nickname.english),
       whiteSpace(1),
