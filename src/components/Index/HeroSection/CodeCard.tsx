@@ -79,7 +79,7 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
       </div>
       <pre className="note flex flex-col">
         {codeLines.map((lineItems, lineIndex) => (
-          <div key={lineIndex} className="flex flex-nowrap gap-2">
+          <div key={lineIndex} className="flex flex-nowrap gap-2 w-full">
             <span className="text-[#888] select-none">{lineIndex + 1}</span>
             <code className={`whitespace-pre-wrap`}>
               {lineItems.map((item, itemIndex) => {
