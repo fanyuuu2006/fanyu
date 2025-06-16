@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "相簿 Album",
+  title: {
+    template: "%s | 相簿 Album",
+    default: "相簿 Album",
+  },
 };
 
 export default function Layout({
@@ -11,4 +14,3 @@ export default function Layout({
 }>) {
   return children;
 }
-
