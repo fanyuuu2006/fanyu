@@ -1,7 +1,6 @@
 import { profile } from "@/libs/profile";
 import { LanguageOption } from "@/types/language";
-import { CodeTokenProps, whiteSpace } from "c063";
-import c063 from "c063";
+import c063, { CodeTokenProps, whiteSpace } from "c063";
 import Link from "next/link";
 
 export const generateCodeLines = (

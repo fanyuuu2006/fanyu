@@ -1,19 +1,21 @@
 import { Toast } from "@/components/custom/Toast";
 import { CopyOutlined } from "@ant-design/icons";
-import { OverrideProps } from "fanyucomponents";
-import { CodeBlock, CodeTokenProps, extractTokenContent } from "c063";
-import React from "react";
+import { CodeBlock, extractTokenContent } from "c063";
+import React, { useMemo } from "react";
+import { useLanguage } from "@/context/LanguageContext";
+import { generateCodeLines } from "./codeLines";
 
-export type CodeCardProps = OverrideProps<
-  React.HTMLAttributes<HTMLDivElement>,
-  {
-    codeLines: CodeTokenProps<React.ElementType>[][];
-  }
->;
+export type CodeCardProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
+export const CodeCard = ({ className, ...rest }: CodeCardProps) => {
+  const Language = useLanguage();
+
+  const codeLines = useMemo(() => {
+    return generateCodeLines(Language.Current);
+  }, [Language.Current]);
+
   return (
-    <div className="card p-6 overflow-auto" {...rest}>
+    <div className={`card p-6 overflow-auto ${className}`} {...rest}>
       <div className="hint flex items-center">
         <span>TypeScript</span>
         <button
@@ -25,9 +27,7 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
             }
             const plainText = codeLines
               .map((line) =>
-                line
-                  .map((token) => extractTokenContent(token))
-                  .join("")
+                line.map((token) => extractTokenContent(token)).join("")
               )
               .join("\n");
 
