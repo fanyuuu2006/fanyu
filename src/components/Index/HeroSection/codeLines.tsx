@@ -98,5 +98,11 @@ export const generateCodeLines = (
       c063.type("const"),
       c063.default(";"),
     ],
+    [
+      c063.keyword2("export default"),
+      whiteSpace(1),
+      c063.constant("FanYu"),
+      c063.default(";"),
+    ],
   ];
 };

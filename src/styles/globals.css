@@ -93,7 +93,7 @@ button {
 .btn-primary:active,
 .btn-secondary:active {
   scale: 0.9;
-  filter: brightness(var(--brightness-hover));
+  filter: brightness(var(--brightness-active));
 }
 
 .btn-text {
