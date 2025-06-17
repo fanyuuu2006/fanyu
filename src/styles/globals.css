@@ -10,7 +10,7 @@
   --background-color: #131723;
   --background-color-dark: #0d110d;
   --background-color-primary: #212830;
-  --background-color-overlay: #171c4ebb;
+  --background-color-secondary: #1e262e;
   --text-color: #ffffff;
   --text-color-primary: #1f6feb;
   --text-color-secondary: #ffff71;
@@ -111,7 +111,11 @@ button {
 }
 
 .card {
-  background-color: var(--background-color);
+  background: linear-gradient(
+    15deg,
+    var(--background-color),
+    var(--background-color-secondary)
+  );
   border-radius: 1.5rem;
   border: 2px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
