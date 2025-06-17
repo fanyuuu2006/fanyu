@@ -1,6 +1,6 @@
 import { profile } from "@/libs/profile";
 import { LanguageOption } from "@/types/language";
-import { CodeTokenProps, createToken, whiteSpace } from "c063";
+import { CodeTokenProps, c063, whiteSpace } from "c063";
 import Link from "next/link";
 
 export const generateCodeLines = (
@@ -8,39 +8,39 @@ export const generateCodeLines = (
 ): CodeTokenProps<React.ElementType>[][] => {
   return [
     [
-      createToken["keyword-blue"]("const"),
+      c063.keyword1("const"),
       whiteSpace(1),
-      createToken.constant(profile.nickname.english),
+      c063.constant(profile.nickname.english),
       whiteSpace(1),
-      createToken.operator("="),
+      c063.operator("="),
       whiteSpace(1),
-      createToken["brackets-1"]("{"),
+      c063.brackets1("{"),
     ],
     [
       whiteSpace(2),
-      createToken.variable(`name:`),
+      c063.variable(`name:`),
       whiteSpace(1),
-      createToken.string(`'${profile.name[language]}'`),
-      createToken.default(","),
+      c063.string(`'${profile.name[language]}'`),
+      c063.default(","),
     ],
     [
       whiteSpace(2),
-      createToken.variable(`nickname:`),
+      c063.variable(`nickname:`),
       whiteSpace(1),
-      createToken.string(`'${profile.nickname[language]}'`),
-      createToken.default(","),
+      c063.string(`'${profile.nickname[language]}'`),
+      c063.default(","),
     ],
     [
       whiteSpace(2),
-      createToken.variable(`age:`),
+      c063.variable(`age:`),
       whiteSpace(1),
-      createToken.number(`${profile.age()}`, {
+      c063.number(`${profile.age()}`, {
         as: Link,
         href: "/my",
       }),
-      createToken.default(","),
+      c063.default(","),
       whiteSpace(1),
-      createToken.comment(
+      c063.comment(
         `// <-${
           {
             chinese: "點看看",
@@ -51,10 +51,10 @@ export const generateCodeLines = (
     ],
     [
       whiteSpace(2),
-      createToken.variable(`hobbies:`),
+      c063.variable(`hobbies:`),
       whiteSpace(1),
-      createToken["brackets-2"]("["),
-      createToken.string(
+      c063.brackets2("["),
+      c063.string(
         `'${
           {
             chinese: "寫程式",
@@ -62,9 +62,9 @@ export const generateCodeLines = (
           }[language]
         }'`
       ),
-      createToken.default(","),
+      c063.default(","),
       whiteSpace(1),
-      createToken.string(
+      c063.string(
         `'${
           {
             chinese: "繪畫",
@@ -72,31 +72,31 @@ export const generateCodeLines = (
           }[language]
         }'`
       ),
-      createToken["brackets-2"]("]"),
-      createToken.default(","),
+      c063.brackets2("]"),
+      c063.default(","),
     ],
     [
       whiteSpace(2),
-      createToken.variable(`skills:`),
+      c063.variable(`skills:`),
       whiteSpace(1),
-      createToken["brackets-2"]("["),
-      createToken.string(`'TypeScript'`),
-      createToken.default(","),
+      c063.brackets2("["),
+      c063.string(`'TypeScript'`),
+      c063.default(","),
       whiteSpace(1),
-      createToken.string(`'React'`),
-      createToken.default(","),
+      c063.string(`'React'`),
+      c063.default(","),
       whiteSpace(1),
-      createToken.string(`'Python'`),
-      createToken["brackets-2"]("]"),
-      createToken.default(","),
+      c063.string(`'Python'`),
+      c063.brackets2("]"),
+      c063.default(","),
     ],
     [
-      createToken["brackets-1"]("}"),
+      c063.brackets1("}"),
       whiteSpace(1),
-      createToken["keyword-purple"]("as"),
+      c063.keyword2("as"),
       whiteSpace(1),
-      createToken.type("const"),
-      createToken.default(";"),
+      c063.type("const"),
+      c063.default(";"),
     ],
   ];
 };
