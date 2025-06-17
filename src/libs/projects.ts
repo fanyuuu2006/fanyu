@@ -298,10 +298,59 @@ const FanYuComponents: ProjectItem = {
   },
 };
 
+const C063: ProjectItem = {
+  title: {
+    chinese: "c063",
+    english: "c063",
+  },
+  imageSrc:
+    "https://raw.githubusercontent.com/fanyuuu2006/c063/refs/heads/main/public/icon.png",
+  links: [
+    {
+      category: "package",
+      href: "https://www.npmjs.com/package/c063",
+    },
+    {
+      category: "github",
+      href: "https://github.com/fanyuuu2006/c063",
+    },
+  ],
+  time: "2025-06",
+  about: {
+    chinese: "一款用於顯示語法高亮代碼片段的 React 組件庫。",
+    english: "A React library for displaying syntax highlighted code snippets.",
+  },
+  description: {
+    chinese: [
+      "使用 React 和 TypeScript 開發，提供強大的語法高亮功能與高度模組化設計，適用於教學、文件與部落格等場景。",
+      "支援多種主題風格（如 GitHub、VS Code 等），可自由切換深淺色模式，提升可讀性。",
+      "組件具備可擴充性，提供 `as` 屬性支援自定義渲染方式。",
+      "公開於 npm，可快速安裝並於各式前端專案中整合使用。",
+      "提供 `token` 工具函式協助開發者快速建立語法元素，提升開發效率。",
+    ],
+    english: [
+      "Built with React and TypeScript, c063 offers robust syntax highlighting and a highly modular architecture for documentation, blogs, and learning platforms.",
+      "Supports multiple themes (e.g., GitHub, VS Code) with light/dark mode toggling for better readability.",
+      "Provides high customizability with `as` prop for custom rendering of elements.",
+      "Published on npm for easy installation and seamless integration into frontend projects.",
+      "Includes utility functions such as `c063.keyword1()` and `whiteSpace()` for efficient token creation.",
+    ],
+  },
+  tags: [
+    "TypeScript",
+    "React",
+    "Frontend",
+    "NPM",
+    "JavaScript",
+    "Git / GitHub",
+  ],
+};
+
 export const projects: ProjectItem[] = [
   LabaG,
   ToolsForMetaInformation,
   FanYuComponents,
   DoBuJio,
   AoJiao,
+  C063,
 ];

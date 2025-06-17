@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   ProjectItem,
   ProjectLinkCategory,
@@ -53,12 +52,11 @@ export const ProjectCard = ({
         id={slugify(item.title.english)}
         className={`${className} card shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       >
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element*/}
+        <img
           className="bg-[#fff] border border-[var(--border-color)] h-25 w-fit  rounded-full"
           src={item.imageSrc}
           alt={`${item.title.english} icon`}
-          width={300}
-          height={300}
         />
         <div className="flex flex-col flex-1 gap-2">
           <div className="content font-bold">

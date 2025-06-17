@@ -3,7 +3,6 @@ import { ProjectItem } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { ClockCircleOutlined, TagsOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import Image from "next/image";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 
 const tagLimit = 10;
@@ -44,12 +43,11 @@ export const ProjectLinkCard = ({
       {...rest}
     >
       <div className="w-full relative aspect-video bg-white  brightness-80">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element*/}{" "}
+        <img
           className="absolute inset-0 w-full h-full object-cover"
           src={item.imageSrc}
           alt={`${item.title.english} icon`}
-          width={300}
-          height={300}
         />
       </div>
       <div className="flex flex-col gap-2 p-4">

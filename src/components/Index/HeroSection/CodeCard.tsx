@@ -1,7 +1,8 @@
 import { Toast } from "@/components/custom/Toast";
 import { CopyOutlined } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
-import { CodeBlock, CodeTokenProps } from "c063";
+import { CodeBlock, CodeTokenProps, extractTokenContent } from "c063";
+import React from "react";
 
 export type CodeCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -18,9 +19,15 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
         <button
           className="btn flex items-center justify-center ml-auto w-6 h-6 rounded-sm"
           onClick={async () => {
+            if (!navigator?.clipboard) {
+              Toast.fire({ icon: "error", text: "瀏覽器不支援複製" });
+              return;
+            }
             const plainText = codeLines
               .map((line) =>
-                line.map((item) => item.children?.toString()).join("")
+                line
+                  .map((token) => extractTokenContent(token))
+                  .join("")
               )
               .join("\n");
 
@@ -42,6 +49,7 @@ export const CodeCard = ({ codeLines, ...rest }: CodeCardProps) => {
         </button>
       </div>
       <CodeBlock
+        theme="default-dark-modern"
         showLineNumbers
         tokenLines={codeLines}
         className="note flex flex-col"
