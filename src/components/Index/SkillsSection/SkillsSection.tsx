@@ -67,7 +67,7 @@ export const SkillsSection = () => {
                         src={item.src}
                         width={300}
                         height={300}
-                        className="object-cover"
+                        className="object-cover transition-transform hover:-translate-y-2 hover:scale-110"
                       />
                     </Tooltip>
                   </motion.div>

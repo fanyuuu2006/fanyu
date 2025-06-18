@@ -10,7 +10,7 @@
   --background-color: #131723;
   --background-color-dark: #0d110d;
   --background-color-primary: #212830;
-  --background-color-secondary: #1e262e;
+  --background-color-secondary: #1b2430;
   --text-color: #ffffff;
   --text-color-primary: #1f6feb;
   --text-color-secondary: #ffff71;
@@ -119,9 +119,7 @@ button {
   border-radius: 1.5rem;
   border: 2px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  transition-property: transform, box-shadow;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {

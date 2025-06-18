@@ -31,7 +31,7 @@ export const ExperienceCard = ({
           )}`
         }
         alt={item.name.english}
-        className="h-30 w-30 object-cover bg-[#fff] rounded-full border border-[var(--border-color)]"
+        className="h-30 w-30 object-cover bg-[#fff] rounded-full border-2 border-[var(--border-color)]"
         width={600}
         height={600}
       />
@@ -67,7 +67,7 @@ export const ExperienceCard = ({
             </div>
           )}
         </div>
-        {item.role && <span>{item.role[Language.Current]}</span>}
+        {item.role && <span className="note">{item.role[Language.Current]}</span>}
         {item.description && (
           <div>
             <item.description language={Language.Current} />
