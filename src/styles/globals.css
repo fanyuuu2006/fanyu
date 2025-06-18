@@ -26,10 +26,7 @@
   scroll-margin: 6rem;
 }
 
-html,
-body {
-  height: 100%;
-}
+
 
 body {
   display: flex;
@@ -124,11 +121,15 @@ button {
 
 .card:hover {
   --offset-y: 0.25rem;
-  box-shadow: 0 var(--offset-y) 1rem rgba(0, 0, 0, 1);
+  box-shadow: 0 var(--offset-y) 1.5rem rgba(0, 0, 0, 1);
   transform: translateY(calc(-1 * var(--offset-y)));
 }
 
-a:not(.card):not(.hover\:underline-spread):hover {
+a.card:hover {
+  text-decoration: none;
+}
+
+a:hover {
   text-decoration: underline 1px;
 }
 
@@ -206,6 +207,9 @@ a:not(.card):not(.hover\:underline-spread):hover {
 
   .hover\:underline-spread {
     position: relative;
+  }
+  .hover\:underline-spread:hover{
+    text-decoration: none !important;
   }
   .hover\:underline-spread::after {
     content: "";

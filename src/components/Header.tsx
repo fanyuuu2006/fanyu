@@ -102,7 +102,7 @@ export const Header = () => {
           <div className="hidden lg:flex note font-bold gap-6">
             {Routes.map((item, index) => (
               <Link
-                className="hover:scale-105 group hover:underline-spread"
+                className="hover:underline-spread"
                 key={index}
                 href={item.href}
               >
