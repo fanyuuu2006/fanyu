@@ -10,7 +10,7 @@
   --background-color: #131723;
   --background-color-dark: #0d110d;
   --background-color-primary: #212830;
-  --background-color-secondary: #1f2732;
+  --background-color-secondary: #222b37;
   --text-color: #ffffff;
   --text-color-primary: #1f6feb;
   --text-color-secondary: #ffff71;
@@ -23,7 +23,7 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  scroll-margin: 6em;
+  scroll-margin: 6rem;
 }
 
 html,
@@ -123,16 +123,12 @@ button {
 }
 
 .card:hover {
-  box-shadow: 0 0.25rem 1.5rem rgba(0, 0, 0, 1);
-  transform: translateY(-0.25rem);
+  --offset-y: 0.25rem;
+  box-shadow: 0 var(--offset-y) 1rem rgba(0, 0, 0, 1);
+  transform: translateY(calc(-1 * var(--offset-y)));
 }
 
-a.card,
-a.card:hover {
-  text-decoration: none;
-}
-
-a:hover {
+a:not(.card):not(.hover\:underline-spread):hover {
   text-decoration: underline 1px;
 }
 
@@ -206,6 +202,25 @@ a:hover {
   }
   .animate-turn {
     animation: turn 0.2s forwards;
+  }
+
+  .hover\:underline-spread {
+    position: relative;
+  }
+  .hover\:underline-spread::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--text-color-primary);
+    transition: width 0.2s ease-in-out;
+    transform-origin: center;
+  }
+  .hover\:underline-spread:hover::after {
+    width: 100%;
   }
 }
 

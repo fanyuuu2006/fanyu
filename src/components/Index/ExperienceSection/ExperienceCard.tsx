@@ -37,14 +37,14 @@ export const ExperienceCard = ({
         height={600}
       />
       <div className="flex flex-col gap-1 w-full">
-        <span className="content font-bold">{item.name[Language.Current]}</span>
+        <span className="label font-bold">{item.name[Language.Current]}</span>
         {item.organization && (
-          <span className="note font-bold opacity-75">
+          <span className="content font-bold opacity-75">
             {item.organization.name[Language.Current]}
           </span>
         )}
         {item.department && (
-          <span className="note font-bold opacity-75">
+          <span className="content font-bold opacity-75">
             {item.department[Language.Current]}
           </span>
         )}
@@ -54,7 +54,7 @@ export const ExperienceCard = ({
             {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
           </span>
           {item.links && (
-            <div className="flex flex-wrap gap-x-2">
+            <div className="flex gap-x-2 flex-col flex-wrap md:flex-row">
               {item.links.map((link) => {
                 // 判斷是否為外部連結
                 const Tag = !link.href.startsWith("http") ? Link : OutsideLink;
@@ -73,7 +73,9 @@ export const ExperienceCard = ({
           )}
         </div>
         {item.role && (
-          <span className="note">{item.role[Language.Current]}</span>
+          <div>
+            <span className="note">{item.role[Language.Current]}</span>
+          </div>
         )}
         {item.description && (
           <div>
