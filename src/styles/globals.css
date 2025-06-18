@@ -16,8 +16,8 @@
   --text-color-secondary: #ffff71;
   --border-color: #3d444d;
   --brightness-light: 2;
-  --brightness-hover: 1.2;
-  --brightness-active: 0.8;
+  --brightness-hover: 1.5;
+  --brightness-active: 0.7;
 }
 
 * {
@@ -112,7 +112,7 @@ button {
 
 .card {
   background: linear-gradient(
-    15deg,
+    30deg,
     var(--background-color),
     var(--background-color-secondary)
   );

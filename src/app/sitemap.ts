@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   const randomDate = () =>
-    new Date(Date.now() - Math.random() * 1000 * 60 * 60 * 24 * 30); // 前30天內隨機
+    new Date(Date.now() - Math.random() * 1000 * 60 * 60 * 24 * 10); // 前10天內隨機
 
   return [...staticRoutes, ...dynamicRoutes].map((route) => ({
     url: `${baseUrl}${route}`,

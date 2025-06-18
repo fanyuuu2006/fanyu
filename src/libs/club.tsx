@@ -5,7 +5,7 @@ import { NTUST } from "./education";
 export const NTUST_BGC: ExperienceItem = {
   name: {
     chinese: "桌上遊戲研究社",
-    english: "BoardGame Club",
+    english: "Board Game Club",
   },
   role: {
     chinese: "第14屆幹部 美宣 & 攝影",
@@ -19,7 +19,7 @@ export const NTUST_BGC: ExperienceItem = {
   links: [
     {
       chinese: "台科大桌遊社 Instagram",
-      english: "NTUST BoardGame Club Instagram",
+      english: "NTUST Board Game Club Instagram",
       icon: <InstagramOutlined />,
       href: "https://www.instagram.com/ntust_boardgame/",
     },

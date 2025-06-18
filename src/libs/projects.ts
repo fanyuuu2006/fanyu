@@ -4,8 +4,16 @@ export const projectTagCategories = {
   language: ["TypeScript", "Python", "JavaScript", "CSS"],
   roles: ["Frontend", "Backend", "Full Stack"], // ← 職能/開發角色分類
   domains: ["Crawler", "Restful API"], // 專長領域
-  frameworks: ["React", "Next.js", "Express", "Node.js", "Flask"],
-  libraries: ["Line Bot SDK", "Matplotlib", "Requests"],
+  "frameworks/libraries": [
+    "React",
+    "Next.js",
+    "Express",
+    "Node.js",
+    "Flask",
+    "Line Bot SDK",
+    "Matplotlib",
+    "Requests",
+  ],
   tools: ["Git / GitHub", "NPM", "Google Sheets", "Vercel", "Render"],
   other: [],
 } as const;
