@@ -4,6 +4,7 @@ import {
   FileOutlined,
   InstagramOutlined,
   LinkOutlined,
+  PictureOutlined,
 } from "@ant-design/icons";
 
 export const PDAO: ExperienceItem = {
@@ -30,6 +31,12 @@ export const PDAO: ExperienceItem = {
       english: "Da'an District, Taipei City, Taiwan",
       icon: <EnvironmentOutlined />,
       href: "https://maps.app.goo.gl/MvSK9ZHVXD2GiGvA9",
+    },
+    {
+      chinese: "活動照片相簿",
+      english: "Photo Album",
+      icon: <PictureOutlined />,
+      href: "/album/2025/PDAO%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E7%AB%B6%E8%B3%BD",
     },
   ],
   description: ({ language }) => (
@@ -82,6 +89,12 @@ export const HCCGM: ExperienceItem = {
       english: "Xinfeng Township, Hsinchu County, Taiwan",
       icon: <EnvironmentOutlined />,
       href: "https://maps.app.goo.gl/KJsTatVSbbJhiCKx8",
+    },
+    {
+      chinese: "活動照片相簿",
+      english: "Photo Album",
+      icon: <PictureOutlined />,
+      href: "/album/2021/%E5%9C%8B%E4%B8%AD%E6%95%99%E8%82%B2%E6%9C%83%E8%80%83",
     },
   ],
   description: ({ language }) => (
@@ -209,6 +222,12 @@ export const PVQC2021: ExperienceItem = {
       english: "Taoyuan City, Zhongli District, Taiwan",
       icon: <EnvironmentOutlined />,
       href: "https://maps.app.goo.gl/GLQw8GLzCRiNSCup6",
+    },
+    {
+      chinese: "活動照片相簿",
+      english: "Photo Album",
+      icon: <PictureOutlined />,
+      href: "/album/2021/PVQC-%E5%8C%97%E4%BA%8C%E5%8D%80%E8%B3%BD",
     },
   ],
 };

@@ -62,7 +62,6 @@ export const SkillsSection = () => {
                     <Tooltip title={item.title}>
                       {/* eslint-disable-next-line @next/next/no-img-element*/}
                       <img
-                        draggable={false}
                         alt={item.title}
                         src={item.src}
                         width={300}

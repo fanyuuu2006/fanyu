@@ -3,6 +3,7 @@ import { ExperienceItem } from "@/types/experience";
 import { slugify } from "@/utils/url";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
+import Link from "next/link";
 
 export type ExperienceCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -54,20 +55,26 @@ export const ExperienceCard = ({
           </span>
           {item.links && (
             <div className="flex flex-wrap gap-x-2">
-              {item.links.map((link) => (
-                <OutsideLink
-                  key={link.href}
-                  href={link.href}
-                  className="w-fit flex gap-2 items-center"
-                >
-                  {link.icon}
-                  {link[Language.Current]}
-                </OutsideLink>
-              ))}
+              {item.links.map((link) => {
+                // 判斷是否為外部連結
+                const Tag = !link.href.startsWith("http") ? Link : OutsideLink;
+                return (
+                  <Tag
+                    key={link.href}
+                    href={link.href}
+                    className="w-fit flex gap-2 items-center"
+                  >
+                    {link.icon}
+                    {link[Language.Current]}
+                  </Tag>
+                );
+              })}
             </div>
           )}
         </div>
-        {item.role && <span className="note">{item.role[Language.Current]}</span>}
+        {item.role && (
+          <span className="note">{item.role[Language.Current]}</span>
+        )}
         {item.description && (
           <div>
             <item.description language={Language.Current} />

@@ -4,7 +4,6 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import { ImageCard } from "./ImageCard";
-import Link from "next/link";
 import useSWR from "swr";
 import { useEffect } from "react";
 import { fetcher } from "@/utils/fetcher";
@@ -12,6 +11,7 @@ import { slugify } from "@/utils/url";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { LazyImage } from "@/components/custom/LazyImage";
+import { useRouter } from "next/navigation";
 
 type ImagesContent = Record<
   "noImages" | "eventsLoadFailed" | "imageLoadFailed",
@@ -49,6 +49,7 @@ export const MainSection = ({
   );
   const Language = useLanguage();
   const imagesContent = getImagesContent(Language.Current);
+  const router = useRouter();
 
   useEffect(() => {
     if (error) {
@@ -64,9 +65,13 @@ export const MainSection = ({
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <Link href={`/album#${year}`} className="w-full text-left content">
-          <ArrowLeftOutlined />
-        </Link>
+        <div className="w-full text-left content">
+          <ArrowLeftOutlined
+            onClick={() => {
+              router.back();
+            }}
+          />
+        </div>
         <div className="flex flex-col items-center">
           <h2 className="title font-bold">{year}</h2>
           <h2 className="label font-bold">{eventName}</h2>
@@ -89,7 +94,11 @@ export const MainSection = ({
               </motion.div>
             ))
           ) : !images || images.length === 0 ? (
-            <div className="content font-bold">{imagesContent.noImages}</div>
+            <div className="w-full text-center">
+              <span className="content font-bold">
+                {imagesContent.noImages}
+              </span>
+            </div>
           ) : (
             images.map((src) => <ImageCard key={src} src={src} />)
           )}

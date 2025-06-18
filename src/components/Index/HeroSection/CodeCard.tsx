@@ -51,7 +51,7 @@ export const CodeCard = ({ className, ...rest }: CodeCardProps) => {
       <CodeBlock
         theme="default-dark-modern"
         tokenLines={codeLines}
-        className="note flex flex-col"
+        className="note flex flex-col font-mono"
       />
     </div>
   );

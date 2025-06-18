@@ -1,7 +1,29 @@
 import { profile } from "@/libs/profile";
 import { LanguageOption } from "@/types/language";
 import c063, { CodeTokenProps } from "c063";
+import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
+
+const LoopDiv = ({
+  loopCount,
+  children,
+  ...rest
+}: OverrideProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  { loopCount: number }
+>) => {
+  if (loopCount === 0) {
+    return null;
+  }
+  return (
+    <div {...rest}>
+      {children}
+      <LoopDiv loopCount={loopCount - 1} {...rest}>
+        {children}
+      </LoopDiv>
+    </div>
+  );
+};
 
 export const generateCodeLines = (
   language: LanguageOption
