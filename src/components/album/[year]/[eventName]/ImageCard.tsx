@@ -44,7 +44,7 @@ export const ImageCard = ({
         loading={!isInView}
         src={src}
         alt={`Event Image ${src}`}
-        className="title bg-[#888] cursor-pointer select-none aspect-square object-cover group-hover:outline"
+        className="title bg-[#888] cursor-pointer select-none aspect-square object-cover transition-colors duration-200 group-hover:outline"
         onClick={Modal.Open}
       />
       <Modal.Container className="backdrop-blur-sm animate-pop">
