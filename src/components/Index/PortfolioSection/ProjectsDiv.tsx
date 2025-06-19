@@ -71,8 +71,8 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
         {[...Array(total)].map((_, index) => (
           <button
             key={index}
-            className={`rounded-full p-2 bg-white ${
-              currentIndex  === index ? "" : "opacity-30"
+            className={`rounded-full p-2 bg-white transition-opacity ${
+              currentIndex === index ? "" : "opacity-30"
             }`}
             onClick={() => scrollToPage(index)}
           />
