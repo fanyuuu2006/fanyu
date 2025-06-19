@@ -167,7 +167,7 @@ export const HeroSection = () => {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <CodeCard className="note" lang="ts" codeLines={codeLines} />
+              <CodeCard className="note" lang="typescript" codeLines={codeLines} />
             </motion.div>
           </div>
         </div>
