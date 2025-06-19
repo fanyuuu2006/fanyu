@@ -6,7 +6,7 @@ export const useInViewUnderlineSpread = <T extends HTMLElement>(
     root: undefined, // 要觀察哪個容器，null = 整個視窗
     margin: "0px", // 提前多少觸發 in-view（可加 margin）
     amount: 1, // 幾成進入畫面才算 in-view
-    once: false, // 只觸發一次
+    once: true, // 只觸發一次
     initial: false, // 預設不要啟用
   }
 ): React.RefObject<T | null> => {

@@ -234,7 +234,6 @@ a:hover {
   .underline-spread,
   .hover\:underline-spread {
     position: relative;
-    padding-inline: 0.25rem;
   }
   .hover\:underline-spread:hover {
     text-decoration: none !important;
@@ -258,14 +257,14 @@ a:hover {
     animation: underlineSpreadIn 0.3s ease-in-out forwards;
   }
   .hover\:underline-spread:hover::after {
-    width: 100%;
+    width: 120%;
   }
   @keyframes underlineSpreadIn {
     from {
       width: 0;
     }
     to {
-      width: 100%;
+      width: 120%;
     }
   }
 }
