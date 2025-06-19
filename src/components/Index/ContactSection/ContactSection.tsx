@@ -7,7 +7,6 @@ import { ContactCategory } from "@/types/contact";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { motion } from "framer-motion";
 import { ContactCard } from "./ContactCard";
-import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
 
 type ContactContent = Record<"contact", string>;
 
@@ -26,12 +25,11 @@ const getContactContent = (language: LanguageOption): ContactContent =>
 export const ContactSection = () => {
   const Language = useLanguage();
   const contactContent = getContactContent(Language.Current);
-  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
 
   return (
     <section id="contact">
       <div className="container flex flex-col items-center">
-        <h1 ref={ref} className="title font-bold">
+        <h1 className="title font-bold">
           {contactContent.contact}
         </h1>
         {Object.entries(profile.contact).map(([category, items]) => (

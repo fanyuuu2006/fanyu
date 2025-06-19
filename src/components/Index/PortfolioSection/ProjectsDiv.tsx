@@ -55,7 +55,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   if (!shuffledProject) return null;
 
   return (
-    <div className={`flex flex-col gap-4 items-center ${className}`} {...rest}>
+    <div className={`flex flex-col p-2 gap-4 items-center ${className}`} {...rest}>
       <div className="content w-full flex justify-between items-center">
         <div className="font-bold">{projectsContent.projects}</div>
         <button

@@ -352,6 +352,11 @@ const C063: ProjectItem = {
     "JavaScript",
     "Git / GitHub",
   ],
+  github: {
+    repo: "fanyuuu2006/c063",
+    repoId: "R_kgDOO8lIlQ",
+    categoryId: "DIC_kwDOO8lIlc4Crtvu",
+  },
 };
 
 export const projects: ProjectItem[] = [

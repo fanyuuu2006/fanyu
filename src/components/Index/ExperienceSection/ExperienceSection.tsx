@@ -10,7 +10,6 @@ import { experienceTabIcons, experienceTabs } from "@/libs/experience";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
-import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
 
 type ExperienceContent = Record<
   "experience" | ExperienceTab | "noExperience" | "viewMore" | "collapse",
@@ -60,12 +59,10 @@ export const ExperienceSection = () => {
   const moreItems = sortedItems.slice(viewLimit);
   const hasMore = moreItems.length > 0;
 
-  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
-
   return (
     <section id="experience">
       <div className="container flex flex-col items-center overflow-x-hidden">
-        <h1 ref={ref} className="title font-bold">
+        <h1 className="title font-bold">
           {experienceContent.experience}
         </h1>
         <div className="flex flex-col w-full gap-4">

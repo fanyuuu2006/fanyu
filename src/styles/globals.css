@@ -112,20 +112,20 @@ button {
 
 .card {
   background: linear-gradient(
-    15deg,
+    25deg,
     var(--background-color),
     var(--background-color-primary)
   );
   border-radius: 1.5rem;
-  border: 2px solid var(--border-color);
+  border: 3px solid var(--border-color);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  --offset-y: 0.25rem;
-  box-shadow: 0 var(--offset-y) 1.5rem rgba(0, 0, 0, 1);
-  transform: translateY(calc(-1 * var(--offset-y)));
+  --move-y: 0.25rem;
+  box-shadow: 0 var(--move-y) 1.5rem rgba(0, 0, 0, 1);
+  transform: translateY(calc(-1 * var(--move-y)));
 }
 
 a.card:hover {
