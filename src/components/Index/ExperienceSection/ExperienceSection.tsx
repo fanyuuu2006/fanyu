@@ -64,13 +64,7 @@ export const ExperienceSection = () => {
 
   return (
     <section id="experience">
-      <motion.div
-        variants={fadeInItem}
-        initial="hiddenLeft"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-        className="container flex flex-col items-center overflow-x-hidden"
-      >
+      <div className="container flex flex-col items-center overflow-x-hidden">
         <h1 ref={ref} className="title font-bold">
           {experienceContent.experience}
         </h1>
@@ -180,7 +174,7 @@ export const ExperienceSection = () => {
             </motion.div>
           </AnimatePresence>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

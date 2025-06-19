@@ -1,16 +1,33 @@
+import { OverrideProps } from "fanyucomponents";
 import { useInView, UseInViewOptions } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-export const useInViewUnderlineSpread = <T extends HTMLElement>(
-  { root, margin, amount, once, initial }: UseInViewOptions = {
-    root: undefined, // 要觀察哪個容器，null = 整個視窗
-    margin: "0px", // 提前多少觸發 in-view（可加 margin）
-    amount: 1, // 幾成進入畫面才算 in-view
-    once: true, // 只觸發一次
-    initial: false, // 預設不要啟用
+export const useInViewUnderlineSpread = <
+  T1 extends HTMLElement = HTMLElement,
+  T2 extends HTMLElement = HTMLElement
+>(
+  {
+    target,
+    root,
+    margin,
+    amount,
+    once,
+    initial,
+  }: OverrideProps<
+    UseInViewOptions,
+    {
+      target?: React.RefObject<T2 | null>;
+    }
+  > = {
+    target: undefined,
+    root: undefined,
+    margin: "0px",
+    amount: 1,
+    once: true,
+    initial: false,
   }
-): React.RefObject<T | null> => {
-  const ref = useRef<T>(null);
+): React.RefObject<T1 | null> => {
+  const ref = useRef<T1>(null);
 
   const isInView = useInView(ref, {
     root,
@@ -21,8 +38,8 @@ export const useInViewUnderlineSpread = <T extends HTMLElement>(
   });
 
   useEffect(() => {
-    if (!ref.current) return;
-    const el = ref.current;
+    const el = target?.current || ref.current;
+    if (!el) return;
 
     if (isInView) {
       el.classList.remove("underline-spread");
@@ -34,7 +51,7 @@ export const useInViewUnderlineSpread = <T extends HTMLElement>(
     return () => {
       el.classList.remove("underline-spread"); // 清除 class
     };
-  }, [isInView]);
+  }, [isInView, target]);
 
   return ref;
 };
