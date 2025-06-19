@@ -26,6 +26,11 @@
   scroll-margin: 6rem;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   display: flex;
   flex-direction: column;

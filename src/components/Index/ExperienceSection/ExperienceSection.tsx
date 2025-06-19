@@ -81,7 +81,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`note font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-[background-color] duration-200 ${
+                className={`note font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-colors duration-200 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
@@ -106,7 +106,11 @@ export const ExperienceSection = () => {
               {sortedItems.length > 0 ? (
                 <>
                   {defaultItems.map((item) => (
-                    <motion.div variants={fadeInItem} key={item.name.english} className="w-full">
+                    <motion.div
+                      variants={fadeInItem}
+                      key={item.name.english}
+                      className="w-full"
+                    >
                       <ExperienceCard item={item} className="w-full" />
                     </motion.div>
                   ))}

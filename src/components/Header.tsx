@@ -102,7 +102,7 @@ export const Header = () => {
           <div className="hidden lg:flex note font-bold gap-6">
             {Routes.map((item, index) => (
               <Link
-                className="hover:underline-spread"
+                className="hover:underline-spread px-1"
                 key={index}
                 href={item.href}
               >
@@ -121,7 +121,7 @@ export const Header = () => {
               <Link
                 key={index}
                 href={item.href}
-                className="w-full py-2 px-4 hover:bg-[var(--background-color-primary)]"
+                className="py-2 px-4 hover:bg-[var(--background-color-primary)]"
                 onClick={() => setMenuShow(false)}
               >
                 {item.label[Language.Current]}
