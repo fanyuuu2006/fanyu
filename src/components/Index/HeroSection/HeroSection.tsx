@@ -49,17 +49,20 @@ export const HeroSection = () => {
         c063.brackets1("{"),
       ],
       [
-        c063.variable(`  name: `),
+        c063.variable(`  name`),
+        c063.default(": "),
         c063.string(`'${profile.name[Language.Current]}'`),
         c063.default(","),
       ],
       [
-        c063.variable(`  nickname: `),
+        c063.variable(`  nickname`),
+        c063.default(": "),
         c063.string(`'${profile.nickname[Language.Current]}'`),
         c063.default(","),
       ],
       [
-        c063.variable(`  age: `),
+        c063.variable(`  age`),
+        c063.default(": "),
         c063.number(`${profile.age()}`, {
           as: Link,
           href: "/my",
@@ -75,7 +78,8 @@ export const HeroSection = () => {
         ),
       ],
       [
-        c063.variable(`  hobbies: `),
+        c063.variable(`  hobbies`),
+        c063.default(": "),
         c063.brackets2("["),
         c063.string(
           `'${
@@ -98,7 +102,8 @@ export const HeroSection = () => {
         c063.default(","),
       ],
       [
-        c063.variable(`  skills: `),
+        c063.variable(`  skills`),
+        c063.default(": "),
         c063.brackets2("["),
         c063.string(`'TypeScript'`),
         c063.default(", "),
@@ -162,7 +167,7 @@ export const HeroSection = () => {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <CodeCard lang="ts" codeLines={codeLines} />
+              <CodeCard className="note" lang="ts" codeLines={codeLines} />
             </motion.div>
           </div>
         </div>

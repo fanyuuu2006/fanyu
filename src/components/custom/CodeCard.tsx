@@ -60,7 +60,7 @@ export const CodeCard = ({
 
   return (
     <div className={`card p-6 overflow-auto ${className}`} {...rest}>
-      <div className="note flex items-center">
+      <div className="flex items-center">
         <span>{lang}</span>
         <button
           aria-label={copied ? "已複製" : "複製代碼"}
@@ -74,7 +74,7 @@ export const CodeCard = ({
       <CodeBlock
         theme="default-dark-modern"
         tokenLines={codeLines}
-        className="note font-mono"
+        className="font-mono"
       />
     </div>
   );

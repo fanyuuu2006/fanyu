@@ -19,10 +19,10 @@ const getContent = (language: LanguageOption): ProjectsContent =>
     } as LanguageContent<ProjectsContent>
   )[language]);
 
-export const useTimeOrderTabs = (initOption?: {
-    init: boolean
-}) => {
-  const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(initOption?.init ?? true);
+export const useTimeOrderTabs = (initOption?: { init: boolean }) => {
+  const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(
+    initOption?.init ?? true
+  );
   const Language = useLanguage();
   const content = getContent(Language.Current);
 
@@ -44,8 +44,8 @@ export const useTimeOrderTabs = (initOption?: {
           return (
             <button
               key={item.label}
-              className={`px-4 py-1 transition-[background-color] duration-200 ${
-                isSelected ? "btn rounded-lg" : ""
+              className={`px-4 py-1 transition-colors duration-200 rounded-lg ${
+                isSelected ? "btn" : ""
               }`}
               onClick={() => {
                 if (isSelected) return;
@@ -67,3 +67,4 @@ export const useTimeOrderTabs = (initOption?: {
     Div,
   };
 };
+
