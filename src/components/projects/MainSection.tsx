@@ -167,8 +167,8 @@ export const MainSection = () => {
             ))}
           </motion.div>
         )}
-        <Link className="note" href="/#portfolio">
-          <ArrowLeftOutlined />
+        <Link className="note transition-all hover:translate-x-2 group" href="/#portfolio">
+          <ArrowLeftOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-x-2" />
           {projectsContent.back}
         </Link>
       </div>

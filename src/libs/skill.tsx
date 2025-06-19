@@ -42,10 +42,6 @@ export const skills: Record<SkillCategory, { src: string; title: string }[]> = {
       title: "Tailwind CSS",
       src: "https://www.svgrepo.com/show/354431/tailwindcss-icon.svg",
     },
-    {
-      title: "ESLint",
-      src: "https://www.svgrepo.com/show/353709/eslint.svg",
-    },
   ],
   backend: [
     { title: "Node.js", src: "https://www.svgrepo.com/show/373929/node.svg" },
@@ -63,6 +59,10 @@ export const skills: Record<SkillCategory, { src: string; title: string }[]> = {
     {
       title: "Visual Studio Code",
       src: "https://www.svgrepo.com/show/452129/vs-code.svg",
+    },
+    {
+      title: "ESLint",
+      src: "https://www.svgrepo.com/show/353709/eslint.svg",
     },
     // {
     //   title: "Vercel",

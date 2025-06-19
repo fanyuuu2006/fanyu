@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { fadeInItem } from "@/libs/motion";
 import Link from "next/link";
 import { CodeCard } from "./CodeCard";
+import { useMemo } from "react";
+import { generateCodeLines } from "./codeLines";
 
 type HeroContent = Record<
   "hello" | "iAm" | "intro" | "contactMe" | "portfolio",
@@ -37,6 +39,10 @@ export const HeroSection = () => {
   const Language = useLanguage();
 
   const heroContent: HeroContent = getHeroContent(Language.Current);
+
+  const codeLines = useMemo(() => {
+    return generateCodeLines(Language.Current);
+  }, [Language.Current]);
 
   return (
     <section id="hero">
@@ -78,7 +84,7 @@ export const HeroSection = () => {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <CodeCard />
+              <CodeCard codeLines={codeLines} />
             </motion.div>
           </div>
         </div>

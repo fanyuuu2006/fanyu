@@ -4,7 +4,7 @@ import "@/styles/alert.css";
 export const Toast: typeof Swal = Swal.mixin({
   toast: true,
   position: "center",
-  timer: 3000,
+  timer: 2000,
   timerProgressBar: true,
   showConfirmButton: false,
   iconColor: "white",
