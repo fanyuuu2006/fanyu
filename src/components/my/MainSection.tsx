@@ -1,5 +1,4 @@
 "use client";
-import { CodeCard } from "../custom/CodeCard";
 import { TimerCard } from "./TimerCard";
 
 export const MainSection = () => {
