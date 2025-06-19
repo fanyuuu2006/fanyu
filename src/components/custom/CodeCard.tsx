@@ -1,6 +1,10 @@
 import { Toast } from "@/components/custom/Toast";
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
-import { CodeBlock, CodeTokenProps, extractTokenContent } from "c063";
+import {
+  CodeBlock,
+  CodeTokenProps,
+  extractTokenContent,
+} from "c063";
 import React, { useEffect, useMemo, useState } from "react";
 import { OverrideProps } from "fanyucomponents";
 
@@ -70,7 +74,7 @@ export const CodeCard = ({
       <CodeBlock
         theme="default-dark-modern"
         tokenLines={codeLines}
-        className="note flex flex-col font-mono"
+        className="note font-mono"
       />
     </div>
   );
