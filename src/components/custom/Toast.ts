@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import "@/styles/Alert.css";
+import "@/styles/alert.css";
 
 export const Toast: typeof Swal = Swal.mixin({
   toast: true,

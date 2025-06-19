@@ -140,18 +140,20 @@ export const ExperienceSection = () => {
                       </Collapse>
                       <div className="w-full text-center">
                         <button
-                          className="note hover:underline"
+                          className="note transition-all hover:-translate-x-2 group"
                           onClick={() => {
                             setShowMore((prev) => !prev);
                           }}
                         >
                           {showMore ? (
                             <>
-                              <UpOutlined /> {experienceContent.collapse}
+                              {experienceContent.collapse}
+                              <UpOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
                             </>
                           ) : (
                             <>
-                              <DownOutlined /> {experienceContent.viewMore}
+                              {experienceContent.viewMore}
+                              <DownOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
                             </>
                           )}
                         </button>

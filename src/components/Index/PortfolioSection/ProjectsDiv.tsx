@@ -96,7 +96,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           </motion.div>
         ))}
       </motion.div>
-      <Link className="note flex group" href="/projects">
+      <Link className="note flex transition-all hover:-translate-x-2 group" href="/projects">
         {projectsContent.learnMore}
         <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
       </Link>
