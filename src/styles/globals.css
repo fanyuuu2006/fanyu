@@ -204,17 +204,45 @@ a:hover {
   .animate-pop {
     animation: Pop 0.1s;
   }
+  @keyframes Pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    80% {
+      opacity: 0.7;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   .animate-turn {
     animation: turn 0.2s forwards;
   }
+  @keyframes turn {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .underline-spread,
   .hover\:underline-spread {
     position: relative;
+    padding-inline: 0.25rem;
   }
   .hover\:underline-spread:hover {
     text-decoration: none !important;
   }
+
+  .underline-spread::after,
   .hover\:underline-spread::after {
-    --line-height: 3px;
+    --line-height: 0.25rem;
     content: "";
     position: absolute;
     bottom: 0;
@@ -223,34 +251,21 @@ a:hover {
     width: 0;
     height: var(--line-height);
     background-color: var(--text-color-primary);
-    transition: width 0.2s ease-in-out;
+    transition: width 0.3s ease-in-out;
     transform-origin: center;
+  }
+  .underline-spread::after {
+    animation: underlineSpreadIn 0.3s ease-in-out forwards;
   }
   .hover\:underline-spread:hover::after {
     width: 100%;
   }
-}
-
-@keyframes Pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  80% {
-    opacity: 0.7;
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes turn {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+  @keyframes underlineSpreadIn {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
   }
 }

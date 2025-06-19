@@ -4,6 +4,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { motion } from "framer-motion";
 import { fadeInItem } from "@/libs/motion";
+import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
 
 type AboutMeContent = {
   aboutMe: string;
@@ -39,12 +40,14 @@ export const AboutMeSection = () => {
 
   const aboutMeContent: AboutMeContent = getAboutMeContent(Language.Current);
 
+  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
+
   return (
     <section id="aboutMe">
       <div className="container flex flex-col items-center">
-        <div className="title font-bold text-center">
+        <h1 ref={ref} className="title font-bold text-center">
           {aboutMeContent.aboutMe}
-        </div>
+        </h1>
         <div className="overflow-hidden flex items-center gap-4 flex-col lg:flex-row">
           <motion.div
             variants={fadeInItem}
