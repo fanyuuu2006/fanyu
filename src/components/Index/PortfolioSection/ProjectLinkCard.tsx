@@ -36,14 +36,13 @@ export const ProjectLinkCard = ({
 
   return (
     <Link
-      draggable={true}
       href={`/projects/#${slugify(item.title.english)}`}
       aria-label={`View project: ${item.title.english}`}
       className={`${className} card flex flex-col items-center gap-4 overflow-hidden`}
       {...rest}
     >
       <div className="w-full relative aspect-video brightness-80 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element*/}{" "}
+        {/* eslint-disable-next-line @next/next/no-img-element*/}
         <img
           draggable={false}
           className="absolute inset-0 w-full h-full bg-white object-cover transition-transform duration-200 hover:scale-125"
