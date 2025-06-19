@@ -11,7 +11,12 @@ export type CodeCardProps = OverrideProps<
   }
 >;
 
-export const CodeCard = ({ codeLines, className, ...rest }: CodeCardProps) => {
+export const CodeCard = ({
+  lang,
+  codeLines,
+  className,
+  ...rest
+}: CodeCardProps) => {
   const [copied, setCopied] = useState<boolean>(false);
 
   const handleCopy = useMemo(() => {
@@ -51,12 +56,12 @@ export const CodeCard = ({ codeLines, className, ...rest }: CodeCardProps) => {
 
   return (
     <div className={`card p-6 overflow-auto ${className}`} {...rest}>
-      <div className="hint flex items-center">
-        <span>TypeScript</span>
+      <div className="note flex items-center">
+        <span>{lang}</span>
         <button
           aria-label={copied ? "已複製" : "複製代碼"}
           title={copied ? "已複製" : "複製代碼"}
-          className="btn note flex items-center justify-center ml-auto p-1 rounded-sm"
+          className="btn flex items-center justify-center ml-auto p-1 rounded-sm"
           onClick={handleCopy}
         >
           {copied ? <CheckOutlined /> : <CopyOutlined />}

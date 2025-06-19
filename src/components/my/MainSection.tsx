@@ -1,105 +1,73 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
-import { profile } from "@/libs/profile";
-import { LanguageContent, LanguageOption } from "@/types/language";
-import { LoadingOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
-import { TimeUnit } from "./TimeUnit";
-
-type MyContent = Record<
-  "birthdayTimer" | "days" | "hours" | "minutes" | "seconds",
-  string
->;
-
-const getMyContent = (language: LanguageOption): MyContent =>
-  ((
-    {
-      chinese: {
-        birthdayTimer: "生日倒計時",
-        days: "天",
-        hours: "時",
-        minutes: "分",
-        seconds: "秒",
-      },
-      english: {
-        birthdayTimer: "Birthday Timer",
-        days: "Days",
-        hours: "Hours",
-        minutes: "Minutes",
-        seconds: "Seconds",
-      },
-    } as LanguageContent<MyContent>
-  )[language]);
+import { CodeCard } from "../custom/CodeCard";
+import { TimerCard } from "./TimerCard";
 
 export const MainSection = () => {
-  const Language = useLanguage();
-  const myContent = getMyContent(Language.Current);
-
-  const nextBirthday = (() => {
-    const today = new Date();
-    const birthday = new Date(profile.birthday);
-    birthday.setFullYear(today.getFullYear());
-    if (today > birthday) birthday.setFullYear(today.getFullYear() + 1);
-    return birthday;
-  })();
-
-  const [timeLeft, setTimeLeft] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  } | null>(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const rest = nextBirthday.getTime() - Date.now();
-      setTimeLeft({
-        days: Math.floor(rest / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((rest / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((rest / 1000 / 60) % 60),
-        seconds: Math.floor((rest / 1000) % 60),
-      });
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, [nextBirthday]);
-
+  // const codeLines = useMemo(() => {
+  //   return [
+  //     [c063.string('"use client"'), c063.default(";")],
+  //     [
+  //       c063.keyword2("import "),
+  //       c063.brackets1("{ "),
+  //       c063.variable("CodeCard "),
+  //       c063.brackets1("} "),
+  //       c063.keyword2("from "),
+  //       c063.string('"../custom/CodeCard"'),
+  //       c063.default(";"),
+  //     ],
+  //     [
+  //       c063.keyword2("import "),
+  //       c063.brackets1("{ "),
+  //       c063.variable("TimerCard "),
+  //       c063.brackets1("} "),
+  //       c063.keyword2("from "),
+  //       c063.string('"./TimerCard"'),
+  //       c063.default(";"),
+  //     ],
+  //     [
+  //       c063.keyword2("import "),
+  //       c063.variable("c063 "),
+  //       c063.keyword2("from "),
+  //       c063.string('"c063"'),
+  //       c063.default(";"),
+  //     ],
+  //     [],
+  //     [
+  //       c063.keyword2("export "),
+  //       c063.keyword1("const "),
+  //       c063.function("MainSection "),
+  //       c063.operator("= "),
+  //       c063.brackets1("() "),
+  //       c063.keyword1("=> "),
+  //       c063.brackets1("{"),
+  //     ],
+  //     [
+  //       c063.keyword1("  const "),
+  //       c063.constant("codeLines "),
+  //       c063.operator("= "),
+  //       c063.function("useMemo"),
+  //       c063.brackets2("("),
+  //       c063.brackets3("() "),
+  //       c063.keyword1("=> "),
+  //       c063.brackets3("{"),
+  //     ],
+  //     [c063.keyword2("    return "), c063.brackets1("[]"), c063.default(";")],
+  //     [
+  //       c063.brackets3("  }, "),
+  //       c063.brackets3("[]"),
+  //       c063.brackets2(")"),
+  //       c063.default(";"),
+  //     ],
+  //     [c063.keyword2("  return "), c063.brackets2("(")],
+  //     [c063.brackets2("  );")],
+  //     [c063.brackets1("};")],
+  //   ];
+  // }, []);
   return (
     <section id="hero">
       <div className="container flex flex-col items-center justify-center min-h-162">
-        {timeLeft ? (
-          <div className="card flex flex-col gap-2 items-center px-8 py-4">
-            <h1 className="title font-bold">{myContent.birthdayTimer}</h1>
-            <div className="flex gap-2 items-end label">
-              <TimeUnit
-                label={myContent.days}
-                value={timeLeft.days}
-                maxLength={3}
-              />
-              :
-              <TimeUnit
-                label={myContent.hours}
-                value={timeLeft.hours}
-                maxLength={2}
-              />
-              :
-              <TimeUnit
-                label={myContent.minutes}
-                value={timeLeft.minutes}
-                maxLength={2}
-              />
-              :
-              <TimeUnit
-                label={myContent.seconds}
-                value={timeLeft.seconds}
-                maxLength={2}
-              />
-            </div>
-          </div>
-        ) : (
-          <LoadingOutlined className="label" />
-        )}
+        <TimerCard />
+        {/* <CodeCard lang="ts" codeLines={codeLines} /> */}
       </div>
     </section>
   );

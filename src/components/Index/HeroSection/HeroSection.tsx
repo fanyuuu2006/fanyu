@@ -1,14 +1,14 @@
 "use client";
 import { useLanguage } from "@/context/LanguageContext";
 import { profile } from "@/libs/profile";
-import { LanguageContent, LanguageOption } from "@/types/language";
 import { TypeWriterText } from "fanyucomponents";
 import { motion } from "framer-motion";
 import { fadeInItem } from "@/libs/motion";
 import Link from "next/link";
-import { CodeCard } from "./CodeCard";
+import { CodeCard } from "../../custom/CodeCard";
 import { useMemo } from "react";
-import { generateCodeLines } from "./codeLines";
+import c063 from "c063";
+import { LanguageOption, LanguageContent } from "@/types/language";
 
 type HeroContent = Record<
   "hello" | "iAm" | "intro" | "contactMe" | "portfolio",
@@ -41,7 +41,85 @@ export const HeroSection = () => {
   const heroContent: HeroContent = getHeroContent(Language.Current);
 
   const codeLines = useMemo(() => {
-    return generateCodeLines(Language.Current);
+    return [
+      [
+        c063.keyword1("const "),
+        c063.constant(profile.nickname.english),
+        c063.operator(" = "),
+        c063.brackets1("{"),
+      ],
+      [
+        c063.variable(`  name: `),
+        c063.string(`'${profile.name[Language.Current]}'`),
+        c063.default(","),
+      ],
+      [
+        c063.variable(`  nickname: `),
+        c063.string(`'${profile.nickname[Language.Current]}'`),
+        c063.default(","),
+      ],
+      [
+        c063.variable(`  age: `),
+        c063.number(`${profile.age()}`, {
+          as: Link,
+          href: "/my",
+        }),
+        c063.default(", "),
+        c063.comment(
+          `// <-${
+            {
+              chinese: "可以點ㄛ",
+              english: "Could be clicked",
+            }[Language.Current]
+          }🤫`
+        ),
+      ],
+      [
+        c063.variable(`  hobbies: `),
+        c063.brackets2("["),
+        c063.string(
+          `'${
+            {
+              chinese: "寫程式",
+              english: "Coding",
+            }[Language.Current]
+          }'`
+        ),
+        c063.default(", "),
+        c063.string(
+          `'${
+            {
+              chinese: "繪畫",
+              english: "Drawing",
+            }[Language.Current]
+          }'`
+        ),
+        c063.brackets2("]"),
+        c063.default(","),
+      ],
+      [
+        c063.variable(`  skills: `),
+        c063.brackets2("["),
+        c063.string(`'TypeScript'`),
+        c063.default(", "),
+        c063.string(`'React'`),
+        c063.default(", "),
+        c063.string(`'Python'`),
+        c063.brackets2("]"),
+        c063.default(","),
+      ],
+      [
+        c063.brackets1("} "),
+        c063.keyword2("as "),
+        c063.type("const"),
+        c063.default(";"),
+      ],
+      [
+        c063.keyword2("export default "),
+        c063.constant("FanYu"),
+        c063.default(";"),
+      ],
+    ];
   }, [Language.Current]);
 
   return (
@@ -84,7 +162,7 @@ export const HeroSection = () => {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <CodeCard codeLines={codeLines} />
+              <CodeCard lang="ts" codeLines={codeLines} />
             </motion.div>
           </div>
         </div>
