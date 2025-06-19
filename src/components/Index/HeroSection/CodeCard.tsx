@@ -19,7 +19,7 @@ export const CodeCard = ({ className, ...rest }: CodeCardProps) => {
       <div className="hint flex items-center">
         <span>TypeScript</span>
         <button
-          className="btn flex items-center justify-center ml-auto w-6 h-6 rounded-sm"
+          className="btn note flex items-center justify-center ml-auto p-1 rounded-sm"
           onClick={async () => {
             if (!navigator?.clipboard) {
               Toast.fire({ icon: "error", text: "瀏覽器不支援複製" });

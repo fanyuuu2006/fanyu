@@ -1,13 +1,16 @@
+import { useEffect, useRef, useState } from "react";
 import { profile } from "@/libs/profile";
 import { ProjectItem } from "@/types/portfolio";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, ReloadOutlined } from "@ant-design/icons";
+import { Tooltip } from "antd";
 import Link from "next/link";
 import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
-import { useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 
-const visibleCount = 3;
+const projectCount = 3;
 
 type ProjectsContent = Record<"projects" | "learnMore" | "refresh", string>;
 
@@ -21,7 +24,7 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
       },
       english: {
         projects: "Projects",
-        learnMore: "Learn More",
+        learnMore: "Learn more",
         refresh: "Refresh",
       },
     } as LanguageContent<ProjectsContent>
@@ -33,56 +36,69 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   const Language = useLanguage();
   const projectsContent = getProjectsContent(Language.Current);
 
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const total = profile.portfolio.projects.length;
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [shuffledProject, setShuffledProject] = useState<ProjectItem[] | null>(
+    null
+  );
+  const turnRef = useRef<HTMLSpanElement>(null);
 
-  const scrollToPage = useMemo(() => {
-    return (index: number) => {
-      if (!containerRef.current) return;
-      containerRef.current.scrollTo({
-        left: index * (containerRef.current.clientWidth / visibleCount),
-        behavior: "smooth",
-      });
-      setCurrentIndex(index);
-    };
-  }, [containerRef]);
+  const shuffleProject = () => {
+    const shuffled = profile.portfolio.projects
+      .toSorted(() => Math.random() - 0.5)
+      .slice(0, projectCount);
+    setShuffledProject(shuffled);
+  };
+
+  useEffect(() => {
+    shuffleProject();
+  }, []);
+
+  if (!shuffledProject) return null;
 
   return (
     <div className={`flex flex-col gap-4 items-center ${className}`} {...rest}>
-      <div className="content w-full flex items-center">
+      <div className="content w-full flex justify-between items-center">
         <div className="font-bold">{projectsContent.projects}</div>
-      </div>
-      {/**輪播區塊 */}
-      <div className="w-full overflow-hidden" ref={containerRef}>
-        <div className="flex gap-2 transition-all duration-300">
-          {profile.portfolio.projects.map((item: ProjectItem) => (
-            <ProjectLinkCard
-              item={item}
-              key={item.title.english}
-              style={{ flex: `0 0 ${Math.floor(100 / visibleCount)}%` }}
+        <button
+          className="flex items-center justify-center w-10 h-10 p-1 rounded-sm"
+          onClick={shuffleProject}
+        >
+          <Tooltip title={projectsContent.refresh}>
+            <ReloadOutlined
+              ref={turnRef}
+              className="transition-[rolate]"
+              onClick={() => {
+                if (!turnRef.current) return;
+                turnRef.current?.classList.add("animate-turn");
+                setTimeout(() => {
+                  turnRef.current?.classList.remove("animate-turn");
+                }, 200);
+              }}
             />
-          ))}
-        </div>
+          </Tooltip>
+        </button>
       </div>
-
-      {/**導覽點 */}
-      <div className="flex gap-2">
-        {[...Array(total)].map((_, index) => (
-          <button
-            key={index}
-            className={`rounded-full p-2 bg-white transition-opacity ${
-              currentIndex === index ? "" : "opacity-30"
-            }`}
-            onClick={() => scrollToPage(index)}
-          />
+      <motion.div
+        key={JSON.stringify(shuffledProject)}
+        variants={staggerContainer}
+        initial="hiddenBottom"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="flex flex-wrap justify-between gap-4"
+      >
+        {shuffledProject.map((item: ProjectItem) => (
+          <motion.div
+            key={item.title.english}
+            variants={fadeInItem}
+            viewport={{ once: true, amount: 0.1 }}
+            className="flex flex-1 basis-full md:basis-3/10"
+          >
+            <ProjectLinkCard item={item} className="w-full" />
+          </motion.div>
         ))}
-      </div>
-
-      {/**了解更多 */}
-      <Link className="note flex gap-1" href="/projects">
+      </motion.div>
+      <Link className="note flex group" href="/projects">
         {projectsContent.learnMore}
-        <ArrowRightOutlined className="rotate-315" />
+        <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
       </Link>
     </div>
   );

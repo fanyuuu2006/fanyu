@@ -10,7 +10,7 @@
   --background-color: #131723;
   --background-color-dark: #0d110d;
   --background-color-primary: #212830;
-  --background-color-secondary: #1e2630;
+  --background-color-secondary: #171a1d;
   --text-color: #ffffff;
   --text-color-primary: #1f6feb;
   --text-color-secondary: #ffff71;
@@ -112,9 +112,9 @@ button {
 
 .card {
   background: linear-gradient(
-    30deg,
+    15deg,
     var(--background-color),
-    var(--background-color-secondary)
+    var(--background-color-primary)
   );
   border-radius: 1.5rem;
   border: 2px solid var(--border-color);
