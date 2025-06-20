@@ -22,15 +22,20 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
       }}
       {...rest}
     >
+      {/**桌機顯示 */}
       <OutsideLink
-        target="_blank"
         href={item.href}
-        rel="noopener noreferrer"
-        className="content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] flex items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent"
+        className="hidden md:flex content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent"
       >
         <item.icon />
         {item.label}
       </OutsideLink>
+
+      {/**移動端顯示 (防止無法Hover)*/}
+      <div className="flex md:hidden content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent">
+        <item.icon />
+        {item.label}
+      </div>
 
       {/**Hover 資訊卡 */}
       <div
@@ -71,11 +76,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
 
               {/**名稱 & ID */}
               <div className="flex flex-col gap-0 whitespace-nowrap">
-                <span
-                  className="note font-bold"
-                >
-                  {item.info.name}
-                </span>
+                <span className="note font-bold">{item.info.name}</span>
                 <span className="hint flex items-center gap-1">
                   {item.info.id}
                   <CopyButton content={item.info.id} />
