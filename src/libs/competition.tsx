@@ -94,7 +94,7 @@ export const HCCGM: ExperienceItem = {
       chinese: "活動照片相簿",
       english: "Photo Album",
       icon: <PictureOutlined />,
-      href: "/album/2021/%E5%9C%8B%E4%B8%AD%E6%95%99%E8%82%B2%E6%9C%83%E8%80%83",
+      href: "/album/2021/%E6%95%B8%E5%AD%B8%E9%87%91%E9%A0%AD%E8%85%A6%E7%AB%B6%E8%B3%BD",
     },
   ],
   description: ({ language }) => (

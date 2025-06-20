@@ -27,7 +27,7 @@ export const Footer = () => {
   const footerContent = getFooterContent(Langauge.Current);
   const year = new Date().getFullYear();
   return (
-    <footer className="w-full flex flex-1 bg-[var(--background-color-dark)]">
+    <footer className="w-full flex flex-1 bg-black">
       <div className="container flex flex-col items-center">
         <div className="hint flex flex-col gap-2 text-[#aaa]">
           <div className="flex gap-2">

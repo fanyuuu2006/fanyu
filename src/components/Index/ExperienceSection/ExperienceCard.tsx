@@ -54,7 +54,7 @@ export const ExperienceCard = ({
             {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
           </span>
           {item.links && (
-            <div className="flex gap-x-2 flex-col flex-wrap md:flex-row">
+            <div className="flex gap-x-2 flex-wrap">
               {item.links.map((link) => {
                 // 判斷是否為外部連結
                 const Tag = !link.href.startsWith("http") ? Link : OutsideLink;
