@@ -1,9 +1,13 @@
 export type ContactItem = {
   label: string;
   icon: React.ElementType;
-  id: string;
   href: string;
   backgrounds?: React.CSSProperties["color"][];
+  info: {
+    image?: string;
+    id: string;
+    name: string;
+  };
 };
 
 export enum ContactCategory {

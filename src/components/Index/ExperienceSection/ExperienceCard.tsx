@@ -26,7 +26,7 @@ export const ExperienceCard = ({
       {/*eslint-disable-next-line @next/next/no-img-element*/}
       <img
         src={
-          item.imageSrc ??
+          item.imageSrc ||
           `https://s2.googleusercontent.com/s2/favicons?domain_url=${slugify(
             item.links?.[0].href ?? ""
           )}`

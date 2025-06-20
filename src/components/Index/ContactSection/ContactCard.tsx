@@ -10,23 +10,59 @@ export type ContactCardProps = OverrideProps<
 export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   return (
     <motion.div
-      className="flex items-center justify-center p-[3px] rounded-2xl"
+      className="group relative p-[3px] rounded-2xl"
       style={{
-        background: `linear-gradient(45deg, ${
-          item.backgrounds?.join(",") || "var(--text-color-primary)"
-        })`,
+        background: item.backgrounds?.length
+          ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
+          : "var(--text-color-primary)",
       }}
       {...rest}
     >
       <OutsideLink
-        draggable={true}
         target="_blank"
         href={item.href}
         rel="noopener noreferrer"
-        className="content w-full bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] flex items-center justify-center px-8 py-2 gap-2 hover:bg-transparent"
+        className="content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] flex items-center justify-center px-8 py-2 gap-2 group-hover:bg-transparent"
       >
         <item.icon />
+        {item.label}
       </OutsideLink>
+      <div
+        className="absolute transition-all duration-300 
+       left-1/2 -translate-x-1/2
+       -top-16 group-hover:-top-25 
+       opacity-0 group-hover:opacity-100
+       invisible group-hover:visible
+       z-1000
+       "
+        id={`${item.label}-info-card`}
+      >
+        <div
+          className="p-[3px] rounded-2xl"
+          style={{
+            background: item.backgrounds?.length
+              ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
+              : "var(--text-color-primary)",
+          }}
+        >
+          <div className="bg-[var(--background-color-dark)] rounded-[inherit] p-4">
+            <div className="w-50 flex flex-col gap-2">
+              <div className="flex flex-nowrap gap-2">
+                {/*eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="bg-white h-10 w-10 object-cover rounded-full "
+                  src={item.info.image || `/favicon.ico`}
+                  alt={`${item.label}-${item.info.id}`}
+                />
+                <div className="flex flex-col gap-0 whitespace-nowrap">
+                  <span className="note">{item.info.name}</span>
+                  <span className="hint">{item.info.id}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 };

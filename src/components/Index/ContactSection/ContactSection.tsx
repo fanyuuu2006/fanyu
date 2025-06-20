@@ -53,9 +53,9 @@ export const ContactSection = () => {
               viewport={{ once: true }}
               className="flex flex-wrap w-full gap-2"
             >
-              {items.map((item, index) => (
+              {items.map((item) => (
                 <ContactCard
-                  key={`${item.label} ${index}`}
+                  key={`${item.label}-${item.info.id}`}
                   variants={fadeInItem}
                   item={item}
                 />

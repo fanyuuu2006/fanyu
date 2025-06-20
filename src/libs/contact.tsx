@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { BiLogoGmail } from "react-icons/bi";
 import { BsLine } from "react-icons/bs";
-import { FaThreads,FaFacebookMessenger } from "react-icons/fa6";
+import { FaThreads, FaFacebookMessenger } from "react-icons/fa6";
 import { SiWakatime } from "react-icons/si";
 export const contactCategorieMap: LanguageContent<
   Record<ContactCategory, string>
@@ -31,7 +31,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "Instagram",
       icon: InstagramOutlined,
-      id: "fan._.yuuu",
+      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
       href: "https://www.instagram.com/fan._.yuuu",
       backgrounds: [
         "#ffdc80",
@@ -49,7 +49,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "Instagram",
       icon: InstagramOutlined,
-      id: "fanyu_draw",
+      info: { id: "fanyu_draw", name: "🍚🐟✖️➗" },
       href: "https://www.instagram.com/fanyu._.draw",
       backgrounds: [
         "#ffdc80",
@@ -67,48 +67,41 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "GitHub",
       icon: GithubFilled,
-      id: "fanyuuu2006",
+      info: { id: "fanyuuu2006", name: "FanYu" },
       href: "https://github.com/fanyuuu2006",
       backgrounds: ["#333"],
     },
     {
       label: "Threads",
       icon: FaThreads,
-      id: "fan._.yuuu",
+      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
       href: "https://www.threads.net/@fan._.yuuu",
       backgrounds: ["#777"],
     },
     {
       label: "Youtube",
       icon: YoutubeOutlined,
-      id: "閃火",
+      info: { id: "fan._.yuuu", name: "閃火" },
       href: "https://www.youtube.com/@fan_yuuu",
       backgrounds: ["#ff0000"],
     },
     {
+      label: "WakaTime",
+      icon: SiWakatime,
+      info: { id: "fanyuuu2006", name: "FanYu" },
+      href: "https://wakatime.com/@fanyuuu2006",
+    },
+    {
       label: "Facebook",
       icon: FacebookOutlined,
-      id: "范振富",
+      info: { id: "fan.zhen.fu.2025", name: "范振富" },
       href: "https://www.facebook.com/share/1MpEQ1faFk/",
       backgrounds: ["#1877f2"],
     },
     {
-      label: "TikTok",
-      icon: TikTokOutlined,
-      id: "fan._.yuuu",
-      href: "https://www.tiktok.com/@fan._.yuuu",
-      backgrounds: ["#69C9D0", "#010101", "#010101", "#EE1D52"],
-    },
-    {
-      label: "WakaTime",
-      icon: SiWakatime,
-      id: "fanyuuu2006",
-      href: "https://wakatime.com/@fanyuuu2006",
-    },
-    {
       label: "bilibili",
       icon: BilibiliOutlined,
-      id: "飯魚",
+      info: { name: "飯魚", id: "1488181486" },
       href: "https://space.bilibili.com/1488181486",
       backgrounds: ["#FF6999"],
     },
@@ -131,23 +124,30 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
           </svg>
         );
       },
-      id: "芯渝啥都沒說",
+      info: { id: "yorn90104", name: "芯渝啥都沒說" },
       href: "https://www.dcard.tw/@yorn90104?utm_source=share",
       backgrounds: ["#006aa6"],
+    },
+    {
+      label: "TikTok",
+      icon: TikTokOutlined,
+      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
+      href: "https://www.tiktok.com/@fan._.yuuu",
+      backgrounds: ["#69C9D0", "#010101", "#010101", "#EE1D52"],
     },
   ],
   [ContactCategory.InstantMessaging]: [
     {
       label: "Line",
       icon: BsLine,
-      id: "fan._.yuuu",
+      info: { id: "fan._.yuuu", name: "飯魚🍚🐟" },
       href: "https://line.me/ti/p/IqB3QvjIlU",
       backgrounds: ["#00c300"],
     },
     {
       label: "Email",
       icon: BiLogoGmail,
-      id: "bingxiao526@gmail.com",
+      info: { id: "bingxiao526@gmail.com", name: "飯魚正負" },
       href: "mailto:bingxiao526@gmail.com",
       backgrounds: [
         "#4285f4",
@@ -163,14 +163,14 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "Discord",
       icon: DiscordOutlined,
-      id: "fan._.yuuu",
+      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
       href: "https://discord.com/users/959582016431620147",
       backgrounds: ["#5865f2"],
     },
     {
       label: "Messenger",
       icon: FaFacebookMessenger,
-      id: "范振富",
+      info: { id: "fan.zhen.fu.2025", name: "范振富" },
       href: "https://m.me/fan.zhen.fu.2025",
       backgrounds: ["#0084ff"],
     },
