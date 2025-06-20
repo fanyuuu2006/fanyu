@@ -1,30 +1,28 @@
 import { ContactItem } from "@/types/contact";
-import { Tooltip } from "antd";
-import { OutsideLink, OverrideProps } from "fanyucomponents";
-import { HTMLMotionProps, motion } from "framer-motion";
+import { OutsideLink } from "fanyucomponents";
+import { motion } from "framer-motion";
 
-export type ContactCardProps = OverrideProps<
-  HTMLMotionProps<"div">,
-  {
-    item: ContactItem;
-  }
->;
-
-export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
+export const ContactCard: React.FC<{
+  item: ContactItem;
+}> = ({ item }) => {
   return (
-    <Tooltip title={item.label}>
-      <motion.div {...rest}>
-        <OutsideLink
-          draggable={true}
-          target="_blank"
-          href={item.href}
-          rel="noopener noreferrer"
-          className="card w-full note flex items-center px-4 py-2 gap-2"
-        >
-          {item.icon}
-          <span>{item.id}</span>
-        </OutsideLink>
-      </motion.div>
-    </Tooltip>
+    <motion.div
+      className="p-[3px] rounded-2xl"
+      style={{
+        background: `linear-gradient(45deg, ${
+          item.backgrounds?.join(",") || "var(--text-color-primary)"
+        })`,
+      }}
+    >
+      <OutsideLink
+        draggable={true}
+        target="_blank"
+        href={item.href}
+        rel="noopener noreferrer"
+        className="content w-full bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit]  flex items-center justify-center px-8 py-2 gap-2 hover:bg-transparent"
+      >
+        {item.icon}
+      </OutsideLink>
+    </motion.div>
   );
 };

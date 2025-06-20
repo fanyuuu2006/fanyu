@@ -34,7 +34,7 @@ export const SkillsSection = () => {
   const Language = useLanguage();
   const skillsContent = getSkillsContent(Language.Current);
   const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
-  
+
   return (
     <section id="skills">
       <div className="container flex flex-col items-center">

@@ -1,12 +1,9 @@
 import { Toast } from "@/components/custom/Toast";
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
-import {
-  CodeBlock,
-  CodeTokenProps,
-  extractTokenContent,
-} from "c063";
+import { CodeBlock, CodeTokenProps, extractTokenContent } from "c063";
 import React, { useEffect, useMemo, useState } from "react";
 import { OverrideProps } from "fanyucomponents";
+import { Tooltip } from "antd";
 
 export type CodeCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -62,14 +59,16 @@ export const CodeCard = ({
     <div className={`card p-6 overflow-auto ${className}`} {...rest}>
       <div className="flex items-center">
         <span>{lang}</span>
-        <button
-          aria-label={copied ? "已複製" : "複製代碼"}
-          title={copied ? "已複製" : "複製代碼"}
-          className="btn flex items-center justify-center ml-auto p-1 rounded-sm"
-          onClick={handleCopy}
-        >
-          {copied ? <CheckOutlined /> : <CopyOutlined />}
-        </button>
+        <Tooltip title={copied ? "已複製" : "複製代碼"}>
+          <button
+            aria-label={copied ? "已複製" : "複製代碼"}
+            title={copied ? "已複製" : "複製代碼"}
+            className="btn flex items-center justify-center ml-auto p-1 rounded-sm"
+            onClick={handleCopy}
+          >
+            {copied ? <CheckOutlined /> : <CopyOutlined />}
+          </button>
+        </Tooltip>
       </div>
       <CodeBlock
         theme="default-dark-modern"

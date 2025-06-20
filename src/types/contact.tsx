@@ -3,6 +3,7 @@ export type ContactItem = {
   icon: React.ReactNode;
   id: string;
   href: string;
+  backgrounds?: React.CSSProperties["color"][];
 };
 
 export enum ContactCategory {
