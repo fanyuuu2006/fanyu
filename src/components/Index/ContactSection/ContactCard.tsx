@@ -38,8 +38,11 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
       {...rest}
     >
       <button
-        className="flex content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent"
+        className="flex content no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
         onClick={() => setIsOpen((prev) => !prev)}
+        style={{
+          background: isOpen ? "transparent" : "var(--background-color-dark)",
+        }}
       >
         <item.icon />
         {item.label}
