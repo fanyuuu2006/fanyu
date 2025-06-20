@@ -67,7 +67,11 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "GitHub",
       icon: GithubFilled,
-      info: { id: "fanyuuu2006", name: "FanYu" },
+      info: {
+        id: "fanyuuu2006",
+        name: "FanYu",
+        image: "https://avatars.githubusercontent.com/u/180280998?v=4",
+      },
       href: "https://github.com/fanyuuu2006",
       backgrounds: ["#333"],
     },
@@ -88,7 +92,12 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "WakaTime",
       icon: SiWakatime,
-      info: { id: "fanyuuu2006", name: "FanYu" },
+      info: {
+        id: "fanyuuu2006",
+        name: "FanYu",
+        image:
+          "https://wakatime.com/photo/852f9428-fd16-453e-80bd-6cabc63ee83e",
+      },
       href: "https://wakatime.com/@fanyuuu2006",
     },
     {
