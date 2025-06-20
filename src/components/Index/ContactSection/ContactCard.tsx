@@ -35,7 +35,6 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
        invisible group-hover:visible
        z-1000
        "
-        id={`${item.label}-info-card`}
       >
         <div
           className="p-[3px] rounded-2xl"
@@ -46,14 +45,18 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
           }}
         >
           <div className="bg-[var(--background-color-dark)] rounded-[inherit] p-4">
-            <div className="w-50 flex flex-col gap-2">
-              <div className="flex flex-nowrap gap-2">
-                {/*eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="bg-white h-10 w-10 object-cover rounded-full "
-                  src={item.info.image || `/favicon.ico`}
-                  alt={`${item.label}-${item.info.id}`}
-                />
+            <div className="flex flex-col gap-2">
+              <div
+                className="flex items-center gap-4"
+              >
+                <div className="h-10 aspect-square rounded-full">
+                  {/*eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="bg-white w-full h-full object-cover rounded-full "
+                    src={item.info.image || `/favicon.ico`}
+                    alt={`${item.label}-${item.info.id}`}
+                  />
+                </div>
                 <div className="flex flex-col gap-0 whitespace-nowrap">
                   <span className="note">{item.info.name}</span>
                   <span className="hint">{item.info.id}</span>
