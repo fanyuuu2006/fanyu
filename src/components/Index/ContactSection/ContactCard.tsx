@@ -22,20 +22,13 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
       }}
       {...rest}
     >
-      {/**桌機顯示 */}
       <OutsideLink
         href={item.href}
-        className="hidden md:flex content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent"
+        className="flex content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent"
       >
         <item.icon />
         {item.label}
       </OutsideLink>
-
-      {/**移動端顯示 (防止無法Hover)*/}
-      <div className="flex md:hidden content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent">
-        <item.icon />
-        {item.label}
-      </div>
 
       {/**Hover 資訊卡 */}
       <div

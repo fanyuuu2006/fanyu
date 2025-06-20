@@ -258,7 +258,7 @@
     transform: translateX(-50%);
     width: 0;
     height: var(--line-height);
-    background-color: var(--text-color-primary);
+    background: linear-gradient(45deg, var(--text-color-primary));
     border-radius: 1rem;
     transition: width 0.3s ease-in-out;
   }
