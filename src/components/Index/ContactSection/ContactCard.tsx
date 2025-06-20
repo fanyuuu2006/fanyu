@@ -4,7 +4,7 @@ import { ContactItem } from "@/types/contact";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import { HTMLMotionProps, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 export type ContactCardProps = OverrideProps<
   HTMLMotionProps<"div">,
   {
@@ -14,8 +14,21 @@ export type ContactCardProps = OverrideProps<
 export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   const Language = useLanguage();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isOpen]);
+
   return (
     <motion.div
+      ref={ref}
       className="group relative p-[3px] rounded-2xl"
       style={{
         background: item.backgrounds?.length
