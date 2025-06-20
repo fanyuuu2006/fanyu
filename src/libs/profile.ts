@@ -31,7 +31,7 @@ export const profile = {
     chinese: "臺灣省臺北市大安區",
     english: "Da'an Dist, Taipei City, Taiwan",
   },
-  birthday: "2006-05-26",
+  birthday: "2006-05-26 UTC+08:00",
   age: () => {
     const today = new Date();
     const birthday = new Date(profile.birthday);
