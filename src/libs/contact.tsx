@@ -90,6 +90,13 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       backgrounds: ["#ff0000"],
     },
     {
+      label: "TikTok",
+      icon: TikTokOutlined,
+      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
+      href: "https://www.tiktok.com/@fan._.yuuu",
+      backgrounds: ["#69C9D0", "#010101", "#010101", "#EE1D52"],
+    },
+    {
       label: "WakaTime",
       icon: SiWakatime,
       info: {
@@ -99,20 +106,6 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
           "https://wakatime.com/photo/852f9428-fd16-453e-80bd-6cabc63ee83e",
       },
       href: "https://wakatime.com/@fanyuuu2006",
-    },
-    {
-      label: "Facebook",
-      icon: FacebookOutlined,
-      info: { id: "fan.zhen.fu.2025", name: "范振富" },
-      href: "https://www.facebook.com/share/1MpEQ1faFk/",
-      backgrounds: ["#1877f2"],
-    },
-    {
-      label: "bilibili",
-      icon: BilibiliOutlined,
-      info: { name: "飯魚", id: "1488181486" },
-      href: "https://space.bilibili.com/1488181486",
-      backgrounds: ["#FF6999"],
     },
     {
       label: "Dcard",
@@ -138,11 +131,18 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       backgrounds: ["#006aa6"],
     },
     {
-      label: "TikTok",
-      icon: TikTokOutlined,
-      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
-      href: "https://www.tiktok.com/@fan._.yuuu",
-      backgrounds: ["#69C9D0", "#010101", "#010101", "#EE1D52"],
+      label: "bilibili",
+      icon: BilibiliOutlined,
+      info: { name: "飯魚", id: "1488181486" },
+      href: "https://space.bilibili.com/1488181486",
+      backgrounds: ["#FF6999"],
+    },
+    {
+      label: "Facebook",
+      icon: FacebookOutlined,
+      info: { id: "fan.zhen.fu.2025", name: "范振富" },
+      href: "https://www.facebook.com/share/1MpEQ1faFk/",
+      backgrounds: ["#1877f2"],
     },
   ],
   [ContactCategory.InstantMessaging]: [

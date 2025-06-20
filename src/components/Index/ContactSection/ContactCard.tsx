@@ -26,7 +26,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
         target="_blank"
         href={item.href}
         rel="noopener noreferrer"
-        className="content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] flex items-center justify-center px-8 py-2 gap-2 group-hover:bg-transparent"
+        className="content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] flex items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent"
       >
         <item.icon />
         {item.label}
