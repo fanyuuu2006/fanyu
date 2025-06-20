@@ -55,7 +55,10 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   if (!shuffledProject) return null;
 
   return (
-    <div className={`flex flex-col p-2 gap-4 items-center ${className}`} {...rest}>
+    <div
+      className={`flex flex-col p-2 gap-4 items-center ${className}`}
+      {...rest}
+    >
       <div className="content w-full flex justify-between items-center">
         <div className="font-bold">{projectsContent.projects}</div>
         <button
@@ -65,13 +68,12 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           <Tooltip title={projectsContent.refresh}>
             <ReloadOutlined
               ref={turnRef}
-              className="transition-[rolate]"
               onClick={() => {
                 if (!turnRef.current) return;
                 turnRef.current?.classList.add("animate-turn");
                 setTimeout(() => {
                   turnRef.current?.classList.remove("animate-turn");
-                }, 200);
+                }, 300);
               }}
             />
           </Tooltip>
@@ -96,7 +98,10 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
           </motion.div>
         ))}
       </motion.div>
-      <Link className="note flex transition-all hover:-translate-x-2 group" href="/projects">
+      <Link
+        className="note flex transition-all hover:-translate-x-2 group"
+        href="/projects"
+      >
         {projectsContent.learnMore}
         <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
       </Link>

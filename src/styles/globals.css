@@ -202,7 +202,7 @@ a:hover {
 
 @layer utilities {
   .animate-pop {
-    animation: Pop 0.1s;
+    animation: Pop 0.3s;
   }
   @keyframes Pop {
     0% {
@@ -220,7 +220,7 @@ a:hover {
   }
 
   .animate-turn {
-    animation: turn 0.2s forwards;
+    animation: turn 0.3s forwards;
   }
   @keyframes turn {
     0% {
