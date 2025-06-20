@@ -4,6 +4,7 @@ import { ContactItem } from "@/types/contact";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import { HTMLMotionProps, motion } from "framer-motion";
+import { useState } from "react";
 export type ContactCardProps = OverrideProps<
   HTMLMotionProps<"div">,
   {
@@ -12,6 +13,7 @@ export type ContactCardProps = OverrideProps<
 >;
 export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   const Language = useLanguage();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <motion.div
       className="group relative p-[3px] rounded-2xl"
@@ -22,23 +24,25 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
       }}
       {...rest}
     >
-      <OutsideLink
-        href={item.href}
+      <button
         className="flex content no-underline bg-[var(--background-color-dark)] transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2 group-hover:bg-transparent"
+        onClick={() => setIsOpen((prev) => !prev)}
       >
         <item.icon />
         {item.label}
-      </OutsideLink>
+      </button>
 
-      {/**Hover 資訊卡 */}
+      {/**資訊卡 */}
       <div
         className="absolute transition-all duration-300 
        left-1/2 -translate-x-1/2
-       -top-24 group-hover:-top-32 
-       opacity-0 group-hover:opacity-100
-       invisible group-hover:visible
        z-1000
        "
+        style={{
+          top: isOpen ? "-8rem" : "-6rem",
+          opacity: isOpen ? "1" : "0",
+          visibility: isOpen ? "visible" : "hidden",
+        }}
       >
         <div
           className="p-[3px] rounded-2xl"
