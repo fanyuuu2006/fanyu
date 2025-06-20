@@ -38,7 +38,7 @@ export const ProjectLinkCard = ({
     <Link
       href={`/projects/#${slugify(item.title.english)}`}
       aria-label={`View project: ${item.title.english}`}
-      className={`${className} card flex flex-col items-center gap-4 overflow-hidden`}
+      className={`${className} card flex flex-col items-center gap-2 overflow-hidden`}
       {...rest}
     >
       <div className="w-full relative aspect-video brightness-80 overflow-hidden">
