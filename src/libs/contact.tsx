@@ -165,7 +165,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       icon: DiscordOutlined,
       id: "fan._.yuuu",
       href: "https://discord.com/users/959582016431620147",
-      backgrounds: ["#5865f2 "],
+      backgrounds: ["#5865f2"],
     },
     {
       label: "Messenger",
