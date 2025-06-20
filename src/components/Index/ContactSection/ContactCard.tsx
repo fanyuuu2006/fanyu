@@ -36,7 +36,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
       <div
         className="absolute transition-all duration-300 
        left-1/2 -translate-x-1/2
-       -top-20 group-hover:-top-28 
+       -top-24 group-hover:-top-32 
        opacity-0 group-hover:opacity-100
        invisible group-hover:visible
        z-1000
