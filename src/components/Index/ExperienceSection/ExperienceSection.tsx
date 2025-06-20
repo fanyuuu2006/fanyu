@@ -10,6 +10,7 @@ import { experienceTabIcons, experienceTabs } from "@/libs/experience";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
 
 type ExperienceContent = Record<
   "experience" | ExperienceTab | "noExperience" | "viewMore" | "collapse",
@@ -59,16 +60,18 @@ export const ExperienceSection = () => {
   const moreItems = sortedItems.slice(viewLimit);
   const hasMore = moreItems.length > 0;
 
+  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
+
   return (
     <section id="experience">
       <div className="container flex flex-col items-center overflow-x-hidden">
-        <h1 className="title font-bold">
+        <h1 className="title font-bold" ref={ref}>
           {experienceContent.experience}
         </h1>
         <div className="flex flex-col w-full gap-4">
           <div
             role="tablist"
-            className="w-full bg-[var(--background-color-dark)] rounded-lg flex justify-between p-1"
+            className="w-full bg-[#000] rounded-lg flex justify-between p-1"
           >
             {experienceTabs.map((key) => (
               <button
@@ -78,7 +81,7 @@ export const ExperienceSection = () => {
                 aria-label={experienceContent[key]}
                 key={key}
                 className={`note font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-colors duration-200 ${
-                  Tab === key ? "btn" : ""
+                  Tab === key ? "btn" : "hover:bg-[var(--background-color)]"
                 }`}
                 onClick={() => {
                   if (Tab === key) return;

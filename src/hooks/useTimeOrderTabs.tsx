@@ -33,7 +33,7 @@ export const useTimeOrderTabs = (initOption?: { init: boolean }) => {
     return (
       <div
         role="tablist"
-        className={`${className} flex bg-[var(--background-color-dark)] rounded-lg p-1`}
+        className={`${className} flex bg-[#000] rounded-lg p-1`}
         {...rest}
       >
         {[

@@ -153,7 +153,7 @@ export const HeroSection = () => {
                 </Link>
                 <Link
                   href="/#portfolio"
-                  className="btn-secondary px-4 py-2 rounded-lg"
+                  className="btn px-4 py-2 rounded-lg"
                 >
                   {heroContent.portfolio}
                 </Link>
