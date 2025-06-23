@@ -156,7 +156,12 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "Email",
       icon: BiLogoGmail,
-      info: { id: "bingxiao526@gmail.com", name: "飯魚正負" },
+      info: {
+        id: "bingxiao526@gmail.com",
+        name: "飯魚正負",
+        image:
+          "https://lh3.googleusercontent.com/a/ACg8ocKdE_VVvBiQF5MPlOqLuuBc9-NntvLaIb9i42xm3hVCwhNsLg_-=s96-c",
+      },
       href: "mailto:bingxiao526@gmail.com",
       backgrounds: [
         "#4285f4",

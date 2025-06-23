@@ -5,59 +5,72 @@ import { ArrowRightOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { OverrideProps } from "fanyucomponents";
 import React from "react";
+import styled from "styled-components";
+
+const ProjectCardWrapper = styled.div`
+  position: relative;
+  border: 1px solid #ccc;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.75rem;
+  overflow: hidden;
+`;
+const ProjectImage = styled.img`
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  object-fit: cover;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  ${ProjectCardWrapper}:hover & {
+    opacity: 1;
+  }
+`;
 
 export type ProjectLinkCardProps = OverrideProps<
-  React.HTMLAttributes<HTMLDivElement>,
+  React.ComponentPropsWithRef<typeof ProjectCardWrapper>,
   {
     item: ProjectItem;
   }
 >;
-export const ProjectLinkCard = ({
-  item,
-  className = "",
-  ...rest
-}: ProjectLinkCardProps) => {
+export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
   const Language = useLanguage();
 
   return (
-    <div
-      className={`${className} border-[1px] border-[#ccc] group relative aspect-square rounded-xl overflow-hidden`}
-      {...rest}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element*/}
-      <img
+    <ProjectCardWrapper {...rest}>
+      <ProjectImage
         draggable={false}
-        className="brightness-75 w-full h-full bg-white object-cover"
         src={item.imageSrc}
         alt={`${item.title.english} icon`}
       />
 
       {/**Hover 資訊面板 */}
-      <div className="absolute inset-0 opacity-0 bg-[#00000066] transition-all duration-300 ease-in-out group-hover:opacity-100">
-        <div className="relative flex flex-col justify-center w-full h-full p-4">
-          <div className="content font-bold">{item.title[Language.Current]}</div>
-          <div className="hint flex gap-2">
-            <ClockCircleOutlined />
-            {item.time}
-          </div>
-          <div className="note">
-            {item.about[Language.Current]}
-          </div>
-          <Link
-            className="absolute bottom-4 right-4 note flex gap-2"
-            href={`/projects/#${slugify(item.title.english)}`}
-            aria-label={`View project: ${item.title.english}`}
-          >
-            {
-              {
-                chinese: "前往",
-                english: "Go to",
-              }[Language.Current]
-            }
-            <ArrowRightOutlined />
-          </Link>
+      <Overlay className="relative flex flex-col justify-center w-full h-full p-4">
+        <div className="content font-bold">{item.title[Language.Current]}</div>
+        <div className="hint flex gap-2">
+          <ClockCircleOutlined />
+          {item.time}
         </div>
-      </div>
-    </div>
+        <div className="note">{item.about[Language.Current]}</div>
+        <Link
+          className="absolute bottom-4 right-4 note flex gap-2"
+          href={`/projects/#${slugify(item.title.english)}`}
+          aria-label={`View project: ${item.title.english}`}
+        >
+          {
+            {
+              chinese: "前往",
+              english: "Go to",
+            }[Language.Current]
+          }
+          <ArrowRightOutlined />
+        </Link>
+      </Overlay>
+    </ProjectCardWrapper>
   );
 };
