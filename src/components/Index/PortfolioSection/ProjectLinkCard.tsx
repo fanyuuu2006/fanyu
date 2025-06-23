@@ -35,7 +35,7 @@ export const ProjectLinkCard = ({
       {/**Hover 資訊面板 */}
       <div className="absolute inset-0 opacity-0 bg-[#00000066] transition-all duration-300 ease-in-out group-hover:opacity-100">
         <div className="relative flex flex-col justify-center w-full h-full p-4">
-          <div className="label font-bold">{item.title[Language.Current]}</div>
+          <div className="content font-bold">{item.title[Language.Current]}</div>
           <div className="hint flex gap-2">
             <ClockCircleOutlined />
             {item.time}
