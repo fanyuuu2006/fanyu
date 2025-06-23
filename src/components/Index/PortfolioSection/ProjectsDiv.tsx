@@ -90,7 +90,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       {/* 輪播區塊 */}
       <Carousel>
         <Container>
-          {[...Array(2)].map((_, chunk) => (
+          {[0, 1].map((chunk) => (
             <Chunk key={chunk}>
               {profile.portfolio.projects
                 .sort(
@@ -98,7 +98,10 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
                     new Date(a.time).getTime() - new Date(b.time).getTime()
                 )
                 .map((item) => (
-                  <Item key={`${item.title.english}-${chunk}`}>
+                  <Item
+                    key={`${item.title.english}-${chunk}`}
+                    aria-hidden={chunk ? "true" : undefined}
+                  >
                     <ProjectLinkCard item={item} />
                   </Item>
                 ))}
