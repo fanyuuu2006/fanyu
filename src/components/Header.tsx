@@ -3,9 +3,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent } from "@/types/language";
 import Link from "next/link";
 import Image from "next/image";
-import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { Collapse } from "fanyucomponents";
+import styled from "styled-components";
 
 const Routes: {
   label: LanguageContent<string>;
@@ -70,6 +70,54 @@ const Routes: {
   },
 ];
 
+export const MenuLabel = styled.label`
+  position: relative;
+  display: inline-block;
+  width: ${4 / 3}em;
+  height: 1em;
+  cursor: pointer;
+`;
+
+export const MenuSpan = styled.span`
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  border-radius: 0.25rem;
+  background-color: var(--text-color);
+  transition: 0.3s ease-in-out;
+  transform-origin: right center;
+
+  &:nth-of-type(1) {
+    top: 0;
+  }
+  &:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &:nth-of-type(3) {
+    top: 100%;
+    transform: translateY(-100%);
+  }
+`;
+
+export const MenuCheckbox = styled.input`
+  display: none;
+
+  &:checked ~ ${MenuSpan}:nth-of-type(1) {
+    transform: rotate(-45deg);
+  }
+
+  &:checked ~ ${MenuSpan}:nth-of-type(2) {
+    opacity: 0;
+    width: 0;
+  }
+
+  &:checked ~ ${MenuSpan}:nth-of-type(3) {
+    transform: rotate(45deg);
+  }
+`;
+
 export const Header = () => {
   const Language = useLanguage();
   const [menuShow, setMenuShow] = useState<boolean>(false);
@@ -88,17 +136,21 @@ export const Header = () => {
               className="h-16 w-auto object-contain"
             />
           </Link>
-          <button
-            className={`lg:hidden label px-2 py-1 transition-transform duration-300 ${
-              menuShow ? "-rotate-90" : ""
-            }`}
-            onClick={() => setMenuShow((prev) => !prev)}
-            aria-label={menuShow ? "關閉選單" : "開啟選單"}
-            aria-expanded={menuShow}
-            aria-controls="mobile-nav"
-          >
-            {menuShow ? <CloseOutlined /> : <MenuOutlined />}
-          </button>
+          <div className="content lg:hidden">
+            <MenuLabel>
+              <MenuCheckbox
+                type="checkbox"
+                checked={menuShow}
+                onChange={() => setMenuShow((prev) => !prev)}
+                aria-label={menuShow ? "關閉選單" : "開啟選單"}
+                aria-expanded={menuShow}
+                aria-controls="mobile-nav"
+              />
+              <MenuSpan />
+              <MenuSpan />
+              <MenuSpan />
+            </MenuLabel>
+          </div>
           <div className="hidden lg:flex note font-bold gap-6">
             {Routes.map((item) => (
               <Link

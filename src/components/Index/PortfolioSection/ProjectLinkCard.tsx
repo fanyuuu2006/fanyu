@@ -40,7 +40,7 @@ export const ProjectLinkCard = ({
             <ClockCircleOutlined />
             {item.time}
           </div>
-          <div className="note text-justify">
+          <div className="note">
             {item.about[Language.Current]}
           </div>
           <Link
