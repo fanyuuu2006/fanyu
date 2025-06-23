@@ -25,7 +25,7 @@ export const CodeCard = ({
     <div className={`card p-6 overflow-auto ${className}`} {...rest}>
       <div className="flex items-center">
         <span>{lang}</span>
-        <CopyButton content={content} />
+        <CopyButton content={content} className="ml-auto btn rounded-sm"/>
       </div>
       <CodeBlock
         theme="default-dark-modern"

@@ -6,7 +6,7 @@
     --background-color: #111111;
     --background-color-dark: #080808;
     --background-color-primary: #212121;
-    --background-color-secondary: #171a1d;
+    --background-color-secondary: #333333;
     --text-color: #ffffff;
     --text-color-primary: #1f6feb;
     --text-color-secondary: #ffff71;
@@ -27,9 +27,6 @@
   }
 
   body {
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
     color: var(--text-color);
     background: var(--background-color-dark);
   }
@@ -50,7 +47,6 @@
     pointer-events: none;
   }
 
-  button,
   .btn,
   .btn-primary,
   .btn-secondary {
@@ -63,7 +59,7 @@
     background: var(--background-color-primary);
   }
   .btn-secondary {
-    background: var(--background-color-primary);
+    background: var(--background-color-secondary);
   }
 
   .btn-primary {

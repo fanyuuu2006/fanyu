@@ -258,7 +258,8 @@ const FanYuComponents: ProjectItem = {
     chinese: "飯魚的組件",
     english: "Fanyu Components",
   },
-  imageSrc: "/Portfolio/fanyucomponents.png",
+  imageSrc:
+    "https://raw.githubusercontent.com/fanyuuu2006/fanyu-components/main/public/icon.png",
   links: [
     {
       category: "package",

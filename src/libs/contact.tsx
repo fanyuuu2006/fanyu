@@ -73,7 +73,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
         image: "https://avatars.githubusercontent.com/u/180280998?v=4",
       },
       href: "https://github.com/fanyuuu2006",
-      backgrounds: ["#333"],
+      backgrounds: ["#5f5f5f"],
     },
     {
       label: "Threads",

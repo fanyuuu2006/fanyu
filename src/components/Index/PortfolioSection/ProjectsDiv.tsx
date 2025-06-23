@@ -1,16 +1,10 @@
-import { useEffect, useRef, useState } from "react";
 import { profile } from "@/libs/profile";
-import { ProjectItem } from "@/types/portfolio";
-import { ArrowRightOutlined, ReloadOutlined } from "@ant-design/icons";
-import { Tooltip } from "antd";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
-import { motion } from "framer-motion";
-import { fadeInItem, staggerContainer } from "@/libs/motion";
-
-const projectCount = 3;
+import styled from "styled-components";
 
 type ProjectsContent = Record<"projects" | "learnMore" | "refresh", string>;
 
@@ -31,80 +25,92 @@ const getProjectsContent = (language: LanguageOption): ProjectsContent =>
   )[language]);
 
 export type ProjectsDivProps = React.HTMLAttributes<HTMLDivElement>;
-
 export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
   const Language = useLanguage();
   const projectsContent = getProjectsContent(Language.Current);
 
-  const [shuffledProject, setShuffledProject] = useState<ProjectItem[] | null>(
-    null
-  );
-  const turnRef = useRef<HTMLSpanElement>(null);
-
-  const shuffleProject = () => {
-    const shuffled = profile.portfolio.projects
-      .toSorted(() => Math.random() - 0.5)
-      .slice(0, projectCount);
-    setShuffledProject(shuffled);
-  };
-
-  useEffect(() => {
-    shuffleProject();
-  }, []);
-
-  if (!shuffledProject) return null;
+  const projects = profile.portfolio.projects;
 
   return (
     <div
-      className={`flex flex-col p-2 gap-4 items-center ${className}`}
+      className={`flex flex-col p-2 gap-4 items-center max-w-full overflow-hidden ${className}`}
       {...rest}
     >
-      <div className="content w-full flex justify-between items-center">
-        <div className="font-bold">{projectsContent.projects}</div>
-        <button
-          className="flex items-center justify-center w-10 h-10 p-1 rounded-sm"
-          onClick={shuffleProject}
-        >
-          <Tooltip title={projectsContent.refresh}>
-            <ReloadOutlined
-              ref={turnRef}
-              onClick={() => {
-                if (!turnRef.current) return;
-                turnRef.current?.classList.add("animate-turn");
-                setTimeout(() => {
-                  turnRef.current?.classList.remove("animate-turn");
-                }, 300);
-              }}
-            />
-          </Tooltip>
-        </button>
-      </div>
-      <motion.div
-        key={JSON.stringify(shuffledProject)}
-        variants={staggerContainer}
-        initial="hiddenBottom"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-        className="flex flex-wrap justify-between gap-4"
-      >
-        {shuffledProject.map((item: ProjectItem) => (
-          <motion.div
-            key={item.title.english}
-            variants={fadeInItem}
-            viewport={{ once: true, amount: 0.1 }}
-            className="flex flex-1 basis-full lg:basis-3/10"
-          >
-            <ProjectLinkCard item={item} className="w-full" />
-          </motion.div>
-        ))}
-      </motion.div>
+      <div className="label font-bold">{projectsContent.projects}</div>
+
+      {/* 輪播區塊 */}
+      <CarouselWrapper className="w-full">
+        <div className="carousel">
+          <div className="inner">
+            {[...Array(2)].map((_, chunk) => (
+              <div key={chunk} className="chunk">
+                {projects.map((item) => (
+                  <ProjectLinkCard
+                    key={`${item.title.english}-${chunk}`}
+                    item={item}
+                    className="item w-80 m-1"
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </CarouselWrapper>
+
+      {/**了解更多 */}
       <Link
-        className="note flex transition-all hover:-translate-x-2 group"
+        className="note flex transition-all hover:-translate-x-2 chunk"
         href="/projects"
       >
         {projectsContent.learnMore}
-        <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
+        <ArrowRightOutlined className="opacity-0 transition-all chunk-hover:opacity-100 chunk-hover:translate-x-2" />
       </Link>
     </div>
   );
 };
+
+const CarouselWrapper = styled.div`
+  .carousel {
+    max-width: 100%;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 5% 95%,
+      transparent
+    );
+  }
+  .carousel .inner {
+    width: max-content;
+    display: flex;
+    flex-wrap: nowrap;
+    animation: slide 15s linear infinite;
+  }
+
+  .carousel .inner .chunk {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .carousel .inner .chunk .item{
+    transition: all 0.3s ease-in-out;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .carousel .inner:hover {
+    animation-play-state: paused;
+  }
+  .carousel .inner:hover .item {
+    animation-play-state: paused;
+    filter: grayscale(1);
+  }
+  .carousel .inner .item:hover {
+    filter: grayscale(0);
+  }
+`;

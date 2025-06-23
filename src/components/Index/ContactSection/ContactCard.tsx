@@ -29,7 +29,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   return (
     <motion.div
       ref={ref}
-      className="group relative p-[3px] rounded-2xl"
+      className="group relative p-[2px] rounded-2xl"
       style={{
         background: item.backgrounds?.length
           ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
@@ -61,7 +61,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
         }}
       >
         <div
-          className="p-[3px] rounded-2xl"
+          className="p-[2px] rounded-2xl"
           style={{
             background: item.backgrounds?.length
               ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
@@ -89,7 +89,14 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
 
               {/**名稱 & ID */}
               <div className="flex flex-col gap-0 whitespace-nowrap">
-                <span className="note font-bold">{item.info.name}</span>
+                <span
+                  className="note font-bold"
+                  style={{
+                    color: item.backgrounds?.[0] || "var(--text-color-primary)",
+                  }}
+                >
+                  {item.info.name}
+                </span>
                 <span className="hint flex items-center gap-1">
                   {item.info.id}
                   <CopyButton content={item.info.id} />
