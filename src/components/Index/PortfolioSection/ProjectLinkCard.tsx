@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 const ProjectCardWrapper = styled.div`
   position: relative;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   aspect-ratio: 1 / 1;
   border-radius: 0.75rem;
   overflow: hidden;
@@ -64,8 +64,8 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
         >
           {
             {
-              chinese: "前往",
-              english: "Go to",
+              chinese: "詳細資訊",
+              english: "More Info",
             }[Language.Current]
           }
           <ArrowRightOutlined />

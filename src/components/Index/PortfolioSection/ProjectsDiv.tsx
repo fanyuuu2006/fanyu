@@ -6,7 +6,7 @@ import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import styled from "styled-components";
 
-export const Carousel = styled.div`
+export const CarouselWrapper = styled.div`
   max-width: 100%;
   mask-image: linear-gradient(
     to right,
@@ -16,7 +16,7 @@ export const Carousel = styled.div`
   );
 `;
 
-export const Container = styled.div`
+export const CarouselTrack = styled.div`
   width: max-content;
   display: flex;
   flex-wrap: nowrap;
@@ -36,17 +36,17 @@ export const Container = styled.div`
   }
 `;
 
-export const Chunk = styled.div`
+export const CarouselGroup = styled.div`
   display: flex;
   flex-wrap: nowrap;
 `;
 
-export const Item = styled.div`
+export const SlideItem = styled.div`
   width: 288px;
   margin: 0.5rem;
   transition: all 0.3s ease-in-out;
 
-  ${Container}:hover & {
+  ${CarouselTrack}:hover & {
     filter: grayscale(1);
   }
 
@@ -88,27 +88,27 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       </div>
 
       {/* 輪播區塊 */}
-      <Carousel>
-        <Container>
-          {[0, 1].map((chunk) => (
-            <Chunk key={chunk}>
+      <CarouselWrapper>
+        <CarouselTrack>
+          {[0, 1].map((group) => (
+            <CarouselGroup key={group}>
               {profile.portfolio.projects
                 .sort(
                   (a, b) =>
                     new Date(a.time).getTime() - new Date(b.time).getTime()
                 )
                 .map((item) => (
-                  <Item
-                    key={`${item.title.english}-${chunk}`}
-                    aria-hidden={chunk ? "true" : undefined}
+                  <SlideItem
+                    key={`${item.title.english}-${group}`}
+                    aria-hidden={group ? "true" : undefined}
                   >
                     <ProjectLinkCard item={item} />
-                  </Item>
+                  </SlideItem>
                 ))}
-            </Chunk>
+            </CarouselGroup>
           ))}
-        </Container>
-      </Carousel>
+        </CarouselTrack>
+      </CarouselWrapper>
 
       {/**了解更多 */}
       <Link

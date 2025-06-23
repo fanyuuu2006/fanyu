@@ -133,7 +133,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "bilibili",
       icon: BilibiliOutlined,
-      info: { name: "飯魚", id: "1488181486" },
+      info: { name: "飯魚", id: "1488181486", image: "https://i1.hdslb.com/bfs/face/10300665780b53d6ea2977d2c4bac163e3bfcff5.jpg" },
       href: "https://space.bilibili.com/1488181486",
       backgrounds: ["#FF6999"],
     },
