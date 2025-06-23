@@ -116,7 +116,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
         href="/projects"
       >
         {projectsContent.learnMore}
-        <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 chunk-hover:translate-x-2" />
+        <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
       </Link>
     </div>
   );
