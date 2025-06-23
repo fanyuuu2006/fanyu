@@ -6,32 +6,21 @@ import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import styled from "styled-components";
 
-const CarouselWrapper = styled.div`
-  .carousel {
-    max-width: 100%;
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      var(--background-color-dark) 5% 95%,
-      transparent
-    );
-  }
-  .carousel .inner {
-    width: max-content;
-    display: flex;
-    flex-wrap: nowrap;
-    animation: slide 15s linear infinite;
-  }
+export const Carousel = styled.div`
+  max-width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    var(--background-color-dark) 5% 95%,
+    transparent
+  );
+`;
 
-  .carousel .inner .chunk {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  .carousel .inner .chunk .item {
-    width: 288px;
-    margin: 0.5rem;
-    transition: all 0.3s ease-in-out;
-  }
+export const Container = styled.div`
+  width: max-content;
+  display: flex;
+  flex-wrap: nowrap;
+  animation: slide 15s linear infinite;
 
   @keyframes slide {
     0% {
@@ -42,15 +31,27 @@ const CarouselWrapper = styled.div`
     }
   }
 
-  .carousel .inner:hover {
+  &:hover {
     animation-play-state: paused;
   }
-  .carousel .inner:hover .item {
-    animation-play-state: paused;
+`;
+
+export const Chunk = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`;
+
+export const Item = styled.div`
+  width: 288px;
+  margin: 0.5rem;
+  transition: all 0.3s ease-in-out;
+
+  ${Container}:hover & {
     filter: grayscale(1);
   }
-  .carousel .inner .item:hover {
-    filter: grayscale(0);
+
+  &:hover {
+    filter: grayscale(0) !important;
   }
 `;
 
@@ -87,29 +88,24 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       </div>
 
       {/* 輪播區塊 */}
-      <CarouselWrapper className="w-full">
-        <div className="carousel">
-          <div className="inner">
-            {[...Array(2)].map((_, chunk) => (
-              <div key={chunk} className="chunk">
-                {profile.portfolio.projects
-                  .sort(
-                    (a, b) =>
-                      new Date(a.time).getTime() - new Date(b.time).getTime()
-                  )
-                  .map((item) => (
-                    <div
-                      className="item"
-                      key={`${item.title.english}-${chunk}`}
-                    >
-                      <ProjectLinkCard item={item} />
-                    </div>
-                  ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </CarouselWrapper>
+      <Carousel>
+        <Container>
+          {[...Array(2)].map((_, chunk) => (
+            <Chunk key={chunk}>
+              {profile.portfolio.projects
+                .sort(
+                  (a, b) =>
+                    new Date(a.time).getTime() - new Date(b.time).getTime()
+                )
+                .map((item) => (
+                  <Item key={`${item.title.english}-${chunk}`}>
+                    <ProjectLinkCard item={item} />
+                  </Item>
+                ))}
+            </Chunk>
+          ))}
+        </Container>
+      </Carousel>
 
       {/**了解更多 */}
       <Link
