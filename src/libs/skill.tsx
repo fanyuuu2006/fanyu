@@ -64,14 +64,6 @@ export const skills: Record<SkillCategory, { src: string; title: string }[]> = {
       title: "ESLint",
       src: "https://www.svgrepo.com/show/353709/eslint.svg",
     },
-    // {
-    //   title: "Vercel",
-    //   src: "https://assets.vercel.com/image/upload/front/favicon/vercel/favicon.ico",
-    // },
-    // {
-    //   title: "Render",
-    //   src: "https://render.com/icon.svg?e6fbdd2e217c00645N*czE3NDg5MTkyMTEkbzEkZzEkdDE3NDg5MjE4OTMkajYwJGwwJGgw",
-    // },
   ],
 };
 

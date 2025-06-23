@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
-import { ProjectTagButton } from "./ProjectTagButton";
+import { ProjectTagCheckbox } from "./ProjectTagCheckbox";
 import { profile } from "../../libs/profile";
 import { Collapse } from "fanyucomponents";
 import { motion } from "framer-motion";
@@ -112,13 +112,13 @@ export const MainSection = () => {
           <Collapse className="slide-collapse" state={categoriesShow}>
             <div className="flex flex-col p-4 gap-2 bordered">
               <div>
-                <ProjectTagButton
+                <ProjectTagCheckbox
                   tag={null}
                   currentTags={currentTags}
                   setCurrentTags={setCurrentTags}
                 >
                   {projectsContent.all}
-                </ProjectTagButton>
+                </ProjectTagCheckbox>
               </div>
               {Object.entries(projectTagCategories).map(
                 ([category, tags]) =>
@@ -129,14 +129,14 @@ export const MainSection = () => {
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {tags.map((tag) => (
-                          <ProjectTagButton
+                          <ProjectTagCheckbox
                             key={tag}
                             tag={tag}
                             currentTags={currentTags}
                             setCurrentTags={setCurrentTags}
                           >
                             {tag}
-                          </ProjectTagButton>
+                          </ProjectTagCheckbox>
                         ))}
                       </div>
                     </div>

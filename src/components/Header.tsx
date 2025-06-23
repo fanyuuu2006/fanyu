@@ -100,10 +100,10 @@ export const Header = () => {
             {menuShow ? <CloseOutlined /> : <MenuOutlined />}
           </button>
           <div className="hidden lg:flex note font-bold gap-6">
-            {Routes.map((item, index) => (
+            {Routes.map((item) => (
               <Link
                 className="hover:underline-spread"
-                key={index}
+                key={item.href}
                 href={item.href}
               >
                 {item.label[Language.Current]}
@@ -117,9 +117,9 @@ export const Header = () => {
           id="mobile-nav"
         >
           <div className="flex flex-col w-full note font-bold text-center">
-            {Routes.map((item, index) => (
+            {Routes.map((item) => (
               <Link
-                key={index}
+                key={item.href}
                 href={item.href}
                 className="py-2 px-4 hover:bg-[var(--background-color-primary)]"
                 onClick={() => setMenuShow(false)}

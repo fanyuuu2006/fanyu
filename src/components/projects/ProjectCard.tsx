@@ -12,7 +12,7 @@ import {
   LinkOutlined,
   TagsOutlined,
 } from "@ant-design/icons";
-import { ProjectTagButton } from "./ProjectTagButton";
+import { ProjectTagCheckbox } from "./ProjectTagCheckbox";
 import { SiNpm } from "react-icons/si";
 import { HTMLMotionProps, motion } from "framer-motion";
 import Giscus from "@giscus/react";
@@ -88,14 +88,14 @@ export const ProjectCard = ({
             <TagsOutlined />
             <div className="flex flex-wrap gap-2">
               {item.tags.map((tag) => (
-                <ProjectTagButton
+                <ProjectTagCheckbox
                   key={tag}
                   tag={tag}
                   currentTags={currentTags}
                   setCurrentTags={setCurrentTags}
                 >
                   {tag}
-                </ProjectTagButton>
+                </ProjectTagCheckbox>
               ))}
             </div>
           </div>
