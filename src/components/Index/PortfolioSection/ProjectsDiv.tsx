@@ -6,76 +6,13 @@ import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
 import styled from "styled-components";
 
-type ProjectsContent = Record<"projects" | "learnMore" | "refresh", string>;
-
-const getProjectsContent = (language: LanguageOption): ProjectsContent =>
-  ((
-    {
-      chinese: {
-        projects: "專案",
-        learnMore: "了解更多",
-        refresh: "換一批",
-      },
-      english: {
-        projects: "Projects",
-        learnMore: "Learn more",
-        refresh: "Refresh",
-      },
-    } as LanguageContent<ProjectsContent>
-  )[language]);
-
-export type ProjectsDivProps = React.HTMLAttributes<HTMLDivElement>;
-export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
-  const Language = useLanguage();
-  const projectsContent = getProjectsContent(Language.Current);
-
-  const projects = profile.portfolio.projects;
-
-  return (
-    <div
-      className={`flex flex-col p-2 gap-4 items-center max-w-full overflow-hidden ${className}`}
-      {...rest}
-    >
-      <div className="label font-bold">{projectsContent.projects}</div>
-
-      {/* 輪播區塊 */}
-      <CarouselWrapper className="w-full">
-        <div className="carousel">
-          <div className="inner">
-            {[...Array(2)].map((_, chunk) => (
-              <div key={chunk} className="chunk">
-                {projects.map((item) => (
-                  <ProjectLinkCard
-                    key={`${item.title.english}-${chunk}`}
-                    item={item}
-                    className="item w-80 m-1"
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </CarouselWrapper>
-
-      {/**了解更多 */}
-      <Link
-        className="note flex transition-all hover:-translate-x-2 chunk"
-        href="/projects"
-      >
-        {projectsContent.learnMore}
-        <ArrowRightOutlined className="opacity-0 transition-all chunk-hover:opacity-100 chunk-hover:translate-x-2" />
-      </Link>
-    </div>
-  );
-};
-
 const CarouselWrapper = styled.div`
   .carousel {
     max-width: 100%;
     mask-image: linear-gradient(
       to right,
       transparent,
-      #000 5% 95%,
+      var(--background-color-dark) 5% 95%,
       transparent
     );
   }
@@ -90,7 +27,9 @@ const CarouselWrapper = styled.div`
     display: flex;
     flex-wrap: nowrap;
   }
-  .carousel .inner .chunk .item{
+  .carousel .inner .chunk .item {
+    width: 288px;
+    margin: 0.5rem;
     transition: all 0.3s ease-in-out;
   }
 
@@ -114,3 +53,72 @@ const CarouselWrapper = styled.div`
     filter: grayscale(0);
   }
 `;
+
+type ProjectsContent = Record<"projects" | "learnMore" | "refresh", string>;
+
+const getProjectsContent = (language: LanguageOption): ProjectsContent =>
+  ((
+    {
+      chinese: {
+        projects: "專案",
+        learnMore: "了解更多",
+        refresh: "換一批",
+      },
+      english: {
+        projects: "Projects",
+        learnMore: "Learn more",
+        refresh: "Refresh",
+      },
+    } as LanguageContent<ProjectsContent>
+  )[language]);
+
+export type ProjectsDivProps = React.HTMLAttributes<HTMLDivElement>;
+export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
+  const Language = useLanguage();
+  const projectsContent = getProjectsContent(Language.Current);
+
+  return (
+    <div
+      className={`flex flex-col p-2 gap-4 items-center max-w-full overflow-hidden ${className}`}
+      {...rest}
+    >
+      <div className="w-full label font-bold">
+        <span>{projectsContent.projects}</span>
+      </div>
+
+      {/* 輪播區塊 */}
+      <CarouselWrapper className="w-full">
+        <div className="carousel">
+          <div className="inner">
+            {[...Array(2)].map((_, chunk) => (
+              <div key={chunk} className="chunk">
+                {profile.portfolio.projects
+                  .sort(
+                    (a, b) =>
+                      new Date(a.time).getTime() - new Date(b.time).getTime()
+                  )
+                  .map((item) => (
+                    <div
+                      className="item"
+                      key={`${item.title.english}-${chunk}`}
+                    >
+                      <ProjectLinkCard item={item} />
+                    </div>
+                  ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </CarouselWrapper>
+
+      {/**了解更多 */}
+      <Link
+        className="note flex transition-all hover:-translate-x-2 group"
+        href="/projects"
+      >
+        {projectsContent.learnMore}
+        <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 chunk-hover:translate-x-2" />
+      </Link>
+    </div>
+  );
+};

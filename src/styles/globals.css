@@ -47,6 +47,10 @@
     pointer-events: none;
   }
 
+  button{
+    cursor: pointer;
+  }
+
   .btn,
   .btn-primary,
   .btn-secondary {
@@ -131,34 +135,6 @@
     transition: height 0.3s;
     overflow: hidden;
   }
-
-  /* .tooltip {
-    position: relative;
-  }
-  .tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    background-color: var(--background-color-primary);
-    border: var(--border-color);
-    border-radius: 1rem;
-    color: var(--text-color);
-    font-size: inherit;
-    padding: 0.25rem 0.5rem;
-    white-space: nowrap;
-    left: 50%;
-    top: -2rem;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-50%);
-    transition: all 0.3s ease;
-    display: flex;
-    z-index: 9999;
-  }
-  .tooltip:hover::after {
-    opacity: 1;
-    visibility: visible;
-    top: -3rem;
-  } */
 
   @media (max-width: 768px) {
     .title {
