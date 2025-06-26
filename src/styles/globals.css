@@ -8,7 +8,7 @@
     --background-color-primary: #212121;
     --background-color-secondary: #333333;
     --text-color: #ffffff;
-    --text-color-primary: #1f6feb;
+    --text-color-primary: #0d59cc;
     --text-color-secondary: #ffff71;
     --border-color: #212121;
     --brightness-light: 2;
@@ -60,10 +60,12 @@
   }
 
   .btn {
-    background: var(--background-color-primary);
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
   }
   .btn-secondary {
     background: var(--background-color-secondary);
+    border: 1px solid var(--border-color);
   }
 
   .btn-primary {
@@ -76,11 +78,11 @@
     text-decoration: none !important;
   }
 
-  .btn:active,
+  /* .btn:active,
   .btn-primary:active,
   .btn-secondary:active {
     transform: scale(0.9);
-  }
+  } */
 
   .container {
     position: relative;

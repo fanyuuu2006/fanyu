@@ -20,7 +20,7 @@ export const CarouselTrack = styled.div`
   width: max-content;
   display: flex;
   flex-wrap: nowrap;
-  animation: slide 15s linear infinite;
+  animation: slide 20s linear infinite;
 
   @keyframes slide {
     0% {

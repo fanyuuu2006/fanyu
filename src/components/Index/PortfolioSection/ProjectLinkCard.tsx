@@ -56,7 +56,7 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
           <ClockCircleOutlined />
           {item.time}
         </div>
-        <div className="note">{item.about[Language.Current]}</div>
+        <div className="hint">{item.about[Language.Current]}</div>
         <Link
           className="absolute bottom-4 right-4 note flex gap-2"
           href={`/projects/#${slugify(item.title.english)}`}
