@@ -147,13 +147,13 @@ export const HeroSection = () => {
               <div className="content flex gap-4 mt-4">
                 <Link
                   href="/#contact"
-                  className="btn-primary px-6 py-2 rounded-2xl"
+                  className="btn-primary px-6 py-2 rounded-xl"
                 >
                   {heroContent.contactMe}
                 </Link>
                 <Link
                   href="/#portfolio"
-                  className="btn-secondary px-6 py-2 rounded-2xl"
+                  className="btn-secondary px-6 py-2 rounded-xl"
                 >
                   {heroContent.portfolio}
                 </Link>

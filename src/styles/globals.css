@@ -73,7 +73,6 @@
   .btn:hover,
   .btn-primary:hover,
   .btn-secondary:hover {
-    filter: brightness(var(--brightness-hover));
     text-decoration: none !important;
   }
 

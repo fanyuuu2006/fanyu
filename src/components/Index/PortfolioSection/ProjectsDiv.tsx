@@ -42,7 +42,7 @@ export const CarouselGroup = styled.div`
 `;
 
 export const SlideItem = styled.div`
-  width: 288px;
+  width: 280px;
   margin: 0.5rem;
   transition: all 0.3s ease-in-out;
 

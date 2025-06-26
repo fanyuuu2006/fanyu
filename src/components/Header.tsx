@@ -80,10 +80,11 @@ export const MenuLabel = styled.label`
 
 export const MenuSpan = styled.span`
   position: absolute;
+  display: block;
   left: 0;
   width: 100%;
   height: 0.25rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background-color: var(--text-color);
   transition: 0.3s ease-in-out;
   transform-origin: right center;
@@ -106,6 +107,7 @@ export const MenuCheckbox = styled.input`
 
   &:checked ~ ${MenuSpan}:nth-of-type(1) {
     transform: rotate(-45deg);
+    right: ${1 / 6}em;
   }
 
   &:checked ~ ${MenuSpan}:nth-of-type(2) {
@@ -115,6 +117,8 @@ export const MenuCheckbox = styled.input`
 
   &:checked ~ ${MenuSpan}:nth-of-type(3) {
     transform: rotate(45deg);
+    top: ${29 / 30}em;
+    right: ${1 / 6}em;
   }
 `;
 
