@@ -45,7 +45,7 @@ export const useTimeOrderTabs = (initOption?: { init: boolean }) => {
             <button
               key={item.label}
               className={`px-4 py-1 transition-all duration-200 rounded-lg ${
-                isSelected ? "btn" : "hover:bg-[var(--background-color)]"
+                isSelected ? "btn" : ""
               }`}
               onClick={() => {
                 if (isSelected) return;

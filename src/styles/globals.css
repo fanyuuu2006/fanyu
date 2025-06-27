@@ -11,8 +11,7 @@
     --text-color-primary: #0d59cc;
     --text-color-secondary: #ffff71;
     --border-color: #212121;
-    --brightness-light: 2;
-    --brightness-hover: 0.7;
+    --brightness-light: 1.5;
   }
 
   * {
@@ -47,16 +46,12 @@
     pointer-events: none;
   }
 
-  button{
-    cursor: pointer;
-  }
-
+  button,
   .btn,
   .btn-primary,
   .btn-secondary {
     cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
-    font-weight: bold;
   }
 
   .btn {
@@ -72,10 +67,12 @@
     background: var(--text-color-primary);
   }
 
+  button:hover,
   .btn:hover,
   .btn-primary:hover,
   .btn-secondary:hover {
     text-decoration: none !important;
+    filter: brightness(var(--brightness-light));
   }
 
   /* .btn:active,

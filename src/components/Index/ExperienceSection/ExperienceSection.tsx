@@ -81,7 +81,7 @@ export const ExperienceSection = () => {
                 aria-label={experienceContent[key]}
                 key={key}
                 className={`note font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-colors duration-200 ${
-                  Tab === key ? "btn" : "hover:bg-[var(--background-color)]"
+                  Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
                   if (Tab === key) return;

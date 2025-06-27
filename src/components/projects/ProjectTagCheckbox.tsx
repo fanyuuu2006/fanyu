@@ -23,8 +23,8 @@ export const ProjectTagCheckbox = ({
   const isActive = tag ? currentTags?.has(tag) : currentTags === null;
   return (
     <label
-      className={`btn ${
-        isActive ? "brightness-[var(--brightness-light)]" : ""
+      className={`btn${
+        isActive ? "-secondary" : ""
       } px-2 rounded-sm whitespace-nowrap ${className} `}
       {...rest}
     >
