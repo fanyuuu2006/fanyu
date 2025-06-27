@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { motion } from "framer-motion";
-import { fadeInItem } from "@/libs/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
 
 type AboutMeContent = {
@@ -29,7 +29,7 @@ const getAboutMeContent = (language: LanguageOption): AboutMeContent =>
           "My name is Fan-Yu Zhen-Fu, a passionate developer who loves programming and software development. Since I was young, I enjoyed playing Minecraft, where I built various redstone contraptions. This experience nurtured my love for logic and creativity.",
           "In high school, I was introduced to App Inventor and applied the logical thinking I had developed through redstone to create a small game, which gradually sparked my interest in programming.",
           "I am currently studying at National Taiwan University of Science and Technology. After buying my first personal laptop in my freshman year, I began self-learning both frontend and backend development, along with various programming languages and tools.",
-          "Although I’m still on the path of learning, I remain highly enthusiastic and continue to explore and expand my knowledge in software development. My goal is to one day become a capable and independent developer.",
+          "Although I'm still on the path of learning, I remain highly enthusiastic and continue to explore and expand my knowledge in software development. My goal is to one day become a capable and independent developer.",
         ],
       },
     } as LanguageContent<AboutMeContent>
@@ -48,33 +48,44 @@ export const AboutMeSection = () => {
         <h1 ref={ref} className="title font-bold text-center">
           {aboutMeContent.aboutMe}
         </h1>
-        <div className="overflow-hidden flex items-center gap-4 flex-col lg:flex-row">
+
+        <div className="w-full flex flex-col lg:flex-row gap-8 items-center">
+          {/* 個人照片卡片 - 佔 1/3 比例 */}
           <motion.div
             variants={fadeInItem}
             initial="hiddenLeft"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="flex justify-center items-center flex-1"
+            className="flex justify-center items-start flex-shrink-0 w-full lg:w-1/3"
           >
-            <Image
-              className="border-2 border-[var(--border-color)] w-4/5 h-auto rounded-3xl"
-              alt="頭貼"
-              src="/GameShow.jpg"
-              width={1000}
-              height={1000}
-            />
+            <div className="card p-4 hover:scale-105 transition-transform duration-300">
+              <Image
+                className="border-2 border-[var(--border-color)] w-64 h-64 lg:w-72 lg:h-72 rounded-[inherit] object-cover shadow-lg"
+                alt="個人照片"
+                src="/GameShow.jpg"
+                width={300}
+                height={300}
+                priority
+              />
+            </div>
           </motion.div>
+
+          {/* 文章內容卡片 - 佔 2/3 比例 */}
           <motion.article
-            variants={fadeInItem}
+            variants={staggerContainer}
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="flex flex-col items-center flex-1 basis-4/10"
+            className="card p-6 flex flex-col flex-1 w-full lg:w-2/3"
           >
             {aboutMeContent.article.map((part, index) => (
-              <p key={index} className="note bold text-justify mb-4 indent-8 ">
+              <motion.p
+                key={index}
+                variants={fadeInItem}
+                className="note text-justify indent-8 p-3 rounded-lg transition-colors duration-200"
+              >
                 {part}
-              </p>
+              </motion.p>
             ))}
           </motion.article>
         </div>
