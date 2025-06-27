@@ -69,6 +69,7 @@ export const BurgerMenu = Object.assign(
     );
   },
   {
+    displayName: "BurgerMenu",
     Label,
     Checkbox,
     Span,

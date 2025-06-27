@@ -3,10 +3,10 @@
 /* ==== Base Layer ==== */
 @layer base {
   :root {
-    --background-color: #111111;
+    --background-color: #171717;
     --background-color-dark: #080808;
     --background-color-primary: #212121;
-    --background-color-secondary: #333333;
+    --background-color-secondary: #292929;
     --text-color: #ffffff;
     --text-color-primary: #0d59cc;
     --text-color-secondary: #ffff71;
@@ -92,8 +92,7 @@
 
   .card {
     background: var(--background-color);
-    border: 2px solid var(--border-color);
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
