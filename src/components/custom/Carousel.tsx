@@ -9,11 +9,14 @@ const Wrapper = styled.div`
 `;
 Wrapper.displayName = "Wrapper";
 
-const Track = styled.div`
+export type TrackProps = {
+  duration?: React.CSSProperties["animationDuration"];
+};
+const Track = styled.div<TrackProps>`
   width: max-content;
   display: flex;
   flex-wrap: nowrap;
-  animation: slide 20s linear infinite;
+  animation: slide ${({ duration }) => duration || "15s"} linear infinite;
 
   @keyframes slide {
     0% {
@@ -36,10 +39,7 @@ const Group = styled.div`
 `;
 Group.displayName = "Group";
 
-export type ItemProps = { width?: React.CSSProperties["width"] };
-const Item = styled.div<ItemProps>`
-  width: ${({ width }) => width || "10rem"};
-  margin: 0.5rem;
+const Item = styled.div`
   transition: all 0.3s ease-in-out;
 
   ${Track}:hover & {
@@ -53,22 +53,18 @@ const Item = styled.div<ItemProps>`
 
 export type CarouselProps = OverrideProps<
   React.ComponentPropsWithRef<typeof Wrapper>,
-  ItemProps & { children: React.ReactNode | React.ReactNode[] }
+  TrackProps & { children: React.ReactNode | React.ReactNode[] }
 >;
 
 export const Carousel = Object.assign(
-  ({ children, width, ...rest }: CarouselProps) => {
+  ({ children, duration, ...rest }: CarouselProps) => {
     return (
       <Wrapper {...rest}>
-        <Track>
+        <Track duration={duration}>
           {[0, 1].map((group) => (
             <Group key={group}>
               {React.Children.toArray(children).map((child, idx) => (
-                <Item
-                  width={width}
-                  key={idx}
-                  aria-hidden={group ? "true" : undefined}
-                >
+                <Item key={idx} aria-hidden={group ? "true" : undefined}>
                   {child}
                 </Item>
               ))}

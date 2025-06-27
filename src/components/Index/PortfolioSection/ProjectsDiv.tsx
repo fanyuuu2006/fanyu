@@ -38,13 +38,17 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       </div>
 
       {/* 輪播區塊 */}
-      <Carousel width={"280px"}>
+      <Carousel>
         {profile.portfolio.projects
           .sort(
             (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime()
           )
           .map((item) => (
-            <ProjectLinkCard key={`${item.title.english}`} item={item} />
+            <ProjectLinkCard
+              key={`${item.title.english}`}
+              item={item}
+              className="m-2 w-60 md:w-70"
+            />
           ))}
       </Carousel>
 
