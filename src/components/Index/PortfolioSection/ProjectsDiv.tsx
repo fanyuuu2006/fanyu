@@ -51,7 +51,6 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
             />
           ))}
       </Carousel>
-
       {/**了解更多 */}
       <Link
         className="note flex transition-all hover:-translate-x-2 group"

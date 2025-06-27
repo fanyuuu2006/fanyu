@@ -4,6 +4,7 @@ import styled, { IStyledComponent } from "styled-components";
 
 const Wrapper = styled.div`
   max-width: 100%;
+  max-height: 100%;
   mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
   overflow: hidden;
 `;
@@ -12,21 +13,54 @@ Wrapper.displayName = "Wrapper";
 export type TrackProps = {
   duration?: number;
   groupCount?: number;
+  direction?: "left" | "right" | "up" | "down";
 };
 const Track = styled.div<TrackProps>`
   width: max-content;
   display: flex;
+  flex-direction: ${({ direction }) => {
+    switch (direction) {
+      case "left":
+      case "right":
+        return "row";
+      case "up":
+      case "down":
+        return "column";
+    }
+  }};
   flex-wrap: nowrap;
   animation: slide ${({ duration }) => `${duration ?? 15000}ms`} linear infinite;
 
   @keyframes slide {
     0% {
-      transform: translateX(0%);
+      transform: ${({ direction, groupCount }) => {
+        const percent = 100 / (groupCount || 2);
+        switch (direction) {
+          case "left":
+            return "translateX(0%)";
+          case "right":
+            return `translateX(-${percent}%)`;
+          case "up":
+            return "translateY(0%)";
+          case "down":
+            return `translateY(-${percent}%)`;
+        }
+      }};
     }
     100% {
-      transform: translateX(
-        -${({ groupCount }) => `${100 / (groupCount || 2)}%`}
-      );
+      transform: ${({ direction, groupCount }) => {
+        const percent = 100 / (groupCount || 2);
+        switch (direction) {
+          case "left":
+            return `translateX(-${percent}%)`;
+          case "right":
+            return "translateX(0%)";
+          case "up":
+            return `translateY(-${percent}%)`;
+          case "down":
+            return "translateY(0%)";
+        }
+      }};
     }
   }
 
@@ -35,9 +69,21 @@ const Track = styled.div<TrackProps>`
   }
 `;
 Track.displayName = "Track";
-
-const Group = styled.div`
+export type GroupProps = {
+  direction?: "left" | "right" | "up" | "down";
+};
+const Group = styled.div<GroupProps>`
   display: flex;
+  flex-direction: ${({ direction }) => {
+    switch (direction) {
+      case "left":
+      case "right":
+        return "row";
+      case "up":
+      case "down":
+        return "column";
+    }
+  }};
   flex-wrap: nowrap;
 `;
 Group.displayName = "Group";
@@ -61,12 +107,22 @@ export type CarouselProps = OverrideProps<
 >;
 
 export const Carousel = Object.assign(
-  ({ children, groupCount = 2, duration = 15000, ...rest }: CarouselProps) => {
+  ({
+    children,
+    groupCount = 2,
+    duration = 15000,
+    direction = "left",
+    ...rest
+  }: CarouselProps) => {
     return (
       <Wrapper {...rest}>
-        <Track duration={duration} groupCount={groupCount}>
+        <Track
+          duration={duration}
+          groupCount={groupCount}
+          direction={direction}
+        >
           {[...Array(groupCount)].map((_, group) => (
-            <Group key={group}>
+            <Group key={group} direction={direction}>
               {React.Children.toArray(children).map((child, idx) => (
                 <Item key={idx} aria-hidden={group ? "true" : undefined}>
                   {child}

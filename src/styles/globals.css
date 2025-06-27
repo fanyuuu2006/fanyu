@@ -244,10 +244,6 @@
     width: 120%;
   }
 
-  .hover\:underline-spread:active::after {
-    width: 50%;
-  }
-
   @keyframes underlineSpreadIn {
     from {
       width: 0;
