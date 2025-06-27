@@ -38,7 +38,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       </div>
 
       {/* 輪播區塊 */}
-      <Carousel>
+      <Carousel groupCount={3}>
         {profile.portfolio.projects
           .sort(
             (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime()
