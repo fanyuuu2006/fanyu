@@ -50,10 +50,11 @@ const Item = styled.div`
     filter: grayscale(0) !important;
   }
 `;
+Item.displayName = "Item";
 
 export type CarouselProps = OverrideProps<
   React.ComponentPropsWithRef<typeof Wrapper>,
-  TrackProps & { children: React.ReactNode | React.ReactNode[] }
+  TrackProps & { children: React.ReactNode }
 >;
 
 export const Carousel = Object.assign(
