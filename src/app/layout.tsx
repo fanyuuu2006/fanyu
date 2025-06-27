@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Header/Header";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { LanguageSwitchButton } from "@/components/LanguageSwitchButton";
 import { Footer } from "@/components/Footer";
