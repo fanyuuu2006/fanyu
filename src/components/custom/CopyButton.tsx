@@ -53,6 +53,7 @@ export const CopyButton = ({
   return (
     <Tooltip title={copied ? "已複製" : "複製"}>
       <button
+        disabled={copied}
         aria-label={copied ? "已複製" : "複製"}
         className={`${className} flex items-center justify-center p-1`}
         onClick={(...args) => {

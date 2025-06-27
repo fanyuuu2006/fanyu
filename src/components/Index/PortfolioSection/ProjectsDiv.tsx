@@ -4,57 +4,7 @@ import Link from "next/link";
 import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/context/LanguageContext";
-import styled from "styled-components";
-
-export const CarouselWrapper = styled.div`
-  max-width: 100%;
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    var(--background-color-dark) 5% 95%,
-    transparent
-  );
-`;
-
-export const CarouselTrack = styled.div`
-  width: max-content;
-  display: flex;
-  flex-wrap: nowrap;
-  animation: slide 20s linear infinite;
-
-  @keyframes slide {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  &:hover {
-    animation-play-state: paused;
-  }
-`;
-
-export const CarouselGroup = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-`;
-
-export const SlideItem = styled.div`
-  width: 280px;
-  margin: 0.5rem;
-  transition: all 0.3s ease-in-out;
-
-  ${CarouselTrack}:hover & {
-    filter: grayscale(1);
-  }
-
-  &:hover {
-    filter: grayscale(0) !important;
-  }
-`;
-
+import { Carousel } from "@/components/custom/Carousel";
 type ProjectsContent = Record<"projects" | "learnMore" | "refresh", string>;
 
 const getProjectsContent = (language: LanguageOption): ProjectsContent =>
@@ -88,27 +38,15 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       </div>
 
       {/* 輪播區塊 */}
-      <CarouselWrapper>
-        <CarouselTrack>
-          {[0, 1].map((group) => (
-            <CarouselGroup key={group}>
-              {profile.portfolio.projects
-                .sort(
-                  (a, b) =>
-                    new Date(a.time).getTime() - new Date(b.time).getTime()
-                )
-                .map((item) => (
-                  <SlideItem
-                    key={`${item.title.english}-${group}`}
-                    aria-hidden={group ? "true" : undefined}
-                  >
-                    <ProjectLinkCard item={item} />
-                  </SlideItem>
-                ))}
-            </CarouselGroup>
+      <Carousel width={"280px"}>
+        {profile.portfolio.projects
+          .sort(
+            (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime()
+          )
+          .map((item) => (
+            <ProjectLinkCard key={`${item.title.english}`} item={item} />
           ))}
-        </CarouselTrack>
-      </CarouselWrapper>
+      </Carousel>
 
       {/**了解更多 */}
       <Link
