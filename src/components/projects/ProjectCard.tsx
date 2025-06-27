@@ -54,7 +54,7 @@ export const ProjectCard = ({
       >
         {/* eslint-disable-next-line @next/next/no-img-element*/}
         <img
-          className="bg-[#fff] border border-[var(--border-color)] h-25 w-fit  rounded-full"
+          className="bg-[#fff] border border-[var(--border-color)] h-25 w-25  rounded-full"
           src={item.imageSrc}
           alt={`${item.title.english} icon`}
         />
