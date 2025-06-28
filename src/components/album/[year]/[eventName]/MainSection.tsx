@@ -2,7 +2,7 @@
 import { Toast } from "@/components/custom/Toast";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
 import useSWR from "swr";
 import { useEffect } from "react";

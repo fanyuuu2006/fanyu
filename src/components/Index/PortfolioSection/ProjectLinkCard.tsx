@@ -1,4 +1,4 @@
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ProjectItem } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { ArrowRightOutlined, ClockCircleOutlined } from "@ant-design/icons";

@@ -1,6 +1,6 @@
 import { OverrideProps } from "fanyucomponents";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import React, { useState, useEffect, useMemo } from "react";
 import { profile } from "@/libs/profile";
 import { LoadingOutlined } from "@ant-design/icons";

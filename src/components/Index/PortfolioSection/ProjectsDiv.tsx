@@ -3,7 +3,7 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Carousel } from "@/components/custom/Carousel";
 type ProjectsContent = Record<"projects" | "learnMore" | "refresh", string>;
 

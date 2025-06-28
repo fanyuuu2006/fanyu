@@ -1,6 +1,6 @@
 import { LazyImage } from "@/components/custom/LazyImage";
 import { Toast } from "@/components/custom/Toast";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { fadeInItem } from "@/libs/motion";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useModal } from "fanyucomponents";

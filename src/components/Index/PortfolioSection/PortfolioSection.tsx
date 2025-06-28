@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectsDiv } from "./ProjectsDiv";
 import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";

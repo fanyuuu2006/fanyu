@@ -3,7 +3,7 @@ import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
 import { LazyImage } from "../custom/LazyImage";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { fetcher } from "@/utils/fetcher";
 import { useEffect, useRef } from "react";
 import useSWR from "swr";

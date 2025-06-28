@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { TranslationOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 

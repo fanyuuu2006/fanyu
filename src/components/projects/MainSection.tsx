@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { projectTagCategories } from "@/libs/projects";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectItem, ProjectTag, ProjectTagCategory } from "@/types/portfolio";

@@ -1,5 +1,5 @@
 import { Toast } from "@/components/custom/Toast";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { OverrideProps } from "fanyucomponents";
 import { forwardRef, useState } from "react";

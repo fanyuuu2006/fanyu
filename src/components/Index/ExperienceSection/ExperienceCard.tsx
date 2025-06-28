@@ -1,4 +1,4 @@
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ExperienceItem } from "@/types/experience";
 import { slugify } from "@/utils/url";
 import { ClockCircleOutlined } from "@ant-design/icons";

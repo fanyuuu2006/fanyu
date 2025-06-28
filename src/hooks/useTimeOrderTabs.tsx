@@ -1,4 +1,4 @@
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { ProjectTagCategory } from "@/types/portfolio";
 import { useMemo, useState } from "react";

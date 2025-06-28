@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { profile } from "@/libs/profile";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { CodeOutlined, CopyrightOutlined } from "@ant-design/icons";

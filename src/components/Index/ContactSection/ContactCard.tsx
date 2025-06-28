@@ -1,5 +1,5 @@
 import { CopyButton } from "@/components/custom/CopyButton";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactItem } from "@/types/contact";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";

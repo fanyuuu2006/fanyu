@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { contactCategorieMap } from "@/libs/contact";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { profile } from "@/libs/profile";

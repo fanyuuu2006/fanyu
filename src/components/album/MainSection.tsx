@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { Toast } from "@/components/custom/Toast";
 import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";

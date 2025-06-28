@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { LanguageContent, LanguageOption } from "@/types/language";
 import Link from "next/link";
 

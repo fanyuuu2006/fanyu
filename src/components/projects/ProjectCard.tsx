@@ -4,7 +4,7 @@ import {
   ProjectTag,
 } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Collapse, OutsideLink, OverrideProps } from "fanyucomponents";
 import {
   ClockCircleOutlined,

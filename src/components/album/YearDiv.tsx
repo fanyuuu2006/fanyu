@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
 import { EventLinkCard } from "./EventLinkCard";
 import { Collapse, OverrideProps } from "fanyucomponents";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useEffect, useState } from "react";
 import { Toast } from "../custom/Toast";

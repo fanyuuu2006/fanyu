@@ -1,5 +1,5 @@
 "use client";
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { profile } from "@/libs/profile";
 import { TypeWriterText } from "fanyucomponents";
 import { motion } from "framer-motion";
