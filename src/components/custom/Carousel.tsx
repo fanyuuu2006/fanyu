@@ -1,6 +1,6 @@
 import { OverrideProps } from "fanyucomponents";
 import React from "react";
-import styled, { IStyledComponent } from "styled-components";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   max-width: 100%;
@@ -15,7 +15,10 @@ export type TrackProps = {
   groupCount?: number;
   direction?: "left" | "right" | "up" | "down";
 };
-const Track = styled.div<TrackProps>`
+const Track = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    !["groupCount", "direction", "duration"].includes(prop),
+})<TrackProps>`
   width: max-content;
   display: flex;
   flex-direction: ${({ direction }) => {
@@ -69,10 +72,13 @@ const Track = styled.div<TrackProps>`
   }
 `;
 Track.displayName = "Track";
+
 export type GroupProps = {
   direction?: "left" | "right" | "up" | "down";
 };
-const Group = styled.div<GroupProps>`
+const Group = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["direction"].includes(prop),
+})<GroupProps>`
   display: flex;
   flex-direction: ${({ direction }) => {
     switch (direction) {
@@ -142,5 +148,3 @@ export const Carousel = Object.assign(
     Item,
   }
 );
-
-export type a = IStyledComponent<"native">;

@@ -146,11 +146,11 @@ export const MainSection = () => {
           <>{projectsContent.nofound}</>
         ) : (
           <motion.div
-            key={`${currentTags}${JSON.stringify(timeOrder.sortedData)}`}
+            key={`${currentTags}`}
             variants={staggerContainer}
             initial="hiddenLeft"
             animate="show"
-            className="w-full flex flex-col gap-4"
+            className=" w-full flex flex-col gap-4"
           >
             {sortedProject.map((item: ProjectItem) => (
               <ProjectCard

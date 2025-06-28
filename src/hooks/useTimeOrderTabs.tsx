@@ -1,7 +1,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { ProjectTagCategory } from "@/types/portfolio";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type ProjectsContent = Record<"Newest" | "Oldest" | ProjectTagCategory, string>;
 
@@ -32,6 +32,16 @@ export const useTimeOrderTabs = <T,>(
   );
   const Language = useLanguage();
   const content = getContent(Language.Current);
+
+  const sortedData = useMemo(() => {
+    return data.sort((a, b) => {
+      const aDate = new Date(getDateAbleString(a));
+      const bDate = new Date(getDateAbleString(b));
+      return isOrderByNewest
+        ? bDate.getTime() - aDate.getTime()
+        : aDate.getTime() - bDate.getTime();
+    });
+  }, [data, getDateAbleString, isOrderByNewest]);
 
   const Div = ({
     className,
@@ -70,13 +80,7 @@ export const useTimeOrderTabs = <T,>(
   Div.displayName = "TimeOrderTabs.Div";
 
   return {
-    sortedData: data.sort((a, b) => {
-      const aDate = new Date(getDateAbleString(a));
-      const bDate = new Date(getDateAbleString(b));
-      return isOrderByNewest
-        ? bDate.getTime() - aDate.getTime()
-        : aDate.getTime() - bDate.getTime();
-    }),
+    sortedData,
     Div,
   };
 };
