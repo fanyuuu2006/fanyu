@@ -9,6 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 export { metadata } from "./metadata";
 import { Noto_Sans_SC } from "next/font/google";
 import { profile } from "@/libs/profile";
+import { AlbumProvider } from "@/contexts/AlbumContext";
 
 // 評估id
 const measurementID = "G-3SGK402751";
@@ -121,10 +122,12 @@ export default function RootLayout({
       </head>
       <body className={`${notoSansSC.className} flex flex-col min-h-screen`}>
         <LanguageProvider>
-          <Header />
-          <main className="mt-24 flex-1">{children}</main>
-          <LanguageSwitchButton />
-          <Footer />
+          <AlbumProvider>
+            <Header />
+            <main className="mt-24 flex-1">{children}</main>
+            <LanguageSwitchButton />
+            <Footer />
+          </AlbumProvider>
         </LanguageProvider>
         <Analytics />
         <SpeedInsights />

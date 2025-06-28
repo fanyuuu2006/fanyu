@@ -4,11 +4,10 @@ import Link from "next/link";
 import { LazyImage } from "../custom/LazyImage";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { fetcher } from "@/utils/fetcher";
 import { useEffect, useRef } from "react";
-import useSWR from "swr";
 import { Toast } from "../custom/Toast";
 import { useInView } from "framer-motion";
+import { useAlbum } from "@/contexts/AlbumContext";
 
 type EventsContent = Record<"noImages" | "imagesLoadFailed", string>;
 
@@ -48,11 +47,8 @@ export const EventLinkCard = ({
     once: true,
     amount: 0.5,
   });
-  const { data: image, error } = useSWR<string>(
-    isInView ? `/api/album/${slugify(year)}/${slugify(eventName)}/0` : null,
-    fetcher
-  );
-
+  const { useImage } = useAlbum();
+  const { data: image, error } = useImage(year, eventName, 0);
   const Language = useLanguage();
   const eventsContent = getEventsContent(Language.Current);
 

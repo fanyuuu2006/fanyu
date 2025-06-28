@@ -1,15 +1,13 @@
-import useSWR from "swr";
-import { fetcher } from "@/utils/fetcher";
+import { Toast } from "../custom/Toast";
 import { EventLinkCard } from "./EventLinkCard";
 import { Collapse, OverrideProps } from "fanyucomponents";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { useEffect, useState } from "react";
-import { Toast } from "../custom/Toast";
-import { slugify } from "@/utils/url";
+import { useEffect, useState } from "react";  
 import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { CaretRightOutlined } from "@ant-design/icons";
+import { useAlbum } from "@/contexts/AlbumContext";
 
 export type YearDivProps = OverrideProps<
   HTMLMotionProps<"article">,
@@ -33,11 +31,8 @@ const getYearsContent = (language: LanguageOption): YearsContent =>
   )[language]);
 
 export const YearDiv = ({ year, ...rest }: YearDivProps) => {
-  const {
-    data: eventNames,
-    error,
-    isLoading,
-  } = useSWR<string[]>(`/api/album/${slugify(year)}`, fetcher);
+  const { useEvents } = useAlbum();
+  const { data: eventNames, error, isLoading } = useEvents(year);
 
   const Language = useLanguage();
   const yearsContent = getYearsContent(Language.Current);

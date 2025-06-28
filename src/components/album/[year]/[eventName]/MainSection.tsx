@@ -4,14 +4,12 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
-import useSWR from "swr";
 import { useEffect } from "react";
-import { fetcher } from "@/utils/fetcher";
-import { slugify } from "@/utils/url";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { LazyImage } from "@/components/custom/LazyImage";
 import { useRouter } from "next/navigation";
+import { useAlbum } from "@/contexts/AlbumContext";
 
 type ImagesContent = Record<
   "noImages" | "eventsLoadFailed" | "imageLoadFailed",
@@ -39,14 +37,9 @@ export const MainSection = ({
   year: string;
   eventName: string;
 }) => {
-  const {
-    data: images,
-    error,
-    isLoading,
-  } = useSWR<string[]>(
-    `/api/album/${slugify(year)}/${slugify(eventName)}`,
-    fetcher
-  );
+  const { useImages } = useAlbum();
+  const { data: images, error, isLoading } = useImages(year, eventName);
+
   const Language = useLanguage();
   const imagesContent = getImagesContent(Language.Current);
   const router = useRouter();

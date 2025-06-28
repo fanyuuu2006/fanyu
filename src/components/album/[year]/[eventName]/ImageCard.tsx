@@ -26,7 +26,7 @@ export const ImageCard = ({
   const Language = useLanguage();
   const imageContent = getImageContent(Language.Current);
   const Modal = useModal();
-
+  
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
     once: true,

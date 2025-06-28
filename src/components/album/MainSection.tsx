@@ -36,9 +36,7 @@ export const MainSection = ({ year }: { year: string | null }) => {
     data: years,
     error,
     isLoading,
-  } = useSWR<string[]>("/api/album", fetcher, {
-    fallbackData: year ? [year] : undefined,
-  });
+  } = useSWR<string[]>("/api/album", fetcher);
 
   useEffect(() => {
     if (error) {
