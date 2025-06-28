@@ -22,7 +22,7 @@ export const CodeCard = ({
       .join("\n");
   }, [codeLines]);
   return (
-    <div className={`card p-6 overflow-auto ${className}`} {...rest}>
+    <div className={`card flex flex-col p-6 gap-2 overflow-auto ${className}`} {...rest}>
       <div className="flex items-center">
         <span>{lang}</span>
         <CopyButton content={content} className="ml-auto btn rounded-sm"/>

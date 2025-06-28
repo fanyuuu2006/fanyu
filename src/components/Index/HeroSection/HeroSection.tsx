@@ -131,20 +131,20 @@ export const HeroSection = () => {
     <section id="hero">
       <div className="container">
         <div className="flex flex-wrap justify-center min-h-154">
-          <div className="flex flex-col items-center justify-center p-4 gap-4 w-full lg:w-24/50">
+          <div className="flex flex-col items-center justify-center p-4 gap-2 w-full lg:w-24/50">
             <div className="flex flex-col gap-2">
-              <div className="text-3xl font-bold">{heroContent.hello}</div>
-              <h1 className="text-5xl font-bold ">
+              <div className="text-5xl font-bold">{heroContent.hello}</div>
+              <h1 className="text-6xl font-bold ">
                 {heroContent.iAm}
                 {profile.nickname[Language.Current]}❗
               </h1>
               <TypeWriterText
-                className="text-2xl"
+                className="text-2xl opacity-75"
                 speed={heroContent.intro.length * 1.5}
               >
                 {heroContent.intro}
               </TypeWriterText>
-              <div className="text-3xl flex gap-4 mt-4">
+              <div className="text-3xl flex gap-4 mt-2">
                 <Link
                   href="/#contact"
                   className="btn-primary px-6 py-2 rounded-xl"

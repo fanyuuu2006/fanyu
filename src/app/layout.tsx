@@ -119,10 +119,10 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${notoSansSC.className}`}>
+      <body className={`${notoSansSC.className} flex flex-col min-h-screen`}>
         <LanguageProvider>
           <Header />
-          <main className="mt-24">{children}</main>
+          <main className="mt-24 flex-1">{children}</main>
           <LanguageSwitchButton />
           <Footer />
         </LanguageProvider>
