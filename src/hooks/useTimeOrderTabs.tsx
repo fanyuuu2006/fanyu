@@ -19,7 +19,14 @@ const getContent = (language: LanguageOption): ProjectsContent =>
     } as LanguageContent<ProjectsContent>
   )[language]);
 
-export const useTimeOrderTabs = (initOption?: { init: boolean }) => {
+export const useTimeOrderTabs = <T,>(
+  data: T[],
+  getDateAbleString: (item: T) => string = (item) => item as unknown as string,
+  initOption?: { init: boolean }
+): {
+  sortedData: T[];
+  Div: React.FC<React.HtmlHTMLAttributes<HTMLDivElement>>;
+} => {
   const [isOrderByNewest, setIsOrderByNewest] = useState<boolean>(
     initOption?.init ?? true
   );
@@ -63,8 +70,13 @@ export const useTimeOrderTabs = (initOption?: { init: boolean }) => {
   Div.displayName = "TimeOrderTabs.Div";
 
   return {
-    isOrderByNewest,
+    sortedData: data.sort((a, b) => {
+      const aDate = new Date(getDateAbleString(a));
+      const bDate = new Date(getDateAbleString(b));
+      return isOrderByNewest
+        ? bDate.getTime() - aDate.getTime()
+        : aDate.getTime() - bDate.getTime();
+    }),
     Div,
   };
 };
-

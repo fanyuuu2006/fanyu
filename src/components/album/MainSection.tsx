@@ -31,7 +31,6 @@ const getAlbumContent = (language: LanguageOption): AlbumContent =>
 export const MainSection = ({ year }: { year: string | null }) => {
   const Language = useLanguage();
   const albumContent = getAlbumContent(Language.Current);
-  const timeOrder = useTimeOrderTabs();
 
   const {
     data: years,
@@ -50,14 +49,10 @@ export const MainSection = ({ year }: { year: string | null }) => {
     }
   }, [albumContent.yearsLoadFailed, error]);
 
+  const timeOrder = useTimeOrderTabs(years ?? []);
+
   const sortedYears = years
-    ? years
-        .filter((y) => !year || y === year)
-        .sort((a, b) => {
-          const yA = parseInt(a);
-          const yB = parseInt(b);
-          return timeOrder.isOrderByNewest ? yB - yA : yA - yB;
-        })
+    ? timeOrder.sortedData.filter((y) => !year || y === year)
     : [];
 
   return (

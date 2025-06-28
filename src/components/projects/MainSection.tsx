@@ -69,21 +69,17 @@ export const MainSection = () => {
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTags, setCurrentTags] = useState<Set<ProjectTag> | null>(null);
-  const timeOrder = useTimeOrderTabs();
+  const timeOrder = useTimeOrderTabs(profile.portfolio.projects, (item) => item.time);
 
   const sortedProject = useMemo(() => {
     return (
       !currentTags
-        ? profile.portfolio.projects
-        : profile.portfolio.projects.filter((item) =>
+        ? timeOrder.sortedData
+        : timeOrder.sortedData.filter((item) =>
             [...currentTags].every((tag) => item.tags.includes(tag))
           )
-    ).sort((a, b) => {
-      const t1 = new Date(a.time).getTime();
-      const t2 = new Date(b.time).getTime();
-      return timeOrder.isOrderByNewest ? t2 - t1 : t1 - t2;
-    });
-  }, [currentTags, timeOrder.isOrderByNewest]);
+    )
+  }, [currentTags, timeOrder.sortedData]);
 
   return (
     <section>
@@ -150,7 +146,7 @@ export const MainSection = () => {
           <>{projectsContent.nofound}</>
         ) : (
           <motion.div
-            key={`${currentTags}${timeOrder.isOrderByNewest}`}
+            key={`${currentTags}${JSON.stringify(timeOrder.sortedData)}`}
             variants={staggerContainer}
             initial="hiddenLeft"
             animate="show"
