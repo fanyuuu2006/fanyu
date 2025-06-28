@@ -58,7 +58,7 @@ export const MainSection = ({
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <div className="w-full text-left content">
+        <div className="w-full text-left text-3xl">
           <ArrowLeftOutlined
             onClick={() => {
               router.back();

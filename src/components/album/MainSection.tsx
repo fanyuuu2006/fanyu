@@ -57,7 +57,7 @@ export const MainSection = ({ year }: { year: string | null }) => {
     <section>
       <div className="container flex flex-col items-center">
         {year && (
-          <Link href="/album" className="w-full text-left content">
+          <Link href="/album" className="w-full text-left text-3xl">
             <ArrowLeftOutlined />
             <span className="sr-only">
               {Language.Current === "chinese" ? "返回" : "Back"}
