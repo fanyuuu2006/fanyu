@@ -20,7 +20,7 @@ export default function Page({ params }: PageProps) {
   return (
     <div className="container">
       <div className="flex">
-        <LoadingOutlined className="title mx-auto" />
+        <LoadingOutlined className="text-5xl mx-auto" />
       </div>
     </div>
   );

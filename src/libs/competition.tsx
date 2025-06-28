@@ -40,7 +40,7 @@ export const PDAO: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="flex flex-col hint font-bold">
+    <div className="flex flex-col text-lg font-bold">
       <span>
         {
           {
@@ -98,7 +98,7 @@ export const HCCGM: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <span className="note font-bold">
+    <span className="text-2xl font-bold">
       {
         {
           chinese: "團體賽(丙組) 第 2 名",
@@ -133,7 +133,7 @@ export const SE: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="flex flex-col hint font-bold">
+    <div className="flex flex-col text-lg font-bold">
       <span>
         {
           {
@@ -176,7 +176,7 @@ export const XLS: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="flex flex-col hint font-bold">
+    <div className="flex flex-col text-lg font-bold">
       <span>
         {
           {

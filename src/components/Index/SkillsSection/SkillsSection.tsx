@@ -38,7 +38,7 @@ export const SkillsSection = () => {
   return (
     <section id="skills">
       <div className="container flex flex-col items-center">
-        <h1 className="title font-bold" ref={ref}>
+        <h1 className="text-5xl font-bold" ref={ref}>
           {skillsContent.skills}
         </h1>
         <motion.div
@@ -50,13 +50,13 @@ export const SkillsSection = () => {
         >
           {Object.entries(profile.skills).map(([category, items]) => (
             <motion.div variants={fadeInItem} key={category}>
-              <div className="content font-bold flex items-center gap-2">
+                <div className="text-3xl font-bold flex items-center gap-2">
                 {skillCategoryIcons[category as SkillCategory]}
                 {skillsContent[category as SkillCategory]}:
               </div>
               <motion.div
                 variants={staggerContainer}
-                className="label flex flex-wrap"
+                className="text-2xl flex flex-wrap"
               >
                 {items.map((item) => (
                   <motion.div

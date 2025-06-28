@@ -25,7 +25,7 @@ export const MainSection = () => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <span className="title font-bold">{guestbookContent.guestbook}</span>
+        <span className="text-5xl font-bold">{guestbookContent.guestbook}</span>
         <div
           className="w-full flex flex-col items-center"
           id="guestbook-container"

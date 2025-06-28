@@ -34,7 +34,7 @@ export const LanguageProvider = ({
           });
         }}
         {...props}
-      ></button>
+      />
     );
   };
 

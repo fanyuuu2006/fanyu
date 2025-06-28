@@ -65,7 +65,7 @@ export const ExperienceSection = () => {
   return (
     <section id="experience">
       <div className="container flex flex-col items-center overflow-x-hidden">
-        <h1 className="title font-bold" ref={ref}>
+        <h1 className="text-5xl font-bold" ref={ref}>
           {experienceContent.experience}
         </h1>
         <div className="flex flex-col w-full gap-4">
@@ -80,7 +80,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`note font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-colors duration-200 ${
+                className={`text-2xl font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-colors duration-200 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
@@ -139,7 +139,7 @@ export const ExperienceSection = () => {
                       </Collapse>
                       <div className="w-full text-center">
                         <button
-                          className="note transition-all hover:-translate-x-2 group"
+                          className="text-2xl transition-all hover:-translate-x-2 group"
                           onClick={() => {
                             setShowMore((prev) => !prev);
                           }}
@@ -165,10 +165,10 @@ export const ExperienceSection = () => {
                   variants={fadeInItem}
                   className="card w-full flex flex-col items-center p-4"
                 >
-                  <span className="content font-bold">
+                  <span className="text-3xl font-bold">
                     {experienceContent[Tab]}
                   </span>
-                  <span className="note">{experienceContent.noExperience}</span>
+                  <span className="text-2xl">{experienceContent.noExperience}</span>
                 </motion.div>
               )}
             </motion.div>

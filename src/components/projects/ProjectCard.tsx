@@ -59,32 +59,32 @@ export const ProjectCard = ({
           alt={`${item.title.english} icon`}
         />
         <div className="flex flex-col flex-1 gap-2">
-          <div className="content font-bold">
+          <div className="text-3xl font-bold">
             {item.title[Language.Current]}
           </div>
-          <div className="hint flex gap-2">
+          <div className="text-lg flex gap-2">
             <ClockCircleOutlined />
             {item.time}
           </div>
-          <div className="note text-justify">
+          <div className="text-2xl text-justify">
             {item.about[Language.Current]}
           </div>
           {item.links.map((link) => (
             <OutsideLink
               key={link.href}
               href={link.href}
-              className="hint w-fit flex flex-nowrap items-center gap-2 opacity-70"
+              className="text-lg w-fit flex flex-nowrap items-center gap-2 opacity-70"
             >
               {categoryIcon[link.category]}
               <span className="wrap-anywhere">{link.href}</span>
             </OutsideLink>
           ))}
-          <ul className="note text-justify list-disc ps-4">
+          <ul className="text-2xl text-justify list-disc ps-4">
             {item.description[Language.Current].map((part, index) => (
               <li key={index}>{part}</li>
             ))}
           </ul>
-          <div className="hint flex flex-nowrap gap-2">
+          <div className="text-lg flex flex-nowrap gap-2">
             <TagsOutlined />
             <div className="flex flex-wrap gap-2">
               {item.tags.map((tag) => (
@@ -107,7 +107,7 @@ export const ProjectCard = ({
                 }}
                 className={`${
                   giscusShow ? "opacity-70" : ""
-                } btn-primary hint px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105`}
+                } btn-primary text-lg px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105`}
               >
                 {
                   (giscusShow

@@ -79,10 +79,10 @@ export const EventLinkCard = ({
         loading={!isInView}
         src={image}
         alt={eventName}
-        className="aspect-square title bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
+        className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
       />
-      <div className="absolute w-full px-4 py-2 bg-[#000] flex justify-center opacity-50 bottom-0 group-hover:opacity-100  transition-all duration-300">
-        <span className="hint font-bold">{eventName}</span>
+      <div className="absolute w-full px-2 py-2 bg-[#000] flex justify-center opacity-50 bottom-0 group-hover:opacity-100  transition-all duration-300">
+        <span className="text-sm font-bold">{eventName}</span>
       </div>
     </Link>
   );

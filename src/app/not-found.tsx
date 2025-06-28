@@ -28,9 +28,9 @@ export default function NotFound() {
   return (
     <div className="container flex flex-col items-center justify-center min-h-screen">
       <div className="card p-8 flex flex-col items-center gap-4">
-        <h2 className="title font-bold">{notFoundContent.title}</h2>
-        <p className="note text-center">{notFoundContent.message}</p>
-        <Link href="/" className="btn-primary note rounded-lg px-4 py-2">
+        <h2 className="text-5xl font-bold">{notFoundContent.title}</h2>
+        <p className="text-2xl text-center">{notFoundContent.message}</p>
+        <Link href="/" className="btn-primary text-2xl rounded-lg px-4 py-2">
           {notFoundContent.home}
         </Link>
       </div>

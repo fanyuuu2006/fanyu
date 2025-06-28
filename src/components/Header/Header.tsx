@@ -25,7 +25,7 @@ export const Header = () => {
               className="h-16 w-auto object-contain"
             />
           </Link>
-          <div className="content lg:hidden">
+          <div className="text-3xl lg:hidden">
             <BurgerMenu
               checked={menuShow}
               onChange={() => setMenuShow((prev) => !prev)}
@@ -34,7 +34,7 @@ export const Header = () => {
               aria-controls="mobile-nav"
             />
           </div>
-          <div className="hidden lg:flex note font-bold gap-6">
+          <div className="hidden lg:flex text-2xl font-bold gap-6">
             {routes.map((item) => (
               <Link
                 className="hover:underline-spread"
@@ -51,7 +51,7 @@ export const Header = () => {
           className="slide-collapse lg:hidden"
           id="mobile-nav"
         >
-          <div className="flex flex-col w-full note font-bold text-center">
+          <div className="flex flex-col w-full text-2xl font-bold text-center">
             {routes.map((item) => (
               <Link
                 key={item.href}

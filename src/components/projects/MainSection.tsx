@@ -84,8 +84,8 @@ export const MainSection = () => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <h1 className="title font-bold">{projectsContent.projects}</h1>
-        <div className="note flex flex-col w-full gap-2">
+        <h1 className="text-5xl font-bold">{projectsContent.projects}</h1>
+        <div className="text-2xl flex flex-col w-full gap-2">
           <div className="relative flex flex-nowrap items-center px-4 gap-4">
             <Tooltip title={projectsContent.filter}>
               <button
@@ -106,7 +106,7 @@ export const MainSection = () => {
             <timeOrder.Div className="ms-auto" />
           </div>
           <Collapse className="slide-collapse" state={categoriesShow}>
-            <div className="flex flex-col p-4 gap-2 bordered">
+            <div className="flex flex-col p-4 gap-2">
               <div>
                 <ProjectTagCheckbox
                   tag={null}
@@ -163,7 +163,7 @@ export const MainSection = () => {
             ))}
           </motion.div>
         )}
-        <Link className="note transition-all hover:translate-x-2 group" href="/#portfolio">
+        <Link className="text-2xl transition-all hover:translate-x-2 group" href="/#portfolio">
           <ArrowLeftOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-x-2" />
           {projectsContent.back}
         </Link>

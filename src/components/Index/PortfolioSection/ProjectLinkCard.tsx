@@ -51,14 +51,14 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
 
       {/**Hover 資訊面板 */}
       <Overlay className="relative flex flex-col justify-center w-full h-full p-4">
-        <div className="content font-bold">{item.title[Language.Current]}</div>
-        <div className="hint flex gap-2">
+        <div className="text-3xl font-bold">{item.title[Language.Current]}</div>
+        <div className="text-2xl flex gap-2">
           <ClockCircleOutlined />
           {item.time}
         </div>
-        <div className="hint">{item.about[Language.Current]}</div>
+        <div className="text-lg">{item.about[Language.Current]}</div>
         <Link
-          className="absolute bottom-4 right-4 note flex gap-2"
+          className="absolute bottom-4 right-4 text-2xl flex gap-2"
           href={`/projects/#${slugify(item.title.english)}`}
           aria-label={`View project: ${item.title.english}`}
         >

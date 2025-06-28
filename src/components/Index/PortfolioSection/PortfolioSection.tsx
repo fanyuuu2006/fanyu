@@ -26,7 +26,7 @@ export const PortfolioSection = () => {
   return (
     <section id="portfolio">
       <div className="container flex flex-col items-center">
-        <h1 ref={ref} className="title font-bold">
+        <h1 ref={ref} className="text-5xl font-bold">
           {portfolioContent.portfolio}
         </h1>
         <ProjectsDiv />

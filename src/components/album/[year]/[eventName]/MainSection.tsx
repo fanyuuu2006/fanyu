@@ -73,8 +73,8 @@ export const MainSection = ({
           />
         </div>
         <div className="flex flex-col items-center">
-          <h2 className="title font-bold">{year}</h2>
-          <h2 className="label font-bold">{eventName}</h2>
+          <h2 className="text-5xl font-bold">{year}</h2>
+          <h2 className="text-4xl font-bold">{eventName}</h2>
         </div>
         <motion.article
           variants={staggerContainer}
@@ -88,14 +88,14 @@ export const MainSection = ({
               <motion.div
                 key={`skeleton-${i}`}
                 variants={fadeInItem}
-                className="bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
+                className="bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 animate-pulse"
               >
                 <LazyImage loading={true} className="w-full" />
               </motion.div>
             ))
           ) : !images || images.length === 0 ? (
             <div className="w-full text-center">
-              <span className="content font-bold">
+              <span className="text-2xl font-bold">
                 {imagesContent.noImages}
               </span>
             </div>

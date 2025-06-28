@@ -57,13 +57,13 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   return (
     <motion.article id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div
-        className={`flex items-end gap-2 transition-colors ${
+        className={`flex items-center gap-2 transition-colors ${
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
         }`}
       >
-        <h2 className="label font-bold">{year}</h2>
+        <h2 className="text-4xl font-bold">{year}</h2>
         <button
-          className={`content transition-transform ${
+          className={`text-3xl transition-transform ${
             isCollapseOpen ? "rotate-90" : ""
           }`}
           onClick={() => {
@@ -91,13 +91,13 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
               </motion.div>
             ))
           ) : !eventNames || eventNames.length === 0 ? (
-            <div className="content font-bold">{`${year} - ${yearsContent.noEvents}`}</div>
+            <div className="text-3xl font-bold">{`${year} - ${yearsContent.noEvents}`}</div>
           ) : (
             eventNames.map((eventName) => (
               <motion.div
                 variants={fadeInItem}
                 key={`${year}-${eventName}`}
-                className="rounded-lg overflow-hidden w-1/2 border border-[var(--border-color)] sm:w-1/3 md:w-1/4 lg:w-1/5"
+                className="rounded-lg overflow-hidden w-1/2 border border-[var(--border-color)] sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6"
               >
                 <EventLinkCard
                   year={year}

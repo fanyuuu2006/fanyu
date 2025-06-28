@@ -45,7 +45,7 @@ export const AboutMeSection = () => {
   return (
     <section id="aboutMe">
       <div className="container flex flex-col items-center">
-        <h1 ref={ref} className="title font-bold text-center">
+        <h1 ref={ref} className="text-5xl font-bold text-center">
           {aboutMeContent.aboutMe}
         </h1>
 
@@ -82,7 +82,7 @@ export const AboutMeSection = () => {
               <motion.p
                 key={index}
                 variants={fadeInItem}
-                className="note text-justify indent-8 p-3 rounded-lg transition-colors duration-200"
+                className="text-lg text-justify indent-8 p-3 rounded-lg transition-colors duration-200"
               >
                 {part}
               </motion.p>

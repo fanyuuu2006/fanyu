@@ -66,12 +66,12 @@ export const MainSection = ({ year }: { year: string | null }) => {
             </span>
           </Link>
         )}
-        <h1 className="title font-bold">{albumContent.album}</h1>
+        <h1 className="text-5xl font-bold">{albumContent.album}</h1>
 
         {!years && isLoading ? (
-          <LoadingOutlined className="title" />
+          <LoadingOutlined className="text-5xl" />
         ) : !sortedYears || sortedYears.length === 0 ? (
-          <div className="content font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
+          <div className="text-3xl font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
         ) : (
           <>
             <timeOrder.Div />

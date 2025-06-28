@@ -31,7 +31,7 @@ export const ContactSection = () => {
   return (
     <section id="contact">
       <div className="container flex flex-col items-center">
-        <h1 ref={ref} className="title font-bold">
+        <h1 ref={ref} className="text-5xl font-bold">
           {contactContent.contact}
         </h1>
         {Object.entries(profile.contact).map(([category, items]) => (
@@ -39,7 +39,7 @@ export const ContactSection = () => {
             key={category}
             className={`flex flex-col w-full items-start gap-4`}
           >
-            <div className="content font-bold ">
+            <div className="text-3xl font-bold ">
               {
                 contactCategorieMap[Language.Current][
                   category as ContactCategory

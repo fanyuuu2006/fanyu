@@ -85,10 +85,10 @@ export const TimerCard = () => {
   }, [nextBirthday]);
 
   return (
-    <div className="card flex flex-col gap-2 items-center px-8 py-4">
-      <h1 className="title font-bold">{timerContent.birthdayTimer}</h1>
+    <div className="card flex flex-col gap-2 items-center p-8">
+      <h1 className="text-5xl font-bold">{timerContent.birthdayTimer}</h1>
       {timeLeft ? (
-        <div className="flex gap-2 items-end label">
+        <div className="flex gap-2 items-end text-4xl">
           <TimeUnit
             label={timerContent.days}
             value={timeLeft.days}
@@ -114,7 +114,7 @@ export const TimerCard = () => {
           />
         </div>
       ) : (
-        <LoadingOutlined className="label" />
+        <LoadingOutlined className="text-4xl" />
       )}
     </div>
   );

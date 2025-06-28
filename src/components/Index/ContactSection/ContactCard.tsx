@@ -38,7 +38,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
       {...rest}
     >
       <button
-        className="flex content no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
+        className="flex text-3xl no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
         onClick={() => setIsOpen((prev) => !prev)}
         style={{
           background: isOpen ? "transparent" : "var(--background-color-dark)",
@@ -90,14 +90,14 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
               {/**名稱 & ID */}
               <div className="flex flex-col gap-0 whitespace-nowrap">
                 <span
-                  className="note font-bold"
+                  className="text-2xl font-bold"
                   style={{
                     color: item.backgrounds?.[0] || "var(--text-color-primary)",
                   }}
                 >
                   {item.info.name}
                 </span>
-                <span className="hint flex items-center gap-1">
+                <span className="text-lg flex items-center gap-1">
                   {item.info.id}
                   <CopyButton content={item.info.id} />
                 </span>
@@ -105,7 +105,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
             </div>
             {/**相關資訊(?) */}
             <div className="flex">
-              <OutsideLink className="ms-auto note flex gap-2" href={item.href}>
+              <OutsideLink className="ms-auto text-2xl flex gap-2" href={item.href}>
                 {
                   {
                     chinese: "前往",

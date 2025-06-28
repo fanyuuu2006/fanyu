@@ -33,7 +33,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       className={`flex flex-col p-2 gap-4 items-center max-w-full overflow-hidden ${className}`}
       {...rest}
     >
-      <div className="w-full label font-bold">
+      <div className="w-full text-4xl font-bold">
         <span>{projectsContent.projects}</span>
       </div>
 
@@ -53,7 +53,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       </Carousel>
       {/**了解更多 */}
       <Link
-        className="note flex transition-all hover:-translate-x-2 group"
+        className="text-2xl flex transition-all hover:-translate-x-2 group"
         href="/projects"
       >
         {projectsContent.learnMore}
