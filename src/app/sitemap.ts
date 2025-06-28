@@ -6,7 +6,7 @@ import { MetadataRoute } from "next";
 const baseUrl = profile.url;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = ["/", "/projects", "/guestbook", "/album", "/my"];
+  const staticRoutes = ["/", "/projects", "/guestbook", "/album", "/my", "/sitemap-page"];
   const dynamicRoutes: string[] = [];
 
   const years = await fetcher<string[]>(`${baseUrl}/api/album`);

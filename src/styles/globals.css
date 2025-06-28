@@ -10,7 +10,7 @@
     --text-color: #ffffff;
     --text-color-primary: #0d59cc;
     --text-color-secondary: #ffff71;
-    --border-color: #212121;
+    --border-color: #333333;
     --brightness-light: 1.5;
   }
 
@@ -181,7 +181,7 @@
     content: "";
     --line-height: 0.25rem;
     position: absolute;
-    bottom: -15%;
+    bottom: -0.25em;
     left: 50%;
     transform: translateX(-50%);
     width: 0;

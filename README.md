@@ -41,7 +41,7 @@
 | ------------ | ------------------------------------------------------------------------------------------------------------------- |
 | 框架         | [Next.js 15 (App Router)](https://nextjs.org/) + Turbopack                                                          |
 | 語言         | [TypeScript](https://www.typescriptlang.org/)                                                                       |
-| 樣式         | [Tailwind CSS 4](https://tailwindcss.com/) + 自訂 CSS 變數                                                          |
+| 樣式         | [Tailwind CSS 4](https://tailwindcss.com/) + [styled-components](https://styled-components.com/) + 自訂 CSS 變數    |
 | 動畫         | [framer-motion](https://www.framer.com/motion/)                                                                     |
 | 圖片處理     | Google Drive + 自建 Image Proxy                                                                                     |
 | 圖示         | [Ant Design Icons](https://ant.design/components/icon/) + [react-icons](https://react-icons.github.io/react-icons/) |

@@ -42,7 +42,7 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
   const Language = useLanguage();
 
   return (
-    <ProjectCardWrapper {...rest} draggable={true}>
+    <ProjectCardWrapper {...rest}>
       <ProjectImage
         draggable={false}
         src={item.imageSrc}
