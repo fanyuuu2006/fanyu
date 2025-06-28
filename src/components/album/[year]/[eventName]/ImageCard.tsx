@@ -65,3 +65,4 @@ export const ImageCard = ({
     </motion.div>
   );
 };
+  
