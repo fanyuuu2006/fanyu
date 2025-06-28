@@ -81,7 +81,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
               <motion.div
                 key={`skeleton-${i}`}
                 variants={fadeInItem}
-                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 animate-pulse"
+                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 animate-pulse"
               >
               </motion.div>
             ))
