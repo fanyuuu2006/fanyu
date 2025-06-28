@@ -38,7 +38,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
       {...rest}
     >
       <button
-        className="flex text-3xl no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
+        className="flex text-2xl no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
         onClick={() => setIsOpen((prev) => !prev)}
         style={{
           background: isOpen ? "transparent" : "var(--background-color-dark)",
