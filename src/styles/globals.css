@@ -9,9 +9,9 @@
     --background-color-secondary: #292929;
     --text-color: #ffffff;
     --text-color-primary: #0d59cc;
-    --text-color-secondary: #ffff71;
+    --text-color-secondary: #43d3ff;
     --border-color: #333333;
-    --brightness-light: 1.5;
+    --brightness-light: 1.2;
   }
 
   * {
@@ -64,7 +64,11 @@
   }
 
   .btn-primary {
-    background: var(--text-color-primary);
+    background: linear-gradient(
+      45deg,
+      var(--text-color-primary),
+      var(--text-color-secondary)
+    );
   }
 
   button:hover,
@@ -108,7 +112,6 @@
     text-decoration: underline 1px;
   }
 
-
   .slide-collapse {
     transition: height 0.3s;
     overflow: hidden;
@@ -135,6 +138,17 @@
 
 /* ==== Utilities Layer ==== */
 @layer utilities {
+  .text-gradient {
+    background: linear-gradient(
+      45deg,
+      var(--text-color-primary),
+      var(--text-color-secondary)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .animate-pop {
     animation: pop 0.2s;
   }
@@ -186,7 +200,11 @@
     transform: translateX(-50%);
     width: 0;
     height: var(--line-height);
-    background: linear-gradient(45deg, var(--text-color-primary));
+    background: linear-gradient(
+      45deg,
+      var(--text-color-primary),
+      var(--text-color-secondary)
+    );
     border-radius: 1rem;
     transition: width 0.3s ease-in-out;
   }

@@ -136,7 +136,10 @@ export const HeroSection = () => {
               <div className="text-5xl font-bold">{heroContent.hello}</div>
               <h1 className="text-6xl font-bold ">
                 {heroContent.iAm}
-                {profile.nickname[Language.Current]}❗
+                <span className="text-gradient">
+                  {profile.nickname[Language.Current]}
+                </span>
+                ❗
               </h1>
               <TypeWriterText
                 className="text-2xl opacity-75"
@@ -167,7 +170,11 @@ export const HeroSection = () => {
               whileInView="show"
               viewport={{ once: true }}
             >
-              <CodeCard className="text-2xl" lang="typescript" codeLines={codeLines} />
+              <CodeCard
+                className="text-2xl"
+                lang="typescript"
+                codeLines={codeLines}
+              />
             </motion.div>
           </div>
         </div>
