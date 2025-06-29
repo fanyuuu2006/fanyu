@@ -97,12 +97,8 @@ Group.displayName = "Group";
 const Item = styled.div`
   transition: all 0.3s ease-in-out;
 
-  ${Track}:hover & {
+  ${Track}:hover &:not(:hover) {
     filter: grayscale(1);
-  }
-
-  &:hover {
-    filter: grayscale(0) !important;
   }
 `;
 Item.displayName = "Item";

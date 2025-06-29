@@ -133,8 +133,10 @@ export const HeroSection = () => {
         <div className="flex flex-wrap justify-center min-h-154">
           <div className="flex flex-col items-center justify-center p-4 gap-2 w-full lg:w-24/50">
             <div className="flex flex-col gap-2">
-              <div className="text-5xl font-bold">{heroContent.hello}</div>
-              <h1 className="text-6xl font-bold ">
+              <span className="text-3xl md:text-5xl font-bold">
+                {heroContent.hello}
+              </span>
+              <h1 className="text-4xl md:text-6xl font-bold ">
                 {heroContent.iAm}
                 <span className="text-gradient">
                   {profile.nickname[Language.Current]}
@@ -142,15 +144,15 @@ export const HeroSection = () => {
                 ❗
               </h1>
               <TypeWriterText
-                className="text-2xl opacity-75"
+                className="text-base md:text-lg lg:text-xl opacity-75"
                 speed={heroContent.intro.length * 1.5}
               >
                 {heroContent.intro}
               </TypeWriterText>
-              <div className="text-2xl flex gap-4 mt-2">
+              <div className="text-lg  md:text-xl lg:text-2xl flex gap-4 mt-2">
                 <Link
                   href="/#contact"
-                  className="btn-primary px-8 py-2 rounded-xl"
+                  className="btn-primary px-6 py-2 rounded-xl"
                 >
                   {heroContent.contactMe}
                 </Link>
@@ -171,7 +173,7 @@ export const HeroSection = () => {
               viewport={{ once: true }}
             >
               <CodeCard
-                className="text-2xl"
+                className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl"
                 lang="typescript"
                 codeLines={codeLines}
               />

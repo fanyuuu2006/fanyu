@@ -71,7 +71,7 @@ export const ExperienceSection = () => {
         <div className="flex flex-col w-full gap-4">
           <div
             role="tablist"
-            className="w-full bg-[#000] rounded-lg flex justify-between p-1"
+            className="w-full bg-[#000] rounded-xl flex justify-between p-1"
           >
             {experienceTabs.map((key) => (
               <button
@@ -80,7 +80,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`text-lg font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-4 gap-2 transition-colors duration-200 ${
+                className={`text-lg md:text-2xl font-bold rounded-[inherit] flex flex-wrap flex-1 items-center justify-center p-4 gap-2 transition-colors duration-200 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
@@ -168,7 +168,9 @@ export const ExperienceSection = () => {
                   <span className="text-3xl font-bold">
                     {experienceContent[Tab]}
                   </span>
-                  <span className="text-2xl">{experienceContent.noExperience}</span>
+                  <span className="text-2xl">
+                    {experienceContent.noExperience}
+                  </span>
                 </motion.div>
               )}
             </motion.div>

@@ -60,11 +60,11 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
       {/**Hover 資訊面板 */}
       <Overlay className="relative flex flex-col justify-center w-full h-full p-4">
         <div className="text-2xl font-bold">{item.title[Language.Current]}</div>
-        <div className="text-base flex gap-2">
+        <div className="text-sm flex gap-2">
           <ClockCircleOutlined />
           {item.time}
         </div>
-        <div className="text-lg">{item.about[Language.Current]}</div>
+        <div className="text-base">{item.about[Language.Current]}</div>
         <div className="absolute bottom-4 right-4 text-2xl flex gap-2">
           <OutsideLink
             className="btn-primary p-2 rounded-full flex gap-2"
