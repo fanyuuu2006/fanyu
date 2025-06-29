@@ -44,7 +44,7 @@ export const AboutMeSection = () => {
 
   return (
     <section id="aboutMe">
-      <div className="container flex flex-col items-center">
+      <div className="container flex flex-col items-center gap-8">
         <h1 ref={ref} className="text-5xl font-bold text-center">
           {aboutMeContent.aboutMe}
         </h1>
@@ -60,7 +60,7 @@ export const AboutMeSection = () => {
           >
             <div className="card p-4 hover:scale-105 transition-transform duration-300">
               <Image
-                className="border-2 border-[var(--border-color)] w-64 h-64 max-w-80 max-h-80 rounded-[inherit] object-cover shadow-lg"
+                className="border-2 border-[var(--border-color)] w-64 h-64 max-w-80 max-h-80 rounded-[inherit] object-cover"
                 alt="個人照片"
                 src="/GameShow.jpg"
                 width={300}

@@ -144,16 +144,16 @@ export const HeroSection = () => {
               >
                 {heroContent.intro}
               </TypeWriterText>
-              <div className="text-3xl flex gap-4 mt-2">
+              <div className="text-2xl flex gap-4 mt-2">
                 <Link
                   href="/#contact"
-                  className="btn-primary px-6 py-2 rounded-xl"
+                  className="btn-primary px-8 py-2 rounded-xl"
                 >
                   {heroContent.contactMe}
                 </Link>
                 <Link
                   href="/#portfolio"
-                  className="btn-secondary px-6 py-2 rounded-xl"
+                  className="btn-secondary px-8 py-2 rounded-xl"
                 >
                   {heroContent.portfolio}
                 </Link>
