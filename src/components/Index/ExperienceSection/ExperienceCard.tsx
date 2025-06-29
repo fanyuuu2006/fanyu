@@ -1,9 +1,9 @@
+import { CustomLink } from "@/components/custom/CustomLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ExperienceItem } from "@/types/experience";
 import { slugify } from "@/utils/url";
 import { ClockCircleOutlined } from "@ant-design/icons";
-import { OutsideLink, OverrideProps } from "fanyucomponents";
-import Link from "next/link";
+import { OverrideProps } from "fanyucomponents";
 
 export type ExperienceCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -11,7 +11,12 @@ export type ExperienceCardProps = OverrideProps<
     item: ExperienceItem;
   }
 >;
-
+/**
+ * 經驗卡片組件 - 展示工作經驗、教育背景等資訊
+ * @param item - 經驗項目資料
+ * @param className - 額外的 CSS 類別
+ * @param rest - 其他 HTML div 屬性
+ */
 export const ExperienceCard = ({
   item,
   className = "",
@@ -37,7 +42,9 @@ export const ExperienceCard = ({
         height={600}
       />
       <div className="flex flex-col gap-1 w-full">
-        <span className="text-4xl font-bold">{item.name[Language.Current]}</span>
+        <span className="text-4xl font-bold">
+          {item.name[Language.Current]}
+        </span>
         {item.organization && (
           <span className="text-3xl font-bold opacity-75">
             {item.organization.name[Language.Current]}
@@ -55,26 +62,24 @@ export const ExperienceCard = ({
           </span>
           {item.links && (
             <div className="flex gap-x-2 flex-wrap">
-              {item.links.map((link) => {
-                // 判斷是否為外部連結
-                const Tag = !link.href.startsWith("http") ? Link : OutsideLink;
-                return (
-                  <Tag
-                    key={link.href}
-                    href={link.href}
-                    className="w-fit flex gap-2 items-center"
-                  >
-                    {link.icon}
-                    {link[Language.Current]}
-                  </Tag>
-                );
-              })}
+              {item.links.map((link) => (
+                <CustomLink
+                  key={link.href}
+                  href={link.href}
+                  className="w-fit flex gap-2 items-center"
+                >
+                  {link.icon}
+                  {link[Language.Current]}
+                </CustomLink>
+              ))}
             </div>
           )}
         </div>
         {item.role && (
           <div>
-            <span className="text-2xl">{item.role[Language.Current]}</span>
+            <span className="text-2xl">
+              {item.role[Language.Current]}
+            </span>
           </div>
         )}
         {item.description && (

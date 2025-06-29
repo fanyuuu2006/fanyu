@@ -4,13 +4,13 @@ import { slugify } from "@/utils/url";
 import {
   ClockCircleOutlined,
   GithubOutlined,
-  InfoOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
-import Link from "next/link";
-import { OutsideLink, OverrideProps } from "fanyucomponents";
+import { OverrideProps } from "fanyucomponents";
 import React from "react";
 import styled from "styled-components";
 import { Tooltip } from "antd";
+import { CustomLink } from "@/components/custom/CustomLink";
 
 const ProjectCardWrapper = styled.div`
   position: relative;
@@ -58,46 +58,42 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
       />
 
       {/**Hover 資訊面板 */}
-      <Overlay className="relative flex flex-col justify-center w-full h-full p-4">
+      <Overlay className="relative flex flex-col w-full h-full p-4">
         <div className="text-2xl font-bold">{item.title[Language.Current]}</div>
-        <div className="text-sm flex gap-2">
+        <div className="text-base flex gap-2">
           <ClockCircleOutlined />
           {item.time}
         </div>
-        <div className="text-base">{item.about[Language.Current]}</div>
+        <div className="text-lg">{item.about[Language.Current]}</div>
         <div className="absolute bottom-4 right-4 text-2xl flex gap-2">
-          <OutsideLink
-            className="btn-primary p-2 rounded-full flex gap-2"
-            href={githubUrl}
-            aria-label={`View github: ${item.title.english}`}
-          >
-            <Tooltip
-              title={
-                {
-                  chinese: "Github 儲存庫",
-                  english: "Github Repository",
-                }[Language.Current]
-              }
+          {[
+            {
+              tooltip: {
+                chinese: "Github 儲存庫",
+                english: "Github Repository",
+              },
+              icon: GithubOutlined,
+              href: githubUrl,
+            },
+            {
+              tooltip: {
+                chinese: "詳細資訊",
+                english: "More Info",
+              },
+              icon: InfoCircleOutlined,
+              href: infoUrl,
+            },
+          ].map((link) => (
+            <CustomLink
+              key={link.tooltip.english}
+              className="btn-primary p-2 rounded-full flex gap-2"
+              href={link.href}
             >
-              <GithubOutlined />
-            </Tooltip>
-          </OutsideLink>
-          <Link
-            className="btn-primary p-2 rounded-full flex gap-2"
-            href={infoUrl}
-            aria-label={`View info: ${item.title.english}`}
-          >
-            <Tooltip
-              title={
-                {
-                  chinese: "詳細資訊",
-                  english: "More Info",
-                }[Language.Current]
-              }
-            >
-              <InfoOutlined />
-            </Tooltip>
-          </Link>
+              <Tooltip title={link.tooltip[Language.Current]}>
+                <link.icon />
+              </Tooltip>
+            </CustomLink>
+          ))}
         </div>
       </Overlay>
     </ProjectCardWrapper>

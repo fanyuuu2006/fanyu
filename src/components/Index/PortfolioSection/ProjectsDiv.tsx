@@ -47,7 +47,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
             <ProjectLinkCard
               key={`${item.title.english}`}
               item={item}
-              className="m-2 w-60 md:w-70"
+              className="m-2 w-64 md:w-72"
             />
           ))}
       </Carousel>
