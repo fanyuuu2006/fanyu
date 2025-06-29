@@ -47,10 +47,15 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
     }
   }, [yearsContent.eventsLoadFailed, error]);
 
-  const skeletonCount = eventNames?.length || 5;
+  const skeletonCount = eventNames?.length || 6;
 
   return (
-    <motion.article id={year} className="w-full flex flex-col gap-2" {...rest}>
+    <motion.article
+      id={year}
+      className="w-full flex flex-col gap-2"
+      {...rest}
+      key={isLoading.toString()}
+    >
       <div
         className={`flex items-center gap-2 transition-colors ${
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
@@ -70,6 +75,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
       </div>
       <Collapse state={isCollapseOpen} className="w-full">
         <motion.div
+          key={isLoading.toString()}
           variants={staggerContainer}
           initial="hiddenBottom"
           animate="show"

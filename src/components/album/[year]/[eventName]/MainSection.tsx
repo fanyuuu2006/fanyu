@@ -53,7 +53,7 @@ export const MainSection = ({
     }
   }, [error, imagesContent.eventsLoadFailed]);
 
-  const skeletonCount = images?.length || 5;
+  const skeletonCount = images?.length || 6;
 
   return (
     <section>
@@ -70,6 +70,7 @@ export const MainSection = ({
           <h2 className="text-4xl font-bold">{eventName}</h2>
         </div>
         <motion.article
+          key={isLoading.toString()}
           variants={staggerContainer}
           initial="hiddenBottom"
           animate="show"
