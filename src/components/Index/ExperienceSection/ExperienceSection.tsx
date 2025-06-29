@@ -64,7 +64,7 @@ export const ExperienceSection = () => {
 
   return (
     <section id="experience">
-      <div className="container flex flex-col items-center overflow-x-hidden">
+      <div className="container flex flex-col gap-8 items-center overflow-x-hidden">
         <h1 className="text-5xl font-bold" ref={ref}>
           {experienceContent.experience}
         </h1>
@@ -80,7 +80,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`text-2xl font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-2 gap-2 transition-colors duration-200 ${
+                className={`text-lg font-bold rounded-lg flex flex-wrap flex-1 items-center justify-center p-4 gap-2 transition-colors duration-200 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
