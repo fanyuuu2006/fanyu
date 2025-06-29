@@ -80,7 +80,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`text-lg md:text-2xl font-bold rounded-[inherit] flex flex-wrap flex-1 items-center justify-center p-4 gap-2 transition-colors duration-200 ${
+                className={`text-lg md:text-2xl font-bold rounded-[inherit] flex flex-wrap flex-1 items-center justify-center p-2 gap-1 transition-colors duration-200 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
