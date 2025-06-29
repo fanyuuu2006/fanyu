@@ -25,7 +25,7 @@ export const Header = () => {
               className="h-16 w-auto object-contain"
             />
           </Link>
-          <div className="text-3xl lg:hidden">
+          <div className="text-2xl lg:hidden">
             <BurgerMenu
               checked={menuShow}
               onChange={() => setMenuShow((prev) => !prev)}
