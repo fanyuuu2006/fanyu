@@ -102,7 +102,7 @@ export const ProjectCard = ({
             </div>
           </div>
           {item.github && (
-            <div className="w-full flex mt-2">
+            <div className="w-full flex border-t border-[#8888] mt-2 pt-4">
               <button
                 onClick={() => {
                   setGiscusShow((prev) => !prev);

@@ -72,7 +72,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
             <div className="flex items-center gap-4">
               {/**頭像 */}
               <div
-                className="h-10 aspect-square rounded-full overflow-hidden"
+                className="h-10 aspect-square rounded-xl overflow-hidden"
                 style={{
                   border: `2px solid ${
                     item.backgrounds?.[0] || "var(--text-color-primary)"
@@ -81,9 +81,12 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
               >
                 {/*eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className="bg-white w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                   src={item.info.image || `/favicon.ico`}
                   alt={`${item.label}-${item.info.id}`}
+                  style={{
+                    backgroundColor: item.backgrounds?.[0] || "var(--text-color-primary)",
+                  }}
                 />
               </div>
 
@@ -103,7 +106,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
                 </span>
               </div>
             </div>
-            {/**相關資訊(?) */}
+            {/**相關資訊(待定) */}
             <div className="flex">
               <OutsideLink className="ms-auto text-2xl flex gap-2" href={item.href}>
                 {
