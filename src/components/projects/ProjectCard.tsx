@@ -52,21 +52,23 @@ export const ProjectCard = ({
         id={slugify(item.title.english)}
         className={`${className} card shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element*/}
-        <img
-          className="bg-[#fff] border border-[var(--border-color)] h-25 w-25  rounded-full"
-          src={item.imageSrc}
-          alt={`${item.title.english} icon`}
-        />
+        <div className="h-25 w-25 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element*/}
+          <img
+            className=" h-full w-full bg-[#fff]"
+            src={item.imageSrc}
+            alt={`${item.title.english} icon`}
+          />
+        </div>
         <div className="flex flex-col flex-1 gap-2">
           <div className="text-3xl font-bold">
             {item.title[Language.Current]}
           </div>
-          <div className="text-lg flex gap-2">
+          <div className="text-base md:text-lg flex gap-2">
             <ClockCircleOutlined />
             {item.time}
           </div>
-          <div className="text-2xl text-justify">
+          <div className="text-xl md:text-2xl text-justify">
             {item.about[Language.Current]}
           </div>
           {item.links.map((link) => (
@@ -79,7 +81,7 @@ export const ProjectCard = ({
               <span className="wrap-anywhere">{link.href}</span>
             </OutsideLink>
           ))}
-          <ul className="text-2xl text-justify list-disc ps-4">
+          <ul className="text-xl md:text-2xl text-justify list-disc ps-4">
             {item.description[Language.Current].map((part, index) => (
               <li key={index}>{part}</li>
             ))}
