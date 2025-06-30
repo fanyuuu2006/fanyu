@@ -42,20 +42,20 @@ export const ExperienceCard = ({
         height={600}
       />
       <div className="flex flex-col gap-1 w-full">
-        <span className="text-4xl font-bold">
+        <span className="text-3xl md:text-4xl font-bold">
           {item.name[Language.Current]}
         </span>
         {item.organization && (
-          <span className="text-3xl font-bold opacity-75">
+          <span className="text-2xl md:text-3xl font-bold opacity-75">
             {item.organization.name[Language.Current]}
           </span>
         )}
         {item.department && (
-          <span className="text-3xl font-bold opacity-75">
+          <span className="text-2xl md:text-3xl font-bold opacity-75">
             {item.department[Language.Current]}
           </span>
         )}
-        <div className="flex flex-col text-lg opacity-75 ">
+        <div className="flex flex-col text-base md:text-lg opacity-75 ">
           <span className="flex gap-2">
             <ClockCircleOutlined />
             {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
@@ -77,7 +77,7 @@ export const ExperienceCard = ({
         </div>
         {item.role && (
           <div>
-            <span className="text-2xl">
+            <span className="text-xl md:text-2xl">
               {item.role[Language.Current]}
             </span>
           </div>

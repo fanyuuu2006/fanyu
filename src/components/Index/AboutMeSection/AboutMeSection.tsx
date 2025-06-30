@@ -76,7 +76,7 @@ export const AboutMeSection = () => {
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card p-6 flex flex-col flex-1 w-full lg:w-3/4"
+            className="card p-2 flex flex-col flex-1 w-full lg:w-3/4"
           >
             {aboutMeContent.article.map((part, index) => (
               <motion.p
