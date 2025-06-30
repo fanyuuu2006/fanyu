@@ -6,7 +6,7 @@
     --background-color: #171717;
     --background-color-dark: #080808;
     --background-color-primary: #212121;
-    --background-color-secondary: #292929;
+    --background-color-secondary: #313131;
     --text-color: #ffffff;
     --text-color-primary: #0d59cc;
     --text-color-secondary: #43d3ff;
@@ -51,7 +51,7 @@
   .btn-primary,
   .btn-secondary {
     cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   }
 
