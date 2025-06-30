@@ -59,7 +59,7 @@ const NTUST: ExperienceItem = {
                     }[language]
                   }
                 </th>
-                <th className="text-center">
+                <th className="text-center p-2">
                   {
                     {
                       chinese: "班級排名",
@@ -67,7 +67,7 @@ const NTUST: ExperienceItem = {
                     }[language]
                   }
                 </th>
-                <th className="text-center">
+                <th className="text-center p-2">
                   {
                     {
                       chinese: "系所排名",
@@ -75,7 +75,7 @@ const NTUST: ExperienceItem = {
                     }[language]
                   }
                 </th>
-                <th className="text-center">
+                <th className="text-center p-2">
                   {
                     {
                       chinese: "平均成績",
@@ -83,7 +83,7 @@ const NTUST: ExperienceItem = {
                     }[language]
                   }
                 </th>
-                <th className="text-center">
+                <th className="text-center p-2">
                   {
                     {
                       chinese: "學分數",
