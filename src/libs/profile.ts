@@ -1,5 +1,5 @@
 import { ContactData } from "./contact";
-import { experience } from "./experience";
+import { experience } from "./education";
 import { projects } from "./projects";
 import { skills } from "./skill";
 

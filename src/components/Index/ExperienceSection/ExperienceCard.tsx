@@ -23,12 +23,13 @@ export const ExperienceCard = ({
   ...rest
 }: ExperienceCardProps) => {
   const Language = useLanguage();
+
   return (
     <div
-      className={`${className} card w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
+      className={`${className} card w-full p-6 gap-4 flex flex-col`}
       {...rest}
     >
-      <div className="h-24 md:h-30 shrink-0 aspect-square rounded-3xl overflow-hidden border-2 border-[var(--border-color)]">
+      <div className="h-20 w-20 md:h-28 md:w-28 rounded-3xl overflow-hidden border-2 border-[var(--border-color)]">
         {/*eslint-disable-next-line @next/next/no-img-element*/}
         <img
           src={

@@ -51,7 +51,8 @@
   .btn-primary,
   .btn-secondary {
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+      color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   }
 
@@ -139,12 +140,15 @@
 
 /* ==== Utilities Layer ==== */
 @layer utilities {
+  .bg-gradient,
   .text-gradient {
     background: linear-gradient(
       45deg,
       var(--text-color-primary),
       var(--text-color-secondary)
     );
+  }
+  .text-gradient {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

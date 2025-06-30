@@ -6,7 +6,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { ExperienceTab } from "@/types/experience";
-import { experienceTabIcons, experienceTabs } from "@/libs/experience";
+import { experienceTabIcons, experienceTabs } from "@/libs/education";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
@@ -80,7 +80,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`text-base md:text-2xl rounded-[inherit] flex flex-col md:flex-row flex-1 items-center justify-center p-2 gap-1 ${
+                className={`text-base md:text-2xl font-bold rounded-[inherit] flex flex-col md:flex-row flex-1 items-center justify-center p-2 gap-1 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {

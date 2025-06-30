@@ -1,6 +1,6 @@
 import { ExperienceItem } from "@/types/experience";
 import { LinkOutlined, EnvironmentOutlined } from "@ant-design/icons";
-import { NTUST } from "./education";
+import NTUST from "./education/ntust";
 
 export const LFR: ExperienceItem = {
   name: {

@@ -1,4 +1,4 @@
-import { experienceTabs } from "@/libs/experience";
+import { experienceTabs } from "@/libs/education";
 import { LanguageContent, LanguageOption } from "./language";
 
 export type Duration = {
@@ -23,3 +23,23 @@ export type ExperienceItem = {
 };
 
 export type ExperienceTab = (typeof experienceTabs)[number];
+
+export type Semester = `${number}-${1 | 2}`;
+export type Grade =
+  | "A+"
+  | "A"
+  | "A-"
+  | "B+"
+  | "B"
+  | "B-"
+  | "C+"
+  | "C"
+  | "C-"
+  | "D+"
+  | "E"
+  | "X";
+export type Course = {
+  courseName: LanguageContent<string>;
+  grade: Grade | null;
+  credits: number;
+};

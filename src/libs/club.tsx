@@ -1,6 +1,6 @@
 import { ExperienceItem } from "@/types/experience";
 import { InstagramOutlined, EnvironmentOutlined } from "@ant-design/icons";
-import { NTUST } from "./education";
+import NTUST from "./education/ntust";
 
 export const NTUST_BGC: ExperienceItem = {
   name: {

@@ -4,12 +4,15 @@ import {
   LuTrophy,
   LuUsers,
 } from "react-icons/lu";
-import { ExperienceItem, ExperienceTab } from "../types/experience";
+import { ExperienceItem, ExperienceTab } from "../../types/experience";
 
-import * as club from "./club";
-import * as education from "./education";
-import * as work from "./work";
-import * as competition from "./competition";
+import * as club from "../club";
+import * as work from "../work";
+import * as competition from "../competition";
+import NTUST from "./ntust";
+import FGJH from "./fgjh";
+import GSES from "./gses";
+import CPSHS from "./cpshs";
 
 export const experienceTabs = [
   "education",
@@ -26,7 +29,7 @@ export const experienceTabIcons: Record<ExperienceTab, React.ReactNode> = {
 };
 
 export const experience: Record<ExperienceTab, ExperienceItem[]> = {
-  education: Object.values(education),
+  education: [NTUST, CPSHS, FGJH, GSES],
   club: Object.values(club),
   work: Object.values(work),
   competition: Object.values(competition),

@@ -9,6 +9,7 @@ import {
   TikTokOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
+import Script from "next/script";
 import { BiLogoGmail } from "react-icons/bi";
 import { BsLine } from "react-icons/bs";
 import { FaThreads, FaFacebookMessenger } from "react-icons/fa6";
@@ -92,7 +93,31 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "TikTok",
       icon: TikTokOutlined,
-      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
+      info: {
+        id: "fan._.yuuu",
+        name: "🍚🐟➕➖",
+        about: (
+          <>
+            <blockquote
+              className="tiktok-embed"
+              cite="https://www.tiktok.com/@fan._.yuuu"
+              data-unique-id="fan._.yuuu"
+              data-embed-type="creator"
+              style={{ maxWidth: "780px", minWidth: "288px" }}
+            >
+              <section>
+                <a
+                  target="_blank"
+                  href="https://www.tiktok.com/@fan._.yuuu?refer=creator_embed"
+                >
+                  @fan._.yuuu
+                </a>
+              </section>
+            </blockquote>
+            <Script async src="https://www.tiktok.com/embed.js"/>
+          </>
+        ),
+      },
       href: "https://www.tiktok.com/@fan._.yuuu",
       backgrounds: ["#69C9D0", "#010101", "#010101", "#EE1D52"],
     },
@@ -133,7 +158,12 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "bilibili",
       icon: BilibiliOutlined,
-      info: { name: "飯魚", id: "1488181486", image: "https://i1.hdslb.com/bfs/face/10300665780b53d6ea2977d2c4bac163e3bfcff5.jpg" },
+      info: {
+        name: "飯魚",
+        id: "1488181486",
+        image:
+          "https://i1.hdslb.com/bfs/face/10300665780b53d6ea2977d2c4bac163e3bfcff5.jpg",
+      },
       href: "https://space.bilibili.com/1488181486",
       backgrounds: ["#FF6999"],
     },

@@ -48,14 +48,14 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
         {item.label}
       </button>
 
-      {/**資訊卡 */}
+      {/**Overlay 資訊卡 */}
       <div
         className="absolute transition-all duration-300 
        left-1/2 -translate-x-1/2
        z-1000
        "
         style={{
-          top: isOpen ? "-8rem" : "-6rem",
+          bottom: isOpen ? "100%" : "50%",
           opacity: isOpen ? "1" : "0",
           visibility: isOpen ? "visible" : "hidden",
         }}
@@ -85,7 +85,8 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
                   src={item.info.image || `/favicon.ico`}
                   alt={`${item.label}-${item.info.id}`}
                   style={{
-                    backgroundColor: item.backgrounds?.[0] || "var(--text-color-primary)",
+                    backgroundColor:
+                      item.backgrounds?.[0] || "var(--text-color-primary)",
                   }}
                 />
               </div>
@@ -107,8 +108,12 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
               </div>
             </div>
             {/**相關資訊(待定) */}
+            {item.info.about && <div>{item.info.about}</div>}
             <div className="flex">
-              <OutsideLink className="ms-auto text-2xl flex gap-2" href={item.href}>
+              <OutsideLink
+                className="ms-auto text-2xl flex gap-2"
+                href={item.href}
+              >
                 {
                   {
                     chinese: "前往",
