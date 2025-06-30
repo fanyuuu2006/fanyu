@@ -1,0 +1,49 @@
+.burger {
+  position: relative;
+  display: inline-block;
+  width: calc(4em / 3);
+  height: 1em;
+  cursor: pointer;
+}
+
+.burger span {
+  position: absolute;
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--text-color);
+  transition: 0.3s ease-in-out;
+  transform-origin: right center;
+}
+
+.burger span:nth-of-type(1) {
+  top: 0;
+}
+.burger span:nth-of-type(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.burger span:nth-of-type(3) {
+  top: 100%;
+  transform: translateY(-100%);
+}
+
+.burger input {
+  display: none;
+}
+
+.burger input:checked ~ span:nth-of-type(1) {
+  transform: rotate(-45deg);
+  right: calc(1em / 6);
+}
+.burger input:checked ~ span:nth-of-type(2) {
+  opacity: 0;
+  width: 0;
+}
+.burger input:checked ~ span:nth-of-type(3) {
+  transform: rotate(45deg);
+  top: calc(29em / 30);
+  right: calc(1em / 6);
+}
