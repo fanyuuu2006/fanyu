@@ -49,9 +49,9 @@ const NTUST: ExperienceItem = {
         </span>
         <div className="overflow-x-auto rounded-2xl">
           <table className="w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
-            <thead className="text-lg md:text-2xl backdrop-brightness-90">
+            <thead className="text-base md:text-lg bg-gradient">
               <tr>
-                <th className="text-center p-1">
+                <th className="text-center p-2 border-b border-white/10">
                   {
                     {
                       chinese: "學期",
@@ -93,18 +93,22 @@ const NTUST: ExperienceItem = {
                 </th>
               </tr>
             </thead>
-            <tbody className="text-base md:text-xl">
+            <tbody className="text-lg md:text-xl">
               {Object.entries(grades).map(([year, data]) => {
                 const { gpa, totalCredits } = calculateGPA(data.courses);
                 return (
                   <tr key={year}>
                     <td className="text-center">{year}</td>
-                    <td className="text-center">{data.classRank}</td>
-                    <td className="text-center">{data.departmentRanK}</td>
+                    <td className="text-center">
+                      {data.classRank ||
+                        { chinese: "無資料", english: "No Data" }[language]}
+                    </td>
+                    <td className="text-center">
+                      {data.departmentRanK ||
+                        { chinese: "無資料", english: "No Data" }[language]}
+                    </td>
                     <td className="text-center p-2">
-                      <span className="bg-gradient px-2 rounded-4xl">
-                        {Math.round(gpa * 100) / 100}
-                      </span>
+                      {Math.round(gpa * 100) / 100}
                     </td>
                     <td className="text-center">{totalCredits}</td>
                   </tr>
