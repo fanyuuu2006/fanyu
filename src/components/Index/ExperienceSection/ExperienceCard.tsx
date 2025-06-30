@@ -28,7 +28,7 @@ export const ExperienceCard = ({
       className={`${className} card w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
-      <div className="h-30 w-30 rounded-3xl overflow-hidden border-2 border-[var(--border-color)]">
+      <div className="h-24 md:h-30 shrink-0 aspect-square rounded-3xl overflow-hidden border-2 border-[var(--border-color)]">
         {/*eslint-disable-next-line @next/next/no-img-element*/}
         <img
           src={
