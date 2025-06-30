@@ -107,7 +107,7 @@ export const ProjectCard = ({
                 }}
                 className={`${
                   giscusShow ? "opacity-70" : ""
-                } btn-primary text-lg px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105`}
+                } btn-primary text-lg px-4 py-2 rounded-lg transition-all duration-200 `}
               >
                 {
                   (giscusShow

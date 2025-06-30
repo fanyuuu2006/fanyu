@@ -25,7 +25,7 @@ export const ProjectTagCheckbox = ({
     <label
       className={`btn${
         isActive ? "-secondary" : ""
-      } px-2 rounded-sm whitespace-nowrap ${className} `}
+      } px-4 py-1 rounded-3xl whitespace-nowrap ${className} `}
       {...rest}
     >
       <input

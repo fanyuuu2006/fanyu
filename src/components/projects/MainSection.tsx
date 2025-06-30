@@ -85,8 +85,8 @@ export const MainSection = () => {
     <section>
       <div className="container flex flex-col items-center">
         <h1 className="text-5xl font-bold">{projectsContent.projects}</h1>
-        <div className="text-2xl flex flex-col w-full gap-2">
-          <div className="relative flex flex-nowrap items-center px-4 gap-4">
+        <div className="flex flex-col w-full gap-2">
+          <div className="relative text-2xl flex flex-nowrap items-center px-4 gap-4">
             <Tooltip title={projectsContent.filter}>
               <button
                 onClick={() => {
@@ -110,6 +110,7 @@ export const MainSection = () => {
               <div>
                 <ProjectTagCheckbox
                   tag={null}
+                  className="text-xl font-bold"
                   currentTags={currentTags}
                   setCurrentTags={setCurrentTags}
                 >
@@ -120,10 +121,10 @@ export const MainSection = () => {
                 ([category, tags]) =>
                   tags.length > 0 && (
                     <div key={category} className="flex flex-col gap-2">
-                      <span className="font-bold">
+                      <span className="text-2xl font-bold">
                         {projectsContent[category as keyof ProjectsContent]}
                       </span>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="text-xl flex flex-wrap gap-2">
                         {tags.map((tag) => (
                           <ProjectTagCheckbox
                             key={tag}

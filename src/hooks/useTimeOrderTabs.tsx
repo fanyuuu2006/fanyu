@@ -50,7 +50,7 @@ export const useTimeOrderTabs = <T,>(
     return (
       <div
         role="tablist"
-        className={`${className} flex bg-[#000] rounded-lg p-1`}
+        className={`${className} flex bg-[#000] rounded-2xl p-1`}
         {...rest}
       >
         {[
@@ -61,7 +61,7 @@ export const useTimeOrderTabs = <T,>(
           return (
             <button
               key={item.label}
-              className={`px-4 py-1 transition-all duration-200 rounded-lg ${
+              className={`px-4 py-1 transition-all duration-200 rounded-[inherit] ${
                 isSelected ? "btn" : ""
               }`}
               onClick={() => {
