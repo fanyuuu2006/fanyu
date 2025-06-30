@@ -28,19 +28,21 @@ export const ExperienceCard = ({
       className={`${className} card w-full p-4 gap-4 flex flex-wrap items-center md:flex-nowrap`}
       {...rest}
     >
-      {/*eslint-disable-next-line @next/next/no-img-element*/}
-      <img
-        src={
-          item.imageSrc ||
-          `https://s2.googleusercontent.com/s2/favicons?domain_url=${slugify(
-            item.links?.[0].href ?? ""
-          )}`
-        }
-        alt={item.name.english}
-        className="h-30 w-30 object-cover bg-[#fff] rounded-full border-2 border-[var(--border-color)]"
-        width={600}
-        height={600}
-      />
+      <div className="h-30 w-30 rounded-3xl overflow-hidden border-2 border-[var(--border-color)]">
+        {/*eslint-disable-next-line @next/next/no-img-element*/}
+        <img
+          src={
+            item.imageSrc ||
+            `https://s2.googleusercontent.com/s2/favicons?domain_url=${slugify(
+              item.links?.[0].href ?? ""
+            )}`
+          }
+          alt={item.name.english}
+          className="w-full h-full object-cover bg-[#fff]"
+          width={600}
+          height={600}
+        />
+      </div>
       <div className="flex flex-col gap-1 w-full">
         <span className="text-3xl md:text-4xl font-bold">
           {item.name[Language.Current]}
