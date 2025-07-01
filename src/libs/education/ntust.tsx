@@ -119,8 +119,8 @@ const NTUST: ExperienceItem = {
                       </td>
                       <td className="text-center p-2">{totalCredits}</td>
                     </tr>
-                    <modal.Container className="animate-pop">
-                      <div className="rounded-2xl overflow-hidden">
+                    <modal.Container >
+                      <div className="rounded-2xl animate-pop overflow-hidden">
                         <table className="w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
                           <thead className="text-sm md:text-lg bg-gradient">
                             <tr>
