@@ -121,8 +121,8 @@ const NTUST: ExperienceItem = {
                     </tr>
                     <modal.Container >
                       <div className="rounded-2xl animate-pop overflow-hidden">
-                        <table className="w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
-                          <thead className="text-sm md:text-lg bg-gradient">
+                        <table className="text-sm md:text-base w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
+                          <thead className="bg-gradient">
                             <tr>
                               <th className="text-center p-2">
                                 {
@@ -150,7 +150,7 @@ const NTUST: ExperienceItem = {
                               </th>
                             </tr>
                           </thead>
-                          <tbody className="text-base md:text-xl">
+                          <tbody >
                             {data.courses.map((course, index) => (
                               <tr
                                 key={index}
