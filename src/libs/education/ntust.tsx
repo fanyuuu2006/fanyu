@@ -38,8 +38,6 @@ const NTUST: ExperienceItem = {
   description: ({ language }) => {
     const allCourses = Object.values(grades).flatMap((data) => data.courses);
     const overallGPA = calculateGPA(allCourses);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const modal = useModal();
 
     return (
       <div className="flex flex-col gap-2">
@@ -100,6 +98,7 @@ const NTUST: ExperienceItem = {
             <tbody className="text-base md:text-xl">
               {Object.entries(grades).map(([year, data]) => {
                 const { gpa, totalCredits } = calculateGPA(data.courses);
+                const modal = useModal();
                 return (
                   <React.Fragment key={year}>
                     <tr

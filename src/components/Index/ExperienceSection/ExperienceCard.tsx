@@ -58,18 +58,18 @@ export const ExperienceCard = ({
             {item.department[Language.Current]}
           </span>
         )}
-        <div className="flex flex-col text-base md:text-lg opacity-75 ">
-          <span className="flex gap-2">
+        <div className="flex flex-col gap-2">
+          <span className="flex gap-2 text-base md:text-lg opacity-75 ">
             <ClockCircleOutlined />
             {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
           </span>
           {item.links && (
-            <div className="flex gap-x-2 flex-wrap">
+            <div className="flex gap-1 flex-wrap">
               {item.links.map((link) => (
                 <CustomLink
                   key={link.href}
                   href={link.href}
-                  className="w-fit flex gap-2 items-center"
+                  className="btn-secondary text-base md:text-lg flex gap-2 px-2 py-1 rounded-3xl items-center"
                 >
                   {link.icon}
                   {link[Language.Current]}
