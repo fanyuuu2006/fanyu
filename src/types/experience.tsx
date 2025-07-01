@@ -37,7 +37,8 @@ export type Grade =
   | "C-"
   | "D+"
   | "E"
-  | "X";
+  | "X"
+  | "通過";
 export type Course = {
   courseName: LanguageContent<string>;
   grade: Grade | null;

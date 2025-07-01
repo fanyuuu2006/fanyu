@@ -1,6 +1,8 @@
 import { Semester, Course, ExperienceItem } from "@/types/experience";
 import { calculateGPA } from "@/utils/education";
 import { LinkOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { useModal } from "fanyucomponents";
+import React from "react";
 
 const NTUST: ExperienceItem = {
   name: {
@@ -36,6 +38,8 @@ const NTUST: ExperienceItem = {
   description: ({ language }) => {
     const allCourses = Object.values(grades).flatMap((data) => data.courses);
     const overallGPA = calculateGPA(allCourses);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const modal = useModal();
 
     return (
       <div className="flex flex-col gap-2">
@@ -97,24 +101,97 @@ const NTUST: ExperienceItem = {
               {Object.entries(grades).map(([year, data]) => {
                 const { gpa, totalCredits } = calculateGPA(data.courses);
                 return (
-                  <tr
-                    className="hover:backdrop-brightness-125 cursor-pointer"
-                    key={year}
-                  >
-                    <td className="text-center p-2">{year}</td>
-                    <td className="text-center p-2">
-                      {data.classRank ||
-                        { chinese: "無資料", english: "No Data" }[language]}
-                    </td>
-                    <td className="text-center p-2">
-                      {data.departmentRanK ||
-                        { chinese: "無資料", english: "No Data" }[language]}
-                    </td>
-                    <td className="text-center p-2">
-                      {Math.round(gpa * 100) / 100}
-                    </td>
-                    <td className="text-center p-2">{totalCredits}</td>
-                  </tr>
+                  <React.Fragment key={year}>
+                    <tr
+                      className="hover:backdrop-brightness-125 cursor-pointer"
+                      onClick={modal.Open}
+                    >
+                      <td className="text-center p-2">{year}</td>
+                      <td className="text-center p-2">
+                        {data.classRank ||
+                          { chinese: "無資料", english: "No Data" }[language]}
+                      </td>
+                      <td className="text-center p-2">
+                        {data.departmentRanK ||
+                          { chinese: "無資料", english: "No Data" }[language]}
+                      </td>
+                      <td className="text-center p-2">
+                        {Math.round(gpa * 100) / 100}
+                      </td>
+                      <td className="text-center p-2">{totalCredits}</td>
+                    </tr>
+                    <modal.Container className="animate-pop">
+                      <div className="rounded-2xl overflow-hidden">
+                        <table className="w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
+                          <thead className="text-sm md:text-lg bg-gradient">
+                            <tr>
+                              <th className="text-center p-2">
+                                {
+                                  {
+                                    chinese: "課程名稱",
+                                    english: "Course Name",
+                                  }[language]
+                                }
+                              </th>
+                              <th className="text-center p-2">
+                                {
+                                  {
+                                    chinese: "成績",
+                                    english: "Grade",
+                                  }[language]
+                                }
+                              </th>
+                              <th className="text-center p-2">
+                                {
+                                  {
+                                    chinese: "學分數",
+                                    english: "Credits",
+                                  }[language]
+                                }
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="text-base md:text-xl">
+                            {data.courses.map((course, index) => (
+                              <tr
+                                key={index}
+                                className="hover:backdrop-brightness-125"
+                              >
+                                <td className="text-center p-2">
+                                  {course.courseName[language]}
+                                </td>
+                                <td className="text-center p-2">
+                                  {course.grade ||
+                                    { chinese: "無資料", english: "No Data" }[
+                                      language
+                                    ]}
+                                </td>
+                                <td className="text-center p-2">
+                                  {course.credits}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                          <tfoot className="text-lg md:text-xl">
+                            <tr>
+                              <td className="text-center p-2">
+                                {
+                                  {
+                                    chinese: "總計",
+                                    english: "Total",
+                                  }[language]
+                                }
+                              </td>
+                              <td className="text-center p-2"></td>
+                              <td className="text-center p-2">
+                                {totalCredits}
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </modal.Container>
+                  </React.Fragment>
                 );
               })}
             </tbody>
@@ -314,7 +391,7 @@ export const grades: Record<
           chinese: "社會實踐",
           english: "Social Practice",
         },
-        grade: null,
+        grade: "通過",
         credits: 1,
       },
       {

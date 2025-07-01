@@ -21,7 +21,7 @@ export const calculateGPA = (
   gpa: number;
   totalCredits: number;
 } => {
-  const _map: Record<Grade, number> = {
+  const _map: Record<Exclude<Grade, "通過">, number> = {
     "A+": 4,
     A: 4,
     "A-": 3.7,
@@ -45,7 +45,7 @@ export const calculateGPA = (
     if (!course.grade || !(course.grade in _map)) {
       continue; // 忽略沒有成績或成績不在映射中的課程
     }
-    const gradePoints = _map[course.grade];
+    const gradePoints = _map[course.grade as Exclude<Grade, "通過">];
     totalPoints += gradePoints * course.credits;
     totalCredits += course.credits;
   }
@@ -54,12 +54,12 @@ export const calculateGPA = (
   }
   const gpa = totalPoints / totalCredits;
 
-  // 沒有等第成績但有學分的課程仍要算
-    for (const course of courses) {
-        if (course.credits && (!course.grade || !(course.grade in _map))) {
-        totalCredits += course.credits; // 將學分加到總學分中
-        }
+  // 有學分的課程且等第為通過仍要算
+  for (const course of courses) {
+    if (course.credits && course.grade === "通過") {
+      totalCredits += course.credits; // 將學分加到總學分中
     }
+  }
 
   return { gpa, totalCredits };
 };
