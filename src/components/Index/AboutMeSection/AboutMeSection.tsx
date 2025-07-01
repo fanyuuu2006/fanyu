@@ -49,7 +49,7 @@ export const AboutMeSection = () => {
           {aboutMeContent.aboutMe}
         </h1>
 
-        <div className="w-full flex flex-col lg:flex-row gap-8 items-center">
+        <div className="w-full flex flex-col lg:flex-row gap-4 items-center">
           {/* 個人照片卡片 - 佔 1/4 比例 */}
           <motion.div
             variants={fadeInItem}
@@ -76,7 +76,7 @@ export const AboutMeSection = () => {
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card p-2 flex flex-col flex-1 w-full lg:w-3/4"
+            className="card p-2 flex flex-col flex-1 overflow-hidden lg:w-3/4"
           >
             {aboutMeContent.article.map((part, index) => (
               <motion.p

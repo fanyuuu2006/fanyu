@@ -49,7 +49,7 @@ const NTUST: ExperienceItem = {
         </span>
         <div className="overflow-x-auto rounded-2xl">
           <table className="w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
-            <thead className="text-base md:text-lg bg-gradient">
+            <thead className="text-sm md:text-lg bg-gradient">
               <tr>
                 <th className="text-center p-2 border-b border-white/10">
                   {
@@ -93,31 +93,34 @@ const NTUST: ExperienceItem = {
                 </th>
               </tr>
             </thead>
-            <tbody className="text-lg md:text-xl">
+            <tbody className="text-base md:text-xl">
               {Object.entries(grades).map(([year, data]) => {
                 const { gpa, totalCredits } = calculateGPA(data.courses);
                 return (
-                  <tr key={year}>
-                    <td className="text-center">{year}</td>
-                    <td className="text-center">
+                  <tr
+                    className="hover:backdrop-brightness-125 cursor-pointer"
+                    key={year}
+                  >
+                    <td className="text-center p-2">{year}</td>
+                    <td className="text-center p-2">
                       {data.classRank ||
                         { chinese: "無資料", english: "No Data" }[language]}
                     </td>
-                    <td className="text-center">
+                    <td className="text-center p-2">
                       {data.departmentRanK ||
                         { chinese: "無資料", english: "No Data" }[language]}
                     </td>
                     <td className="text-center p-2">
                       {Math.round(gpa * 100) / 100}
                     </td>
-                    <td className="text-center">{totalCredits}</td>
+                    <td className="text-center p-2">{totalCredits}</td>
                   </tr>
                 );
               })}
             </tbody>
             <tfoot className="text-lg md:text-xl">
               <tr>
-                <td className="text-center p-1">
+                <td className="text-center p-2">
                   {
                     {
                       chinese: "總計",
@@ -125,12 +128,12 @@ const NTUST: ExperienceItem = {
                     }[language]
                   }
                 </td>
-                <td className="text-center"></td>
-                <td className="text-center"></td>
-                <td className="text-center font-bold">
+                <td className="text-center p-2"></td>
+                <td className="text-center p-2"></td>
+                <td className="text-center p-2 font-bold">
                   {Math.round(overallGPA.gpa * 100) / 100}
                 </td>
-                <td className="text-center font-bold">
+                <td className="text-center p-2 font-bold">
                   {overallGPA.totalCredits}
                 </td>
               </tr>
