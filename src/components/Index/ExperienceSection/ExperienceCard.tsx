@@ -49,12 +49,12 @@ export const ExperienceCard = ({
           {item.name[Language.Current]}
         </span>
         {item.organization && (
-          <span className="text-2xl md:text-3xl font-bold opacity-75">
+          <span className="text-xl md:text-2xl font-bold opacity-75">
             {item.organization.name[Language.Current]}
           </span>
         )}
         {item.department && (
-          <span className="text-2xl md:text-3xl font-bold opacity-75">
+          <span className="text-xl md:text-2xl font-bold opacity-75">
             {item.department[Language.Current]}
           </span>
         )}
