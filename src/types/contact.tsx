@@ -7,7 +7,7 @@ export type ContactItem = {
     image?: string;
     id: string;
     name: string;
-    about?: React.ReactNode;
+    about?: React.ElementType;
   };
 };
 

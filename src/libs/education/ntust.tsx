@@ -50,7 +50,7 @@ const NTUST: ExperienceItem = {
           }
         </span>
         <div className="overflow-x-auto rounded-2xl">
-          <table className="w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
+          <table className="w-full bg-[var(--background-color-primary)] table-auto border-collapse">
             <thead className="text-sm md:text-lg bg-gradient">
               <tr>
                 <th className="text-center p-2 border-b border-white/10">
@@ -121,7 +121,7 @@ const NTUST: ExperienceItem = {
                     </tr>
                     <modal.Container >
                       <div className="rounded-2xl animate-pop overflow-hidden">
-                        <table className="text-sm md:text-base w-full bg-[var(--background-color-secondary)] table-auto border-collapse">
+                        <table className="text-sm md:text-base w-full bg-[var(--background-color-primary)] table-auto border-collapse">
                           <thead className="bg-gradient">
                             <tr>
                               <th className="text-center p-2">

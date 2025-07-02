@@ -108,7 +108,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
               </div>
             </div>
             {/**相關資訊(待定) */}
-            {item.info.about && <div>{item.info.about}</div>}
+            {item.info.about && <div>{<item.info.about />}</div>}
             <div className="flex">
               <OutsideLink
                 className="ms-auto text-2xl flex gap-2"

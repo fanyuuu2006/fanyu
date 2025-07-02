@@ -29,7 +29,7 @@ export const Footer = () => {
   return (
     <footer className="w-full flex flex-1 bg-black border-[var(--border-color)] border-t-1">
       <div className="container flex flex-col items-center">
-        <div className="text-lg flex flex-col gap-2 text-[#aaa]">
+        <div className="text-base md:text-lg flex flex-col gap-2 text-[#aaa]">
           <div className="flex gap-2">
             <CopyrightOutlined /> {year}, {profile.nickname[Langauge.Current]}
             {footerContent.copyright}
@@ -50,7 +50,7 @@ export const Footer = () => {
                 src={item.url}
                 alt={item.title}
                 title={item.title}
-                className="h-fit select-none"
+                className="h-[1em] select-none"
               />
             ))}
           </div>

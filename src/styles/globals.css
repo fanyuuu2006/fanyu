@@ -5,8 +5,7 @@
   :root {
     --background-color: #171717;
     --background-color-dark: #080808;
-    --background-color-primary: #212121;
-    --background-color-secondary: #313131;
+    --background-color-primary: #313131;
     --text-color: #ffffff;
     --text-color-primary: #0d59cc;
     --text-color-secondary: #43ccff;
@@ -61,7 +60,7 @@
     border: 1px solid var(--border-color);
   }
   .btn-secondary {
-    background: var(--background-color-secondary);
+    background: var(--background-color-primary);
     border: 1px solid var(--border-color);
   }
 
