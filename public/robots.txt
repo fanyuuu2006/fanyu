@@ -7,7 +7,6 @@ Allow: /projects/
 Allow: /album/
 Allow: /guestbook/
 Allow: /my/
-Allow: /sitemap-page/
 
 # Disallow API routes and private files
 Disallow: /api/
