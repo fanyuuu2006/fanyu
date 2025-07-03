@@ -31,18 +31,35 @@ export const metadata: Metadata = {
     "fanyuuu2006",
     "范振富",
 
-    // 💻 技能與職能
+    // 💻 技能與職能 - 擴展更多相關詞彙
     "Frontend Developer",
     "Web Developer",
     "Fullstack Developer",
+    "前端工程師",
+    "網頁開發者",
+    "全端開發者",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript Developer",
     "React",
     "Next.js",
     "TypeScript",
     "JavaScript",
     "Python",
     "Tailwind CSS",
+    "CSS",
+    "HTML",
     "GitHub",
     "Node.js",
+    "Git",
+    "API",
+    "REST API",
+    "JSON",
+    "Responsive Design",
+    "Mobile First",
+    "UI/UX",
+    "Web Performance",
+    "SEO",
 
     // 🏫 教育背景
     "NTUST",
@@ -55,6 +72,7 @@ export const metadata: Metadata = {
     "美宣",
     "Board Game Club",
     "資訊管理系",
+    "Information Management",
     "治平高中",
     "CPSHS",
     "電子商務科",
@@ -65,13 +83,33 @@ export const metadata: Metadata = {
     "新竹縣",
     "關西",
 
-    // 🧾 網站與用途
+    // 🌍 地理位置 SEO
+    "台灣開發者",
+    "Taiwan Developer",
+    "台北",
+    "Taipei",
+    "新竹",
+    "Hsinchu",
+    "台灣學生開發者",
+    "Taiwan Student Developer",
+
+    // 🧾 網站與用途 - 增加更多相關詞彙
     "personal website",
     "portfolio",
     "個人網站",
+    "個人作品集",
     "開發作品",
     "履歷",
     "簡歷",
+    "專案展示",
+    "project showcase",
+    "web portfolio",
+    "developer portfolio",
+    "student portfolio",
+    "programming projects",
+    "coding projects",
+    "技術部落格",
+    "tech blog",
 
     // 🎮 相關作品與彩蛋
     "LaBaG",
@@ -86,6 +124,19 @@ export const metadata: Metadata = {
     "c063",
     "fanyucomponents",
     "小傲嬌",
+
+    // 📚 專業領域長尾關鍵字
+    "網頁前端開發",
+    "React 專案",
+    "Next.js 作品集",
+    "TypeScript 開發",
+    "響應式網頁設計",
+    "現代網頁開發",
+    "學生開發者作品",
+    "開源專案",
+    "GitHub 專案",
+    "Web Development Taiwan",
+    "Frontend Development Taiwan"
   ],
 
   openGraph: {
@@ -96,10 +147,13 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/GameShow.jpg",
-        alt: "FanYu Profile Image",
+        width: 1200,
+        height: 630,
+        alt: "FanYu Profile Image - Frontend Developer Portfolio",
       },
     ],
     locale: "zh_TW",
+    alternateLocale: ["en_US"],
     type: "website",
   },
   twitter: {
@@ -107,6 +161,8 @@ export const metadata: Metadata = {
     title,
     description,
     images: ["/GameShow.jpg"],
+    creator: "@fanyuuu2006",
+    site: "@fanyuuu2006",
   },
   robots: "index, follow",
 
