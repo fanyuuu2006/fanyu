@@ -133,10 +133,10 @@ export const HeroSection = () => {
         <div className="flex flex-wrap justify-center min-h-154">
           <div className="flex flex-col items-center justify-center p-4 gap-2 w-full lg:w-24/50">
             <div className="flex flex-col gap-2">
-              <span className="text-3xl md:text-5xl font-bold">
+              <span className="text-4xl md:text-5xl font-bold">
                 {heroContent.hello}
               </span>
-              <h1 className="text-4xl md:text-6xl font-bold ">
+              <h1 className="text-5xl md:text-6xl font-bold ">
                 {heroContent.iAm}
                 <span className="text-gradient">
                   {profile.nickname[Language.Current]}
