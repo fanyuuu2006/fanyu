@@ -61,7 +61,13 @@ export const ExperienceCard = ({
         <div className="flex flex-col gap-2">
           <span className="flex gap-2 text-base md:text-lg opacity-75 ">
             <ClockCircleOutlined />
-            {`${item.duration.start ?? ""} ~ ${item.duration.end ?? ""}`}
+            {`${
+              item.duration.start ??
+              { chinese: "無紀錄", english: "No Record" }[Language.Current]
+            } ~ ${
+              item.duration.end ??
+              { chinese: "至今", english: "Present" }[Language.Current]
+            }`}
           </span>
           {item.links && (
             <div className="flex gap-1 flex-wrap">
