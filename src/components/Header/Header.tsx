@@ -48,7 +48,7 @@ export const Header = () => {
         </div>
         <Collapse
           state={menuShow}
-          className="p-2 slide-collapse lg:hidden"
+          className="slide-collapse lg:hidden"
           id="mobile-nav"
         >
           <div className="flex flex-col w-full text-2xl font-bold text-center">
@@ -56,7 +56,7 @@ export const Header = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="py-2 px-4 hover:bg-[var(--background-color-secondary)] transition-colors duration-200"
+                className="p-3 hover:bg-[var(--background-color-secondary)] transition-colors duration-200"
                 onClick={() => setMenuShow(false)}
               >
                 {item.label[Language.Current]}

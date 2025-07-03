@@ -54,7 +54,6 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
       id={year}
       className="w-full flex flex-col gap-2"
       {...rest}
-      key={isLoading.toString()}
     >
       <div
         className={`flex items-center gap-2 transition-colors ${
