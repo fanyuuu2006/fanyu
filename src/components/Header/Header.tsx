@@ -12,7 +12,7 @@ export const Header = () => {
   const [menuShow, setMenuShow] = useState<boolean>(false);
 
   return (
-    <header className="fixed top-0 z-1080 w-full bg-[var(--background-color)]">
+    <header className="fixed top-0 z-1080 w-full bg-[var(--background-color)] border-[var(--border-color)] border-b-1">
       <nav className="flex flex-col" role="navigation" aria-label="主導航">
         <div className="container flex items-center justify-between flex-nowrap px-8 py-4 w-full">
           <Link href="/" className="h-full">

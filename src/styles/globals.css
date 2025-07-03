@@ -9,7 +9,7 @@
     --text-color: #ffffff;
     --text-color-primary: #0d59cc;
     --text-color-secondary: #43ccff;
-    --border-color: #333333;
+    --border-color: #333333cc;
     --brightness-light: 1.2;
   }
 
@@ -97,14 +97,19 @@
 
   .card {
     background: var(--background-color-secondary);
-    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
+  }
+  .card:hover {
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
   }
 
   a.card:hover {
     --move-y: 0.5rem;
     transform: translateY(calc(-1 * var(--move-y)));
+    border-color: var(--text-color-primary);
     box-shadow: 0 var(--move-y) 1.5rem rgba(0, 0, 0, 1);
     text-decoration: none;
   }

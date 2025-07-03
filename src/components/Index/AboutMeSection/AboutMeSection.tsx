@@ -58,9 +58,9 @@ export const AboutMeSection = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="flex justify-center items-start flex-shrink-0 w-full lg:w-1/4"
           >
-            <div className="card p-4 hover:scale-105 transition-transform duration-300">
+            <div className="w-64 h-64 max-w-80 max-h-80 border-2 border-[var(--border-color)] rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-300">
               <Image
-                className="border-2 border-[var(--border-color)] w-64 h-64 max-w-80 max-h-80 rounded-[inherit] object-cover"
+                className="w-full h-full object-cover"
                 alt="個人照片"
                 src="/GameShow.jpg"
                 width={300}
