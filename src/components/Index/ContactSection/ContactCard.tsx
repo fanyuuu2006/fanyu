@@ -29,7 +29,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   return (
     <motion.div
       ref={ref}
-      className="group relative p-[2px] rounded-2xl"
+      className="group relative p-[2px] rounded-full"
       style={{
         background: item.backgrounds?.length
           ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`

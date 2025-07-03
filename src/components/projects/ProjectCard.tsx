@@ -5,7 +5,7 @@ import {
 } from "@/types/portfolio";
 import { slugify } from "@/utils/url";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Collapse, OutsideLink, OverrideProps } from "fanyucomponents";
+import { Collapse, OverrideProps } from "fanyucomponents";
 import {
   ClockCircleOutlined,
   GithubOutlined,
@@ -18,6 +18,7 @@ import { HTMLMotionProps, motion } from "framer-motion";
 import Giscus from "@giscus/react";
 import { useState } from "react";
 import { getGithubBadgeSrcs } from "@/utils/github";
+import { CustomLink } from "../custom/CustomLink";
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
@@ -71,16 +72,20 @@ export const ProjectCard = ({
           <div className="text-xl md:text-2xl text-justify">
             {item.about[Language.Current]}
           </div>
-          {item.links.map((link) => (
-            <OutsideLink
-              key={link.href}
-              href={link.href}
-              className="text-lg w-fit flex flex-nowrap items-center gap-2 opacity-70"
-            >
-              {categoryIcon[link.category]}
-              <span className="wrap-anywhere">{link.href}</span>
-            </OutsideLink>
-          ))}
+          <div className="flex gap-1 flex-wrap">
+            {item.links.map((link) => (
+              <CustomLink
+                key={link.href}
+                href={link.href}
+                className="max-w-full btn-secondary text-sm md:text-base flex gap-2 px-2 py-1 rounded-full items-center"
+              >
+                {categoryIcon[link.category]}
+                <span className="text-ellipsis overflow-hidden whitespace-nowrap">
+                  {link.href}
+                </span>
+              </CustomLink>
+            ))}
+          </div>
           <ul className="text-xl md:text-2xl text-justify list-disc ps-4">
             {item.description[Language.Current].map((part, index) => (
               <li key={index}>{part}</li>
