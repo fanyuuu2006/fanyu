@@ -41,7 +41,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
         className="flex text-2xl no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
         onClick={() => setIsOpen((prev) => !prev)}
         style={{
-          background: isOpen ? "transparent" : "var(--background-color-dark)",
+          background: isOpen ? "transparent" : "var(--background-color)",
         }}
       >
         <item.icon />
@@ -68,7 +68,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
               : "var(--text-color-primary)",
           }}
         >
-          <div className="bg-[var(--background-color-dark)] rounded-[inherit] flex flex-col gap-2 p-4">
+          <div className="bg-[var(--background-color)] rounded-[inherit] flex flex-col gap-2 p-4">
             <div className="flex items-center gap-4">
               {/**頭像 */}
               <div

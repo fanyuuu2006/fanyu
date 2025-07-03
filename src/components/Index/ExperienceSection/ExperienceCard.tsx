@@ -69,10 +69,12 @@ export const ExperienceCard = ({
                 <CustomLink
                   key={link.href}
                   href={link.href}
-                  className="btn-secondary text-sm md:text-base flex gap-2 px-2 py-1 rounded-3xl items-center"
+                  className="btn-secondary group relative text-sm md:text-base flex gap-2 p-2 rounded-3xl items-center"
                 >
                   {link.icon}
-                  {link[Language.Current]}
+                  <span>
+                    {link[Language.Current]}
+                  </span>
                 </CustomLink>
               ))}
             </div>

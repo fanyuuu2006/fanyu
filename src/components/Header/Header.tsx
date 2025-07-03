@@ -12,7 +12,7 @@ export const Header = () => {
   const [menuShow, setMenuShow] = useState<boolean>(false);
 
   return (
-    <header className="fixed top-0 z-1080 w-full bg-[var(--background-color-dark)]">
+    <header className="fixed top-0 z-1080 w-full bg-[var(--background-color)]">
       <nav className="flex flex-col" role="navigation" aria-label="主導航">
         <div className="container flex items-center justify-between flex-nowrap px-8 py-4 w-full">
           <Link href="/" className="h-full">
@@ -48,7 +48,7 @@ export const Header = () => {
         </div>
         <Collapse
           state={menuShow}
-          className="slide-collapse lg:hidden"
+          className="p-2 slide-collapse lg:hidden"
           id="mobile-nav"
         >
           <div className="flex flex-col w-full text-2xl font-bold text-center">
@@ -56,7 +56,7 @@ export const Header = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="py-2 px-4 hover:bg-[var(--background-color-primary)]"
+                className="py-2 px-4 hover:bg-[var(--background-color-secondary)] transition-colors duration-200"
                 onClick={() => setMenuShow(false)}
               >
                 {item.label[Language.Current]}
