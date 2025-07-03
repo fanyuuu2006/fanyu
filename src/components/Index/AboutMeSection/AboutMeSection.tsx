@@ -5,6 +5,7 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
+import Link from "next/link";
 
 type AboutMeContent = {
   aboutMe: string;
@@ -58,7 +59,7 @@ export const AboutMeSection = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="flex justify-center items-start flex-shrink-0 w-full lg:w-1/4"
           >
-            <div className="w-64 h-64 max-w-80 max-h-80 border-2 border-[var(--border-color)] rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-300">
+            <Link className="w-64 h-64 max-w-80 max-h-80 card overflow-hidden"  href="#">
               <Image
                 className="w-full h-full object-cover"
                 alt="個人照片"
@@ -67,7 +68,7 @@ export const AboutMeSection = () => {
                 height={300}
                 priority
               />
-            </div>
+            </Link>
           </motion.div>
 
           {/* 文章內容卡片 - 佔 3/4 比例 */}
