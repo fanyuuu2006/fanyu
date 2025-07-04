@@ -51,10 +51,10 @@ export const SkillsSection = () => {
           {Object.entries(profile.skills).map(([category, items]) => (
             <motion.div variants={fadeInItem} key={category}>
               <div className="p-4 flex flex-col gap-2">
-                <span className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2">
                   {skillCategoryIcons[category as SkillCategory]}
                   {skillsContent[category as SkillCategory]}:
-                </span>
+                </h2>
                 <motion.div
                   variants={staggerContainer}
                   className="text-2xl flex flex-wrap"
