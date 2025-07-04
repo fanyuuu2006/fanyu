@@ -51,7 +51,7 @@ export const ProjectCard = ({
     <motion.article className="w-full flex flex-col" {...rest}>
       <div
         id={slugify(item.title.english)}
-        className={`${className} card shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
+        className={`${className} card shadow w-full p-6 gap-2 flex flex-col md:flex-row`}
       >
         <div className="h-25 w-25 shrink-0 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element*/}
@@ -72,12 +72,12 @@ export const ProjectCard = ({
           <div className="text-xl md:text-2xl text-justify">
             {item.about[Language.Current]}
           </div>
-          <div className="flex gap-1 flex-wrap">
+          <div className="flex gap-2 flex-wrap">
             {item.links.map((link) => (
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="max-w-full text-[var(--text-color-muted)] text-sm md:text-base flex gap-2 px-2 py-1 rounded-full items-center"
+                className="max-w-full text-[var(--text-color-muted)] text-sm md:text-base flex gap-2 rounded-full items-center"
               >
                 {categoryIcon[link.category]}
                 <span className="text-ellipsis overflow-hidden whitespace-nowrap">
@@ -91,7 +91,7 @@ export const ProjectCard = ({
               <li key={index}>{part}</li>
             ))}
           </ul>
-          <div className="text-lg flex flex-nowrap gap-2">
+          <div className="text-sm md:text-base flex flex-nowrap gap-2">
             <TagsOutlined />
             <div className="flex flex-wrap gap-2">
               {item.tags.map((tag) => (
