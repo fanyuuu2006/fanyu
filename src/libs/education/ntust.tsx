@@ -77,14 +77,7 @@ const NTUST: ExperienceItem = {
                     }[language]
                   }
                 </th>
-                <th className="text-center p-2">
-                  {
-                    {
-                      chinese: "平均成績",
-                      english: "GPA",
-                    }[language]
-                  }
-                </th>
+                <th className="text-center p-2">GPA</th>
                 <th className="text-center p-2">
                   {
                     {
@@ -119,7 +112,7 @@ const NTUST: ExperienceItem = {
                       </td>
                       <td className="text-center p-2">{totalCredits}</td>
                     </tr>
-                    <modal.Container >
+                    <modal.Container>
                       <div className="rounded-2xl animate-pop overflow-hidden">
                         <table className="text-sm md:text-base w-full bg-[var(--background-color-primary)] table-auto border-collapse">
                           <thead className="bg-gradient">
@@ -150,7 +143,7 @@ const NTUST: ExperienceItem = {
                               </th>
                             </tr>
                           </thead>
-                          <tbody >
+                          <tbody>
                             {data.courses.map((course, index) => (
                               <tr
                                 key={index}

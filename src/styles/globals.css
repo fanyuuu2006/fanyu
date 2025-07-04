@@ -4,10 +4,10 @@
 @layer base {
   :root {
     /* === 顏色系統 === */
-    --background-color: #080808;
+    --background-color: #0a0a0a;
     --background-color-primary: #313131;
     --background-color-secondary: #171717;
-    --background-color-tertiary: #262626;
+    --background-color-tertiary: #0f0f0f;
 
     --text-color: #ffffff;
     --text-color-primary: #3b82f6; /* Tailwind 的 blue-500 */

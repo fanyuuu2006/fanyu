@@ -59,7 +59,10 @@ export const AboutMeSection = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="flex justify-center items-start flex-shrink-0 w-full lg:w-1/4"
           >
-            <Link className="w-64 h-64 max-w-80 max-h-80 card overflow-hidden"  href="#">
+            <Link
+              className="w-64 h-64 max-w-80 max-h-80 card overflow-hidden"
+              href="#"
+            >
               <Image
                 className="w-full h-full object-cover"
                 alt="個人照片"
@@ -77,7 +80,7 @@ export const AboutMeSection = () => {
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card p-2 flex flex-col flex-1 overflow-hidden lg:w-3/4"
+            className="card p-2  md:p-3 xl:p-4 flex flex-col flex-1 overflow-hidden lg:w-3/4"
           >
             {aboutMeContent.article.map((part, index) => (
               <motion.p
