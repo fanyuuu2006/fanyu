@@ -144,7 +144,7 @@ export const HeroSection = () => {
                 ❗
               </h1>
               <TypeWriterText
-                className="text-base md:text-lg lg:text-xl opacity-75"
+                className="text-base md:text-lg lg:text-xl text-[var(--text-color-muted)]"
                 speed={heroContent.intro.length * 1.5}
               >
                 {heroContent.intro}
