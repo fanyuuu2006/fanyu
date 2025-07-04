@@ -10,8 +10,6 @@ import {
   ClockCircleOutlined,
   GithubOutlined,
   LinkOutlined,
-  StarOutlined,
-  TagsOutlined,
 } from "@ant-design/icons";
 import { ProjectTagCheckbox } from "./ProjectTagCheckbox";
 import { SiNpm } from "react-icons/si";
@@ -96,49 +94,40 @@ export const ProjectCard = ({
               <p className="text-lg md:text-xl text-[var(--text-color-muted)] text-justify leading-relaxed">
                 {item.about[Language.Current]}
               </p>
-              <div className="flex items-center gap-3 text-base md:text-lg text-[var(--text-color-muted)]">
+              <div className="flex items-center gap-2 text-base md:text-lg text-[var(--text-color-muted)]">
                 <ClockCircleOutlined />
                 <span className="font-medium">{item.time}</span>
               </div>
+              <div className="flex gap-2 flex-wrap">
+                {item.links.map((link) => (
+                  <CustomLink
+                    key={link.href}
+                    href={link.href}
+                    className="text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-2"
+                  >
+                    {categoryIcon[link.category]}
+                    <span className="text-ellipsis overflow-hidden whitespace-nowrap">
+                      {link.href}
+                    </span>
+                  </CustomLink>
+                ))}
+              </div>
             </div>
 
-            <div className="flex gap-2 flex-wrap">
-              {item.links.map((link) => (
-                <CustomLink
-                  key={link.href}
-                  href={link.href}
-                  className="btn-secondary text-sm md:text-base flex items-center gap-2 py-2 px-4 rounded-full"
-                >
-                  {categoryIcon[link.category]}
-                  <span className="text-ellipsis overflow-hidden whitespace-nowrap">
-                    {link.href}
-                  </span>
-                </CustomLink>
-              ))}
-            </div>
-
-            <div className="bg-[var(--background-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
-              <h4 className="flex items-center gap-2 mb-3">
-                <StarOutlined />
-                <span className="text-lg md:text-xl font-semibold text-[var(--text-color)]">
-                  {projectContent.projectFeature}
-                </span>
+            <div className="flex flex-col gap-2 p-4 rounded-lg border border-[var(--border-color)]">
+              <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
+                {projectContent.projectFeature}
               </h4>
               <ul className="text-base md:text-lg text-justify list-disc ps-5 space-y-2">
                 {item.description[Language.Current].map((part, index) => (
-                  <li key={index} className="leading-relaxed">
-                    {part}
-                  </li>
+                  <li key={index}>{part}</li>
                 ))}
               </ul>
             </div>
 
-            <div className="bg-[var(--background-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
-              <h4 className="flex items-center gap-2 mb-3">
-                <TagsOutlined />
-                <span className="text-lg md:text-xl font-semibold text-[var(--text-color)]">
-                  {projectContent.skillTag}
-                </span>
+            <div className="flex flex-col gap-2 p-4 rounded-lg border border-[var(--border-color)]">
+              <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
+                {projectContent.skillTag}
               </h4>
               <div className="flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
@@ -162,7 +151,7 @@ export const ProjectCard = ({
                   }}
                   className={`btn-${
                     giscusShow ? "secondary" : "primary"
-                  } text-base md:text-lg px-6 py-3 rounded-lg`}
+                  } text-base md:text-lg px-4 py-2 rounded-lg`}
                 >
                   {
                     (giscusShow

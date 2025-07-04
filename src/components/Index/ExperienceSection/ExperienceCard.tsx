@@ -124,7 +124,7 @@ export const ExperienceCard = ({
         )}
         {/** 角色/職位 */}
         {item.role && (
-          <div className="p-4 rounded-lg border border-[var(--border-color)]">
+          <div className="flex flex-col gap-2 p-4 rounded-lg border border-[var(--border-color)]">
             <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
               {experienceContent.role}
             </h4>
@@ -135,7 +135,7 @@ export const ExperienceCard = ({
         )}
         {/** 描述 */}
         {item.description && (
-          <div className="p-4 rounded-lg border border-[var(--border-color)]">
+          <div className="flex flex-col gap-2 p-4 rounded-lg border border-[var(--border-color)]">
             <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
               {experienceContent.description}
             </h4>

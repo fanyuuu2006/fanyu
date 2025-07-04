@@ -69,16 +69,17 @@ export const MainSection = () => {
 
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false);
   const [currentTags, setCurrentTags] = useState<Set<ProjectTag> | null>(null);
-  const timeOrder = useTimeOrderTabs(profile.portfolio.projects, (item) => item.time);
+  const timeOrder = useTimeOrderTabs(
+    profile.portfolio.projects,
+    (item) => item.time
+  );
 
   const sortedProject = useMemo(() => {
-    return (
-      !currentTags
-        ? timeOrder.sortedData
-        : timeOrder.sortedData.filter((item) =>
-            [...currentTags].every((tag) => item.tags.includes(tag))
-          )
-    )
+    return !currentTags
+      ? timeOrder.sortedData
+      : timeOrder.sortedData.filter((item) =>
+          [...currentTags].every((tag) => item.tags.includes(tag))
+        );
   }, [currentTags, timeOrder.sortedData]);
 
   return (
@@ -164,7 +165,10 @@ export const MainSection = () => {
             ))}
           </motion.div>
         )}
-        <Link className="text-2xl transition-all hover:translate-x-2 group" href="/#portfolio">
+        <Link
+          className="text-2xl transition-all hover:translate-x-2 group"
+          href="/#portfolio"
+        >
           <ArrowLeftOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-x-2" />
           {projectsContent.back}
         </Link>
