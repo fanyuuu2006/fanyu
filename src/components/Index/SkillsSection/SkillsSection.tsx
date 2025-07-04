@@ -50,11 +50,11 @@ export const SkillsSection = () => {
         >
           {Object.entries(profile.skills).map(([category, items]) => (
             <motion.div variants={fadeInItem} key={category}>
-              <div className="card p-4 flex flex-col gap-2">
-                <div className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+              <div className="p-4 flex flex-col gap-2">
+                <span className="text-2xl md:text-3xl font-bold flex items-center gap-2">
                   {skillCategoryIcons[category as SkillCategory]}
                   {skillsContent[category as SkillCategory]}:
-                </div>
+                </span>
                 <motion.div
                   variants={staggerContainer}
                   className="text-2xl flex flex-wrap"
@@ -71,7 +71,7 @@ export const SkillsSection = () => {
                           src={item.src}
                           width={300}
                           height={300}
-                          className="object-cover transition-transform hover:-translate-y-2 hover:scale-110"
+                          className="object-cover transition-transform"
                         />
                       </Tooltip>
                     </div>

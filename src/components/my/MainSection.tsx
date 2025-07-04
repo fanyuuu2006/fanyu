@@ -121,7 +121,7 @@ export const MainSection = () => {
   // }, []);
   return (
     <section id="hero">
-      <div className="container flex flex-col items-center justify-center min-h-162">
+      <div className="container flex flex-col items-center justify-center min-h-154">
         <TimerCard />
         {/* <CodeCard className="hint" lang="typescript" codeLines={codeLines} /> */}
       </div>
