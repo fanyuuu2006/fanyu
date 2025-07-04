@@ -139,6 +139,7 @@
       var(--text-color-primary),
       var(--text-color-secondary)
     );
+    box-shadow: var(--shadow-base);
     color: white;
     border: none;
   }
