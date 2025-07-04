@@ -10,15 +10,32 @@ import {
   ClockCircleOutlined,
   GithubOutlined,
   LinkOutlined,
+  StarOutlined,
   TagsOutlined,
 } from "@ant-design/icons";
 import { ProjectTagCheckbox } from "./ProjectTagCheckbox";
 import { SiNpm } from "react-icons/si";
 import { HTMLMotionProps, motion } from "framer-motion";
 import Giscus from "@giscus/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { getGithubBadgeSrcs } from "@/utils/github";
 import { CustomLink } from "../custom/CustomLink";
+import { LanguageOption, LanguageContent } from "@/types/language";
+
+type ProjectContent = Record<"skillTag" | "projectFeature", string>;
+const getProjectContent = (language: LanguageOption): ProjectContent =>
+  ((
+    {
+      chinese: {
+        skillTag: "技能標籤",
+        projectFeature: "專案特色",
+      },
+      english: {
+        skillTag: "Skill Tags",
+        projectFeature: "Project Features",
+      },
+    } as LanguageContent<ProjectContent>
+  )[language]);
 
 const categoryIcon: Record<ProjectLinkCategory, React.ReactNode> = {
   demo: <LinkOutlined />,
@@ -46,97 +63,129 @@ export const ProjectCard = ({
 }: ProjectCardProps) => {
   const Language = useLanguage();
   const [giscusShow, setGiscusShow] = useState<boolean>(false);
+  const projectContent = useMemo(
+    () => getProjectContent(Language.Current),
+    [Language.Current]
+  );
 
   return (
     <motion.article className="w-full flex flex-col" {...rest}>
       <div
         id={slugify(item.title.english)}
-        className={`${className} card shadow w-full p-6 gap-2 flex flex-col md:flex-row`}
+        className={`${className} card shadow w-full p-6 md:p-8 gap-4 flex flex-col md:flex-row`}
       >
-        <div className="h-25 w-25 shrink-0 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element*/}
-          <img
-            className=" h-full w-full bg-[#fff]"
-            src={item.imageSrc}
-            alt={`${item.title.english} icon`}
-          />
+        {/* 專案圖片 */}
+        <div>
+          <div className="h-25 w-25 shrink-0 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element*/}
+            <img
+              className="h-full w-full bg-[#fff] object-cover"
+              src={item.imageSrc}
+              alt={`${item.title.english} icon`}
+            />
+          </div>
         </div>
-        <div className="flex flex-col flex-1 gap-2">
-          <div className="text-3xl font-bold">
-            {item.title[Language.Current]}
-          </div>
-          <div className="text-base md:text-lg flex gap-2">
-            <ClockCircleOutlined />
-            {item.time}
-          </div>
-          <div className="text-xl md:text-2xl text-justify">
-            {item.about[Language.Current]}
-          </div>
-          <div className="flex gap-2 flex-wrap">
-            {item.links.map((link) => (
-              <CustomLink
-                key={link.href}
-                href={link.href}
-                className="max-w-full text-[var(--text-color-muted)] text-sm md:text-base flex gap-2 rounded-full items-center"
-              >
-                {categoryIcon[link.category]}
-                <span className="text-ellipsis overflow-hidden whitespace-nowrap">
-                  {link.href}
-                </span>
-              </CustomLink>
-            ))}
-          </div>
-          <ul className="text-xl md:text-2xl text-justify list-disc ps-4">
-            {item.description[Language.Current].map((part, index) => (
-              <li key={index}>{part}</li>
-            ))}
-          </ul>
-          <div className="text-sm md:text-base flex flex-nowrap gap-2">
-            <TagsOutlined />
-            <div className="flex flex-wrap gap-2">
-              {item.tags.map((tag) => (
-                <ProjectTagCheckbox
-                  key={tag}
-                  tag={tag}
-                  currentTags={currentTags}
-                  setCurrentTags={setCurrentTags}
+
+        {/* 專案資訊 */}
+        <div className="flex-1">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
+                {item.title[Language.Current]}
+              </h3>
+              <p className="text-lg md:text-xl text-[var(--text-color-muted)] text-justify leading-relaxed">
+                {item.about[Language.Current]}
+              </p>
+              <div className="flex items-center gap-3 text-base md:text-lg text-[var(--text-color-muted)]">
+                <ClockCircleOutlined />
+                <span className="font-medium">{item.time}</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2 flex-wrap">
+              {item.links.map((link) => (
+                <CustomLink
+                  key={link.href}
+                  href={link.href}
+                  className="btn-secondary text-sm md:text-base flex items-center gap-2 py-2 px-4 rounded-full"
                 >
-                  {tag}
-                </ProjectTagCheckbox>
+                  {categoryIcon[link.category]}
+                  <span className="text-ellipsis overflow-hidden whitespace-nowrap">
+                    {link.href}
+                  </span>
+                </CustomLink>
               ))}
             </div>
-          </div>
-          {item.github && (
-            <div className="w-full flex border-t border-[#8888] mt-2 pt-4">
-              <button
-                onClick={() => {
-                  setGiscusShow((prev) => !prev);
-                }}
-                className={`${
-                  giscusShow ? "opacity-70" : ""
-                } btn-primary text-lg px-4 py-2 rounded-lg transition-all duration-200 `}
-              >
-                {
-                  (giscusShow
-                    ? { chinese: "關閉討論區", english: "Close Discussion" }
-                    : { chinese: "展開討論區", english: "Open Discussion" })[
-                    Language.Current
-                  ]
-                }
-              </button>
+
+            <div className="bg-[var(--background-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
+              <h4 className="flex items-center gap-2 mb-3">
+                <StarOutlined />
+                <span className="text-lg md:text-xl font-semibold text-[var(--text-color)]">
+                  {projectContent.projectFeature}
+                </span>
+              </h4>
+              <ul className="text-base md:text-lg text-justify list-disc ps-5 space-y-2">
+                {item.description[Language.Current].map((part, index) => (
+                  <li key={index} className="leading-relaxed">
+                    {part}
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
+
+            <div className="bg-[var(--background-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
+              <h4 className="flex items-center gap-2 mb-3">
+                <TagsOutlined />
+                <span className="text-lg md:text-xl font-semibold text-[var(--text-color)]">
+                  {projectContent.skillTag}
+                </span>
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {item.tags.map((tag) => (
+                  <ProjectTagCheckbox
+                    key={tag}
+                    tag={tag}
+                    currentTags={currentTags}
+                    setCurrentTags={setCurrentTags}
+                  >
+                    {tag}
+                  </ProjectTagCheckbox>
+                ))}
+              </div>
+            </div>
+
+            {item.github && (
+              <div className="w-full flex">
+                <button
+                  onClick={() => {
+                    setGiscusShow((prev) => !prev);
+                  }}
+                  className={`btn-${
+                    giscusShow ? "secondary" : "primary"
+                  } text-base md:text-lg px-6 py-3 rounded-lg`}
+                >
+                  {
+                    (giscusShow
+                      ? { chinese: "關閉討論區", english: "Close Discussion" }
+                      : { chinese: "展開討論區", english: "Open Discussion" })[
+                      Language.Current
+                    ]
+                  }
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {item.github && (
         <Collapse
           state={giscusShow}
-          className={`w-full slide-collapse flex flex-col items-center gap-4 ${
-            giscusShow ? "mt-4" : "mt-0"
+          className={`w-full slide-collapse flex flex-col items-center gap-6 ${
+            giscusShow ? "mt-6" : ""
           }`}
           id="github-container"
         >
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 justify-center">
             {getGithubBadgeSrcs(item.github.repo).map((item) => (
               /* eslint-disable-next-line @next/next/no-img-element*/
               <img
@@ -145,24 +194,26 @@ export const ProjectCard = ({
                 src={item.url}
                 alt={item.title}
                 title={item.title}
-                className="h-6 object-cover select-none"
+                className="h-6 object-cover select-none transition-transform duration-200 hover:scale-110"
               />
             ))}
           </div>
-          <Giscus
-            repo={item.github.repo}
-            repoId={item.github.repoId}
-            categoryId={item.github.categoryId}
-            category="Announcements"
-            mapping="pathname"
-            strict="0"
-            reactionsEnabled="1"
-            emitMetadata="0"
-            inputPosition="top"
-            theme="dark"
-            lang={Language.Current === "chinese" ? "zh-TW" : "en"}
-            loading="lazy"
-          />
+          <div className="w-full">
+            <Giscus
+              repo={item.github.repo}
+              repoId={item.github.repoId}
+              categoryId={item.github.categoryId}
+              category="Announcements"
+              mapping="pathname"
+              strict="0"
+              reactionsEnabled="1"
+              emitMetadata="0"
+              inputPosition="top"
+              theme="dark"
+              lang={Language.Current === "chinese" ? "zh-TW" : "en"}
+              loading="lazy"
+            />
+          </div>
         </Collapse>
       )}
     </motion.article>

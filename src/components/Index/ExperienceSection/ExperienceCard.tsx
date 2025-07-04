@@ -57,9 +57,9 @@ export const ExperienceCard = ({
       className={`${className} card w-full p-6 sm:p-8 gap-4 flex flex-col`}
       {...rest}
     >
-      {/** 圖片 & 標題  */}
+      {/** 圖片 */}
       <div className="flex items-start flex-col md:flex-row gap-4">
-        <div className="flex-shrink-0 h-20 w-20 md:h-28 md:w-28 rounded-3xl overflow-hidden border-2 border-[var(--border-color)] shadow-md transition-transform duration-300 hover:scale-105">
+        <div className="flex-shrink-0 h-20 w-20 md:h-28 md:w-28 rounded-3xl overflow-hidden border-2 border-[var(--border-color)]">
           {/*eslint-disable-next-line @next/next/no-img-element*/}
           <img
             src={
@@ -74,6 +74,8 @@ export const ExperienceCard = ({
             height={600}
           />
         </div>
+
+        {/** 標題 */}
         <div className="flex-1">
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
