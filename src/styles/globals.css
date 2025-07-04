@@ -100,16 +100,8 @@
   .btn-secondary {
     cursor: pointer;
     border: none;
-    border-radius: var(--border-radius-sm);
-    padding: 0.75rem 1.5rem;
-    font-weight: 500;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
     transition: all var(--transition-normal) ease;
-    box-shadow: var(--shadow-base);
     position: relative;
     overflow: hidden;
   }
@@ -169,7 +161,6 @@
     text-decoration: none !important;
     filter: brightness(var(--brightness-light));
     transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
   }
 
   button:active,
@@ -199,10 +190,10 @@
     max-width: var(--container-max-width);
     margin-inline: auto;
     padding: 1rem;
+    gap: 1rem;
     width: 100%;
   }
 
- 
   /* === 卡片系統 === */
   .card {
     background: var(--background-color-secondary);

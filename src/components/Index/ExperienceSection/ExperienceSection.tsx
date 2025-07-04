@@ -9,7 +9,6 @@ import { ExperienceTab } from "@/types/experience";
 import { experienceTabIcons, experienceTabs } from "@/libs/education";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
 
 type ExperienceContent = Record<
@@ -139,21 +138,15 @@ export const ExperienceSection = () => {
                       </Collapse>
                       <div className="w-full text-center">
                         <button
-                          className="text-2xl transition-all hover:-translate-x-2 group"
+                          className="text-2xl"
                           onClick={() => {
                             setShowMore((prev) => !prev);
                           }}
                         >
                           {showMore ? (
-                            <>
-                              {experienceContent.collapse}
-                              <UpOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
-                            </>
+                            <>{experienceContent.collapse}</>
                           ) : (
-                            <>
-                              {experienceContent.viewMore}
-                              <DownOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
-                            </>
+                            <>{experienceContent.viewMore}</>
                           )}
                         </button>
                       </div>

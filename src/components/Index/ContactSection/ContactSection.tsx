@@ -30,7 +30,7 @@ export const ContactSection = () => {
 
   return (
     <section id="contact">
-      <div className="container flex flex-col items-center gap-4">
+      <div className="container flex flex-col items-center">
         <h1 ref={ref} className="text-5xl font-bold">
           {contactContent.contact}
         </h1>
