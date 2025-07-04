@@ -170,6 +170,11 @@ export const metadata: Metadata = {
     google: "BPwLDvPkjbND-Djvxq812SdYkm2pHQ18WPWt2KkPiQk",
   },
   alternates: {
-    canonical: "/",
+    canonical: profile.url,
+    languages: {
+      "zh-TW": profile.url,
+      "en": profile.url,
+      "x-default": profile.url,
+    },
   },
 };

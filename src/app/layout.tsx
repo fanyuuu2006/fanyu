@@ -27,20 +27,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* 語言和地區標籤 */}
-        <link rel="alternate" href={profile.url} hrefLang="zh-TW" />
-        <link rel="alternate" href={profile.url} hrefLang="en" />
-        <link rel="alternate" href={profile.url} hrefLang="x-default" />
-        
         {/* Preconnect 到外部資源以提升效能 */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        
+
         {/* DNS Prefetch 到可能訪問的外部連結 */}
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//vercel.app" />
-        
+
         {/** 結構化資料 */}
         <Script
           id="person-jsonld"
@@ -50,27 +49,35 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: profile.name.english,
-              alternateName: [profile.nickname.english, profile.nickname.chinese, profile.name.chinese],
+              alternateName: [
+                profile.nickname.english,
+                profile.nickname.chinese,
+                profile.name.chinese,
+              ],
               birthDate: profile.birthday,
               url: profile.url,
               image: `${profile.url}/GameShow.jpg`,
               sameAs: Object.values(profile.contact)
                 .flat()
                 .map((item) => item.href),
-              jobTitle: ["Student Developer", "Frontend Developer", "Web Developer"],
+              jobTitle: [
+                "Student Developer",
+                "Frontend Developer",
+                "Web Developer",
+              ],
               description: profile.description.english,
               nationality: {
                 "@type": "Country",
-                name: "Taiwan"
+                name: "Taiwan",
               },
               homeLocation: {
                 "@type": "Place",
-                name: "Taipei, Taiwan"
+                name: "Taipei, Taiwan",
               },
-              alumniOf: profile.experience.education.map(edu => ({
+              alumniOf: profile.experience.education.map((edu) => ({
                 "@type": "CollegeOrUniversity",
                 name: edu.name.english,
-                alternateName: edu.name.chinese
+                alternateName: edu.name.chinese,
               })),
               knowsAbout: [
                 "Web Development",
@@ -83,20 +90,20 @@ export default function RootLayout({
                 "Node.js",
                 "Tailwind CSS",
                 "UI/UX Design",
-                "Responsive Design"
+                "Responsive Design",
               ],
               knowsLanguage: [
                 {
                   "@type": "Language",
                   name: "Chinese",
-                  alternateName: "zh-TW"
+                  alternateName: "zh-TW",
                 },
                 {
-                  "@type": "Language", 
+                  "@type": "Language",
                   name: "English",
-                  alternateName: "en"
-                }
-              ]
+                  alternateName: "en",
+                },
+              ],
             }),
           }}
         />
