@@ -77,7 +77,7 @@ export const ProjectCard = ({
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="max-w-full btn-secondary text-sm md:text-base flex gap-2 px-2 py-1 rounded-full items-center"
+                className="max-w-full text-[var(--text-color-muted)] text-sm md:text-base flex gap-2 px-2 py-1 rounded-full items-center"
               >
                 {categoryIcon[link.category]}
                 <span className="text-ellipsis overflow-hidden whitespace-nowrap">

@@ -59,7 +59,7 @@ export const ExperienceCard = ({
           </span>
         )}
         <div className="flex flex-col gap-2">
-          <span className="flex gap-2 text-base md:text-lg opacity-75 ">
+          <span className="flex gap-2 text-base md:text-lg text-[var(--text-color-muted)]">
             <ClockCircleOutlined />
             {`${
               item.duration.start ??
