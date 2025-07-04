@@ -20,7 +20,6 @@
 
     /* === 效果參數 === */
     --brightness-light: 1.2;
-    --brightness-dim: 0.8;
     --shadow-base: 0 0 1rem rgba(0, 0, 0, 0.5);
     --shadow-hover: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
     --shadow-card-hover: 0 var(--move-y) 1.5rem rgba(0, 0, 0, 1);
@@ -65,17 +64,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* === 減少動畫對於有動畫敏感的使用者 === */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-
+ 
   /* === Hero 區塊樣式 === */
   #hero {
     position: relative;
@@ -231,7 +220,6 @@
   }
 
   a.card:hover {
-    --move-y: var(--move-y);
     transform: translateY(calc(-1 * var(--move-y)));
     border-color: var(--text-color-primary);
     box-shadow: var(--shadow-card-hover);
@@ -247,12 +235,6 @@
 
   a:hover {
     text-decoration: underline 1px;
-  }
-
-  a:focus-visible {
-    outline: 2px solid var(--border-color-focus);
-    outline-offset: 2px;
-    border-radius: 2px;
   }
 
   /* === 滑動摺疊效果 === */
@@ -281,11 +263,6 @@
     background: var(--text-color-muted);
   }
 
-  /* Firefox */
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-color) transparent;
-  }
 }
 
 /* ==== Utilities Layer ==== */
@@ -316,18 +293,6 @@
     animation: turn var(--transition-normal) ease-in-out forwards;
   }
 
-  .animate-bounce-in {
-    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-
-  .animate-fade-in {
-    animation: fadeIn var(--transition-slow) ease-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp var(--transition-normal) ease-out;
-  }
-
   /* === Keyframe 動畫 === */
   @keyframes pop {
     0% {
@@ -350,44 +315,6 @@
     }
     to {
       transform: rotate(360deg);
-    }
-  }
-
-  @keyframes bounceIn {
-    0% {
-      opacity: 0;
-      transform: scale(0.3) translateY(50px);
-    }
-    50% {
-      opacity: 0.9;
-      transform: scale(1.05) translateY(-10px);
-    }
-    70% {
-      transform: scale(0.98) translateY(2px);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
     }
   }
 
