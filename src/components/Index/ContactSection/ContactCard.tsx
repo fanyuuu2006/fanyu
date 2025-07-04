@@ -34,7 +34,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
         style={{
           background: item.backgrounds?.length
             ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
-            : "var(--text-color-primary)",
+            : `linear-gradient(45deg,var(--text-color-primary),var(--text-color-secondary))`,
         }}
       >
         <span
@@ -65,7 +65,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
           style={{
             background: item.backgrounds?.length
               ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
-              : "var(--text-color-primary)",
+              : `linear-gradient(45deg,var(--text-color-primary),var(--text-color-secondary))`,
           }}
         >
           <div className="bg-[var(--background-color)] rounded-[inherit] flex flex-col gap-2 p-4">

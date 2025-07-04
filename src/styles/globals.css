@@ -10,8 +10,8 @@
     --background-color-tertiary: #262626;
 
     --text-color: #ffffff;
-    --text-color-primary: #0d59cc;
-    --text-color-secondary: #d65ff8;
+    --text-color-primary: #3b82f6; /* Tailwind 的 blue-500 */
+    --text-color-secondary: #8b5cf6; /* Tailwind 的 violet-500 */
     --text-color-muted: #a3a3a3;
 
     --border-color: #333333cc;
@@ -64,7 +64,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
- 
   /* === Hero 區塊樣式 === */
   #hero {
     position: relative;
@@ -262,7 +261,6 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--text-color-muted);
   }
-
 }
 
 /* ==== Utilities Layer ==== */

@@ -80,22 +80,6 @@ export const SkillsSection = () => {
             </motion.div>
           ))}
         </motion.div>
-        {/* <motion.div
-          variants={fadeInItem}
-          initial="hiddenBottom"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="card w-full p-4"
-        >
-          <div></div>
-          <img
-            src={`https://github-readme-stats.vercel.app/api/top-langs?username=fanyuuu2006&layout=compact&langs_count=100&locale=${
-              Language.Current == "chinese" ? "zh-tw" : "en"
-            }`}
-            alt="Most Used Languages"
-            className='object-cover'
-          />
-        </motion.div> */}
       </div>
     </section>
   );
