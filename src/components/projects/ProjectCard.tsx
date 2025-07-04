@@ -114,7 +114,7 @@ export const ProjectCard = ({
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 p-4 rounded-lg border border-[var(--border-color)]">
+            <div className="flex flex-col gap-2 p-4 md:p-6 rounded-3xl border border-[var(--border-color)]">
               <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
                 {projectContent.projectFeature}
               </h4>
@@ -125,7 +125,7 @@ export const ProjectCard = ({
               </ul>
             </div>
 
-            <div className="flex flex-col gap-2 p-4 rounded-lg border border-[var(--border-color)]">
+            <div className="flex flex-col gap-2 p-4 md:p-6 rounded-3xl border border-[var(--border-color)]">
               <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
                 {projectContent.skillTag}
               </h4>
@@ -151,7 +151,7 @@ export const ProjectCard = ({
                   }}
                   className={`btn-${
                     giscusShow ? "secondary" : "primary"
-                  } text-base md:text-lg px-4 py-2 rounded-lg`}
+                  } text-base md:text-lg px-4 py-2 rounded-xl`}
                 >
                   {
                     (giscusShow
