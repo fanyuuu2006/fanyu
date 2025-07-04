@@ -53,7 +53,7 @@ export const ProjectCard = ({
         id={slugify(item.title.english)}
         className={`${className} card shadow w-full p-6 gap-4 flex flex-col md:flex-row`}
       >
-        <div className="h-25 w-25 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
+        <div className="h-25 w-25 shrink-0 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element*/}
           <img
             className=" h-full w-full bg-[#fff]"

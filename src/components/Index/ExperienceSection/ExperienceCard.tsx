@@ -70,7 +70,7 @@ export const ExperienceCard = ({
             }`}
           </span>
           {item.links && (
-            <div className="flex gap-1 flex-wrap">
+            <div className="flex gap-2 flex-wrap">
               {item.links.map((link) => (
                 <CustomLink
                   key={link.href}
