@@ -23,7 +23,7 @@ const LabaG: ProjectItem = {
     chinese: "啦八機",
     english: "LaBaG",
   },
-  imageSrc: "/Portfolio/labag.jpg",
+  imageSrc: "https://raw.githubusercontent.com/fanyuuu2006/LaBaG-Web/refs/heads/main/frontend/src/assets/SuperCircle.png",
 
   links: [
     {
@@ -99,7 +99,7 @@ const ToolsForMetaInformation: ProjectItem = {
     chinese: "Meta 資訊處理工具",
     english: "Tools For Meta Information",
   },
-  imageSrc: "/Portfolio/toolsformetainformation.jpg",
+  imageSrc: "https://raw.githubusercontent.com/fanyuuu2006/Tools-For-Meta-Infomation/refs/heads/main/frontend/public/Logo.webp",
 
   links: [
     {
@@ -153,7 +153,7 @@ const DoBuJio: ProjectItem = {
     chinese: "玩股票都不揪",
     english: "Do Bu Jio",
   },
-  imageSrc: "/Portfolio/dobujio.jpg",
+  imageSrc: "https://raw.githubusercontent.com/fanyuuu2006/NTUST-1132-Software-Programming-Final-Project/refs/heads/main/assets/favicon.jpg",
 
   links: [
     {
@@ -203,7 +203,7 @@ const DoBuJio: ProjectItem = {
 };
 
 const AoJiao: ProjectItem = {
-  imageSrc: "/Portfolio/aojiao.jpg",
+  imageSrc: "https://raw.githubusercontent.com/fanyuuu2006/NTUST-BoardGameClub-Bot/refs/heads/main/image/icon.jpg",
   title: {
     chinese: "小傲驕",
     english: "Aojiao",

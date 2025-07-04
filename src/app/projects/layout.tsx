@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: `${profile.url}/projects`,
     images: [
       {
-        url: "/Portfolio/toolsformetainformation.jpg",
+        url: `${profile.url}/GameShow.jpg`,
         width: 1200,
         height: 630,
         alt: "FanYu Projects Portfolio",

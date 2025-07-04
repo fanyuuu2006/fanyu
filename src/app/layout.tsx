@@ -6,10 +6,10 @@ import { Footer } from "@/components/Footer";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-export { metadata } from "./metadata";
 import { Noto_Sans_SC } from "next/font/google";
 import { profile } from "@/libs/profile";
 import { AlbumProvider } from "@/contexts/AlbumContext";
+export { metadata } from "./metadata";
 
 // 評估id
 const measurementID = "G-3SGK402751";
