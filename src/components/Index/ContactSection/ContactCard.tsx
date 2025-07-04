@@ -27,25 +27,25 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   }, [isOpen]);
 
   return (
-    <motion.div
-      ref={ref}
-      className="group relative p-[2px] rounded-full"
-      style={{
-        background: item.backgrounds?.length
-          ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
-          : "var(--text-color-primary)",
-      }}
-      {...rest}
-    >
+    <motion.div ref={ref} className="group relative" {...rest}>
       <button
-        className="flex text-2xl no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
+        className="p-[2px] rounded-full"
         onClick={() => setIsOpen((prev) => !prev)}
         style={{
-          background: isOpen ? "transparent" : "var(--background-color)",
+          background: item.backgrounds?.length
+            ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
+            : "var(--text-color-primary)",
         }}
       >
-        <item.icon />
-        {item.label}
+        <span
+          className="flex text-2xl no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
+          style={{
+            background: isOpen ? "transparent" : "var(--background-color)",
+          }}
+        >
+          <item.icon />
+          {item.label}
+        </span>
       </button>
 
       {/**Overlay 資訊卡 */}
