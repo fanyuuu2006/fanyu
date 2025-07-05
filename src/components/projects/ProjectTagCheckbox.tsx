@@ -23,8 +23,8 @@ export const ProjectTagCheckbox = ({
   const isActive = tag ? currentTags?.has(tag) : currentTags === null;
   return (
     <label
-      className={`btn${
-        isActive ? "-secondary" : ""
+      className={`btn-${
+        isActive ? "secondary" : "tertiary"
       } px-4 py-1 rounded-full whitespace-nowrap ${className} `}
       {...rest}
     >

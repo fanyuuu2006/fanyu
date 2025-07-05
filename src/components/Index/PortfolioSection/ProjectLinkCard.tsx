@@ -14,24 +14,47 @@ import { CustomLink } from "@/components/custom/CustomLink";
 
 const ProjectCardWrapper = styled.div`
   position: relative;
-  border: 2px solid #ccc;
+  border: 2px solid var(--border-color);
   aspect-ratio: 1 / 1;
-  border-radius: 1.5rem;
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
+  transition: all var(--transition-normal) ease;
+  box-shadow: var(--shadow-base);
+  background: var(--background-color-secondary);
+
+  &:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--border-color-light);
+  }
 `;
+
 const ProjectImage = styled.img`
   width: 100%;
   height: 100%;
   background: #fff;
   object-fit: cover;
+  transition: transform var(--transition-slow) ease;
+
+  ${ProjectCardWrapper}:hover & {
+    transform: scale(1.05);
+  }
 `;
 
 const Overlay = styled.div`
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
   opacity: 0;
-  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(2px);
+  transition: all var(--transition-normal) ease;
+  color: var(--text-color);
+
   ${ProjectCardWrapper}:hover & {
     opacity: 1;
   }
@@ -58,14 +81,24 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
       />
 
       {/**Hover 資訊面板 */}
-      <Overlay className="relative flex flex-col w-full h-full p-4">
-        <div className="text-2xl font-bold">{item.title[Language.Current]}</div>
-        <div className="text-base flex gap-2">
-          <ClockCircleOutlined />
-          {item.time}
+      <Overlay className="relative flex flex-col justify-between w-full h-full p-6">
+
+        {/* 主要內容區域 */}
+        <div className="flex flex-col gap-3">
+          <div className="text-2xl font-extrabold leading-tight">
+            {item.title[Language.Current]}
+          </div>
+          <div className="text-sm flex items-center gap-2 text-gray-300">
+            <ClockCircleOutlined className="text-blue-400" />
+            <span>{item.time}</span>
+          </div>
+          <div className="text-base text-gray-200 line-clamp-3">
+            {item.about[Language.Current]}
+          </div>
         </div>
-        <div className="text-lg">{item.about[Language.Current]}</div>
-        <div className="absolute bottom-4 right-4 text-2xl flex gap-2">
+
+        {/* 按鈕區域 */}
+        <div className="text-lg flex justify-end gap-2">
           {[
             {
               tooltip: {
@@ -74,6 +107,7 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
               },
               icon: GithubOutlined,
               href: githubUrl,
+              className: "btn-primary",
             },
             {
               tooltip: {
@@ -82,17 +116,20 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
               },
               icon: InfoCircleOutlined,
               href: infoUrl,
+              className: "btn-secondary",
             },
           ].map((link) => (
-            <CustomLink
+            <Tooltip
               key={link.tooltip.english}
-              className="btn-primary p-2 rounded-full flex gap-2"
-              href={link.href}
+              title={link.tooltip[Language.Current]}
             >
-              <Tooltip title={link.tooltip[Language.Current]}>
+              <CustomLink
+                className={`${link.className} p-3 rounded-full flex items-center justify-center`}
+                href={link.href}
+              >
                 <link.icon />
-              </Tooltip>
-            </CustomLink>
+              </CustomLink>
+            </Tooltip>
           ))}
         </div>
       </Overlay>
