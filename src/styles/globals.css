@@ -12,6 +12,7 @@
     --text-color: #ffffff;
     --text-color-primary: #3b82f6; /* Tailwind 的 blue-500 */
     --text-color-secondary: #8b5cf6; /* Tailwind 的 violet-500 */
+    --text-color-tertiary: #22c55e; /* Tailwind 的 amber-500 */
     --text-color-muted: #aaaaaa;
 
     --border-color: #333333cc;
@@ -85,7 +86,8 @@
   button,
   .btn,
   .btn-primary,
-  .btn-secondary {
+  .btn-secondary,
+  .btn-tertiary {
     cursor: pointer;
     border: none;
     text-decoration: none;
@@ -98,7 +100,8 @@
   button::before,
   .btn::before,
   .btn-primary::before,
-  .btn-secondary::before {
+  .btn-secondary::before,
+  .btn-tertiary::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -116,19 +119,14 @@
   button:active::before,
   .btn:active::before,
   .btn-primary:active::before,
-  .btn-secondary:active::before {
+  .btn-secondary:active::before,
+  .btn-tertiary:active::before {
     width: 300px;
     height: 300px;
   }
 
   .btn {
     background: var(--background-color-secondary);
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-  }
-
-  .btn-secondary {
-    background: var(--background-color-primary);
     border: 1px solid var(--border-color);
     color: var(--text-color);
   }
@@ -144,10 +142,25 @@
     border: none;
   }
 
+  .btn-secondary {
+    background: linear-gradient(
+      45deg,
+      var(--text-color-primary),
+      var(--text-color-tertiary)
+    );
+    box-shadow: var(--shadow-base);
+  }
+
+  .btn-tertiary {
+    background: var(--background-color-primary);
+    border: 1px solid var(--border-color);
+  }
+
   button:hover,
   .btn:hover,
   .btn-primary:hover,
-  .btn-secondary:hover {
+  .btn-secondary:hover,
+  .btn-tertiary:hover {
     text-decoration: none !important;
     filter: brightness(var(--brightness-light));
     transform: translateY(-2px);
@@ -156,7 +169,8 @@
   button:active,
   .btn:active,
   .btn-primary:active,
-  .btn-secondary:active {
+  .btn-secondary:active,
+  .btn-tertiary:active {
     transform: translateY(0);
     transition-duration: var(--transition-fast);
   }
@@ -165,7 +179,8 @@
   button:disabled,
   .btn:disabled,
   .btn-primary:disabled,
-  .btn-secondary:disabled {
+  .btn-secondary:disabled,
+  .btn-tertiary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     filter: none;
@@ -269,7 +284,6 @@
 /* ==== Utilities Layer ==== */
 @layer utilities {
   /* === 漸變效果 === */
-  .bg-gradient,
   .text-gradient {
     background: linear-gradient(
       45deg,
