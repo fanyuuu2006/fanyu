@@ -283,22 +283,6 @@
 
 /* ==== Utilities Layer ==== */
 @layer utilities {
-  /* === 漸變效果 === */
-  .text-gradient {
-    background: linear-gradient(
-      45deg,
-      var(--text-color-primary),
-      var(--text-color-secondary)
-    );
-  }
-
-  .text-gradient {
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent; /* fallback */
-  }
-
   /* === 動畫效果 === */
   .animate-pop {
     animation: pop var(--transition-fast) cubic-bezier(0.68, -0.55, 0.265, 1.55);

@@ -138,7 +138,7 @@ export const HeroSection = () => {
               </span>
               <h1 className="text-5xl md:text-6xl font-bold ">
                 {heroContent.iAm}
-                <span className="text-gradient">
+                <span className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
                   {profile.nickname[Language.Current]}
                 </span>
                 ❗
@@ -158,7 +158,7 @@ export const HeroSection = () => {
                 </Link>
                 <Link
                   href="/#portfolio"
-                  className="btn-tertiary px-8 py-2 rounded-xl"
+                  className="btn-tertiary px-6 py-2 rounded-xl"
                 >
                   {heroContent.portfolio}
                 </Link>
