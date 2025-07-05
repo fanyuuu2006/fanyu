@@ -179,6 +179,7 @@
 ├── next.config.ts          # Next.js 設定檔
 ├── package.json            # 專案依賴與腳本
 ├── postcss.config.mjs      # PostCSS 設定
+├── tailwind.config.js      # Tailwind CSS 設定
 ├── README.md               # 專案說明文件
 └── tsconfig.json           # TypeScript 設定
 ```

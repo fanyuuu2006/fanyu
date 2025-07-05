@@ -54,11 +54,11 @@ export const ExperienceCard = ({
 
   return (
     <div
-      className={`${className} card w-full p-6 sm:p-8 gap-4 flex flex-col`}
+      className={`${className} card w-full p-6 lg:p-8 gap-4 flex flex-col`}
       {...rest}
     >
       {/** 圖片 */}
-      <div className="flex items-start flex-col md:flex-row gap-4">
+      <div className="flex items-start flex-col lg:flex-row gap-3">
         <div className="flex-shrink-0 h-20 w-20 md:h-28 md:w-28 rounded-3xl overflow-hidden border-2 border-[var(--border-color)]">
           {/*eslint-disable-next-line @next/next/no-img-element*/}
           <img
@@ -75,7 +75,7 @@ export const ExperienceCard = ({
           />
         </div>
 
-        {/** 標題 */}
+        {/** 標題與時間 */}
         <div className="flex-1">
           <div className="flex flex-col gap-2">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
@@ -91,20 +91,19 @@ export const ExperienceCard = ({
                 {item.department[Language.Current]}
               </p>
             )}
+            <p className="flex items-center gap-3 text-base md:text-lg text-[var(--text-color-muted)]">
+              <ClockCircleOutlined className="text-[var(--primary-color)]" />
+              <span className="font-medium">
+                {`${item.duration.start ?? experienceContent.noRecord} ~ ${
+                  item.duration.end ?? experienceContent.present
+                }`}
+              </span>
+            </p>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col gap-4">
-        {/** 時間 */}
-        <div className="flex items-center gap-3 text-base md:text-lg text-[var(--text-color-muted)]">
-          <ClockCircleOutlined className="text-[var(--primary-color)]" />
-          <span className="font-medium">
-            {`${item.duration.start ?? experienceContent.noRecord} ~ ${
-              item.duration.end ?? experienceContent.present
-            }`}
-          </span>
-        </div>
         {/** 連結 */}
         {item.links && (
           <div className="flex gap-3 flex-wrap">
