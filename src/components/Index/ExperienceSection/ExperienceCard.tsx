@@ -128,7 +128,7 @@ export const ExperienceCard = ({
             <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
               {experienceContent.role}
             </h4>
-            <p className="text-base md:text-lg">
+            <p className="text-base md:text-lg font-semibold">
               {item.role[Language.Current]}
             </p>
           </div>

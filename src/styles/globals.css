@@ -13,6 +13,7 @@
     --text-color-primary: #3b82f6; /* Tailwind 的 blue-500 */
     --text-color-secondary: #8b5cf6; /* Tailwind 的 violet-500 */
     --text-color-tertiary: #22c55e; /* Tailwind 的 amber-500 */
+    --text-color-quaternary: #f59e0b; /* Tailwind 的 yellow-500 */
     --text-color-muted: #aaaaaa;
 
     --border-color: #333333cc;

@@ -62,7 +62,7 @@ export const SkillsSection = () => {
                   {items.map((item) => (
                     <div
                       key={item.title}
-                      className="p-1 w-1/7 sm:w-1/10 md:w-1/13 lg:w-1/17"
+                      className="p-1 w-1/7 sm:w-1/10 md:w-1/13 lg:w-1/17 xl:w-1/20"
                     >
                       <Tooltip title={item.title}>
                         {/* eslint-disable-next-line @next/next/no-img-element*/}

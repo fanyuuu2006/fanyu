@@ -12,8 +12,8 @@ export default function Page() {
       <AboutMeSection />
       <SkillsSection />
       <PortfolioSection />
-      <ExperienceSection />
       <ContactSection />
+      <ExperienceSection />
     </>
   );
 }

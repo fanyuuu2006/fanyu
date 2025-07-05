@@ -10,6 +10,7 @@ import { experienceTabIcons, experienceTabs } from "@/libs/education";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
 import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
+import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 
 type ExperienceContent = Record<
   "experience" | ExperienceTab | "noExperience" | "viewMore" | "collapse",
@@ -136,17 +137,23 @@ export const ExperienceSection = () => {
                           </motion.div>
                         ))}
                       </Collapse>
-                      <div className="w-full text-center">
+                      <div className="w-full">
                         <button
-                          className="text-2xl"
+                          className="text-lg mx-auto md:text-xl btn-secondary px-3 py-2 rounded-full flex items-center gap-1"
                           onClick={() => {
                             setShowMore((prev) => !prev);
                           }}
                         >
                           {showMore ? (
-                            <>{experienceContent.collapse}</>
+                            <>
+                              <CaretUpOutlined />
+                              {experienceContent.collapse}
+                            </>
                           ) : (
-                            <>{experienceContent.viewMore}</>
+                            <>
+                              <CaretDownOutlined />
+                              {experienceContent.viewMore}
+                            </>
                           )}
                         </button>
                       </div>
