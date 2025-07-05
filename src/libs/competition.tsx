@@ -5,6 +5,11 @@ import {
   InstagramOutlined,
   LinkOutlined,
   PictureOutlined,
+  TrophyOutlined,
+  TeamOutlined,
+  BookOutlined,
+  StarOutlined,
+  CrownOutlined,
 } from "@ant-design/icons";
 
 export const PDAO: ExperienceItem = {
@@ -40,23 +45,40 @@ export const PDAO: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="flex flex-col text-lg font-bold">
-      <span>
+    <div className="flex flex-col gap-4">
+      {[
         {
-          {
-            chinese: "隊名: 不知道對不隊",
-            english: "Team Name: Not Sure If It's the Right Team",
-          }[language]
-        }
-      </span>
-      <span>
+          icon: TeamOutlined,
+          label: { chinese: "隊伍名稱", english: "Team Name" },
+          content: {
+            chinese: "不知道對不隊",
+            english: "Not Sure If It's the Right Team",
+          },
+        },
         {
-          {
-            chinese: "名次: 59",
-            english: "Placed 59th",
-          }[language]
-        }
-      </span>
+          icon: TrophyOutlined,
+          label: { chinese: "參賽成績", english: "Competition Result" },
+          content: {
+            chinese: "第 59 名",
+            english: "59th Place",
+          },
+        },
+      ].map((chunk, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+        >
+          <chunk.icon className="text-xl flex-shrink-0" />
+          <div className="flex flex-col">
+            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+              {chunk.label[language]}
+            </span>
+            <span className="text-base font-semibold">
+              {chunk.content[language]}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   ),
 };
@@ -98,14 +120,19 @@ export const HCCGM: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <span className="text-2xl font-bold">
-      {
-        {
-          chinese: "團體賽(丙組) 第 2 名",
-          english: "2nd Place in Team Competition (Group C)",
-        }[language]
-      }
-    </span>
+    <div className="flex items-center justify-center p-2 rounded-2xl">
+      <div className="text-2xl flex items-center gap-2 text-white">
+        <CrownOutlined className=" flex-shrink-0" />
+        <span className="font-bold">
+          {
+            {
+              chinese: "團體賽 (丙組) 第 2 名",
+              english: "2nd Place in Team Competition (Group C)",
+            }[language]
+          }
+        </span>
+      </div>
+    </div>
   ),
 };
 
@@ -133,24 +160,41 @@ export const SE: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="flex flex-col text-lg font-bold">
-      <span>
+    <div className="flex flex-col gap-4">
+      {[
         {
-          {
-            chinese: '主題:  疫情後消費者對電商平台使用現狀-以"蝦皮購物"為例',
+          icon: BookOutlined,
+          label: { chinese: "研究主題", english: "Research Topic" },
+          content: {
+            chinese: '疫情後消費者對電商平台使用現狀 - 以"蝦皮購物"為例',
             english:
-              "Topic: Consumer Usage of E-commerce Platforms after the Pandemic – A Case Study on Shopee",
-          }[language]
-        }
-      </span>
-      <span>
+              "Consumer Usage of E-commerce Platforms after the Pandemic – A Case Study on Shopee",
+          },
+        },
         {
-          {
-            chinese: "名次: 甲等",
-            english: "Rank: Grade A",
-          }[language]
-        }
-      </span>
+          icon: StarOutlined,
+          label: { chinese: "獲獎等級", english: "Award Level" },
+          content: {
+            chinese: "甲等",
+            english: "Grade A",
+          },
+        },
+      ].map((chunk, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+        >
+          <chunk.icon className="text-xl flex-shrink-0" />
+          <div className="flex flex-col">
+            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+              {chunk.label[language]}
+            </span>
+            <span className="text-base font-semibold">
+              {chunk.content[language]}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   ),
 };
@@ -176,23 +220,40 @@ export const XLS: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="flex flex-col text-lg font-bold">
-      <span>
+    <div className="flex flex-col gap-4">
+      {[
         {
-          {
-            chinese: "隊名: 你在偷喵我吼?",
-            english: "Team Name: Are You Secretly Meow-ing at Me?",
-          }[language]
-        }
-      </span>
-      <span>
+          icon: TeamOutlined,
+          label: { chinese: "隊伍名稱", english: "Team Name" },
+          content: {
+            chinese: "你在偷喵我吼?",
+            english: "Are You Secretly Meow-ing at Me?",
+          },
+        },
         {
-          {
+          icon: TrophyOutlined,
+          label: { chinese: "參賽成績", english: "Competition Result" },
+          content: {
             chinese: "挑戰完成獎",
             english: "Challenge Completed Award",
-          }[language]
-        }
-      </span>
+          },
+        },
+      ].map((chunk, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+        >
+          <chunk.icon className="text-xl flex-shrink-0" />
+          <div className="flex flex-col">
+            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+              {chunk.label[language]}
+            </span>
+            <span className="text-base font-semibold">
+              {chunk.content[language]}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   ),
 };
