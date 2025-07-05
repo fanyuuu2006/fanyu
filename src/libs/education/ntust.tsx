@@ -1,6 +1,10 @@
 import { Semester, Course, ExperienceItem } from "@/types/experience";
 import { calculateGPA } from "@/utils/education";
-import { LinkOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import {
+  LinkOutlined,
+  EnvironmentOutlined,
+  IdcardOutlined,
+} from "@ant-design/icons";
 import { useModal } from "fanyucomponents";
 import React from "react";
 
@@ -41,15 +45,34 @@ const NTUST: ExperienceItem = {
 
     return (
       <div className="flex flex-col gap-2">
-        <span className="text-lg font-bold">
-          {
+        <div className="flex flex-col gap-4">
+          {[
             {
-              chinese: "學號: B11309044",
-              english: "Student ID: B11309044",
-            }[language]
-          }
-        </span>
-        <div className="overflow-x-auto rounded-2xl">
+              icon: IdcardOutlined,
+              label: { chinese: "學生證號", english: "Student ID" },
+              content: {
+                chinese: "B11309044",
+                english: "B11309044",
+              },
+            },
+          ].map((chunk, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+            >
+              <chunk.icon className="text-xl flex-shrink-0" />
+              <div className="flex flex-col">
+                <span className="text-sm font-medium text-[var(--text-color-muted)]">
+                  {chunk.label[language]}
+                </span>
+                <span className="text-base font-semibold">
+                  {chunk.content[language]}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="overflow-x-auto rounded-xl">
           <table className="w-full bg-[var(--background-color-primary)] table-auto border-collapse">
             <thead className="text-sm md:text-lg bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)]">
               <tr>
@@ -113,7 +136,7 @@ const NTUST: ExperienceItem = {
                       <td className="text-center p-2">{totalCredits}</td>
                     </tr>
                     <modal.Container>
-                      <div className="rounded-2xl animate-pop overflow-hidden">
+                      <div className="rounded-xl animate-pop overflow-hidden">
                         <table className="text-sm md:text-base w-full bg-[var(--background-color-primary)] table-auto border-collapse">
                           <thead className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)]">
                             <tr>

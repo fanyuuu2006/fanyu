@@ -1,5 +1,9 @@
 import { ExperienceItem } from "@/types/experience";
-import { LinkOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import {
+  LinkOutlined,
+  EnvironmentOutlined,
+  IdcardOutlined,
+} from "@ant-design/icons";
 
 const GSES: ExperienceItem = {
   name: {
@@ -28,15 +32,32 @@ const GSES: ExperienceItem = {
   imageSrc:
     "https://gses.hcc.edu.tw/var/file/63/1063/msys_1063_9975114_41652.png",
   description: ({ language }) => (
-    <div className="flex flex-col">
-      <span className="text-lg font-bold">
+    <div className="flex flex-col gap-4">
+      {[
         {
-          {
-            chinese: "學號: 1010010",
-            english: "Student ID: 1010010",
-          }[language]
-        }
-      </span>
+          icon: IdcardOutlined,
+          label: { chinese: "學生證號", english: "Student ID" },
+          content: {
+            chinese: "1010010",
+            english: "1010010",
+          },
+        },
+      ].map((chunk, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+        >
+          <chunk.icon className="text-xl flex-shrink-0" />
+          <div className="flex flex-col">
+            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+              {chunk.label[language]}
+            </span>
+            <span className="text-base font-semibold">
+              {chunk.content[language]}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   ),
 };
