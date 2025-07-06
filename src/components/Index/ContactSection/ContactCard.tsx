@@ -21,13 +21,19 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
   return (
     <div className={`contact-card ${className}`} {...rest}>
       <OutsideLink
+        draggable={true}
         href={item.href}
-        className="block p-[2px] rounded-full no-underline"
+        className="block p-[2px] rounded-full no-underline "
         style={{
           background: `linear-gradient(45deg, ${(item.backgrounds?.length
             ? item.backgrounds
             : ["var(--text-color-primary)", "var(--text-color-secondary)"]
           ).join(",")})`,
+          backgroundBlendMode: "overlay", 
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          backdropFilter: "blur(1rem)",
+          WebkitBackdropFilter: "blur(1rem)", // Safari 支援
+          willChange: "background-color, backdrop-filter",
         }}
       >
         <span className="label text-2xl font-semibold">

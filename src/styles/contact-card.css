@@ -26,7 +26,7 @@
   z-index: 1000;
 }
 .contact-card:hover .overlay {
-  bottom: 100%;
+  bottom: 120%;
   opacity: 1;
   visibility: visible;
 }
