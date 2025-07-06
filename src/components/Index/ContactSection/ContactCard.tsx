@@ -2,51 +2,18 @@ import { CopyButton } from "@/components/custom/CopyButton";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactItem } from "@/types/contact";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
-import styled from "styled-components";
-
-const Container = styled.div`
-  position: relative;
-`;
-const Label = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  gap: 0.5rem;
-  border-radius: inherit;
-  text-decoration: none;
-  background-color: var(--background-color);
-  transition: all 0.3s ease, color 0.3s ease;
-  ${Container}:hover & {
-    background-color: transparent;
-  }
-`;
-const Overlay = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 50%;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  ${Container}:hover & {
-    bottom: 100%;
-    opacity: 1;
-    visibility: visible;
-  }
-`;
+import "@/styles/contact-card.css";
 
 export type ContactCardProps = OverrideProps<
-  React.ComponentPropsWithRef<typeof Container>,
+  React.HTMLAttributes<HTMLDivElement>,
   {
     item: ContactItem;
   }
 >;
-export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
+export const ContactCard = ({className, item, ...rest }: ContactCardProps) => {
   const Language = useLanguage();
   return (
-    <Container {...rest}>
+    <div className={`contact-card ${className}`} {...rest}>
       <OutsideLink
         href={item.href}
         className="block p-[2px] rounded-full no-underline"
@@ -57,14 +24,14 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
           ).join(",")})`,
         }}
       >
-        <Label className="text-2xl font-semibold">
+        <span className="label text-2xl font-semibold">
           <item.icon />
           {item.label}
-        </Label>
+        </span>
       </OutsideLink>
 
       {/**Overlay 資訊卡 */}
-      <Overlay>
+      <div className="overlay">
         <div
           className="p-[2px] rounded-2xl"
           style={{
@@ -78,23 +45,22 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
             <div className="flex items-center gap-4">
               {/**頭像 */}
               <div
-                className="h-10 p-[2px] aspect-square rounded-xl overflow-hidden"
+                className="h-10 aspect-square rounded-xl overflow-hidden"
                 style={{
-                  background: `linear-gradient(45deg, ${(item.backgrounds
-                    ?.length
-                    ? item.backgrounds
-                    : [
-                        "var(--text-color-primary)",
-                        "var(--text-color-secondary)",
-                      ]
-                  ).join(",")})`,
+                  border: `2px solid ${
+                    item.backgrounds?.[0] || "var(--text-color-primary)"
+                  }`,
                 }}
               >
                 {/*eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className="w-full h-full object-cover rounded-[inherit]"
+                  className="w-full h-full object-cover"
                   src={item.info.image || `/favicon.ico`}
                   alt={`${item.label}-${item.info.id}`}
+                  style={{
+                    backgroundColor:
+                      item.backgrounds?.[0] || "var(--text-color-primary)",
+                  }}
                 />
               </div>
 
@@ -120,6 +86,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
               <OutsideLink
                 className="btn-tertiary ms-auto text-lg font-semibold flex items-center rounded-full px-3 py-1 "
                 href={item.href}
+                
               >
                 {
                   {
@@ -131,7 +98,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
             </div>
           </div>
         </div>
-      </Overlay>
-    </Container>
+      </div>
+    </div>
   );
 };

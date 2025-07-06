@@ -1,6 +1,6 @@
 import { profile } from "@/libs/profile";
 import Link from "next/link";
-import { ProjectLinkCard } from "./ProjectLinkCard";
+import { ProjectCard } from "./ProjectCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Carousel } from "@/components/custom/Carousel";
@@ -43,7 +43,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
             (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime()
           )
           .map((item) => (
-            <ProjectLinkCard
+            <ProjectCard
               key={`${item.title.english}`}
               item={item}
               className="m-2 w-64 md:w-72"

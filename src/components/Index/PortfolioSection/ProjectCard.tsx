@@ -8,80 +8,33 @@ import {
 } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import React from "react";
-import styled from "styled-components";
 import { Tooltip } from "antd";
 import { CustomLink } from "@/components/custom/CustomLink";
+import "@/styles/project-card.css";
 
-const ProjectCardWrapper = styled.div`
-  position: relative;
-  border: 2px solid var(--border-color);
-  aspect-ratio: 1 / 1;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  transition: all var(--transition-normal) ease;
-  box-shadow: var(--shadow-base);
-  background: var(--background-color-secondary);
-
-  &:hover {
-    transform: translateY(-0.5rem);
-    box-shadow: var(--shadow-card-hover);
-    border-color: var(--border-color-light);
-  }
-`;
-
-const ProjectImage = styled.img`
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  object-fit: cover;
-  transition: transform var(--transition-slow) ease;
-
-  ${ProjectCardWrapper}:hover & {
-    transform: scale(1.05);
-  }
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
-  opacity: 0;
-  backdrop-filter: blur(2px);
-  transition: all var(--transition-normal) ease;
-  color: var(--text-color);
-
-  ${ProjectCardWrapper}:hover & {
-    opacity: 1;
-  }
-`;
-
-export type ProjectLinkCardProps = OverrideProps<
-  React.ComponentPropsWithRef<typeof ProjectCardWrapper>,
+export type ProjectCardProps = OverrideProps<
+  React.HTMLAttributes<HTMLDivElement>,
   {
     item: ProjectItem;
   }
 >;
-export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
+export const ProjectCard = ({ className, item, ...rest }: ProjectCardProps) => {
   const Language = useLanguage();
 
   const infoUrl = `/projects/#${slugify(item.title.english)}`;
   const githubUrl = `https://github.com/${item.github?.repo}`;
 
   return (
-    <ProjectCardWrapper {...rest}>
-      <ProjectImage
+    <div className={`project-card ${className}`} {...rest}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         draggable={false}
         src={item.imageSrc}
         alt={`${item.title.english} icon`}
       />
 
-      {/**Hover 資訊面板 */}
-      <Overlay>
+      {/**資訊面板 */}
+      <div className="overlay">
         <div className="relative flex flex-col justify-between w-full h-full p-6">
           {/* 主要內容區域 */}
           <div className="flex flex-col gap-1">
@@ -133,7 +86,7 @@ export const ProjectLinkCard = ({ item, ...rest }: ProjectLinkCardProps) => {
             ))}
           </div>
         </div>
-      </Overlay>
-    </ProjectCardWrapper>
+      </div>
+    </div>
   );
 };

@@ -120,8 +120,8 @@ export const HCCGM: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="flex items-center justify-center p-2 rounded-2xl">
-      <div className="text-2xl flex items-center gap-2 text-white">
+    <div className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)] flex items-center justify-center p-3 rounded-xl">
+      <div className="text-lg md:text-xl flex items-center gap-2 text-white">
         <CrownOutlined className=" flex-shrink-0" />
         <span className="font-bold">
           {

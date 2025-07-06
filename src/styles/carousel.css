@@ -1,0 +1,102 @@
+/* Carousel 組件樣式 */
+
+.carousel-wrapper {
+  max-width: 100%;
+  max-height: 100%;
+  mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
+  overflow: hidden;
+}
+
+.carousel-track {
+  width: max-content;
+  display: flex;
+  flex-wrap: nowrap;
+  animation: slide linear infinite;
+}
+
+.carousel-track--row {
+  flex-direction: row;
+}
+
+.carousel-track--column {
+  flex-direction: column;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.carousel-group {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.carousel-group--row {
+  flex-direction: row;
+}
+
+.carousel-group--column {
+  flex-direction: column;
+}
+
+.carousel-item {
+  transition: all 0.3s ease-in-out;
+}
+
+.carousel-track:hover .carousel-item:not(:hover) {
+  filter: grayscale(1);
+}
+
+/* 動畫關鍵幀 */
+@keyframes slide-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(calc(-1 * var(--transform-percent, 50%)));
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(calc(-1 * var(--transform-percent, 50%)));
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(calc(-1 * var(--transform-percent, 50%)));
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(calc(-1 * var(--transform-percent, 50%)));
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+/* 動畫方向類別 */
+.carousel-track--left {
+  animation-name: slide-left;
+}
+
+.carousel-track--right {
+  animation-name: slide-right;
+}
+
+.carousel-track--up {
+  animation-name: slide-up;
+}
+
+.carousel-track--down {
+  animation-name: slide-down;
+}

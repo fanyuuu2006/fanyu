@@ -1,86 +1,79 @@
 import { OverrideProps } from "fanyucomponents";
-import React from "react";
-import styled from "styled-components";
-
-const Wrapper = styled.div`
-  max-width: 100%;
-  max-height: 100%;
-  mask-image: linear-gradient(to right, transparent, #000 5% 95%, transparent);
-  overflow: hidden;
-`;
-Wrapper.displayName = "Wrapper";
+import React, { useMemo } from "react";
+import "@/styles/carousel.css";
 
 export type TrackProps = {
   duration?: number;
   groupCount?: number;
   direction?: "left" | "right" | "up" | "down";
 };
-const Track = styled.div.withConfig({
-  shouldForwardProp: (prop) =>
-    !["groupCount", "direction", "duration"].includes(prop),
-})<TrackProps>`
-  width: max-content;
-  display: flex;
-  flex-direction: ${({ direction }) => {
-    switch (direction) {
-      case "left":
-      case "right":
-        return "row";
-      case "up":
-      case "down":
-        return "column";
-    }
-  }};
-  flex-wrap: nowrap;
-  animation: slide ${({ duration }) => `${duration ?? 15000}ms`} linear infinite;
-
-  @keyframes slide {
-    0% {
-      transform: ${({ direction, groupCount }) => {
-        const percent = 100 / (groupCount || 2);
-        switch (direction) {
-          case "left":
-            return "translateX(0%)";
-          case "right":
-            return `translateX(-${percent}%)`;
-          case "up":
-            return "translateY(0%)";
-          case "down":
-            return `translateY(-${percent}%)`;
-        }
-      }};
-    }
-    100% {
-      transform: ${({ direction, groupCount }) => {
-        const percent = 100 / (groupCount || 2);
-        switch (direction) {
-          case "left":
-            return `translateX(-${percent}%)`;
-          case "right":
-            return "translateX(0%)";
-          case "up":
-            return `translateY(-${percent}%)`;
-          case "down":
-            return "translateY(0%)";
-        }
-      }};
-    }
-  }
-
-  &:hover {
-    animation-play-state: paused;
-  }
-`;
-Track.displayName = "Track";
 
 export type GroupProps = {
   direction?: "left" | "right" | "up" | "down";
 };
-const Group = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["direction"].includes(prop),
-})<GroupProps>`
-  display: flex;
-  flex-direction: ${({ direction }) => {
+
+// 包裝器組件
+const Wrapper = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={`carousel-wrapper ${className || ""}`} {...props} />
+));
+Wrapper.displayName = "Wrapper";
+
+// 軌道組件
+const Track = React.forwardRef<
+  HTMLDivElement,
+  TrackProps & React.HTMLAttributes<HTMLDivElement>
+>(
+  (
+    {
+      duration = 15000,
+      groupCount = 2,
+      direction = "left",
+      className,
+      style,
+      ...props
+    },
+    ref
+  ) => {
+    const flexDirection = useMemo(() => {
+      switch (direction) {
+        case "left":
+        case "right":
+          return "row";
+        case "up":
+        case "down":
+          return "column";
+      }
+    }, [direction]);
+
+    return (
+      <div
+        ref={ref}
+        className={`carousel-track carousel-track--${flexDirection} carousel-track--${direction} ${
+          className || ""
+        }`}
+        style={
+          {
+            animationDuration: `${duration}ms`,
+            "--transform-percent": `${100 / groupCount}%`,
+            ...style,
+          } as React.CSSProperties
+        }
+        {...props}
+      />
+    );
+  }
+);
+Track.displayName = "Track";
+
+// 群組組件
+const Group = React.forwardRef<
+  HTMLDivElement,
+  GroupProps & React.HTMLAttributes<HTMLDivElement>
+>(({ direction = "left", className, ...props }, ref) => {
+  const flexDirection = useMemo(() => {
     switch (direction) {
       case "left":
       case "right":
@@ -89,22 +82,31 @@ const Group = styled.div.withConfig({
       case "down":
         return "column";
     }
-  }};
-  flex-wrap: nowrap;
-`;
+  }, [direction]);
+
+  return (
+    <div
+      ref={ref}
+      className={`carousel-group carousel-group--${flexDirection} ${
+        className || ""
+      }`}
+      {...props}
+    />
+  );
+});
 Group.displayName = "Group";
 
-const Item = styled.div`
-  transition: all 0.3s ease-in-out;
-
-  ${Track}:hover &:not(:hover) {
-    filter: grayscale(1);
-  }
-`;
+// 項目組件
+const Item = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={`carousel-item ${className || ""}`} {...props} />
+));
 Item.displayName = "Item";
 
 export type CarouselProps = OverrideProps<
-  React.ComponentPropsWithRef<typeof Wrapper>,
+  React.ComponentPropsWithRef<"div">,
   TrackProps & { children: React.ReactNode }
 >;
 
