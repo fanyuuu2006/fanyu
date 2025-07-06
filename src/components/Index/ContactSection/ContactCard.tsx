@@ -10,7 +10,7 @@ export type ContactCardProps = OverrideProps<
     item: ContactItem;
   }
 >;
-export const ContactCard = ({className, item, ...rest }: ContactCardProps) => {
+export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
   const Language = useLanguage();
   return (
     <div className={`contact-card ${className}`} {...rest}>
@@ -81,21 +81,9 @@ export const ContactCard = ({className, item, ...rest }: ContactCardProps) => {
               </div>
             </div>
             {/**相關資訊(待定) */}
-            {item.info.about && <div>{<item.info.about />}</div>}
-            <div className="flex">
-              <OutsideLink
-                className="btn-tertiary ms-auto text-lg font-semibold flex items-center rounded-full px-3 py-1 "
-                href={item.href}
-                
-              >
-                {
-                  {
-                    chinese: "前往",
-                    english: "Go to",
-                  }[Language.Current]
-                }
-              </OutsideLink>
-            </div>
+            {item.info.about && (
+              <div>{<item.info.about language={Language.Current} />}</div>
+            )}
           </div>
         </div>
       </div>

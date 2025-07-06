@@ -1,3 +1,5 @@
+import { LanguageOption } from "./language";
+
 export type ContactItem = {
   label: string;
   icon: React.ElementType;
@@ -7,7 +9,7 @@ export type ContactItem = {
     image?: string;
     id: string;
     name: string;
-    about?: React.ElementType;
+    about?: React.FC<{ language: LanguageOption }>;
   };
 };
 
