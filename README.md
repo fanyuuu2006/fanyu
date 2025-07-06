@@ -251,13 +251,6 @@ npm run lint
 npx tsc --noEmit
 ```
 
-### 開發工具建議
-
-- **IDE**：VS Code + TypeScript + ESLint 擴充套件
-- **瀏覽器**：Chrome DevTools + React Developer Tools
-- **除錯**：Vercel 本地開發環境
-- **版本控制**：Git + GitHub Desktop（選用）
-
 ## 📊 監控與分析
 
 ### 多重分析工具整合
@@ -274,54 +267,6 @@ npx tsc --noEmit
 - 📱 **Open Graph**：社群媒體分享最佳化
 - 🐦 **Twitter Cards**：Twitter 分享卡片最佳化
 - 🌐 **多語言 SEO**：hreflang 標籤、語言特定 meta 標籤
-
-## 🎯 核心功能深度解析
-
-### 🖼️ 相簿系統
-
-**技術架構**：Google Drive API + SWR + 動態路由
-
-- 📁 **階層式結構**：年份 → 活動 → 圖片三層架構
-- 🔗 **動態路由**：`/album/[year]/[eventName]` SEO 友善 URL
-- 🖼️ **圖片最佳化**：懶載入 + Intersection Observer + 模態框預覽
-- 📐 **響應式佈局**：CSS Grid 自適應網格排列
-- 🗺️ **自動 Sitemap**：動態生成相簿頁面至 sitemap.xml
-- 🚀 **效能最佳化**：圖片壓縮 + WebP 格式 + CDN 加速
-
-## 🤝 貢獻指南
-
-歡迎對這個專案提出建議或貢獻！
-
-### 如何貢獻
-
-1. **Fork 專案** → 點擊右上角 Fork 按鈕
-2. **建立分支** → `git checkout -b feature/your-feature-name`
-3. **提交變更** → `git commit -m "Add some amazing feature"`
-4. **推送分支** → `git push origin feature/your-feature-name`
-5. **發起 PR** → 建立 Pull Request 並詳述變更內容
-
-### 開發規範
-
-- 📝 **Commit Message**：使用 [Conventional Commits](https://www.conventionalcommits.org/) 格式
-- 🧪 **程式碼品質**：確保通過 ESLint 檢查
-- 📚 **文件更新**：重要變更需同步更新 README
-- 🎯 **型別安全**：維持 100% TypeScript 覆蓋率
-
-## 📞 聯絡資訊
-
-### 開發者：FanYu (范余振富)
-
-- 🌐 **個人網站**：[https://fanyu.vercel.app](https://fanyu.vercel.app)
-- 📧 **Email**：[fanyuuu2006@gmail.com](mailto:fanyuuu2006@gmail.com)
-- 💼 **LinkedIn**：[Fan-Yu Zhen-Fu](https://www.linkedin.com/in/fan-yu-zhen-fu-461678293/)
-- 🐙 **GitHub**：[@fanyuuu2006](https://github.com/fanyuuu2006)
-- 📱 **Instagram**：[@fanyu.dev](https://www.instagram.com/fanyu.dev/)
-
-### 技術支援
-
-- 🐛 **Bug 回報**：[GitHub Issues](https://github.com/fanyuuu2006/fanyu/issues)
-- 💬 **功能建議**：[GitHub Discussions](https://github.com/fanyuuu2006/fanyu/discussions)
-- 📝 **留言板**：[網站留言板](https://fanyu.vercel.app/guestbook)
 
 ## 📜 授權條款
 
