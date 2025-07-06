@@ -3,63 +3,69 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactItem } from "@/types/contact";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
-import { HTMLMotionProps, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+
+const Container = styled.div`
+  position: relative;
+`;
+const Span = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  border-radius: inherit;
+  text-decoration: none;
+  background-color: var(--background-color);
+  transition: all 0.3s ease, color 0.3s ease;
+  ${Container}:hover & {
+    background-color: transparent;
+  }
+`;
+const Overlay = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  ${Container}:hover & {
+    bottom: 100%;
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+
 export type ContactCardProps = OverrideProps<
-  HTMLMotionProps<"div">,
+  React.ComponentPropsWithRef<typeof Container>,
   {
     item: ContactItem;
   }
 >;
 export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   const Language = useLanguage();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [isOpen]);
 
   return (
-    <motion.div ref={ref} className="group relative" {...rest}>
-      <button
-        className="p-[2px] rounded-full"
-        onClick={() => setIsOpen((prev) => !prev)}
+    <Container {...rest}>
+      <OutsideLink
+        href={item.href}
+        className="block p-[2px] rounded-full no-underline"
         style={{
           background: item.backgrounds?.length
             ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
             : `linear-gradient(45deg,var(--text-color-primary),var(--text-color-secondary))`,
         }}
       >
-        <span
-          className="flex text-2xl no-underline  transition-all duration-300 rounded-[inherit] items-center justify-center px-4 py-2 gap-2"
-          style={{
-            background: isOpen ? "transparent" : "var(--background-color)",
-          }}
-        >
+        <Span className="text-2xl font-semibold">
           <item.icon />
           {item.label}
-        </span>
-      </button>
+        </Span>
+      </OutsideLink>
 
       {/**Overlay 資訊卡 */}
-      <div
-        className="absolute transition-all duration-300 
-       left-1/2 -translate-x-1/2
-       z-1000
-       "
-        style={{
-          bottom: isOpen ? "100%" : "50%",
-          opacity: isOpen ? "1" : "0",
-          visibility: isOpen ? "visible" : "hidden",
-        }}
-      >
+      <Overlay>
         <div
           className="p-[2px] rounded-2xl"
           style={{
@@ -125,7 +131,7 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
             </div>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </Overlay>
+    </Container>
   );
 };

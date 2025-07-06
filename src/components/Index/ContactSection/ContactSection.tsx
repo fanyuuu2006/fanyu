@@ -54,11 +54,12 @@ export const ContactSection = () => {
               className="flex flex-wrap w-full gap-2"
             >
               {items.map((item) => (
-                <ContactCard
+                <motion.div
                   key={`${item.label}-${item.info.id}`}
                   variants={fadeInItem}
-                  item={item}
-                />
+                >
+                  <ContactCard item={item} />
+                </motion.div>
               ))}
             </motion.div>
           </div>
