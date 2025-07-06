@@ -18,23 +18,26 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
     className: imageClassName,
     ...restImageProps
   } = item.info.image || {};
+
+  const gradientStyle: React.CSSProperties = {
+    background: `linear-gradient(45deg, ${(item.backgrounds?.length
+      ? item.backgrounds
+      : ["var(--text-color-primary)", "var(--text-color-secondary)"]
+    ).join(",")})`,
+    backgroundBlendMode: "overlay",
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    backdropFilter: "blur(1rem)",
+    WebkitBackdropFilter: "blur(1rem)", // Safari 支援
+    willChange: "background-color, backdrop-filter",
+  };
+
   return (
     <div className={`contact-card ${className}`} {...rest}>
       <OutsideLink
         draggable={true}
         href={item.href}
         className="block p-[2px] rounded-full no-underline "
-        style={{
-          background: `linear-gradient(45deg, ${(item.backgrounds?.length
-            ? item.backgrounds
-            : ["var(--text-color-primary)", "var(--text-color-secondary)"]
-          ).join(",")})`,
-          backgroundBlendMode: "overlay", 
-          backgroundColor: "rgba(0, 0, 0, 0.1)",
-          backdropFilter: "blur(1rem)",
-          WebkitBackdropFilter: "blur(1rem)", // Safari 支援
-          willChange: "background-color, backdrop-filter",
-        }}
+        style={gradientStyle}
       >
         <span className="label text-2xl font-semibold">
           <item.icon />
@@ -44,15 +47,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
 
       {/**Overlay 資訊卡 */}
       <div className="overlay">
-        <div
-          className="p-[2px] rounded-2xl"
-          style={{
-            background: `linear-gradient(45deg, ${(item.backgrounds?.length
-              ? item.backgrounds
-              : ["var(--text-color-primary)", "var(--text-color-secondary)"]
-            ).join(",")})`,
-          }}
-        >
+        <div className="p-[2px] rounded-2xl" style={gradientStyle}>
           <div className="bg-[var(--background-color)] rounded-[inherit] flex flex-col gap-2 p-4">
             <div className="flex items-center gap-4">
               {/**頭像 */}
