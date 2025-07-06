@@ -77,7 +77,7 @@ export const ExperienceCard = ({
 
         {/** 標題與時間 */}
         <div className="flex-1">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
               {item.name[Language.Current]}
             </h3>
@@ -91,8 +91,8 @@ export const ExperienceCard = ({
                 {item.department[Language.Current]}
               </p>
             )}
-            <p className="flex items-center gap-3 text-base md:text-lg text-[var(--text-color-muted)]">
-              <ClockCircleOutlined className="text-[var(--primary-color)]" />
+            <p className="flex items-center gap-3 text-sm md:text-base text-[var(--text-color-muted)]">
+              <ClockCircleOutlined />
               <span className="font-medium">
                 {`${item.duration.start ?? experienceContent.noRecord} ~ ${
                   item.duration.end ?? experienceContent.present

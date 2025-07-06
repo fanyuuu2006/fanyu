@@ -78,22 +78,23 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
             <div className="flex items-center gap-4">
               {/**頭像 */}
               <div
-                className="h-10 aspect-square rounded-xl overflow-hidden"
+                className="h-10 p-[2px] aspect-square rounded-xl overflow-hidden"
                 style={{
-                  border: `2px solid ${
-                    item.backgrounds?.[0] || "var(--text-color-primary)"
-                  }`,
+                  background: `linear-gradient(45deg, ${(item.backgrounds
+                    ?.length
+                    ? item.backgrounds
+                    : [
+                        "var(--text-color-primary)",
+                        "var(--text-color-secondary)",
+                      ]
+                  ).join(",")})`,
                 }}
               >
                 {/*eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-[inherit]"
                   src={item.info.image || `/favicon.ico`}
                   alt={`${item.label}-${item.info.id}`}
-                  style={{
-                    backgroundColor:
-                      item.backgrounds?.[0] || "var(--text-color-primary)",
-                  }}
                 />
               </div>
 
@@ -119,7 +120,6 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
               <OutsideLink
                 className="btn-tertiary ms-auto text-lg font-semibold flex items-center rounded-full px-3 py-1 "
                 href={item.href}
-                
               >
                 {
                   {
