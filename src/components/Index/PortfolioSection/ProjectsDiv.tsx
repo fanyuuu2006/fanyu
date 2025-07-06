@@ -1,5 +1,4 @@
 import { profile } from "@/libs/profile";
-import { CaretRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
@@ -51,14 +50,13 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
             />
           ))}
       </Carousel>
-      
+
       {/**了解更多 */}
       <Link
         className="btn-primary text-base md:text-lg font-semibold rounded-full flex items-center px-3 py-2"
         href="/projects"
       >
         {projectsContent.learnMore}
-        <CaretRightOutlined  />
       </Link>
     </div>
   );

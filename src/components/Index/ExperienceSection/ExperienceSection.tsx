@@ -10,7 +10,6 @@ import { experienceTabIcons, experienceTabs } from "@/libs/education";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
 import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
-import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 
 type ExperienceContent = Record<
   "experience" | ExperienceTab | "noExperience" | "viewMore" | "collapse",
@@ -144,17 +143,9 @@ export const ExperienceSection = () => {
                             setShowMore((prev) => !prev);
                           }}
                         >
-                          {showMore ? (
-                            <>
-                              <CaretUpOutlined />
-                              {experienceContent.collapse}
-                            </>
-                          ) : (
-                            <>
-                              <CaretDownOutlined />
-                              {experienceContent.viewMore}
-                            </>
-                          )}
+                          {showMore
+                            ? experienceContent.collapse
+                            : experienceContent.viewMore}
                         </button>
                       </div>
                     </div>

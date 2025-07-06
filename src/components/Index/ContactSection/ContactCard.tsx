@@ -1,14 +1,13 @@
 import { CopyButton } from "@/components/custom/CopyButton";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactItem } from "@/types/contact";
-import { ArrowRightOutlined } from "@ant-design/icons";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import styled from "styled-components";
 
 const Container = styled.div`
   position: relative;
 `;
-const Span = styled.span`
+const Label = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,22 +45,22 @@ export type ContactCardProps = OverrideProps<
 >;
 export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
   const Language = useLanguage();
-
   return (
     <Container {...rest}>
       <OutsideLink
         href={item.href}
         className="block p-[2px] rounded-full no-underline"
         style={{
-          background: item.backgrounds?.length
-            ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
-            : `linear-gradient(45deg,var(--text-color-primary),var(--text-color-secondary))`,
+          background: `linear-gradient(45deg, ${(item.backgrounds?.length
+            ? item.backgrounds
+            : ["var(--text-color-primary)", "var(--text-color-secondary)"]
+          ).join(",")})`,
         }}
       >
-        <Span className="text-2xl font-semibold">
+        <Label className="text-2xl font-semibold">
           <item.icon />
           {item.label}
-        </Span>
+        </Label>
       </OutsideLink>
 
       {/**Overlay 資訊卡 */}
@@ -69,9 +68,10 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
         <div
           className="p-[2px] rounded-2xl"
           style={{
-            background: item.backgrounds?.length
-              ? `linear-gradient(45deg, ${item.backgrounds.join(",")})`
-              : `linear-gradient(45deg,var(--text-color-primary),var(--text-color-secondary))`,
+            background: `linear-gradient(45deg, ${(item.backgrounds?.length
+              ? item.backgrounds
+              : ["var(--text-color-primary)", "var(--text-color-secondary)"]
+            ).join(",")})`,
           }}
         >
           <div className="bg-[var(--background-color)] rounded-[inherit] flex flex-col gap-2 p-4">
@@ -117,8 +117,9 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
             {item.info.about && <div>{<item.info.about />}</div>}
             <div className="flex">
               <OutsideLink
-                className="ms-auto text-2xl flex gap-2"
+                className="btn-tertiary ms-auto text-lg font-semibold flex items-center rounded-full px-3 py-1 "
                 href={item.href}
+                
               >
                 {
                   {
@@ -126,7 +127,6 @@ export const ContactCard = ({ item, ...rest }: ContactCardProps) => {
                     english: "Go to",
                   }[Language.Current]
                 }
-                <ArrowRightOutlined />
               </OutsideLink>
             </div>
           </div>
