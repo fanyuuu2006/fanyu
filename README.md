@@ -1,6 +1,6 @@
 # 🧑‍💻FanYu 個人網站（Portfolio Website）
 
-由 FanYu（范余振富） 開發的個人作品展示平台，基於 Next.js 15 + TypeScript，整合多語言切換、Google Drive 相簿 API、動態篩選作品集、動畫效果、SEO 優化、留言板、生日倒計時等功能，是一個全方位的現代化個人網站。
+由 FanYu（范余振富） 開發的個人作品展示平台，基於 Next.js + TypeScript，整合多語言切換、Google Drive 相簿 API、動態篩選作品集、動畫效果、SEO 優化、留言板、生日倒計時等功能，是一個全方位的現代化個人網站。
 
 ## 🔗 快速前往
 
@@ -54,13 +54,13 @@
 
 | 分類         | 技術堆疊                                                                                                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| 框架         | [Next.js 15(App Router)](https://nextjs.org/) + [Turbopack](https://nextjs.org/docs/app/api-reference/next-config-js/turbopack) |
+| 框架         | [Next.js (App Router)](https://nextjs.org/) + [Turbopack](https://nextjs.org/docs/app/api-reference/next-config-js/turbopack) |
 | 語言         | [TypeScript](https://www.typescriptlang.org/)                                                                                   |
 | UI 函式庫    | [React](https://react.dev/)                                                                                                     |
-| 樣式         | [Tailwind CSS](https://tailwindcss.com/) + [styled-components 6](https://styled-components.com/) + 自訂 CSS 變數                |
+| 樣式         | [Tailwind CSS](https://tailwindcss.com/) + [styled-components](https://styled-components.com/) + 自訂 CSS 變數                |
 | 動畫         | [framer-motion](https://www.framer.com/motion/)                                                                                 |
 | 圖片處理     | Google Drive API + 自建 Image Proxy + Next.js Image 優化                                                                        |
-| 圖示         | [Ant Design Icons](https://ant.design/components/icon/) + [react-icons 5](https://react-icons.github.io/react-icons/)           |
+| 圖示         | [Ant Design Icons](https://ant.design/components/icon/) + [react-icons](https://react-icons.github.io/react-icons/)           |
 | UI 元件      | `fanyucomponents`（自訂元件庫）+ [Ant Design](https://ant.design/)                                                              |
 | 通知系統     | [sweetalert2](https://sweetalert2.github.io/)（Toast 通知）                                                                     |
 | 評論系統     | [Giscus](https://giscus.app/)（GitHub Discussions 整合）                                                                        |
@@ -68,8 +68,8 @@
 | 圖片載入優化 | 自訂 `LazyImage` 元件 + Intersection Observer                                                                                   |
 | 程式碼高亮   | [c063](https://www.npmjs.com/package/c063)（自開發語法高亮元件）                                                                |
 | 網站地圖     | [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)                                                                 |
-| HTTP 客戶端  | [gaxios](https://github.com/googleapis/gaxios) + [googleapis 150](https://github.com/googleapis/google-api-nodejs-client)       |
-| 網站分析     | [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights 1.2.0](https://vercel.com/docs/speed-insights)               |
+| HTTP 客戶端  | [gaxios](https://github.com/googleapis/gaxios) + [googleapis](https://github.com/googleapis/google-api-nodejs-client)       |
+| 網站分析     | [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights)               |
 | 部署平台     | [Vercel](https://vercel.com/)                                                                                                   |
 
 ## 🗂 專案結構
@@ -179,7 +179,7 @@
 ├── next.config.ts          # Next.js 設定檔
 ├── package.json            # 專案依賴與腳本
 ├── postcss.config.mjs      # PostCSS 設定
-├── tailwind.config.js      # Tailwind CSS 設定
+├── tailwind.config.ts      # Tailwind CSS 設定
 ├── README.md               # 專案說明文件
 └── tsconfig.json           # TypeScript 設定
 ```
@@ -188,9 +188,9 @@
 
 ### 環境需求
 
-- Node.js 18.17+ 或 20.0+
-- npm 9.0+ 或 yarn 1.22+
-- Git 2.0+
+- Node.js 18.17+
+- npm 或 yarn
+- Git
 
 ### 快速開始
 
@@ -239,7 +239,7 @@ npx tsc --noEmit
 
 ### 多重分析工具整合
 
-- 📈 **Google Analytics 4**：深度使用者行為分析、轉換追蹤
+- 📈 **Google Analytics**：深度使用者行為分析、轉換追蹤
 - ⚡ **Vercel Analytics**：即時效能監控、使用者地理分佈
 - 🏃 **Speed Insights**：Core Web Vitals 即時監控
 
