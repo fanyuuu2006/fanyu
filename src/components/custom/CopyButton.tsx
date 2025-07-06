@@ -3,6 +3,7 @@ import { Tooltip } from "antd";
 import { OverrideProps } from "fanyucomponents";
 import { useEffect, useMemo, useState } from "react";
 import { Toast } from "./Toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export type CopyButtonProps = OverrideProps<
   React.HTMLAttributes<HTMLButtonElement>,
@@ -19,11 +20,31 @@ export const CopyButton = ({
   ...rest
 }: CopyButtonProps) => {
   const [copied, setCopied] = useState<boolean>(false);
+  const Language = useLanguage();
+
+  const copyButtonContent = useMemo(() => {
+    return {
+      chinese: {
+        copied: "已複製",
+        copy: "複製",
+        success: "已複製到剪貼簿",
+        failed: "複製失敗",
+        notSupport: "瀏覽器不支援複製",
+      },
+      english: {
+        copied: "Copied",
+        copy: "Copy",
+        success: "Copied to clipboard",
+        failed: "Copy failed",
+        notSupport: "Browser does not support copy",
+      },
+    }[Language.Current];
+  }, [Language.Current]);
 
   const handleCopy = useMemo(() => {
     return async () => {
       if (!navigator?.clipboard) {
-        Toast.fire({ icon: "error", text: "瀏覽器不支援複製" });
+        Toast.fire({ icon: "error", text: copyButtonContent.notSupport });
         return;
       }
       await navigator.clipboard
@@ -32,15 +53,20 @@ export const CopyButton = ({
           setCopied(true);
           Toast.fire({
             icon: "success",
-            text: "已複製到剪貼簿",
+            text: copyButtonContent.success,
           });
         })
         .catch((err) => {
           console.error("複製失敗", err);
-          Toast.fire({ icon: "error", text: "複製失敗" });
+          Toast.fire({ icon: "error", text: copyButtonContent.failed });
         });
     };
-  }, [content]);
+  }, [
+    content,
+    copyButtonContent.failed,
+    copyButtonContent.notSupport,
+    copyButtonContent.success,
+  ]);
 
   useEffect(() => {
     if (!copied) return;
@@ -52,10 +78,10 @@ export const CopyButton = ({
   }, [copied]);
 
   return (
-    <Tooltip title={copied ? "已複製" : "複製"}>
+    <Tooltip title={copied ? copyButtonContent.copied : copyButtonContent.copy}>
       <button
         disabled={copied}
-        aria-label={copied ? "已複製" : "複製"}
+        aria-label={copied ? copyButtonContent.copied : copyButtonContent.copy}
         className={className}
         onClick={(...args) => {
           handleCopy();

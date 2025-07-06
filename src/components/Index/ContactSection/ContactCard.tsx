@@ -12,6 +12,12 @@ export type ContactCardProps = OverrideProps<
 >;
 export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
   const Language = useLanguage();
+  const {
+    src: imageSrc,
+    style: imageStyle,
+    className: imageClassName,
+    ...restImageProps
+  } = item.info.image || {};
   return (
     <div className={`contact-card ${className}`} {...rest}>
       <OutsideLink
@@ -54,32 +60,36 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
               >
                 {/*eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className="w-full h-full object-cover"
-                  src={item.info.image || `/GameShow.jpg`}
+                  className={`w-full h-full object-cover ${
+                    imageClassName || ""
+                  }`}
+                  src={imageSrc || `/GameShow.jpg`}
                   alt={`${item.label}-${item.info.id}`}
                   style={{
                     backgroundColor:
                       item.backgrounds?.[0] || "var(--text-color-primary)",
+                    ...imageStyle,
                   }}
+                  {...restImageProps}
                 />
               </div>
 
               {/**名稱 & ID */}
               <div className="flex flex-col whitespace-nowrap leading-tight">
-                <span
+                <h5
                   className="text-lg md:text-xl font-bold"
                   style={{
                     color: item.backgrounds?.[0] || "var(--text-color-primary)",
                   }}
                 >
                   {item.info.name}
-                </span>
+                </h5>
                 <div>
                   <CopyButton
                     content={item.info.id}
                     className="text-sm md:text-base text-[var(--text-color-muted)]"
                   >
-                    {item.info.id}
+                    <h6>{item.info.id}</h6>
                   </CopyButton>
                 </div>
               </div>

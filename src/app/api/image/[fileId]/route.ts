@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: Promise<{ fileId: string }> }
 ) {
   try {
-    const fileId = (await params).fileId;
+    const { fileId } = await params;
 
     // 1️⃣ 取得 Node.js 串流
     const resp = await drive.files.get(

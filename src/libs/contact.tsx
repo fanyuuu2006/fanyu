@@ -71,7 +71,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       info: {
         id: "fanyuuu2006",
         name: "FanYu",
-        image: "https://avatars.githubusercontent.com/u/180280998?v=4",
+        image: { src: "https://avatars.githubusercontent.com/u/180280998" },
       },
       href: "https://github.com/fanyuuu2006",
       backgrounds: ["#5f5f5f"],
@@ -127,8 +127,9 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       info: {
         id: "fanyuuu2006",
         name: "FanYu",
-        image:
-          "https://wakatime.com/photo/852f9428-fd16-453e-80bd-6cabc63ee83e",
+        image: {
+          src: "https://wakatime.com/photo/852f9428-fd16-453e-80bd-6cabc63ee83e",
+        },
       },
       href: "https://wakatime.com/@fanyuuu2006",
     },
@@ -163,8 +164,9 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       info: {
         name: "飯魚",
         id: "1488181486",
-        image:
-          "https://i1.hdslb.com/bfs/face/10300665780b53d6ea2977d2c4bac163e3bfcff5.jpg",
+        image: {
+          src: "/api/proxy-image?url=https://i1.hdslb.com/bfs/face/10300665780b53d6ea2977d2c4bac163e3bfcff5.jpg",
+        },
       },
       href: "https://space.bilibili.com/1488181486",
       backgrounds: ["#FF6999"],
@@ -181,7 +183,13 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "Line",
       icon: BsLine,
-      info: { id: "fan._.yuuu", name: "飯魚🍚🐟" },
+      info: {
+        id: "fan._.yuuu",
+        name: "飯魚🍚🐟",
+        image: {
+          src: "https://profile.line-scdn.net/0hHQvRd6bKF35bKwNydPZpASt7FBR4Wk5sdk5eSG0pS040S1IgcRhbSDksQU00TlR4JUwKG2ojHBtXOGAYRX3rSlwbSUpgHFYuc0pdnQ",
+        },
+      },
       href: "https://line.me/ti/p/IqB3QvjIlU",
       backgrounds: ["#00c300"],
     },
@@ -191,8 +199,9 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       info: {
         id: "bingxiao526@gmail.com",
         name: "飯魚正負",
-        image:
-          "https://lh3.googleusercontent.com/a/ACg8ocKdE_VVvBiQF5MPlOqLuuBc9-NntvLaIb9i42xm3hVCwhNsLg_-=s96-c",
+        image: {
+          src: "https://lh3.googleusercontent.com/a/ACg8ocKdE_VVvBiQF5MPlOqLuuBc9-NntvLaIb9i42xm3hVCwhNsLg_-=s96-c",
+        },
       },
       href: "mailto:bingxiao526@gmail.com",
       backgrounds: [
@@ -208,7 +217,13 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
     {
       label: "Discord",
       icon: DiscordOutlined,
-      info: { id: "fan._.yuuu", name: "🍚🐟➕➖" },
+      info: {
+        id: "fan._.yuuu",
+        name: "🍚🐟➕➖",
+        image: {
+          src: "https://cdn.discordapp.com/avatars/959582016431620147/49359a36b9a89375920586067a64c0de",
+        },
+      },
       href: "https://discord.com/users/959582016431620147",
       backgrounds: ["#5865f2"],
     },

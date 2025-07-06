@@ -6,7 +6,7 @@ export type ContactItem = {
   href: string;
   backgrounds?: React.CSSProperties["color"][];
   info: {
-    image?: string;
+    image?: React.ImgHTMLAttributes<HTMLImageElement>;
     id: string;
     name: string;
     about?: React.FC<{ language: LanguageOption }>;
