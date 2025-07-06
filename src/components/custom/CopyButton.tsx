@@ -15,6 +15,7 @@ export const CopyButton = ({
   className = "",
   content,
   onClick,
+  children,
   ...rest
 }: CopyButtonProps) => {
   const [copied, setCopied] = useState<boolean>(false);
@@ -55,14 +56,14 @@ export const CopyButton = ({
       <button
         disabled={copied}
         aria-label={copied ? "已複製" : "複製"}
-        className={`${className} flex items-center justify-center p-1`}
+        className={className}
         onClick={(...args) => {
           handleCopy();
           onClick?.(...args);
         }}
         {...rest}
       >
-        {copied ? <CheckOutlined /> : <CopyOutlined />}
+        {children || (copied ? <CheckOutlined /> : <CopyOutlined />)}
       </button>
     </Tooltip>
   );

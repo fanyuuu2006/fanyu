@@ -70,7 +70,7 @@ export const ProjectCard = ({
     <motion.article className="w-full flex flex-col" {...rest}>
       <div
         id={slugify(item.title.english)}
-        className={`${className} card shadow w-full p-6 md:p-8 gap-4 flex flex-col md:flex-row`}
+        className={`${className} card shadow w-full p-6 lg:p-8 gap-4 flex flex-col lg:flex-row`}
       >
         {/* 專案圖片 */}
         <div>
@@ -86,32 +86,32 @@ export const ProjectCard = ({
 
         {/* 專案資訊 */}
         <div className="flex-1">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1">
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
                 {item.title[Language.Current]}
               </h3>
               <p className="text-lg md:text-xl text-[var(--text-color-muted)] text-justify leading-relaxed">
                 {item.about[Language.Current]}
               </p>
-              <div className="flex items-center gap-2 text-base md:text-lg text-[var(--text-color-muted)]">
+              <p className="flex items-center gap-1 text-base md:text-lg text-[var(--text-color-muted)]">
                 <ClockCircleOutlined />
                 <span className="font-medium">{item.time}</span>
-              </div>
-              <div className="flex gap-2 flex-wrap">
-                {item.links.map((link) => (
-                  <CustomLink
-                    key={link.href}
-                    href={link.href}
-                    className="max-w-full text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-2"
-                  >
-                    {categoryIcon[link.category]}
-                    <span className="text-ellipsis overflow-hidden whitespace-nowrap">
-                      {link.href}
-                    </span>
-                  </CustomLink>
-                ))}
-              </div>
+              </p>
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              {item.links.map((link) => (
+                <CustomLink
+                  key={link.href}
+                  href={link.href}
+                  className="max-w-full text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-1"
+                >
+                  {categoryIcon[link.category]}
+                  <span className="text-ellipsis overflow-hidden whitespace-nowrap">
+                    {link.href}
+                  </span>
+                </CustomLink>
+              ))}
             </div>
 
             <div className="flex flex-col gap-2 p-4 md:p-6 rounded-3xl border border-[var(--border-color)]">

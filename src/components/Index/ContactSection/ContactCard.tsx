@@ -45,7 +45,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
             <div className="flex items-center gap-4">
               {/**頭像 */}
               <div
-                className="h-10 aspect-square rounded-xl overflow-hidden"
+                className="h-12 aspect-square rounded-xl overflow-hidden"
                 style={{
                   border: `2px solid ${
                     item.backgrounds?.[0] || "var(--text-color-primary)"
@@ -65,19 +65,23 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
               </div>
 
               {/**名稱 & ID */}
-              <div className="flex flex-col gap-0 whitespace-nowrap">
+              <div className="flex flex-col whitespace-nowrap leading-tight">
                 <span
-                  className="text-2xl font-bold"
+                  className="text-lg md:text-xl font-bold"
                   style={{
                     color: item.backgrounds?.[0] || "var(--text-color-primary)",
                   }}
                 >
                   {item.info.name}
                 </span>
-                <span className="text-lg flex items-center gap-1">
-                  {item.info.id}
-                  <CopyButton content={item.info.id} />
-                </span>
+                <div>
+                  <CopyButton
+                    content={item.info.id}
+                    className="text-sm md:text-base text-[var(--text-color-muted)]"
+                  >
+                    {item.info.id}
+                  </CopyButton>
+                </div>
               </div>
             </div>
             {/**相關資訊(待定) */}
