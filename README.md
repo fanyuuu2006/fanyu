@@ -1,9 +1,6 @@
 # 🧑‍💻 FanYu 個人網站
 
-由 FanYu（范余振富）開發的個人作品展示平台，基於 Next.js + TypeScript 構建，## 📁 專案結構
-
-````plaintext
-├── public/                    # 靜態資源言切換、Google Drive 相簿系統、動態作品集篩選、動畫效果、SEO 優化、留言板等功能的現代化個人網站。
+由 FanYu（范余振富）開發的個人作品展示平台，基於 Next.js + TypeScript 構建，多語言切換、Google Drive 相簿系統、動態作品集篩選、動畫效果、SEO 優化、留言板等功能的現代化個人網站。
 
 ## 🔗 線上預覽
 
@@ -54,26 +51,26 @@
 
 ## 🛠 技術架構
 
-| 分類       | 技術堆疊                                                                                |
-| ---------- | --------------------------------------------------------------------------------------- |
-| 核心框架   | Next.js (App Router) + Turbopack                                                       |
-| 開發語言   | TypeScript                                                                              |
-| UI 框架    | React                                                                                   |
-| 樣式系統   | Tailwind CSS + styled-components                                                       |
-| 動畫效果   | framer-motion                                                                           |
-| 圖片處理   | Google Drive API + Next.js Image 優化                                                  |
-| 圖示庫     | Ant Design Icons + react-icons                                                         |
-| UI 元件    | fanyucomponents（自訂元件庫）+ Ant Design                                              |
-| 通知系統   | sweetalert2                                                                             |
-| 評論系統   | Giscus（GitHub Discussions）                                                           |
-| 資料獲取   | SWR + Next.js API Routes                                                               |
-| 程式碼高亮 | c063（自開發元件）                                                                      |
-| 網站地圖   | next-sitemap                                                                            |
-| HTTP 客戶端 | gaxios + googleapis                                                                     |
-| 網站分析   | Vercel Analytics + Speed Insights                                                      |
-| 部署平台   | Vercel                                                                                  |
+| 分類        | 技術堆疊                                  |
+| ----------- | ----------------------------------------- |
+| 核心框架    | Next.js (App Router) + Turbopack          |
+| 開發語言    | TypeScript                                |
+| UI 框架     | React                                     |
+| 樣式系統    | Tailwind CSS + styled-components          |
+| 動畫效果    | framer-motion                             |
+| 圖片處理    | Google Drive API + Next.js Image 優化     |
+| 圖示庫      | Ant Design Icons + react-icons            |
+| UI 元件     | fanyucomponents（自訂元件庫）+ Ant Design |
+| 通知系統    | sweetalert2                               |
+| 評論系統    | Giscus（GitHub Discussions）              |
+| 資料獲取    | SWR + Next.js API Routes                  |
+| 程式碼高亮  | c063（自開發元件）                        |
+| 網站地圖    | next-sitemap                              |
+| HTTP 客戶端 | gaxios + googleapis                       |
+| 網站分析    | Vercel Analytics + Speed Insights         |
+| 部署平台    | Vercel                                    |
 
-## � 專案結構
+## 📁 專案結構
 
 ```plaintext
 ├── public/ # 靜態資源
@@ -84,7 +81,7 @@
 │ │ │ │ └── [eventName]/ # 活動動態路由
 │ │ ├── api/ # API 路由
 │ │ │ ├── album/ # 相簿 API
-│ │ │ └── proxy-image/ # 圖片代理 API
+│ │ │ └── proxy/ # 代理 API 路由
 │ │ ├── guestbook/ # 留言板頁面
 │ │ ├── my/ # 個人頁面（倒計時）
 │ │ ├── projects/ # 作品集專頁
@@ -111,10 +108,9 @@
 ├── package.json # 專案依賴
 ├── tailwind.config.ts # Tailwind CSS 設定
 └── tsconfig.json # TypeScript 設定
+```
 
-````
-
-## � 快速開始
+## 🚀 快速開始
 
 ### 環境需求
 
