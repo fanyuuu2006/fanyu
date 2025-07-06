@@ -150,7 +150,7 @@ export const ProjectCard = ({
                     setGiscusShow((prev) => !prev);
                   }}
                   className={`btn-${
-                    giscusShow ? "secondary" : "primary"
+                    giscusShow ? "tertiary" : "primary"
                   } text-base md:text-lg px-4 py-2 rounded-xl`}
                 >
                   {

@@ -90,9 +90,7 @@ export const MainSection = () => {
           <div className="relative text-2xl flex flex-nowrap items-center px-4 gap-4">
             <Tooltip title={projectsContent.filter}>
               <button
-                onClick={() => {
-                  setCategoriesShow((prev) => !prev);
-                }}
+                onClick={() => setCategoriesShow((prev) => !prev)}
                 className="btn flex items-center w-fit gap-2 p-2 rounded-lg"
               >
                 {categoriesShow ? <DownOutlined /> : <FilterOutlined />}
