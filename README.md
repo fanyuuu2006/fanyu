@@ -85,17 +85,31 @@
 │   ├── app/                # Next.js App Router 路由系統
 │   │   ├── album/          # 相簿系統動態路由
 │   │   │   ├── [year]/     # 年份動態路由
+│   │   │   │   ├── page.tsx # 年份頁面
 │   │   │   │   └── [eventName]/ # 活動動態路由
+│   │   │   │       ├── layout.tsx # 活動佈局
+│   │   │   │       └── page.tsx   # 活動頁面
 │   │   │   ├── layout.tsx  # 相簿佈局
 │   │   │   └── page.tsx    # 相簿主頁
 │   │   ├── api/            # API 路由
 │   │   │   ├── album/      # 相簿 API
-│   │   │   │   └── [year]/[eventName]/ # 動態相簿 API
+│   │   │   │   ├── route.ts # 相簿列表 API
+│   │   │   │   └── [year]/ # 年份相簿 API
+│   │   │   │       ├── route.ts # 年份 API
+│   │   │   │       └── [eventName]/ # 活動相簿 API
+│   │   │   │           ├── route.ts   # 活動 API
+│   │   │   │           └── [index]/   # 圖片索引 API
+│   │   │   │               └── route.ts
 │   │   │   └── image/[fileId]/ # 圖片代理 API
+│   │   │       └── route.ts
 │   │   ├── guestbook/      # 留言板頁面
+│   │   │   ├── layout.tsx  # 留言板佈局
+│   │   │   └── page.tsx    # 留言板頁面
 │   │   ├── my/             # 個人頁面（倒計時器）
+│   │   │   └── page.tsx    # 個人頁面
 │   │   ├── projects/       # 作品集專頁
 │   │   │   ├── [title]/    # 專案詳情動態路由
+│   │   │   │   └── page.tsx # 專案詳情頁面
 │   │   │   ├── layout.tsx  # 作品集佈局
 │   │   │   └── page.tsx    # 作品集主頁
 │   │   ├── error.tsx       # 全域錯誤頁面
@@ -106,30 +120,36 @@
 │   │   └── sitemap.ts      # 動態 sitemap 生成
 │   ├── components/         # React 元件
 │   │   ├── album/          # 相簿相關元件
-│   │   │   ├── [year]/[eventName]/ # 特定相簿頁面元件
-│   │   │   ├── EventLinkCard.tsx   # 活動連結卡片
-│   │   │   ├── MainSection.tsx     # 相簿主要區塊
-│   │   │   └── YearDiv.tsx         # 年份顯示元件
+│   │   │   ├── [year]/     # 特定年份相簿元件
+│   │   │   │   └── [eventName]/ # 特定活動相簿元件
+│   │   │   │       ├── ImageCard.tsx   # 圖片卡片
+│   │   │   │       └── MainSection.tsx # 活動主要區塊
+│   │   │   ├── EventLinkCard.tsx # 活動連結卡片
+│   │   │   ├── MainSection.tsx   # 相簿主要區塊
+│   │   │   └── YearDiv.tsx       # 年份顯示元件
 │   │   ├── custom/         # 自訂通用元件
-│   │   │   ├── Carousel.tsx        # 輪播元件
-│   │   │   ├── CodeCard.tsx        # 程式碼卡片
-│   │   │   ├── CopyButton.tsx      # 複製按鈕
-│   │   │   ├── CustomLink.tsx      # 自訂連結元件
-│   │   │   ├── LazyImage.tsx       # 懶載入圖片元件
-│   │   │   └── Toast.ts            # 通知系統
+│   │   │   ├── Carousel.tsx      # 輪播元件
+│   │   │   ├── CodeCard.tsx      # 程式碼卡片
+│   │   │   ├── CopyButton.tsx    # 複製按鈕
+│   │   │   ├── CustomLink.tsx    # 自訂連結元件
+│   │   │   ├── LazyImage.tsx     # 懶載入圖片元件
+│   │   │   └── Toast.ts          # 通知系統
 │   │   ├── guestbook/      # 留言板元件
+│   │   │   └── MainSection.tsx   # 留言板主要區塊
 │   │   ├── Header/         # 導航列相關元件
-│   │   │   ├── BurgerMenu.tsx      # 漢堡選單
-│   │   │   ├── Header.tsx          # 主導航列
-│   │   │   └── routes.tsx          # 路由設定
+│   │   │   ├── BurgerMenu.tsx    # 漢堡選單
+│   │   │   ├── Header.tsx        # 主導航列
+│   │   │   └── routes.tsx        # 路由設定
 │   │   ├── Index/          # 首頁各區塊元件
-│   │   │   ├── AboutMeSection/     # 關於我區塊
-│   │   │   ├── ContactSection/     # 聯絡資訊區塊
-│   │   │   ├── ExperienceSection/  # 經歷區塊
-│   │   │   ├── HeroSection/        # 英雄區塊
-│   │   │   ├── PortfolioSection/   # 作品集區塊
-│   │   │   └── SkillsSection/      # 技能區塊
+│   │   │   ├── AboutMeSection/   # 關於我區塊
+│   │   │   ├── ContactSection/   # 聯絡資訊區塊
+│   │   │   ├── ExperienceSection/ # 經歷區塊
+│   │   │   ├── HeroSection/      # 英雄區塊
+│   │   │   ├── PortfolioSection/ # 作品集區塊
+│   │   │   └── SkillsSection/    # 技能區塊
 │   │   ├── my/             # 個人頁面元件
+│   │   │   ├── MainSection.tsx   # 個人頁面主區塊
+│   │   │   └── TimerCard.tsx     # 倒計時卡片
 │   │   ├── projects/       # 作品集元件
 │   │   │   ├── MainSection.tsx     # 作品集主區塊
 │   │   │   ├── ProjectCard.tsx     # 專案卡片
@@ -137,8 +157,8 @@
 │   │   ├── Footer.tsx      # 網站頁尾
 │   │   └── LanguageSwitchButton.tsx # 語言切換按鈕
 │   ├── contexts/           # React Context 狀態管理
-│   │   ├── AlbumContext.tsx        # 相簿狀態管理
-│   │   └── LanguageContext.tsx     # 語言切換狀態
+│   │   ├── AlbumContext.tsx      # 相簿狀態管理
+│   │   └── LanguageContext.tsx   # 語言切換狀態
 │   ├── hooks/              # 自訂 React Hooks
 │   │   ├── useInViewUnderlineSpread.tsx # 視窗內動畫 Hook
 │   │   └── useTimeOrderTabs.tsx         # 時間排序 Hook
@@ -157,8 +177,11 @@
 │   │   └── work.tsx        # 工作經歷資料
 │   ├── styles/             # 樣式檔案
 │   │   ├── alert.css       # 通知樣式
+│   │   ├── carousel.css    # 輪播樣式
+│   │   ├── contact-card.css # 聯絡卡片樣式
 │   │   ├── globals.css     # 全域樣式
-│   │   └── menu.css        # 選單樣式
+│   │   ├── menu.css        # 選單樣式
+│   │   └── project-card.css # 專案卡片樣式
 │   ├── types/              # TypeScript 型別定義
 │   │   ├── contact.tsx     # 聯絡資訊型別
 │   │   ├── experience.tsx  # 經歷型別
