@@ -84,7 +84,6 @@
 │ │ │ │ └── [eventName]/ # 活動動態路由
 │ │ ├── api/ # API 路由
 │ │ │ ├── album/ # 相簿 API
-│ │ │ ├── image/ # 圖片 API
 │ │ │ └── proxy-image/ # 圖片代理 API
 │ │ ├── guestbook/ # 留言板頁面
 │ │ ├── my/ # 個人頁面（倒計時）

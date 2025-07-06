@@ -27,7 +27,7 @@ export async function GET(
       const images = await listAllFiles(
         `'${yearFolder.id}' in parents and mimeType contains 'image/'`
       );
-      const result = images.map((f) => `/api/image/${f.id}`).reverse();
+      const result = images.map((f) => `/api/album/image/${f.id}`).reverse();
       return NextResponse.json(result);
     }
 
@@ -44,7 +44,7 @@ export async function GET(
     const images = await listAllFiles(
       `'${eventFolder.id}' in parents and mimeType contains 'image/'`
     );
-    const result = images.map((f) => `/api/image/${f.id}`).reverse();
+    const result = images.map((f) => `/api/album/image/${f.id}`).reverse();
 
     return NextResponse.json(result);
   } catch (error) {

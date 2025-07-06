@@ -51,7 +51,7 @@ export async function GET(
         );
       }
 
-      return NextResponse.json(`/api/image/${image.id}`);
+      return NextResponse.json(`/api/album/image/${image.id}`);
     }
 
     // 找事件資料夾
@@ -77,7 +77,7 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(`/api/image/${image.id}`);
+    return NextResponse.json(`/api/album/image/${image.id}`);
   } catch (error) {
     console.warn("⚠️ 讀取 Album 資料夾時發生錯誤:", error);
     return NextResponse.json(

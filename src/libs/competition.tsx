@@ -98,7 +98,7 @@ export const HCCGM: ExperienceItem = {
     english: "Member",
   },
   duration: { start: "2021-01", end: "2021-01" },
-  imageSrc: "/api/image/1aPifYS-OcfKdp01OCzz6acKKK_3A1Huo",
+  imageSrc: "/api/album/image/1aPifYS-OcfKdp01OCzz6acKKK_3A1Huo",
   links: [
     {
       chinese: "金頭腦數學競賽官網",
