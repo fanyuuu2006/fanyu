@@ -55,7 +55,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
                 {/*eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className="w-full h-full object-cover"
-                  src={item.info.image || `/favicon.ico`}
+                  src={item.info.image || `/GameShow.jpg`}
                   alt={`${item.label}-${item.info.id}`}
                   style={{
                     backgroundColor:
