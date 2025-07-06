@@ -67,9 +67,12 @@ export const ProjectCard = ({
   );
 
   return (
-    <motion.article className="w-full flex flex-col" {...rest}>
+    <motion.article
+      id={slugify(item.title.english)}
+      className="w-full flex flex-col"
+      {...rest}
+    >
       <div
-        id={slugify(item.title.english)}
         className={`${className} card shadow w-full p-6 lg:p-8 gap-4 flex flex-col lg:flex-row`}
       >
         {/* 專案圖片 */}
