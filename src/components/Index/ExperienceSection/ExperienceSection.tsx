@@ -139,7 +139,7 @@ export const ExperienceSection = () => {
                       </Collapse>
                       <div className="w-full">
                         <button
-                          className="text-lg mx-auto md:text-xl btn-secondary px-3 py-2 rounded-full flex items-center gap-1"
+                          className="btn-secondary mx-auto text-base md:text-lg font-semibold rounded-full flex items-center px-3 py-2"
                           onClick={() => {
                             setShowMore((prev) => !prev);
                           }}

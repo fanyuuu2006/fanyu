@@ -1,5 +1,5 @@
 import { profile } from "@/libs/profile";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { CaretRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { ProjectLinkCard } from "./ProjectLinkCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
@@ -54,11 +54,11 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
       
       {/**了解更多 */}
       <Link
-        className="text-2xl flex transition-all hover:-translate-x-2 group"
+        className="btn-primary text-base md:text-lg font-semibold rounded-full flex items-center px-3 py-2"
         href="/projects"
       >
         {projectsContent.learnMore}
-        <ArrowRightOutlined className="opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-2" />
+        <CaretRightOutlined  />
       </Link>
     </div>
   );
