@@ -69,18 +69,18 @@ export const ProjectCard = ({
   return (
     <motion.article
       id={slugify(item.title.english)}
-      className="w-full flex flex-col"
+      className="w-full"
       {...rest}
     >
       <div
-        className={`${className} card shadow w-full p-6 lg:p-8 gap-4 flex flex-col lg:flex-row`}
+        className={`${className} card w-full p-6 lg:p-8 gap-6 flex flex-col lg:flex-row group`}
       >
         {/* 專案圖片 */}
-        <div>
-          <div className="h-25 w-25 shrink-0 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
+        <div className="shrink-0">
+          <div className="h-28 w-28 lg:h-32 lg:w-32 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden transition-all duration-300 group-hover:border-[var(--border-color-light)] group-hover:shadow-lg">
             {/* eslint-disable-next-line @next/next/no-img-element*/}
             <img
-              className="h-full w-full bg-[#fff] object-cover"
+              className="h-full w-full bg-white object-cover transition-transform duration-300 group-hover:scale-105"
               src={item.imageSrc}
               alt={`${item.title.english} icon`}
             />
@@ -88,87 +88,93 @@ export const ProjectCard = ({
         </div>
 
         {/* 專案資訊 */}
-        <div className="flex-1">
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
-                {item.title[Language.Current]}
-              </h3>
-              <p className="text-lg md:text-xl text-[var(--text-color-muted)] text-justify leading-relaxed">
-                {item.about[Language.Current]}
-              </p>
-              <p className="flex items-center gap-1 text-base md:text-lg text-[var(--text-color-muted)]">
-                <ClockCircleOutlined />
-                <span className="font-medium">{item.time}</span>
-              </p>
+        <div className="flex-1 space-y-4">
+          {/* 標題和描述 */}
+          <div className="space-y-3">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight hover:underline-spread transition-colors duration-300">
+              {item.title[Language.Current]}
+            </h3>
+            <p className="text-lg md:text-xl text-[var(--text-color-muted)] text-justify leading-relaxed">
+              {item.about[Language.Current]}
+            </p>
+            <div className="flex items-center gap-2 text-base md:text-lg text-[var(--text-color-muted)]">
+              <ClockCircleOutlined />
+              <span className="font-medium">{item.time}</span>
             </div>
-            <div className="flex gap-2 flex-wrap">
-              {item.links.map((link) => (
-                <CustomLink
-                  key={link.href}
-                  href={link.href}
-                  className="max-w-full text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-1"
+          </div>
+
+          {/* 連結區域 */}
+          <div className="flex gap-3 flex-wrap">
+            {item.links.map((link) => (
+              <CustomLink
+                key={link.href}
+                href={link.href}
+                className="max-w-full btn text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-1 px-3 py-2 rounded-full"
+              >
+                {categoryIcon[link.category]}
+                <span className="text-ellipsis overflow-hidden whitespace-nowrap">
+                  {link.href}
+                </span>
+              </CustomLink>
+            ))}
+          </div>
+
+          {/* 專案特色 */}
+          <div className="rounded-2xl p-4 md:p-6 bg-[var(--background-color-tertiary)] border border-[var(--border-color)]">
+            <h4 className="text-[var(--text-color)] text-lg md:text-xl lg:text-2xl font-bold mb-3">
+              {projectContent.projectFeature}
+            </h4>
+            <ul className="text-base md:text-lg text-justify list-disc ps-5 space-y-2 text-[var(--text-color-muted)]">
+              {item.description[Language.Current].map((part, index) => (
+                <li key={index} className="leading-relaxed">{part}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 技能標籤 */}
+          <div className="rounded-2xl p-4 md:p-6 bg-[var(--background-color-tertiary)] border border-[var(--border-color)]">
+            <h4 className="text-lg md:text-xl lg:text-2xl font-bold mb-3">
+              {projectContent.skillTag}
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {item.tags.map((tag) => (
+                <ProjectTagCheckbox
+                  key={tag}
+                  tag={tag}
+                  currentTags={currentTags}
+                  setCurrentTags={setCurrentTags}
                 >
-                  {categoryIcon[link.category]}
-                  <span className="text-ellipsis overflow-hidden whitespace-nowrap">
-                    {link.href}
-                  </span>
-                </CustomLink>
+                  {tag}
+                </ProjectTagCheckbox>
               ))}
             </div>
-
-            <div className="flex flex-col gap-2 p-4 md:p-6 rounded-3xl border border-[var(--border-color)]">
-              <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
-                {projectContent.projectFeature}
-              </h4>
-              <ul className="text-base md:text-lg text-justify list-disc ps-5 space-y-2">
-                {item.description[Language.Current].map((part, index) => (
-                  <li key={index}>{part}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex flex-col gap-2 p-4 md:p-6 rounded-3xl border border-[var(--border-color)]">
-              <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
-                {projectContent.skillTag}
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {item.tags.map((tag) => (
-                  <ProjectTagCheckbox
-                    key={tag}
-                    tag={tag}
-                    currentTags={currentTags}
-                    setCurrentTags={setCurrentTags}
-                  >
-                    {tag}
-                  </ProjectTagCheckbox>
-                ))}
-              </div>
-            </div>
-
-            {item.github && (
-              <div className="w-full flex">
-                <button
-                  onClick={() => {
-                    setGiscusShow((prev) => !prev);
-                  }}
-                  className={`btn-${
-                    giscusShow ? "tertiary" : "primary"
-                  } text-base md:text-lg px-4 py-2 rounded-xl`}
-                >
-                  {
-                    (giscusShow
-                      ? { chinese: "關閉討論區", english: "Close Discussion" }
-                      : { chinese: "展開討論區", english: "Open Discussion" })[
-                      Language.Current
-                    ]
-                  }
-                </button>
-              </div>
-            )}
           </div>
+
+          {/* 討論區按鈕 */}
+          {item.github && (
+            <div className="w-full">
+              <button
+                onClick={() => {
+                  setGiscusShow((prev) => !prev);
+                }}
+                className={`btn-${
+                  giscusShow ? "tertiary" : "primary"
+                } text-base md:text-lg px-6 py-3 rounded-xl font-semibold min-w-[180px] transition-all duration-300`}
+              >
+                {
+                  (giscusShow
+                    ? { chinese: "關閉討論區", english: "Close Discussion" }
+                    : { chinese: "展開討論區", english: "Open Discussion" })[
+                    Language.Current
+                  ]
+                }
+              </button>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* GitHub 討論區 */}
       {item.github && (
         <Collapse
           state={giscusShow}
@@ -177,34 +183,36 @@ export const ProjectCard = ({
           }`}
           id="github-container"
         >
-          <div className="flex flex-wrap gap-4 justify-center">
-            {getGithubBadgeSrcs(item.github.repo).map((item) => (
-              /* eslint-disable-next-line @next/next/no-img-element*/
-              <img
-                draggable={false}
-                key={item.title}
-                src={item.url}
-                alt={item.title}
-                title={item.title}
-                className="h-6 object-cover select-none transition-transform duration-200 hover:scale-110"
+          <div className="card p-6 w-full">
+            <div className="flex flex-wrap gap-4 justify-center mb-6">
+              {getGithubBadgeSrcs(item.github.repo).map((badgeItem) => (
+                /* eslint-disable-next-line @next/next/no-img-element*/
+                <img
+                  draggable={false}
+                  key={badgeItem.title}
+                  src={badgeItem.url}
+                  alt={badgeItem.title}
+                  title={badgeItem.title}
+                  className="h-6 object-cover select-none"
+                />
+              ))}
+            </div>
+            <div className="w-full">
+              <Giscus
+                repo={item.github.repo}
+                repoId={item.github.repoId}
+                categoryId={item.github.categoryId}
+                category="Announcements"
+                mapping="pathname"
+                strict="0"
+                reactionsEnabled="1"
+                emitMetadata="0"
+                inputPosition="top"
+                theme="dark"
+                lang={Language.Current === "chinese" ? "zh-TW" : "en"}
+                loading="lazy"
               />
-            ))}
-          </div>
-          <div className="w-full">
-            <Giscus
-              repo={item.github.repo}
-              repoId={item.github.repoId}
-              categoryId={item.github.categoryId}
-              category="Announcements"
-              mapping="pathname"
-              strict="0"
-              reactionsEnabled="1"
-              emitMetadata="0"
-              inputPosition="top"
-              theme="dark"
-              lang={Language.Current === "chinese" ? "zh-TW" : "en"}
-              loading="lazy"
-            />
+            </div>
           </div>
         </Collapse>
       )}
