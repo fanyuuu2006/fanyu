@@ -19,6 +19,7 @@ import { useMemo, useState } from "react";
 import { getGithubBadgeSrcs } from "@/utils/github";
 import { CustomLink } from "../custom/CustomLink";
 import { LanguageOption, LanguageContent } from "@/types/language";
+import { cn } from "@/utils/className";
 
 type ProjectContent = Record<"skillTag" | "projectFeature", string>;
 const getProjectContent = (language: LanguageOption): ProjectContent =>
@@ -56,7 +57,7 @@ export const ProjectCard = ({
   item,
   currentTags,
   setCurrentTags,
-  className = "",
+  className,
   ...rest
 }: ProjectCardProps) => {
   const Language = useLanguage();
@@ -73,14 +74,14 @@ export const ProjectCard = ({
       {...rest}
     >
       <div
-        className={`${className} card w-full p-6 lg:p-8 gap-6 flex flex-col lg:flex-row group`}
+        className={`${className} card w-full p-6 lg:p-8 gap-6 flex flex-col lg:flex-row`}
       >
         {/* 專案圖片 */}
         <div className="shrink-0">
           <div className="h-28 w-28 lg:h-32 lg:w-32 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden transition-all duration-300 group-hover:border-[var(--border-color-light)] group-hover:shadow-lg">
             {/* eslint-disable-next-line @next/next/no-img-element*/}
             <img
-              className="h-full w-full bg-white object-cover transition-transform duration-300 group-hover:scale-105"
+              className="h-full w-full bg-white object-cover"
               src={item.imageSrc}
               alt={`${item.title.english} icon`}
             />
@@ -126,7 +127,9 @@ export const ProjectCard = ({
             </h4>
             <ul className="text-base md:text-lg text-justify list-disc ps-5 space-y-2 text-[var(--text-color-muted)]">
               {item.description[Language.Current].map((part, index) => (
-                <li key={index} className="leading-relaxed">{part}</li>
+                <li key={index} className="leading-relaxed">
+                  {part}
+                </li>
               ))}
             </ul>
           </div>
@@ -159,7 +162,7 @@ export const ProjectCard = ({
                 }}
                 className={`btn-${
                   giscusShow ? "tertiary" : "primary"
-                } text-base md:text-lg px-6 py-3 rounded-xl font-semibold min-w-[180px] transition-all duration-300`}
+                } text-base md:text-lg px-6 py-3 rounded-xl font-semibold transition-all duration-300`}
               >
                 {
                   (giscusShow
@@ -178,9 +181,12 @@ export const ProjectCard = ({
       {item.github && (
         <Collapse
           state={giscusShow}
-          className={`w-full slide-collapse flex flex-col items-center gap-6 ${
-            giscusShow ? "mt-6" : ""
-          }`}
+          className={cn(
+            `w-full slide-collapse flex flex-col items-center gap-6`,
+            {
+              "mt-6": giscusShow,
+            }
+          )}
           id="github-container"
         >
           <div className="card p-6 w-full">
