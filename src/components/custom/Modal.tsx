@@ -1,6 +1,6 @@
 import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 
 export type ModalProps = OverrideProps<
   React.HTMLAttributes<HTMLDialogElement>,
@@ -11,6 +11,22 @@ export type ModalProps = OverrideProps<
 
 export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
   ({ className = "", children, onClick, onClose, ...rest }, ref) => {
+    useEffect(() => {
+      if (!ref || !("current" in ref) || !ref.current) return;
+      const dialog = ref.current;
+
+      const handleKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          dialog?.close();
+          onClose?.(e as unknown as React.MouseEvent<HTMLDialogElement>);
+        }
+      };
+      document.addEventListener("keydown", handleKey);
+      return () => {
+        document.removeEventListener("keydown", handleKey);
+      };
+    }, [ref, onClose]);
+
     return (
       <dialog
         ref={ref}

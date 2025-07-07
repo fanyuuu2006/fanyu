@@ -92,7 +92,7 @@ export const ProjectCard = ({
         <div className="flex-1 flex flex-col gap-3">
           {/* 標題和描述 */}
           <div className="flex flex-col gap-1">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight hover:underline-spread transition-colors duration-300">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
               {item.title[Language.Current]}
             </h3>
             <p className="text-lg md:text-xl text-[var(--text-color-muted)] text-justify leading-relaxed">
