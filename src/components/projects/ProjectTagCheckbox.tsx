@@ -1,4 +1,5 @@
 import { ProjectTag } from "@/types/portfolio";
+import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
 
 export type ProjectTagCheckboxProps = OverrideProps<
@@ -21,13 +22,10 @@ export const ProjectTagCheckbox = ({
   ...rest
 }: ProjectTagCheckboxProps) => {
   const isActive = tag ? currentTags?.has(tag) : currentTags === null;
+  const baseClass = "px-4 py-1 rounded-full whitespace-nowrap";
+  const variantClass = isActive ? "btn-secondary" : "btn-tertiary";
   return (
-    <label
-      className={`btn-${
-        isActive ? "secondary" : "tertiary"
-      } px-4 py-1 rounded-full whitespace-nowrap ${className} `}
-      {...rest}
-    >
+    <label className={cn(baseClass, variantClass, className)} {...rest}>
       <input
         type="checkbox"
         className="hidden"

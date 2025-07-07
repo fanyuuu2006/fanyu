@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactItem } from "@/types/contact";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import "@/styles/contact-card.css";
+import { cn } from "@/utils/className";
 
 export type ContactCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -32,7 +33,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
   };
 
   return (
-    <div className={`contact-card ${className}`} {...rest}>
+    <div className={cn(`contact-card`, className)} {...rest}>
       <OutsideLink
         draggable={true}
         href={item.href}

@@ -13,7 +13,6 @@ export type CopyButtonProps = OverrideProps<
 >;
 
 export const CopyButton = ({
-  className = "",
   content,
   onClick,
   children,
@@ -82,7 +81,6 @@ export const CopyButton = ({
       <button
         disabled={copied}
         aria-label={copied ? copyButtonContent.copied : copyButtonContent.copy}
-        className={className}
         onClick={(...args) => {
           handleCopy();
           onClick?.(...args);

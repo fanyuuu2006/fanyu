@@ -1,6 +1,7 @@
 import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
+import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
 import { forwardRef, useState } from "react";
 
@@ -40,7 +41,10 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
       <>
         {showLoader && (
           <div
-            className={`flex items-center justify-center animate-pulse ${className}`}
+            className={cn(
+              `flex items-center justify-center animate-pulse`,
+              className
+            )}
           />
         )}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -48,7 +52,9 @@ export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
           ref={ref}
           src={src}
           alt={alt ?? src?.toString()}
-          className={`${className} ${showLoader ? "h-0" : ""}`}
+          className={cn(className, {
+            "h-0": showLoader,
+          })}
           onLoad={() => setIsLoading(false)}
           onError={handleError}
           draggable={!showLoader}

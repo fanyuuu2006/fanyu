@@ -11,6 +11,7 @@ import React from "react";
 import { Tooltip } from "antd";
 import { CustomLink } from "@/components/custom/CustomLink";
 import "@/styles/project-card.css";
+import { cn } from "@/utils/className";
 
 export type ProjectCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -25,7 +26,7 @@ export const ProjectCard = ({ className, item, ...rest }: ProjectCardProps) => {
   const githubUrl = `https://github.com/${item.github?.repo}`;
 
   return (
-    <div className={`project-card ${className}`} {...rest}>
+    <div className={cn(`project-card`, className)} {...rest}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         draggable={false}

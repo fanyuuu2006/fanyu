@@ -2,6 +2,7 @@ import { CodeBlock, CodeTokenProps, extractTokenContent } from "c063";
 import React, { useMemo } from "react";
 import { OverrideProps } from "fanyucomponents";
 import { CopyButton } from "./CopyButton";
+import { cn } from "@/utils/className";
 
 export type CodeCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -22,10 +23,13 @@ export const CodeCard = ({
       .join("\n");
   }, [codeLines]);
   return (
-    <div className={`card flex flex-col p-6 gap-2 ${className}`} {...rest}>
+    <div className={cn(`card flex flex-col p-6 gap-2`, className)} {...rest}>
       <div className="flex items-center">
         <span>{lang}</span>
-        <CopyButton content={content} className="ml-auto btn rounded-sm flex items-center justify-center p-1"/>
+        <CopyButton
+          content={content}
+          className="ml-auto btn rounded-sm flex items-center justify-center p-1"
+        />
       </div>
       <CodeBlock
         theme="default-dark-modern"

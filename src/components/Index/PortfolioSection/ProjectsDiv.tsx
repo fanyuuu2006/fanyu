@@ -4,6 +4,7 @@ import { ProjectCard } from "./ProjectCard";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Carousel } from "@/components/custom/Carousel";
+import { cn } from "@/utils/className";
 type ProjectsContent = Record<"projects" | "learnMore" | "refresh", string>;
 
 const getProjectsContent = (language: LanguageOption): ProjectsContent =>
@@ -29,7 +30,10 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
 
   return (
     <div
-      className={`flex flex-col p-2 gap-4 items-center max-w-full overflow-hidden ${className}`}
+      className={cn(
+        `flex flex-col p-2 gap-4 items-center max-w-full overflow-hidden`,
+        className
+      )}
       {...rest}
     >
       <div className="w-full text-4xl font-bold">

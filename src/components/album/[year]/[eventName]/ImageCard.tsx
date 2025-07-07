@@ -1,11 +1,11 @@
 import { LazyImage } from "@/components/custom/LazyImage";
+import { Modal } from "@/components/custom/Modal";
 import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { fadeInItem } from "@/libs/motion";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { useModal } from "fanyucomponents";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 type ImageContent = Record<"imageLoadFailed", string>;
 
 const getImageContent = (language: LanguageOption): ImageContent =>
@@ -25,34 +25,39 @@ export const ImageCard = ({
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const Language = useLanguage();
   const imageContent = getImageContent(Language.Current);
-  const Modal = useModal();
-  
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const handleOpen = useCallback(() => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  }, []);
+
+  const inviewRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(inviewRef, {
     once: true,
     amount: 0.5,
   });
 
   return (
     <motion.div
-      ref={ref}
+      ref={inviewRef}
       variants={fadeInItem}
       className="relative border border-[var(--border-color)] w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 group"
     >
       <LazyImage
         draggable={true}
         loading={!isInView}
+        onClick={handleOpen}
         src={src}
         alt={`Event Image ${src}`}
         className="text-5xl bg-[#888] cursor-pointer select-none aspect-square object-cover transition-colors duration-200 group-hover:outline"
-        onClick={Modal.Open}
       />
-      <Modal.Container className="backdrop-blur-sm">
+      <Modal ref={modalRef}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={`Event Image ${src}`}
-          className={`max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
+          className={`max-w-[95vw] max-h-[80vh] object-contain`}
           onError={(e: React.SyntheticEvent) => {
             console.error(e);
             Toast.fire({
@@ -61,8 +66,7 @@ export const ImageCard = ({
             });
           }}
         />
-      </Modal.Container>
+      </Modal>
     </motion.div>
   );
 };
-  

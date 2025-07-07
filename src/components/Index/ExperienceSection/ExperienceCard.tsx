@@ -2,6 +2,7 @@ import { CustomLink } from "@/components/custom/CustomLink";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ExperienceItem } from "@/types/experience";
 import { LanguageContent, LanguageOption } from "@/types/language";
+import { cn } from "@/utils/className";
 import { slugify } from "@/utils/url";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
@@ -43,7 +44,7 @@ export type ExperienceCardProps = OverrideProps<
  */
 export const ExperienceCard = ({
   item,
-  className = "",
+  className,
   ...rest
 }: ExperienceCardProps) => {
   const Language = useLanguage();
@@ -54,7 +55,7 @@ export const ExperienceCard = ({
 
   return (
     <div
-      className={`${className} card w-full p-6 lg:p-8 gap-4 flex flex-col`}
+      className={cn(`card w-full p-6 lg:p-8 gap-4 flex flex-col`, className)}
       {...rest}
     >
       {/** 圖片 */}
