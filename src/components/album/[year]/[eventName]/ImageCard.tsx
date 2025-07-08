@@ -28,7 +28,7 @@ export const ImageCard = ({ src, className, ...rest }: LazyImageProps) => {
   const inviewRef = useRef<HTMLImageElement>(null);
   const isInView = useInView(inviewRef, {
     once: true,
-    amount: 0.5,
+    amount: 0.2,
   });
 
   return (
