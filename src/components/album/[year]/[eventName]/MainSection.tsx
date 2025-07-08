@@ -1,18 +1,28 @@
 "use client";
 import { Toast } from "@/components/custom/Toast";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { CaretLeftOutlined } from "@ant-design/icons";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
-import { useEffect } from "react";
+import { useEffect, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { LazyImage } from "@/components/custom/LazyImage";
 import { useRouter } from "next/navigation";
 import { useAlbum } from "@/contexts/AlbumContext";
+import { cn } from "@/utils/className";
+
+const DEFAULT_SKELETON_COUNT = 6;
+const CLASSNAME =
+  "aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 bg-[#888] border border-[var(--border-color)] hover:border-white";
+
+type MainSectionProps = {
+  year: string;
+  eventName: string;
+};
 
 type ImagesContent = Record<
-  "noImages" | "eventsLoadFailed" | "imageLoadFailed",
+  "noImages" | "eventsLoadFailed" | "backToAlbum",
   string
 >;
 
@@ -22,27 +32,30 @@ const getImagesContent = (language: LanguageOption): ImagesContent =>
       chinese: {
         noImages: "沒有圖片",
         eventsLoadFailed: "載入相簿失敗",
+        backToAlbum: "返回相簿",
       },
       english: {
         noImages: "No Images",
         eventsLoadFailed: "Album Load Failed",
+        backToAlbum: "Back to Album",
       },
     } as LanguageContent<ImagesContent>
   )[language]);
 
-export const MainSection = ({
-  year,
-  eventName,
-}: {
-  year: string;
-  eventName: string;
-}) => {
+export const MainSection = ({ year, eventName }: MainSectionProps) => {
   const { useImages } = useAlbum();
   const { data: images, error, isLoading } = useImages(year, eventName);
-
-  const Language = useLanguage();
-  const imagesContent = getImagesContent(Language.Current);
   const router = useRouter();
+  const { Current: currentLanguage } = useLanguage();
+
+  const imagesContent = useMemo(
+    () => getImagesContent(currentLanguage),
+    [currentLanguage]
+  );
+
+  const handleBackClick = useCallback(() => {
+    router.back();
+  }, [router]);
 
   useEffect(() => {
     if (error) {
@@ -53,48 +66,60 @@ export const MainSection = ({
     }
   }, [error, imagesContent.eventsLoadFailed]);
 
-  const skeletonCount = images?.length || 6;
+  const skeletonCount = useMemo(
+    () => images?.length || DEFAULT_SKELETON_COUNT,
+    [images?.length]
+  );
 
   return (
-    <section>
-      <div className="container flex flex-col items-center">
-        <div className="w-full text-left text-3xl">
-          <ArrowLeftOutlined
-            onClick={() => {
-              router.back();
-            }}
+    <section className="min-h-screen">
+      <div className="container flex flex-col items-center px-4 py-8">
+        <div className="w-full">
+          <CaretLeftOutlined
+            aria-label={imagesContent.backToAlbum}
+            title={imagesContent.backToAlbum}
+            onClick={handleBackClick}
+            className="btn-tertiary text-2xl items-center p-3 rounded-full"
           />
         </div>
-        <div className="flex flex-col items-center">
-          <h2 className="text-5xl font-bold">{year}</h2>
-          <h2 className="text-4xl font-bold">{eventName}</h2>
+
+        <div className="flex flex-col items-center mb-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">{year}</h1>
+          <h2 className="text-2xl md:text-4xl font-semibold">{eventName}</h2>
         </div>
+
         <motion.article
-          key={isLoading.toString()}
+          key={`${isLoading}-${images?.length || 0}`}
           variants={staggerContainer}
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.1 }}
           className="w-full flex flex-wrap"
+          role="main"
+          aria-label={`${eventName} 照片集`}
         >
           {isLoading ? (
-            [...Array(skeletonCount)].map((_, i) => (
+            [...Array(skeletonCount)].map((_, index) => (
               <motion.div
-                key={`skeleton-${i}`}
+                key={`skeleton-${index}`}
                 variants={fadeInItem}
-                className="bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 animate-pulse"
+                className={cn(CLASSNAME, `animate-pulse`)}
               >
                 <LazyImage loading={true} className="w-full" />
               </motion.div>
             ))
           ) : !images || images.length === 0 ? (
-            <div className="w-full text-center">
+            <div className="w-full text-center py-8">
               <span className="text-2xl font-bold">
                 {imagesContent.noImages}
               </span>
             </div>
           ) : (
-            images.map((src) => <ImageCard key={src} src={src} />)
+            images.map((src) => (
+              <motion.div key={src} variants={fadeInItem} className={CLASSNAME}>
+                <ImageCard src={src} className="h-full w-full object-cover" />
+              </motion.div>
+            ))
           )}
         </motion.article>
       </div>

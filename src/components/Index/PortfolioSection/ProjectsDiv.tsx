@@ -57,7 +57,7 @@ export const ProjectsDiv = ({ className = "", ...rest }: ProjectsDivProps) => {
 
       {/**了解更多 */}
       <Link
-        className="btn-primary text-base md:text-lg font-semibold rounded-full flex items-center px-3 py-2"
+        className="btn-primary text-base md:text-lg font-semibold rounded-full flex items-center px-4 py-2"
         href="/projects"
       >
         {projectsContent.learnMore}

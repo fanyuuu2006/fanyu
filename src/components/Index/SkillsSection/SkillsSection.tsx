@@ -1,7 +1,6 @@
 "use client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
-import { Tooltip } from "antd";
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
@@ -62,18 +61,17 @@ export const SkillsSection = () => {
                   {items.map((item) => (
                     <div
                       key={item.title}
-                      className="p-1 w-1/7 sm:w-1/10 md:w-1/13 lg:w-1/17 xl:w-1/20"
+                      title={item.title}
+                      className="tooltip text-sm md:text-base font-semibold p-1 w-1/7 sm:w-1/10 md:w-1/13 lg:w-1/17 xl:w-1/20"
                     >
-                      <Tooltip title={item.title}>
-                        {/* eslint-disable-next-line @next/next/no-img-element*/}
-                        <img
-                          alt={item.title}
-                          src={item.src}
-                          width={300}
-                          height={300}
-                          className="object-cover transition-transform"
-                        />
-                      </Tooltip>
+                      {/* eslint-disable-next-line @next/next/no-img-element*/}
+                      <img
+                        alt={item.title}
+                        src={item.src}
+                        width={300}
+                        height={300}
+                        className="object-cover transition-transform"
+                      />
                     </div>
                   ))}
                 </motion.div>

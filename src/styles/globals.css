@@ -284,7 +284,13 @@
 
 /* ==== Utilities Layer ==== */
 @layer utilities {
-  .tooltip-wrapper .tooltip {
+  .tooltip,
+  .overlay-wrapper {
+    position: relative;
+  }
+
+  .tooltip::before,
+  .overlay-wrapper .overlay-content {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -294,10 +300,22 @@
     transition: all 0.3s ease;
     z-index: 1000;
   }
-  .tooltip-wrapper:hover .tooltip {
+
+  .tooltip:hover:before,
+  .overlay-wrapper:hover .overlay-content {
     bottom: 120%;
     opacity: 1;
     visibility: visible;
+  }
+
+  .tooltip::before {
+    content: attr(title);
+    width: max-content;
+    background: var(--background-color-secondary);
+    border: var(--border-color) 1px solid;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
   }
 
   /* === 動畫效果 === */

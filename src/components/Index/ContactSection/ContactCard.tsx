@@ -32,7 +32,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
   };
 
   return (
-    <div className={cn(`tooltip-wrapper relative group`, className)} {...rest}>
+    <div className={cn(`overlay-wrapper group`, className)} {...rest}>
       <OutsideLink
         draggable={true}
         href={item.href}
@@ -46,7 +46,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
       </OutsideLink>
 
       {/** 資訊卡 */}
-      <div className="tooltip">
+      <div className="overlay-content">
         <div className="p-[2px] rounded-2xl" style={gradientStyle}>
           <div className="bg-[var(--background-color)] rounded-[inherit] flex flex-col gap-2 p-4">
             <div className="flex items-center gap-4">
