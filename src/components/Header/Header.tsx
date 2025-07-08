@@ -48,7 +48,7 @@ export const Header = () => {
         </div>
         <Collapse
           state={menuShow}
-          className="slide-collapse lg:hidden"
+          className="slide-collapse lg:hidden will-change-[height]"
           id="mobile-nav"
         >
           <div className="flex flex-col w-full text-2xl font-bold text-center">

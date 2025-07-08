@@ -284,6 +284,22 @@
 
 /* ==== Utilities Layer ==== */
 @layer utilities {
+  .tooltip-wrapper .tooltip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 50%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+  .tooltip-wrapper:hover .tooltip {
+    bottom: 120%;
+    opacity: 1;
+    visibility: visible;
+  }
+
   /* === 動畫效果 === */
   .animate-pop {
     animation: pop var(--transition-fast) cubic-bezier(0.42, -0.09, 0.59, 1.83);
