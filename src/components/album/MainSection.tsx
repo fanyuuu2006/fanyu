@@ -2,8 +2,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { Toast } from "@/components/custom/Toast";
-import { ArrowLeftOutlined, LoadingOutlined } from "@ant-design/icons";
-import Link from "next/link";
+import { LoadingOutlined } from "@ant-design/icons";
 import useSWR from "swr";
 import { useEffect } from "react";
 import { fetcher } from "@/utils/fetcher";
@@ -28,7 +27,7 @@ const getAlbumContent = (language: LanguageOption): AlbumContent =>
     } as LanguageContent<AlbumContent>
   )[language]);
 
-export const MainSection = ({ year }: { year: string | null }) => {
+export const MainSection = () => {
   const Language = useLanguage();
   const albumContent = getAlbumContent(Language.Current);
 
@@ -49,31 +48,19 @@ export const MainSection = ({ year }: { year: string | null }) => {
 
   const timeOrder = useTimeOrderTabs(years ?? []);
 
-  const sortedYears = years
-    ? timeOrder.sortedData.filter((y) => !year || y === year)
-    : [];
-
   return (
     <section>
       <div className="container flex flex-col items-center">
-        {year && (
-          <Link href="/album" className="w-full text-left text-3xl">
-            <ArrowLeftOutlined />
-            <span className="sr-only">
-              {Language.Current === "chinese" ? "返回" : "Back"}
-            </span>
-          </Link>
-        )}
         <h1 className="text-5xl font-bold">{albumContent.album}</h1>
 
         {!years && isLoading ? (
           <LoadingOutlined className="text-5xl" />
-        ) : !sortedYears || sortedYears.length === 0 ? (
-          <div className="text-3xl font-bold">{`${year} - ${albumContent.noAlbum}`}</div>
+        ) : timeOrder.sortedData.length === 0 ? (
+          <div className="text-3xl font-bold">{albumContent.noAlbum}</div>
         ) : (
           <>
             <timeOrder.Div />
-            {sortedYears.map((y) => (
+            {timeOrder.sortedData.map((y) => (
               <YearDiv key={y} year={y} />
             ))}
           </>

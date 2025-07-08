@@ -11,6 +11,7 @@ import { LazyImage } from "@/components/custom/LazyImage";
 import { useRouter } from "next/navigation";
 import { useAlbum } from "@/contexts/AlbumContext";
 import { cn } from "@/utils/className";
+import { Tooltip } from "antd";
 
 const DEFAULT_SKELETON_COUNT = 6;
 const CLASSNAME =
@@ -75,12 +76,15 @@ export const MainSection = ({ year, eventName }: MainSectionProps) => {
     <section className="min-h-screen">
       <div className="container flex flex-col items-center px-4 py-8">
         <div className="w-full">
-          <CaretLeftOutlined
-            aria-label={imagesContent.backToAlbum}
-            title={imagesContent.backToAlbum}
-            onClick={handleBackClick}
-            className="btn-tertiary text-2xl items-center p-3 rounded-full"
-          />
+          <Tooltip title={imagesContent.backToAlbum}>
+            <button
+              aria-label={imagesContent.backToAlbum}
+              onClick={handleBackClick}
+              className="btn text-xl flex items-center justify-center p-3 rounded-full"
+            >
+              <CaretLeftOutlined className="relative left-[-2px]" />
+            </button>
+          </Tooltip>
         </div>
 
         <div className="flex flex-col items-center mb-8 text-center">

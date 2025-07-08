@@ -1,13 +1,27 @@
-import { MainSection } from "@/components/album/MainSection";
-import { deslugify } from '@/utils/url';
-
+"use client";
+import { deslugify } from "@/utils/url";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface PageProps {
   params: Promise<{ year: string }>;
 }
 
-export default async function Page({ params }: PageProps) {
-  const { year } = await params;
+export default function Page({ params }: PageProps) {
+  const router = useRouter();
 
-  return <MainSection year={deslugify(year)} />;
+  useEffect(() => {
+    params.then((res) => {
+      router.replace(`/album/#${deslugify(res.year)}`);
+    });
+  }, [params, router]);
+
+  return (
+    <div className="container">
+      <div className="flex">
+        <LoadingOutlined className="text-5xl mx-auto" />
+      </div>
+    </div>
+  );
 }
