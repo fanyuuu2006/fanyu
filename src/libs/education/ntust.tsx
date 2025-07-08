@@ -112,16 +112,16 @@ const NTUST: ExperienceItem = {
               </tr>
             </thead>
             <tbody className="text-base md:text-xl">
-              {Object.entries(grades).map(([year, data]) => {
+              {Object.entries(grades).map(([semester, data]) => {
                 const { gpa, totalCredits } = calculateGPA(data.courses);
                 const modal = useModal();
                 return (
-                  <React.Fragment key={year}>
+                  <React.Fragment key={semester}>
                     <tr
                       className="hover:backdrop-brightness-125 cursor-pointer"
                       onClick={modal.Open}
                     >
-                      <td className="text-center p-2">{year}</td>
+                      <td className="text-center p-2">{semester}</td>
                       <td className="text-center p-2">
                         {data.classRank ||
                           { chinese: "無資料", english: "No Data" }[language]}

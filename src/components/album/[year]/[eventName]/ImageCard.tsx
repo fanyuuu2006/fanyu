@@ -1,11 +1,11 @@
 import { LazyImage } from "@/components/custom/LazyImage";
-import { Modal } from "@/components/custom/Modal";
 import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { fadeInItem } from "@/libs/motion";
 import { LanguageOption, LanguageContent } from "@/types/language";
+import { useModal } from "fanyucomponents";
 import { motion, useInView } from "framer-motion";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 type ImageContent = Record<"imageLoadFailed", string>;
 
 const getImageContent = (language: LanguageOption): ImageContent =>
@@ -25,12 +25,7 @@ export const ImageCard = ({
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const Language = useLanguage();
   const imageContent = getImageContent(Language.Current);
-  const modalRef = useRef<HTMLDialogElement>(null);
-  const handleOpen = useCallback(() => {
-    if (modalRef.current) {
-      modalRef.current.showModal();
-    }
-  }, []);
+  const modal = useModal();
 
   const inviewRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(inviewRef, {
@@ -47,17 +42,17 @@ export const ImageCard = ({
       <LazyImage
         draggable={true}
         loading={!isInView}
-        onClick={handleOpen}
+        onClick={modal.Open}
         src={src}
         alt={`Event Image ${src}`}
         className="text-5xl bg-[#888] cursor-pointer select-none aspect-square object-cover transition-colors duration-200 group-hover:outline"
       />
-      <Modal ref={modalRef}>
+      <modal.Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={`Event Image ${src}`}
-          className={`max-w-[95vw] max-h-[80vh] object-contain`}
+          className={`max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
           onError={(e: React.SyntheticEvent) => {
             console.error(e);
             Toast.fire({
@@ -66,7 +61,7 @@ export const ImageCard = ({
             });
           }}
         />
-      </Modal>
+      </modal.Container>
     </motion.div>
   );
 };

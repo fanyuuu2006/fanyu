@@ -44,3 +44,8 @@ export type Course = {
   grade: Grade | null;
   credits: number;
 };
+export type SemesterData = {
+  classRank?: number;
+  departmentRanK?: number;
+  courses: Course[];
+};
