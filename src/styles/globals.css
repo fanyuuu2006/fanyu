@@ -285,8 +285,24 @@
 /* ==== Utilities Layer ==== */
 @layer utilities {
   /* === 動畫效果 === */
+  .animate-pop {
+    animation: pop var(--transition-fast) cubic-bezier(0.42, -0.09, 0.59, 1.83);
+  }
+
   .animate-turn {
     animation: turn var(--transition-normal) ease-in-out forwards;
+  }
+
+  /* === Keyframe 動畫 === */
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   @keyframes turn {
