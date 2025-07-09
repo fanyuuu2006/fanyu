@@ -68,9 +68,10 @@ export const ExperienceSection = () => {
           {experienceContent.experience}
         </h1>
         <div className="flex flex-col w-full gap-4">
+          {/** 分頁選單 */}
           <div
             role="tablist"
-            className="w-full bg-[#000] rounded-xl flex justify-between p-1"
+            className="w-full bg-[#000] rounded-2xl flex justify-between p-1"
           >
             {experienceTabs.map((key) => (
               <button
@@ -92,6 +93,8 @@ export const ExperienceSection = () => {
               </button>
             ))}
           </div>
+
+          {/** 內容區域 */}
           <AnimatePresence mode="wait">
             <motion.div
               key={Tab}

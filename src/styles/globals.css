@@ -115,6 +115,7 @@
     transform: translate(-50%, -50%);
     transition: width 0.3s, height 0.3s;
     z-index: 0;
+    pointer-events: none; /* 防止 ripple 擋住按鈕點擊事件 */
   }
 
   button:active::before,
@@ -129,7 +130,6 @@
   .btn {
     background: var(--background-color-secondary);
     border: 1px solid var(--border-color);
-    color: var(--text-color);
   }
 
   .btn-primary {
@@ -202,7 +202,7 @@
 
   /* === 卡片系統 === */
   .card {
-    background: var(--background-color-secondary);
+    background: var(--background-color);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-base);
