@@ -122,7 +122,7 @@ export const ProjectCard = ({
 
           {/* 專案特色 */}
           <div className="rounded-2xl p-4 md:p-6 bg-[var(--background-color-tertiary)] border border-[var(--border-color)]">
-            <h4 className="text-[var(--text-color)] text-lg md:text-xl lg:text-2xl font-bold mb-3">
+            <h4 className="text-lg md:text-xl lg:text-2xl font-bold mb-3">
               {projectContent.projectFeature}
             </h4>
             <ul className="text-base md:text-lg text-justify list-disc ps-5 space-y-2 text-[var(--text-color-muted)]">

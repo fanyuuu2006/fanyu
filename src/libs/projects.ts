@@ -14,7 +14,7 @@ export const projectTagCategories = {
     "Matplotlib",
     "Requests",
   ],
-  tools: ["Git / GitHub", "NPM", "Google Sheets", "Vercel", "Render"],
+  tools: ["Git / GitHub", "NPM", "Google Sheets", "Vercel"],
   other: [],
 } as const;
 
@@ -175,13 +175,13 @@ const DoBuJio: ProjectItem = {
       "以 Python 開發，串接 Line Messaging API ，提供即時股票資訊查詢功能。",
       "利用 Requests 爬取台灣證交所公開資料。",
       "使用 Matplotlib 動態生成視覺化圖表。",
-      "後端以 Flask 架設，並部署於 Render，處理 Line webhook 請求與回應。",
+      "後端以 Flask 架設，並部署於 Vercel，處理 Line webhook 請求與回應。",
     ],
     english: [
       "Developed with Python and integrated with the LINE Messaging API to provide real-time stock information query functionality.",
       "Scraped public data from the Taiwan Stock Exchange using the Requests library.",
       "Generated dynamic visualizations with Matplotlib.",
-      "Backend built with Flask and deployed on Render to handle Line webhook requests and responses.",
+      "Backend built with Flask and deployed on Vercel to handle Line webhook requests and responses.",
     ],
   },
   tags: [
@@ -193,7 +193,7 @@ const DoBuJio: ProjectItem = {
     "Line Bot SDK",
     "Matplotlib",
     "Git / GitHub",
-    "Render",
+    "Vercel"
   ],
   github: {
     repo: "fanyuuu2006/NTUST-1132-Software-Programming-Final-Project",
@@ -340,7 +340,7 @@ const C063: ProjectItem = {
     english: [
       "Built with React and TypeScript, c063 offers robust syntax highlighting and a highly modular architecture for documentation, blogs, and learning platforms.",
       "Supports multiple themes (e.g., GitHub, VS Code) with light/dark mode toggling for better readability.",
-      "Provides high customizability with `as` prop for custom rendering of elements.",
+      "Provides high customizability with `as` prop for custom Verceling of elements.",
       "Published on npm for easy installation and seamless integration into frontend projects.",
       "Includes utility functions such as `c063.keyword1()` and `whiteSpace()` for efficient token creation.",
     ],
