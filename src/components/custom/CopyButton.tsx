@@ -81,9 +81,9 @@ export const CopyButton = ({
       <button
         disabled={copied}
         aria-label={copied ? copyButtonContent.copied : copyButtonContent.copy}
-        onClick={(...args) => {
+        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           handleCopy();
-          onClick?.(...args);
+          onClick?.(event);
         }}
         {...rest}
       >

@@ -35,18 +35,19 @@ export const routes: {
   },
   {
     label: {
-      chinese: "經歷",
-      english: "Experience",
-    },
-    href: "/#experience",
-  },
-  {
-    label: {
       chinese: "聯繫",
       english: "Contact",
     },
     href: "/#contact",
   },
+  {
+    label: {
+      chinese: "經歷",
+      english: "Experience",
+    },
+    href: "/#experience",
+  },
+
   {
     label: {
       chinese: "留言版",
