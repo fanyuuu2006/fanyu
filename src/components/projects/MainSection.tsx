@@ -78,7 +78,7 @@ export const MainSection = () => {
     return !currentTags
       ? timeOrder.sortedData
       : timeOrder.sortedData.filter((item) =>
-          [...currentTags].every((tag) => item.tags.includes(tag))
+          [...currentTags].some((tag) => item.tags.includes(tag))
         );
   }, [currentTags, timeOrder.sortedData]);
 

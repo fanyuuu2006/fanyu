@@ -294,7 +294,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 50%;
+    bottom: 70%;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -309,7 +309,7 @@
   }
 
   .tooltip::before {
-    content: attr(title);
+    content: attr(data-tooltip);
     width: max-content;
     background: var(--background-color-secondary);
     border: var(--border-color) 1px solid;

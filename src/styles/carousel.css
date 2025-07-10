@@ -12,6 +12,7 @@
   display: flex;
   flex-wrap: nowrap;
   animation: slide linear infinite;
+  will-change: transform;
 }
 
 .carousel-track--row {
