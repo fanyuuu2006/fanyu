@@ -1,7 +1,7 @@
 "use client";
 import { deslugify } from "@/utils/url";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 interface PageProps {
