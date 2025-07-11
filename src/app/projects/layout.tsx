@@ -80,6 +80,8 @@ export default function Layout({
                       url: profile.url,
                     },
                   },
+                  programmingLanguage: project.tags[0],
+                  framework: project.tags[1],
                 })
               ),
             },

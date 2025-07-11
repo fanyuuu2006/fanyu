@@ -186,10 +186,10 @@ const DoBuJio: ProjectItem = {
   },
   tags: [
     "Python",
+    "Flask",
     "Backend",
     "Requests",
     "Crawler",
-    "Flask",
     "Line Bot SDK",
     "Matplotlib",
     "Git / GitHub",
