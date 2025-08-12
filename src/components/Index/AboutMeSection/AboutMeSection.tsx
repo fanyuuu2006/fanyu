@@ -50,43 +50,43 @@ export const AboutMeSection = () => {
           {aboutMeContent.aboutMe}
         </h1>
 
-        <div className="w-full flex flex-col lg:flex-row gap-4 items-center">
-          {/* 個人照片卡片 - 佔 1/4 比例 */}
+        <div className="w-full flex flex-col lg:flex-row gap-6 items-stretch">
+          {/* 個人照片卡片 */}
           <motion.div
             variants={fadeInItem}
             initial="hiddenLeft"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="flex justify-center items-start flex-shrink-0 w-full lg:w-1/4"
+            className="flex justify-center items-center flex-shrink-0 w-full lg:w-1/3"
           >
             <Link
-              className="w-64 h-64 max-w-80 max-h-80 card overflow-hidden"
-              href="#"
+              className="w-72 h-72 card overflow-hidden rounded-xl"
+              href="/#top"
             >
               <Image
                 className="w-full h-full object-cover"
                 alt="個人照片"
                 src="/GameShow.jpg"
-                width={300}
-                height={300}
+                width={320}
+                height={320}
                 priority
               />
             </Link>
           </motion.div>
 
-          {/* 文章內容卡片 - 佔 3/4 比例 */}
+          {/* 文章內容卡片 */}
           <motion.article
             variants={staggerContainer}
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card p-2  md:p-3 xl:p-4 flex flex-col flex-1 overflow-hidden lg:w-3/4"
+            className="card p-6 md:p-8 flex flex-col flex-1 lg:w-2/3 space-y-6"
           >
             {aboutMeContent.article.map((part, index) => (
               <motion.p
                 key={index}
                 variants={fadeInItem}
-                className="text-base md:text-lg text-justify leading-tight indent-8 p-3 rounded-lg transition-colors duration-200"
+                className="text-base md:text-lg leading-relaxed text-justify indent-8"
               >
                 {part}
               </motion.p>
