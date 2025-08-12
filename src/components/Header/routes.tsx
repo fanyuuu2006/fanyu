@@ -1,51 +1,59 @@
 import { LanguageContent } from "@/types/language";
 
-export const routes: {
+type BaseRoute = {
   label: LanguageContent<string>;
-  href: string;
-}[] = [
+  url: string;
+};
+
+export type Route = BaseRoute & {
+  sub?: BaseRoute[];
+};
+
+export const routes: Route[] = [
   {
     label: {
       chinese: "首頁",
       english: "Home",
     },
-    href: "/#hero",
-  },
-  {
-    label: {
-      chinese: "關於我",
-      english: "About Me",
-    },
-    href: "/#aboutMe",
-  },
+    url: "/",
+    sub: [
+      {
+        label: {
+          chinese: "關於我",
+          english: "About Me",
+        },
+        url: "#aboutMe",
+      },
 
-  {
-    label: {
-      chinese: "技能",
-      english: "Skills",
-    },
-    href: "/#skills",
-  },
-  {
-    label: {
-      chinese: "作品集",
-      english: "Portfolio",
-    },
-    href: "/#portfolio",
-  },
-  {
-    label: {
-      chinese: "聯繫",
-      english: "Contact",
-    },
-    href: "/#contact",
-  },
-  {
-    label: {
-      chinese: "經歷",
-      english: "Experience",
-    },
-    href: "/#experience",
+      {
+        label: {
+          chinese: "技能",
+          english: "Skills",
+        },
+        url: "#skills",
+      },
+      {
+        label: {
+          chinese: "作品集",
+          english: "Portfolio",
+        },
+        url: "#portfolio",
+      },
+      {
+        label: {
+          chinese: "聯繫",
+          english: "Contact",
+        },
+        url: "#contact",
+      },
+      {
+        label: {
+          chinese: "經歷",
+          english: "Experience",
+        },
+        url: "#experience",
+      },
+    ],
   },
 
   {
@@ -53,13 +61,13 @@ export const routes: {
       chinese: "留言版",
       english: "Guestbook",
     },
-    href: "/guestbook",
+    url: "/guestbook",
   },
   {
     label: {
       chinese: "相簿",
       english: "Album",
     },
-    href: "/album",
+    url: "/album",
   },
 ];

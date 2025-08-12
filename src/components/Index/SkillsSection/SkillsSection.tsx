@@ -56,13 +56,13 @@ export const SkillsSection = () => {
                 </h2>
                 <motion.div
                   variants={staggerContainer}
-                  className="text-2xl flex flex-wrap"
+                  className="text-2xl grid grid-cols-7 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-17 xl:grid-cols-20 gap-3"
                 >
                   {items.map((item) => (
                     <div
                       key={item.title}
                       data-tooltip={item.title}
-                      className="tooltip text-sm md:text-base font-semibold p-1 w-1/7 sm:w-1/10 md:w-1/13 lg:w-1/17 xl:w-1/20"
+                      className="tooltip text-sm md:text-base font-semibold"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element*/}
                       <img

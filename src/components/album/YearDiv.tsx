@@ -3,7 +3,7 @@ import { EventLinkCard } from "./EventLinkCard";
 import { Collapse, OverrideProps } from "fanyucomponents";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
-import { useEffect, useState } from "react";  
+import { useEffect, useState } from "react";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { CaretRightOutlined } from "@ant-design/icons";
@@ -50,11 +50,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
   const skeletonCount = eventNames?.length || 6;
 
   return (
-    <motion.article
-      id={year}
-      className="w-full flex flex-col gap-2"
-      {...rest}
-    >
+    <motion.article id={year} className="w-full flex flex-col gap-2" {...rest}>
       <div
         className={`flex items-center gap-2 transition-colors ${
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
@@ -79,16 +75,15 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.5 }}
-          className="w-full flex flex-wrap"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-[1px]"
         >
           {isLoading ? (
             [...Array(skeletonCount)].map((_, i) => (
               <motion.div
                 key={`skeleton-${i}`}
                 variants={fadeInItem}
-                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 animate-pulse"
-              >
-              </motion.div>
+                className="rounded-lg bg-[#888] border border-[var(--border-color)] aspect-square animate-pulse"
+              ></motion.div>
             ))
           ) : !eventNames || eventNames.length === 0 ? (
             <div className="text-3xl font-bold">{`${year} - ${yearsContent.noEvents}`}</div>
@@ -97,7 +92,7 @@ export const YearDiv = ({ year, ...rest }: YearDivProps) => {
               <motion.div
                 variants={fadeInItem}
                 key={`${year}-${eventName}`}
-                className="rounded-lg overflow-hidden w-1/2 border border-[var(--border-color)] sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6"
+                className="rounded-lg overflow-hidden border border-[var(--border-color)]"
               >
                 <EventLinkCard
                   year={year}

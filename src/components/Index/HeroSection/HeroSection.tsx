@@ -9,6 +9,7 @@ import { CodeCard } from "../../custom/CodeCard";
 import { useMemo } from "react";
 import c063 from "c063";
 import { LanguageOption, LanguageContent } from "@/types/language";
+import { cn } from "@/utils/className";
 
 type HeroContent = Record<
   "hello" | "iAm" | "intro" | "contactMe" | "portfolio",
@@ -130,13 +131,13 @@ export const HeroSection = () => {
   return (
     <section id="hero">
       <div className="container">
-        <div className="flex flex-wrap justify-center min-h-154">
-          <div className="flex flex-col items-center justify-center p-4 gap-2 w-full lg:w-24/50">
+        <div className={cn("grid grid-cols-1 lg:grid-cols-2 min-h-screen")}>
+          <div className="flex flex-col items-center justify-center p-4 gap-2">
             <div className="flex flex-col gap-2">
-              <span className="text-4xl md:text-5xl font-bold">
+              <span className="text-4xl sm:text-5xl md:text-6xl font-bold">
                 {heroContent.hello}
               </span>
-              <h1 className="text-5xl md:text-6xl font-bold ">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold ">
                 {heroContent.iAm}
                 <span className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
                   {profile.nickname[Language.Current]}
@@ -149,23 +150,34 @@ export const HeroSection = () => {
               >
                 {heroContent.intro}
               </TypeWriterText>
-              <div className="text-lg  md:text-xl lg:text-2xl flex gap-4 mt-2">
-                <Link
-                  href="/#contact"
-                  className="btn-primary px-6 py-2 rounded-xl"
-                >
-                  {heroContent.contactMe}
-                </Link>
-                <Link
-                  href="/#portfolio"
-                  className="btn-tertiary px-6 py-2 rounded-xl"
-                >
-                  {heroContent.portfolio}
-                </Link>
+              <div className="text-lg md:text-xl lg:text-2xl flex flex-col md:flex-row gap-4 mt-2">
+                {[
+                  {
+                    href: "/#contact",
+                    label: heroContent.contactMe,
+                    className: "btn-primary",
+                  },
+                  {
+                    href: "/#portfolio",
+                    label: heroContent.portfolio,
+                    className: "btn-tertiary",
+                  },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "w-full md:w-fit flex items-center justify-center px-6 py-3 font-semibold rounded-full",
+                      item.className
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full lg:w-24/50">
+          <div className="flex flex-col items-center justify-center">
             <motion.div
               variants={fadeInItem}
               initial="hiddenBottom"

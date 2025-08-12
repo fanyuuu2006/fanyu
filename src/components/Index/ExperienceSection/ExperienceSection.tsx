@@ -71,7 +71,7 @@ export const ExperienceSection = () => {
           {/** 分頁選單 */}
           <div
             role="tablist"
-            className="w-full bg-[#000] rounded-2xl flex justify-between p-1"
+            className="w-full bg-[#000] rounded-2xl grid grid-cols-4 p-1"
           >
             {experienceTabs.map((key) => (
               <button
@@ -80,7 +80,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`text-base md:text-2xl font-bold rounded-[inherit] flex flex-col md:flex-row flex-1 items-center justify-center p-2 gap-1 ${
+                className={`text-base md:text-xl font-semibold rounded-[inherit] flex flex-col md:flex-row w-full items-center justify-center p-2 gap-1 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {

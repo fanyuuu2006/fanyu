@@ -1,21 +1,27 @@
 "use client";
-import { useLanguage } from "@/contexts/LanguageContext";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Collapse } from "fanyucomponents";
 import { routes } from "./routes";
 import { BurgerMenu } from "./BurgerMenu";
+import { DesktopLink } from "./DesktopLink";
+import { MobileLink } from "./MobileLink";
 
 export const Header = () => {
-  const Language = useLanguage();
   const [menuShow, setMenuShow] = useState<boolean>(false);
+
+  const handleMenuToggle = useCallback(() => {
+    setMenuShow((prev) => !prev);
+  }, []);
 
   return (
     <header className="fixed top-0 z-1080 w-full bg-[var(--background-color)]/90 backdrop-blur-md border-[var(--border-color)] border-b-1">
       <nav className="flex flex-col" role="navigation" aria-label="主導航">
-        <div className="container flex items-center justify-between flex-nowrap px-8 py-4 w-full">
-          <Link href="/" className="h-full">
+        {/* 主要導航區域 */}
+        <div className="container px-8 py-4 w-full flex flex-nowrap items-center justify-between">
+          {/* Logo 區域 */}
+          <Link href="/">
             <Image
               priority
               alt="Logo"
@@ -25,42 +31,40 @@ export const Header = () => {
               className="h-16 w-auto object-contain"
             />
           </Link>
-          <div className="text-2xl lg:hidden">
+
+          {/* 手機版漢堡選單按鈕 */}
+          <div className="text-xl lg:hidden">
             <BurgerMenu
               checked={menuShow}
-              onChange={() => setMenuShow((prev) => !prev)}
+              onChange={handleMenuToggle}
               aria-label={menuShow ? "關閉選單" : "開啟選單"}
               aria-expanded={menuShow}
               aria-controls="mobile-nav"
             />
           </div>
-          <div className="hidden lg:flex text-2xl font-bold gap-6">
+
+          {/* 桌面版導覽列 */}
+          <div className="hidden lg:flex text-xl font-bold gap-4">
             {routes.map((item) => (
-              <Link
-                className="hover:underline-spread"
-                key={item.href}
-                href={item.href}
-              >
-                {item.label[Language.Current]}
-              </Link>
+              <DesktopLink key={item.url} item={item} />
             ))}
           </div>
         </div>
+
+        {/* 手機版導覽列 */}
         <Collapse
           state={menuShow}
-          className="slide-collapse lg:hidden will-change-[height]"
+          className="slide-collapse lg:hidden"
           id="mobile-nav"
         >
-          <div className="flex flex-col w-full text-2xl font-bold text-center">
+          <div className="flex flex-col w-full text-xl font-semibold">
             {routes.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="p-3"
-                onClick={() => setMenuShow(false)}
-              >
-                {item.label[Language.Current]}
-              </Link>
+              <MobileLink
+                key={item.url}
+                item={item}
+                menuShow={menuShow}
+                setMenuShow={setMenuShow}
+              />
             ))}
           </div>
         </Collapse>

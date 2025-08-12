@@ -10,10 +10,10 @@
     --background-color-tertiary: #0f0f0f;
 
     --text-color: #ffffff;
-    --text-color-primary: #3b82f6; /* Tailwind 的 blue-500 */
-    --text-color-secondary: #8b5cf6; /* Tailwind 的 violet-500 */
-    --text-color-tertiary: #22c55e; /* Tailwind 的 amber-500 */
-    --text-color-quaternary: #f59e0b; /* Tailwind 的 yellow-500 */
+    --text-color-primary: #5798ff;
+    --text-color-secondary: #8b5cf6;
+    --text-color-tertiary: #22c55e;
+    --text-color-quaternary: #f59e0b;
     --text-color-muted: #aaaaaa;
 
     --border-color: #333333cc;
@@ -153,8 +153,9 @@
   }
 
   .btn-tertiary {
+    color: var(--text-color-primary);
     background: var(--background-color-primary);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--text-color-primary);
   }
 
   button:hover,
@@ -163,7 +164,6 @@
   .btn-secondary:hover,
   .btn-tertiary:hover {
     text-decoration: none !important;
-    filter: brightness(var(--brightness-light));
     transform: translateY(-2px);
   }
 
@@ -195,14 +195,19 @@
     z-index: 1;
     max-width: var(--container-max-width);
     margin-inline: auto;
-    padding: 1rem;
+    padding: 1.5rem;
     gap: 1rem;
     width: 100%;
+  }
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
   }
 
   /* === 卡片系統 === */
   .card {
-    background: var(--background-color-tertiary);
+    background: var(--background-color-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-base);
@@ -252,13 +257,14 @@
   }
 
   a:hover {
-    text-decoration: underline 1px;
+    filter: brightness(var(--brightness-light));
   }
 
   /* === 滑動摺疊效果 === */
   .slide-collapse {
     transition: height var(--transition-normal) ease-out;
     overflow: hidden;
+    will-change: height;
   }
 
   /* === 自訂滾動條 === */

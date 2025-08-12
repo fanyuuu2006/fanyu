@@ -15,7 +15,7 @@ import { Tooltip } from "antd";
 
 const DEFAULT_SKELETON_COUNT = 6;
 const CLASSNAME =
-  "aspect-square w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 bg-[#888] border border-[var(--border-color)] hover:border-white";
+  "aspect-square bg-[#888] border border-[var(--border-color)] hover:border-white";
 
 type MainSectionProps = {
   year: string;
@@ -98,7 +98,7 @@ export const MainSection = ({ year, eventName }: MainSectionProps) => {
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.1 }}
-          className="w-full flex flex-wrap"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-[1px]"
           role="main"
           aria-label={`${eventName} 照片集`}
         >
@@ -120,7 +120,7 @@ export const MainSection = ({ year, eventName }: MainSectionProps) => {
             </div>
           ) : (
             images.map((src) => (
-              <motion.div key={src} variants={fadeInItem} className={CLASSNAME}>
+              <motion.div key={src} variants={fadeInItem} className={cn(CLASSNAME)}>
                 <ImageCard src={src} className="h-full w-full object-cover" />
               </motion.div>
             ))
