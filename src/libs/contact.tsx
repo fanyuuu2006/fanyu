@@ -84,7 +84,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       backgrounds: ["#777"],
     },
     {
-      label: "Youtube",
+      label: "YouTube",
       icon: YoutubeOutlined,
       info: { id: "fan._.yuuu", name: "閃火" },
       href: "https://www.youtube.com/@fan_yuuu",

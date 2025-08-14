@@ -55,7 +55,13 @@ export const routes: Route[] = [
       },
     ],
   },
-
+  {
+    label: {
+      chinese: "專案",
+      english: "projects",
+    },
+    url: "/projects",
+  },
   {
     label: {
       chinese: "留言版",

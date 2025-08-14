@@ -42,7 +42,7 @@ export const MobileLink = ({
       {/* 主選單項目 */}
       <div
         className={cn(
-          "flex items-center justify-between py-3 px-6 hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
+          "flex items-center justify-between py-3 px-6 border-b border-[var(--border-color)]"
         )}
       >
         <Link
@@ -77,7 +77,7 @@ export const MobileLink = ({
           className="slide-collapse"
           id={`sub-menu-${item.url.replace("/", "")}`}
         >
-          <div className="flex flex-col text-sm bg-[var(--background-color-tertiary)] border-t border-[var(--border-color)]">
+          <div className="flex flex-col text-sm bg-[var(--background-color-tertiary)]">
             {item.sub!.map((sub) => (
               <Link
                 key={sub.url}
