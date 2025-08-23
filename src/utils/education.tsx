@@ -21,8 +21,8 @@ export const calculateGPA = (
   gpa: number;
   totalCredits: number;
 } => {
-  const _map: Record<Exclude<Grade, "通過">, number> = {
-    "A+": 4,
+  const _map: Record<Exclude<Grade, "通過">, number | ((credit: number) => number)> = {
+    "A+": (credit)=> credit > 2 ? 4.3 : 4,
     A: 4,
     "A-": 3.7,
     "B+": 3.3,
@@ -46,7 +46,11 @@ export const calculateGPA = (
       continue; // 忽略沒有成績或成績不在映射中的課程
     }
     const gradePoints = _map[course.grade as Exclude<Grade, "通過">];
-    totalPoints += gradePoints * course.credits;
+    if (typeof gradePoints === "function") {
+      totalPoints += gradePoints(course.credits) * course.credits;
+    } else {
+      totalPoints += gradePoints * course.credits;
+    }
     totalCredits += course.credits;
   }
   if (totalCredits === 0) {

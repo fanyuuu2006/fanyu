@@ -47,7 +47,7 @@ export const MobileLink = ({
       >
         <Link
           href={item.url}
-          className="flex-1 text-left "
+          className="flex-1 text-left"
           onClick={handleLinkClick}
         >
           {item.label[Language.Current]}
@@ -77,7 +77,7 @@ export const MobileLink = ({
           className="slide-collapse"
           id={`sub-menu-${item.url.replace("/", "")}`}
         >
-          <div className="flex flex-col text-sm bg-[var(--background-color-tertiary)]">
+          <div className="flex flex-col text-sm bg-[var(--background-color-tertiary)] border-b border-[var(--border-color)]">
             {item.sub!.map((sub) => (
               <Link
                 key={sub.url}
