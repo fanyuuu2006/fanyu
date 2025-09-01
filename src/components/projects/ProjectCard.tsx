@@ -74,24 +74,28 @@ export const ProjectCard = ({
       {...rest}
     >
       <div
-        className={`${className} card w-full p-6 lg:p-8 gap-6 flex flex-col lg:flex-row`}
+        className={cn(
+          "card w-full p-6 lg:p-8 gap-6 flex flex-col lg:flex-row group",
+          className
+        )}
       >
         {/* 專案圖片 */}
-        <div className="shrink-0">
-          <div className="h-28 w-28 lg:h-32 lg:w-32 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden transition-all duration-300 group-hover:border-[var(--border-color-light)] group-hover:shadow-lg">
+        <div className="shrink-0 flex items-start">
+          <div className="h-28 w-28 lg:h-32 lg:w-32 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden transition-all duration-300 group-hover:border-[var(--border-color-light)] group-hover:shadow-lg group-hover:scale-105">
             {/* eslint-disable-next-line @next/next/no-img-element*/}
             <img
-              className="h-full w-full bg-white object-cover"
+              className="h-full w-full bg-white object-cover select-none"
               src={item.imageSrc}
               alt={`${item.title.english} icon`}
+              loading="lazy"
             />
           </div>
         </div>
 
         {/* 專案資訊 */}
-        <div className="flex-1 flex flex-col gap-3">
+        <div className="flex-1 flex flex-col gap-4">
           {/* 標題和描述 */}
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
               {item.title[Language.Current]}
             </h3>
@@ -99,30 +103,30 @@ export const ProjectCard = ({
               {item.about[Language.Current]}
             </p>
             <div className="flex items-center gap-2 text-base md:text-lg text-[var(--text-color-muted)]">
-              <ClockCircleOutlined />
+              <ClockCircleOutlined className="opacity-75" />
               <span className="font-medium">{item.time}</span>
             </div>
           </div>
 
           {/* 連結區域 */}
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex gap-2 flex-wrap">
             {item.links.map((link) => (
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="max-w-full btn text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-1 px-3 py-2 rounded-full"
+                className="btn text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-2 px-4 py-2 rounded-full hover:text-[var(--text-color)] transition-colors duration-300"
               >
-                {categoryIcon[link.category]}
-                <span className="text-ellipsis overflow-hidden whitespace-nowrap">
-                  {link.href}
+                <span className="text-base">{categoryIcon[link.category]}</span>
+                <span className="truncate max-w-[140px] md:max-w-[200px]">
+                  {link.href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                 </span>
               </CustomLink>
             ))}
           </div>
 
           {/* 專案特色 */}
-          <div className="rounded-2xl p-4 md:p-6 bg-[var(--background-color-tertiary)] border border-[var(--border-color)]">
-            <h4 className="text-lg md:text-xl lg:text-2xl font-bold mb-3">
+          <div className="rounded-2xl p-5 md:p-6 bg-[var(--background-color-tertiary)] border border-[var(--border-color)] transition-all duration-300 hover:border-[var(--border-color-light)]">
+            <h4 className="text-lg md:text-xl lg:text-2xl font-bold mb-4 text-[var(--text-color)]">
               {projectContent.projectFeature}
             </h4>
             <ul className="text-base md:text-lg text-justify list-disc ps-5 space-y-2 text-[var(--text-color-muted)]">
@@ -135,8 +139,8 @@ export const ProjectCard = ({
           </div>
 
           {/* 技能標籤 */}
-          <div className="rounded-2xl p-4 md:p-6 bg-[var(--background-color-tertiary)] border border-[var(--border-color)]">
-            <h4 className="text-lg md:text-xl lg:text-2xl font-bold mb-3">
+          <div className="rounded-2xl p-5 md:p-6 bg-[var(--background-color-tertiary)] border border-[var(--border-color)] transition-all duration-300 hover:border-[var(--border-color-light)]">
+            <h4 className="text-lg md:text-xl lg:text-2xl font-bold mb-4 text-[var(--text-color)]">
               {projectContent.skillTag}
             </h4>
             <div className="flex flex-wrap gap-2">
@@ -155,7 +159,7 @@ export const ProjectCard = ({
 
           {/* 討論區按鈕 */}
           {item.github && (
-            <div className="w-full">
+            <div className="w-full flex justify-center lg:justify-end mt-2">
               <button
                 onClick={() => {
                   setGiscusShow((prev) => !prev);
@@ -190,7 +194,7 @@ export const ProjectCard = ({
           id="github-container"
         >
           <div className="card p-6 w-full">
-            <div className="flex flex-wrap gap-4 justify-center mb-6">
+            <div className="flex flex-wrap gap-3 justify-center mb-6">
               {getGithubBadgeSrcs(item.github.repo).map((badgeItem) => (
                 /* eslint-disable-next-line @next/next/no-img-element*/
                 <img
@@ -199,7 +203,7 @@ export const ProjectCard = ({
                   src={badgeItem.url}
                   alt={badgeItem.title}
                   title={badgeItem.title}
-                  className="h-6 object-cover select-none"
+                  className="h-5 md:h-6 object-cover select-none transition-transform duration-200 hover:scale-110"
                 />
               ))}
             </div>
