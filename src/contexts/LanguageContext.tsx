@@ -19,7 +19,7 @@ export const LanguageProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const [Language, setLanguage] = useState<LanguageOption>("chinese");
+  const [Language, setLanguage] = useState<LanguageOption>("english");
 
   const Switch: React.FC<LanguageSwitchProps> = (
     props: LanguageSwitchProps

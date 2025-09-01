@@ -2,7 +2,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { ProjectsDiv } from "./ProjectsDiv";
-import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
+import { Title } from "@/components/custom/Title";
 
 type PortfolioContent = Record<"portfolio", string>;
 
@@ -21,14 +21,13 @@ const getPortfolioContent = (language: LanguageOption): PortfolioContent =>
 export const PortfolioSection = () => {
   const Language = useLanguage();
   const portfolioContent = getPortfolioContent(Language.Current);
-  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
 
   return (
     <section id="portfolio">
       <div className="container flex flex-col items-center">
-        <h1 ref={ref} className="text-5xl font-bold">
+        <Title >
           {portfolioContent.portfolio}
-        </h1>
+        </Title>
         <ProjectsDiv />
       </div>
     </section>

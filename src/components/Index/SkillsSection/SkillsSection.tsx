@@ -7,7 +7,7 @@ import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { SkillCategory } from "@/types/skill";
 import { skillCategoryIcons } from "@/libs/skill";
 import { profile } from "@/libs/profile";
-import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
+import { Title } from "@/components/custom/Title";
 
 type SkillsContent = Record<"skills" | SkillCategory, string>;
 
@@ -32,14 +32,13 @@ const getSkillsContent = (language: LanguageOption): SkillsContent =>
 export const SkillsSection = () => {
   const Language = useLanguage();
   const skillsContent = getSkillsContent(Language.Current);
-  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
 
   return (
     <section id="skills">
       <div className="container flex flex-col items-center">
-        <h1 className="text-5xl font-bold" ref={ref}>
+        <Title>
           {skillsContent.skills}
-        </h1>
+        </Title>
         <motion.div
           variants={staggerContainer}
           initial="hiddenBottom"

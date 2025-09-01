@@ -4,8 +4,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
-import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
 import Link from "next/link";
+import { Title } from "@/components/custom/Title";
 
 type AboutMeContent = {
   aboutMe: string;
@@ -41,14 +41,10 @@ export const AboutMeSection = () => {
 
   const aboutMeContent: AboutMeContent = getAboutMeContent(Language.Current);
 
-  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
-
   return (
     <section id="aboutMe">
       <div className="container flex flex-col items-center gap-8">
-        <h1 ref={ref} className="text-5xl font-bold text-center">
-          {aboutMeContent.aboutMe}
-        </h1>
+        <Title>{aboutMeContent.aboutMe}</Title>
 
         <div className="w-full flex flex-col lg:flex-row gap-6 items-stretch">
           {/* 個人照片卡片 */}

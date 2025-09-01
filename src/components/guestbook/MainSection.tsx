@@ -3,6 +3,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import Giscus from "@giscus/react";
+import { Title } from "@/components/custom/Title";
 
 type GuestbookContent = Record<"guestbook", string>;
 
@@ -25,7 +26,7 @@ export const MainSection = () => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <span className="text-5xl font-bold">{guestbookContent.guestbook}</span>
+        <Title className="text-5xl font-bold">{guestbookContent.guestbook}</Title>
         <div
           className="w-full flex flex-col items-center"
           id="guestbook-container"

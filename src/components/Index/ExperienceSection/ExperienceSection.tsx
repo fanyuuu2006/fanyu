@@ -9,7 +9,7 @@ import { ExperienceTab } from "@/types/experience";
 import { experienceTabIcons, experienceTabs } from "@/libs/education";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
-import { useInViewUnderlineSpread } from "@/hooks/useInViewUnderlineSpread";
+import { Title } from "@/components/custom/Title";
 
 type ExperienceContent = Record<
   "experience" | ExperienceTab | "noExperience" | "viewMore" | "collapse",
@@ -59,14 +59,12 @@ export const ExperienceSection = () => {
   const moreItems = sortedItems.slice(viewLimit);
   const hasMore = moreItems.length > 0;
 
-  const ref = useInViewUnderlineSpread<HTMLHeadingElement>();
-
   return (
     <section id="experience">
       <div className="container flex flex-col gap-8 items-center overflow-x-hidden">
-        <h1 className="text-5xl font-bold" ref={ref}>
+        <Title>
           {experienceContent.experience}
-        </h1>
+        </Title>
         <div className="flex flex-col w-full gap-4">
           {/** 分頁選單 */}
           <div

@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { Tooltip } from "antd";
 import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
+import { Title } from "@/components/custom/Title";
 type ProjectsContent = Record<
   | "projects"
   | "nofound"
@@ -85,7 +86,7 @@ export const MainSection = () => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <h1 className="text-5xl font-bold">{projectsContent.projects}</h1>
+        <Title className="text-5xl font-bold">{projectsContent.projects}</Title>
         <div className="flex flex-col w-full gap-2">
           <div className="relative text-2xl flex flex-nowrap items-center px-4 gap-4">
             <Tooltip title={projectsContent.filter}>
