@@ -58,7 +58,7 @@ export const routes: Route[] = [
   {
     label: {
       chinese: "專案",
-      english: "projects",
+      english: "Projects",
     },
     url: "/projects",
   },

@@ -112,7 +112,7 @@ export const ExperienceCard = ({
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="btn-primary text-sm md:text-base flex gap-1 px-3 py-2 rounded-full items-center"
+                className="btn-primary text-sm md:text-base flex gap-1 px-4 py-2 rounded-full items-center"
               >
                 {link.icon}
                 <span className="text-ellipsis overflow-hidden whitespace-nowrap">
@@ -124,7 +124,7 @@ export const ExperienceCard = ({
         )}
         {/** 角色/職位 */}
         {item.role && (
-          <div className="flex flex-col gap-2 p-4 md:p-6 rounded-3xl border border-[var(--border-color)]">
+          <div className="flex flex-col gap-2 p-4 md:p-6 rounded-xl border border-[var(--border-color)]">
             <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
               {experienceContent.role}
             </h4>
@@ -135,7 +135,7 @@ export const ExperienceCard = ({
         )}
         {/** 描述 */}
         {item.description && (
-          <div className="flex flex-col gap-2 p-4 md:p-6 rounded-3xl border border-[var(--border-color)]">
+          <div className="flex flex-col gap-2 p-4 md:p-6 rounded-xl border border-[var(--border-color)]">
             <h4 className="text-[var(--text-color-muted)] text-lg md:text-xl lg:text-2xl font-bold">
               {experienceContent.description}
             </h4>
