@@ -328,6 +328,8 @@ export const grades: Record<
     ],
   },
   "113-2": {
+    classRank: 27,
+    departmentRanK: 27,
     courses: [
       {
         courseName: {
