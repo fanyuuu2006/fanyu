@@ -40,6 +40,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//vercel.app" />
 
+        {/* Microsoft 驗證中繼標籤 */}
+        <meta name="msvalidate.01" content="73B631CBCD1EBDF32F1395A77E8758D9" />
+
         {/** 結構化資料 */}
         <Script
           id="person-jsonld"
