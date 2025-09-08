@@ -42,6 +42,8 @@ export default function RootLayout({
 
         {/* Microsoft 驗證中繼標籤 */}
         <meta name="msvalidate.01" content="73B631CBCD1EBDF32F1395A77E8758D9" />
+        {/* Yahoo 驗證中繼標籤 */}
+        <meta name="yandex-verification" content="b1e94267c95b0001" />
 
         {/** 結構化資料 */}
         <Script
