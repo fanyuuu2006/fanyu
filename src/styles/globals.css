@@ -256,10 +256,6 @@
     transition: all var(--transition-normal) ease;
   }
 
-  a:hover {
-    filter: brightness(var(--brightness-light));
-  }
-
   /* === 滑動摺疊效果 === */
   .slide-collapse {
     transition: height var(--transition-normal) ease-out;
