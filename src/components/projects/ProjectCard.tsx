@@ -75,13 +75,13 @@ export const ProjectCard = ({
     >
       <div
         className={cn(
-          "card w-full p-6 lg:p-8 gap-6 flex flex-col lg:flex-row group",
+          "card w-full p-6 md:p-8 gap-6 flex flex-col lg:flex-row",
           className
         )}
       >
         {/* 專案圖片 */}
         <div className="shrink-0 flex items-start">
-          <div className="h-28 w-28 lg:h-32 lg:w-32 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden transition-all duration-300 group-hover:border-[var(--border-color-light)] group-hover:shadow-lg group-hover:scale-105">
+          <div className="h-28 w-28 lg:h-32 lg:w-32 border-2 border-[var(--border-color)] rounded-2xl overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element*/}
             <img
               className="h-full w-full bg-white object-cover select-none"
@@ -114,7 +114,7 @@ export const ProjectCard = ({
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="btn text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-2 px-4 py-2 rounded-full hover:text-[var(--text-color)] transition-colors duration-300"
+                className="btn text-[var(--text-color-muted)] text-sm md:text-base flex items-center gap-2 px-4 py-2 rounded-full "
               >
                 <span className="text-base">{categoryIcon[link.category]}</span>
                 <span className="truncate max-w-[140px] md:max-w-[200px]">

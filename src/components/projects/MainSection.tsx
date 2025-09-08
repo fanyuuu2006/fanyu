@@ -147,7 +147,6 @@ export const MainSection = () => {
           <>{projectsContent.nofound}</>
         ) : (
           <motion.div
-            key={`${currentTags}`}
             variants={staggerContainer}
             initial="hiddenLeft"
             animate="show"
