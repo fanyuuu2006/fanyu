@@ -17,7 +17,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "antd": "^5.26.1",
-    "c063": "^1.6.2",
+    "c063": "^1.6.3",
     "clsx": "^2.1.1",
     "fanyucomponents": "^2.11.1",
     "framer-motion": "^12.18.1",
