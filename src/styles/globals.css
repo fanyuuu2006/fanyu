@@ -60,10 +60,11 @@
     height: 100%;
     color: var(--text-color);
     background: var(--background-color);
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* === Hero 區塊樣式 === */
@@ -92,9 +93,11 @@
     cursor: pointer;
     border: none;
     text-decoration: none;
-    transition: all var(--transition-normal) ease;
+    transition: all var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* 移除移動端點擊高亮 */
   }
 
   /* 按鈕 ripple 效果 */
@@ -110,10 +113,10 @@
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgb(255, 255, 255);
-    opacity: 0.1;
+    background: rgba(255, 255, 255, 0.1);
     transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 0;
     pointer-events: none; /* 防止 ripple 擋住按鈕點擊事件 */
   }
@@ -123,8 +126,8 @@
   .btn-primary:active::before,
   .btn-secondary:active::before,
   .btn-tertiary:active::before {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
   }
 
   .btn {
@@ -134,7 +137,7 @@
 
   .btn-primary {
     background: linear-gradient(
-      45deg,
+      135deg,
       var(--text-color-primary),
       var(--text-color-secondary)
     );
@@ -145,7 +148,7 @@
 
   .btn-secondary {
     background: linear-gradient(
-      45deg,
+      135deg,
       var(--text-color-primary),
       var(--text-color-tertiary)
     );
@@ -165,6 +168,7 @@
   .btn-tertiary:hover {
     text-decoration: none !important;
     transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
   }
 
   button:active,
@@ -174,6 +178,16 @@
   .btn-tertiary:active {
     transform: translateY(0);
     transition-duration: var(--transition-fast);
+  }
+
+  /* 聚焦狀態 */
+  button:focus-visible,
+  .btn:focus-visible,
+  .btn-primary:focus-visible,
+  .btn-secondary:focus-visible,
+  .btn-tertiary:focus-visible {
+    outline: 2px solid var(--border-color-focus);
+    outline-offset: 2px;
   }
 
   /* 禁用狀態 */
@@ -211,7 +225,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-base);
-    transition: all var(--transition-normal) ease-in-out;
+    transition: all var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
   }
@@ -226,11 +240,11 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.03),
       transparent
     );
-    transform: skewX(-20deg);
-    transition: left var(--transition-slow) ease;
+    transform: skewX(-15deg);
+    transition: left var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .card:hover {
@@ -249,11 +263,23 @@
     text-decoration: none;
   }
 
+  /* 聚焦狀態 */
+  a.card:focus-visible {
+    outline: 2px solid var(--border-color-focus);
+    outline-offset: 2px;
+  }
+
   /* === 連結樣式 === */
   a {
     color: inherit;
     text-decoration: none;
-    transition: all var(--transition-normal) ease;
+    transition: all var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--border-color-focus);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   /* === 滑動摺疊效果 === */
@@ -265,22 +291,29 @@
 
   /* === 自訂滾動條 === */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
     background: transparent;
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb {
     background: var(--border-color);
-    border-radius: 3px;
+    border-radius: 4px;
     transition: background var(--transition-normal) ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: var(--text-color-muted);
+  }
+
+  /* 針對 Firefox 的滾動條樣式 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
   }
 }
 
@@ -299,7 +332,7 @@
     bottom: 70%;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 1000;
   }
 
@@ -313,20 +346,42 @@
   .tooltip::before {
     content: attr(data-tooltip);
     width: max-content;
+    max-width: 200px;
     background: var(--background-color-secondary);
     border: var(--border-color) 1px solid;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius-sm);
     white-space: nowrap;
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-base);
   }
 
   /* === 動畫效果 === */
   .animate-pop {
-    animation: pop var(--transition-fast) cubic-bezier(0.42, -0.09, 0.59, 1.83);
+    animation: pop var(--transition-fast) cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   .animate-turn {
-    animation: turn var(--transition-normal) ease-in-out forwards;
+    animation: turn var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* 減少動畫效果（針對有偏好的用戶） */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pop,
+    .animate-turn,
+    .underline-spread::after,
+    .hover\:underline-spread::after {
+      animation: none;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   /* === Keyframe 動畫 === */
@@ -381,7 +436,7 @@
     width: 0;
     height: var(--line-height);
     background: linear-gradient(
-      45deg,
+      135deg,
       var(--text-color-primary),
       var(--text-color-secondary)
     );
@@ -396,6 +451,6 @@
   }
 
   .hover\:underline-spread:hover::after {
-    width: 120%;
+    width: 110%;
   }
 }
