@@ -8,6 +8,7 @@ import { SkillCategory } from "@/types/skill";
 import { skillCategoryIcons } from "@/libs/skill";
 import { profile } from "@/libs/profile";
 import { Title } from "@/components/custom/Title";
+import { Tooltip } from "antd";
 
 type SkillsContent = Record<"skills" | SkillCategory, string>;
 
@@ -36,9 +37,7 @@ export const SkillsSection = () => {
   return (
     <section id="skills">
       <div className="container flex flex-col items-center">
-        <Title>
-          {skillsContent.skills}
-        </Title>
+        <Title>{skillsContent.skills}</Title>
         <motion.div
           variants={staggerContainer}
           initial="hiddenBottom"
@@ -58,20 +57,22 @@ export const SkillsSection = () => {
                   className="text-2xl grid grid-cols-7 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-17 xl:grid-cols-20 gap-3"
                 >
                   {items.map((item) => (
-                    <div
+                    <motion.div
                       key={item.title}
-                      data-tooltip={item.title}
-                      className="tooltip text-sm md:text-base font-semibold"
+                      variants={fadeInItem}
+                      className="text-sm md:text-base font-semibold"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element*/}
-                      <img
-                        alt={item.title}
-                        src={item.src}
-                        width={300}
-                        height={300}
-                        className="object-cover transition-transform"
-                      />
-                    </div>
+                      <Tooltip title={item.title} placement="top">
+                        {/* eslint-disable-next-line @next/next/no-img-element*/}
+                        <img
+                          alt={item.title}
+                          src={item.src}
+                          width={300}
+                          height={300}
+                          className="object-cover transition-transform"
+                        />
+                      </Tooltip>
+                    </motion.div>
                   ))}
                 </motion.div>
               </div>
