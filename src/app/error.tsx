@@ -4,22 +4,29 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import type { LanguageContent, LanguageOption } from "@/types/language";
 import Link from "next/link";
 
-type ErrorContent = Record<"title" | "message" | "retry" | "home", string>;
+type ErrorContent = Record<
+  "title" | "message" | "retry" | "home" | "details" | "errorCode",
+  string
+>;
 
 const getErrorContent = (language: LanguageOption): ErrorContent =>
   ((
     {
       chinese: {
         title: "發生錯誤",
-        message: "很抱歉，頁面載入時發生錯誤。",
-        retry: "重試",
+        message: "很抱歉，頁面發生了意外錯誤。",
+        retry: "重新嘗試",
         home: "返回首頁",
+        details: "錯誤詳情",
+        errorCode: "錯誤代碼",
       },
       english: {
         title: "Something went wrong",
-        message: "Sorry, an error occurred while loading the page.",
+        message: "Sorry, an unexpected error has occurred.",
         retry: "Try again",
         home: "Back to home",
+        details: "Error Details",
+        errorCode: "Error Code",
       },
     } as LanguageContent<ErrorContent>
   )[language]);
@@ -40,18 +47,61 @@ export default function Error({
 
   return (
     <div className="container flex flex-col items-center justify-center min-h-screen">
-      <div className="p-8 flex flex-col items-center gap-4">
-        <h2 className="text-5xl font-bold">{errorContent.title}</h2>
-        <span className="text-2xl text-center">{errorContent.message}</span>
-        <span className="text-lg text-center">{error.message}</span>
-        <div className="flex gap-4">
+      <div className="card p-8 max-w-2xl w-full flex flex-col items-center text-center gap-6">
+        <div className="flex flex-col items-center gap-4">
+          {/* 錯誤圖標 */}
+          <div className="relative">
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] flex items-center justify-center text-4xl font-bold text-white shadow-lg">
+              !
+            </div>
+            <div className="absolute -top-1 -right-1 w-6 h-6 bg-red-600 rounded-full animate-pulse"></div>
+          </div>
+
+          {/* 錯誤標題 */}
+          <h1 className="text-4xl font-bold text-[color:var(--text-color)]">
+            {errorContent.title}
+          </h1>
+
+          {/* 錯誤描述 */}
+          <p className="text-lg text-[color:var(--text-color-muted)] leading-relaxed max-w-md">
+            {errorContent.message}
+          </p>
+
+          {/* 錯誤詳情 */}
+          {error.message && (
+            <details className="w-full max-w-lg">
+              <summary className="cursor-pointer text-[color:var(--text-color-primary)] hover:text-[color:var(--text-color-secondary)] transition-colors text-sm mb-2">
+                {errorContent.details}
+              </summary>
+              <div className="bg-[color:var(--background-color-tertiary)] rounded-lg p-4 text-left">
+                <p className="text-sm text-[color:var(--text-color-muted)] font-mono break-words">
+                  <span className="text-[color:var(--text-color-quaternary)] font-bold">
+                    {errorContent.errorCode}:{" "}
+                  </span>
+                  {error.message}
+                </p>
+                {error.digest && (
+                  <p className="text-xs text-[color:var(--text-color-muted)] mt-2 opacity-75">
+                    Digest: {error.digest}
+                  </p>
+                )}
+              </div>
+            </details>
+          )}
+        </div>
+
+        {/* 操作按鈕 */}
+        <div className="flex flex-row gap-4">
           <button
             onClick={() => reset()}
-            className="btn text-2xl rounded-lg px-4 py-2"
+            className="btn-primary rounded-full px-6 py-3 font-medium transition-all duration-300 hover:scale-105"
           >
             {errorContent.retry}
           </button>
-          <Link href="/" className="btn text-2xl rounded-lg px-4 py-2">
+          <Link
+            href="/"
+            className="btn-tertiary rounded-full px-6 py-3 font-medium transition-all duration-300 hover:scale-105"
+          >
             {errorContent.home}
           </Link>
         </div>
