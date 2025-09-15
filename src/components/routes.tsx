@@ -1,8 +1,15 @@
 import { LanguageContent } from "@/types/language";
+import {
+  HomeOutlined,
+  ProjectOutlined,
+  MessageOutlined,
+  PictureOutlined,
+} from "@ant-design/icons";
 
 type BaseRoute = {
   label: LanguageContent<string>;
   url: string;
+  icon?: React.ElementType;
 };
 
 export type Route = BaseRoute & {
@@ -16,6 +23,7 @@ export const routes: Route[] = [
       english: "Home",
     },
     url: "/",
+    icon: HomeOutlined,
     sub: [
       {
         label: {
@@ -61,6 +69,7 @@ export const routes: Route[] = [
       english: "Projects",
     },
     url: "/projects",
+    icon: ProjectOutlined,
   },
   {
     label: {
@@ -68,6 +77,7 @@ export const routes: Route[] = [
       english: "Guestbook",
     },
     url: "/guestbook",
+    icon: MessageOutlined,
   },
   {
     label: {
@@ -75,5 +85,6 @@ export const routes: Route[] = [
       english: "Album",
     },
     url: "/album",
+    icon: PictureOutlined,
   },
 ];

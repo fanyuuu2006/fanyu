@@ -1,4 +1,4 @@
-import { Route } from "./routes";
+import { Route } from "../routes";
 import { cn } from "@/utils/className";
 import { Collapse } from "fanyucomponents";
 import Link from "next/link";

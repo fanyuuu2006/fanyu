@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useCallback } from "react";
 import { Collapse } from "fanyucomponents";
-import { routes } from "./routes";
+import { routes } from "../routes";
 import { BurgerMenu } from "./BurgerMenu";
 import { DesktopLink } from "./DesktopLink";
 import { MobileLink } from "./MobileLink";
