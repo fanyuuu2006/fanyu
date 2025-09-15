@@ -137,7 +137,7 @@ export const metadata: Metadata = {
     "開源專案",
     "GitHub 專案",
     "Web Development Taiwan",
-    "Frontend Development Taiwan"
+    "Frontend Development Taiwan",
   ],
 
   openGraph: {
@@ -161,20 +161,40 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/GameShow.jpg"],
+    images: [
+      {
+        url: `${url}/GameShow.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "FanYu Profile Image",
+      },
+    ],
+
     creator: "@fanyuuu2006",
     site: "@fanyuuu2006",
   },
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
 
   verification: {
     google: "BPwLDvPkjbND-Djvxq812SdYkm2pHQ18WPWt2KkPiQk",
+    yandex: "b1e94267c95b0001",
+    me: "73B631CBCD1EBDF32F1395A77E8758D9",
   },
   alternates: {
     canonical: profile.url,
     languages: {
       "zh-TW": profile.url,
-      "en": profile.url,
+      en: profile.url,
       "x-default": profile.url,
     },
   },

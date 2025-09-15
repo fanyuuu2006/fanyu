@@ -40,11 +40,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//vercel.app" />
 
-        {/* Microsoft 驗證中繼標籤 */}
-        <meta name="msvalidate.01" content="73B631CBCD1EBDF32F1395A77E8758D9" />
-        {/* Yahoo 驗證中繼標籤 */}
-        <meta name="yandex-verification" content="b1e94267c95b0001" />
-
         {/** 結構化資料 */}
         <Script
           id="person-jsonld"
@@ -166,7 +161,9 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${measurementID}');
+            gtag('config', '${measurementID}', {
+              page_path: window.location.pathname,
+            })
           `}
         </Script>
       </head>
