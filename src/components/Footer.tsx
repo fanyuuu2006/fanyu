@@ -16,8 +16,7 @@ type FooterContent = Record<
   | "copyright"
   | "sourceCode"
   | "backToTop"
-  | "quickLinks"
-  | "builtWith",
+  | "quickLinks",
   string
 >;
 
@@ -29,14 +28,12 @@ const getFooterContent = (language: LanguageOption): FooterContent =>
         sourceCode: "原始碼",
         backToTop: "返回頂部",
         quickLinks: "快速連結",
-        builtWith: "技術棧",
       },
       english: {
         copyright: " All rights reserved.",
         sourceCode: "Source Code",
         backToTop: "Back to top",
         quickLinks: "Quick Links",
-        builtWith: "Built With",
       },
     } as LanguageContent<FooterContent>
   )[language]);
@@ -46,21 +43,12 @@ export const Footer = () => {
   const footerContent = getFooterContent(Language.Current);
   const year = new Date().getFullYear();
 
-  // 技術棧
-  const techStack = [
-    "Next.js 15",
-    "TypeScript",
-    "Tailwind CSS",
-    "React 19",
-    "Vercel",
-  ];
-
   return (
     <footer className="w-full bg-black border-[var(--border-color)] border-t-1">
       <div className="container px-6 py-12">
         {/* 左側內容區域 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div>
             <div className="text-base md:text-lg flex flex-col gap-2 text-[var(--text-color-muted)]">
               <div className="flex gap-2">
                 <CopyrightOutlined /> {year},{" "}
@@ -118,22 +106,6 @@ export const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div>
-            <h5 className="text-md font-medium text-[var(--text-color)] mb-3">
-              {footerContent.builtWith}
-            </h5>
-            <div className="flex flex-wrap gap-2">
-              {techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2 py-1 text-xs bg-[var(--background-color-tertiary)] text-[var(--text-color-muted)] rounded border border-[var(--border-color)]"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </div>
