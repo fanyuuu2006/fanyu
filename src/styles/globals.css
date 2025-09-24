@@ -229,7 +229,7 @@
     overflow: hidden;
   }
 
-  .card::before {
+  /* .card::before {
     content: "";
     position: absolute;
     top: 0;
@@ -244,16 +244,16 @@
     );
     transform: skewX(-15deg);
     transition: left var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+  } */
 
   .card:hover {
     box-shadow: var(--shadow-hover);
     border-color: var(--border-color-light);
   }
 
-  .card:hover::before {
+  /* .card:hover::before {
     left: 100%;
-  }
+  } */
 
   a.card:hover {
     transform: translateY(calc(-1 * var(--move-y)));
