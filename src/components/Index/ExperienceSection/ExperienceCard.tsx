@@ -113,7 +113,7 @@ export const ExperienceCard = ({
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="btn-primary text-xs sm:text-sm md:text-base flex gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full items-center"
+                className="btn-primary font-medium text-xs sm:text-sm md:text-base flex gap-1 px-3 py-2 rounded-full items-center"
               >
                 {link.icon}
                 <span className="text-ellipsis overflow-hidden whitespace-nowrap">
