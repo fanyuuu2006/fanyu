@@ -22,7 +22,7 @@ export const ProjectTagCheckbox = ({
   ...rest
 }: ProjectTagCheckboxProps) => {
   const isActive = tag ? currentTags?.has(tag) : currentTags === null;
-  const baseClass = "px-4 py-1 rounded-full whitespace-nowrap";
+  const baseClass = "px-4 py-2 rounded-full whitespace-nowrap";
   const variantClass = isActive ? "btn-tertiary" : "btn";
   return (
     <label className={cn(baseClass, variantClass, className)} {...rest}>

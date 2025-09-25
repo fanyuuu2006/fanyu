@@ -119,7 +119,7 @@ export const ProjectCard = ({
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="btn-primary font-medium text-xs sm:text-sm md:text-base flex gap-1 px-4 py-2 rounded-full items-center"
+                className="btn-primary font-medium text-xs sm:text-sm md:text-base flex gap-2 px-4 py-2 rounded-full items-center"
               >
                 <span className="text-base">{categoryIcon[link.category]}</span>
                 <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px] sm:max-w-[140px] md:max-w-[200px]">
@@ -209,7 +209,7 @@ export const ProjectCard = ({
                   src={badgeItem.url}
                   alt={badgeItem.title}
                   title={badgeItem.title}
-                  className="h-5 md:h-6 object-cover select-none transition-transform duration-200 hover:scale-110"
+                  className="h-5 md:h-6 object-cover select-none"
                 />
               ))}
             </div>
