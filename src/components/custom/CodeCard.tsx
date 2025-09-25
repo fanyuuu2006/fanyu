@@ -25,7 +25,7 @@ export const CodeCard = ({
   return (
     <div className={cn(`card flex flex-col p-6 gap-2`, className)} {...rest}>
       <div className="flex items-center">
-        <span>{lang}</span>
+        <span className="text-[var(--text-color-muted)]">{lang}</span>
         <CopyButton
           content={content}
           className="ml-auto btn rounded-sm flex items-center justify-center p-1"
