@@ -50,7 +50,7 @@ export const useTimeOrderTabs = <T,>(
     return (
       <div
         role="tablist"
-        className={`${className} grid grid-cols-2 bg-[#000] rounded-2xl p-1`}
+        className={`${className} grid grid-cols-2 bg-[#000] rounded-xl p-1`}
         {...rest}
       >
         {[

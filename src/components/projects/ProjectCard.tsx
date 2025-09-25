@@ -149,7 +149,7 @@ export const ProjectCard = ({
             <h4 className="text-[var(--text-color-muted)] text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
               {projectContent.skillTag}
             </h4>
-            <div className="flex flex-wrap gap-3">
+            <div className="text-sm md:text-base lg:text-lg flex flex-wrap gap-1">
               {item.tags.map((tag) => (
                 <ProjectTagCheckbox
                   key={tag}
