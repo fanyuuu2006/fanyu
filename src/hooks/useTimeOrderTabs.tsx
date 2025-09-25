@@ -54,8 +54,8 @@ export const useTimeOrderTabs = <T,>(
         {...rest}
       >
         {[
-          { label: content.Newest, value: true },
           { label: content.Oldest, value: false },
+          { label: content.Newest, value: true },
         ].map((item) => {
           const isSelected = isOrderByNewest === item.value;
           return (
