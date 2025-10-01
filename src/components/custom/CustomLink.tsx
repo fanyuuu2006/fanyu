@@ -1,8 +1,11 @@
 import { OutsideLink, OutsideLinkProps, OverrideProps } from "fanyucomponents";
-import Link, { LinkProps } from "next/link";
+import Link from "next/link";
 import { forwardRef } from "react";
 
-export type CustomLinkProps = OverrideProps<LinkProps, OutsideLinkProps>;
+export type CustomLinkProps = OverrideProps<
+  React.ComponentProps<typeof Link>,
+  OutsideLinkProps
+>;
 
 export const CustomLink = forwardRef<HTMLAnchorElement, CustomLinkProps>(
   ({ href, ...rest }, ref) => {
