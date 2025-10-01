@@ -17,7 +17,7 @@ const getLazyImageContent = (language: LanguageOption): LazyImageContent =>
 
 export type LazyImageProps = OverrideProps<
   React.ImgHTMLAttributes<HTMLImageElement>,
-  { loading?: boolean }
+  { loading?: boolean; src?: string }
 >;
 
 export const LazyImage = forwardRef<HTMLImageElement, LazyImageProps>(
