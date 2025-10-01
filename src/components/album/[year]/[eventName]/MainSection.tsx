@@ -23,7 +23,7 @@ type MainSectionProps = {
 };
 
 type ImagesContent = Record<
-  "noImages" | "eventsLoadFailed" | "backToAlbum",
+  "noImages" | "eventsLoadFailed" | "back",
   string
 >;
 
@@ -33,12 +33,12 @@ const getImagesContent = (language: LanguageOption): ImagesContent =>
       chinese: {
         noImages: "沒有圖片",
         eventsLoadFailed: "載入相簿失敗",
-        backToAlbum: "返回相簿",
+        back: "返回",
       },
       english: {
         noImages: "No Images",
         eventsLoadFailed: "Album Load Failed",
-        backToAlbum: "Back to Album",
+        back: "Back",
       },
     } as LanguageContent<ImagesContent>
   )[language]);
@@ -76,9 +76,9 @@ export const MainSection = ({ year, eventName }: MainSectionProps) => {
     <section className="min-h-screen">
       <div className="container flex flex-col items-center px-4 py-8">
         <div className="w-full">
-          <Tooltip title={imagesContent.backToAlbum}>
+          <Tooltip title={imagesContent.back}>
             <button
-              aria-label={imagesContent.backToAlbum}
+              aria-label={imagesContent.back}
               onClick={handleBackClick}
               className="btn text-xl flex items-center justify-center p-3 rounded-full"
             >
