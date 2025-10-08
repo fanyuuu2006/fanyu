@@ -15,21 +15,16 @@ const AlbumContext = createContext<{
   ) => SWRResponse<string>;
 } | null>(null);
 
-const useYearsHook = () => useSWR<string[]>("/api/album", fetcher);
-const useEventsHook = (year: string) =>
-  useSWR<string[]>(`/api/album/${slugify(year)}`, fetcher);
-const useImagesHook = (y: string, e: string) =>
-  useSWR<string[]>(`/api/album/${slugify(y)}/${slugify(e)}`, fetcher);
-const useImageHook = (y: string, e: string, i: number) =>
-  useSWR<string>(`/api/album/${slugify(y)}/${slugify(e)}/${i}`, fetcher);
-
 export const AlbumProvider = ({ children }: { children: React.ReactNode }) => {
   const value = useMemo(
     () => ({
-      useYears: useYearsHook,
-      useEvents: useEventsHook,
-      useImages: useImagesHook,
-      useImage: useImageHook,
+      useYears: () => useSWR<string[]>("/api/album", fetcher),
+      useEvents: (year: string) =>
+        useSWR<string[]>(`/api/album/${slugify(year)}`, fetcher),
+      useImages: (y: string, e: string) =>
+        useSWR<string[]>(`/api/album/${slugify(y)}/${slugify(e)}`, fetcher),
+      useImage: (y: string, e: string, i: number) =>
+        useSWR<string>(`/api/album/${slugify(y)}/${slugify(e)}/${i}`, fetcher),
     }),
     []
   );
