@@ -216,7 +216,7 @@ export const MainSection = () => {
 
         {/* 返回連結：回到首頁的 portfolio 區段 */}
         <Link
-          className="text-2xl transition-all hover:translate-x-2 group"
+          className="text-xl md:text-2xl text-[var(--text-color-muted)] transition-all hover:translate-x-2 group"
           href="/#portfolio"
         >
           {/* 返回箭頭：hover 時會向左移動並顯示 */}

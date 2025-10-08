@@ -75,7 +75,7 @@ export const ProjectCard = ({
     >
       <div
         className={cn(
-          "card w-full p-4 sm:p-6 lg:p-8 flex flex-col gap-6",
+          "card w-full p-6 md:p-8 flex flex-col gap-6",
           className
         )}
       >
@@ -119,10 +119,10 @@ export const ProjectCard = ({
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="btn-primary font-medium text-xs sm:text-sm md:text-base flex gap-2 px-4 py-2 rounded-full items-center"
+                className="btn-primary font-medium text-xs sm:text-sm md:text-base flex gap-2 px-3 py-1 rounded-full items-center"
               >
                 <span className="text-base">{categoryIcon[link.category]}</span>
-                <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px] sm:max-w-[140px] md:max-w-[200px]">
+                <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px] sm:max-w-[140px] md:max-w-[200px]">
                   {link.href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                 </span>
               </CustomLink>

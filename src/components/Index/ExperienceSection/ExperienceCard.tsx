@@ -55,7 +55,7 @@ export const ExperienceCard = ({
 
   return (
     <div
-      className={cn(`card w-full p-4 sm:p-6 lg:p-8 flex flex-col gap-6`, className)}
+      className={cn(`card w-full p-6 md:p-8 flex flex-col gap-6`, className)}
       {...rest}
     >
       {/** 標題區域 */}

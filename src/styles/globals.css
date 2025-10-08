@@ -132,7 +132,7 @@
 
   .btn {
     background: var(--background-color-secondary);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
   }
 
   .btn-primary {
@@ -167,7 +167,6 @@
   .btn-secondary:hover,
   .btn-tertiary:hover {
     text-decoration: none !important;
-    transform: translateY(-2px);
   }
 
   button:active,
@@ -175,7 +174,6 @@
   .btn-primary:active,
   .btn-secondary:active,
   .btn-tertiary:active {
-    transform: translateY(0);
     transition-duration: var(--transition-fast);
   }
 

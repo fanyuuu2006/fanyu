@@ -122,6 +122,34 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
       backgrounds: ["#69C9D0", "#010101", "#010101", "#EE1D52"],
     },
     {
+      label: "Retro",
+      icon: () => {
+        return (
+          <span>
+            {/*eslint-disable-next-line @next/next/no-img-element*/}
+            <img
+              src="https://retro.app/logo_white.png"
+              alt="Retro Logo"
+              style={{
+                height: "1em",
+                width: "auto",
+                objectFit: "contain",
+              }}
+            />
+          </span>
+        );
+      },
+      info: {
+        id: "fan._.yuuu",
+        name: "🍚🐟➕➖",
+        image: {
+          src: "https://firebasestorage.googleapis.com/v0/b/retro-media-multi/o/profilePhotos%2FXwoajkypoePTkSVu31UWlVQQKkF3%2F6d3d1a3d-5faf-4ba0-afd3-f7fa630cd5b6?alt=media&token=6e132eb0-1efc-491b-b90c-b088a28c08f1",
+        },
+      },
+      href: "https://retro.app/u/fan._.yuuu",
+      backgrounds: ["#999999", "#666666", "#333333"],
+    },
+    {
       label: "WakaTime",
       icon: SiWakatime,
       info: {
