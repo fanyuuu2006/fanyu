@@ -3,11 +3,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageContent, LanguageOption } from "@/types/language";
 import { Toast } from "@/components/custom/Toast";
 import { LoadingOutlined } from "@ant-design/icons";
-import useSWR from "swr";
 import { useEffect } from "react";
-import { fetcher } from "@/utils/fetcher";
 import { YearDiv } from "./YearDiv";
 import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
+import { useAlbum } from "@/contexts/AlbumContext";
 
 type AlbumContent = Record<"album" | "noAlbum" | "yearsLoadFailed", string>;
 
@@ -30,12 +29,13 @@ const getAlbumContent = (language: LanguageOption): AlbumContent =>
 export const MainSection = () => {
   const Language = useLanguage();
   const albumContent = getAlbumContent(Language.Current);
+  const { useYears } = useAlbum();
 
   const {
     data: years,
     error,
     isLoading,
-  } = useSWR<string[]>("/api/album", fetcher);
+  } = useYears();
 
   useEffect(() => {
     if (error) {
