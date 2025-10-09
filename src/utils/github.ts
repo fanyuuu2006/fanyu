@@ -11,21 +11,6 @@ const badgeConfig: Record<
     color: "blue",
     logo: "github",
   },
-  Stars: {
-    endpoint: "stars",
-    color: "yellow",
-    logo: "star",
-  },
-  Forks: {
-    endpoint: "forks",
-    color: "blue",
-    logo: "git-fork",
-  },
-  Issues: {
-    endpoint: "issues",
-    color: "red",
-    logo: "issue-opened",
-  },
   "Last commit": {
     endpoint: "last-commit",
     color: "green",
@@ -51,6 +36,21 @@ const badgeConfig: Record<
     color: "blueviolet",
     logo: "code",
   },
+  Stars: {
+    endpoint: "stars",
+    color: "yellow",
+    logo: "star",
+  },
+  Forks: {
+    endpoint: "forks",
+    color: "blue",
+    logo: "git-fork",
+  },
+  Issues: {
+    endpoint: "issues",
+    color: "red",
+    logo: "issue-opened",
+  },
 };
 
 export const getGithubBadgeSrcs = (repo: RepoString): GitHubBadgeItem[] => {
@@ -69,43 +69,6 @@ export const getGithubBadgeSrcs = (repo: RepoString): GitHubBadgeItem[] => {
     // 構建 URL 參數
     const params = new URLSearchParams({
       style: "for-the-badge", // 使用更現代的樣式
-      color: config.color || "blue",
-      ...(config.logo && { logo: config.logo }),
-      logoColor: "white",
-    });
-
-    return {
-      title: badge,
-      url: `https://img.shields.io/github/${
-        config.endpoint
-      }/${repo}.svg?${params.toString()}`,
-    };
-  });
-};
-
-// 提供不同樣式選項的函數
-export const getGithubBadgeSrcsWithStyle = (
-  repo: RepoString,
-  style:
-    | "flat"
-    | "flat-square"
-    | "for-the-badge"
-    | "plastic"
-    | "social" = "for-the-badge"
-): GitHubBadgeItem[] => {
-  return githubBadges.map((badge) => {
-    const config = badgeConfig[badge];
-    if (!config) {
-      return {
-        title: badge,
-        url: `https://img.shields.io/github/${badge
-          .toLowerCase()
-          .replace(" ", "-")}/${repo}.svg?style=${style}`,
-      };
-    }
-
-    const params = new URLSearchParams({
-      style,
       color: config.color || "blue",
       ...(config.logo && { logo: config.logo }),
       logoColor: "white",

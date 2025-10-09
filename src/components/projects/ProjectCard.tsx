@@ -199,7 +199,7 @@ export const ProjectCard = ({
           )}
           id="github-container"
         >
-          <div className="card p-4 sm:p-6 lg:p-7 w-full">
+          <div className="p-4 sm:p-6 lg:p-7 w-full">
             <div className="flex flex-wrap gap-3 justify-center mb-7">
               {getGithubBadgeSrcs(item.github.repo).map((badgeItem) => (
                 /* eslint-disable-next-line @next/next/no-img-element*/
