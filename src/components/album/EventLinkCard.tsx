@@ -2,6 +2,7 @@ import { slugify } from "@/utils/url";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
 import { useRef } from "react";
+import { useInView } from "framer-motion";
 import { Album } from "@/types/album";
 
 export type EventLinkCardProps = DistributiveOmit<
@@ -22,6 +23,10 @@ export const EventLinkCard = ({
   ...rest
 }: EventLinkCardProps) => {
   const ref = useRef<HTMLAnchorElement>(null);
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.5,
+  });
 
   return (
     <Link
@@ -34,7 +39,7 @@ export const EventLinkCard = ({
     >
       {/*eslint-disable-next-line @next/next/no-img-element*/}
       <img
-        src={event.images[0]}
+        src={isInView ? event.images[0] : "https://www.kleinpaint.ca/cdn/shop/products/444A50.png?v=1666632521&width=713"}
         alt={`${year} ${event.name} 相簿封面`}
         className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
       />
