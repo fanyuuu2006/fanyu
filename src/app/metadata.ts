@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     "fan._.yuu",
     "fanyuuu2006",
     "范振富",
+    "z04m65p4zj4",
 
     // 💻 技能與職能 - 擴展更多相關詞彙
     "Frontend Developer",
