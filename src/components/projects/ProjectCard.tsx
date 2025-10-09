@@ -114,15 +114,15 @@ export const ProjectCard = ({
         {/* 內容區域 */}
         <div className="flex flex-col gap-5">
           {/* 連結 */}
-          <div className="flex gap-2 sm:gap-3 flex-wrap">
+          <div className="flex gap-2 flex-wrap">
             {item.links.map((link) => (
               <CustomLink
                 key={link.href}
                 href={link.href}
-                className="btn-primary font-medium text-xs sm:text-sm md:text-base flex gap-2 px-3 py-1 rounded-full items-center"
+                className="btn-primary font-medium text-xs sm:text-sm md:text-base flex gap-2 px-4 py-2 rounded-full items-center"
               >
                 <span className="text-base">{categoryIcon[link.category]}</span>
-                <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px] sm:max-w-[140px] md:max-w-[200px]">
+                <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[150px] sm:max-w-[200px] md:max-w-[250px]">
                   {link.href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                 </span>
               </CustomLink>

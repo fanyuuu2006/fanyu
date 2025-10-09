@@ -33,7 +33,7 @@ export const Header = () => {
           </Link>
 
           {/* 手機版漢堡選單按鈕 */}
-          <div className="text-xl lg:hidden">
+          <div className="text-2xl lg:hidden">
             <BurgerMenu
               checked={menuShow}
               onChange={handleMenuToggle}
@@ -44,7 +44,7 @@ export const Header = () => {
           </div>
 
           {/* 桌面版導覽列 */}
-          <div className="hidden lg:flex text-xl font-bold gap-4">
+          <div className="hidden lg:flex text-2xl font-bold gap-4">
             {routes.map((item) => (
               <DesktopLink key={item.url} item={item} />
             ))}
