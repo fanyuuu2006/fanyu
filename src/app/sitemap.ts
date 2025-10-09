@@ -1,5 +1,5 @@
 import { profile } from "@/libs/profile";
-import { fetcher } from "@/utils/fetcher";
+import album from "@/utils/album";
 import { slugify } from "@/utils/url";
 import { MetadataRoute } from "next";
 
@@ -28,13 +28,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }> = [];
 
   try {
-    const years = await fetcher<string[]>(`${baseUrl}/api/album`);
+    const years = await album.years();
 
     const yearEventMap = await Promise.all(
       years.map(async (year) => {
-        const events = await fetcher<string[]>(
-          `${baseUrl}/api/album/${slugify(year)}`
-        );
+        const events = await album.events(year);
         return { year, events };
       })
     );
