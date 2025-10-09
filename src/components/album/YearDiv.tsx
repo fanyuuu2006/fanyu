@@ -74,7 +74,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
               <motion.div
                 variants={fadeInItem}
                 key={`${item.year}-${event.name}`}
-                className="rounded-xl overflow-hidden border border-[var(--border-color)]"
+                className="rounded-3xl overflow-hidden border border-[var(--border-color)]"
               >
                 <EventLinkCard
                   year={item.year}

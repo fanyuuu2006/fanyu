@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
-import { Title } from "@/components/custom/Title";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
@@ -62,10 +61,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           </Tooltip>
         </div>
 
-        <Title className="flex flex-col items-center">
-          <span className="text-4xl md:text-5xl font-bold mb-2">{year}</span>
-          <span className="text-2xl md:text-4xl font-semibold">{event.name}</span>
-        </Title>
+        <div className="flex flex-col items-center leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl font-semibold text-[var(--text-color-muted)] mb-2">{year}</h2>
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">{event.name}</h1>
+        </div>
 
         {/* 圖片網格 */}
         <motion.article
@@ -73,7 +72,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.1 }}
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-[1px]"
           role="main"
           aria-label={`${year}-${event.name}照片集`}
         >
@@ -89,7 +88,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 key={src}
                 variants={fadeInItem}
                 className={cn(
-                  "rounded-xl overflow-hidden aspect-square bg-[#888] border border-[var(--border-color)] hover:border-[var(--text-color-primary])]"
+                  "aspect-square bg-[#888] border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
                 )}
               >
                 <ImageCard src={src} className="h-full w-full object-cover" />
