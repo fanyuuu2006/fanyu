@@ -55,7 +55,6 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           onClick={() => {
             setIsCollapseOpen((prev) => !prev);
           }}
-          aria-label={isCollapseOpen ? `收合 ${item.year} 年相簿` : `展開 ${item.year} 年相簿`}
         >
           <CaretRightOutlined />
         </button>
@@ -66,7 +65,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.5 }}
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-[1px]"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
         >
           {item.events.length === 0 ? (
             <div className="text-3xl font-bold">{`${item.year} - ${yearsContent.noEvents}`}</div>
@@ -75,7 +74,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
               <motion.div
                 variants={fadeInItem}
                 key={`${item.year}-${event.name}`}
-                className="rounded-md overflow-hidden border border-[var(--border-color)]"
+                className="rounded-xl overflow-hidden border border-[var(--border-color)]"
               >
                 <EventLinkCard
                   year={item.year}

@@ -35,7 +35,7 @@ export const ImageCard = ({
         onClick={modal.Open}
         src={src}
         alt={`Event Image ${src}`}
-        className={cn("text-5xl cursor-pointer", className)}
+        className={cn("cursor-pointer", className)}
         onError={(e: React.SyntheticEvent) => {
           (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
           console.error(e);

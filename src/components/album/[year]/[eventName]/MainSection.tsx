@@ -48,15 +48,16 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
   return (
     <section className="min-h-screen">
-      <div className="container flex flex-col items-center px-4 py-8">
-        <div className="w-full">
+      <div className="container">
+        {/* 返回按鈕區域 */}
+        <div className="w-full mb-6">
           <Tooltip title={imagesContent.back}>
             <button
               aria-label={imagesContent.back}
               onClick={handleBackClick}
-              className="btn text-xl flex items-center justify-center p-3 rounded-full"
+              className="btn text-lg lg:text-xl flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-full "
             >
-              <CaretLeftOutlined className="relative left-[-2px]" />
+              <CaretLeftOutlined className="relative left-[-1px]" />
             </button>
           </Tooltip>
         </div>
@@ -66,12 +67,13 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           <span className="text-2xl md:text-4xl font-semibold">{event.name}</span>
         </Title>
 
+        {/* 圖片網格 */}
         <motion.article
           variants={staggerContainer}
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.1 }}
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-[1px]"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
           role="main"
           aria-label={`${year}-${event.name}照片集`}
         >
@@ -87,7 +89,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 key={src}
                 variants={fadeInItem}
                 className={cn(
-                  "aspect-square bg-[#888] border border-[var(--border-color)] hover:border-white"
+                  "rounded-xl overflow-hidden aspect-square bg-[#888] border border-[var(--border-color)] hover:border-white"
                 )}
               >
                 <ImageCard src={src} className="h-full w-full object-cover" />
