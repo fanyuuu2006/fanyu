@@ -1,3 +1,5 @@
+import { profile } from "@/libs/profile";
+import album from "@/utils/album";
 import { deslugify, slugify } from "@/utils/url";
 import { Metadata } from "next";
 
@@ -12,21 +14,41 @@ export async function generateMetadata({
   const year = deslugify(rawYear);
   const eventName = deslugify(rawEventName);
 
-  const title = `${year}-${eventName}`;
+  const title = `${year} - ${eventName}`;
+  const description = `查看 ${year} 年 ${eventName} 的相片集，記錄美好時刻與珍貴回憶`;
+  const image = await album.image(year, eventName, 0);
+
   return {
     title,
-    description: `${year}-${eventName}`,
+    description,
     openGraph: {
-      title,
-      description: `${year}-${eventName}`,
-      url: `https://fanyu.vercel.app/album/${slugify(year)}/${slugify(
-        eventName
-      )}`,
+      title: `${title} | 相簿 Album`,
+      description,
+      url: `${profile.url}/album/${slugify(year)}/${slugify(eventName)}`,
+      type: "website",
+      siteName: `${profile.nickname.chinese} ${profile.nickname.english}`,
       images: [
-        `https://fanyu.vercel.app/api/album/${slugify(year)}/${slugify(
-          eventName
-        )}/0`,
+        {
+          url: image,
+          alt: `${year} ${eventName} - FanYu Photo Album`,
+          type: "image/jpeg",
+        },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | 相簿 Album`,
+      description,
+      images: [
+        {
+          url: image,
+          alt: `${year} ${eventName} - FanYu Photo Album`,
+          type: "image/jpeg",
+        },
+      ],
+    },
+    alternates: {
+      canonical: `${profile.url}/album/${slugify(year)}/${slugify(eventName)}`,
     },
   };
 }
