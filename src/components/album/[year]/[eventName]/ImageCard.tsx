@@ -1,5 +1,6 @@
 import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { FALLBACK_IMAGE } from "@/libs/album";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
 import { useModal } from "fanyucomponents";
@@ -36,6 +37,7 @@ export const ImageCard = ({
         alt={`Event Image ${src}`}
         className={cn("text-5xl cursor-pointer", className)}
         onError={(e: React.SyntheticEvent) => {
+          (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
           console.error(e);
           Toast.fire({
             icon: "error",
@@ -51,6 +53,7 @@ export const ImageCard = ({
           alt={`Event Image ${src}`}
           className={`max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
           onError={(e: React.SyntheticEvent) => {
+            (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
             console.error(e);
             Toast.fire({
               icon: "error",

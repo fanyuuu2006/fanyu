@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { Album } from "@/types/album";
+import { FALLBACK_IMAGE } from "@/libs/album";
 
 export type EventLinkCardProps = DistributiveOmit<
   OverrideProps<
@@ -15,6 +16,8 @@ export type EventLinkCardProps = DistributiveOmit<
   >,
   "href"
 >;
+
+
 
 export const EventLinkCard = ({
   year,
@@ -30,7 +33,7 @@ export const EventLinkCard = ({
 
   return (
     <Link
-      draggable={true}
+      draggable={false}
       ref={ref}
       aria-label={`前往 ${year} ${event.name} 相簿`}
       className={`relative group ${className}`}
@@ -39,7 +42,10 @@ export const EventLinkCard = ({
     >
       {/*eslint-disable-next-line @next/next/no-img-element*/}
       <img
-        src={isInView ? event.images[0] : "https://www.kleinpaint.ca/cdn/shop/products/444A50.png?v=1666632521&width=713"}
+        src={isInView ? event.images[0] : FALLBACK_IMAGE}
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+        }}
         alt={`${year} ${event.name} 相簿封面`}
         className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
       />
