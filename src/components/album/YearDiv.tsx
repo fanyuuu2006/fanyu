@@ -37,9 +37,11 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
   return (
     <motion.article
       id={item.year}
-      className="w-full flex flex-col gap-2"
+      className="w-full flex flex-col mb-8 gap-2"
+      variants={fadeInItem}
       {...rest}
     >
+      {/* 年份 */}
       <div
         className={`flex items-center gap-2 transition-colors ${
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
@@ -53,6 +55,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           onClick={() => {
             setIsCollapseOpen((prev) => !prev);
           }}
+          aria-label={isCollapseOpen ? `收合 ${item.year} 年相簿` : `展開 ${item.year} 年相簿`}
         >
           <CaretRightOutlined />
         </button>

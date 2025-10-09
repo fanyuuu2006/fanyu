@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         dynamicRoutes.push({
           path: `/album/${slugify(year)}/${slugify(event)}`,
           priority: 0.6,
-          changeFreq: "yearly",
+          changeFreq: "monthly",
         });
       }
     }
