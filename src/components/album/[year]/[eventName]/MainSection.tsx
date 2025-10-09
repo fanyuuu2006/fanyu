@@ -22,10 +22,7 @@ type MainSectionProps = {
   eventName: string;
 };
 
-type ImagesContent = Record<
-  "noImages" | "eventsLoadFailed" | "back",
-  string
->;
+type ImagesContent = Record<"noImages" | "eventsLoadFailed" | "back", string>;
 
 const getImagesContent = (language: LanguageOption): ImagesContent =>
   ((
@@ -47,11 +44,11 @@ export const MainSection = ({ year, eventName }: MainSectionProps) => {
   const { useImages } = useAlbum();
   const { data: images, error, isLoading } = useImages(year, eventName);
   const router = useRouter();
-  const { Current: currentLanguage } = useLanguage();
+  const language = useLanguage();
 
   const imagesContent = useMemo(
-    () => getImagesContent(currentLanguage),
-    [currentLanguage]
+    () => getImagesContent(language.Current),
+    [language.Current]
   );
 
   const handleBackClick = useCallback(() => {
@@ -120,7 +117,11 @@ export const MainSection = ({ year, eventName }: MainSectionProps) => {
             </div>
           ) : (
             images.map((src) => (
-              <motion.div key={src} variants={fadeInItem} className={cn(CLASSNAME)}>
+              <motion.div
+                key={src}
+                variants={fadeInItem}
+                className={cn(CLASSNAME)}
+              >
                 <ImageCard src={src} className="h-full w-full object-cover" />
               </motion.div>
             ))
