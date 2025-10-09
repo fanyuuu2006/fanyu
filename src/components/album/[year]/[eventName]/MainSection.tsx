@@ -89,7 +89,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 key={src}
                 variants={fadeInItem}
                 className={cn(
-                  "rounded-xl overflow-hidden aspect-square bg-[#888] border border-[var(--border-color)] hover:border-white"
+                  "rounded-xl overflow-hidden aspect-square bg-[#888] border border-[var(--border-color)] hover:border-[var(--text-color-primary])]"
                 )}
               >
                 <ImageCard src={src} className="h-full w-full object-cover" />
