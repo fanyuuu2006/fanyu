@@ -74,7 +74,7 @@ const NTUST: ExperienceItem = {
           ))}
         </div>
         {/** 學期成績表格 */}
-        <div className="overflow-x-auto rounded-xl">
+        <div className="overflow-x-auto rounded-xl border border-[var(--border-color)]">
           <table className="w-full bg-[var(--background-color-primary)] table-auto border-collapse">
             <thead className="text-sm md:text-lg bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)]">
               <tr>
@@ -138,7 +138,7 @@ const NTUST: ExperienceItem = {
                       <td className="text-center p-2">{totalCredits}</td>
                     </tr>
                     <modal.Container>
-                      <div className="rounded-xl animate-pop overflow-hidden">
+                      <div className="animate-pop rounded-xl overflow-hidden border border-[var(--border-color)]">
                         <table className="text-sm md:text-base w-full bg-[var(--background-color-primary)] table-auto border-collapse">
                           <thead className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)]">
                             <tr>
@@ -196,7 +196,7 @@ const NTUST: ExperienceItem = {
                               </tr>
                             ))}
                           </tbody>
-                          <tfoot className="text-lg md:text-xl">
+                          <tfoot className="text-lg md:text-xl bg-[var(--background-color-secondary)]">
                             <tr>
                               <td className="text-center p-2">
                                 {
@@ -219,7 +219,7 @@ const NTUST: ExperienceItem = {
                 );
               })}
             </tbody>
-            <tfoot className="text-lg md:text-xl">
+            <tfoot className="text-lg md:text-xl bg-[var(--background-color-secondary)]">
               <tr>
                 <td className="text-center p-2">
                   {
