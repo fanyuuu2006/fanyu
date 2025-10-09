@@ -1,5 +1,24 @@
 import { MainSection } from "@/components/album/MainSection";
+import album from "@/utils/album";
 
 export default async function Page() {
-  return <MainSection />;
+  const years = await album.years();
+
+  // 並行抓取所有年份與事件封面圖
+  const data = await Promise.all(
+    years.map(async (year) => {
+      const events = await album.events(year);
+
+      const eventData = await Promise.all(
+        events.map(async (name) => {
+          const image = await album.image(year, name, 0);
+          return { name, image };
+        })
+      );
+
+      return { year, events: eventData };
+    })
+  );
+
+  return <MainSection data={data} />;
 }
