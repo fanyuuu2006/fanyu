@@ -73,6 +73,7 @@ const NTUST: ExperienceItem = {
             </div>
           ))}
         </div>
+        {/** 學期成績表格 */}
         <div className="overflow-x-auto rounded-xl">
           <table className="w-full bg-[var(--background-color-primary)] table-auto border-collapse">
             <thead className="text-sm md:text-lg bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)]">
