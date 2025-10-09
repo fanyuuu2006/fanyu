@@ -94,13 +94,13 @@ export default function Error({
         <div className="flex flex-row gap-4">
           <button
             onClick={() => reset()}
-            className="btn-primary rounded-full px-6 py-3 font-medium transition-all duration-300 hover:scale-105"
+            className="btn-primary rounded-full px-6 py-3 font-medium"
           >
             {errorContent.retry}
           </button>
           <Link
             href="/"
-            className="btn-tertiary rounded-full px-6 py-3 font-medium transition-all duration-300 hover:scale-105"
+            className="btn-tertiary rounded-full px-6 py-3 font-medium"
           >
             {errorContent.home}
           </Link>
