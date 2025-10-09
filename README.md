@@ -55,21 +55,22 @@
 
 | 分類        | 技術堆疊                                  |
 | ----------- | ----------------------------------------- |
-| 核心框架    | Next.js (App Router) + Turbopack          |
-| 開發語言    | TypeScript                                |
-| UI 框架     | React                                     |
-| 樣式系統    | Tailwind CSS                              |
-| 動畫效果    | Framer Motion                             |
+| 核心框架    | Next.js 15.3.4 (App Router) + Turbopack   |
+| 開發語言    | TypeScript 5                              |
+| UI 框架     | React 19.1.0                              |
+| 樣式系統    | Tailwind CSS 4.1.11                       |
+| 動畫效果    | Framer Motion 12.18.1                     |
 | 圖片處理    | Google Drive API + Next.js Image 優化     |
-| 圖示庫      | Ant Design Icons + React Icons            |
-| UI 元件     | fanyucomponents（自訂元件庫）+ Ant Design |
-| 通知系統    | SweetAlert2                               |
-| 評論系統    | Giscus（GitHub Discussions）              |
-| 資料獲取    | SWR + Next.js API Routes                  |
-| 程式碼高亮  | c063（自開發元件）                        |
-| 網站地圖    | next-sitemap                              |
-| HTTP 客戶端 | gaxios + googleapis                       |
-| 網站分析    | Vercel Analytics + Speed Insights         |
+| 圖示庫      | Ant Design Icons 6.0.0 + React Icons 5.5.0 |
+| UI 元件     | fanyucomponents 2.11.1 + Ant Design 5.26.1 |
+| 樣式工具    | clsx 2.1.1 + tailwind-merge 3.3.1 + styled-components 6.1.19 |
+| 通知系統    | SweetAlert2 11.22.0                       |
+| 評論系統    | Giscus 3.1.0（GitHub Discussions）        |
+| 資料獲取    | SWR 2.3.3 + Next.js API Routes            |
+| 程式碼高亮  | c063 1.6.3（自開發元件）                  |
+| 網站地圖    | next-sitemap 4.2.3                        |
+| HTTP 客戶端 | gaxios 7.1.0 + googleapis 150.0.1         |
+| 網站分析    | Vercel Analytics 1.5.0 + Speed Insights 1.2.0 |
 | 部署平台    | Vercel                                    |
 
 ## 📁 專案結構
@@ -84,12 +85,12 @@
 ├── src/
 │   ├── app/                  # Next.js App Router
 │   │   ├── album/            # 相簿系統
-│   │   │   ├── [year]/       # 年份動態路由
-│   │   │   │   └── [eventName]/  # 活動動態路由
+│   │   │   └── [year]/       # 年份動態路由
+│   │   │       └── [eventName]/  # 活動動態路由
 │   │   ├── api/              # API 路由
 │   │   │   ├── album/        # 相簿 API
-│   │   │   │   ├── [year]/   # 年份 API
-│   │   │   │   └── image/    # 圖片代理 API
+│   │   │   │   └── [year]/   # 年份 API
+│   │   │   ├── image/        # 圖片代理 API
 │   │   │   └── proxy/        # 安全代理 API
 │   │   ├── guestbook/        # 留言板頁面
 │   │   ├── my/               # 個人頁面（倒計時）
@@ -102,22 +103,92 @@
 │   │   ├── error.tsx         # 錯誤頁面
 │   │   └── not-found.tsx     # 404 頁面
 │   ├── components/           # React 元件
+│   │   ├── Footer.tsx        # 頁尾元件
+│   │   ├── LanguageSwitchButton.tsx  # 語言切換按鈕
+│   │   ├── routes.tsx        # 路由設定
 │   │   ├── album/            # 相簿相關元件
+│   │   │   ├── EventLinkCard.tsx     # 活動連結卡片
+│   │   │   ├── MainSection.tsx       # 相簿主區塊
+│   │   │   ├── YearDiv.tsx           # 年份區塊
+│   │   │   └── [year]/[eventName]/   # 活動頁面元件
 │   │   ├── custom/           # 自訂通用元件
+│   │   │   ├── Carousel.tsx          # 輪播元件
+│   │   │   ├── CodeCard.tsx          # 程式碼卡片
+│   │   │   ├── CopyButton.tsx        # 複製按鈕
+│   │   │   ├── CustomLink.tsx        # 自訂連結
+│   │   │   ├── Title.tsx             # 標題元件
+│   │   │   └── Toast.ts              # 通知元件
 │   │   ├── guestbook/        # 留言板元件
+│   │   │   └── MainSection.tsx       # 留言板主區塊
 │   │   ├── Header/           # 導航列元件
+│   │   │   ├── BurgerMenu.tsx        # 漢堡選單
+│   │   │   ├── DesktopLink.tsx       # 桌面版連結
+│   │   │   ├── Header.tsx            # 導航列主體
+│   │   │   └── MobileLink.tsx        # 行動版連結
 │   │   ├── Index/            # 首頁各區塊元件
+│   │   │   ├── AboutMeSection/       # 關於我區塊
+│   │   │   ├── ContactSection/       # 聯絡區塊
+│   │   │   ├── ExperienceSection/    # 經歷區塊
+│   │   │   ├── HeroSection/          # 英雄區塊
+│   │   │   ├── PortfolioSection/     # 作品集區塊
+│   │   │   └── SkillsSection/        # 技能區塊
 │   │   ├── my/               # 個人頁面元件
+│   │   │   ├── MainSection.tsx       # 主區塊
+│   │   │   └── TimerCard.tsx         # 倒計時卡片
 │   │   └── projects/         # 作品集元件
+│   │       ├── MainSection.tsx       # 主區塊
+│   │       ├── ProjectCard.tsx       # 專案卡片
+│   │       └── ProjectTagCheckbox.tsx # 標籤篩選框
 │   ├── contexts/             # React Context 狀態管理
+│   │   ├── AlbumContext.tsx  # 相簿狀態管理
+│   │   └── LanguageContext.tsx       # 語言狀態管理
 │   ├── hooks/                # 自訂 React Hooks
+│   │   └── useTimeOrderTabs.tsx      # 時間排序標籤頁 Hook
 │   ├── libs/                 # 資料與設定檔案
+│   │   ├── album.tsx         # 相簿資料
+│   │   ├── club.tsx          # 社團資料
+│   │   ├── competition.tsx   # 競賽資料
+│   │   ├── contact.tsx       # 聯絡資料
+│   │   ├── github.ts         # GitHub 設定
+│   │   ├── googleapis.ts     # Google APIs 設定
+│   │   ├── language.ts       # 語言設定
+│   │   ├── motion.tsx        # 動畫設定
+│   │   ├── profile.ts        # 個人資料
+│   │   ├── projects.ts       # 專案資料
+│   │   ├── skill.tsx         # 技能資料
+│   │   ├── work.tsx          # 工作資料
+│   │   └── education/        # 教育經歷資料
+│   │       ├── index.tsx     # 教育資料匯出
+│   │       ├── cpshs.tsx     # 中和高中
+│   │       ├── fgjh.tsx      # 福和國中
+│   │       ├── gses.tsx      # 秀朗國小
+│   │       └── ntust.tsx     # 台科大
 │   ├── styles/               # 樣式檔案
+│   │   ├── alert.css         # 警告樣式
+│   │   ├── carousel.css      # 輪播樣式
+│   │   ├── globals.css       # 全域樣式
+│   │   ├── menu.css          # 選單樣式
+│   │   └── project-card.css  # 專案卡片樣式
 │   ├── types/                # TypeScript 型別定義
+│   │   ├── album.tsx         # 相簿型別
+│   │   ├── contact.tsx       # 聯絡型別
+│   │   ├── experience.tsx    # 經歷型別
+│   │   ├── github.ts         # GitHub 型別
+│   │   ├── language.tsx      # 語言型別
+│   │   ├── portfolio.ts      # 作品集型別
+│   │   └── skill.tsx         # 技能型別
 │   └── utils/                # 工具函式
+│       ├── album.tsx         # 相簿工具
+│       ├── className.tsx     # 樣式類別工具
+│       ├── education.tsx     # 教育工具
+│       ├── fetcher.ts        # 資料獲取工具
+│       ├── github.ts         # GitHub 工具
+│       ├── googleapis.ts     # Google APIs 工具
+│       └── url.ts            # URL 工具
 ├── eslint.config.mjs         # ESLint 設定
 ├── next.config.ts            # Next.js 設定
-├── package.json              # 專案依賴
+├── next-env.d.ts             # Next.js 型別定義
+├── package.json              # 專案依賴與腳本
 ├── postcss.config.mjs        # PostCSS 設定
 ├── tailwind.config.ts        # Tailwind CSS 設定
 └── tsconfig.json             # TypeScript 設定
@@ -128,7 +199,7 @@
 ### 環境需求
 
 - Node.js 18+
-- npm 或 yarn
+- npm 或 yarn 或 pnpm
 
 ### 安裝與執行
 
@@ -139,6 +210,10 @@ cd fanyu
 
 # 安裝依賴
 npm install
+# 或
+yarn install
+# 或  
+pnpm install
 
 # 開發模式（使用 Turbopack 加速）
 npm run dev
