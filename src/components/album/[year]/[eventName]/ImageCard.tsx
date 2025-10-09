@@ -1,11 +1,8 @@
-import { LazyImage, LazyImageProps } from "@/components/custom/LazyImage";
 import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
 import { useModal } from "fanyucomponents";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 type ImageContent = Record<"imageLoadFailed", string>;
 
 const getImageContent = (language: LanguageOption): ImageContent =>
@@ -20,30 +17,31 @@ const getImageContent = (language: LanguageOption): ImageContent =>
     } as LanguageContent<ImageContent>
   )[language]);
 
-export const ImageCard = ({ src, className, ...rest }: LazyImageProps) => {
+export const ImageCard = ({
+  src,
+  className,
+  ...rest
+}: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const Language = useLanguage();
   const imageContent = getImageContent(Language.Current);
   const modal = useModal();
 
-  const inviewRef = useRef<HTMLImageElement>(null);
-  const isInView = useInView(inviewRef, {
-    once: true,
-    amount: 0.2,
-  });
-
   return (
     <>
-      <LazyImage
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         draggable={true}
-        ref={inviewRef}
-        loading={!isInView}
         onClick={modal.Open}
         src={src}
         alt={`Event Image ${src}`}
-        className={cn(
-          "text-5xl cursor-pointer",
-          className
-        )}
+        className={cn("text-5xl cursor-pointer", className)}
+        onError={(e: React.SyntheticEvent) => {
+          console.error(e);
+          Toast.fire({
+            icon: "error",
+            text: imageContent.imageLoadFailed,
+          });
+        }}
         {...rest}
       />
       <modal.Container>

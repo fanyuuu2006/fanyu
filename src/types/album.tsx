@@ -1,1 +1,1 @@
-export type Album = { year: string; events: { name: string; image: string }[] }[];
+export type Album = { year: string; events: { name: string; images: string[] }[] }[];

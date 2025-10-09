@@ -1,9 +1,7 @@
 import { slugify } from "@/utils/url";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
-import { LazyImage } from "../custom/LazyImage";
 import { useRef } from "react";
-import { useInView } from "framer-motion";
 import { Album } from "@/types/album";
 
 export type EventLinkCardProps = DistributiveOmit<
@@ -24,10 +22,6 @@ export const EventLinkCard = ({
   ...rest
 }: EventLinkCardProps) => {
   const ref = useRef<HTMLAnchorElement>(null);
-  const isInView = useInView(ref, {
-    once: true,
-    amount: 0.5,
-  });
 
   return (
     <Link
@@ -38,10 +32,9 @@ export const EventLinkCard = ({
       href={`/album/${slugify(year)}/${slugify(event.name)}`}
       {...rest}
     >
-      <LazyImage
-        draggable={false}
-        loading={!isInView}
-        src={event.image}
+      {/*eslint-disable-next-line @next/next/no-img-element*/}
+      <img
+        src={event.images[0]}
         alt={`${year} ${event.name} 相簿封面`}
         className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
       />
