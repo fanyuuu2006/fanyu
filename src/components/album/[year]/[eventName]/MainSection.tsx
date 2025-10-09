@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
+import { Title } from "@/components/custom/Title";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
@@ -60,10 +61,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           </Tooltip>
         </div>
 
-        <div className="flex flex-col items-center mb-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2">{year}</h1>
-          <h2 className="text-2xl md:text-4xl font-semibold">{event.name}</h2>
-        </div>
+        <Title className="flex flex-col items-center">
+          <span className="text-4xl md:text-5xl font-bold mb-2">{year}</span>
+          <span className="text-2xl md:text-4xl font-semibold">{event.name}</span>
+        </Title>
 
         <motion.article
           variants={staggerContainer}

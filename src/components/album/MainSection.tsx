@@ -4,6 +4,7 @@ import { LanguageContent, LanguageOption } from "@/types/language";
 import { YearDiv } from "./YearDiv";
 import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
 import { Album } from "@/types/album";
+import { Title } from "../custom/Title";
 
 type AlbumContent = Record<"album" | "noAlbum", string>;
 
@@ -34,7 +35,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
   return (
     <section>
       <div className="container flex flex-col items-center">
-        <h1 className="text-5xl font-bold">{albumContent.album}</h1>
+        <Title>{albumContent.album}</Title>
 
         {timeOrder.sortedData.length === 0 ? (
           <div className="text-3xl font-bold">{albumContent.noAlbum}</div>
