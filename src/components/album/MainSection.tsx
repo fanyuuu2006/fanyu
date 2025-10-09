@@ -42,9 +42,11 @@ export const MainSection = ({ data }: MainSectionProps) => {
         ) : (
           <>
             <timeOrder.Div />
-            {timeOrder.sortedData.map((item) => (
-              <YearDiv key={item.year} item={item} />
-            ))}
+            <div className="w-full flex flex-col gap-6">
+              {timeOrder.sortedData.map((item) => (
+                <YearDiv key={item.year} item={item} />
+              ))}
+            </div>
           </>
         )}
       </div>

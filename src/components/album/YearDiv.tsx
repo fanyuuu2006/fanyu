@@ -37,7 +37,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
   return (
     <motion.article
       id={item.year}
-      className="w-full flex flex-col mb-8 gap-2"
+      className="w-full flex flex-col gap-2"
       variants={fadeInItem}
       {...rest}
     >
