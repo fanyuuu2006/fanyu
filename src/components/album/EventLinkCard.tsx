@@ -50,7 +50,7 @@ export const EventLinkCard = ({
         className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
       />
       <div className="absolute w-full px-2 py-1.5 bg-[#000] flex justify-center opacity-50 bottom-0 group-hover:opacity-100  transition-all duration-300">
-        <span className="text-sm font-bold">{event.name}</span>
+        <span className="text-sm font-semibold">{event.name}</span>
       </div>
     </Link>
   );

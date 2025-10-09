@@ -1,8 +1,11 @@
 export const githubBadges: string[] = [
   "License",
-  "Stars",
+  "Stars", 
+  "Forks",
+  "Issues",
   "Last commit",
   "Created at",
   "Repo size",
   "Commit Activity/y",
+  "Languages/top",
 ];
