@@ -1,26 +1,26 @@
 "use client";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { LanguageContent, LanguageOption } from "@/types/language";
+import { LanguageContent } from "@/types/language";
 import { YearDiv } from "./YearDiv";
 import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
 import { Album } from "@/types/album";
 import { Title } from "../custom/Title";
+import { useMemo } from "react";
 
-type AlbumContent = Record<"album" | "noAlbum", string>;
+type AlbumContent = Record<"album" | "noAlbum" | "totalItems", string>;
 
-const getAlbumContent = (language: LanguageOption): AlbumContent =>
-  ((
-    {
-      chinese: {
-        album: "我的相簿",
-        noAlbum: "沒有相簿",
-      },
-      english: {
-        album: "My Album",
-        noAlbum: "No Album",
-      },
-    } as LanguageContent<AlbumContent>
-  )[language]);
+const ALBUM_CONTENT: LanguageContent<AlbumContent> = {
+  chinese: {
+    album: "我的相簿",
+    noAlbum: "沒有相簿",
+    totalItems: "共 {count} 個項目",
+  },
+  english: {
+    album: "My Album",
+    noAlbum: "No Album",
+    totalItems: "Total {count} items",
+  },
+};
 
 export type MainSectionProps = {
   data: Album;
@@ -28,9 +28,20 @@ export type MainSectionProps = {
 
 export const MainSection = ({ data }: MainSectionProps) => {
   const Language = useLanguage();
-  const albumContent = getAlbumContent(Language.Current);
+  const albumContent = ALBUM_CONTENT[Language.Current];
 
   const timeOrder = useTimeOrderTabs(data, (item) => item.year);
+
+  const totalCount = useMemo(
+    () =>
+      data.reduce(
+        (res, year) =>
+          res +
+          year.events.reduce((sum, event) => sum + event.images.length, 0),
+        0
+      ),
+    [data]
+  );
 
   return (
     <section>
@@ -41,6 +52,13 @@ export const MainSection = ({ data }: MainSectionProps) => {
           <div className="text-3xl font-bold">{albumContent.noAlbum}</div>
         ) : (
           <>
+            <span className="text-[var(--text-color-muted)]">
+              {albumContent.totalItems.replace(
+                "{count}",
+                totalCount.toString()
+              )}
+            </span>
+            {/* 分類標籤 */}
             <timeOrder.Div />
             <div className="w-full flex flex-col gap-6">
               {timeOrder.sortedData.map((item) => (

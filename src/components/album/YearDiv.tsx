@@ -1,7 +1,7 @@
 import { EventLinkCard } from "./EventLinkCard";
 import { Collapse, OverrideProps } from "fanyucomponents";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { LanguageOption, LanguageContent } from "@/types/language";
+import { LanguageContent } from "@/types/language";
 import { useState } from "react";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
@@ -17,21 +17,17 @@ export type YearDivProps = OverrideProps<
 
 type YearsContent = Record<"noEvents", string>;
 
-const getYearsContent = (language: LanguageOption): YearsContent =>
-  ((
-    {
-      chinese: {
-        noEvents: "沒有事件",
-      },
-      english: {
-        noEvents: "No Events",
-      },
-    } as LanguageContent<YearsContent>
-  )[language]);
-
+const YEARS_CONTENT: LanguageContent<YearsContent> = {
+  chinese: {
+    noEvents: "沒有事件",
+  },
+  english: {
+    noEvents: "No Events",
+  },
+};
 export const YearDiv = ({ item, ...rest }: YearDivProps) => {
   const Language = useLanguage();
-  const yearsContent = getYearsContent(Language.Current);
+  const yearsContent = YEARS_CONTENT[Language.Current];
   const [isCollapseOpen, setIsCollapseOpen] = useState(true);
 
   return (
@@ -74,7 +70,6 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
               <motion.div
                 variants={fadeInItem}
                 key={`${item.year}-${event.name}`}
-                className="rounded-3xl overflow-hidden border border-[var(--border-color)]"
               >
                 <EventLinkCard
                   year={item.year}

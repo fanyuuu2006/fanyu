@@ -63,13 +63,13 @@ const TimeUnit = ({
     {...rest}
   >
     {/* 時間單位標籤 - 顯示在數值上方 */}
-    <span className="text-xs sm:text-sm md:text-base text-[var(--text-color-muted)] font-medium uppercase tracking-wider">
+    <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-[var(--text-color-muted)] font-medium uppercase tracking-wider">
       {label}
     </span>
     {/* 時間數值卡片 - 帶有背景、邊框和陰影效果 */}
     <div className="bg-[var(--background-color-tertiary)] border border-[var(--border-color)] rounded-xl px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4">
       {/* 數值文字 - 使用等寬字體確保對齊，並補零顯示 */}
-      <span className="font-mono font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-color)] tabular-nums">
+      <span className="font-mono font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[var(--text-color)] tabular-nums">
         {value.toString().padStart(maxLength, "0")}
       </span>
     </div>

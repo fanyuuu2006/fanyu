@@ -179,10 +179,10 @@ const NTUST: ExperienceItem = {
                                 </td>
                                 <td
                                   className={cn(`text-center p-2`, {
-                                    "text-red-400": course.grade && ["A+", "A", "A-"].includes(course.grade),
-                                    "text-green-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
-                                    "text-yellow-400": course.grade && ["C+", "C", "D+", "E", "X"].includes(course.grade),
-                                    "text-blue-400": course.grade === "通過",
+                                    "text-green-400": course.grade && ["A+", "A", "A-"].includes(course.grade),
+                                    "text-blue-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
+                                    "text-red-400": course.grade && ["C+", "C", "D+", "E", "X"].includes(course.grade),
+                                    "text-yellow-400": course.grade === "通過",
                                   })}
                                 >
                                   {course.grade ||
