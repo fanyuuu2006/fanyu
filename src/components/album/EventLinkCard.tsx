@@ -52,9 +52,9 @@ export const EventLinkCard = ({
           className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
         />
       </div>
-      <div className="flex flex-col px-2 py-3 gap-2">
-        <span className="text-lg font-semibold leading-tight">{event.name}</span>
-        <span className="text-sm text-[var(--text-color-muted)] leading-relaxed">
+      <div className="text-base flex flex-col px-2 py-3 gap-1">
+        <span className="font-semibold leading-tight">{event.name}</span>
+        <span className="text-[var(--text-color-muted)] leading-relaxed">
           {event.images.length}{" "}
           {
             {
