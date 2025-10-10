@@ -7,18 +7,18 @@ import { Album } from "@/types/album";
 import { Title } from "../custom/Title";
 import { useMemo } from "react";
 
-type AlbumContent = Record<"album" | "noAlbum" | "totalItems", string>;
+type AlbumContent = Record<"album" | "noAlbum" | "totalImages", string>;
 
 const ALBUM_CONTENT: LanguageContent<AlbumContent> = {
   chinese: {
     album: "我的相簿",
     noAlbum: "沒有相簿",
-    totalItems: "共 {count} 個項目",
+    totalImages: "共 {count} 張照片",
   },
   english: {
     album: "My Album",
     noAlbum: "No Album",
-    totalItems: "Total {count} items",
+    totalImages: "Total {count} images",
   },
 };
 
@@ -53,7 +53,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
         ) : (
           <>
             <span className="text-[var(--text-color-muted)]">
-              {albumContent.totalItems.replace(
+              {albumContent.totalImages.replace(
                 "{count}",
                 totalCount.toString()
               )}

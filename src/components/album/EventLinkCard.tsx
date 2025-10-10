@@ -58,8 +58,8 @@ export const EventLinkCard = ({
           {event.images.length}{" "}
           {
             {
-              chinese: "個項目",
-              english: "items",
+              chinese: "張照片",
+              english: "images",
             }[language.Current]
           }
         </span>

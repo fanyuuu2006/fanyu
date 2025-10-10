@@ -14,18 +14,18 @@ type MainSectionProps = {
   year: Album[number]["year"];
 };
 
-type ImagesContent = Record<"noImages" | "back" | "totalItems", string>;
+type ImagesContent = Record<"noImages" | "back" | "totalImages", string>;
 
 const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
   chinese: {
     noImages: "沒有圖片",
     back: "返回",
-    totalItems: "共 {count} 個項目",
+    totalImages: "共 {count} 張照片",
   },
   english: {
     noImages: "No Images",
     back: "Back",
-    totalItems: "Total {count} items",
+    totalImages: "Total {count} images",
   },
 };
 export const MainSection = ({ year, event }: MainSectionProps) => {
@@ -61,7 +61,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             {event.name}
           </h1>
           <span className="text-[var(--text-color-muted)]">
-            {imagesContent.totalItems.replace(
+            {imagesContent.totalImages.replace(
               "{count}",
               event.images.length.toString()
             )}
