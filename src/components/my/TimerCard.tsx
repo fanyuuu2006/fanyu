@@ -153,7 +153,7 @@ export const TimerCard = () => {
       {/* 倒計時內容區域 - 根據載入狀態顯示不同內容 */}
       {timeLeft ? (
         // 倒計時顯示區域 - 使用 flexbox 佈局，響應式間距
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 items-center">
+        <div className="flex flex-wrap justify-center gap-4 items-center">
           {/* 天數時間單位 */}
           <TimeUnit
             label={timerContent.days}

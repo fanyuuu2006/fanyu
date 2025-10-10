@@ -55,19 +55,22 @@ export const AboutMeSection = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="flex justify-center items-center flex-shrink-0 w-full lg:w-1/3"
           >
-            <Link
-              className="w-72 h-72 card overflow-hidden rounded-xl"
-              href="/#top"
-            >
-              <Image
-                className="w-full h-full object-cover"
-                alt="個人照片"
-                src="/GameShow.jpg"
-                width={320}
-                height={320}
-                priority
-              />
-            </Link>
+            <div className="relative group">
+              <Link
+                className="block card overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 aspect-square w-80 sm:w-96 md:w-80 lg:w-72 xl:w-80"
+                href="/#top"
+              >
+                <Image
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  alt="個人照片"
+                  src="/GameShow.jpg"
+                  width={400}
+                  height={400}
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </Link>
+            </div>
           </motion.div>
 
           {/* 文章內容卡片 */}
@@ -76,13 +79,17 @@ export const AboutMeSection = () => {
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card p-6 md:p-8 flex flex-col flex-1 lg:w-2/3 space-y-6"
+            className="card p-8 md:p-10 lg:p-8 xl:p-10 flex flex-col flex-1 xl:w-3/5 lg:w-1/2 space-y-4"
           >
             {aboutMeContent.article.map((part, index) => (
               <motion.p
                 key={index}
                 variants={fadeInItem}
-                className="text-base md:text-lg leading-relaxed text-justify indent-8"
+                className={`text-base md:text-lg lg:text-base xl:text-lg leading-relaxed text-gray-200 ${
+                  index === 0
+                    ? "text-justify indent-8 first-letter:text-2xl first-letter:font-bold first-letter:text-[var(--text-color-primary)]"
+                    : "text-justify indent-8"
+                }`}
               >
                 {part}
               </motion.p>
