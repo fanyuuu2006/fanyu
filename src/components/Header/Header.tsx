@@ -44,7 +44,7 @@ export const Header = () => {
           </div>
 
           {/* 桌面版導覽列 */}
-          <div className="hidden lg:flex text-2xl font-bold gap-4">
+          <div className="hidden lg:flex text-2xl font-bold gap-6">
             {routes.map((item) => (
               <DesktopLink key={item.url} item={item} />
             ))}

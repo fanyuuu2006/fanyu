@@ -41,7 +41,7 @@ export async function GET(
       const images = await listAllFiles(
         `'${yearFolder.id}' in parents and mimeType contains 'image/'`
       );
-      const reversedImages = images.reverse();
+      const reversedImages = images;
       const image = reversedImages[index];
 
       if (!image) {
@@ -67,7 +67,7 @@ export async function GET(
     const images = await listAllFiles(
       `'${eventFolder.id}' in parents and mimeType contains 'image/'`
     );
-    const reversedImages = images.reverse();
+    const reversedImages = images;
     const image = reversedImages[index];
 
     if (!image) {
