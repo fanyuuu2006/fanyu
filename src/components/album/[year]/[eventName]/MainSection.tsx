@@ -54,7 +54,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
         </div>
 
         <div className="flex flex-col items-center leading-tight mb-6 ">
-          <h2 className="text-4xl md:text-5xl font-semibold text-[var(--text-color-muted)]">
+          <h2 className="text-2xl md:text-3xl font-semibold text-[var(--text-color-muted)]">
             {year}
           </h2>
           <h1 className="mb-4 text-3xl md:text-4xl font-bold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">

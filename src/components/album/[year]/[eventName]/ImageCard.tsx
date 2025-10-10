@@ -33,6 +33,13 @@ export const ImageCard = ({
       <img
         draggable={true}
         onClick={modal.Open}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            modal.Open();
+          }
+        }}
+        tabIndex={0}
         src={src}
         alt={`Event Image ${src}`}
         className={cn("cursor-pointer", className)}

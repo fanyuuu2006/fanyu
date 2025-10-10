@@ -49,7 +49,7 @@ export const EventLinkCard = ({
             (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
           }}
           alt={`${year} ${event.name} 相簿封面`}
-          className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
+          className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
         />
       </div>
       <div className="text-base flex flex-col px-2 py-3 gap-1">
