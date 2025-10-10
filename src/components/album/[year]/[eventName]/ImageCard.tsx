@@ -51,7 +51,7 @@ export const ImageCard = ({
         <img
           src={src}
           alt={`Event Image ${src}`}
-          className={`max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
+          className={`select-none max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
           onError={(e: React.SyntheticEvent) => {
             (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
             console.error(e);

@@ -98,7 +98,7 @@ export const Footer = () => {
                 <li key={link.url}>
                   <Link
                     href={link.url}
-                    className="flex items-center gap-2 text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] transition-colors duration-200"
+                    className="w-fit flex items-center gap-2 text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] transition-colors duration-200"
                   >
                     {link.icon && <link.icon className="text-sm" />}
                     {link.label[Language.Current]}

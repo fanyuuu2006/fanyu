@@ -54,9 +54,9 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             <button
               aria-label={imagesContent.back}
               onClick={handleBackClick}
-              className="btn text-lg lg:text-xl flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 rounded-full "
+              className="btn text-lg lg:text-xl flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-full "
             >
-              <CaretLeftOutlined className="relative left-[-1px]" />
+              <CaretLeftOutlined className="relative -left-[2%]" />
             </button>
           </Tooltip>
         </div>
