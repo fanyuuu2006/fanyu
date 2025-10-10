@@ -37,7 +37,7 @@ export const EventLinkCard = ({
       draggable={false}
       ref={ref}
       aria-label={`前往 ${year} ${event.name} 相簿`}
-      className={`relative group space-y-1 ${className}`}
+      className={`relative group ${className}`}
       href={`/album/${slugify(year)}/${slugify(event.name)}`}
       {...rest}
     >
@@ -52,12 +52,9 @@ export const EventLinkCard = ({
           className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:brightness-50 group-hover:scale-125"
         />
       </div>
-      {/* <div className="absolute w-full px-2 py-1.5 bg-[#000] flex justify-center opacity-50 bottom-0 group-hover:opacity-100  transition-all duration-300">
-        <span className="text-sm font-semibold">{event.name}</span>
-      </div> */}
-      <div className="flex flex-col p-1 gap-1">
-        <span className="text-base font-semibold">{event.name}</span>
-        <span className="text-sm text-[var(--text-color-muted)]">
+      <div className="flex flex-col px-2 py-3 gap-2">
+        <span className="text-lg font-semibold leading-tight">{event.name}</span>
+        <span className="text-sm text-[var(--text-color-muted)] leading-relaxed">
           {event.images.length}{" "}
           {
             {
