@@ -178,9 +178,9 @@ const NTUST: ExperienceItem = {
                                   {course.courseName[language]}
                                 </td>
                                 <td
-                                  className={cn(`text-center p-2`, {
+                                  className={cn(`text-center font-semibold p-2`, {
                                     "text-green-400": course.grade && ["A+", "A", "A-"].includes(course.grade),
-                                    "text-blue-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
+                                    "text-cyan-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
                                     "text-red-400": course.grade && ["C+", "C", "D+", "E", "X"].includes(course.grade),
                                     "text-yellow-400": course.grade === "通過",
                                   })}

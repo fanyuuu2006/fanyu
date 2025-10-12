@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { ProjectTagCategory } from "@/types/portfolio";
+import { cn } from "@/utils/className";
 import { useMemo, useState } from "react";
 
 type ProjectsContent = Record<"Newest" | "Oldest" | ProjectTagCategory, string>;
@@ -50,7 +51,7 @@ export const useTimeOrderTabs = <T,>(
     return (
       <div
         role="tablist"
-        className={`${className} grid grid-cols-2 bg-[#000] rounded-xl p-1`}
+        className={cn("grid grid-cols-2 bg-[#000] rounded-xl p-1", className)}
         {...rest}
       >
         {[
@@ -61,7 +62,7 @@ export const useTimeOrderTabs = <T,>(
           return (
             <button
               key={item.label}
-              className={`w-full px-4 py-1 transition-all duration-200 rounded-[inherit] ${
+              className={`w-full px-3 py-1 transition-all duration-200 rounded-[inherit] ${
                 isSelected ? "btn" : ""
               }`}
               onClick={() => {
