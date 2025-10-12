@@ -81,14 +81,18 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               </span>
             </div>
           ) : (
-            event.images.map((src) => (
+            event.images.map((src, i) => (
               <div
                 key={src}
                 className={cn(
                   "aspect-square bg-[#888] border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
                 )}
               >
-                <ImageCard src={src} className="h-full w-full object-cover" />
+                <ImageCard
+                  id={i.toString()}
+                  src={src}
+                  className="h-full w-full object-cover"
+                />
               </div>
             ))
           )}
