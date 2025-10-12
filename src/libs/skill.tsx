@@ -46,7 +46,7 @@ export const skills = {
   backend: {
     icon: DatabaseOutlined,
     list: [
-      { title: "Node.js", src: "https://www.svgrepo.com/show/373929/node.svg" },
+      { title: "Node.js", src: "https://www.svgrepo.com/show/452075/node-js.svg" },
       {
         title: "Python",
         src: "https://www.svgrepo.com/show/452091/python.svg",
