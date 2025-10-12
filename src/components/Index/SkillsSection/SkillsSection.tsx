@@ -1,38 +1,34 @@
 "use client";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { LanguageContent, LanguageOption } from "@/types/language";
+import { LanguageContent } from "@/types/language";
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { SkillCategory } from "@/types/skill";
-import { skillCategoryIcons } from "@/libs/skill";
 import { profile } from "@/libs/profile";
 import { Title } from "@/components/custom/Title";
 import { Tooltip } from "antd";
 
-type SkillsContent = Record<"skills" | SkillCategory, string>;
-
-const getSkillsContent = (language: LanguageOption): SkillsContent =>
-  ((
-    {
-      chinese: {
-        skills: "技能",
-        frontend: "前端",
-        backend: "後端",
-        devtools: "開發工具",
-      },
-      english: {
-        skills: "Skills",
-        frontend: "Frontend",
-        backend: "Backend",
-        devtools: "Development tools",
-      },
-    } as LanguageContent<SkillsContent>
-  )[language]);
+const SKILLS_CONTENT: LanguageContent<
+  Record<"skills" | SkillCategory, string>
+> = {
+  chinese: {
+    skills: "技能",
+    frontend: "前端",
+    backend: "後端",
+    devtools: "開發工具",
+  },
+  english: {
+    skills: "Skills",
+    frontend: "Frontend",
+    backend: "Backend",
+    devtools: "Development tools",
+  },
+};
 
 export const SkillsSection = () => {
   const Language = useLanguage();
-  const skillsContent = getSkillsContent(Language.Current);
+  const skillsContent = SKILLS_CONTENT[Language.Current];
 
   return (
     <section id="skills">
@@ -45,28 +41,28 @@ export const SkillsSection = () => {
           viewport={{ once: true }}
           className="flex flex-col w-full gap-4"
         >
-          {Object.entries(profile.skills).map(([category, items]) => (
+          {Object.entries(profile.skills).map(([category, item]) => (
             <motion.div variants={fadeInItem} key={category}>
               <div className="p-4 flex flex-col gap-2">
                 <h2 className="text-xl md:text-2xl font-bold flex items-center gap-2">
-                  {skillCategoryIcons[category as SkillCategory]}
+                  <item.icon />
                   {skillsContent[category as SkillCategory]}:
                 </h2>
                 <motion.div
                   variants={staggerContainer}
                   className="text-2xl grid grid-cols-7 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-17 xl:grid-cols-20 gap-3"
                 >
-                  {items.map((item) => (
+                  {item.list.map((skillItem) => (
                     <motion.div
-                      key={item.title}
+                      key={skillItem.title}
                       variants={fadeInItem}
                       className="text-sm md:text-base font-semibold"
                     >
-                      <Tooltip title={item.title} placement="top">
+                      <Tooltip title={skillItem.title} placement="top">
                         {/* eslint-disable-next-line @next/next/no-img-element*/}
                         <img
-                          alt={item.title}
-                          src={item.src}
+                          alt={skillItem.title}
+                          src={skillItem.src}
                           width={300}
                           height={300}
                           className="object-cover transition-transform"
