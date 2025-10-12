@@ -59,14 +59,14 @@ const NTUST: ExperienceItem = {
           ].map((chunk, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-2xl border border-[var(--border-color)]"
             >
-              <chunk.icon className="text-xl flex-shrink-0" />
+              <chunk.icon className="text-lg sm:text-xl flex-shrink-0" />
               <div className="flex flex-col">
-                <span className="text-sm font-medium text-[var(--text-color-muted)]">
+                <span className="text-xs sm:text-sm font-medium text-[var(--text-color-muted)]">
                   {chunk.label[language]}
                 </span>
-                <span className="text-base font-semibold">
+                <span className="text-sm sm:text-base font-semibold">
                   {chunk.content[language]}
                 </span>
               </div>
@@ -74,172 +74,176 @@ const NTUST: ExperienceItem = {
           ))}
         </div>
         {/** 學期成績表格 */}
-        <div className="overflow-x-auto rounded-xl border border-[var(--border-color)]">
-          <table className="w-full bg-[var(--background-color-primary)] table-auto border-collapse">
-            <thead className="text-sm md:text-lg bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)]">
-              <tr>
-                <th className="text-center p-2 border-b border-white/10">
-                  {
+        <div className="overflow-hidden rounded-xl border border-[var(--border-color)] shadow-lg">
+          <div className="overflow-x-auto">
+            <table className="w-full bg-[var(--background-color-primary)] table-auto border-collapse">
+              <thead className="text-xs sm:text-sm md:text-base bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] text-white">
+                <tr>
+                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
                     {
-                      chinese: "學期",
-                      english: "Semester",
-                    }[language]
-                  }
-                </th>
-                <th className="text-center p-2">
-                  {
+                      {
+                        chinese: "學期",
+                        english: "Semester",
+                      }[language]
+                    }
+                  </th>
+                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
                     {
-                      chinese: "班級排名",
-                      english: "Class Rank",
-                    }[language]
-                  }
-                </th>
-                <th className="text-center p-2">
-                  {
+                      {
+                        chinese: "班級排名",
+                        english: "Class Rank",
+                      }[language]
+                    }
+                  </th>
+                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
                     {
-                      chinese: "系所排名",
-                      english: "Department Rank",
-                    }[language]
-                  }
-                </th>
-                <th className="text-center p-2">GPA</th>
-                <th className="text-center p-2">
-                  {
+                      {
+                        chinese: "系所排名",
+                        english: "Department Rank",
+                      }[language]
+                    }
+                  </th>
+                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">GPA</th>
+                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold">
                     {
-                      chinese: "學分數",
-                      english: "Credits",
-                    }[language]
-                  }
-                </th>
-              </tr>
-            </thead>
-            <tbody className="text-base md:text-xl">
-              {Object.entries(grades).map(([semester, data]) => {
-                const { gpa, totalCredits } = calculateGPA(data.courses);
-                const modal = useModal();
-                return (
-                  <React.Fragment key={semester}>
-                    <tr
-                      className="hover:backdrop-brightness-125 cursor-pointer"
-                      onClick={modal.Open}
-                    >
-                      <td className="text-center p-2">{semester}</td>
-                      <td className="text-center p-2">
-                        {data.classRank ||
-                          { chinese: "無資料", english: "No Data" }[language]}
-                      </td>
-                      <td className="text-center p-2">
-                        {data.departmentRanK ||
-                          { chinese: "無資料", english: "No Data" }[language]}
-                      </td>
-                      <td className="text-center p-2">
-                        {Math.round(gpa * 100) / 100}
-                      </td>
-                      <td className="text-center p-2">{totalCredits}</td>
-                    </tr>
-                    <modal.Container>
-                      <div className="animate-pop rounded-xl overflow-hidden border border-[var(--border-color)]">
-                        <table className="text-sm md:text-base w-full bg-[var(--background-color-primary)] table-auto border-collapse">
-                          <thead className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)]">
-                            <tr>
-                              <th className="text-center p-2">
-                                {
+                      {
+                        chinese: "學分數",
+                        english: "Credits",
+                      }[language]
+                    }
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-xs sm:text-sm md:text-base">
+                {Object.entries(grades).map(([semester, data]) => {
+                  const { gpa, totalCredits } = calculateGPA(data.courses);
+                  const modal = useModal();
+                  return (
+                    <React.Fragment key={semester}>
+                      <tr
+                        className="hover:backdrop-brightness-125 transition-colors duration-200 cursor-pointer border-b border-[var(--border-color)]"
+                        onClick={modal.Open}
+                      >
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">{semester}</td>
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                          {data.classRank ||
+                            { chinese: "無資料", english: "No Data" }[language]}
+                        </td>
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                          {data.departmentRanK ||
+                            { chinese: "無資料", english: "No Data" }[language]}
+                        </td>
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                          {Math.round(gpa * 100) / 100}
+                        </td>
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">{totalCredits}</td>
+                      </tr>
+                      <modal.Container>
+                        <div className="animate-pop rounded-xl overflow-hidden border border-[var(--border-color)] shadow-lg">
+                          <div className="overflow-x-auto">
+                            <table className="text-xs sm:text-sm md:text-base w-full bg-[var(--background-color-primary)] table-auto border-collapse">
+                              <thead className="bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] text-white">
+                                <tr>
+                                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                                    {
+                                      {
+                                        chinese: "課程名稱",
+                                        english: "Course Name",
+                                    }[language]
+                                  }
+                                </th>
+                                <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
                                   {
-                                    chinese: "課程名稱",
-                                    english: "Course Name",
-                                  }[language]
-                                }
-                              </th>
-                              <th className="text-center p-2">
-                                {
+                                    {
+                                      chinese: "成績",
+                                      english: "Grade",
+                                    }[language]
+                                  }
+                                </th>
+                                <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold">
                                   {
-                                    chinese: "成績",
-                                    english: "Grade",
-                                  }[language]
-                                }
-                              </th>
-                              <th className="text-center p-2">
-                                {
-                                  {
-                                    chinese: "學分數",
-                                    english: "Credits",
-                                  }[language]
-                                }
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {data.courses.map((course, index) => (
-                              <tr
-                                key={index}
-                                className="hover:backdrop-brightness-125"
-                              >
-                                <td className="text-center p-2">
-                                  {course.courseName[language]}
-                                </td>
-                                <td
-                                  className={cn(`text-center font-semibold p-2`, {
-                                    "text-green-400": course.grade && ["A+", "A", "A-"].includes(course.grade),
-                                    "text-cyan-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
-                                    "text-red-400": course.grade && ["C+", "C", "D+", "E", "X"].includes(course.grade),
-                                    "text-yellow-400": course.grade === "通過",
-                                  })}
+                                    {
+                                      chinese: "學分數",
+                                      english: "Credits",
+                                    }[language]
+                                  }
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {data.courses.map((course, index) => (
+                                <tr
+                                  key={index}
+                                  className="border-b border-[var(--border-color)] last:border-b-0"
                                 >
-                                  {course.grade ||
-                                    { chinese: "無資料", english: "No Data" }[
-                                      language
-                                    ]}
+                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                                    {course.courseName[language]}
+                                  </td>
+                                  <td
+                                    className={cn(`text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0`, {
+                                      "text-green-400": course.grade && ["A+", "A", "A-"].includes(course.grade),
+                                      "text-cyan-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
+                                      "text-red-400": course.grade && ["C+", "C", "D+", "E", "X"].includes(course.grade),
+                                      "text-yellow-400": course.grade === "通過",
+                                    })}
+                                  >
+                                    {course.grade ||
+                                      { chinese: "無資料", english: "No Data" }[
+                                        language
+                                      ]}
+                                  </td>
+                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
+                                    {course.credits}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                            <tfoot className="text-xs sm:text-sm md:text-base bg-[var(--background-color-secondary)]">
+                              <tr>
+                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                                  {
+                                    {
+                                      chinese: "總計",
+                                      english: "Total",
+                                    }[language]
+                                  }
                                 </td>
-                                <td className="text-center p-2">
-                                  {course.credits}
+                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0"></td>
+                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
+                                  {totalCredits}
                                 </td>
                               </tr>
-                            ))}
-                          </tbody>
-                          <tfoot className="text-lg md:text-xl bg-[var(--background-color-secondary)]">
-                            <tr>
-                              <td className="text-center p-2">
-                                {
-                                  {
-                                    chinese: "總計",
-                                    english: "Total",
-                                  }[language]
-                                }
-                              </td>
-                              <td className="text-center p-2"></td>
-                              <td className="text-center p-2">
-                                {totalCredits}
-                              </td>
-                            </tr>
-                          </tfoot>
-                        </table>
-                      </div>
-                    </modal.Container>
-                  </React.Fragment>
-                );
-              })}
-            </tbody>
-            <tfoot className="text-lg md:text-xl bg-[var(--background-color-secondary)]">
-              <tr>
-                <td className="text-center p-2">
-                  {
+                            </tfoot>
+                          </table>
+                          </div>
+                        </div>
+                      </modal.Container>
+                    </React.Fragment>
+                  );
+                })}
+              </tbody>
+              <tfoot className="text-xs sm:text-sm md:text-base bg-[var(--background-color-secondary)]">
+                <tr>
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
                     {
-                      chinese: "總計",
-                      english: "Total",
-                    }[language]
-                  }
-                </td>
-                <td className="text-center p-2"></td>
-                <td className="text-center p-2"></td>
-                <td className="text-center p-2 font-bold">
-                  {Math.round(overallGPA.gpa * 100) / 100}
-                </td>
-                <td className="text-center p-2 font-bold">
-                  {overallGPA.totalCredits}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+                      {
+                        chinese: "總計",
+                        english: "Total",
+                      }[language]
+                    }
+                  </td>
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0"></td>
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0"></td>
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                    {Math.round(overallGPA.gpa * 100) / 100}
+                  </td>
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3">
+                    {overallGPA.totalCredits}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
       </div>
     );

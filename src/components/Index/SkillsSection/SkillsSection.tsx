@@ -50,13 +50,12 @@ export const SkillsSection = () => {
                 </h2>
                 <motion.div
                   variants={staggerContainer}
-                  className="text-2xl grid grid-cols-7 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-17 xl:grid-cols-20 gap-3"
+                  className="text-2xl grid grid-cols-6 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-16 xl:grid-cols-20 gap-3"
                 >
                   {item.list.map((skillItem) => (
                     <motion.div
                       key={skillItem.title}
                       variants={fadeInItem}
-                      className="text-sm md:text-base font-semibold"
                     >
                       <Tooltip title={skillItem.title} placement="top">
                         {/* eslint-disable-next-line @next/next/no-img-element*/}
