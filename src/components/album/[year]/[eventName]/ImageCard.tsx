@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
+import { CloseOutlined } from "@ant-design/icons";
 import { useModal } from "fanyucomponents";
 type ImageContent = Record<"imageLoadFailed", string>;
 
@@ -54,6 +55,9 @@ export const ImageCard = ({
         {...rest}
       />
       <modal.Container>
+        <button onClick={modal.Close} className="fixed top-4 right-4 z-[9999]">
+          <CloseOutlined className="text-3xl" />
+        </button>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
