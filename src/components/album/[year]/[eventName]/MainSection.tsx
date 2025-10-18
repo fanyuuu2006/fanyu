@@ -132,11 +132,11 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               "flex items-center gap-2",
               "text-2xl font-semibold text-[var(--text-color-muted)]",
               "w-full absolute top-0 left-0 py-4 px-8",
-              "hover:bg-[var(--background-color)]/70 transition-colors duration-200"
+              "hover:bg-[var(--background-color)] transition-colors duration-200"
             )}
           >
             <CloseOutlined onClick={modal.Close} />
-            <span className="text-[0.75em]">{modalImg.name}</span>
+            <span className="text-[0.75em] truncate">{modalImg.name}</span>
 
             {/* 功能按鈕按鈕 */}
             <div
