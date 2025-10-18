@@ -65,7 +65,7 @@ export const ImageCard = ({
         <div
           className={cn(
             "flex items-center gap-2",
-            "text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-[var(--text-color-muted)]",
+            "text-2xl font-semibold text-[var(--text-color-muted)]",
             "w-full absolute top-0 left-0 py-4 px-8",
             "hover:bg-[var(--background-color)]/70 transition-colors duration-200"
           )}
