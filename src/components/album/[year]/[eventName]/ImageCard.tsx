@@ -22,6 +22,7 @@ const getImageContent = (language: LanguageOption): ImageContent =>
 export const ImageCard = ({
   src,
   className,
+  alt,
   ...rest
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const Language = useLanguage();
@@ -42,7 +43,7 @@ export const ImageCard = ({
         }}
         tabIndex={0}
         src={src}
-        alt={`Event Image ${src}`}
+        alt={alt}
         className={cn("cursor-pointer", className)}
         onError={(e: React.SyntheticEvent) => {
           (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
@@ -61,7 +62,7 @@ export const ImageCard = ({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
-          alt={`Event Image ${src}`}
+          alt={alt}
           className={`select-none max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
           onError={(e: React.SyntheticEvent) => {
             (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
