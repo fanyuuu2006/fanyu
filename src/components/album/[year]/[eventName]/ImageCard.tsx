@@ -3,8 +3,13 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
-import { CloseOutlined, DownloadOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  DownloadOutlined,
+  // ExportOutlined,
+} from "@ant-design/icons";
 import { useModal } from "fanyucomponents";
+import Link from "next/link";
 type ImageContent = Record<"imageLoadFailed", string>;
 
 const getImageContent = (language: LanguageOption): ImageContent =>
@@ -61,15 +66,34 @@ export const ImageCard = ({
           className={cn(
             "flex items-center gap-2",
             "text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-[var(--text-color-muted)]",
-            "w-full absolute top-0 left-0 p-4"
+            "w-full absolute top-0 left-0 py-4 px-8",
+            "hover:bg-[var(--background-color)]/70 transition-colors duration-200"
           )}
         >
           <CloseOutlined onClick={modal.Close} />
-          <h5>{alt}</h5>
-          <div className="ms-auto">
-            <a href={src?.toString()} download aria-label={`下載圖片 ${alt}`}>
+          <span className="text-[0.75em]">{rest.title}</span>
+
+          {/* 功能按鈕按鈕 */}
+          <div
+            className={cn(
+              // "hidden lg:flex",
+              "ms-auto items-center gap-6"
+            )}
+          >
+            <Link
+              href={src?.toString() || ""}
+              download
+              aria-label={`下載圖片 ${alt}`}
+            >
               <DownloadOutlined />
-            </a>
+            </Link>
+            {/* <Link
+              href={src?.toString() || ""}
+              target="_blank"
+              aria-label={`在新分頁開啟圖片 ${alt}`}
+            >
+              <ExportOutlined />
+            </Link> */}
           </div>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}

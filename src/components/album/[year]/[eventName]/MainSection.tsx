@@ -92,7 +92,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   id={i.toString()}
                   src={imgItem.url}
                   title={imgItem.name}
-                  alt={imgItem.name}
+                  alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"
                 />
               </div>
