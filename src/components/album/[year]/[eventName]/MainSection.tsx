@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
@@ -55,6 +55,38 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   const handleBackClick = useCallback(() => {
     router.back();
   }, [router]);
+
+  // 處理鍵盤事件
+  useEffect(() => {
+    if (modalImageIndex === -1) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft":
+          e.preventDefault();
+          if (modalImageIndex > 0) {
+            setModalImageIndex((prev) => prev - 1);
+          }
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          if (modalImageIndex < event.images.length - 1) {
+            setModalImageIndex((prev) => prev + 1);
+          }
+          break;
+        case "Escape":
+          e.preventDefault();
+          modal.Close();
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [modalImageIndex, event.images.length, modal]);
+
 
   return (
     <section className="min-h-screen">
@@ -130,15 +162,20 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           <div
             className={cn(
               "flex items-center gap-2",
-              "text-2xl font-semibold text-[var(--text-color-muted)]",
+              "text-3xl font-semibold text-[var(--text-color-muted)]",
               "w-full absolute top-0 left-0 py-4 px-8",
               "hover:bg-[var(--background-color)] transition-colors duration-200"
             )}
           >
             <CloseOutlined onClick={modal.Close} />
-            <span className="text-[0.75em] truncate">
-              {event.images[modalImageIndex].name}
-            </span>
+            <div className="flex flex-col">
+              <span className="text-[0.75em] truncate">
+                {event.images[modalImageIndex].name}
+              </span>
+              <span className="text-[0.5em]">
+                {modalImageIndex + 1} / {event.images.length}
+              </span>
+            </div>
 
             {/* 功能按鈕按鈕 */}
             <div className={cn("ms-auto items-center gap-6")}>
@@ -183,17 +220,22 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 ),
             },
           ].map((item, i) => (
-            <item.icon
+            <button
               key={i}
               disabled={item.disable}
               className={cn(
                 "text-2xl",
                 "fixed top-1/2",
                 item.position,
-                "cursor-pointer select-none"
+                "cursor-pointer select-none transition-opacity duration-200",
+                {
+                  "text-[var(--text-color-muted)]": item.disable,
+                }
               )}
               onClick={item.onClick}
-            />
+            >
+              <item.icon />
+            </button>
           ))}
         </modal.Container>
       )}
