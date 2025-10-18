@@ -1,36 +1,55 @@
 "use client";
-import { CaretLeftOutlined } from "@ant-design/icons";
+import {
+  CaretLeftOutlined,
+  CloseOutlined,
+  DownloadOutlined,
+} from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
+import { Toast } from "@/components/custom/Toast";
+import { FALLBACK_IMAGE } from "@/libs/album";
+import { useModal } from "fanyucomponents";
+import Link from "next/link";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
   year: Album[number]["year"];
 };
 
-type ImagesContent = Record<"noImages" | "back" | "totalImages", string>;
+type ImagesContent = Record<
+  "noImages" | "back" | "totalImages" | "imageLoadFailed",
+  string
+>;
 
 const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
   chinese: {
     noImages: "沒有圖片",
     back: "返回",
     totalImages: "共 {count} 張照片",
+    imageLoadFailed: "載入圖片失敗",
   },
   english: {
     noImages: "No Images",
     back: "Back",
     totalImages: "Total {count} images",
+    imageLoadFailed: "Image Load Failed",
   },
 };
 export const MainSection = ({ year, event }: MainSectionProps) => {
   const router = useRouter();
   const language = useLanguage();
+  const [modalImg, setModalImg] = useState<
+    Album[number]["events"][number]["images"][number] | null
+  >(null);
+  const modal = useModal({
+    onClose: () => setModalImg(null),
+  });
 
   const imagesContent = IMAGES_CONTENT[language.Current];
   const handleBackClick = useCallback(() => {
@@ -94,12 +113,62 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   title={imgItem.name}
                   alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"
+                  onClick={() => {
+                    setModalImg(imgItem);
+                    modal.Open();
+                  }}
                 />
               </div>
             ))
           )}
         </article>
       </div>
+
+      {modalImg && (
+        <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.75)" }}>
+          {/* Header */}
+          <div
+            className={cn(
+              "flex items-center gap-2",
+              "text-2xl font-semibold text-[var(--text-color-muted)]",
+              "w-full absolute top-0 left-0 py-4 px-8",
+              "hover:bg-[var(--background-color)]/70 transition-colors duration-200"
+            )}
+          >
+            <CloseOutlined onClick={modal.Close} />
+            <span className="text-[0.75em]">{modalImg.name}</span>
+
+            {/* 功能按鈕按鈕 */}
+            <div
+              className={cn(
+                "ms-auto items-center gap-6"
+              )}
+            >
+              <Link
+                href={modalImg.url || ""}
+                download
+                aria-label={`下載圖片 ${modalImg.name}`}
+              >
+                <DownloadOutlined />
+              </Link>
+            </div>
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={modalImg.url}
+            alt={modalImg.name}
+            className={`select-none max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
+            onError={(e: React.SyntheticEvent) => {
+              (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+              console.error(e);
+              Toast.fire({
+                icon: "error",
+                text: imagesContent.imageLoadFailed,
+              });
+            }}
+          />
+        </modal.Container>
+      )}
     </section>
   );
 };
