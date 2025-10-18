@@ -1,5 +1,7 @@
 "use client";
 import {
+  LeftOutlined,
+  RightOutlined,
   CaretLeftOutlined,
   CloseOutlined,
   DownloadOutlined,
@@ -44,11 +46,9 @@ const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
 export const MainSection = ({ year, event }: MainSectionProps) => {
   const router = useRouter();
   const language = useLanguage();
-  const [modalImg, setModalImg] = useState<
-    Album[number]["events"][number]["images"][number] | null
-  >(null);
+  const [modalImageIndex, setModalImageIndex] = useState<number>(-1);
   const modal = useModal({
-    onClose: () => setModalImg(null),
+    onClose: () => setModalImageIndex(-1),
   });
 
   const imagesContent = IMAGES_CONTENT[language.Current];
@@ -114,7 +114,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"
                   onClick={() => {
-                    setModalImg(imgItem);
+                    setModalImageIndex(i);
                     modal.Open();
                   }}
                 />
@@ -124,7 +124,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
         </article>
       </div>
 
-      {modalImg && (
+      {modalImageIndex > -1 && (
         <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.75)" }}>
           {/* Header */}
           <div
@@ -136,18 +136,16 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             )}
           >
             <CloseOutlined onClick={modal.Close} />
-            <span className="text-[0.75em] truncate">{modalImg.name}</span>
+            <span className="text-[0.75em] truncate">
+              {event.images[modalImageIndex].name}
+            </span>
 
             {/* 功能按鈕按鈕 */}
-            <div
-              className={cn(
-                "ms-auto items-center gap-6"
-              )}
-            >
+            <div className={cn("ms-auto items-center gap-6")}>
               <Link
-                href={modalImg.url || ""}
+                href={event.images[modalImageIndex].url || ""}
                 download
-                aria-label={`下載圖片 ${modalImg.name}`}
+                aria-label={`下載圖片 ${event.images[modalImageIndex].name}`}
               >
                 <DownloadOutlined />
               </Link>
@@ -155,8 +153,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={modalImg.url}
-            alt={modalImg.name}
+            src={event.images[modalImageIndex].url}
+            alt={event.images[modalImageIndex].name}
             className={`select-none max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
             onError={(e: React.SyntheticEvent) => {
               (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
@@ -167,6 +165,36 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               });
             }}
           />
+          {[
+            {
+              icon: LeftOutlined,
+              position: "left-4",
+              disable: modalImageIndex === 0,
+              onClick: () =>
+                setModalImageIndex((prev) => Math.max(prev - 1, 0)),
+            },
+            {
+              icon: RightOutlined,
+              position: "right-4",
+              disable: modalImageIndex === event.images.length - 1,
+              onClick: () =>
+                setModalImageIndex((prev) =>
+                  Math.min(prev + 1, event.images.length - 1)
+                ),
+            },
+          ].map((item, i) => (
+            <item.icon
+              key={i}
+              disabled={item.disable}
+              className={cn(
+                "text-2xl",
+                "fixed top-1/2",
+                item.position,
+                "cursor-pointer select-none"
+              )}
+              onClick={item.onClick}
+            />
+          ))}
         </modal.Container>
       )}
     </section>
