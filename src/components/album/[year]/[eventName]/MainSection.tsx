@@ -91,7 +91,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 <ImageCard
                   id={i.toString()}
                   src={imgItem.url}
-                  alt={`${year} ${event.name} ${i + 1}`}
+                  title={imgItem.name}
+                  alt={imgItem.name}
                   className="h-full w-full object-cover"
                 />
               </div>

@@ -35,7 +35,7 @@ export const useTimeOrderTabs = <T,>(
   const content = getContent(Language.Current);
 
   const sortedData = useMemo(() => {
-    return data.sort((a, b) => {
+    return data.toSorted((a, b) => {
       const aDate = new Date(getDateAbleString(a));
       const bDate = new Date(getDateAbleString(b));
       return isOrderByNewest

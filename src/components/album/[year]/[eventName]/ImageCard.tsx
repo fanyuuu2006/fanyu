@@ -3,7 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined, DownloadOutlined } from "@ant-design/icons";
 import { useModal } from "fanyucomponents";
 type ImageContent = Record<"imageLoadFailed", string>;
 
@@ -55,10 +55,23 @@ export const ImageCard = ({
         }}
         {...rest}
       />
-      <modal.Container>
-        <button onClick={modal.Close} className="fixed top-4 right-4 z-[9999]">
-          <CloseOutlined className="text-3xl" />
-        </button>
+      <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.75)" }}>
+        {/* Header */}
+        <div
+          className={cn(
+            "flex items-center gap-2",
+            "text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-[var(--text-color-muted)]",
+            "w-full absolute top-0 left-0 p-4"
+          )}
+        >
+          <CloseOutlined onClick={modal.Close} />
+          <h5>{alt}</h5>
+          <div className="ms-auto">
+            <a href={src?.toString()} download aria-label={`下載圖片 ${alt}`}>
+              <DownloadOutlined />
+            </a>
+          </div>
+        </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
