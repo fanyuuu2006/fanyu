@@ -168,8 +168,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             )}
           >
             <CloseOutlined onClick={modal.Close} />
-            <div className="flex flex-col">
-              <span className="text-[0.75em] truncate">
+            <div className="flex flex-col truncate">
+              <span className="text-[0.75em]">
                 {event.images[modalImageIndex].name}
               </span>
               <span className="text-[0.5em]">
@@ -192,7 +192,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           <img
             src={event.images[modalImageIndex].url}
             alt={event.images[modalImageIndex].name}
-            className={`select-none max-w-[95vw] max-h-[80vh] object-contain animate-pop`}
+            className={`select-none max-w-[95vw] max-h-[80vh] object-contain`}
             onError={(e: React.SyntheticEvent) => {
               (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
               console.error(e);
