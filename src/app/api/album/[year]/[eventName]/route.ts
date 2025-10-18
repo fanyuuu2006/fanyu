@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listAllFiles } from "@/utils/googleapis";
+import { listAllFiles, toImageItem } from "@/utils/googleapis";
 import { deslugify } from "@/utils/url";
 
 export async function GET(
@@ -27,7 +27,7 @@ export async function GET(
       const images = await listAllFiles(
         `'${yearFolder.id}' in parents and mimeType contains 'image/'`
       );
-      const result = images.map((f) => `/api/album/image/${f.id}`);
+      const result = images.map((f) => toImageItem(f));
       return NextResponse.json(result);
     }
 
@@ -44,7 +44,7 @@ export async function GET(
     const images = await listAllFiles(
       `'${eventFolder.id}' in parents and mimeType contains 'image/'`
     );
-    const result = images.map((f) => `/api/album/image/${f.id}`);
+    const result = images.map((f) => toImageItem(f));
 
     return NextResponse.json(result);
   } catch (error) {

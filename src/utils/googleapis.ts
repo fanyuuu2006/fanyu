@@ -1,4 +1,5 @@
 import drive from "@/libs/googleapis";
+import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
 
@@ -21,4 +22,10 @@ export const listAllFiles = async (
   } while (pageToken);
 
   return files;
+};
+
+export const toImageItem = (
+  file: drive_v3.Schema$File
+): Album[number]["events"][number]["images"][number] => {
+  return { url: `/api/album/image/${file.id}`, name: file.name || "" };
 };

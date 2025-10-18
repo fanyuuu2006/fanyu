@@ -19,6 +19,5 @@ export default async function Page() {
       return { year, events: eventData };
     })
   );
-
   return <MainSection data={data} />;
 }

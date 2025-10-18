@@ -12,7 +12,6 @@ type DesktopLinkProps = {
 export const DesktopLink = ({ item }: DesktopLinkProps) => {
   const Language = useLanguage();
   const pathName = usePathname();
-  const isActive = pathName === item.url;
   const hasSubRoute = Boolean(item.sub);
   const [subRouteShow, setSubRouteShow] = useState<boolean>(false);
 
@@ -33,7 +32,7 @@ export const DesktopLink = ({ item }: DesktopLinkProps) => {
       <Link
         href={item.url}
         className={cn({
-          "text-[var(--text-color-primary)]": isActive,
+          "text-[var(--text-color-primary)]": item.isActive?.(pathName) || pathName === item.url,
         })}
       >
         {item.label[Language.Current]}

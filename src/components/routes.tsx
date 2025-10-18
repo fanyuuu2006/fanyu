@@ -10,10 +10,11 @@ type BaseRoute = {
   label: LanguageContent<string>;
   url: string;
   icon?: React.ElementType;
+  isActive?: (path: string) => boolean;
 };
 
 export type Route = BaseRoute & {
-  sub?: BaseRoute[];
+  sub?: Omit<BaseRoute, "isActive">[];
 };
 
 export const routes: Route[] = [
@@ -85,6 +86,7 @@ export const routes: Route[] = [
       english: "Album",
     },
     url: "/album",
+    isActive: (path: string) => path.startsWith("/album"),
     icon: PictureOutlined,
   },
 ];

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listAllFiles } from "@/utils/googleapis";
+import { listAllFiles, toImageItem } from "@/utils/googleapis";
 import { deslugify } from "@/utils/url";
 
 export async function GET(
@@ -51,7 +51,7 @@ export async function GET(
         );
       }
 
-      return NextResponse.json(`/api/album/image/${image.id}`);
+      return NextResponse.json(toImageItem(image));
     }
 
     // 找事件資料夾
@@ -77,7 +77,7 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(`/api/album/image/${image.id}`);
+    return NextResponse.json(toImageItem(image));
   } catch (error) {
     console.warn("⚠️ 讀取 Album 資料夾時發生錯誤:", error);
     return NextResponse.json(

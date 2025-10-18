@@ -44,7 +44,7 @@ export const EventLinkCard = ({
       <div className="rounded-3xl overflow-hidden">
         {/*eslint-disable-next-line @next/next/no-img-element*/}
         <img
-          src={isInView ? event.images[0] : FALLBACK_IMAGE}
+          src={isInView ? event.images[0].url : FALLBACK_IMAGE}
           onError={(e) => {
             (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
           }}

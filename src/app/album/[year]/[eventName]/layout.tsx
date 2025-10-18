@@ -65,7 +65,7 @@ export async function generateMetadata({
       locale: "zh_TW",
       images: [
         {
-          url: image,
+          url: image.url,
           width: 1200,
           height: 630,
           alt: `${year} ${eventName} - FanYu Photo Album`,
@@ -81,7 +81,7 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: image,
+          url: image.url,
           alt: `${year} ${eventName} - FanYu Photo Album`,
           type: "image/jpeg",
         },

@@ -81,16 +81,16 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               </span>
             </div>
           ) : (
-            event.images.map((src, i) => (
+            event.images.map((imgItem, i) => (
               <div
-                key={src}
+                key={imgItem.name}
                 className={cn(
                   "aspect-square bg-[#888] border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
                 )}
               >
                 <ImageCard
                   id={i.toString()}
-                  src={src}
+                  src={imgItem.url}
                   alt={`${year} ${event.name} ${i + 1}`}
                   className="h-full w-full object-cover"
                 />
