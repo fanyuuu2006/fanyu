@@ -224,8 +224,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               key={i}
               disabled={item.disable}
               className={cn(
-                "text-2xl",
-                "fixed top-1/2",
+                "text-2xl h-3/4 p-1",
+                "fixed top-1/2 -translate-y-1/2",
                 item.position,
                 "cursor-pointer select-none transition-opacity duration-200",
                 {
