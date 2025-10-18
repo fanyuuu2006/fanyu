@@ -64,15 +64,15 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       switch (e.key) {
         case "ArrowLeft":
           e.preventDefault();
-          if (modalImageIndex > 0) {
-            setModalImageIndex((prev) => prev - 1);
-          }
+          setModalImageIndex((prev) => 
+            prev === 0 ? event.images.length - 1 : prev - 1
+          );
           break;
         case "ArrowRight":
           e.preventDefault();
-          if (modalImageIndex < event.images.length - 1) {
-            setModalImageIndex((prev) => prev + 1);
-          }
+          setModalImageIndex((prev) => 
+            prev === event.images.length - 1 ? 0 : prev + 1
+          );
           break;
         case "Escape":
           e.preventDefault();
@@ -206,31 +206,27 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             {
               icon: LeftOutlined,
               position: "left-4",
-              disable: modalImageIndex === 0,
               onClick: () =>
-                setModalImageIndex((prev) => Math.max(prev - 1, 0)),
+                setModalImageIndex((prev) => 
+                  prev === 0 ? event.images.length - 1 : prev - 1
+                ),
             },
             {
               icon: RightOutlined,
               position: "right-4",
-              disable: modalImageIndex === event.images.length - 1,
               onClick: () =>
                 setModalImageIndex((prev) =>
-                  Math.min(prev + 1, event.images.length - 1)
+                  prev === event.images.length - 1 ? 0 : prev + 1
                 ),
             },
           ].map((item, i) => (
             <button
               key={i}
-              disabled={item.disable}
               className={cn(
                 "text-2xl h-3/4 p-1",
                 "fixed top-1/2 -translate-y-1/2",
                 item.position,
                 "cursor-pointer select-none transition-opacity duration-200",
-                {
-                  "text-[var(--text-color-muted)]": item.disable,
-                }
               )}
               onClick={item.onClick}
             >
