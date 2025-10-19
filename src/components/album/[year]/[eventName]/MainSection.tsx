@@ -133,7 +133,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           ) : (
             event.images.map((imgItem, i) => (
               <div
-                key={imgItem.name}
+                key={`${i}-${imgItem.name}`}
                 className={cn(
                   "aspect-square bg-[#888] border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
                 )}
