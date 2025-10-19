@@ -162,7 +162,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             className={cn(
               "flex items-center",
               "w-full absolute top-0 left-0 py-4 px-8",
-              "hover:bg-[var(--background-color)] transition-colors duration-200"
+              "hover:bg-[var(--background-color)] transition-all duration-200"
             )}
           >
             <div className="flex items-center gap-2 min-w-0">
@@ -231,7 +231,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             <button
               key={i}
               className={cn(
-                "text-2xl h-3/4 p-1",
+                "text-lg rounded-full btn w-10 h-10",
+                "flex items-center justify-center",
                 "fixed top-1/2 -translate-y-1/2",
                 item.position,
                 "cursor-pointer select-none transition-opacity duration-200"
