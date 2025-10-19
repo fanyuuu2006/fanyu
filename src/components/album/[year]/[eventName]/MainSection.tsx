@@ -9,7 +9,6 @@ import {
   InfoCircleOutlined,
 } from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ImageCard } from "./ImageCard";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
@@ -245,16 +244,18 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               <div
                 key={`${i}-${imgItem.name}`}
                 className={cn(
-                  "aspect-square bg-[#888] border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
+                  "aspect-square bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
                 )}
               >
-                <ImageCard
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   id={i.toString()}
                   src={imgItem.url}
                   title={imgItem.name || "無標題"}
                   alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"
                   onClick={() => handleImageClick(i)}
+                  onError={handleImageError}
                 />
               </div>
             ))
@@ -348,7 +349,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           <img
             src={currentImage.url}
             alt={currentImage.name || "圖片"}
-            className="select-none max-w-[90vw] max-h-[75vh] object-contain"
+            className="select-none max-w-[95vw] max-h-[80vh] object-contain"
             onError={handleImageError}
           />
           {navigationButtons.map((item, i) => (
