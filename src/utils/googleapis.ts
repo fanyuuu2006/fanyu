@@ -3,6 +3,12 @@ import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
 
+const SEARCH_FIELDS: (keyof drive_v3.Schema$File)[] = [
+  "id",
+  "name",
+  "createdTime",
+];
+
 export const listAllFiles = async (
   query: string
 ): Promise<drive_v3.Schema$File[]> => {
@@ -12,7 +18,7 @@ export const listAllFiles = async (
   do {
     const res = (await drive.files.list({
       q: query,
-      fields: "nextPageToken, files(id, name)",
+      fields: `nextPageToken, files(${SEARCH_FIELDS.join(",")})`,
       pageSize: 1000,
       pageToken,
     })) as unknown as GaxiosResponse<drive_v3.Schema$FileList>;
