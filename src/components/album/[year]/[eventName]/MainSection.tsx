@@ -310,10 +310,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   zIndex: 6990,
                 }}
               >
-                <div className="card flex flex-col p-6">
+                <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
                   {/* 標頭 */}
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-semibold">
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-color)]">
+                    <h3 className="text-xl font-semibold bg-gradient-to-br  from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
                       {infoContent.title}
                     </h3>
                     <button
@@ -326,13 +326,15 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   </div>
 
                   {/* 內容 */}
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {imageInfoFields.map((info, i) => (
-                      <div key={i}>
+                      <div key={i} className="flex flex-col">
                         <div className="text-sm text-[var(--text-color-muted)]">
                           {info.label}
                         </div>
-                        <div className="text-base">{info.value}</div>
+                        <div className="text-base font-medium break-all">
+                          {info.value}
+                        </div>
                       </div>
                     ))}
                   </div>
