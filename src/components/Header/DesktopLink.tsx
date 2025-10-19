@@ -32,7 +32,8 @@ export const DesktopLink = ({ item }: DesktopLinkProps) => {
       <Link
         href={item.url}
         className={cn({
-          "text-[var(--text-color-primary)]": item.isActive?.(pathName) || pathName === item.url,
+          "text-[var(--text-color-primary)]":
+            item.isActive?.(pathName) || pathName === item.url,
         })}
       >
         {item.label[Language.Current]}
@@ -40,23 +41,24 @@ export const DesktopLink = ({ item }: DesktopLinkProps) => {
 
       {/* 子選單下拉區域 */}
       {hasSubRoute && (
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 z-50">
-          <Collapse className="slide-collapse" state={subRouteShow}>
-            <div className="bg-[var(--background-color)] border border-[var(--border-color)] rounded-md shadow-lg mt-2 min-w-48">
-              <div className="text-[var(--text-color-muted)] flex flex-col text-base font-normal">
-                {item.sub!.map((sub) => (
-                  <Link
-                    key={sub.url}
-                    href={`${item.url}${sub.url}`}
-                    className="px-4 py-3 hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
-                  >
-                    {sub.label[Language.Current]}
-                  </Link>
-                ))}
-              </div>
+        <Collapse
+          className="slide-collapse absolute top-full left-1/2 transform -translate-x-1/2 z-50"
+          state={subRouteShow}
+        >
+          <div className="bg-[var(--background-color)] border border-[var(--border-color)] rounded-md shadow-lg mt-2 min-w-48">
+            <div className="text-[var(--text-color-muted)] flex flex-col text-base font-normal">
+              {item.sub!.map((sub) => (
+                <Link
+                  key={sub.url}
+                  href={`${item.url}${sub.url}`}
+                  className="px-4 py-3 hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
+                >
+                  {sub.label[Language.Current]}
+                </Link>
+              ))}
             </div>
-          </Collapse>
-        </div>
+          </div>
+        </Collapse>
       )}
     </div>
   );

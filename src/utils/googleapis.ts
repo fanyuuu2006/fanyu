@@ -7,6 +7,7 @@ const SEARCH_FIELDS: (keyof drive_v3.Schema$File)[] = [
   "id",
   "name",
   "createdTime",
+  "fileExtension",
 ];
 
 export const listAllFiles = async (

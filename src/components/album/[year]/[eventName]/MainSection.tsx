@@ -4,6 +4,7 @@ import {
   RightOutlined,
   CaretLeftOutlined,
   CloseOutlined,
+  // InfoCircleOutlined,
   DownloadOutlined,
 } from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -45,9 +46,13 @@ const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
 export const MainSection = ({ year, event }: MainSectionProps) => {
   const language = useLanguage();
   const [modalImageIndex, setModalImageIndex] = useState<number>(-1);
-  const modal = useModal({
-    onClose: () => setModalImageIndex(-1),
+
+  const previewModal = useModal({
+    onClose: () => {
+      setModalImageIndex(-1);
+    },
   });
+  // const infoModal = useModal({});
 
   const imagesContent = IMAGES_CONTENT[language.Current];
 
@@ -71,7 +76,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           break;
         case "Escape":
           e.preventDefault();
-          modal.Close();
+          previewModal.Close();
           break;
       }
     };
@@ -80,7 +85,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [modalImageIndex, event.images.length, modal]);
+  }, [modalImageIndex, event.images.length, previewModal]);
 
   return (
     <section className="min-h-screen">
@@ -141,7 +146,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   className="h-full w-full object-cover"
                   onClick={() => {
                     setModalImageIndex(i);
-                    modal.Open();
+                    previewModal.Open();
                   }}
                 />
               </div>
@@ -151,12 +156,14 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       </div>
 
       {modalImageIndex > -1 && (
-        <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+        <previewModal.Container
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+        >
           {/* Header */}
           <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
             <button
               className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
-              onClick={modal.Close}
+              onClick={previewModal.Close}
               aria-label="關閉"
             >
               <CloseOutlined />
@@ -173,15 +180,30 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 {modalImageIndex + 1} / {event.images.length}
               </span>
             </div>
-
             <div className="ms-auto text-3xl flex">
               <Link
+                className="rounded-full p-2"
                 href={event.images[modalImageIndex].url || ""}
-                download
+                download={
+                  event.images[modalImageIndex].name ||
+                  `${modalImageIndex}.${event.images[modalImageIndex].fileExtension}`
+                }
                 aria-label={`下載圖片 ${event.images[modalImageIndex].name}`}
               >
                 <DownloadOutlined />
               </Link>
+              {/* <button
+                className="rounded-full p-2"
+                aria-label="詳細資訊"
+                onClick={infoModal.Open}
+              >
+                <InfoCircleOutlined />
+              </button>
+              <infoModal.Container
+                style={{
+                  zIndex: 6990,
+                }}
+              ></infoModal.Container> */}
             </div>
           </div>
 
@@ -228,7 +250,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               <item.icon />
             </button>
           ))}
-        </modal.Container>
+        </previewModal.Container>
       )}
     </section>
   );
