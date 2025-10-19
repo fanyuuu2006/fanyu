@@ -8,8 +8,7 @@ import {
 } from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
@@ -44,7 +43,6 @@ const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
   },
 };
 export const MainSection = ({ year, event }: MainSectionProps) => {
-  const router = useRouter();
   const language = useLanguage();
   const [modalImageIndex, setModalImageIndex] = useState<number>(-1);
   const modal = useModal({
@@ -52,9 +50,6 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   });
 
   const imagesContent = IMAGES_CONTENT[language.Current];
-  const handleBackClick = useCallback(() => {
-    router.back();
-  }, [router]);
 
   // 處理鍵盤事件
   useEffect(() => {
@@ -92,14 +87,14 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       <div className="container">
         {/* 返回按鈕區域 */}
         <div className="w-full mb-6">
-          <Tooltip title={imagesContent.back}>
-            <button
+          <Tooltip placement="bottom" title={imagesContent.back}>
+            <Link
+              href="/album"
               aria-label={imagesContent.back}
-              onClick={handleBackClick}
               className="btn text-lg lg:text-xl flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-full "
             >
               <CaretLeftOutlined className="relative -left-[2%]" />
-            </button>
+            </Link>
           </Tooltip>
         </div>
 

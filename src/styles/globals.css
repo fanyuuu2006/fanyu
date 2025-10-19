@@ -60,7 +60,8 @@
     height: 100%;
     color: var(--text-color);
     background: var(--background-color);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -93,7 +94,8 @@
     cursor: pointer;
     border: none;
     text-decoration: none;
-    transition: all var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--transition-normal)
+      cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
     outline: none;
@@ -115,8 +117,8 @@
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     transform: translate(-50%, -50%);
-    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 0;
     pointer-events: none; /* 防止 ripple 擋住按鈕點擊事件 */
   }
@@ -222,7 +224,8 @@
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-base);
-    transition: all var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--transition-normal)
+      cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     overflow: hidden;
   }
@@ -270,7 +273,8 @@
   a {
     color: inherit;
     text-decoration: none;
-    transition: all var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all var(--transition-normal)
+      cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   a:focus-visible {
@@ -358,8 +362,14 @@
     animation: pop var(--transition-fast) cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
+  .animate-appear {
+    animation: appear var(--transition-normal)
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
   .animate-turn {
-    animation: turn var(--transition-normal) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: turn var(--transition-normal)
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 
   /* 減少動畫效果（針對有偏好的用戶） */
@@ -370,7 +380,7 @@
     .hover\:underline-spread::after {
       animation: none;
     }
-    
+
     *,
     *::before,
     *::after {
@@ -390,6 +400,15 @@
     to {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 
