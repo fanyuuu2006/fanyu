@@ -6,6 +6,7 @@ import {
   CloseOutlined,
   // InfoCircleOutlined,
   DownloadOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
@@ -52,7 +53,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       setModalImageIndex(-1);
     },
   });
-  // const infoModal = useModal({});
+  const infoModal = useModal({});
 
   const imagesContent = IMAGES_CONTENT[language.Current];
 
@@ -192,7 +193,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               >
                 <DownloadOutlined />
               </Link>
-              {/* <button
+              <button
                 className="rounded-full p-2"
                 aria-label="詳細資訊"
                 onClick={infoModal.Open}
@@ -203,7 +204,88 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 style={{
                   zIndex: 6990,
                 }}
-              ></infoModal.Container> */}
+              >
+                <div className="card flex flex-col p-6">
+                  {/* 標頭 */}
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-semibold">
+                      {
+                        {
+                          chinese: "圖片資訊",
+                          english: "Image Information",
+                        }[language.Current]
+                      }
+                    </h3>
+                    <button
+                      className="text-xl text-[var(--text-color-muted)] rounded-full p-2"
+                      onClick={infoModal.Close}
+                      aria-label="關閉"
+                    >
+                      <CloseOutlined />
+                    </button>
+                  </div>
+
+                  {/* 內容 */}
+                  <div className="space-y-3">
+                    {[
+                      {
+                        label: {
+                          chinese: "檔案名稱",
+                          english: "File Name",
+                        },
+                        value:
+                          event.images[modalImageIndex].name ||
+                          {
+                            chinese: "無標題",
+                            english: "Untitled",
+                          }[language.Current],
+                      },
+                      {
+                        label: {
+                          chinese: "檔案格式",
+                          english: "File Extension",
+                        },
+                        value:
+                          event.images[modalImageIndex].fileExtension ||
+                          {
+                            chinese: "未知",
+                            english: "Unknown",
+                          }[language.Current],
+                      },
+                      {
+                        label: {
+                          chinese: "建立時間",
+                          english: "Created Time",
+                        },
+                        value:
+                          new Date(
+                            event.images[modalImageIndex].createdTime || "0"
+                          ).toLocaleString(
+                            {
+                              chinese: "zh-TW",
+                              english: "en-US",
+                            }[language.Current],
+                            {
+                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit",
+                            }
+                          ) || "",
+                      },
+                    ].map((info, i) => (
+                      <div key={i}>
+                        <div className="text-sm text-[var(--text-color-muted)]">
+                          {info.label[language.Current]}
+                        </div>
+                        <div className="text-base">{info.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </infoModal.Container>
             </div>
           </div>
 
