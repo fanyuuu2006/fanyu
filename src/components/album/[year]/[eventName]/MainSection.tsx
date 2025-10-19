@@ -153,35 +153,28 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       {modalImageIndex > -1 && (
         <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
           {/* Header */}
-          <div
-            className={cn(
-              "flex items-center",
-              "w-full absolute top-0 left-0 py-4 px-8",
-              "hover:bg-[var(--background-color)] transition-all duration-200"
-            )}
-          >
-            <div className="flex items-center gap-2 min-w-0">
-              <button
-                className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
-                onClick={modal.Close}
+          <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8 hover:bg-[var(--background-color)] transition-colors">
+            <button
+              className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+              onClick={modal.Close}
+              aria-label="關閉"
+            >
+              <CloseOutlined />
+            </button>
+
+            <div className="flex flex-col min-w-0 mx-4">
+              <h3
+                title={event.images[modalImageIndex].name}
+                className="text-lg md:text-xl font-semibold truncate"
               >
-                <CloseOutlined />
-              </button>
-              <div className="flex flex-col min-w-0">
-                <h3
-                  title={event.images[modalImageIndex].name}
-                  className="text-lg md:text-xl font-semibold truncate"
-                >
-                  {event.images[modalImageIndex].name}
-                </h3>
-                <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-                  {modalImageIndex + 1} / {event.images.length}
-                </span>
-              </div>
+                {event.images[modalImageIndex].name}
+              </h3>
+              <span className="text-sm md:text-base text-[var(--text-color-muted)]">
+                {modalImageIndex + 1} / {event.images.length}
+              </span>
             </div>
 
-            {/* 功能按鈕按鈕 */}
-            <div className={cn("text-3xl ms-auto items-center gap-6")}>
+            <div className="ms-auto text-3xl flex">
               <Link
                 href={event.images[modalImageIndex].url || ""}
                 download
@@ -191,11 +184,12 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               </Link>
             </div>
           </div>
+
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={event.images[modalImageIndex].url}
             alt={event.images[modalImageIndex].name}
-            className={`select-none max-w-[95vw] max-h-[80vh] object-contain`}
+            className="select-none max-w-[90vw] max-h-[75vh] object-contain"
             onError={(e: React.SyntheticEvent) => {
               (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
               console.error(e);
@@ -226,11 +220,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             <button
               key={i}
               className={cn(
-                "text-lg rounded-full btn w-10 h-10",
-                "flex items-center justify-center",
-                "fixed top-1/2 -translate-y-1/2",
+                "btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center",
                 item.position,
-                "cursor-pointer select-none transition-opacity duration-200"
               )}
               onClick={item.onClick}
             >

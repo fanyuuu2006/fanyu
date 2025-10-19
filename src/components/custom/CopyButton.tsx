@@ -5,6 +5,23 @@ import { useEffect, useMemo, useState } from "react";
 import { Toast } from "./Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+const COPYBUTTON_CONTENT = {
+  chinese: {
+    copied: "已複製",
+    copy: "複製",
+    success: "已複製到剪貼簿",
+    failed: "複製失敗",
+    notSupport: "瀏覽器不支援複製",
+  },
+  english: {
+    copied: "Copied",
+    copy: "Copy",
+    success: "Copied to clipboard",
+    failed: "Copy failed",
+    notSupport: "Browser does not support copy",
+  },
+};
+
 export type CopyButtonProps = OverrideProps<
   React.HTMLAttributes<HTMLButtonElement>,
   {
@@ -21,24 +38,7 @@ export const CopyButton = ({
   const [copied, setCopied] = useState<boolean>(false);
   const Language = useLanguage();
 
-  const copyButtonContent = useMemo(() => {
-    return {
-      chinese: {
-        copied: "已複製",
-        copy: "複製",
-        success: "已複製到剪貼簿",
-        failed: "複製失敗",
-        notSupport: "瀏覽器不支援複製",
-      },
-      english: {
-        copied: "Copied",
-        copy: "Copy",
-        success: "Copied to clipboard",
-        failed: "Copy failed",
-        notSupport: "Browser does not support copy",
-      },
-    }[Language.Current];
-  }, [Language.Current]);
+  const copyButtonContent = COPYBUTTON_CONTENT[Language.Current];
 
   const handleCopy = useMemo(() => {
     return async () => {
@@ -92,3 +92,5 @@ export const CopyButton = ({
     </Tooltip>
   );
 };
+
+CopyButton.displayName = "CopyButton";
