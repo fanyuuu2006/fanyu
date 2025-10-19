@@ -136,7 +136,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 <ImageCard
                   id={i.toString()}
                   src={imgItem.url}
-                  title={imgItem.name}
+                  title={imgItem.name || "無標題"}
                   alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"
                   onClick={() => {
@@ -153,7 +153,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       {modalImageIndex > -1 && (
         <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
           {/* Header */}
-          <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8 hover:bg-[var(--background-color)] transition-colors">
+          <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
             <button
               className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
               onClick={modal.Close}
@@ -162,9 +162,9 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               <CloseOutlined />
             </button>
 
-            <div className="flex flex-col min-w-0 mx-4">
+            <div className="flex flex-col min-w-0 ms-2">
               <h3
-                title={event.images[modalImageIndex].name}
+                title={event.images[modalImageIndex].name || "無標題"}
                 className="text-lg md:text-xl font-semibold truncate"
               >
                 {event.images[modalImageIndex].name}
@@ -188,7 +188,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={event.images[modalImageIndex].url}
-            alt={event.images[modalImageIndex].name}
+            alt={event.images[modalImageIndex].name || "圖片"}
             className="select-none max-w-[90vw] max-h-[75vh] object-contain"
             onError={(e: React.SyntheticEvent) => {
               (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
@@ -202,7 +202,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           {[
             {
               icon: LeftOutlined,
-              position: "left-4",
+              className: "left-4",
               onClick: () =>
                 setModalImageIndex((prev) =>
                   prev === 0 ? event.images.length - 1 : prev - 1
@@ -210,7 +210,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             },
             {
               icon: RightOutlined,
-              position: "right-4",
+              className: "right-4",
               onClick: () =>
                 setModalImageIndex((prev) =>
                   prev === event.images.length - 1 ? 0 : prev + 1
@@ -221,7 +221,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               key={i}
               className={cn(
                 "btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center",
-                item.position,
+                item.className
               )}
               onClick={item.onClick}
             >

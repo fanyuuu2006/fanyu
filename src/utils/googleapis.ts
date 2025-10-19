@@ -27,8 +27,7 @@ export const listAllFiles = async (
 export const toImageItem = (
   file: drive_v3.Schema$File
 ): Album[number]["events"][number]["images"][number] => {
-  return {
+  return Object.assign(file, {
     url: `/api/album/image/${file.id}`,
-    name: file.name || "無",
-  };
+  });
 };
