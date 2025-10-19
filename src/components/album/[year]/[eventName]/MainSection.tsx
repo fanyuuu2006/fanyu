@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ImageCard } from "./ImageCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
@@ -44,6 +44,32 @@ const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
     imageLoadFailed: "Image Load Failed",
   },
 };
+
+const INFO_MODAL_CONTENT: LanguageContent<{
+  title: string;
+  fileName: string;
+  fileExtension: string;
+  createdTime: string;
+  untitled: string;
+  unknown: string;
+}> = {
+  chinese: {
+    title: "圖片資訊",
+    fileName: "檔案名稱",
+    fileExtension: "檔案格式",
+    createdTime: "建立時間",
+    untitled: "無標題",
+    unknown: "未知",
+  },
+  english: {
+    title: "Image Information",
+    fileName: "File Name",
+    fileExtension: "File Extension",
+    createdTime: "Created Time",
+    untitled: "Untitled",
+    unknown: "Unknown",
+  },
+};
 export const MainSection = ({ year, event }: MainSectionProps) => {
   const language = useLanguage();
   const [modalImageIndex, setModalImageIndex] = useState<number>(-1);
@@ -56,24 +82,106 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   const infoModal = useModal({});
 
   const imagesContent = IMAGES_CONTENT[language.Current];
+  const infoContent = INFO_MODAL_CONTENT[language.Current];
+
+  const isModalOpen = modalImageIndex > -1;
+  const currentImage = isModalOpen ? event.images[modalImageIndex] : null;
+
+  const handlePrevImage = useCallback(() => {
+    setModalImageIndex((prev) =>
+      prev === 0 ? event.images.length - 1 : prev - 1
+    );
+  }, [event.images.length]);
+
+  const handleNextImage = useCallback(() => {
+    setModalImageIndex((prev) =>
+      prev === event.images.length - 1 ? 0 : prev + 1
+    );
+  }, [event.images.length]);
+
+  const handleImageError = useCallback(
+    (e: React.SyntheticEvent) => {
+      (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+      console.error(e);
+      Toast.fire({
+        icon: "error",
+        text: imagesContent.imageLoadFailed,
+      });
+    },
+    [imagesContent.imageLoadFailed]
+  );
+
+  const handleImageClick = useCallback(
+    (index: number) => {
+      setModalImageIndex(index);
+      previewModal.Open();
+    },
+    [previewModal]
+  );
+
+  // 優化：使用 useMemo 計算圖片資訊欄位
+  const imageInfoFields = useMemo(() => {
+    if (!currentImage) return [];
+
+    return [
+      {
+        label: infoContent.fileName,
+        value: currentImage.name || infoContent.untitled,
+      },
+      {
+        label: infoContent.fileExtension,
+        value: currentImage.fileExtension || infoContent.unknown,
+      },
+      {
+        label: infoContent.createdTime,
+        value:
+          new Date(currentImage.createdTime || "0").toLocaleString(
+            language.Current === "chinese" ? "zh-TW" : "en-US",
+            {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            }
+          ) || "",
+      },
+    ];
+  }, [currentImage, infoContent, language.Current]);
+
+  // 優化：使用 useMemo 計算導航按鈕
+  const navigationButtons = useMemo(
+    () => [
+      {
+        icon: LeftOutlined,
+        className: "left-4",
+        onClick: handlePrevImage,
+        ariaLabel: "上一張",
+      },
+      {
+        icon: RightOutlined,
+        className: "right-4",
+        onClick: handleNextImage,
+        ariaLabel: "下一張",
+      },
+    ],
+    [handlePrevImage, handleNextImage]
+  );
 
   // 處理鍵盤事件
   useEffect(() => {
-    if (modalImageIndex === -1) return;
+    if (!isModalOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case "ArrowLeft":
           e.preventDefault();
-          setModalImageIndex((prev) =>
-            prev === 0 ? event.images.length - 1 : prev - 1
-          );
+          handlePrevImage();
           break;
         case "ArrowRight":
           e.preventDefault();
-          setModalImageIndex((prev) =>
-            prev === event.images.length - 1 ? 0 : prev + 1
-          );
+          handleNextImage();
           break;
         case "Escape":
           e.preventDefault();
@@ -86,7 +194,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [modalImageIndex, event.images.length, previewModal]);
+  }, [isModalOpen, handlePrevImage, handleNextImage, previewModal]);
 
   return (
     <section className="min-h-screen">
@@ -145,10 +253,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   title={imgItem.name || "無標題"}
                   alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"
-                  onClick={() => {
-                    setModalImageIndex(i);
-                    previewModal.Open();
-                  }}
+                  onClick={() => handleImageClick(i)}
                 />
               </div>
             ))
@@ -156,7 +261,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
         </article>
       </div>
 
-      {modalImageIndex > -1 && (
+      {isModalOpen && currentImage && (
         <previewModal.Container
           style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
         >
@@ -172,10 +277,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
             <div className="flex flex-col min-w-0 ms-2">
               <h3
-                title={event.images[modalImageIndex].name || "無標題"}
+                title={currentImage.name || "無標題"}
                 className="text-lg md:text-xl font-semibold truncate"
               >
-                {event.images[modalImageIndex].name}
+                {currentImage.name}
               </h3>
               <span className="text-sm md:text-base text-[var(--text-color-muted)]">
                 {modalImageIndex + 1} / {event.images.length}
@@ -184,12 +289,12 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             <div className="ms-auto text-3xl flex">
               <Link
                 className="rounded-full p-2"
-                href={event.images[modalImageIndex].url || ""}
+                href={currentImage.url || ""}
                 download={
-                  event.images[modalImageIndex].name ||
-                  `${modalImageIndex}.${event.images[modalImageIndex].fileExtension}`
+                  currentImage.name ||
+                  `${modalImageIndex}.${currentImage.fileExtension}`
                 }
-                aria-label={`下載圖片 ${event.images[modalImageIndex].name}`}
+                aria-label={`下載圖片 ${currentImage.name}`}
               >
                 <DownloadOutlined />
               </Link>
@@ -209,12 +314,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   {/* 標頭 */}
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-xl font-semibold">
-                      {
-                        {
-                          chinese: "圖片資訊",
-                          english: "Image Information",
-                        }[language.Current]
-                      }
+                      {infoContent.title}
                     </h3>
                     <button
                       className="text-xl text-[var(--text-color-muted)] rounded-full p-2"
@@ -227,58 +327,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
                   {/* 內容 */}
                   <div className="space-y-3">
-                    {[
-                      {
-                        label: {
-                          chinese: "檔案名稱",
-                          english: "File Name",
-                        },
-                        value:
-                          event.images[modalImageIndex].name ||
-                          {
-                            chinese: "無標題",
-                            english: "Untitled",
-                          }[language.Current],
-                      },
-                      {
-                        label: {
-                          chinese: "檔案格式",
-                          english: "File Extension",
-                        },
-                        value:
-                          event.images[modalImageIndex].fileExtension ||
-                          {
-                            chinese: "未知",
-                            english: "Unknown",
-                          }[language.Current],
-                      },
-                      {
-                        label: {
-                          chinese: "建立時間",
-                          english: "Created Time",
-                        },
-                        value:
-                          new Date(
-                            event.images[modalImageIndex].createdTime || "0"
-                          ).toLocaleString(
-                            {
-                              chinese: "zh-TW",
-                              english: "en-US",
-                            }[language.Current],
-                            {
-                              year: "numeric",
-                              month: "2-digit",
-                              day: "2-digit",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              second: "2-digit",
-                            }
-                          ) || "",
-                      },
-                    ].map((info, i) => (
+                    {imageInfoFields.map((info, i) => (
                       <div key={i}>
                         <div className="text-sm text-[var(--text-color-muted)]">
-                          {info.label[language.Current]}
+                          {info.label}
                         </div>
                         <div className="text-base">{info.value}</div>
                       </div>
@@ -291,36 +343,12 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={event.images[modalImageIndex].url}
-            alt={event.images[modalImageIndex].name || "圖片"}
+            src={currentImage.url}
+            alt={currentImage.name || "圖片"}
             className="select-none max-w-[90vw] max-h-[75vh] object-contain"
-            onError={(e: React.SyntheticEvent) => {
-              (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
-              console.error(e);
-              Toast.fire({
-                icon: "error",
-                text: imagesContent.imageLoadFailed,
-              });
-            }}
+            onError={handleImageError}
           />
-          {[
-            {
-              icon: LeftOutlined,
-              className: "left-4",
-              onClick: () =>
-                setModalImageIndex((prev) =>
-                  prev === 0 ? event.images.length - 1 : prev - 1
-                ),
-            },
-            {
-              icon: RightOutlined,
-              className: "right-4",
-              onClick: () =>
-                setModalImageIndex((prev) =>
-                  prev === event.images.length - 1 ? 0 : prev + 1
-                ),
-            },
-          ].map((item, i) => (
+          {navigationButtons.map((item, i) => (
             <button
               key={i}
               className={cn(
@@ -328,6 +356,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 item.className
               )}
               onClick={item.onClick}
+              aria-label={item.ariaLabel}
             >
               <item.icon />
             </button>
