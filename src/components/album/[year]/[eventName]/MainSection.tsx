@@ -77,6 +77,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   const previewModal = useModal({
     onClose: () => {
       setModalImageIndex(-1);
+      if (infoModal.isShow) infoModal.Close();
     },
   });
   const infoModal = useModal({});
