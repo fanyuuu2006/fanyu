@@ -64,13 +64,13 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       switch (e.key) {
         case "ArrowLeft":
           e.preventDefault();
-          setModalImageIndex((prev) => 
+          setModalImageIndex((prev) =>
             prev === 0 ? event.images.length - 1 : prev - 1
           );
           break;
         case "ArrowRight":
           e.preventDefault();
-          setModalImageIndex((prev) => 
+          setModalImageIndex((prev) =>
             prev === event.images.length - 1 ? 0 : prev + 1
           );
           break;
@@ -86,7 +86,6 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [modalImageIndex, event.images.length, modal]);
-
 
   return (
     <section className="min-h-screen">
@@ -157,28 +156,37 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       </div>
 
       {modalImageIndex > -1 && (
-        <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.75)" }}>
+        <modal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
           {/* Header */}
           <div
             className={cn(
-              "flex items-center gap-2",
-              "text-3xl font-semibold text-[var(--text-color-muted)]",
+              "flex items-center",
               "w-full absolute top-0 left-0 py-4 px-8",
               "hover:bg-[var(--background-color)] transition-colors duration-200"
             )}
           >
-            <CloseOutlined onClick={modal.Close} />
-            <div className="flex flex-col truncate">
-              <span className="text-[0.75em]">
-                {event.images[modalImageIndex].name}
-              </span>
-              <span className="text-[0.5em]">
-                {modalImageIndex + 1} / {event.images.length}
-              </span>
+            <div className="flex items-center gap-2 min-w-0">
+              <button
+                className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+                onClick={modal.Close}
+              >
+                <CloseOutlined />
+              </button>
+              <div className="flex flex-col min-w-0">
+                <h3
+                  title={event.images[modalImageIndex].name}
+                  className="text-lg md:text-xl font-semibold truncate"
+                >
+                  {event.images[modalImageIndex].name}
+                </h3>
+                <span className="text-sm md:text-base text-[var(--text-color-muted)]">
+                  {modalImageIndex + 1} / {event.images.length}
+                </span>
+              </div>
             </div>
 
             {/* 功能按鈕按鈕 */}
-            <div className={cn("ms-auto items-center gap-6")}>
+            <div className={cn("text-3xl ms-auto items-center gap-6")}>
               <Link
                 href={event.images[modalImageIndex].url || ""}
                 download
@@ -207,7 +215,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               icon: LeftOutlined,
               position: "left-4",
               onClick: () =>
-                setModalImageIndex((prev) => 
+                setModalImageIndex((prev) =>
                   prev === 0 ? event.images.length - 1 : prev - 1
                 ),
             },
@@ -226,7 +234,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                 "text-2xl h-3/4 p-1",
                 "fixed top-1/2 -translate-y-1/2",
                 item.position,
-                "cursor-pointer select-none transition-opacity duration-200",
+                "cursor-pointer select-none transition-opacity duration-200"
               )}
               onClick={item.onClick}
             >
