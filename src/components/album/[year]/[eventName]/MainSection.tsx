@@ -279,6 +279,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   onError={handleImageError}
                   width={imgItem.imageMediaMetadata?.width}
                   height={imgItem.imageMediaMetadata?.height}
+                  loading="lazy"
                 />
               </div>
             ))
@@ -369,6 +370,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           </div>
 
           <Image
+            priority
             src={currentImage.url}
             alt={currentImage.name || "圖片"}
             className="select-none max-w-[95vw] max-h-[80vh] object-contain"
