@@ -1,14 +1,9 @@
-import drive from "@/libs/googleapis";
+import {drive, SEARCH_FIELDS} from "@/libs/googleapis";
 import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
 
-const SEARCH_FIELDS: (keyof drive_v3.Schema$File)[] = [
-  "id",
-  "name",
-  "createdTime",
-  "fileExtension",
-];
+
 
 export const listAllFiles = async (
   query: string

@@ -1,7 +1,7 @@
-import { google } from "googleapis";
+import { drive_v3, google } from "googleapis";
 
 // 初始化 Google Drive API 客戶端
-const drive = google.drive({
+export const drive = google.drive({
   version: "v3",
   auth: new google.auth.GoogleAuth({
     credentials: {
@@ -12,4 +12,11 @@ const drive = google.drive({
   }),
 });
 
-export default drive;
+export  const SEARCH_FIELDS: (keyof drive_v3.Schema$File)[] = [
+  "id",
+  "name",
+  "createdTime",
+  "fileExtension",
+  "size"
+];
+

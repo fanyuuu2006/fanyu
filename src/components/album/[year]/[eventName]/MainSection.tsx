@@ -44,14 +44,18 @@ const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
   },
 };
 
-const INFO_MODAL_CONTENT: LanguageContent<{
-  title: string;
-  fileName: string;
-  fileExtension: string;
-  createdTime: string;
-  untitled: string;
-  unknown: string;
-}> = {
+const INFO_MODAL_CONTENT: LanguageContent<
+  Record<
+    | "title"
+    | "fileName"
+    | "fileExtension"
+    | "createdTime"
+    | "untitled"
+    | "unknown"
+    | "size",
+    string
+  >
+> = {
   chinese: {
     title: "圖片資訊",
     fileName: "檔案名稱",
@@ -59,6 +63,7 @@ const INFO_MODAL_CONTENT: LanguageContent<{
     createdTime: "建立時間",
     untitled: "無標題",
     unknown: "未知",
+    size: "檔案大小",
   },
   english: {
     title: "Image Information",
@@ -67,6 +72,7 @@ const INFO_MODAL_CONTENT: LanguageContent<{
     createdTime: "Created Time",
     untitled: "Untitled",
     unknown: "Unknown",
+    size: "File Size",
   },
 };
 export const MainSection = ({ year, event }: MainSectionProps) => {
@@ -146,6 +152,12 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               second: "2-digit",
             }
           ) || "",
+      },
+      {
+        label: infoContent.size,
+        value: currentImage.size
+          ? `${(Number(currentImage.size) / 1024).toFixed(2)} KB`
+          : infoContent.unknown,
       },
     ];
   }, [currentImage, infoContent, language.Current]);
