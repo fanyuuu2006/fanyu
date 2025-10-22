@@ -15,8 +15,8 @@ export const drive = google.drive({
 export  const SEARCH_FIELDS: (keyof drive_v3.Schema$File)[] = [
   "id",
   "name",
-  "createdTime",
   "fileExtension",
-  "size"
+  "size",
+  "imageMediaMetadata",
 ];
 
