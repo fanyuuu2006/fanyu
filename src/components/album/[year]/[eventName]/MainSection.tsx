@@ -141,7 +141,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       {
         label: infoContent.createdTime,
         value:
-          new Date(currentImage.imageMediaMetadata?.time|| "0").toLocaleString(
+          new Date(currentImage.createdTime || "0").toLocaleString(
             language.Current === "chinese" ? "zh-TW" : "en-US",
             {
               year: "numeric",
