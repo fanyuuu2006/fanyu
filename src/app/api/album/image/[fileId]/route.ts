@@ -1,6 +1,6 @@
 // app/api/image/[fileId]/route.ts
 import { Readable } from "stream"; // Node.js stream
-import drive from "@/libs/googleapis";
+import { drive } from "@/libs/googleapis";
 
 export async function GET(
   _: unknown,

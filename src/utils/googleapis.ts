@@ -3,8 +3,6 @@ import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
 
-
-
 export const listAllFiles = async (
   query: string
 ): Promise<drive_v3.Schema$File[]> => {
