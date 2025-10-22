@@ -382,7 +382,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             <button
               key={i}
               className={cn(
-                "btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center",
+                "btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
                 item.className
               )}
               onClick={item.onClick}
