@@ -18,6 +18,7 @@ import { Toast } from "@/components/custom/Toast";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { useModal } from "fanyucomponents";
 import Link from "next/link";
+import Image from "next/image";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
@@ -52,7 +53,8 @@ const INFO_MODAL_CONTENT: LanguageContent<
     | "createdTime"
     | "untitled"
     | "unknown"
-    | "size",
+    | "size"
+    | "widthXheight",
     string
   >
 > = {
@@ -64,6 +66,7 @@ const INFO_MODAL_CONTENT: LanguageContent<
     untitled: "無標題",
     unknown: "未知",
     size: "檔案大小",
+    widthXheight: "寬 x 高",
   },
   english: {
     title: "Image Information",
@@ -73,6 +76,7 @@ const INFO_MODAL_CONTENT: LanguageContent<
     untitled: "Untitled",
     unknown: "Unknown",
     size: "File Size",
+    widthXheight: "Width x Height",
   },
 };
 export const MainSection = ({ year, event }: MainSectionProps) => {
@@ -157,6 +161,12 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
         label: infoContent.size,
         value: currentImage.size
           ? `${(Number(currentImage.size) / 1024).toFixed(2)} KB`
+          : infoContent.unknown,
+      },
+      {
+        label: infoContent.widthXheight,
+        value: currentImage.imageMediaMetadata
+          ? `${currentImage.imageMediaMetadata.width} x ${currentImage.imageMediaMetadata.height}`
           : infoContent.unknown,
       },
     ];
@@ -259,8 +269,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   "aspect-square bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
                 )}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   id={i.toString()}
                   src={imgItem.url}
                   title={imgItem.name || "無標題"}
@@ -268,6 +277,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   className="h-full w-full object-cover"
                   onClick={() => handleImageClick(i)}
                   onError={handleImageError}
+                  width={imgItem.imageMediaMetadata?.width}
+                  height={imgItem.imageMediaMetadata?.height}
                 />
               </div>
             ))
@@ -357,12 +368,13 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             </div>
           </div>
 
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={currentImage.url}
             alt={currentImage.name || "圖片"}
             className="select-none max-w-[95vw] max-h-[80vh] object-contain"
             onError={handleImageError}
+            width={currentImage.imageMediaMetadata?.width}
+            height={currentImage.imageMediaMetadata?.height}
           />
           {navigationButtons.map((item, i) => (
             <button
