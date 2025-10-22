@@ -1,7 +1,7 @@
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 import { OverrideProps } from "fanyucomponents";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Toast } from "./Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -20,7 +20,7 @@ const COPYBUTTON_CONTENT = {
     failed: "Copy failed",
     notSupport: "Browser does not support copy",
   },
-};
+} as const;
 
 export type CopyButtonProps = OverrideProps<
   React.HTMLAttributes<HTMLButtonElement>,
@@ -36,58 +36,82 @@ export const CopyButton = ({
   ...rest
 }: CopyButtonProps) => {
   const [copied, setCopied] = useState<boolean>(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const Language = useLanguage();
 
-  const copyButtonContent = COPYBUTTON_CONTENT[Language.Current];
+  const copyButtonContent = useMemo(
+    () => COPYBUTTON_CONTENT[Language.Current],
+    [Language.Current]
+  );
 
-  const handleCopy = useMemo(() => {
-    return async () => {
-      if (!navigator?.clipboard) {
-        Toast.fire({ icon: "error", text: copyButtonContent.notSupport });
-        return;
-      }
-      await navigator.clipboard
-        .writeText(content)
-        .then(() => {
-          setCopied(true);
-          Toast.fire({
-            icon: "success",
-            text: copyButtonContent.success,
-          });
-        })
-        .catch((err) => {
-          console.error("複製失敗", err);
-          Toast.fire({ icon: "error", text: copyButtonContent.failed });
-        });
-    };
-  }, [
-    content,
-    copyButtonContent.failed,
-    copyButtonContent.notSupport,
-    copyButtonContent.success,
-  ]);
+  const handleCopy = useCallback(async () => {
+    if (!navigator?.clipboard) {
+      Toast.fire({ icon: "error", text: copyButtonContent.notSupport });
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopied(true);
+      Toast.fire({
+        icon: "success",
+        text: copyButtonContent.success,
+      });
+    } catch (err) {
+      console.error("複製失敗", err);
+      Toast.fire({ icon: "error", text: copyButtonContent.failed });
+    }
+  }, [content, copyButtonContent]);
+
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      handleCopy();
+      onClick?.(event);
+    },
+    [handleCopy, onClick]
+  );
 
   useEffect(() => {
     if (!copied) return;
 
-    const timer = setTimeout(() => setCopied(false), 2000);
+    // 清除之前的 timer 避免記憶體洩漏
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      setCopied(false);
+      timerRef.current = null;
+    }, 2000);
+
     return () => {
-      clearTimeout(timer);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
     };
   }, [copied]);
 
+  const tooltipTitle = useMemo(
+    () => (copied ? copyButtonContent.copied : copyButtonContent.copy),
+    [copied, copyButtonContent.copied, copyButtonContent.copy]
+  );
+
+  const ariaLabel = tooltipTitle;
+  const icon = useMemo(
+    () => (copied ? <CheckOutlined /> : <CopyOutlined />),
+    [copied]
+  );
+
   return (
-    <Tooltip title={copied ? copyButtonContent.copied : copyButtonContent.copy}>
+    <Tooltip title={tooltipTitle}>
       <button
         disabled={copied}
-        aria-label={copied ? copyButtonContent.copied : copyButtonContent.copy}
-        onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-          handleCopy();
-          onClick?.(event);
-        }}
+        aria-label={ariaLabel}
+        onClick={handleClick}
         {...rest}
       >
-        {children || (copied ? <CheckOutlined /> : <CopyOutlined />)}
+        {children || icon}
       </button>
     </Tooltip>
   );
