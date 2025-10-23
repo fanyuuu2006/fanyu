@@ -1,4 +1,4 @@
-import { google } from "googleapis";
+import { drive_v3, google } from "googleapis";
 
 // 初始化 Google Drive API 客戶端
 export const drive = google.drive({
@@ -19,4 +19,4 @@ export const SEARCH_FIELDS = [
   "fileExtension",
   "size",
   "imageMediaMetadata",
-] as const;
+] as const satisfies readonly (keyof drive_v3.Schema$File)[];
