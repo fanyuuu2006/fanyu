@@ -271,7 +271,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               >
                 <Image
                   id={i.toString()}
-                  src={imgItem.url}
+                  src={imgItem.thumbnailLink || imgItem.url}
                   title={imgItem.name || imagesContent.noImages}
                   alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"

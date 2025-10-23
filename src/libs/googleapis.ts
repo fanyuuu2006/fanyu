@@ -19,4 +19,5 @@ export const SEARCH_FIELDS = [
   "fileExtension",
   "size",
   "imageMediaMetadata",
+  "thumbnailLink",
 ] as const satisfies readonly (keyof drive_v3.Schema$File)[];
