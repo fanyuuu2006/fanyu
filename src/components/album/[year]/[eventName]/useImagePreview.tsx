@@ -333,26 +333,29 @@ export const useImagePreview = ({
         ))}
 
         {/*下方預覽圖片切換欄 */}
-        <div className="fixed bottom-4">
-          <div className="relative mx-auto">
-            {event.images.map((imgItem, i) => {
-              return (
-                <div
-                  key={i}
-                  onClick={() => setImageIndex(i)}
-                  className={cn("absolute select-none cursor-pointer")}
-                  aria-label={`切換到圖片 ${imgItem.name || i}`}
-                >
-                  {/*eslint-disable-next-line @next/next/no-img-element*/}
-                  <img
-                    src={imgItem.thumbnailLink || FALLBACK_IMAGE}
-                    alt={imgItem.name || `圖片 ${i}`}
-                    className="h-full w-auto object-cover"
-                    onError={handleImageError}
-                  />
-                </div>
-              );
-            })}
+        <div className="fixed bottom-4 left-0 w-full flex justify-center">
+          <div className="relative flex gap-2 overflow-x-auto max-w-[90%] px-4 py-2 bg-black/40 backdrop-blur-md rounded-xl">
+            {event.images.map((imgItem, i) => (
+              <button
+                key={i}
+                onClick={() => setImageIndex(i)}
+                className={cn(
+                  "flex-shrink-0 rounded-lg overflow-hidden border-2 transition-transform duration-200",
+                  imageIndex === i
+                    ? "border-white scale-105"
+                    : "border-transparent hover:scale-105"
+                )}
+                aria-label={`切換到圖片 ${imgItem.name || i}`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imgItem.thumbnailLink || FALLBACK_IMAGE}
+                  alt={imgItem.name || `圖片 ${i}`}
+                  className="h-20 w-auto object-cover"
+                  onError={handleImageError}
+                />
+              </button>
+            ))}
           </div>
         </div>
       </previewModal.Container>
