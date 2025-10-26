@@ -44,12 +44,16 @@ export const EventLinkCard = ({
       <div className="rounded-3xl overflow-hidden">
         {/*eslint-disable-next-line @next/next/no-img-element*/}
         <img
-          src={isInView ? event.images[0].url : FALLBACK_IMAGE}
+          src={
+            isInView
+              ? event.images[0].url
+              : event.images[0].thumbnailLink || FALLBACK_IMAGE
+          }
           onError={(e) => {
             (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
           }}
           alt={`${year} ${event.name} 相簿封面`}
-          className="aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
+          className="w-full h-full aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
         />
       </div>
       <div className="text-base flex flex-col px-1 py-3">
