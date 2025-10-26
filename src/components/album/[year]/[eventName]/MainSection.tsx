@@ -4,7 +4,6 @@ import {
   RightOutlined,
   CaretLeftOutlined,
   CloseOutlined,
-  // InfoCircleOutlined,
   DownloadOutlined,
   InfoCircleOutlined,
 } from "@ant-design/icons";
@@ -129,7 +128,6 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     [previewModal]
   );
 
-  // 優化：使用 useMemo 計算圖片資訊欄位
   const imageInfoFields = useMemo(() => {
     if (!currentImage) return [];
 
@@ -172,7 +170,6 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     ];
   }, [currentImage, infoContent, language.Current]);
 
-  // 優化：使用 useMemo 計算導航按鈕
   const navigationButtons = useMemo(
     () => [
       {
