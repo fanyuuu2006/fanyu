@@ -1,3 +1,8 @@
+/**
+ * 圖片預覽 Hook
+ * 提供相簿圖片的預覽、導航、資訊顯示等功能
+ */
+
 import { Toast } from "@/components/custom/Toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FALLBACK_IMAGE } from "@/libs/album";
@@ -59,21 +64,23 @@ export const useImagePreview = ({
 }: {
   event: Album[number]["events"][number];
 }) => {
-  const [imageIndex, setImageIndex] = useState<number>(-1);
-  const isModalOpen = imageIndex > -1;
-  const currentImage = isModalOpen ? event.images[imageIndex] : null;
+  // 當前預覽的圖片索引，-1 表示未開啟預覽
+  const [imageIndex, setImageIndex] = useState<number>(0);
+  const currentImage = event.images[imageIndex];
 
-  const previewModal = useModal({
-    onClose: () => {
-      setImageIndex(-1);
-      if (infoModal.isShow) infoModal.Close();
-    },
-  });
+  // 主要預覽視窗的控制
+  const previewModal = useModal({});
+  // 圖片資訊視窗的控制
   const infoModal = useModal({});
 
+  // 取得當前語言設定
   const language = useLanguage();
   const imagePreviewContent = IMAGE_PREVIEW_CONTENT[language.Current];
 
+  /**
+   * 處理圖片載入錯誤
+   * 當圖片無法載入時，顯示備用圖片並提示錯誤訊息
+   */
   const handleImageError = useCallback(
     (e: React.SyntheticEvent) => {
       (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
@@ -85,16 +92,29 @@ export const useImagePreview = ({
     },
     [imagePreviewContent.imageLoadFailed]
   );
+
+  /**
+   * 切換到上一張圖片
+   * 如果目前是第一張，則循環到最後一張
+   */
   const handlePrevImage = useCallback(() => {
     setImageIndex((prev) => (prev === 0 ? event.images.length - 1 : prev - 1));
   }, [event.images.length]);
+
+  /**
+   * 切換到下一張圖片
+   * 如果目前是最後一張，則循環到第一張
+   */
   const handleNextImage = useCallback(() => {
     setImageIndex((prev) => (prev === event.images.length - 1 ? 0 : prev + 1));
   }, [event.images.length]);
 
+  /**
+   * 計算圖片資訊欄位
+   * 根據當前圖片的 metadata 動態生成顯示資訊
+   * 包含：檔案名稱、格式、建立時間、大小、尺寸
+   */
   const imageInfoFields = useMemo(() => {
-    if (!currentImage) return [];
-
     return [
       {
         label: imagePreviewContent.fileName,
@@ -134,6 +154,10 @@ export const useImagePreview = ({
     ];
   }, [currentImage, imagePreviewContent, language.Current]);
 
+  /**
+   * 導航按鈕配置
+   * 定義左右切換按鈕的圖示、位置和點擊事件
+   */
   const navigationButtons = useMemo(
     () => [
       {
@@ -152,8 +176,21 @@ export const useImagePreview = ({
     [handlePrevImage, handleNextImage]
   );
 
+  /**
+   * 預覽容器元件
+   * 渲染完整的圖片預覽介面，包括：
+   * - 頂部工具列（關閉、圖片名稱、下載、資訊按鈕）
+   * - 中央圖片顯示區域
+   * - 左右導航按鈕
+   * - 圖片資訊彈出視窗
+   */
   const Container = () => {
-    // 處理鍵盤事件
+    /**
+     * 鍵盤快捷鍵監聽
+     * - 左箭頭：上一張圖片
+     * - 右箭頭：下一張圖片
+     * - ESC：關閉預覽
+     */
     useEffect(() => {
       if (previewModal.isShow) return;
 
@@ -182,8 +219,9 @@ export const useImagePreview = ({
 
     return (
       <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
-        {/* Header */}
+        {/* Header - 頂部工具列 */}
         <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
+          {/* 關閉按鈕 */}
           <button
             className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
             onClick={previewModal.Close}
@@ -191,6 +229,7 @@ export const useImagePreview = ({
           >
             <CloseOutlined />
           </button>
+          {/* 圖片標題和進度 */}
           <div className="flex flex-col min-w-0 ms-2">
             <h3
               title={event.images[imageIndex].name || "無標題"}
@@ -198,11 +237,14 @@ export const useImagePreview = ({
             >
               {event.images[imageIndex].name}
             </h3>
+            {/* 圖片計數 (當前/總數) */}
             <span className="text-sm md:text-base text-[var(--text-color-muted)]">
               {imageIndex + 1} / {event.images.length}
             </span>
           </div>
+          {/* 右側功能按鈕群組 */}
           <div className="ms-auto text-3xl flex">
+            {/* 下載按鈕 */}
             <Link
               className="rounded-full p-2"
               href={event.images[imageIndex].url || ""}
@@ -214,6 +256,7 @@ export const useImagePreview = ({
             >
               <DownloadOutlined />
             </Link>
+            {/* 圖片資訊按鈕 */}
             <button
               className="rounded-full p-2"
               aria-label="詳細資訊"
@@ -221,17 +264,19 @@ export const useImagePreview = ({
             >
               <InfoCircleOutlined />
             </button>
+            {/* 圖片資訊彈出視窗 */}
             <infoModal.Container
               style={{
                 zIndex: 6990,
               }}
             >
               <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
-                {/* 標頭 */}
+                {/* 資訊視窗標頭 */}
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-color)]">
                   <h3 className="text-xl font-semibold bg-gradient-to-br  from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
                     {imagePreviewContent.title}
                   </h3>
+                  {/* 關閉資訊視窗按鈕 */}
                   <button
                     className="text-xl text-[var(--text-color-muted)] rounded-full p-2"
                     onClick={infoModal.Close}
@@ -241,8 +286,9 @@ export const useImagePreview = ({
                   </button>
                 </div>
 
-                {/* 內容 */}
+                {/* 圖片資訊內容 */}
                 <div className="space-y-4">
+                  {/* 動態渲染所有圖片資訊欄位 */}
                   {imageInfoFields.map((info, i) => (
                     <div key={i} className="flex flex-col">
                       <div className="text-sm text-[var(--text-color-muted)]">
@@ -259,6 +305,7 @@ export const useImagePreview = ({
           </div>
         </div>
 
+        {/* 主要圖片顯示區域 */}
         <Image
           priority
           src={event.images[imageIndex].url}
@@ -268,6 +315,7 @@ export const useImagePreview = ({
           width={event.images[imageIndex].imageMediaMetadata?.width}
           height={event.images[imageIndex].imageMediaMetadata?.height}
         />
+        {/* 左右導航按鈕 */}
         {navigationButtons.map((item, i) => (
           <button
             key={i}
@@ -285,8 +333,13 @@ export const useImagePreview = ({
     );
   };
 
+  // 回傳預覽功能的所有方法和容器元件
   return {
     ...previewModal,
     Container,
+    Open: (index: number) => {
+      setImageIndex(index);
+      return previewModal.Open();
+    },
   };
 };
