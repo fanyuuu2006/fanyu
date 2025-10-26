@@ -8,7 +8,7 @@ export type BurgerMenuProps = DistributiveOmit<
 export const BurgerMenu = ({ ...rest }: BurgerMenuProps) => {
   return (
     <label className="burger">
-      <input type="checkbox" {...rest} />
+      <input type="checkbox" id={rest.id || "burger-menu-toggle"} {...rest} />
       <span />
       <span />
       <span />
