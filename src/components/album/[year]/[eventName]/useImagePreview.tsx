@@ -331,6 +331,30 @@ export const useImagePreview = ({
             <item.icon />
           </button>
         ))}
+
+        {/*下方預覽圖片切換欄 */}
+        <div className="fixed bottom-4">
+          <div className="relative mx-auto">
+            {event.images.map((imgItem, i) => {
+              return (
+                <div
+                  key={i}
+                  onClick={() => setImageIndex(i)}
+                  className={cn("absolute select-none cursor-pointer")}
+                  aria-label={`切換到圖片 ${imgItem.name || i}`}
+                >
+                  {/*eslint-disable-next-line @next/next/no-img-element*/}
+                  <img
+                    src={imgItem.thumbnailLink || FALLBACK_IMAGE}
+                    alt={imgItem.name || `圖片 ${i}`}
+                    className="h-full w-auto object-cover"
+                    onError={handleImageError}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </previewModal.Container>
     );
   };
