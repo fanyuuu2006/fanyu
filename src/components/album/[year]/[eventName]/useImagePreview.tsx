@@ -177,6 +177,40 @@ export const useImagePreview = ({
   );
 
   /**
+   * 鍵盤快捷鍵監聽
+   * - 左箭頭：上一張圖片
+   * - 右箭頭：下一張圖片
+   * - ESC：關閉預覽
+   */
+  useEffect(() => {
+    if (!previewModal.isShow) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft":
+          e.preventDefault();
+          handlePrevImage();
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          handleNextImage();
+          break;
+        case "Escape":
+          e.preventDefault();
+          previewModal.Close();
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleNextImage, handlePrevImage, previewModal]);
+
+  /**
    * 預覽容器元件
    * 渲染完整的圖片預覽介面，包括：
    * - 頂部工具列（關閉、圖片名稱、下載、資訊按鈕）
@@ -185,44 +219,8 @@ export const useImagePreview = ({
    * - 圖片資訊彈出視窗
    */
   const Container = () => {
-    /**
-     * 鍵盤快捷鍵監聽
-     * - 左箭頭：上一張圖片
-     * - 右箭頭：下一張圖片
-     * - ESC：關閉預覽
-     */
-    useEffect(() => {
-      if (!previewModal.isShow) return;
-
-      const handleKeyDown = (e: KeyboardEvent) => {
-        switch (e.key) {
-          case "ArrowLeft":
-            e.preventDefault();
-            handlePrevImage();
-            break;
-          case "ArrowRight":
-            e.preventDefault();
-            handleNextImage();
-            break;
-          case "Escape":
-            e.preventDefault();
-            previewModal.Close();
-            break;
-          default:
-            break;
-        }
-      };
-
-      window.addEventListener("keydown", handleKeyDown);
-      return () => {
-        window.removeEventListener("keydown", handleKeyDown);
-      };
-    }, []);
-
     return (
-      <previewModal.Container
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
-      >
+      <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         {/* Header - 頂部工具列 */}
         <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
           {/* 關閉按鈕 */}

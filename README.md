@@ -58,11 +58,11 @@
 | 核心框架    | Next.js 15.3.4 (App Router) + Turbopack   |
 | 開發語言    | TypeScript 5                              |
 | UI 框架     | React 19.1.0                              |
-| 樣式系統    | Tailwind CSS 4.1.11                       |
+| 樣式系統    | Tailwind CSS 4.1.11 + PostCSS            |
 | 動畫效果    | Framer Motion 12.18.1                     |
 | 圖片處理    | Google Drive API + Next.js Image 優化     |
 | 圖示庫      | Ant Design Icons 6.0.0 + React Icons 5.5.0 |
-| UI 元件     | fanyucomponents 2.11.1 + Ant Design 5.26.1 |
+| UI 元件     | fanyucomponents 2.11.2 + Ant Design 5.26.1 |
 | 樣式工具    | clsx 2.1.1 + tailwind-merge 3.3.1 + styled-components 6.1.19 |
 | 通知系統    | SweetAlert2 11.22.0                       |
 | 評論系統    | Giscus 3.1.0（GitHub Discussions）        |
@@ -89,8 +89,9 @@
 │   │   │       └── [eventName]/  # 活動動態路由
 │   │   ├── api/              # API 路由
 │   │   │   ├── album/        # 相簿 API
-│   │   │   │   └── [year]/   # 年份 API
-│   │   │   ├── image/        # 圖片代理 API
+│   │   │   │   ├── route.ts  # 相簿列表 API
+│   │   │   │   ├── [year]/   # 年份 API
+│   │   │   │   └── image/    # 圖片代理 API
 │   │   │   └── proxy/        # 安全代理 API
 │   │   ├── guestbook/        # 留言板頁面
 │   │   ├── my/               # 個人頁面（倒計時）
@@ -100,6 +101,7 @@
 │   │   ├── page.tsx          # 首頁
 │   │   ├── metadata.ts       # SEO 元資料
 │   │   ├── sitemap.ts        # 動態網站地圖
+│   │   ├── robots.ts         # Robots.txt 生成
 │   │   ├── error.tsx         # 錯誤頁面
 │   │   └── not-found.tsx     # 404 頁面
 │   ├── components/           # React 元件
