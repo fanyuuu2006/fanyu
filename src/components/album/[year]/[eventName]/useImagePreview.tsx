@@ -192,7 +192,7 @@ export const useImagePreview = ({
      * - ESC：關閉預覽
      */
     useEffect(() => {
-      if (previewModal.isShow) return;
+      if (!previewModal.isShow) return;
 
       const handleKeyDown = (e: KeyboardEvent) => {
         switch (e.key) {
@@ -208,6 +208,8 @@ export const useImagePreview = ({
             e.preventDefault();
             previewModal.Close();
             break;
+          default:
+            break;
         }
       };
 
@@ -218,7 +220,9 @@ export const useImagePreview = ({
     }, []);
 
     return (
-      <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+      <previewModal.Container
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+      >
         {/* Header - 頂部工具列 */}
         <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
           {/* 關閉按鈕 */}
