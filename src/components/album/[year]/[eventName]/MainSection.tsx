@@ -58,6 +58,18 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     [imagesContent.imageLoadFailed]
   );
 
+  const handleImageClick = useCallback(
+    (index: number) => {
+      imagePreview.Open(index);
+    },
+    [imagePreview]
+  );
+
+  const handleImageLoad = useCallback((e: React.SyntheticEvent) => {
+    const target = e.target as HTMLImageElement;
+    target.style.opacity = "1";
+  }, []);
+
   return (
     <section className="min-h-screen">
       <div className="container">
@@ -106,16 +118,24 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               <div
                 key={`${i}-${imgItem.name}`}
                 className={cn(
-                  "aspect-square bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
+                  "relative aspect-square bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
                 )}
+                onClick={() => handleImageClick(i)}
               >
+                {/* 圖片預覽圖 */}
+                {/*eslint-disable-next-line @next/next/no-img-element*/}
+                <img
+                  src={imgItem.thumbnailLink || FALLBACK_IMAGE}
+                  alt={`${year} ${event.name} ${imgItem.name}`}
+                  className="h-full w-full object-cover"
+                />
                 <Image
                   id={i.toString()}
                   src={imgItem.url}
                   title={imgItem.name || imagesContent.noImages}
                   alt={`${year} ${event.name} ${imgItem.name}`}
-                  className="h-full w-full object-cover"
-                  onClick={() => imagePreview.Open(i)}
+                  className="absolute inset-0 w-full h-full object-cover opacity-0"
+                  onLoad={handleImageLoad}
                   onError={handleImageError}
                   width={imgItem.imageMediaMetadata?.width}
                   height={imgItem.imageMediaMetadata?.height}
