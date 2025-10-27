@@ -2,15 +2,12 @@
 import { CaretLeftOutlined } from "@ant-design/icons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCallback } from "react";
-import { cn } from "@/utils/className";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
-import { Toast } from "@/components/custom/Toast";
-import { FALLBACK_IMAGE } from "@/libs/album";
 import Link from "next/link";
-import Image from "next/image";
 import { useImagePreview } from "./useImagePreview";
+import { ImageCard } from "./ImageCard";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
@@ -46,17 +43,6 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     event,
   });
 
-  const handleImageError = useCallback(
-    (e: React.SyntheticEvent) => {
-      (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
-      console.error(e);
-      Toast.fire({
-        icon: "error",
-        text: imagesContent.imageLoadFailed,
-      });
-    },
-    [imagesContent.imageLoadFailed]
-  );
 
   const handleImageClick = useCallback(
     (index: number) => {
@@ -65,10 +51,6 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     [imagePreview]
   );
 
-  const handleImageLoad = useCallback((e: React.SyntheticEvent) => {
-    const target = e.target as HTMLImageElement;
-    target.style.opacity = "1";
-  }, []);
 
   return (
     <section className="min-h-screen">
@@ -115,34 +97,12 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             </div>
           ) : (
             event.images.map((imgItem, i) => (
-              <div
-                key={`${i}-${imgItem.name}`}
-                className={cn(
-                  "relative aspect-square bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]"
-                )}
+              <ImageCard
+                id={i.toString()}
+                image={imgItem}
+                key={i}
                 onClick={() => handleImageClick(i)}
-              >
-                {/* 圖片預覽圖 */}
-                {/*eslint-disable-next-line @next/next/no-img-element*/}
-                <img
-                  src={imgItem.thumbnailLink || FALLBACK_IMAGE}
-                  alt={`${year} ${event.name} ${imgItem.name}`}
-                  className="h-full w-full object-cover"
-                  onError={handleImageError}
-                />
-                <Image
-                  id={i.toString()}
-                  src={imgItem.url}
-                  title={imgItem.name || imagesContent.noImages}
-                  alt={`${year} ${event.name} ${imgItem.name}`}
-                  className="absolute inset-0 w-full h-full object-cover opacity-0"
-                  onLoad={handleImageLoad}
-                  onError={handleImageError}
-                  width={imgItem.imageMediaMetadata?.width}
-                  height={imgItem.imageMediaMetadata?.height}
-                  loading="lazy"
-                />
-              </div>
+              />
             ))
           )}
         </article>
