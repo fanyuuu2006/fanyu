@@ -128,6 +128,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   src={imgItem.thumbnailLink || FALLBACK_IMAGE}
                   alt={`${year} ${event.name} ${imgItem.name}`}
                   className="h-full w-full object-cover"
+                  onError={handleImageError}
                 />
                 <Image
                   id={i.toString()}
