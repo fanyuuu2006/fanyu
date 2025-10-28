@@ -50,7 +50,7 @@ export const EventLinkCard = ({
               : event.images[0].thumbnailLink || FALLBACK_IMAGE
           }
           onError={(e) => {
-            (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+            e.currentTarget.src = FALLBACK_IMAGE;
           }}
           alt={`${year} ${event.name} 相簿封面`}
           className="w-full h-full aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
@@ -58,8 +58,6 @@ export const EventLinkCard = ({
           height={event.images[0].imageMediaMetadata?.height}
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           loading="lazy"
-          placeholder="blur"
-          blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzg4OCIvPjwvc3ZnPg=="
         />
       </div>
       <div className="text-base flex flex-col px-1 py-3">
