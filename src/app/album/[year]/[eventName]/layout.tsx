@@ -115,6 +115,9 @@ function generateAlbumJsonLd({
   year: string;
   event: Album[number]["events"][number];
 }) {
+  if (!year || !event || event.images.length === 0) {
+    return null;
+  }
   // 如果有年份和事件名稱，生成特定事件的結構化資料
   return {
     "@context": "https://schema.org",
