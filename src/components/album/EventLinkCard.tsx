@@ -7,6 +7,7 @@ import { Album } from "@/types/album";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { useLanguage } from "@/contexts/LanguageContext";
 import Image from "next/image";
+import { cn } from "@/utils/className";
 
 export type EventLinkCardProps = DistributiveOmit<
   OverrideProps<
@@ -38,7 +39,7 @@ export const EventLinkCard = ({
       draggable={false}
       ref={ref}
       aria-label={`前往 ${year} ${event.name} 相簿`}
-      className={`relative group ${className}`}
+      className={cn("group", className)}
       href={`/album/${slugify(year)}/${slugify(event.name)}`}
       {...rest}
     >
@@ -54,8 +55,8 @@ export const EventLinkCard = ({
           }}
           alt={`${year} ${event.name} 相簿封面`}
           className="w-full h-full aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
-          width={event.images[0].imageMediaMetadata?.width}
-          height={event.images[0].imageMediaMetadata?.height}
+          width={event.images[0].imageMediaMetadata?.width || 800}
+          height={event.images[0].imageMediaMetadata?.height || 800}
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           loading="lazy"
         />
