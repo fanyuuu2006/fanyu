@@ -1,5 +1,5 @@
 import { profile } from "@/libs/profile";
-import album from "@/utils/album";
+import *  as album from "@/utils/album";
 import { slugify } from "@/utils/url";
 import { MetadataRoute } from "next";
 

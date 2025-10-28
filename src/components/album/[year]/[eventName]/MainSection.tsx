@@ -88,10 +88,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           aria-label={`${year}-${event.name}照片集`}
         >
           {event.images.length === 0 ? (
-            <div className="w-full text-center py-8">
-              <span className="text-2xl font-bold">
+            <div className="col-span-full flex flex-col items-center justify-center">
+              <h3 className="text-2xl md:text-3xl font-bold">
                 {imagesContent.noImages}
-              </span>
+              </h3>
             </div>
           ) : (
             <>
