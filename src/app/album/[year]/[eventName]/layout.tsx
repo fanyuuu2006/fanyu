@@ -1,6 +1,6 @@
 import { profile } from "@/libs/profile";
 import { Album } from "@/types/album";
-import album from "@/utils/album";
+import * as album from "@/utils/album";
 import { deslugify, slugify } from "@/utils/url";
 import { Metadata } from "next";
 import Script from "next/script";

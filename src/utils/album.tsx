@@ -3,12 +3,12 @@ import { Album } from "@/types/album";
 import { fetcher } from "@/utils/fetcher";
 import { slugify } from "@/utils/url";
 
-const years = async () =>
+export const years = async () =>
   fetcher<Album[number]["year"][]>(`${profile.url}/api/album`, {
     cache: "no-store",
   });
 
-const events = async (year: string) =>
+export const events = async (year: string) =>
   fetcher<Album[number]["events"][number]["name"][]>(
     `${profile.url}/api/album/${slugify(year)}`,
     {
@@ -16,7 +16,7 @@ const events = async (year: string) =>
     }
   );
 
-const images = async (year: string, eventName: string) =>
+export const images = async (year: string, eventName: string) =>
   fetcher<Album[number]["events"][number]["images"]>(
     `${profile.url}/api/album/${slugify(year)}/${slugify(eventName)}`,
     {
@@ -24,11 +24,9 @@ const images = async (year: string, eventName: string) =>
     }
   );
 
-const image = async (year: string, eventName: string, index: number) =>
+export const image = async (year: string, eventName: string, index: number) =>
   fetcher<Album[number]["events"][number]["images"][number]>(
     `${profile.url}/api/album/${slugify(year)}/${slugify(eventName)}/${index}`,
     { cache: "no-store" }
   );
 
-const album = { years, events, images, image };
-export default album;

@@ -1,5 +1,5 @@
 import { MainSection } from "@/components/album/MainSection";
-import album from "@/utils/album";
+import * as album from "@/utils/album";
 
 export default async function Page() {
   const years = await album.years();

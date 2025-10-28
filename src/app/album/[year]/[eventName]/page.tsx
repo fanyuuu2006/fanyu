@@ -1,5 +1,5 @@
 import { MainSection } from "@/components/album/[year]/[eventName]/MainSection";
-import album from "@/utils/album";
+import * as album from "@/utils/album";
 import { deslugify } from "@/utils/url";
 import React from "react";
 

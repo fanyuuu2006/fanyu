@@ -43,14 +43,12 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     event,
   });
 
-
   const handleImageClick = useCallback(
     (index: number) => {
       imagePreview.Open(index);
     },
     [imagePreview]
   );
-
 
   return (
     <section className="min-h-screen">
@@ -96,19 +94,21 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               </span>
             </div>
           ) : (
-            event.images.map((imgItem, i) => (
-              <ImageCard
-                id={i.toString()}
-                image={imgItem}
-                key={i}
-                onClick={() => handleImageClick(i)}
-              />
-            ))
+            <>
+              {event.images.map((imgItem, i) => (
+                <ImageCard
+                  id={i.toString()}
+                  image={imgItem}
+                  key={i}
+                  onClick={() => handleImageClick(i)}
+                />
+              ))}
+              <imagePreview.Container />
+            </>
           )}
         </article>
       </div>
       {/* 圖片預覽模態框 */}
-      <imagePreview.Container />
     </section>
   );
 };
