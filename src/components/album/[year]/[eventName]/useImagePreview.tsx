@@ -112,9 +112,13 @@ export const useImagePreview = ({
   /**
    * 計算圖片資訊欄位
    * 根據當前圖片的 metadata 動態生成顯示資訊
-   * 包含：檔案名稱、格式、建立時間、大小、尺寸
+   * 包含:檔案名稱、格式、建立時間、大小、尺寸
    */
   const imageInfoFields = useMemo(() => {
+    if (!currentImage) {
+      return [];
+    }
+    
     return [
       {
         label: imagePreviewContent.fileName,
@@ -212,13 +216,17 @@ export const useImagePreview = ({
 
   /**
    * 預覽容器元件
-   * 渲染完整的圖片預覽介面，包括：
-   * - 頂部工具列（關閉、圖片名稱、下載、資訊按鈕）
+   * 渲染完整的圖片預覽介面,包括:
+   * - 頂部工具列(關閉、圖片名稱、下載、資訊按鈕)
    * - 中央圖片顯示區域
    * - 左右導航按鈕
    * - 圖片資訊彈出視窗
    */
   const Container = () => {
+    if (!currentImage) {
+      return null;
+    }
+    
     return (
       <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         {/* Header - 頂部工具列 */}
@@ -234,10 +242,10 @@ export const useImagePreview = ({
           {/* 圖片標題和進度 */}
           <div className="flex flex-col min-w-0 ms-2">
             <h3
-              title={event.images[imageIndex].name || "無標題"}
+              title={currentImage.name || "無標題"}
               className="text-lg md:text-xl font-semibold truncate"
             >
-              {event.images[imageIndex].name}
+              {currentImage.name}
             </h3>
             {/* 圖片計數 (當前/總數) */}
             <span className="text-sm md:text-base text-[var(--text-color-muted)]">
@@ -249,12 +257,12 @@ export const useImagePreview = ({
             {/* 下載按鈕 */}
             <Link
               className="rounded-full p-2"
-              href={event.images[imageIndex].url || ""}
+              href={currentImage.url || ""}
               download={
-                event.images[imageIndex].name ||
-                `${imageIndex}.${event.images[imageIndex].fileExtension}`
+                currentImage.name ||
+                `${imageIndex}.${currentImage.fileExtension}`
               }
-              aria-label={`下載圖片 ${event.images[imageIndex].name}`}
+              aria-label={`下載圖片 ${currentImage.name}`}
             >
               <DownloadOutlined />
             </Link>
@@ -310,12 +318,12 @@ export const useImagePreview = ({
         {/* 主要圖片顯示區域 */}
         <Image
           priority
-          src={event.images[imageIndex].url}
-          alt={event.images[imageIndex].name || "圖片"}
+          src={currentImage.url}
+          alt={currentImage.name || "圖片"}
           className="select-none max-w-[95vw] max-h-[80vh] object-contain"
           onError={handleImageError}
-          width={event.images[imageIndex].imageMediaMetadata?.width}
-          height={event.images[imageIndex].imageMediaMetadata?.height}
+          width={currentImage.imageMediaMetadata?.width}
+          height={currentImage.imageMediaMetadata?.height}
         />
         {/* 左右導航按鈕 */}
         {navigationButtons.map((item, i) => (
