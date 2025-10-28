@@ -6,7 +6,6 @@ import { LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
 import Image from "next/image";
-import { useCallback } from "react";
 
 const IMAGE_CARD_CONTENT: LanguageContent<
   Record<"noImages" | "imageLoadFailed", string>
@@ -31,23 +30,21 @@ export type ImageCardProps = OverrideProps<
 export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
   const language = useLanguage();
   const imageContent = IMAGE_CARD_CONTENT[language.Current];
+  const title = image.name || imageContent.noImages;
 
-  const handleImageError = useCallback(
-    (e: React.SyntheticEvent) => {
-      (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
-      console.error(e);
-      Toast.fire({
-        icon: "error",
-        text: imageContent.imageLoadFailed,
-      });
-    },
-    [imageContent.imageLoadFailed]
-  );
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = FALLBACK_IMAGE;
+    console.error("Image load error:", e);
+    Toast.fire({
+      icon: "error",
+      text: imageContent.imageLoadFailed,
+    });
+  };
 
-  const handleImageLoad = useCallback((e: React.SyntheticEvent) => {
-    const target = e.target as HTMLImageElement;
-    target.style.opacity = "1";
-  }, []);
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.style.opacity = "1";
+  };
+
   return (
     <div
       className={cn(
@@ -56,24 +53,26 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
       )}
       {...rest}
     >
-      {/* 圖片預覽圖 */}
+      {/* 縮圖預覽 */}
       {/*eslint-disable-next-line @next/next/no-img-element*/}
       <img
         src={image.thumbnailLink || FALLBACK_IMAGE}
-        alt={`${image.name}`}
+        title={title}
+        alt={title}
         className="h-full w-full object-cover"
         onError={handleImageError}
       />
+      {/* 高清圖片 */}
       <Image
+        loading="lazy"
         src={image.url}
-        title={image.name || imageContent.noImages}
-        alt={`${image.name}`}
-        className="absolute inset-0 w-full h-full object-cover opacity-0"
+        title={title}
+        alt={title}
+        className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
         onLoad={handleImageLoad}
         onError={handleImageError}
         width={image.imageMediaMetadata?.width}
         height={image.imageMediaMetadata?.height}
-        loading="lazy"
       />
     </div>
   );
