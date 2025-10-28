@@ -26,12 +26,13 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
     | "title"
     | "fileName"
     | "fileExtension"
-    | "createdTime"
     | "untitled"
     | "unknown"
     | "size"
     | "widthXheight"
-    | "imageLoadFailed",
+    | "imageLoadFailed"
+    | "uploadTime"
+    | "createdTime",
     string
   >
 > = {
@@ -39,23 +40,25 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
     title: "圖片資訊",
     fileName: "檔案名稱",
     fileExtension: "檔案格式",
-    createdTime: "建立時間",
+    uploadTime: "上傳時間",
     untitled: "無標題",
     unknown: "未知",
     size: "檔案大小",
     widthXheight: "寬 x 高",
     imageLoadFailed: "載入圖片失敗",
+    createdTime: "建立時間",
   },
   english: {
     title: "Image Information",
     fileName: "File Name",
     fileExtension: "File Extension",
-    createdTime: "Created Time",
+    uploadTime: "Upload Time",
     untitled: "Untitled",
     unknown: "Unknown",
     size: "File Size",
     widthXheight: "Width x Height",
     imageLoadFailed: "Failed to load image",
+    createdTime: "Created Time",
   },
 };
 
@@ -118,7 +121,7 @@ export const useImagePreview = ({
     if (!currentImage) {
       return [];
     }
-    
+
     return [
       {
         label: imagePreviewContent.fileName,
@@ -129,19 +132,20 @@ export const useImagePreview = ({
         value: currentImage.fileExtension || imagePreviewContent.unknown,
       },
       {
-        label: imagePreviewContent.createdTime,
-        value:
-          new Date(currentImage.createdTime || "0").toLocaleString(
-            language.Current === "chinese" ? "zh-TW" : "en-US",
-            {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
-            }
-          ) || "",
+        label: imagePreviewContent.uploadTime,
+        value: currentImage.createdTime
+          ? new Date(currentImage.createdTime).toLocaleString(
+              language.Current === "chinese" ? "zh-TW" : "en-US",
+              {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              }
+            )
+          : imagePreviewContent.unknown,
       },
       {
         label: imagePreviewContent.size,
@@ -153,6 +157,27 @@ export const useImagePreview = ({
         label: imagePreviewContent.widthXheight,
         value: currentImage.imageMediaMetadata
           ? `${currentImage.imageMediaMetadata.width} x ${currentImage.imageMediaMetadata.height}`
+          : imagePreviewContent.unknown,
+      },
+      {
+        label: imagePreviewContent.createdTime,
+        value: currentImage.imageMediaMetadata?.time
+          ? new Date(
+              currentImage.imageMediaMetadata.time.replace(
+                /^(\d{4}):(\d{2}):(\d{2})/,
+                "$1-$2-$3"
+              )
+            ).toLocaleString(
+              language.Current === "chinese" ? "zh-TW" : "en-US",
+              {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              }
+            )
           : imagePreviewContent.unknown,
       },
     ];
@@ -226,7 +251,7 @@ export const useImagePreview = ({
     if (!currentImage) {
       return null;
     }
-    
+
     return (
       <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         {/* Header - 頂部工具列 */}
