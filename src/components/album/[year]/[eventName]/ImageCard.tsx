@@ -46,11 +46,13 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
   };
 
   return (
-    <div
+    <figure
       className={cn(
         "relative aspect-square bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]",
         className
       )}
+      itemScope
+      itemType="https://schema.org/ImageObject"
       {...rest}
     >
       {/* 縮圖預覽 */}
@@ -61,19 +63,35 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
         alt={title}
         className="h-full w-full object-cover"
         onError={handleImageError}
+        itemProp="thumbnail"
       />
-      {/* 高清圖片 */}
       <Image
-        loading="lazy"
+        loading={"lazy"}
         src={image.url}
         title={title}
         alt={title}
         className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
         onLoad={handleImageLoad}
         onError={handleImageError}
-        width={image.imageMediaMetadata?.width}
-        height={image.imageMediaMetadata?.height}
+        width={image.imageMediaMetadata?.width || 800}
+        height={image.imageMediaMetadata?.height || 800}
+        itemProp="contentUrl"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
-    </div>
+      {/* 結構化數據 - 隱藏但對 SEO 有幫助 */}
+      <meta itemProp="name" content={title} />
+      {image.imageMediaMetadata?.width && (
+        <meta
+          itemProp="width"
+          content={String(image.imageMediaMetadata.width)}
+        />
+      )}
+      {image.imageMediaMetadata?.height && (
+        <meta
+          itemProp="height"
+          content={String(image.imageMediaMetadata.height)}
+        />
+      )}
+    </figure>
   );
 };
