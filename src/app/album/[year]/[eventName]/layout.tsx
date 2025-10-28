@@ -141,7 +141,7 @@ function generateAlbumJsonLd({
     mainEntity: {
       "@type": "ImageObject",
       contentUrl:
-        `${profile.url}${event.images[0]}` || `${profile.url}/GameShow.jpg`, // 圖片 URL
+        `${profile.url}${event.images[0].url}` || `${profile.url}/GameShow.jpg`, // 圖片 URL
       name: `${year} ${event.name} 主要照片`, // 圖片名稱
       description: `${year} 年 ${event.name} 活動的主要照片`, // 圖片描述
     },
@@ -149,7 +149,7 @@ function generateAlbumJsonLd({
     // 關聯媒體 - 將所有圖片轉換為 ImageObject 陣列
     associatedMedia: event.images.map((image, index) => ({
       "@type": "ImageObject",
-      contentUrl: `${profile.url}${image}`, // 圖片 URL
+      contentUrl: `${profile.url}${image.url}`, // 圖片 URL
       name: `${year} ${event.name} 照片 ${index + 1}`, // 圖片名稱 (編號)
       description: `${year} 年 ${event.name} 活動照片`, // 圖片描述
     })),
