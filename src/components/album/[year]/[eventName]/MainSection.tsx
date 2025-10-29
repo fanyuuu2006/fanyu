@@ -54,7 +54,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     <section className="min-h-screen">
       <div className="container">
         {/* 返回按鈕區域 */}
-        <div className="w-full mb-6">
+        <nav className="w-full mb-6" aria-label="導航">
           <Tooltip placement="bottom" title={imagesContent.back}>
             <Link
               href="/album"
@@ -64,7 +64,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               <CaretLeftOutlined className="relative -left-[2%]" />
             </Link>
           </Tooltip>
-        </div>
+        </nav>
 
         <div className="flex flex-col items-center leading-tight mb-6 ">
           <h2 className="text-2xl md:text-3xl font-semibold text-[var(--text-color-muted)]">
@@ -73,25 +73,24 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           <h1 className="mb-4 text-3xl md:text-4xl font-bold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
             {event.name}
           </h1>
-          <span className="text-[var(--text-color-muted)]">
+          <p className="text-[var(--text-color-muted)]">
             {imagesContent.totalImages.replace(
               "{count}",
               event.images.length.toString()
             )}
-          </span>
+          </p>
         </div>
 
         {/* 圖片網格 */}
         <article
           className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1"
-          role="main"
-          aria-label={`${year}-${event.name}照片集`}
+          aria-label={`${year} ${event.name} 照片集`}
         >
           {event.images.length === 0 ? (
             <div className="col-span-full flex flex-col items-center justify-center">
-              <h3 className="text-2xl md:text-3xl font-bold">
+              <p className="text-2xl md:text-3xl font-bold">
                 {imagesContent.noImages}
-              </h3>
+              </p>
             </div>
           ) : (
             <>
@@ -108,7 +107,6 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           )}
         </article>
       </div>
-      {/* 圖片預覽模態框 */}
     </section>
   );
 };
