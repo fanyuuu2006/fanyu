@@ -341,15 +341,24 @@ export const useImagePreview = ({
         </div>
 
         {/* 主要圖片顯示區域 */}
-        <Image
-          priority
-          src={currentImage.url}
-          alt={currentImage.name || "圖片"}
-          className="select-none max-w-[95vw] max-h-[80vh] object-contain"
-          onError={handleImageError}
-          width={currentImage.imageMediaMetadata?.width}
-          height={currentImage.imageMediaMetadata?.height}
-        />
+        <div
+          className="max-w-[95vw] max-h-[80vh]"
+          style={{
+            width: currentImage.imageMediaMetadata?.width,
+            height: currentImage.imageMediaMetadata?.height,
+          }}
+        >
+          <Image
+            priority
+            src={currentImage.url}
+            alt={currentImage.name || "圖片"}
+            className="w-full h-full object-contain"
+            onError={handleImageError}
+            width={currentImage.imageMediaMetadata?.width}
+            height={currentImage.imageMediaMetadata?.height}
+          />
+        </div>
+
         {/* 左右導航按鈕 */}
         {navigationButtons.map((item, i) => (
           <button
