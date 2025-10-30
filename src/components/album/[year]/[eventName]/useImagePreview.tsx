@@ -85,8 +85,8 @@ export const useImagePreview = ({
    * 當圖片無法載入時，顯示備用圖片並提示錯誤訊息
    */
   const handleImageError = useCallback(
-    (e: React.SyntheticEvent) => {
-      (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+    (e: React.SyntheticEvent<HTMLImageElement>) => {
+      e.currentTarget.src = FALLBACK_IMAGE;
       console.error(e);
       Toast.fire({
         icon: "error",
@@ -95,14 +95,6 @@ export const useImagePreview = ({
     },
     [imagePreviewContent.imageLoadFailed]
   );
-
-  /**
-   * 處理圖片載入成功
-   * 當圖片成功載入後，將圖片透明度設為 1 以顯示圖片
-   */
-  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.style.opacity = "1";
-  };
 
   /**
    * 切換到上一張圖片
@@ -352,28 +344,25 @@ export const useImagePreview = ({
 
         {/* 主要圖片顯示區域 */}
         <div
-          className="relative max-w-[95vw] max-h-[80vh]"
+          className="max-w-[95vw] max-h-[80vh]"
           style={{
-            width: currentImage.imageMediaMetadata?.width,
-            height: currentImage.imageMediaMetadata?.height,
+            width: currentImage.imageMediaMetadata?.width
+              ? `${currentImage.imageMediaMetadata.width}px`
+              : "auto",
+            height: currentImage.imageMediaMetadata?.height
+              ? `${currentImage.imageMediaMetadata.height}px`
+              : "auto",
           }}
         >
-          {/*eslint-disable-next-line @next/next/no-img-element*/}
-          <img
-            src={currentImage.thumbnailLink || FALLBACK_IMAGE}
-            className="h-full w-full object-cover"
-            alt={title}
-            title={title}
-            onError={handleImageError}
-          />
           <Image
             priority
             src={currentImage.url}
-            className="absolute w-full h-full object-contain opacity-0 transition-opacity duration-300"
+            blurDataURL={currentImage.thumbnailLink || FALLBACK_IMAGE}
+            placeholder="blur"
+            className="w-full h-full object-contain"
             alt={title}
             title={title}
             onError={handleImageError}
-            onLoad={handleImageLoad}
             width={currentImage.imageMediaMetadata?.width}
             height={currentImage.imageMediaMetadata?.height}
           />
