@@ -97,6 +97,14 @@ export const useImagePreview = ({
   );
 
   /**
+   * 處理圖片載入成功
+   * 當圖片成功載入後，將圖片透明度設為 1 以顯示圖片
+   */
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.style.opacity = "1";
+  };
+
+  /**
    * 切換到上一張圖片
    * 如果目前是第一張，則循環到最後一張
    */
@@ -252,6 +260,8 @@ export const useImagePreview = ({
       return null;
     }
 
+    const title = currentImage.name || imagePreviewContent.untitled;
+
     return (
       <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         {/* Header - 頂部工具列 */}
@@ -342,18 +352,28 @@ export const useImagePreview = ({
 
         {/* 主要圖片顯示區域 */}
         <div
-          className="max-w-[95vw] max-h-[80vh]"
+          className="relative max-w-[95vw] max-h-[80vh]"
           style={{
             width: currentImage.imageMediaMetadata?.width,
             height: currentImage.imageMediaMetadata?.height,
           }}
         >
+          {/*eslint-disable-next-line @next/next/no-img-element*/}
+          <img
+            src={currentImage.thumbnailLink || FALLBACK_IMAGE}
+            className="h-full w-full object-cover"
+            alt={title}
+            title={title}
+            onError={handleImageError}
+          />
           <Image
             priority
             src={currentImage.url}
-            alt={currentImage.name || "圖片"}
-            className="w-full h-full object-contain"
+            className="absolute w-full h-full object-contain opacity-0 transition-opacity duration-300"
+            alt={title}
+            title={title}
             onError={handleImageError}
+            onLoad={handleImageLoad}
             width={currentImage.imageMediaMetadata?.width}
             height={currentImage.imageMediaMetadata?.height}
           />
@@ -376,6 +396,7 @@ export const useImagePreview = ({
       </previewModal.Container>
     );
   };
+  Container.displayName = "ImagePreviewContainer";
 
   // 回傳預覽功能的所有方法和容器元件
   return {
