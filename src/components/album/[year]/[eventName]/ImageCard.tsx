@@ -6,6 +6,7 @@ import { LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
 import Image from "next/image";
+import { useState } from "react";
 
 const IMAGE_CARD_CONTENT: LanguageContent<
   Record<"noImages" | "imageLoadFailed", string>
@@ -31,6 +32,7 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
   const language = useLanguage();
   const imageContent = IMAGE_CARD_CONTENT[language.Current];
   const title = image.name || imageContent.noImages;
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
@@ -39,10 +41,6 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
       icon: "error",
       text: imageContent.imageLoadFailed,
     });
-  };
-
-  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.style.opacity = "1";
   };
 
   return (
@@ -63,15 +61,19 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
         alt={title}
         className="h-full w-full object-cover"
         onError={handleImageError}
-        itemProp="thumbnail"
       />
       <Image
         loading={"lazy"}
         src={image.url}
         title={title}
         alt={title}
-        className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
-        onLoad={handleImageLoad}
+        className={cn(
+          "absolute inset-0 w-full h-full object-cover transition-opacity duration-300",
+          {
+            "opacity-0": !loaded,
+          }
+        )}
+        onLoadingComplete={() => setLoaded(true)}
         onError={handleImageError}
         width={image.imageMediaMetadata?.width || 800}
         height={image.imageMediaMetadata?.height || 800}
@@ -80,6 +82,10 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
       />
       {/* 結構化數據 - 隱藏但對 SEO 有幫助 */}
       <meta itemProp="name" content={title} />
+      <meta
+        itemProp="thumbnailUrl"
+        content={image.thumbnailLink || FALLBACK_IMAGE}
+      />
       {image.imageMediaMetadata?.width && (
         <meta
           itemProp="width"
