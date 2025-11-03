@@ -52,15 +52,14 @@ export const HeroSection = () => {
       [
         c063.variable(`  name`),
         c063.default(": "),
-        c063.string(`'${profile.name[Language.Current]}'`),
+        c063.string(`'${profile.name[Language.Current]}'`, {
+          as: Link,
+          href: "/#aboutMe",
+        }),
         c063.default(","),
       ],
       [
-        c063.variable(`  nickname`, 
-          {
-            as: "span",
-          }
-        ),
+        c063.variable(`  nickname`),
         c063.default(": "),
         c063.string(`'${profile.nickname[Language.Current]}'`),
         c063.default(","),
