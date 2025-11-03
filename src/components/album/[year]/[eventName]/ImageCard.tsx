@@ -63,7 +63,6 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
       />
       {/*eslint-disable-next-line @next/next/no-img-element*/}
       <img
-        loading={"lazy"}
         src={image.url}
         title={title}
         alt={title}
