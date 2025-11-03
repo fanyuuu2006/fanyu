@@ -35,7 +35,7 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = FALLBACK_IMAGE;
-    console.error("Image load error:", e);
+    console.error(imageContent.imageLoadFailed, e);
     Toast.fire({
       icon: "error",
       text: imageContent.imageLoadFailed,
@@ -78,7 +78,6 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
         width={image.imageMediaMetadata?.width || 800}
         height={image.imageMediaMetadata?.height || 800}
         itemProp="contentUrl"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
       {/* 結構化數據 - 隱藏但對 SEO 有幫助 */}
       <meta itemProp="name" content={title} />
