@@ -5,9 +5,9 @@ import { useCallback } from "react";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
-import Link from "next/link";
 import { useImagePreview } from "./useImagePreview";
 import { ImageCard } from "./ImageCard";
+import { useRouter } from "next/navigation";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
@@ -36,6 +36,7 @@ const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
 
 export const MainSection = ({ year, event }: MainSectionProps) => {
   const language = useLanguage();
+  const router = useRouter();
 
   const imagesContent = IMAGES_CONTENT[language.Current];
 
@@ -50,19 +51,23 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
     [imagePreview]
   );
 
+  const handleBackClick = useCallback(() => {
+    router.back();
+  }, [router]);
+
   return (
     <section className="min-h-screen">
       <div className="container">
         {/* 返回按鈕區域 */}
         <div className="w-full mb-6">
           <Tooltip placement="bottom" title={imagesContent.back}>
-            <Link
-              href="/album"
+            <button
+              onClick={handleBackClick}
               aria-label={imagesContent.back}
               className="btn text-lg lg:text-xl flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-full "
             >
               <CaretLeftOutlined className="relative -left-[2%]" />
-            </Link>
+            </button>
           </Tooltip>
         </div>
 
