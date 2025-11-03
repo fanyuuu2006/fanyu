@@ -17,7 +17,6 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import { useModal } from "fanyucomponents";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -354,11 +353,9 @@ export const useImagePreview = ({
               : "auto",
           }}
         >
-          <Image
-            priority
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={currentImage.url}
-            blurDataURL={currentImage.thumbnailLink || FALLBACK_IMAGE}
-            placeholder="blur"
             className="w-full h-full object-contain"
             alt={title}
             title={title}

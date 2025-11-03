@@ -5,7 +5,6 @@ import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
-import Image from "next/image";
 import { useState } from "react";
 
 const IMAGE_CARD_CONTENT: LanguageContent<
@@ -62,7 +61,8 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
         className="h-full w-full object-cover"
         onError={handleImageError}
       />
-      <Image
+      {/*eslint-disable-next-line @next/next/no-img-element*/}
+      <img
         loading={"lazy"}
         src={image.url}
         title={title}
@@ -73,7 +73,7 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
             "opacity-0": !loaded,
           }
         )}
-        onLoadingComplete={() => setLoaded(true)}
+        onLoad={() => setLoaded(true)}
         onError={handleImageError}
         width={image.imageMediaMetadata?.width || 800}
         height={image.imageMediaMetadata?.height || 800}
