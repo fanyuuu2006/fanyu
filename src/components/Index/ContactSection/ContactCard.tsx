@@ -125,7 +125,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
                     content={item.info.id} // 要複製的內容
                     className="text-sm md:text-base text-[var(--text-color-muted)]"
                   >
-                    <h6>{item.info.id}</h6>
+                    @<span>{item.info.id}</span>
                   </CopyButton>
                 </div>
               </div>

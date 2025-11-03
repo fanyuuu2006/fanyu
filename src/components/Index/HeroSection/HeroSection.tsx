@@ -56,7 +56,11 @@ export const HeroSection = () => {
         c063.default(","),
       ],
       [
-        c063.variable(`  nickname`),
+        c063.variable(`  nickname`, 
+          {
+            as: "span",
+          }
+        ),
         c063.default(": "),
         c063.string(`'${profile.nickname[Language.Current]}'`),
         c063.default(","),
