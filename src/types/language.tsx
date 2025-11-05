@@ -1,5 +1,5 @@
-import { LanguageOptions } from "@/libs/language";
+import { languageOptions } from "@/libs/language";
 
-export type LanguageOption = (typeof LanguageOptions)[number];
+export type LanguageOption = (typeof languageOptions)[number];
 
 export type LanguageContent<T> = Record<LanguageOption, T>;

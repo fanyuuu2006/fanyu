@@ -1,2 +1,1 @@
-
-export const LanguageOptions = ["chinese", "english"] as const;
+export const languageOptions = ["chinese", "english"] as const;

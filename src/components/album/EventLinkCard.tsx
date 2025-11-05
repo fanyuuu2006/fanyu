@@ -6,7 +6,6 @@ import { useInView } from "framer-motion";
 import { Album } from "@/types/album";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { useLanguage } from "@/contexts/LanguageContext";
-import Image from "next/image";
 import { cn } from "@/utils/className";
 
 export type EventLinkCardProps = DistributiveOmit<
@@ -44,21 +43,20 @@ export const EventLinkCard = ({
       {...rest}
     >
       <div className="rounded-3xl overflow-hidden">
-        <Image
+        {/*eslint-disable-next-line @next/next/no-img-element*/}
+        <img
           src={
             isInView
               ? event.images[0].url
               : event.images[0].thumbnailLink || FALLBACK_IMAGE
           }
-          onError={(e) => {
+          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
             e.currentTarget.src = FALLBACK_IMAGE;
           }}
           alt={`${year} ${event.name} 相簿封面`}
           className="w-full h-full aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
           width={event.images[0].imageMediaMetadata?.width || 800}
           height={event.images[0].imageMediaMetadata?.height || 800}
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          loading="lazy"
         />
       </div>
       <div className="text-base flex flex-col px-1 py-3">

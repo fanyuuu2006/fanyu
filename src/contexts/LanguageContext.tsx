@@ -1,5 +1,5 @@
 "use client";
-import { LanguageOptions } from "@/libs/language";
+import { languageOptions } from "@/libs/language";
 import { LanguageOption } from "@/types/language";
 import { DistributiveOmit } from "fanyucomponents";
 import { createContext, useContext, useState } from "react";
@@ -28,9 +28,9 @@ export const LanguageProvider = ({
       <button
         onClick={() => {
           setLanguage((prev) => {
-            const currIdx = LanguageOptions.indexOf(prev);
-            const nextIdx = (currIdx + 1) % LanguageOptions.length;
-            return LanguageOptions[nextIdx];
+            const currIdx = languageOptions.indexOf(prev);
+            const nextIdx = (currIdx + 1) % languageOptions.length;
+            return languageOptions[nextIdx];
           });
         }}
         {...props}
