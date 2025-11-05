@@ -1,11 +1,11 @@
-import {drive, SEARCH_FIELDS} from "@/libs/googleapis";
+import { drive, SEARCH_FIELDS } from "@/libs/googleapis";
 import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
 
 export const listAllFiles = async (
   query: string
-): Promise<drive_v3.Schema$File[]> => {
+): Promise<Pick<drive_v3.Schema$File, (typeof SEARCH_FIELDS)[number]>[]> => {
   const files: drive_v3.Schema$File[] = [];
   let pageToken: string | undefined | null = undefined;
 
