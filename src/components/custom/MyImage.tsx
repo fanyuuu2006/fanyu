@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { Toast } from "./Toast";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -24,9 +24,9 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
   ({ src, alt, onError, ...rest }, ref) => {
     const language = useLanguage();
     const imageContent = IMAGE_CONTENT[language.Current];
-
+    const [hasError, setHasError] = useState<boolean>(false);
     const handleImageError: React.ReactEventHandler<HTMLImageElement> = (e) => {
-      e.currentTarget.src = FALLBACK_IMAGE;
+      setHasError(true);
       console.error(imageContent.imageLoadFailed, e);
       Toast.fire({
         icon: "error",
@@ -38,7 +38,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
-        src={src || FALLBACK_IMAGE}
+        src={hasError ? FALLBACK_IMAGE : src || FALLBACK_IMAGE}
         ref={ref}
         alt={alt}
         onError={handleImageError}
