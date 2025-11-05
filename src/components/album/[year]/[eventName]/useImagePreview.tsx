@@ -3,9 +3,8 @@
  * 提供相簿圖片的預覽、導航、資訊顯示等功能
  */
 
-import { Toast } from "@/components/custom/Toast";
+import { MyImage } from "@/components/custom/MyImage";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { FALLBACK_IMAGE } from "@/libs/album";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
@@ -29,7 +28,6 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
     | "unknown"
     | "size"
     | "widthXheight"
-    | "imageLoadFailed"
     | "uploadTime"
     | "createdTime",
     string
@@ -44,7 +42,6 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
     unknown: "未知",
     size: "檔案大小",
     widthXheight: "寬 x 高",
-    imageLoadFailed: "載入圖片失敗",
     createdTime: "建立時間",
   },
   english: {
@@ -56,7 +53,6 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
     unknown: "Unknown",
     size: "File Size",
     widthXheight: "Width x Height",
-    imageLoadFailed: "Failed to load image",
     createdTime: "Created Time",
   },
 };
@@ -78,22 +74,6 @@ export const useImagePreview = ({
   // 取得當前語言設定
   const language = useLanguage();
   const imagePreviewContent = IMAGE_PREVIEW_CONTENT[language.Current];
-
-  /**
-   * 處理圖片載入錯誤
-   * 當圖片無法載入時，顯示備用圖片並提示錯誤訊息
-   */
-  const handleImageError = useCallback(
-    (e: React.SyntheticEvent<HTMLImageElement>) => {
-      e.currentTarget.src = FALLBACK_IMAGE;
-      console.error(e);
-      Toast.fire({
-        icon: "error",
-        text: imagePreviewContent.imageLoadFailed,
-      });
-    },
-    [imagePreviewContent.imageLoadFailed]
-  );
 
   /**
    * 切換到上一張圖片
@@ -353,13 +333,11 @@ export const useImagePreview = ({
               : "auto",
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <MyImage
             src={currentImage.url}
             className="w-full h-full object-contain"
             alt={title}
             title={title}
-            onError={handleImageError}
             width={currentImage.imageMediaMetadata?.width}
             height={currentImage.imageMediaMetadata?.height}
           />
