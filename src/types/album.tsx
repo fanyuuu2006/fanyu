@@ -1,13 +1,9 @@
-import { SEARCH_FIELDS } from "@/libs/googleapis";
-import { drive_v3 } from "googleapis";
+import { MyDriveFile } from "./googleapis";
 
 /**
  * 圖片項目的型別，包含 Google Drive 檔案資訊和相簿 URL
  */
-export type AlbumImageItem = Pick<
-  drive_v3.Schema$File,
-  (typeof SEARCH_FIELDS)[number]
-> & {
+export type AlbumImageItem = MyDriveFile & {
   /** 圖片的 API URL，用於前端顯示 */
   url: string;
 };

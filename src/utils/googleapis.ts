@@ -2,17 +2,22 @@ import { drive, SEARCH_FIELDS } from "@/libs/googleapis";
 import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
+import { MyDriveFile } from "../types/googleapis";
 
-export const listAllFiles = async (
-  query: string
-): Promise<Pick<drive_v3.Schema$File, (typeof SEARCH_FIELDS)[number]>[]> => {
-  const files: drive_v3.Schema$File[] = [];
+export const listAllFiles = async <
+  K extends (keyof drive_v3.Schema$File)[] = typeof SEARCH_FIELDS
+>(
+  query: string,
+  searchFields?: K
+): Promise<MyDriveFile[]> => {
+  const files: MyDriveFile[] = [];
+  const fieldsToUse = searchFields ?? SEARCH_FIELDS;
   let pageToken: string | undefined | null = undefined;
 
   do {
     const res = (await drive.files.list({
       q: query,
-      fields: `nextPageToken, files(${SEARCH_FIELDS.join(",")})`,
+      fields: `nextPageToken, files(${fieldsToUse.join(",")})`,
       pageSize: 1000,
       pageToken,
     })) as unknown as GaxiosResponse<drive_v3.Schema$FileList>;
@@ -25,7 +30,7 @@ export const listAllFiles = async (
 };
 
 export const toImageItem = (
-  file: drive_v3.Schema$File
+  file: MyDriveFile
 ): Album[number]["events"][number]["images"][number] => {
   return Object.assign(file, {
     url: `/api/album/image/${file.id}`,
