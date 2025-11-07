@@ -9,8 +9,8 @@ export const listAllFiles = async <
 >(
   query: string,
   searchFields?: K
-): Promise<MyDriveFile[]> => {
-  const files: MyDriveFile[] = [];
+): Promise<MyDriveFile<K>[]> => {
+  const files: MyDriveFile<K>[] = [];
   const fieldsToUse = searchFields ?? SEARCH_FIELDS;
   let pageToken: string | undefined | null = undefined;
 

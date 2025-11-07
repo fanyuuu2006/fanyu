@@ -5,7 +5,8 @@ export async function GET() {
   try {
     const rootFolderId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID;
     const years = await listAllFiles(
-      `'${rootFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder'`
+      `'${rootFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder'`,
+      ["id", "name"]
     );
     return NextResponse.json(years.map((folder) => folder.name));
   } catch (error) {

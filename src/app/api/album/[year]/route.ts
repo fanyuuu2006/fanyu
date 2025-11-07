@@ -14,7 +14,8 @@ export async function GET(
 
     // 找年份資料夾
     const yearFolders = await listAllFiles(
-      `'${rootFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder'`
+      `'${rootFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder'`,
+      ["id", "name"]
     );
     const yearFolder = yearFolders.find((f) => f.name === year);
     if (!yearFolder) {
@@ -24,6 +25,8 @@ export async function GET(
     // 找事件資料夾
     const eventFolders = await listAllFiles(
       `'${yearFolder.id}' in parents and mimeType = 'application/vnd.google-apps.folder'`
+      , ["name"]
+      
     );
     const eventNames = eventFolders.map((f) => f.name);
 
