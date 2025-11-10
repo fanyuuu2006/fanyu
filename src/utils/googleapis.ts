@@ -5,12 +5,12 @@ import { drive_v3 } from "googleapis";
 import { MyDriveFile } from "../types/googleapis";
 
 export const listAllFiles = async <
-  K extends (keyof drive_v3.Schema$File)[] = typeof SEARCH_FIELDS
+  Keys extends (keyof drive_v3.Schema$File)[] = typeof SEARCH_FIELDS
 >(
   query: string,
-  searchFields?: K
-): Promise<MyDriveFile<K>[]> => {
-  const files: MyDriveFile<K>[] = [];
+  searchFields?: Keys
+): Promise<MyDriveFile<Keys>[]> => {
+  const files: MyDriveFile<Keys>[] = [];
   const fieldsToUse = searchFields ?? SEARCH_FIELDS;
   let pageToken: string | undefined | null = undefined;
 
