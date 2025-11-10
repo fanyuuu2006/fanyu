@@ -48,7 +48,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           {item.events.length}
         </span> */}
         <button
-          className={cn(`text-3xl ms-auto transition-transform`, {
+          className={cn(`text-3xl ml-auto transition-transform`, {
             "-rotate-90": isCollapseOpen,
           })}
           onClick={() => {

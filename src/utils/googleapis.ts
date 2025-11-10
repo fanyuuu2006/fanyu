@@ -33,6 +33,7 @@ export const toImageItem = (
   file: MyDriveFile
 ): Album[number]["events"][number]["images"][number] => {
   return Object.assign(file, {
+    thumbnailLink: `/api/proxy?url=${file.thumbnailLink}`,
     url: `/api/album/image/${file.id}`,
   });
 };
