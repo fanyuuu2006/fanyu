@@ -1,4 +1,4 @@
-import { Course, Grade } from "@/types/experience";
+import { Course, Duration, Grade } from "@/types/experience";
 
 /**
  * 計算 GPA
@@ -21,8 +21,11 @@ export const calculateGPA = (
   gpa: number;
   totalCredits: number;
 } => {
-  const _map: Record<Exclude<Grade, "通過">, number | ((credit: number) => number)> = {
-    "A+": (credit)=> credit > 2 ? 4.3 : 4,
+  const _map: Record<
+    Exclude<Grade, "通過">,
+    number | ((credit: number) => number)
+  > = {
+    "A+": (credit) => (credit > 2 ? 4.3 : 4),
     A: 4,
     "A-": 3.7,
     "B+": 3.3,
@@ -66,4 +69,9 @@ export const calculateGPA = (
   }
 
   return { gpa, totalCredits };
+};
+
+export const parseDate = (d: Duration): Date => {
+  if (typeof d === "string") return new Date(d);
+  return new Date(d.end ?? d.start);
 };

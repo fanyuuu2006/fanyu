@@ -1,6 +1,6 @@
 import { Semester, Course, ExperienceItem } from "@/types/experience";
 import { cn } from "@/utils/className";
-import { calculateGPA } from "@/utils/education";
+import { calculateGPA } from "@/utils/experience";
 import {
   LinkOutlined,
   EnvironmentOutlined,

@@ -5,11 +5,12 @@ import { profile } from "@/libs/profile";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
-import { Duration, ExperienceTab } from "@/types/experience";
+import { ExperienceTab } from "@/types/experience";
 import { experienceTabIcons, experienceTabs } from "@/libs/education";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
 import { Title } from "@/components/custom/Title";
+import { parseDate } from "@/utils/experience";
 
 type ExperienceContent = Record<
   "experience" | ExperienceTab | "noExperience" | "viewMore" | "collapse",
@@ -43,11 +44,6 @@ const getExperienceContent = (language: LanguageOption): ExperienceContent =>
 
 const viewLimit = 4;
 
-const getDateValue = (d: Duration) => {
-  if (typeof d === "string") return new Date(d).getTime();
-  return new Date(d.end ?? d.start).getTime();
-};
-
 export const ExperienceSection = () => {
   const Language = useLanguage();
   const experienceContent = getExperienceContent(Language.Current);
@@ -55,7 +51,7 @@ export const ExperienceSection = () => {
   const [showMore, setShowMore] = useState(false);
 
   const sortedItems = profile.experience[Tab].sort(
-    (a, b) => getDateValue(b.duration) - getDateValue(a.duration)
+    (a, b) => parseDate(b.duration).getTime() - parseDate(a.duration).getTime()
   );
 
   const defaultItems = sortedItems.slice(0, viewLimit);

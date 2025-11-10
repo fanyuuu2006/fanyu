@@ -1,6 +1,7 @@
 import { projectTagCategories } from "@/libs/projects";
 import { LanguageContent } from "./language";
 import { RepoString } from "./github";
+import { DateString } from ".";
 
 export type ProjectLinkCategory = "demo" | "github" | "package";
 
@@ -12,7 +13,7 @@ export type ProjectItem = {
   imageSrc: string;
   title: LanguageContent<string>;
   links: { category: ProjectLinkCategory; href: string }[];
-  time: string;
+  time: DateString;
   about: LanguageContent<string>;
   description: LanguageContent<string[]>;
   tags: ProjectTag[];
