@@ -1,5 +1,6 @@
 import { ContactCategory, ContactItem } from "@/types/contact";
 import { LanguageContent } from "@/types/language";
+import { proxyUrl } from "@/utils/url";
 import {
   BilibiliOutlined,
   DiscordOutlined,
@@ -193,7 +194,7 @@ export const ContactData: Record<ContactCategory, ContactItem[]> = {
         name: "飯魚",
         id: "1488181486",
         image: {
-          src: "/api/proxy?url=https://i1.hdslb.com/bfs/face/10300665780b53d6ea2977d2c4bac163e3bfcff5.jpg",
+          src: proxyUrl("https://i1.hdslb.com/bfs/face/10300665780b53d6ea2977d2c4bac163e3bfcff5.jpg"),
         },
       },
       href: "https://space.bilibili.com/1488181486",

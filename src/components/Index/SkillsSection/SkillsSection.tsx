@@ -8,6 +8,7 @@ import { SkillCategory } from "@/types/skill";
 import { profile } from "@/libs/profile";
 import { Title } from "@/components/custom/Title";
 import { Tooltip } from "antd";
+import { proxyUrl } from "@/utils/url";
 
 const SKILLS_CONTENT: LanguageContent<
   Record<"skills" | SkillCategory, string>
@@ -61,7 +62,7 @@ export const SkillsSection = () => {
                         {/* eslint-disable-next-line @next/next/no-img-element*/}
                         <img
                           alt={skillItem.title}
-                          src={skillItem.src}
+                          src={proxyUrl(skillItem.src)}
                           width={300}
                           height={300}
                           className="object-cover transition-transform"

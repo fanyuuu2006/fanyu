@@ -3,6 +3,7 @@ import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
 import { drive_v3 } from "googleapis";
 import { MyDriveFile } from "../types/googleapis";
+import { proxyUrl } from "./url";
 
 export const listAllFiles = async <
   Keys extends (keyof drive_v3.Schema$File)[] = typeof SEARCH_FIELDS
@@ -33,7 +34,9 @@ export const toImageItem = (
   file: MyDriveFile
 ): Album[number]["events"][number]["images"][number] => {
   return Object.assign(file, {
-    thumbnailLink: `/api/proxy?url=${file.thumbnailLink}`,
+    thumbnailLink: file.thumbnailLink
+      ? proxyUrl(file.thumbnailLink)
+      : undefined,
     url: `/api/album/image/${file.id}`,
   });
 };
