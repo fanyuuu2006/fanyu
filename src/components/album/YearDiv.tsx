@@ -5,8 +5,9 @@ import { LanguageContent } from "@/types/language";
 import { useState } from "react";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
-import { CaretRightOutlined } from "@ant-design/icons";
+import { CaretLeftOutlined } from "@ant-design/icons";
 import { Album } from "@/types/album";
+import { cn } from "@/utils/className";
 
 export type YearDivProps = OverrideProps<
   HTMLMotionProps<"article">,
@@ -37,22 +38,24 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
       variants={fadeInItem}
       {...rest}
     >
-      {/* 年份 */}
       <div
         className={`flex items-center gap-2 transition-colors ${
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
         }`}
       >
         <h2 className="text-4xl font-bold">{item.year}</h2>
+        {/* <span className="text-[var(--text-color-muted)]">
+          {item.events.length}
+        </span> */}
         <button
-          className={`text-3xl transition-transform ${
-            isCollapseOpen ? "rotate-90" : ""
-          }`}
+          className={cn(`text-3xl ms-auto transition-transform`, {
+            "-rotate-90": isCollapseOpen,
+          })}
           onClick={() => {
             setIsCollapseOpen((prev) => !prev);
           }}
         >
-          <CaretRightOutlined />
+          <CaretLeftOutlined />
         </button>
       </div>
       <Collapse state={isCollapseOpen} className="w-full">
