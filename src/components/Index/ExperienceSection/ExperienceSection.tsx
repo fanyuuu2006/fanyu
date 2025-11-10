@@ -5,7 +5,7 @@ import { profile } from "@/libs/profile";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { fadeInItem, staggerContainer } from "@/libs/motion";
-import { ExperienceTab } from "@/types/experience";
+import { Duration, ExperienceTab } from "@/types/experience";
 import { experienceTabIcons, experienceTabs } from "@/libs/education";
 import { ExperienceCard } from "./ExperienceCard";
 import { Collapse } from "fanyucomponents";
@@ -43,6 +43,11 @@ const getExperienceContent = (language: LanguageOption): ExperienceContent =>
 
 const viewLimit = 4;
 
+const getDateValue = (d: Duration) => {
+  if (typeof d === "string") return new Date(d).getTime();
+  return new Date(d.end ?? d.start).getTime();
+};
+
 export const ExperienceSection = () => {
   const Language = useLanguage();
   const experienceContent = getExperienceContent(Language.Current);
@@ -50,9 +55,7 @@ export const ExperienceSection = () => {
   const [showMore, setShowMore] = useState(false);
 
   const sortedItems = profile.experience[Tab].sort(
-    (a, b) =>
-      new Date(b.duration.start).getTime() -
-      new Date(a.duration.start).getTime()
+    (a, b) => getDateValue(b.duration) - getDateValue(a.duration)
   );
 
   const defaultItems = sortedItems.slice(0, viewLimit);
@@ -62,9 +65,7 @@ export const ExperienceSection = () => {
   return (
     <section id="experience">
       <div className="container flex flex-col gap-8 items-center overflow-x-hidden">
-        <Title>
-          {experienceContent.experience}
-        </Title>
+        <Title>{experienceContent.experience}</Title>
         <div className="flex flex-col w-full gap-4">
           {/** 分頁選單 */}
           <div

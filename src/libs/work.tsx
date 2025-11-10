@@ -39,7 +39,7 @@ export const KNSH: ExperienceItem = {
     english: "Summer Part-Time Worker",
   },
   duration: { start: "2024-06", end: "2024-07" },
-  imageSrc: "https://www.knsh.com.tw/Template/2020/Images/fevicon/fevicon.gif",
+  imageSrc: "https://www.knsh.com.tw/images/fevicon/fevicon.png",
   links: [
     {
       chinese: "康軒文教集團官網",

@@ -21,7 +21,7 @@ export const PDAO: ExperienceItem = {
     chinese: "隊員",
     english: "Member",
   },
-  duration: { start: "2025-04", end: "2025-04" },
+  duration: "2025-04-19",
   imageSrc:
     "https://megapx-assets.dcard.tw/images/e28d73e6-a9b0-4449-854e-2b8b50dbb6b6/orig.jpeg",
   links: [
@@ -97,7 +97,7 @@ export const HCCGM: ExperienceItem = {
     chinese: "隊員",
     english: "Member",
   },
-  duration: { start: "2021-01", end: "2021-01" },
+  duration: "2021-01-08",
   imageSrc: "/api/album/image/1aPifYS-OcfKdp01OCzz6acKKK_3A1Huo",
   links: [
     {
@@ -268,7 +268,7 @@ export const PVQC2021: ExperienceItem = {
     chinese: "商業與管理 類 北二區賽",
     english: "Business and Management Category, Northern Region 2",
   },
-  duration: { start: "2021-11", end: "2021-11" },
+  duration: "2021-11-13",
   imageSrc:
     "https://news.idea-show.com/wp-content/uploads/2017/06/GLAD%E5%85%A8%E7%90%83%E5%AD%B8%E7%BF%92%E8%88%87%E6%B8%AC%E8%A9%95%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83.png",
   links: [
@@ -303,7 +303,7 @@ export const PVQC2022: ExperienceItem = {
     chinese: "資訊(計算機) 類 北二區賽",
     english: "Information(Computer) Category, Northern Region 2",
   },
-  duration: { start: "2022-12", end: "2022-12" },
+  duration: "2022-12-03",
   imageSrc:
     "https://news.idea-show.com/wp-content/uploads/2017/06/GLAD%E5%85%A8%E7%90%83%E5%AD%B8%E7%BF%92%E8%88%87%E6%B8%AC%E8%A9%95%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83.png",
   links: [
