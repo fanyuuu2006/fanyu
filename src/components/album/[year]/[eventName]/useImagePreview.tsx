@@ -18,7 +18,8 @@ import {
 } from "@ant-design/icons";
 import { useModal } from "fanyucomponents";
 import Link from "next/link";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
 const IMAGE_PREVIEW_CONTENT: LanguageContent<
   Record<
@@ -208,7 +209,6 @@ export const useImagePreview = ({
 
     return (
       <previewModal.Container
-        className="animate-appear"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
       >
         {/* Header - 頂部工具列 */}
@@ -224,7 +224,7 @@ export const useImagePreview = ({
           {/* 圖片標題和進度 */}
           <div className="flex flex-col min-w-0 ms-2">
             <h3
-              title={currentImage.name || "無標題"}
+              title={currentImage.name || imagePreviewContent.untitled}
               className="text-lg md:text-xl font-semibold truncate"
             >
               {currentImage.name}
