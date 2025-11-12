@@ -174,31 +174,23 @@ export const useImagePreview = ({
    */
   useEffect(() => {
     if (!previewModal.isShow) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return; // 避免長按重複觸發
       switch (e.key) {
         case "ArrowLeft":
-          e.preventDefault();
           handlePrevImage();
           break;
         case "ArrowRight":
-          e.preventDefault();
           handleNextImage();
           break;
         case "Escape":
-          e.preventDefault();
           previewModal.Close();
-          break;
-        default:
           break;
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleNextImage, handlePrevImage, previewModal]);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleNextImage, handlePrevImage, previewModal, previewModal.isShow]);
 
   /**
    * 預覽容器元件
@@ -217,7 +209,7 @@ export const useImagePreview = ({
 
     return (
       <previewModal.Container
-        className="animate-appaear"
+        className="animate-appear"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
       >
         {/* Header - 頂部工具列 */}
