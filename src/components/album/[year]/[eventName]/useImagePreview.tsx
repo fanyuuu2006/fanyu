@@ -19,7 +19,6 @@ import {
 import { useModal } from "fanyucomponents";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 
 const IMAGE_PREVIEW_CONTENT: LanguageContent<
   Record<
