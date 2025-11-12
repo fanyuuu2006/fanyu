@@ -108,17 +108,18 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               {event.images.map((imgItem, i) => (
                 <ImageCard
                   id={i.toString()}
+                  tabIndex={0}
                   image={imgItem}
                   key={i}
                   onClick={() => handleImageClick(i)}
                 />
               ))}
+              {/* 圖片預覽模態框 */}
               <imagePreview.Container />
             </>
           )}
         </article>
       </div>
-      {/* 圖片預覽模態框 */}
     </section>
   );
 };

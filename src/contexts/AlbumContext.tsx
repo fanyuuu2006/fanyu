@@ -1,5 +1,5 @@
 "use client";
-import { fetcher } from "@/utils/fetcher";
+import { fetcher } from "@/utils";
 import useSWR, { SWRResponse } from "swr";
 import { createContext, useContext, useMemo } from "react";
 import { slugify } from "@/utils/url";

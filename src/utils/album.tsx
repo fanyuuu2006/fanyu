@@ -1,6 +1,6 @@
 import { profile } from "@/libs/profile";
 import { Album } from "@/types/album";
-import { fetcher } from "@/utils/fetcher";
+import { fetcher } from "@/utils";
 import { slugify } from "@/utils/url";
 
 export const years = async () =>

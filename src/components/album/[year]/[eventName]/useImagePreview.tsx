@@ -7,6 +7,7 @@ import { MyImage } from "@/components/custom/MyImage";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
+import { formatDate } from "@/utils";
 import { cn } from "@/utils/className";
 import {
   CloseOutlined,
@@ -113,17 +114,7 @@ export const useImagePreview = ({
       {
         label: imagePreviewContent.uploadTime,
         value: currentImage.createdTime
-          ? new Date(currentImage.createdTime).toLocaleString(
-              language.Current === "chinese" ? "zh-TW" : "en-US",
-              {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-              }
-            )
+          ? formatDate(currentImage.createdTime, language.Current)
           : imagePreviewContent.unknown,
       },
       {
@@ -141,21 +132,12 @@ export const useImagePreview = ({
       {
         label: imagePreviewContent.createdTime,
         value: currentImage.imageMediaMetadata?.time
-          ? new Date(
+          ? formatDate(
               currentImage.imageMediaMetadata.time.replace(
                 /^(\d{4}):(\d{2}):(\d{2})/,
                 "$1-$2-$3"
-              )
-            ).toLocaleString(
-              language.Current === "chinese" ? "zh-TW" : "en-US",
-              {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-              }
+              ),
+              language.Current
             )
           : imagePreviewContent.unknown,
       },
@@ -234,7 +216,10 @@ export const useImagePreview = ({
     const title = currentImage.name || imagePreviewContent.untitled;
 
     return (
-      <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+      <previewModal.Container
+        className="animate-appaear"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+      >
         {/* Header - 頂部工具列 */}
         <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
           {/* 關閉按鈕 */}
@@ -368,7 +353,7 @@ export const useImagePreview = ({
     Container,
     Open: (index: number) => {
       setImageIndex(index);
-      return previewModal.Open();
+      previewModal.Open();
     },
   };
 };
