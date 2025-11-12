@@ -175,7 +175,6 @@ export const useImagePreview = ({
   useEffect(() => {
     if (!previewModal.isShow) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.repeat) return; // 避免長按重複觸發
       switch (e.key) {
         case "ArrowLeft":
           handlePrevImage();
