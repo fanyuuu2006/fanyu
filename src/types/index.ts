@@ -9,7 +9,7 @@ type Year =
 
 // 月份：01–12
 type Month =
-  | `0${Exclude<Units, 0>}` // 01–09
+  | `0${Exclude<Digit, 0>}` // 01–09
   | `1${0 | 1 | 2}`; // 10–12
 
 // 日期：01–31
