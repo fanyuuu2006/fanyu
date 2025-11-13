@@ -1,3 +1,8 @@
-export const MainSection = () => {
-  return <div>Main Section Content</div>;
-}
+import { BoardGameResponse } from "@/types/bgc";
+
+export type MainSectionProps = {
+  data: BoardGameResponse;
+};
+export const MainSection = ({ data }: MainSectionProps) => {
+  return <section>{JSON.stringify(data)}</section>;
+};
