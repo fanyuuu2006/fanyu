@@ -4,6 +4,7 @@ import {
   ProjectOutlined,
   MessageOutlined,
   PictureOutlined,
+  BlockOutlined,
 } from "@ant-design/icons";
 
 type BaseRoute = {
@@ -11,6 +12,7 @@ type BaseRoute = {
   url: string;
   icon?: React.ElementType;
   isActive?: (path: string) => boolean;
+  hidden?: boolean;
 };
 
 export type Route = BaseRoute & {
@@ -89,4 +91,13 @@ export const routes: Route[] = [
     isActive: (path: string) => path.startsWith("/album"),
     icon: PictureOutlined,
   },
+  {
+    label: {
+      chinese: "桌遊社",
+      english: "Board Game Club",
+    },
+    url: "/bgc",
+    icon: BlockOutlined,
+    hidden: true,
+  }
 ];

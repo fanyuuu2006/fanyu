@@ -78,16 +78,19 @@ export const MobileLink = ({
           id={`sub-menu-${item.url.replace("/", "")}`}
         >
           <div className="flex flex-col text-sm bg-[var(--background-color-tertiary)] border-b border-[var(--border-color)]">
-            {item.sub!.map((sub) => (
-              <Link
-                key={sub.url}
-                href={`${item.url}${sub.url}`}
-                onClick={handleLinkClick}
-                className="px-8 py-3 text-[var(--text-color-muted)] hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
-              >
-                {sub.label[Language.Current]}
-              </Link>
-            ))}
+            {item.sub!.map((sub) => {
+              if (sub.hidden) return null;
+              return (
+                <Link
+                  key={sub.url}
+                  href={`${item.url}${sub.url}`}
+                  onClick={handleLinkClick}
+                  className="px-8 py-3 text-[var(--text-color-muted)] hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
+                >
+                  {sub.label[Language.Current]}
+                </Link>
+              );
+            })}
           </div>
         </Collapse>
       )}

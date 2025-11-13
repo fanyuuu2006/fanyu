@@ -47,15 +47,18 @@ export const DesktopLink = ({ item }: DesktopLinkProps) => {
         >
           <div className="bg-[var(--background-color)] border border-[var(--border-color)] rounded-md shadow-lg mt-2 min-w-48">
             <div className="text-[var(--text-color-muted)] flex flex-col text-base font-normal">
-              {item.sub!.map((sub) => (
-                <Link
-                  key={sub.url}
-                  href={`${item.url}${sub.url}`}
-                  className="px-4 py-3 hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
-                >
-                  {sub.label[Language.Current]}
-                </Link>
-              ))}
+              {item.sub!.map((sub) => {
+                if (sub.hidden) return null;
+                return (
+                  <Link
+                    key={sub.url}
+                    href={`${item.url}${sub.url}`}
+                    className="px-4 py-3 hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
+                  >
+                    {sub.label[Language.Current]}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </Collapse>

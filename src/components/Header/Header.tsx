@@ -45,9 +45,10 @@ export const Header = () => {
 
           {/* 桌面版導覽列 */}
           <div className="hidden lg:flex text-xl font-bold gap-6">
-            {routes.map((item) => (
-              <DesktopLink key={item.url} item={item} />
-            ))}
+            {routes.map((item) => {
+              if (item.hidden) return null;
+              return <DesktopLink key={item.url} item={item} />;
+            })}
           </div>
         </div>
 
@@ -58,14 +59,17 @@ export const Header = () => {
           id="mobile-nav"
         >
           <div className="flex flex-col w-full text-xl font-semibold">
-            {routes.map((item) => (
-              <MobileLink
-                key={item.url}
-                item={item}
-                menuShow={menuShow}
-                setMenuShow={setMenuShow}
-              />
-            ))}
+            {routes.map((item) => {
+              if (item.hidden) return null;
+              return (
+                <MobileLink
+                  key={item.url}
+                  item={item}
+                  menuShow={menuShow}
+                  setMenuShow={setMenuShow}
+                />
+              );
+            })}
           </div>
         </Collapse>
       </nav>

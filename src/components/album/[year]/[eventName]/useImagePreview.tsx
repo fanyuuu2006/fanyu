@@ -205,11 +205,8 @@ export const useImagePreview = ({
     }
 
     const title = currentImage.name || imagePreviewContent.untitled;
-
     return (
-      <previewModal.Container
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
-      >
+      <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         {/* Header - 頂部工具列 */}
         <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
           {/* 關閉按鈕 */}
