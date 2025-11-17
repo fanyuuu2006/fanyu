@@ -10,7 +10,7 @@ type BgcContent = Record<
   | "unchecked"
   | "position"
   | "borrowed"
-| "notborrowed"
+  | "notborrowed"
   | keyof BoardGame["status"],
   string
 >;
@@ -20,7 +20,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     appearance: "外觀",
     missingParts: "缺件",
     sleeves: "牌套",
-    recommendedCounts: "被推薦次數: {count} 次",
+    recommendedCounts: "被推薦次數",
     checked: "已清點",
     unchecked: "未清點",
     position: "位置",
@@ -32,7 +32,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     appearance: "Appearance",
     missingParts: "Missing Parts",
     sleeves: "Sleeves",
-    recommendedCounts: "Recommended Counts: {count} times",
+    recommendedCounts: "Recommended Counts",
     checked: "Checked",
     unchecked: "Unchecked",
     position: "Position",
@@ -57,23 +57,24 @@ export const BoardGameCard = ({
   const bgcContent = BGC_CONTENT[language.Current];
 
   return (
-    <div className={cn("card p-8 flex flex-col gap-6", className)} {...rest}>
+    <div className={cn("card p-5 flex flex-col gap-4", className)} {...rest}>
       {/* 桌遊 ID */}
-      <div className="text-xs text-[var(--text-color-muted)] font-mono tracking-wider uppercase">
+      <div className="text-xs text-[var(--text-color-muted)] font-mono tracking-wide">
         #{item.id}
       </div>
 
       {/* 桌遊名稱 */}
-      <h3 className="text-2xl font-bold text-[var(--text-color)] leading-tight -mt-4">
+      <h3 className="text-lg font-bold text-[var(--text-color)] leading-tight -mt-2">
         {item.name[language.Current]}
       </h3>
 
       {/* 標籤區域 */}
-      <div className="flex flex-wrap gap-3 -mt-2">
+      <div className="flex flex-wrap gap-2 -mt-1">
         {[
           {
             label: item.type,
-            className: "bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] text-white shadow-lg",
+            className:
+              "bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] text-white shadow-lg",
           },
           {
             label: item.inventory ? bgcContent.checked : bgcContent.unchecked,
@@ -86,7 +87,7 @@ export const BoardGameCard = ({
             className: item.borrowed
               ? "bg-gradient-to-r from-amber-600/30 to-orange-600/30 text-amber-300 border border-amber-500/50"
               : "bg-gradient-to-r from-violet-600/30 to-purple-600/30 text-violet-300 border border-violet-500/50",
-          }
+          },
         ].map((tag, i) => {
           if (!tag.label) return null;
           return (
@@ -94,7 +95,7 @@ export const BoardGameCard = ({
               key={i}
               className={cn(
                 tag.className,
-                "text-sm px-4 py-2 rounded-full font-medium tracking-wide"
+                "text-xs px-3 py-1.5 rounded-full font-medium tracking-wide"
               )}
             >
               {tag.label}
@@ -104,42 +105,49 @@ export const BoardGameCard = ({
       </div>
 
       {/* 位置和推薦次數資訊區域 */}
-      <div className="flex flex-col gap-4">
-        {item.position && (
-          <div className="flex items-center gap-3 p-4 bg-[var(--background-color-tertiary)] rounded-lg border border-[var(--border-color)]">
-            <div className="w-2 h-2 rounded-full bg-[var(--text-color-primary)] shadow-sm shadow-[var(--text-color-primary)]/50"></div>
-            <span className="font-medium text-[var(--text-color-muted)] text-sm tracking-wide">{bgcContent.position}:</span>
-            <span className="text-[var(--text-color)] font-semibold">{item.position}</span>
-          </div>
-        )}
-
-        {/* 推薦次數顯示 */}
-        <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] rounded-lg border border-[var(--border-color)]">
-          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--text-color-quaternary)]/20 border border-[var(--text-color-quaternary)]/30">
-            <span className="text-xs font-bold text-[var(--text-color-quaternary)]">★</span>
-          </div>
-          <span className="font-medium text-[var(--text-color)] text-sm tracking-wide">
-            {bgcContent.recommendedCounts.replace(
-              "{count}",
-              item.recommendedCounts.toString()
-            )}
-          </span>
-        </div>
+      <div className="flex flex-col gap-2">
+        {[
+          {
+            label: bgcContent.position,
+            value: item.position,
+          },
+          {
+            label: bgcContent.recommendedCounts,
+            value: item.recommendedCounts,
+          },
+        ].map((info) => {
+          return (
+            <div
+              key={info.label}
+              className="flex items-center gap-2 p-3 bg-[var(--background-color-tertiary)] rounded-lg border border-[var(--border-color)]"
+            >
+              <span className="font-medium text-[var(--text-color-muted)] text-xs tracking-wide">
+                {info.label}:
+              </span>
+              <span className="text-[var(--text-color)] font-semibold text-sm">
+                {info.value}
+              </span>
+            </div>
+          );
+        })}
       </div>
 
       {/* 狀態詳情區域 */}
-      <div className="border-t border-[var(--border-color)] pt-6 mt-2">
-        <div className="grid grid-cols-2 gap-4">
+      <div className="border-t border-[var(--border-color)] pt-3 mt-1">
+        <div className="grid grid-cols-2 gap-3">
           {/* 遍歷桌遊的各種狀態項目 */}
           {["shrinkWrap", "appearance", "missingParts", "sleeves"].map(
             (statusKey) => (
-              <div key={statusKey} className="flex flex-col gap-2 p-4 bg-[var(--background-color-tertiary)]/50 rounded-lg border border-[var(--border-color)]/50 transition-all duration-300 hover:bg-[var(--background-color-tertiary)] hover:border-[var(--border-color)]">
+              <div
+                key={statusKey}
+                className="flex flex-col gap-1 p-2 bg-[var(--background-color-tertiary)]/50 rounded-lg border border-[var(--border-color)]/50 transition-all duration-300 hover:bg-[var(--background-color-tertiary)] hover:border-[var(--border-color)]"
+              >
                 {/* 狀態標題 */}
-                <span className="text-[var(--text-color-muted)] text-xs font-semibold uppercase tracking-wider">
+                <span className="text-[var(--text-color-muted)] text-xs font-semibold uppercase tracking-wide">
                   {bgcContent[statusKey as keyof BgcContent]}
                 </span>
                 {/* 狀態值 */}
-                <span className="text-[var(--text-color)] font-bold text-sm">
+                <span className="text-[var(--text-color)] font-bold text-xs">
                   {item.status[statusKey as keyof typeof item.status]}
                 </span>
               </div>
@@ -150,14 +158,15 @@ export const BoardGameCard = ({
 
       {/* 備註區域（如果有備註的話） */}
       {item.note && (
-        <div className="mt-4 p-5 bg-gradient-to-br from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] border border-[var(--border-color)] rounded-xl shadow-lg">
-          <div className="flex items-start gap-3">
-            <div className="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-[var(--text-color-secondary)]/20 border border-[var(--text-color-secondary)]/30 flex-shrink-0">
-              <span className="text-xs font-bold text-[var(--text-color-secondary)]">!</span>
-            </div>
+        <div className="p-3 bg-gradient-to-br from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] border border-[var(--border-color)] rounded-lg shadow-lg">
+          <div className="flex items-start gap-2">
             <div className="flex-1">
-              <span className="font-semibold text-[var(--text-color-muted)] text-sm tracking-wide block mb-2">備註：</span>
-              <span className="text-[var(--text-color)] font-medium leading-relaxed">{item.note}</span>
+              <span className="font-semibold text-[var(--text-color-muted)] text-xs tracking-wide block">
+                備註：
+              </span>
+              <span className="text-[var(--text-color)] font-medium text-sm leading-relaxed">
+                {item.note}
+              </span>
             </div>
           </div>
         </div>
