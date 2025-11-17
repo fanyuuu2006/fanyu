@@ -11,6 +11,7 @@ type BgcContent = Record<
   | "recommendedCounts"
   | "checked"
   | "unchecked"
+  |"position"
   | keyof BoardGameResponse["data"][number]["status"],
   string
 >;
@@ -26,6 +27,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     recommendedCounts: "被推薦次數: {count} 次",
     checked: "已清點",
     unchecked: "未清點",
+    position: "位置",
   },
   english: {
     bgc: "Board Game Club",
@@ -38,6 +40,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     recommendedCounts: "Recommended Counts: {count} times",
     checked: "Checked",
     unchecked: "Unchecked",
+    position: "Position",
   },
 };
 
@@ -71,9 +74,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
                   id={`${item.id}`}
                 >
                   {/*桌遊編號 */}
-                  <div className="text-sm text-gray-400 mb-2">
-                    {item.id}
-                  </div>
+                  <div className="text-sm text-gray-400 mb-2">{item.id}</div>
 
                   {/* 桌遊名稱 */}
                   <h3 className="text-xl font-bold mb-2">
@@ -84,23 +85,21 @@ export const MainSection = ({ data }: MainSectionProps) => {
                   <div className="flex gap-1 mb-3">
                     {[item.type].map((tag) => {
                       if (!tag) return null;
-                      return(
-                      <span
-                        key={tag}
-                        className="bg-blue-900 text-blue-200 text-sm px-3 py-1 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    )})}
+                      return (
+                        <span
+                          key={tag}
+                          className="bg-blue-900 text-blue-200 text-sm px-3 py-1 rounded-full"
+                        >
+                          {tag}
+                        </span>
+                      );
+                    })}
                   </div>
 
                   {/* 位置資訊 */}
                   {item.position && (
                     <div className="mb-2 text-sm text-[var(--text-color-muted)]">
-                      <span className="font-medium">位置: </span>
-                      <span className="bg-gray-700 px-2 py-1 rounded">
-                        {item.position}
-                      </span>
+                      <span className="font-medium">{bgcContent.position}: {item.position}</span>
                     </div>
                   )}
 
@@ -113,7 +112,9 @@ export const MainSection = ({ data }: MainSectionProps) => {
                           : "bg-red-900 text-red-200"
                       }`}
                     >
-                      {item.inventory ? `✓ ${bgcContent.checked}` : `✗ ${bgcContent.unchecked}`}
+                      {item.inventory
+                        ? bgcContent.checked
+                        : bgcContent.unchecked}
                     </span>
                   </div>
 
