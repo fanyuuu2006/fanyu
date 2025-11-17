@@ -109,7 +109,14 @@ export const MainSection = ({ data }: MainSectionProps) => {
             <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--text-color-muted)] text-lg pointer-events-none group-focus-within:text-[var(--text-color-primary)] transition-colors duration-200" />
             <input
               type="text"
-              className="text-base sm:text-lg w-full px-12 py-3 rounded-xl border border-[var(--border-color)] placeholder:text-[var(--text-color-muted)] focus:border-[var(--border-color-focus)] focus-visible:border-[var(--border-color-focus)] transition-all duration-200"
+              className="
+              text-base sm:text-lg w-full px-12 py-3 rounded-xl 
+              outline outline-[var(--border-color)] bg-[#000]
+              placeholder:text-[var(--text-color-muted)] 
+              focus:outline-[var(--text-color-primary)]
+              hover:outline-[var(--border-color-hover)]
+              transition-all duration-200
+              "
               placeholder={bgcContent.inputPlaceholder}
               value={inputValue}
               onChange={handleSearch}
