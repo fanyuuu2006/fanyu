@@ -64,9 +64,15 @@ export const BoardGameCard = ({
       </div>
 
       {/* 桌遊名稱 */}
-      <h3 className="text-lg font-bold text-[var(--text-color)] leading-tight -mt-2">
-        {item.name["chinese"]} {item.name["english"]}
-      </h3>
+      <div className="flex flex-col gap-1 -mt-2">
+        <h3 className="text-lg font-bold text-[var(--text-color)] leading-tight">
+          {language.Current === "chinese" ? item.name.chinese : item.name.english}
+        </h3>
+        
+        <h4 className="text-sm font-medium text-[var(--text-color-muted)] leading-tight">
+          {language.Current === "chinese" ? item.name.english : item.name.chinese}
+        </h4>
+      </div>
 
       {/* 標籤區域 */}
       <div className="flex flex-wrap gap-2 -mt-1">

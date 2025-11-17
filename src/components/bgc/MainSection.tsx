@@ -184,7 +184,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
                 </span>
               </div>
             </div>
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {order.data.map((item) => (
                 <BoardGameCard
                   key={item.id}
