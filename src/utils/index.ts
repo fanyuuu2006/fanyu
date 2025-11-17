@@ -21,3 +21,5 @@ export const formatDate = (
       second: "2-digit",
     }
   );
+
+export const normalize = (str: string) => str.toLowerCase().trim();

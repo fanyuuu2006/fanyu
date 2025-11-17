@@ -23,6 +23,7 @@
     "framer-motion": "^12.18.1",
     "gaxios": "^7.1.0",
     "googleapis": "^150.0.1",
+    "lodash": "^4.17.21",
     "next": "15.3.4",
     "next-sitemap": "^4.2.3",
     "react": "^19.1.0",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/lodash": "^4.17.20",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",

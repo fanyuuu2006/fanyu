@@ -5,9 +5,19 @@ import { Title } from "../custom/Title";
 import { BoardGameResponse } from "@/types/bgc";
 import { BoardGameCard } from "./BoardGameCard";
 import { useOrder } from "@/hooks/useOrder";
+import { useState } from "react";
+import bgc from "@/utils/bgc";
+import { normalize } from "../../utils/index";
+import { debounce } from "lodash";
 
 type BgcContent = Record<
-  "bgc" | "noData" | "total" | "newest" | "oldest" | "recommended",
+  | "bgc"
+  | "noData"
+  | "total"
+  | "newest"
+  | "oldest"
+  | "recommended"
+  | "inputPlaceholder",
   string
 >;
 const BGC_CONTENT: LanguageContent<BgcContent> = {
@@ -18,6 +28,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     newest: "最新",
     oldest: "最舊",
     recommended: "推薦度",
+    inputPlaceholder: "搜尋...",
   },
   english: {
     bgc: "Board Game Club",
@@ -26,6 +37,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     newest: "Newest",
     oldest: "Oldest",
     recommended: "Recommended",
+    inputPlaceholder: "Search...",
   },
 };
 
@@ -36,7 +48,17 @@ export type MainSectionProps = {
 export const MainSection = ({ data }: MainSectionProps) => {
   const Language = useLanguage();
   const bgcContent = BGC_CONTENT[Language.Current];
-  const order = useOrder(data.data, {
+  const [searchString, setSearchString] = useState("");
+
+  const filteredData = data.data.filter((item) =>
+    normalize(bgc.stringify(item)).includes(normalize(searchString))
+  );
+
+  const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchString(e.currentTarget.value);
+  }, 1000);
+
+  const order = useOrder(filteredData, {
     newest: {
       label: bgcContent.newest,
       default: true,
@@ -56,6 +78,16 @@ export const MainSection = ({ data }: MainSectionProps) => {
     <section>
       <div className="container flex flex-col items-center">
         <Title>{bgcContent.bgc}</Title>
+        {/* 查詢 */}
+        <div className="w-full md:w-1/2 flex justify-center">
+          <input
+            type="text"
+            className="w-full p-2 border border-[var(--border-color)] rounded-lg"
+            placeholder={bgcContent.inputPlaceholder}
+            value={searchString}
+            onChange={handleSearch}
+          />
+        </div>
 
         {order.data.length === 0 ? (
           <div className="text-3xl font-bold">{bgcContent.noData}</div>
@@ -70,7 +102,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
                 )}
               </span>
             </div>
-            <div className="w-full grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {order.data.map((item) => (
                 <BoardGameCard
                   key={item.id}
