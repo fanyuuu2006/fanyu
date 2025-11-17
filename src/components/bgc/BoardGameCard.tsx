@@ -141,7 +141,7 @@ export const BoardGameCard = ({
             (statusKey) => (
               <div
                 key={statusKey}
-                className="flex flex-col gap-1 p-2 bg-[var(--background-color-tertiary)]/50 rounded-lg border border-[var(--border-color)]/50 transition-all duration-300 hover:bg-[var(--background-color-tertiary)] hover:border-[var(--border-color)]"
+                className="flex flex-col gap-1 px-3 py-2 bg-[var(--background-color-tertiary)]/50 rounded-lg border border-[var(--border-color)]/50 transition-all duration-300 hover:bg-[var(--background-color-tertiary)] hover:border-[var(--border-color)]"
               >
                 {/* 狀態標題 */}
                 <span className="text-[var(--text-color-muted)] text-xs font-semibold uppercase tracking-wide">
@@ -159,7 +159,7 @@ export const BoardGameCard = ({
 
       {/* 備註區域（如果有備註的話） */}
       {item.note && (
-        <div className="p-3 bg-gradient-to-br from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] border border-[var(--border-color)] rounded-lg shadow-lg">
+        <div className="py-2 px-3 bg-gradient-to-br from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] border border-[var(--border-color)] rounded-lg shadow-lg">
           <div className="flex items-start gap-2">
             <div className="flex-1">
               <span className="font-semibold text-[var(--text-color-muted)] text-xs tracking-wide block">

@@ -44,12 +44,10 @@ export const MainSection = ({ data }: MainSectionProps) => {
     },
     oldest: {
       label: bgcContent.oldest,
-      default: true,
       compareFn: (a, b) => a.id - b.id,
     },
     recommended: {
       label: bgcContent.recommended,
-      default: false,
       compareFn: (a, b) => b.recommendedCounts - a.recommendedCounts,
     },
   });

@@ -87,11 +87,11 @@ export const MainSection = () => {
    */
   const sortedProject = useMemo(() => {
     return !currentTags
-      ? timeOrder.sortedData // 未選擇標籤時顯示所有專案
-      : timeOrder.sortedData.filter(
+      ? timeOrder.data // 未選擇標籤時顯示所有專案
+      : timeOrder.data.filter(
           (item) => [...currentTags].some((tag) => item.tags.includes(tag)) // 篩選包含選中標籤的專案
         );
-  }, [currentTags, timeOrder.sortedData]);
+  }, [currentTags, timeOrder.data]);
 
   return (
     <section>
@@ -138,7 +138,7 @@ export const MainSection = () => {
             </div>
 
             {/* 時間排序切換元件 */}
-            <timeOrder.Div />
+            <timeOrder.div />
           </div>
 
           {/* 篩選標籤區域：可折疊的標籤選擇面板 */}

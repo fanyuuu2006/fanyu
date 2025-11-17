@@ -61,7 +61,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
       <div className="container flex flex-col items-center">
         <Title>{albumContent.album}</Title>
 
-        {timeOrder.sortedData.length === 0 ? (
+        {timeOrder.data.length === 0 ? (
           <div className="text-3xl font-bold">{albumContent.noAlbum}</div>
         ) : (
           <>
@@ -85,9 +85,9 @@ export const MainSection = ({ data }: MainSectionProps) => {
               ))}
             </div>
             {/* 分類標籤 */}
-            <timeOrder.Div />
+            <timeOrder.div />
             <div className="w-full flex flex-col gap-6">
-              {timeOrder.sortedData.map((item) => (
+              {timeOrder.data.map((item) => (
                 <YearDiv key={item.year} item={item} />
               ))}
             </div>

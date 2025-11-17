@@ -7,7 +7,7 @@ export const useOrder = <T,>(
     string,
     {
       label: React.ReactNode;
-      default: boolean | undefined;
+      default?: boolean;
       compareFn: (a: T, b: T) => number;
     }
   >
