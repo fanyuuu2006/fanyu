@@ -65,7 +65,7 @@ export const BoardGameCard = ({
 
       {/* 桌遊名稱 */}
       <h3 className="text-lg font-bold text-[var(--text-color)] leading-tight -mt-2">
-        {item.name[language.Current]}
+        {item.name["chinese"]} {item.name["english"]}
       </h3>
 
       {/* 標籤區域 */}

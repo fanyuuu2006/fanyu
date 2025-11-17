@@ -19,7 +19,9 @@ type BgcContent = Record<
   | "oldest"
   | "recommended"
   | "inputPlaceholder"
-  | "clear",
+  | "clear"
+  | "canNotFind"
+  | "noBoardGame",
   string
 >;
 const BGC_CONTENT: LanguageContent<BgcContent> = {
@@ -31,7 +33,9 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     oldest: "最舊",
     recommended: "推薦度",
     inputPlaceholder: "搜尋...",
-    clear: "清除",
+    clear: "清除搜尋",
+    canNotFind: `找不到包含「{string}」的桌遊，試試其他關鍵字吧！`,
+    noBoardGame: "目前沒有可顯示的桌遊資料",
   },
   english: {
     bgc: "Board Game Club",
@@ -41,7 +45,9 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     oldest: "Oldest",
     recommended: "Recommended",
     inputPlaceholder: "Search...",
-    clear: "Clear",
+    clear: "Clear Search",
+    canNotFind: `No matching board games found for "{string}", try other keywords!`,
+    noBoardGame: "No board game data available",
   },
 };
 
@@ -137,7 +143,34 @@ export const MainSection = ({ data }: MainSectionProps) => {
         </div>
 
         {order.data.length === 0 ? (
-          <div className="text-3xl font-bold">{bgcContent.noData}</div>
+          <div className="flex flex-col gap-6 items-center justify-center text-center p-16">
+            {/* 圖示 */}
+            <div className="opacity-60">
+              <SearchOutlined className="text-6xl text-[var(--text-color-muted)]" />
+            </div>
+
+            {/* 主要訊息 */}
+            <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-color)]">
+              {bgcContent.noData}
+            </h3>
+
+            {/* 提示訊息 */}
+            <p className="text-[var(--text-color-muted)] text-lg leading-relaxed">
+              {searchString
+                ? bgcContent.canNotFind.replace("{string}", searchString)
+                : bgcContent.noBoardGame}
+            </p>
+
+            {/* 清除搜尋按鈕（僅在有搜尋時顯示） */}
+            {searchString && (
+              <button
+                onClick={handleClearSearch}
+                className="px-6 py-3 rounded-2xl btn-primary font-medium"
+              >
+                {bgcContent.clear}
+              </button>
+            )}
+          </div>
         ) : (
           <>
             <order.div />
