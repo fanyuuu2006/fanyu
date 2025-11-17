@@ -1,35 +1,28 @@
-import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/utils/className";
 import { useMemo, useState } from "react";
-import { LanguageOption } from "../types/language";
 
 export const useOrder = <T,>(
   data: T[],
   config: Record<
     string,
     {
-      label: Record<LanguageOption, string>;
+      label: React.ReactNode;
       default: boolean | undefined;
-      handler: (item: T) => number;
+      compareFn: (a: T, b: T) => number;
     }
   >
 ): {
   data: T[];
   div: React.FC<React.HtmlHTMLAttributes<HTMLDivElement>>;
 } => {
-  const language = useLanguage();
+  const entries = Object.entries(config);
   const [currTag, setCurrTag] = useState<string>(
-    Object.entries(config).find(([, value]) => value.default === true)?.[0] ||
-      Object.keys(config)[0]
+    entries.find(([, value]) => value.default === true)?.[0] || entries[0][0]
   );
   const currConfig = config[currTag];
 
   const sortedData = useMemo(() => {
-    return data.toSorted((a, b) => {
-      const aValue = currConfig.handler(a);
-      const bValue = currConfig.handler(b);
-      return aValue - bValue;
-    });
+    return data.toSorted(currConfig.compareFn);
   }, [currConfig, data]);
 
   const Div = ({
@@ -39,15 +32,18 @@ export const useOrder = <T,>(
     return (
       <div
         role="tablist"
-        className={cn("grid grid-cols-2 bg-[#000] rounded-xl p-1", className)}
+        className={cn(
+          `flex gap-1 bg-[#000] rounded-xl p-1`,
+          className
+        )}
         {...rest}
       >
-        {Object.entries(config).map(([key, value]) => {
+        {entries.map(([key, value]) => {
           const isSelected = currTag === key;
           return (
             <button
-              key={value.label[language.Current]}
-              className={`w-full px-3 py-1 transition-all duration-200 rounded-[inherit] ${
+              key={key}
+              className={`flex-1 basis-auto shrink-0 px-3 py-1 transition-all duration-200 rounded-[inherit] ${
                 isSelected ? "btn" : ""
               }`}
               onClick={() => {
@@ -55,7 +51,7 @@ export const useOrder = <T,>(
                 setCurrTag(key);
               }}
             >
-              {value.label[language.Current]}
+              {value.label}
             </button>
           );
         })}
