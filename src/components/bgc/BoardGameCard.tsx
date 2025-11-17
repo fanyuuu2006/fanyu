@@ -9,6 +9,8 @@ type BgcContent = Record<
   | "checked"
   | "unchecked"
   | "position"
+  | "borrowed"
+| "notborrowed"
   | keyof BoardGame["status"],
   string
 >;
@@ -22,6 +24,8 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     checked: "已清點",
     unchecked: "未清點",
     position: "位置",
+    borrowed: "已借出",
+    notborrowed: "未借出",
   },
   english: {
     shrinkWrap: "Shrink Wrap",
@@ -32,6 +36,8 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     checked: "Checked",
     unchecked: "Unchecked",
     position: "Position",
+    borrowed: "Borrowed",
+    notborrowed: "Not Borrowed",
   },
 };
 
@@ -75,6 +81,12 @@ export const BoardGameCard = ({
               ? "bg-green-900/20 text-green-300 border border-green-800"
               : "bg-red-900/20 text-red-300 border border-red-800",
           },
+          {
+            label: item.borrowed ? bgcContent.borrowed : bgcContent.notborrowed,
+            className: item.borrowed
+              ? "bg-yellow-900/20 text-yellow-300 border border-yellow-800"
+              : "bg-purple-900/20 text-purple-300 border border-purple-800",
+          }
         ].map((tag, i) => {
           if (!tag.label) return null;
           return (
