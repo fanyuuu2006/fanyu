@@ -5,7 +5,7 @@ import { Title } from "../custom/Title";
 import { BoardGameResponse } from "@/types/bgc";
 import { BoardGameCard } from "./BoardGameCard";
 import { useOrder } from "@/hooks/useOrder";
-import { useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 import bgc from "@/utils/bgc";
 import { normalize } from "../../utils/index";
 import { debounce } from "lodash";
@@ -49,14 +49,25 @@ export const MainSection = ({ data }: MainSectionProps) => {
   const Language = useLanguage();
   const bgcContent = BGC_CONTENT[Language.Current];
   const [searchString, setSearchString] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const filteredData = data.data.filter((item) =>
     normalize(bgc.stringify(item)).includes(normalize(searchString))
   );
 
-  const handleSearch = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchString(e.currentTarget.value);
-  }, 1000);
+  // 使用 debounce 延遲 300ms 後才執行搜索
+  const debouncedSearch = useMemo(
+    () => debounce((value: string) => {
+      setSearchString(value);
+    }, 300),
+    []
+  );
+
+  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+    setInputValue(value);
+    debouncedSearch(value);
+  }, [debouncedSearch]);
 
   const order = useOrder(filteredData, {
     newest: {
@@ -84,7 +95,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
             type="text"
             className="w-full p-2 border border-[var(--border-color)] rounded-lg"
             placeholder={bgcContent.inputPlaceholder}
-            value={searchString}
+            value={inputValue}
             onChange={handleSearch}
           />
         </div>

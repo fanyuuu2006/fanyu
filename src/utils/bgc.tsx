@@ -15,11 +15,10 @@ const stringify = (game: BoardGame): string => {
       ${game.name.english}
       ${game.name.chinese}
       ${game.type}
-      ${game.position}
-      ${game.inventory ? "已清點" : "未清點"}
+      ${game.inventory ? "已" : "未"}清點
       ${Object.values(game.status).join(" ")}
       ${game.note ?? ""}
-      ${game.borrowed ? "已借出" : "未借出"}
+      ${game.borrowed ? "已" : "未"}借出
       ${game.recommendedCounts}
     `;
 };
