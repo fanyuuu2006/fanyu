@@ -67,7 +67,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
                 {bgcContent.total.replace("{count}", data.total.toString())}
               </span>
             </div>
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="w-full grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {data.data.map((item) => (
                 <BoardGameCard
                   key={item.id}

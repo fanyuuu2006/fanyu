@@ -57,35 +57,35 @@ export const BoardGameCard = ({
   const bgcContent = BGC_CONTENT[language.Current];
 
   return (
-    <div className={cn("card p-6 flex flex-col gap-2", className)} {...rest}>
+    <div className={cn("card p-8 flex flex-col gap-6", className)} {...rest}>
       {/* 桌遊 ID */}
-      <div className="text-sm text-[var(--text-color-muted)] font-mono">
+      <div className="text-xs text-[var(--text-color-muted)] font-mono tracking-wider uppercase">
         #{item.id}
       </div>
 
       {/* 桌遊名稱 */}
-      <h3 className="text-xl font-bold text-[var(--text-color)] leading-tight">
+      <h3 className="text-2xl font-bold text-[var(--text-color)] leading-tight -mt-4">
         {item.name[language.Current]}
       </h3>
 
       {/* 標籤區域 */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-3 -mt-2">
         {[
           {
             label: item.type,
-            className: "bg-[var(--text-color-primary)]",
+            className: "bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] text-white shadow-lg",
           },
           {
             label: item.inventory ? bgcContent.checked : bgcContent.unchecked,
             className: item.inventory
-              ? "bg-green-900/20 text-green-300 border border-green-800"
-              : "bg-red-900/20 text-red-300 border border-red-800",
+              ? "bg-gradient-to-r from-emerald-600/30 to-green-600/30 text-emerald-300 border border-emerald-500/50"
+              : "bg-gradient-to-r from-rose-600/30 to-red-600/30 text-rose-300 border border-rose-500/50",
           },
           {
             label: item.borrowed ? bgcContent.borrowed : bgcContent.notborrowed,
             className: item.borrowed
-              ? "bg-yellow-900/20 text-yellow-300 border border-yellow-800"
-              : "bg-purple-900/20 text-purple-300 border border-purple-800",
+              ? "bg-gradient-to-r from-amber-600/30 to-orange-600/30 text-amber-300 border border-amber-500/50"
+              : "bg-gradient-to-r from-violet-600/30 to-purple-600/30 text-violet-300 border border-violet-500/50",
           }
         ].map((tag, i) => {
           if (!tag.label) return null;
@@ -94,7 +94,7 @@ export const BoardGameCard = ({
               key={i}
               className={cn(
                 tag.className,
-                "text-sm px-3 py-1 rounded-full font-medium"
+                "text-sm px-4 py-2 rounded-full font-medium tracking-wide"
               )}
             >
               {tag.label}
@@ -103,37 +103,43 @@ export const BoardGameCard = ({
         })}
       </div>
 
-      {/* 位置資訊區域 */}
-      {item.position && (
-        <div className="flex items-center gap-2 text-[var(--text-color-muted)]">
-          <span className="font-medium">{bgcContent.position}:</span>
-          <span>{item.position}</span>
-        </div>
-      )}
+      {/* 位置和推薦次數資訊區域 */}
+      <div className="flex flex-col gap-4">
+        {item.position && (
+          <div className="flex items-center gap-3 p-4 bg-[var(--background-color-tertiary)] rounded-lg border border-[var(--border-color)]">
+            <div className="w-2 h-2 rounded-full bg-[var(--text-color-primary)] shadow-sm shadow-[var(--text-color-primary)]/50"></div>
+            <span className="font-medium text-[var(--text-color-muted)] text-sm tracking-wide">{bgcContent.position}:</span>
+            <span className="text-[var(--text-color)] font-semibold">{item.position}</span>
+          </div>
+        )}
 
-      {/* 推薦次數顯示 */}
-      <div className="flex items-center gap-2 text-[var(--text-color-muted)]">
-        <span className="font-medium">
-          {bgcContent.recommendedCounts.replace(
-            "{count}",
-            item.recommendedCounts.toString()
-          )}
-        </span>
+        {/* 推薦次數顯示 */}
+        <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] rounded-lg border border-[var(--border-color)]">
+          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--text-color-quaternary)]/20 border border-[var(--text-color-quaternary)]/30">
+            <span className="text-xs font-bold text-[var(--text-color-quaternary)]">★</span>
+          </div>
+          <span className="font-medium text-[var(--text-color)] text-sm tracking-wide">
+            {bgcContent.recommendedCounts.replace(
+              "{count}",
+              item.recommendedCounts.toString()
+            )}
+          </span>
+        </div>
       </div>
 
       {/* 狀態詳情區域 */}
-      <div className="border-t border-[var(--border-color)] pt-4">
-        <div className="grid grid-cols-2 gap-3 text-sm">
+      <div className="border-t border-[var(--border-color)] pt-6 mt-2">
+        <div className="grid grid-cols-2 gap-4">
           {/* 遍歷桌遊的各種狀態項目 */}
           {["shrinkWrap", "appearance", "missingParts", "sleeves"].map(
             (statusKey) => (
-              <div key={statusKey} className="flex flex-col gap-1">
+              <div key={statusKey} className="flex flex-col gap-2 p-4 bg-[var(--background-color-tertiary)]/50 rounded-lg border border-[var(--border-color)]/50 transition-all duration-300 hover:bg-[var(--background-color-tertiary)] hover:border-[var(--border-color)]">
                 {/* 狀態標題 */}
-                <span className="text-[var(--text-color-muted)] text-xs font-medium uppercase tracking-wide">
+                <span className="text-[var(--text-color-muted)] text-xs font-semibold uppercase tracking-wider">
                   {bgcContent[statusKey as keyof BgcContent]}
                 </span>
                 {/* 狀態值 */}
-                <span className="text-[var(--text-color)] font-medium">
+                <span className="text-[var(--text-color)] font-bold text-sm">
                   {item.status[statusKey as keyof typeof item.status]}
                 </span>
               </div>
@@ -144,10 +150,15 @@ export const BoardGameCard = ({
 
       {/* 備註區域（如果有備註的話） */}
       {item.note && (
-        <div className="mt-2 p-3 bg-[var(--background-color-tertiary)] border border-[var(--border-color)] rounded-lg">
-          <div className="text-sm text-[var(--text-color-muted)]">
-            <span className="font-medium">備註：</span>
-            <span className="ml-2 text-[var(--text-color)]">{item.note}</span>
+        <div className="mt-4 p-5 bg-gradient-to-br from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] border border-[var(--border-color)] rounded-xl shadow-lg">
+          <div className="flex items-start gap-3">
+            <div className="flex items-center justify-center w-6 h-6 mt-0.5 rounded-full bg-[var(--text-color-secondary)]/20 border border-[var(--text-color-secondary)]/30 flex-shrink-0">
+              <span className="text-xs font-bold text-[var(--text-color-secondary)]">!</span>
+            </div>
+            <div className="flex-1">
+              <span className="font-semibold text-[var(--text-color-muted)] text-sm tracking-wide block mb-2">備註：</span>
+              <span className="text-[var(--text-color)] font-medium leading-relaxed">{item.note}</span>
+            </div>
           </div>
         </div>
       )}
