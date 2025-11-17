@@ -62,26 +62,33 @@ export const BoardGameCard = ({
         {item.name[language.Current]}
       </h3>
 
-      {/* 標籤區域：類型標籤和庫存狀態 */}
+      {/* 標籤區域 */}
       <div className="flex gap-2">
-        {/* 桌遊類型標籤（如果存在） */}
-        {item.type && (
-          <span className="bg-[var(--text-color-primary)] text-[var(--background-color)] text-sm px-3 py-1 rounded-full font-medium">
-            {item.type}
-          </span>
-        )}
-
-        {/* 庫存狀態標籤 */}
-        <span
-          className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${
-            item.inventory
-              ? "bg-green-900/20 text-green-300 border-green-800"  // 有庫存：綠色樣式
-              : "bg-red-900/20 text-red-300 border-red-800"       // 無庫存：紅色樣式
-          }`}
-        >
-          {item.inventory ? "✓" : "○"}{" "}
-          {item.inventory ? bgcContent.checked : bgcContent.unchecked}
-        </span>
+        {[
+          {
+            label: item.type,
+            className: "bg-[var(--text-color-primary)]",
+          },
+          {
+            label: item.inventory ? bgcContent.checked : bgcContent.unchecked,
+            className: item.inventory
+              ? "bg-green-900/20 text-green-300 border border-green-800"
+              : "bg-red-900/20 text-red-300 border border-red-800",
+          },
+        ].map((tag, i) => {
+          if (!tag.label) return null;
+          return (
+            <span
+              key={i}
+              className={cn(
+                tag.className,
+                "text-sm px-3 py-1 rounded-full font-medium"
+              )}
+            >
+              {tag.label}
+            </span>
+          );
+        })}
       </div>
 
       {/* 位置資訊區域 */}
