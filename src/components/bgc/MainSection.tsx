@@ -99,8 +99,8 @@ export const MainSection = ({ data }: MainSectionProps) => {
                       <span
                         className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium border ${
                           item.inventory
-                            ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-300 dark:border-green-800"
-                            : "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-300 dark:border-red-800"
+                            ? "bg-green-900/20 text-green-300 border-green-800"
+                            : "bg-red-900/20 text-red-300 border-red-800"
                         }`}
                       >
                         {item.inventory ? "✓" : "○"} {item.inventory ? bgcContent.checked : bgcContent.unchecked}
