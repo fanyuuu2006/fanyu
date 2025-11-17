@@ -9,6 +9,7 @@ import { useCallback, useState, useMemo } from "react";
 import bgc from "@/utils/bgc";
 import { normalize } from "../../utils/index";
 import { debounce } from "lodash";
+import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
 
 type BgcContent = Record<
   | "bgc"
@@ -58,7 +59,6 @@ export const MainSection = ({ data }: MainSectionProps) => {
     normalize(bgc.stringify(item)).includes(normalize(searchString))
   );
 
-  // 使用 debounce 延遲 300ms 後才執行搜索
   const debouncedSearch = useMemo(
     () =>
       debounce((value: string) => {
@@ -75,6 +75,11 @@ export const MainSection = ({ data }: MainSectionProps) => {
     },
     [debouncedSearch]
   );
+
+  const handleClearSearch = useCallback(() => {
+    setInputValue("");
+    setSearchString("");
+  }, []);
 
   const order = useOrder(filteredData, {
     newest: {
@@ -96,25 +101,32 @@ export const MainSection = ({ data }: MainSectionProps) => {
     <section>
       <div className="container flex flex-col items-center">
         <Title>{bgcContent.bgc}</Title>
-        {/* 查詢 */}
-        <div className="w-full md:w-1/2 flex justify-center gap-1">
-          <input
-            type="text"
-            className="w-full p-2 border border-[var(--border-color)] rounded-lg"
-            placeholder={bgcContent.inputPlaceholder}
-            value={inputValue}
-            onChange={handleSearch}
-          />
-          <button
-            className="btn rounded-2xl p-3 whitespace-nowrap"
-            onClick={() =>
-              handleSearch({
-                currentTarget: { value: "" },
-              } as React.ChangeEvent<HTMLInputElement>)
-            }
-          >
-            {bgcContent.clear}
-          </button>
+
+        {/* 查詢區塊 */}
+        <div className="w-full max-w-2xl px-4">
+          {/* 搜尋輸入框 */}
+          <div className="relative group">
+            <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--text-color-muted)] text-lg pointer-events-none group-focus-within:text-[var(--text-color-primary)] transition-colors duration-200" />
+            <input
+              type="text"
+              className="text-base sm:text-lg w-full px-12 py-3 rounded-xl border border-[var(--border-color)] placeholder:text-[var(--text-color-muted)] focus:border-[var(--border-color-focus)] focus-visible:border-[var(--border-color-focus)] transition-all duration-200"
+              placeholder={bgcContent.inputPlaceholder}
+              value={inputValue}
+              onChange={handleSearch}
+            />
+
+            {/* 清除按鈕 */}
+            {inputValue && (
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--text-color-muted)] hover:text-[var(--text-color)] transition-colors duration-200 p-1.5 rounded-full hover:bg-[var(--background-color-tertiary)] active:bg-[var(--background-color-quaternary)]"
+                onClick={handleClearSearch}
+                aria-label={bgcContent.clear}
+              >
+                <CloseOutlined className="text-sm" />
+              </button>
+            )}
+          </div>
         </div>
 
         {order.data.length === 0 ? (
@@ -122,13 +134,15 @@ export const MainSection = ({ data }: MainSectionProps) => {
         ) : (
           <>
             <order.div />
-            <div className="w-full flex items-center gap-1">
-              <span className="text-[var(--text-color-muted)]">
-                {bgcContent.total.replace(
-                  "{count}",
-                  order.data.length.toString()
-                )}
-              </span>
+            <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-4 px-4 sm:px-0">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                <span className="text-[var(--text-color-muted)] text-sm sm:text-base">
+                  {bgcContent.total.replace(
+                    "{count}",
+                    order.data.length.toString()
+                  )}
+                </span>
+              </div>
             </div>
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {order.data.map((item) => (
