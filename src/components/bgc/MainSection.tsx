@@ -17,7 +17,8 @@ type BgcContent = Record<
   | "newest"
   | "oldest"
   | "recommended"
-  | "inputPlaceholder",
+  | "inputPlaceholder"
+  | "clear",
   string
 >;
 const BGC_CONTENT: LanguageContent<BgcContent> = {
@@ -29,6 +30,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     oldest: "最舊",
     recommended: "推薦度",
     inputPlaceholder: "搜尋...",
+    clear: "清除",
   },
   english: {
     bgc: "Board Game Club",
@@ -38,6 +40,7 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
     oldest: "Oldest",
     recommended: "Recommended",
     inputPlaceholder: "Search...",
+    clear: "Clear",
   },
 };
 
@@ -57,17 +60,21 @@ export const MainSection = ({ data }: MainSectionProps) => {
 
   // 使用 debounce 延遲 300ms 後才執行搜索
   const debouncedSearch = useMemo(
-    () => debounce((value: string) => {
-      setSearchString(value);
-    }, 300),
+    () =>
+      debounce((value: string) => {
+        setSearchString(value);
+      }, 300),
     []
   );
 
-  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
-    setInputValue(value);
-    debouncedSearch(value);
-  }, [debouncedSearch]);
+  const handleSearch = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.currentTarget.value;
+      setInputValue(value);
+      debouncedSearch(value);
+    },
+    [debouncedSearch]
+  );
 
   const order = useOrder(filteredData, {
     newest: {
@@ -90,7 +97,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
       <div className="container flex flex-col items-center">
         <Title>{bgcContent.bgc}</Title>
         {/* 查詢 */}
-        <div className="w-full md:w-1/2 flex justify-center">
+        <div className="w-full md:w-1/2 flex justify-center gap-1">
           <input
             type="text"
             className="w-full p-2 border border-[var(--border-color)] rounded-lg"
@@ -98,6 +105,16 @@ export const MainSection = ({ data }: MainSectionProps) => {
             value={inputValue}
             onChange={handleSearch}
           />
+          <button
+            className="btn rounded-2xl p-3 whitespace-nowrap"
+            onClick={() =>
+              handleSearch({
+                currentTarget: { value: "" },
+              } as React.ChangeEvent<HTMLInputElement>)
+            }
+          >
+            {bgcContent.clear}
+          </button>
         </div>
 
         {order.data.length === 0 ? (
