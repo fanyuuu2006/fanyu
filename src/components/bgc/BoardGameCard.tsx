@@ -116,10 +116,11 @@ export const BoardGameCard = ({
             value: item.recommendedCounts,
           },
         ].map((info) => {
+          if (!info.value) return null;
           return (
             <div
               key={info.label}
-              className="flex items-center gap-2 p-3 bg-[var(--background-color-tertiary)] rounded-lg border border-[var(--border-color)]"
+              className="flex items-center gap-2 p-2 bg-[var(--background-color-tertiary)] rounded-lg border border-[var(--border-color)]"
             >
               <span className="font-medium text-[var(--text-color-muted)] text-xs tracking-wide">
                 {info.label}:
