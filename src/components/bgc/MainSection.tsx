@@ -5,10 +5,11 @@ import { Title } from "../custom/Title";
 import { BoardGameResponse } from "@/types/bgc";
 import { BoardGameCard } from "./BoardGameCard";
 import { useOrder } from "@/hooks/useOrder";
-import { useCallback, useState, useMemo, useRef, useEffect } from "react";
+import { useCallback, useState, useMemo } from "react";
 import bgc from "@/utils/bgc";
 import { normalize } from "../../utils/index";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
+import { useDebounce } from "@/hooks/useDebounce";
 
 type BgcContent = Record<
   | "bgc"
@@ -55,24 +56,6 @@ export type MainSectionProps = {
 };
 
 // 自定義 debounce hook，確保正確清理
-const useDebounce = (callback: (value: string) => void, delay: number) => {
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-  
-  return useCallback((value: string) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = setTimeout(() => callback(value), delay);
-  }, [callback, delay]);
-};
 
 export const MainSection = ({ data }: MainSectionProps) => {
   const Language = useLanguage();
@@ -83,26 +66,24 @@ export const MainSection = ({ data }: MainSectionProps) => {
   const boardGames = useMemo(() => data.data, [data.data]);
 
   const searchableData = useMemo(
-    () => boardGames.map(item => ({
-      item,
-      searchText: normalize(bgc.stringify(item))
-    })),
+    () =>
+      boardGames.map((item) => ({
+        item,
+        searchText: normalize(bgc.stringify(item)),
+      })),
     [boardGames]
   );
 
   // 優化：使用 useMemo 快取過濾結果
-  const filteredData = useMemo(
-    () => {
-      if (!searchString) return boardGames;
-      const normalizedSearch = normalize(searchString);
-      return searchableData
-        .filter(({ searchText }) => searchText.includes(normalizedSearch))
-        .map(({ item }) => item);
-    },
-    [searchableData, searchString, boardGames]
-  );
+  const filteredData = useMemo(() => {
+    if (!searchString) return boardGames;
+    const normalizedSearch = normalize(searchString);
+    return searchableData
+      .filter(({ searchText }) => searchText.includes(normalizedSearch))
+      .map(({ item }) => item);
+  }, [searchableData, searchString, boardGames]);
 
-  const debouncedSearch = useDebounce(setSearchString, 300);
+  const debouncedSearch = useDebounce(setSearchString, 500);
 
   const handleSearch = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,12 +99,11 @@ export const MainSection = ({ data }: MainSectionProps) => {
     setSearchString("");
   }, []);
 
-
-
   const noResultMessage = useMemo(
-    () => searchString 
-      ? bgcContent.canNotFind.replace("{string}", searchString)
-      : bgcContent.noBoardGame,
+    () =>
+      searchString
+        ? bgcContent.canNotFind.replace("{string}", searchString)
+        : bgcContent.noBoardGame,
     [bgcContent.canNotFind, bgcContent.noBoardGame, searchString]
   );
 
