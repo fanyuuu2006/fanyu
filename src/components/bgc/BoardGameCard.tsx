@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { BoardGame } from "@/types/bgc";
-import { LanguageContent } from "@/types/language";
+import { LanguageContent, LanguageOption } from "@/types/language";
 import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
 
@@ -41,6 +41,19 @@ const BGC_CONTENT: LanguageContent<BgcContent> = {
   },
 };
 
+const isEmpty = (str: string | undefined) =>
+  !str || str.trim() === "" || str.trim().toLowerCase() === "無";
+
+const getName = (item: BoardGame, lang: LanguageOption) => {
+  const other = lang === "chinese" ? "english" : "chinese";
+  const mainEmpty = isEmpty(item.name[lang]);
+
+  return {
+    main: !mainEmpty ? item.name[lang] : item.name[other],
+    sub: mainEmpty ? undefined : item.name[other],
+  };
+};
+
 type BoardGameCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
   {
@@ -55,6 +68,7 @@ export const BoardGameCard = ({
 }: BoardGameCardProps) => {
   const language = useLanguage();
   const bgcContent = BGC_CONTENT[language.Current];
+  const name = getName(item, language.Current);
 
   return (
     <div className={cn("card p-5 flex flex-col gap-4", className)} {...rest}>
@@ -66,12 +80,14 @@ export const BoardGameCard = ({
       {/* 桌遊名稱 */}
       <div className="flex flex-col gap-1 -mt-2">
         <h3 className="text-lg font-bold text-[var(--text-color)] leading-tight">
-          {language.Current === "chinese" ? item.name.chinese : item.name.english}
+          {name.main}
         </h3>
-        
-        <h4 className="text-sm font-medium text-[var(--text-color-muted)] leading-tight">
-          {language.Current === "chinese" ? item.name.english : item.name.chinese}
-        </h4>
+
+        {name.sub && (
+          <h4 className="text-sm font-medium text-[var(--text-color-muted)] leading-tight">
+            {name.sub}
+          </h4>
+        )}
       </div>
 
       {/* 標籤區域 */}
