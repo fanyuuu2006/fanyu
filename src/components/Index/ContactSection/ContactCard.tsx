@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { ContactItem } from "@/types/contact";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import { cn } from "@/utils/className";
+import { proxyUrl } from "@/utils/url";
 
 /**
  * ContactCard 元件的 Props 型別定義
@@ -20,7 +21,7 @@ export type ContactCardProps = OverrideProps<
  * ContactCard 聯絡卡片元件
  * 用於顯示聯絡方式的卡片，包含連結、頭像、姓名、ID 等資訊
  * 支援懸停顯示詳細資訊的覆蓋層效果
- * 
+ *
  * @param className - 自訂 CSS 類別名稱
  * @param item - 聯絡資訊項目數據
  * @param rest - 其他 HTML div 屬性
@@ -28,7 +29,7 @@ export type ContactCardProps = OverrideProps<
 export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
   // 取得當前語言設定
   const Language = useLanguage();
-  
+
   // 從聯絡項目中解構圖片相關屬性
   const {
     src: imageSrc,
@@ -95,7 +96,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
                   className={`w-full h-full object-cover ${
                     imageClassName || ""
                   }`}
-                  src={imageSrc || `/GameShow.jpg`} // 預設圖片或自訂圖片
+                  src={proxyUrl(imageSrc as string) || `/GameShow.jpg`} // 預設圖片或自訂圖片
                   alt={`${item.label}-${item.info.id}`} // 無障礙替代文字
                   style={{
                     // 動態背景顏色：匹配邊框顏色
