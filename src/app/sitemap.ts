@@ -1,21 +1,14 @@
 import { profile } from "@/libs/profile";
-import *  as album from "@/utils/album";
+import * as album from "@/utils/album";
 import { slugify } from "@/utils/url";
 import { MetadataRoute } from "next";
+import { routes as staticRoutes } from "@/components/routes";
 
 const baseUrl = profile.url;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = [
-    { path: "/", priority: 1.0, changeFreq: "weekly" as const },
-    { path: "/projects", priority: 0.9, changeFreq: "monthly" as const },
-    { path: "/guestbook", priority: 0.7, changeFreq: "daily" as const },
-    { path: "/album", priority: 0.8, changeFreq: "weekly" as const },
-    { path: "/my", priority: 0.6, changeFreq: "monthly" as const },
-  ];
-
   const dynamicRoutes: Array<{
-    path: string;
+    pat: string;
     priority: number;
     changeFreq:
       | "yearly"
@@ -40,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const { year, events } of yearEventMap) {
       // 年份頁面
       dynamicRoutes.push({
-        path: `/album/${slugify(year)}`,
+        pat: `/album/${slugify(year)}`,
         priority: 0.7,
         changeFreq: "monthly",
       });
@@ -48,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // 活動頁面
       for (const event of events) {
         dynamicRoutes.push({
-          path: `/album/${slugify(year)}/${slugify(event)}`,
+          pat: `/album/${slugify(year)}/${slugify(event)}`,
           priority: 0.6,
           changeFreq: "monthly",
         });
@@ -58,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 專案頁面
     for (const project of profile.portfolio.projects) {
       dynamicRoutes.push({
-        path: `/projects/${slugify(project.title.english)}`,
+        pat: `/projects/${slugify(project.title.english)}`,
         priority: 0.8,
         changeFreq: "monthly",
       });
@@ -75,13 +68,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const allRoutes = [
     ...staticRoutes.map((route) => ({
-      url: `${baseUrl}${route.path}`,
-      lastModified: getLastModified(route.priority),
-      changeFrequency: route.changeFreq,
+      url: `${baseUrl}${route.url}`,
+      lastModified: getLastModified(route.priority || 0.5),
+      changeFrequency: route.changeFrequency,
       priority: route.priority,
     })),
     ...dynamicRoutes.map((route) => ({
-      url: `${baseUrl}${route.path}`,
+      url: `${baseUrl}${route.pat}`,
       lastModified: getLastModified(route.priority),
       changeFrequency: route.changeFreq,
       priority: route.priority,

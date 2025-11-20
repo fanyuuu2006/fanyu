@@ -5,11 +5,12 @@ import {
   MessageOutlined,
   PictureOutlined,
   BlockOutlined,
+  StarOutlined,
 } from "@ant-design/icons";
+import { MetadataRoute } from "next";
 
-type BaseRoute = {
+type BaseRoute = MetadataRoute.Sitemap[number] & {
   label: LanguageContent<string>;
-  url: string;
   icon?: React.ElementType;
   isActive?: (path: string) => boolean;
   hidden?: boolean;
@@ -27,6 +28,8 @@ export const routes: Route[] = [
     },
     url: "/",
     icon: HomeOutlined,
+    changeFrequency: "weekly",
+    priority: 1.0,
     sub: [
       {
         label: {
@@ -73,6 +76,8 @@ export const routes: Route[] = [
     },
     url: "/projects",
     icon: ProjectOutlined,
+    changeFrequency : "monthly",
+    priority: 0.6,
   },
   {
     label: {
@@ -81,6 +86,8 @@ export const routes: Route[] = [
     },
     url: "/guestbook",
     icon: MessageOutlined,
+    changeFrequency : "weekly",
+    priority: 0.5,
   },
   {
     label: {
@@ -90,6 +97,8 @@ export const routes: Route[] = [
     url: "/album",
     isActive: (path: string) => path.startsWith("/album"),
     icon: PictureOutlined,
+    changeFrequency : "weekly",
+    priority: 0.9,
   },
   {
     label: {
@@ -99,5 +108,16 @@ export const routes: Route[] = [
     url: "/bgc",
     icon: BlockOutlined,
     hidden: true,
+  },
+  {
+    label: {
+      english: "My",
+      chinese: "我的專區",
+    },
+    url: "/my",
+    icon: StarOutlined,
+    hidden: true,
+    changeFrequency: "monthly",
+    priority: 0.4,
   }
 ];
