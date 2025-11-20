@@ -170,7 +170,7 @@ export const HeroSection = () => {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "w-full md:w-fit flex items-center justify-center px-6 py-3 font-semibold rounded-full",
+                      "w-full md:w-fit flex items-center justify-center px-8 py-3 font-semibold rounded-full",
                       item.className
                     )}
                   >

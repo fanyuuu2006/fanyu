@@ -207,7 +207,7 @@ const DoBuJio: ProjectItem = {
 
 const AoJiao: ProjectItem = {
   imageSrc:
-    "https://raw.githubusercontent.com/fanyuuu2006/NTUST-BoardGameClub-Bot/refs/heads/main/image/icon.jpg",
+    "https://raw.githubusercontent.com/fanyuuu2006/NTUST-BoardGameClub-Bot/refs/heads/main/public/image/icon.jpg",
   title: {
     chinese: "小傲驕",
     english: "Aojiao",

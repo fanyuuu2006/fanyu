@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ProjectItem } from "@/types/portfolio";
-import { slugify } from "@/utils/url";
+import { proxyUrl, slugify } from "@/utils/url";
 import {
   ClockCircleOutlined,
   GithubOutlined,
@@ -12,6 +12,7 @@ import { Tooltip } from "antd";
 import { CustomLink } from "@/components/custom/CustomLink";
 import "@/styles/project-card.css";
 import { cn } from "@/utils/className";
+import { MyImage } from "@/components/custom/MyImage";
 
 export type ProjectCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -27,10 +28,9 @@ export const ProjectCard = ({ className, item, ...rest }: ProjectCardProps) => {
 
   return (
     <div className={cn(`project-card`, className)} {...rest}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <MyImage
         draggable={false}
-        src={item.imageSrc}
+        src={proxyUrl(item.imageSrc)}
         alt={`${item.title.english} icon`}
       />
 

@@ -7,6 +7,7 @@ import { slugify } from "@/utils/url";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import { useMemo } from "react";
+import { MyImage } from "@/components/custom/MyImage";
 
 type ExperienceContent = Record<
   "noRecord" | "present" | "role" | "description",
@@ -61,8 +62,7 @@ export const ExperienceCard = ({
       {/** 標題區域 */}
       <div className="flex items-start flex-col lg:flex-row gap-4 lg:gap-6">
         <div className="flex-shrink-0 aspect-square h-16 sm:h-18 md:h-20 lg:h-22 xl:h-24 rounded-2xl overflow-hidden border-2 border-[var(--border-color)]">
-          {/*eslint-disable-next-line @next/next/no-img-element*/}
-          <img
+          <MyImage
             src={
               item.imageSrc ||
               `https://s2.googleusercontent.com/s2/favicons?domain_url=${slugify(
