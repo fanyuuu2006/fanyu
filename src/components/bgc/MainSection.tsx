@@ -153,16 +153,15 @@ export const MainSection = ({ data }: MainSectionProps) => {
               value={inputValue}
               onChange={handleSearch}
             />
-
             {/* 清除按鈕 */}
             {inputValue && (
               <button
                 type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--text-color-muted)] hover:text-[var(--text-color)] transition-colors duration-200 p-1.5 rounded-full hover:bg-[var(--background-color-tertiary)] active:bg-[var(--background-color-quaternary)]"
+                className="text-sm absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--text-color-muted)] hover:text-[var(--text-color)] transition-colors duration-200 p-1.5 rounded-full hover:bg-[var(--background-color-tertiary)] active:bg-[var(--background-color-quaternary)]"
                 onClick={handleClearSearch}
                 aria-label={bgcContent.clear}
               >
-                <CloseOutlined className="text-sm" />
+                <CloseOutlined />
               </button>
             )}
           </div>
