@@ -71,9 +71,9 @@ export const BoardGameCard = ({
   const name = getName(item, language.Current);
 
   return (
-    <div className={cn("card p-5 flex flex-col gap-4", className)} {...rest}>
+    <div className={cn("card p-5 flex flex-col gap-3", className)} {...rest}>
       {/* 桌遊 ID */}
-      <div className="text-xs text-[var(--text-color-muted)] font-mono tracking-wide">
+      <div className="text-base text-[var(--text-color-muted)] font-mono tracking-wide">
         #{item.id}
       </div>
 

@@ -8,7 +8,7 @@ type DebouncedFunction<Func extends (...args: any[]) => void> = (
 /**
  * useDebounce Hook - 用於延遲執行函數以減少頻繁調用
  * 
- * @template T - 函數類型
+ * @template Func - 函數類型
  * @param callback - 要延遲執行的回調函數
  * @param delay - 延遲時間（毫秒）
  * @returns 包裝後的防抖函數
