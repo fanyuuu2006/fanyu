@@ -89,7 +89,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
     const finalSrc =
       hasError || !src
         ? FALLBACK_IMAGE
-        : `${src}?retry=${retryCount}&ts=${Date.now()}`;
+        : `${src}?retry=${retryCount}`;
 
     return (
       // eslint-disable-next-line @next/next/no-img-element
@@ -98,9 +98,9 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
         ref={ref}
         alt={alt}
         onError={handleImageError}
-        {...rest}
         data-origin-src={src}
         data-retry-count={retryCount}
+        {...rest}
       />
     );
   }
