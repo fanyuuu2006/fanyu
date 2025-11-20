@@ -5,6 +5,7 @@ import { ContactItem } from "@/types/contact";
 import { OutsideLink, OverrideProps } from "fanyucomponents";
 import { cn } from "@/utils/className";
 import { proxyUrl } from "@/utils/url";
+import { MyImage } from "@/components/custom/MyImage";
 
 /**
  * ContactCard 元件的 Props 型別定義
@@ -90,9 +91,8 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
                   }`,
                 }}
               >
-                {/* 頭像圖片：使用 img 標籤而非 Next.js Image 以支援外部來源 */}
-                {/*eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                {/* 頭像圖片 */}
+                <MyImage
                   className={`w-full h-full object-cover ${
                     imageClassName || ""
                   }`}

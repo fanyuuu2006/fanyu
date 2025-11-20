@@ -12,6 +12,7 @@ export type MyImageProps = OverrideProps<
   {
     /** 圖片的來源 URL，可以是字串、undefined 或 null */
     src: string | undefined | null;
+    maxRetryCount?: number;
   }
 >;
 
@@ -23,6 +24,7 @@ const IMAGE_CONTENT = {
     imageLoadFailed: "Image Load Failed",
   },
 };
+const MAX_RETRY_COUNT = 3;
 
 /**
  * 自訂圖片組件
@@ -60,7 +62,7 @@ const IMAGE_CONTENT = {
  * ```
  */
 export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
-  ({ src, alt, onError, ...rest }, ref) => {
+  ({ src, alt, onError, maxRetryCount = MAX_RETRY_COUNT, ...rest }, ref) => {
     const language = useLanguage();
     const imageContent = IMAGE_CONTENT[language.Current];
     const [hasError, setHasError] = useState<boolean>(false);
@@ -69,23 +71,25 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
     const handleImageError: React.ReactEventHandler<HTMLImageElement> =
       useCallback(
         (e) => {
-          setHasError(true);
           console.error(imageContent.imageLoadFailed, e);
-          if (retryCount < 3 && src) {
-            // 嘗試重新載入圖片，最多重試 3 次
-            setRetryCount((prev) => prev + 1);
-            setHasError(false);
+          if (retryCount < maxRetryCount && src) {
+            // 如果圖片伺服器暫時有問題，會連續 3 次失敗。加短延遲對網路/伺服器更友善
+            setTimeout(
+              () => setRetryCount((prev) => prev + 1),
+              500 * (retryCount + 1)
+            );
+          } else {
+            setHasError(true);
           }
 
           if (onError) onError(e);
         },
-        [imageContent.imageLoadFailed, onError, retryCount, src]
+        [imageContent.imageLoadFailed, maxRetryCount, onError, retryCount, src]
       );
-    const finalSrc = hasError
-      ? FALLBACK_IMAGE
-      : src
-      ? `${src}?retry=${retryCount}` // 重新請求用 cache bust
-      : FALLBACK_IMAGE;
+    const finalSrc =
+      hasError || !src
+        ? FALLBACK_IMAGE
+        : `${src}?retry=${retryCount}&ts=${Date.now()}`;
 
     return (
       // eslint-disable-next-line @next/next/no-img-element
@@ -95,7 +99,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
         alt={alt}
         onError={handleImageError}
         {...rest}
-        data-origin-src={hasError ? src : undefined}
+        data-origin-src={src}
         data-retry-count={retryCount}
       />
     );
