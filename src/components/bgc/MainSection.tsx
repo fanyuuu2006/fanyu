@@ -132,6 +132,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
   return (
     <section
       id="hero"
+      className="h-full"
       style={
         {
           "--bg": `url("/api/album/image/10YJQZuJ4eBtNStqgj9OdsMbByrtWOoJ3")`,
@@ -175,7 +176,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
         </div>
 
         {order.data.length === 0 ? (
-          <div className="flex flex-col gap-6 items-center justify-center text-center p-16">
+          <div className="card max-w-lg flex flex-col gap-4 items-center justify-center text-center p-12">
             {/* 圖示 */}
             <div className="opacity-60">
               <SearchOutlined className="text-6xl text-[var(--text-color-muted)]" />
@@ -204,12 +205,10 @@ export const MainSection = ({ data }: MainSectionProps) => {
         ) : (
           <>
             <order.div />
-            <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-4 px-4 sm:px-0">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                <span className="text-[var(--text-color-muted)] text-sm sm:text-base">
+            <div className="w-full flex mb-4 px-4">
+                <span className="text-sm sm:text-base">
                   {totalCountText}
                 </span>
-              </div>
             </div>
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
               {order.data.map((item) => (

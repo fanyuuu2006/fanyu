@@ -56,11 +56,11 @@ export const ExperienceCard = ({
 
   return (
     <div
-      className={cn(`card w-full p-6 md:p-8 flex flex-col gap-6`, className)}
+      className={cn(`card w-full p-6 flex flex-col gap-4`, className)}
       {...rest}
     >
       {/** 標題區域 */}
-      <div className="flex items-start flex-col lg:flex-row gap-4 lg:gap-6">
+      <div className="flex items-start flex-col lg:flex-row gap-2 lg:gap-6">
         <div className="flex-shrink-0 aspect-square h-16 sm:h-18 md:h-20 lg:h-22 xl:h-24 rounded-2xl overflow-hidden border-2 border-[var(--border-color)]">
           <MyImage
             src={
