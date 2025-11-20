@@ -43,10 +43,9 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
         }`}
       >
-        <h2 className="text-4xl font-bold">{item.year}</h2>
-        <span className="text-[var(--text-color-muted)]">
-          {item.events.length}
-        </span>
+        <h2 className="text-4xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
+          {item.year}
+        </h2>
         <button
           className={cn(`text-3xl ml-auto transition-transform`, {
             "-rotate-90": isCollapseOpen,
