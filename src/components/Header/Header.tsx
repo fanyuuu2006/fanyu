@@ -21,7 +21,12 @@ export const Header = () => {
         {/* 主要導航區域 */}
         <div className="container px-8 py-4 w-full flex flex-nowrap items-center justify-between">
           {/* Logo 區域 */}
-          <Link href="/">
+          <Link
+            href="/"
+            onClick={() => {
+              if (menuShow) setMenuShow(false);
+            }}
+          >
             <Image
               priority
               alt="Logo"
