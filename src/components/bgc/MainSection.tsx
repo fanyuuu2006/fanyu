@@ -95,8 +95,8 @@ export const MainSection = ({ data }: MainSectionProps) => {
   );
 
   const handleClearSearch = useCallback(() => {
-    setInputValue("");
     setSearchString("");
+    setInputValue("");
   }, []);
 
   const noResultMessage = useMemo(
@@ -130,7 +130,14 @@ export const MainSection = ({ data }: MainSectionProps) => {
   );
 
   return (
-    <section>
+    <section
+      id="hero"
+      style={
+        {
+          "--bg": `url("/api/album/image/10YJQZuJ4eBtNStqgj9OdsMbByrtWOoJ3")`,
+        } as React.CSSProperties
+      }
+    >
       <div className="container flex flex-col items-center">
         <Title>{bgcContent.bgc}</Title>
 
@@ -204,7 +211,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
                 </span>
               </div>
             </div>
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
               {order.data.map((item) => (
                 <BoardGameCard
                   key={item.id}

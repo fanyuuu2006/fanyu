@@ -120,7 +120,14 @@ export const MainSection = () => {
   //   ];
   // }, []);
   return (
-    <section id="hero">
+    <section
+      id="hero"
+      style={
+        {
+          "--bg": 'url("/cbg.jpg")',
+        } as React.CSSProperties
+      }
+    >
       <div className="container flex flex-col items-center justify-center min-h-154">
         <TimerCard />
         {/* <CodeCard className="hint" lang="typescript" codeLines={codeLines} /> */}

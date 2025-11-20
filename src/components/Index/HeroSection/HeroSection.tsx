@@ -132,7 +132,14 @@ export const HeroSection = () => {
   }, [Language.Current]);
 
   return (
-    <section id="hero">
+    <section
+      id="hero"
+      style={
+        {
+          "--bg": 'url("/cbg.jpg")',
+        } as React.CSSProperties
+      }
+    >
       <div className="container">
         <div className={cn("grid grid-cols-1 lg:grid-cols-2 min-h-screen")}>
           <div className="flex flex-col items-center justify-center p-4 gap-2">

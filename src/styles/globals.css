@@ -71,7 +71,7 @@
   /* === Hero 區塊樣式 === */
   #hero {
     position: relative;
-    background: url("/cbg.jpg") center/cover no-repeat;
+    background: var(--bg) center/cover no-repeat;
     background-attachment: fixed; /* 視差效果 */
   }
 
