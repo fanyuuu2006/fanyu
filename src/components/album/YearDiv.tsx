@@ -34,7 +34,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
   return (
     <motion.article
       id={item.year}
-      className="w-full flex flex-col gap-2"
+      className="w-full flex flex-col gap-4 mb-6"
       variants={fadeInItem}
       {...rest}
     >
@@ -44,9 +44,9 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
         }`}
       >
         <h2 className="text-4xl font-bold">{item.year}</h2>
-        {/* <span className="text-[var(--text-color-muted)]">
+        <span className="text-[var(--text-color-muted)]">
           {item.events.length}
-        </span> */}
+        </span>
         <button
           className={cn(`text-3xl ml-auto transition-transform`, {
             "-rotate-90": isCollapseOpen,
@@ -64,7 +64,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.5 }}
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4"
         >
           {item.events.length === 0 ? (
             <div className="text-3xl font-bold">{`${item.year} - ${yearsContent.noEvents}`}</div>

@@ -93,7 +93,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
         {/* 圖片網格 */}
         <article
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1"
+          className="w-full grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-1"
           role="main"
           aria-label={`${year}-${event.name}照片集`}
         >
