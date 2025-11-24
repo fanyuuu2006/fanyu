@@ -29,5 +29,6 @@ export const NTUST_BGC: ExperienceItem = {
       icon: <EnvironmentOutlined />,
       href: "https://maps.app.goo.gl/Rzro8g26H8Pb1f1EA",
     },
+    
   ],
 };

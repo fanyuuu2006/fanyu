@@ -72,7 +72,7 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
         onLoad={() => setLoaded(true)}
       />
       {isVideo && (
-        <div className="text-sm absolute top-1 right-1">
+        <div className="text-sm md:text-base lg:text-lg xl:text-xl absolute top-1.5 right-1.5">
           <div className="flex gap-1">
             <PlayCircleFilled />
           </div>
