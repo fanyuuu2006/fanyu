@@ -7,7 +7,7 @@ import { MyImage } from "@/components/custom/MyImage";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
-import { formatDate } from "@/utils";
+import { formatDate, formatTime } from "@/utils";
 import { cn } from "@/utils/className";
 import {
   CloseOutlined,
@@ -161,9 +161,7 @@ export const useItemPreview = ({
         {
           label: itemPreviewContent.duration,
           value: currentItem.videoMediaMetadata.durationMillis
-            ? `${Math.floor(
-                Number(currentItem.videoMediaMetadata.durationMillis) / 1000
-              )} ${itemPreviewContent.seconds}`
+            ? formatTime(currentItem.videoMediaMetadata.durationMillis)
             : itemPreviewContent.unknown,
         }
       );

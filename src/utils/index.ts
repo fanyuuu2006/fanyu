@@ -22,4 +22,15 @@ export const formatDate = (
     }
   );
 
+export const formatTime = (millis: string): string => {
+  const totalSeconds = Math.floor(Number(millis) / 1000);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return [ minutes, seconds]
+    .map((v) => String(v).padStart(2, "0"))
+    .join(":");
+};
+
+
 export const normalize = (str: string) => str.toLowerCase().trim();

@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
+import { formatTime } from "@/utils";
 import { cn } from "@/utils/className";
 import { PlayCircleFilled } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
@@ -73,9 +74,9 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
       />
       {isVideo && (
         <div className="text-sm md:text-base lg:text-lg xl:text-xl absolute top-1.5 right-1.5">
-          <div className="flex gap-1">
-            <span className="text-[0.8em]">
-              {_formatTime(item.videoMediaMetadata?.durationMillis || "0")}
+          <div className="flex gap-1 items-center">
+            <span className="text-[0.75em] font-bold">
+              {formatTime(item.videoMediaMetadata?.durationMillis || "0")}
             </span>
             <PlayCircleFilled />
           </div>
@@ -98,14 +99,4 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
       )}
     </figure>
   );
-};
-
-const _formatTime = (millis: string): string => {
-  const totalSeconds = Math.floor(Number(millis) / 1000);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  return [ minutes, seconds]
-    .map((v) => String(v).padStart(2, "0"))
-    .join(":");
 };
