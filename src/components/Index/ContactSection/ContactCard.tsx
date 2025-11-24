@@ -98,7 +98,8 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
                   }`}
                   src={
                     imageSrc ? proxyUrl(imageSrc as string) : `/GameShow.jpg`
-                  } // 預設圖片或自訂圖片
+                  }
+                  fallbackSrc={`/GameShow.jpg`}
                   alt={`${item.label}-${item.info.id}`} // 無障礙替代文字
                   style={{
                     // 動態背景顏色：匹配邊框顏色

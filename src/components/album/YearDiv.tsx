@@ -63,7 +63,7 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.5 }}
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3"
         >
           {item.events.length === 0 ? (
             <div className="text-3xl font-bold">{`${item.year} - ${yearsContent.noEvents}`}</div>
