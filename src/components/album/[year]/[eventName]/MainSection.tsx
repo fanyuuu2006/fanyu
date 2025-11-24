@@ -6,7 +6,7 @@ import { Tooltip } from "antd";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
 import { useImagePreview } from "./useImagePreview";
-import { ImageCard } from "./ImageCard";
+import { ItemCard } from "./ItemCard";
 import { useRouter } from "next/navigation";
 
 type MainSectionProps = {
@@ -14,22 +14,22 @@ type MainSectionProps = {
   year: Album[number]["year"];
 };
 
-type ImagesContent = Record<
-  "noImages" | "back" | "totalImages" | "imageLoadFailed",
+type ItemsContent = Record<
+  "noItems" | "back" | "totalItems" | "imageLoadFailed",
   string
 >;
 
-const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
+const ITEMS_CONTENT: LanguageContent<ItemsContent> = {
   chinese: {
-    noImages: "沒有圖片",
+    noItems: "沒有內容",
     back: "返回",
-    totalImages: "共 {count} 張照片",
+    totalItems: "共 {count} 張照片",
     imageLoadFailed: "載入圖片失敗",
   },
   english: {
-    noImages: "No Images",
+    noItems: "No Items",
     back: "Back",
-    totalImages: "Total {count} items",
+    totalItems: "Total {count} items",
     imageLoadFailed: "Image Load Failed",
   },
 };
@@ -38,7 +38,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   const language = useLanguage();
   const router = useRouter();
 
-  const imagesContent = IMAGES_CONTENT[language.Current];
+  const itemsContent = ITEMS_CONTENT[language.Current];
 
   const imagePreview = useImagePreview({
     event,
@@ -65,10 +65,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
       <div className="container">
         {/* 返回按鈕區域 */}
         <div className="w-full mb-6">
-          <Tooltip placement="bottom" title={imagesContent.back}>
+          <Tooltip placement="bottom" title={itemsContent.back}>
             <button
               onClick={handleBackClick}
-              aria-label={imagesContent.back}
+              aria-label={itemsContent.back}
               className="btn text-lg lg:text-xl flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12 rounded-full "
             >
               <CaretLeftOutlined className="relative -left-[2%]" />
@@ -84,7 +84,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             {event.name}
           </h1>
           <span className="text-[var(--text-color-muted)]">
-            {imagesContent.totalImages.replace(
+            {itemsContent.totalItems.replace(
               "{count}",
               event.items.length.toString()
             )}
@@ -100,16 +100,16 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           {event.items.length === 0 ? (
             <div className="col-span-full flex flex-col items-center justify-center">
               <h3 className="text-2xl md:text-3xl font-bold">
-                {imagesContent.noImages}
+                {itemsContent.noItems}
               </h3>
             </div>
           ) : (
             <>
-              {event.items.map((imgItem, i) => (
-                <ImageCard
+              {event.items.map((item, i) => (
+                <ItemCard
                   id={i.toString()}
                   tabIndex={0}
-                  image={imgItem}
+                  item={item}
                   key={i}
                   onClick={() => handleImageClick(i)}
                 />

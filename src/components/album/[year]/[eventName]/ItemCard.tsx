@@ -7,26 +7,26 @@ import { cn } from "@/utils/className";
 import { OverrideProps } from "fanyucomponents";
 import { useState } from "react";
 
-const IMAGE_CARD_CONTENT: LanguageContent<Record<"noImages", string>> = {
+const ITEM_CARD_CONTENT: LanguageContent<Record<"noItem", string>> = {
   chinese: {
-    noImages: "沒有圖片",
+    noItem: "沒有圖片",
   },
   english: {
-    noImages: "No Images",
+    noItem: "No Item",
   },
 };
 
 export type ImageCardProps = OverrideProps<
   React.HTMLAttributes<HTMLElement>,
   {
-    image: Album[number]["events"][number]["items"][number];
+    item: Album[number]["events"][number]["items"][number];
   }
 >;
 
-export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
+export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
   const language = useLanguage();
-  const imageContent = IMAGE_CARD_CONTENT[language.Current];
-  const title = image.name || imageContent.noImages;
+  const itemContent = ITEM_CARD_CONTENT[language.Current];
+  const title = item.name || itemContent.noItem;
   const [loaded, setLoaded] = useState<boolean>(false);
 
   return (
@@ -41,13 +41,13 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
     >
       {/* 縮圖預覽 */}
       <MyImage
-        src={image.thumbnailLink}
+        src={item.thumbnailLink}
         title={title}
         alt={title}
         className="h-full w-full object-cover"
       />
       <MyImage
-        src={image.url}
+        src={item.url}
         title={title}
         alt={title}
         className={cn(
@@ -57,26 +57,26 @@ export const ImageCard = ({ image, className, ...rest }: ImageCardProps) => {
           }
         )}
         onLoad={() => setLoaded(true)}
-        width={image.imageMediaMetadata?.width || 800}
-        height={image.imageMediaMetadata?.height || 800}
+        width={item.imageMediaMetadata?.width || 800}
+        height={item.imageMediaMetadata?.height || 800}
         itemProp="contentUrl"
       />
       {/* 結構化數據 - 隱藏但對 SEO 有幫助 */}
       <meta itemProp="name" content={title} />
       <meta
         itemProp="thumbnailUrl"
-        content={image.thumbnailLink || FALLBACK_IMAGE}
+        content={item.thumbnailLink || FALLBACK_IMAGE}
       />
-      {image.imageMediaMetadata?.width && (
+      {item.imageMediaMetadata?.width && (
         <meta
           itemProp="width"
-          content={String(image.imageMediaMetadata.width)}
+          content={String(item.imageMediaMetadata.width)}
         />
       )}
-      {image.imageMediaMetadata?.height && (
+      {item.imageMediaMetadata?.height && (
         <meta
           itemProp="height"
-          content={String(image.imageMediaMetadata.height)}
+          content={String(item.imageMediaMetadata.height)}
         />
       )}
     </figure>
