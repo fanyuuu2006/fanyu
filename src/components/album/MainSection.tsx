@@ -8,7 +8,7 @@ import { Title } from "../custom/Title";
 import { useMemo } from "react";
 
 type AlbumContent = Record<
-  "album" | "noAlbum" | "total" | "countImages" | "countEvents",
+  "album" | "noAlbum" | "total" | "countItems" | "countEvents",
   string
 >;
 const ALBUM_CONTENT: LanguageContent<AlbumContent> = {
@@ -16,14 +16,14 @@ const ALBUM_CONTENT: LanguageContent<AlbumContent> = {
     album: "我的相簿",
     noAlbum: "沒有相簿",
     total: "共",
-    countImages: "{count} 張照片",
+    countItems: "{count} 個項目",
     countEvents: "{count} 個事件",
   },
   english: {
     album: "My Album",
     noAlbum: "No Album",
     total: "Total",
-    countImages: "{count} images",
+    countItems: "{count} items",
     countEvents: "{count} events",
   },
 };
@@ -42,7 +42,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
       data.reduce(
         (res, year) => {
           res.events += year.events.length;
-          res.images += year.events.reduce(
+          res.items += year.events.reduce(
             (eventRes, event) => eventRes + event.items.length,
             0
           );
@@ -50,7 +50,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
         },
         {
           events: 0,
-          images: 0,
+          items: 0,
         }
       ),
     [data]
@@ -65,7 +65,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
           <div className="text-3xl font-bold">{albumContent.noAlbum}</div>
         ) : (
           <>
-            {/* 總照片數和事件數 */}
+            {/* 總項目數和事件數 */}
             <div className="flex items-center gap-1">
               <span className="text-[var(--text-color-muted)]">
                 {albumContent.total}
@@ -73,7 +73,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
               {(
                 [
                   { key: "events", labelKey: "countEvents" },
-                  { key: "images", labelKey: "countImages" },
+                  { key: "items", labelKey: "countItems" },
                 ] as const
               ).map((item) => (
                 <span key={item.key} className="text-[var(--text-color-muted)]">

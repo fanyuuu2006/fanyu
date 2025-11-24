@@ -52,7 +52,7 @@ const _createFileItem = <
     return result;
   };
 };
-export const toEventItem = (
+export const toEvent = (
   file: MyDriveFile,
 ): Omit<Album[number]["events"][number], "items">  => {
   return _createFileItem({
@@ -61,13 +61,13 @@ export const toEventItem = (
       : undefined,
   })(file);
 };
-export const toImageItem = (
+export const toItem = (
   file: MyDriveFile
 ): Album[number]["events"][number]["items"][number] => {
   return _createFileItem({
     thumbnailLink: file.thumbnailLink
       ? proxyUrl(file.thumbnailLink)
       : undefined,
-    url: `/api/album/image/${file.id}`,
+    url: `/api/album/item/${file.id}`,
   })(file);
 };

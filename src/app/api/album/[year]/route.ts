@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listAllFiles, toEventItem } from "@/utils/googleapis";
+import { listAllFiles, toEvent } from "@/utils/googleapis";
 import { deslugify } from "@/utils/url";
 
 export async function GET(
@@ -27,14 +27,14 @@ export async function GET(
       `'${yearFolder.id}' in parents and mimeType = 'application/vnd.google-apps.folder'`
       , ["id", "name", "createdTime"]
     );
-    const events = eventFolders.map(toEventItem);
+    const events = eventFolders.map(toEvent);
 
-    const otherimages = await listAllFiles(
-      `'${yearFolder.id}' in parents and mimeType contains 'image/'`
+    const otheritems = await listAllFiles(
+      `'${yearFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
     );
 
     // 加上「其他」類別
-    if (otherimages.length > 0) {
+    if (otheritems.length > 0) {
       events.push({
         name: "其他",
       });

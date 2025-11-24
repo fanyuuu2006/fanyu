@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listAllFiles, toImageItem } from "@/utils/googleapis";
+import { listAllFiles, toItem } from "@/utils/googleapis";
 import { deslugify } from "@/utils/url";
 
 export async function GET(
@@ -16,13 +16,13 @@ export async function GET(
     const index = parseInt(deslugify(i));
 
     if (isNaN(index) || index < 0) {
-      return NextResponse.json({ error: "Invalid index" }, { status: 400 });
+      return NextResponse.json({ error: "索引無效" }, { status: 400 });
     }
 
     const rootFolderId = process.env.GOOGLE_DRIVE_ROOT_FOLDER_ID;
     if (!rootFolderId) {
       return NextResponse.json(
-        { error: "Missing Google Drive root folder ID" },
+        { error: "缺少 Google Drive 根資料夾 ID" },
         { status: 500 }
       );
     }
@@ -34,24 +34,24 @@ export async function GET(
     );
     const yearFolder = yearFolders.find((f) => f.name === year);
     if (!yearFolder) {
-      return NextResponse.json({ error: "Year not found" }, { status: 404 });
+      return NextResponse.json({ error: "找不到年份" }, { status: 404 });
     }
 
     // 處理 event = "其他"
     if (eventName === "其他") {
-      const images = await listAllFiles(
-        `'${yearFolder.id}' in parents and mimeType contains 'image/'`
+      const items = await listAllFiles(
+        `'${yearFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
       );
-      const image = images[index];
+      const item = items[index];
 
-      if (!image) {
+      if (!item) {
         return NextResponse.json(
-          { error: "Image index out of range" },
+          { error: "索引超出範圍" },
           { status: 404 }
         );
       }
 
-      return NextResponse.json(toImageItem(image));
+      return NextResponse.json(toItem(item));
     }
 
     // 找事件資料夾
@@ -61,28 +61,28 @@ export async function GET(
     );
     const eventFolder = eventFolders.find((e) => e.name === eventName);
     if (!eventFolder) {
-      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+      return NextResponse.json({ error: "找不到事件" }, { status: 404 });
     }
 
     // 找事件圖片
-    const images = await listAllFiles(
-      `'${eventFolder.id}' in parents and mimeType contains 'image/'`
+    const items = await listAllFiles(
+      `'${eventFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
     );
-    const reversedImages = images;
-    const image = reversedImages[index];
+    const reversedItems = items;
+    const item = reversedItems[index];
 
-    if (!image) {
+    if (!item) {
       return NextResponse.json(
-        { error: "Image index out of range" },
+        { error: "索引超出範圍" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(toImageItem(image));
+    return NextResponse.json(toItem(item));
   } catch (error) {
     console.warn("⚠️ 讀取 Album 資料夾時發生錯誤:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "伺服器內部錯誤" },
       { status: 500 }
     );
   }

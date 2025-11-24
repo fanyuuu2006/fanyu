@@ -20,7 +20,7 @@ import { useModal } from "fanyucomponents";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-const IMAGE_PREVIEW_CONTENT: LanguageContent<
+const ITEM_PREVIEW_CONTENT: LanguageContent<
   Record<
     | "title"
     | "fileName"
@@ -35,7 +35,7 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
   >
 > = {
   chinese: {
-    title: "圖片資訊",
+    title: "資訊",
     fileName: "檔案名稱",
     fileExtension: "檔案格式",
     uploadTime: "上傳時間",
@@ -46,7 +46,7 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
     createdTime: "建立時間",
   },
   english: {
-    title: "Image Information",
+    title: "Information",
     fileName: "File Name",
     fileExtension: "File Extension",
     uploadTime: "Upload Time",
@@ -58,38 +58,38 @@ const IMAGE_PREVIEW_CONTENT: LanguageContent<
   },
 };
 
-export const useImagePreview = ({
+export const useItemPreview = ({
   event,
 }: {
   event: Album[number]["events"][number];
 }) => {
   // 當前預覽的圖片索引，-1 表示未開啟預覽
-  const [imageIndex, setImageIndex] = useState<number>(0);
-  const currentImage = event.items[imageIndex];
+  const [itemIndex, setItemIndex] = useState<number>(0);
+  const currentItem = event.items[itemIndex];
 
   // 主要預覽視窗的控制
   const previewModal = useModal({});
-  // 圖片資訊視窗的控制
+  // 項目資訊視窗的控制
   const infoModal = useModal({});
 
   // 取得當前語言設定
   const language = useLanguage();
-  const imagePreviewContent = IMAGE_PREVIEW_CONTENT[language.Current];
+  const itemPreviewContent = ITEM_PREVIEW_CONTENT[language.Current];
 
   /**
    * 切換到上一張圖片
    * 如果目前是第一張，則循環到最後一張
    */
-  const handlePrevImage = useCallback(() => {
-    setImageIndex((prev) => (prev === 0 ? event.items.length - 1 : prev - 1));
+  const handlePrevItem = useCallback(() => {
+    setItemIndex((prev) => (prev === 0 ? event.items.length - 1 : prev - 1));
   }, [event.items.length]);
 
   /**
    * 切換到下一張圖片
    * 如果目前是最後一張，則循環到第一張
    */
-  const handleNextImage = useCallback(() => {
-    setImageIndex((prev) => (prev === event.items.length - 1 ? 0 : prev + 1));
+  const handleNextItem = useCallback(() => {
+    setItemIndex((prev) => (prev === event.items.length - 1 ? 0 : prev + 1));
   }, [event.items.length]);
 
   /**
@@ -98,51 +98,51 @@ export const useImagePreview = ({
    * 包含:檔案名稱、格式、建立時間、大小、尺寸
    */
   const imageInfoFields = useMemo(() => {
-    if (!currentImage) {
+    if (!currentItem) {
       return [];
     }
 
     return [
       {
-        label: imagePreviewContent.fileName,
-        value: currentImage.name || imagePreviewContent.untitled,
+        label: itemPreviewContent.fileName,
+        value: currentItem.name || itemPreviewContent.untitled,
       },
       {
-        label: imagePreviewContent.fileExtension,
-        value: currentImage.fileExtension || imagePreviewContent.unknown,
+        label: itemPreviewContent.fileExtension,
+        value: currentItem.fileExtension || itemPreviewContent.unknown,
       },
       {
-        label: imagePreviewContent.uploadTime,
-        value: currentImage.createdTime
-          ? formatDate(currentImage.createdTime, language.Current)
-          : imagePreviewContent.unknown,
+        label: itemPreviewContent.uploadTime,
+        value: currentItem.createdTime
+          ? formatDate(currentItem.createdTime, language.Current)
+          : itemPreviewContent.unknown,
       },
       {
-        label: imagePreviewContent.size,
-        value: currentImage.size
-          ? `${(Number(currentImage.size) / 1024).toFixed(2)} KB`
-          : imagePreviewContent.unknown,
+        label: itemPreviewContent.size,
+        value: currentItem.size
+          ? `${(Number(currentItem.size) / 1024).toFixed(2)} KB`
+          : itemPreviewContent.unknown,
       },
       {
-        label: imagePreviewContent.widthXheight,
-        value: currentImage.imageMediaMetadata
-          ? `${currentImage.imageMediaMetadata.width} x ${currentImage.imageMediaMetadata.height}`
-          : imagePreviewContent.unknown,
+        label: itemPreviewContent.widthXheight,
+        value: currentItem.imageMediaMetadata
+          ? `${currentItem.imageMediaMetadata.width} x ${currentItem.imageMediaMetadata.height}`
+          : itemPreviewContent.unknown,
       },
       {
-        label: imagePreviewContent.createdTime,
-        value: currentImage.imageMediaMetadata?.time
+        label: itemPreviewContent.createdTime,
+        value: currentItem.imageMediaMetadata?.time
           ? formatDate(
-              currentImage.imageMediaMetadata.time.replace(
+              currentItem.imageMediaMetadata.time.replace(
                 /^(\d{4}):(\d{2}):(\d{2})/,
                 "$1-$2-$3"
               ),
               language.Current
             )
-          : imagePreviewContent.unknown,
+          : itemPreviewContent.unknown,
       },
     ];
-  }, [currentImage, imagePreviewContent, language.Current]);
+  }, [currentItem, itemPreviewContent, language.Current]);
 
   /**
    * 導航按鈕配置
@@ -153,17 +153,17 @@ export const useImagePreview = ({
       {
         icon: LeftOutlined,
         className: "left-4",
-        onClick: handlePrevImage,
+        onClick: handlePrevItem,
         ariaLabel: "上一張",
       },
       {
         icon: RightOutlined,
         className: "right-4",
-        onClick: handleNextImage,
+        onClick: handleNextItem,
         ariaLabel: "下一張",
       },
     ],
-    [handlePrevImage, handleNextImage]
+    [handlePrevItem, handleNextItem]
   );
 
   /**
@@ -177,10 +177,10 @@ export const useImagePreview = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case "ArrowLeft":
-          handlePrevImage();
+          handlePrevItem();
           break;
         case "ArrowRight":
-          handleNextImage();
+          handleNextItem();
           break;
         case "Escape":
           previewModal.Close();
@@ -189,7 +189,7 @@ export const useImagePreview = ({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleNextImage, handlePrevImage, previewModal, previewModal.isShow]);
+  }, [handleNextItem, handlePrevItem, previewModal, previewModal.isShow]);
 
   /**
    * 預覽容器元件
@@ -200,11 +200,11 @@ export const useImagePreview = ({
    * - 圖片資訊彈出視窗
    */
   const Container = () => {
-    if (!currentImage) {
+    if (!currentItem) {
       return null;
     }
 
-    const title = currentImage.name || imagePreviewContent.untitled;
+    const title = currentItem.name || itemPreviewContent.untitled;
     return (
       <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         {/* Header - 頂部工具列 */}
@@ -220,14 +220,14 @@ export const useImagePreview = ({
           {/* 圖片標題和進度 */}
           <div className="flex flex-col min-w-0 ms-2">
             <h3
-              title={currentImage.name || imagePreviewContent.untitled}
+              title={currentItem.name || itemPreviewContent.untitled}
               className="text-lg md:text-xl font-semibold truncate"
             >
-              {currentImage.name}
+              {currentItem.name}
             </h3>
             {/* 圖片計數 (當前/總數) */}
             <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-              {imageIndex + 1} / {event.items.length}
+              {itemIndex + 1} / {event.items.length}
             </span>
           </div>
           {/* 右側功能按鈕群組 */}
@@ -235,12 +235,12 @@ export const useImagePreview = ({
             {/* 下載按鈕 */}
             <Link
               className="rounded-full p-2"
-              href={currentImage.url || ""}
+              href={currentItem.url || ""}
               download={
-                currentImage.name ||
-                `${imageIndex}.${currentImage.fileExtension}`
+                currentItem.name ||
+                `${itemIndex}.${currentItem.fileExtension}`
               }
-              aria-label={`下載圖片 ${currentImage.name}`}
+              aria-label={`下載圖片 ${currentItem.name}`}
             >
               <DownloadOutlined />
             </Link>
@@ -262,7 +262,7 @@ export const useImagePreview = ({
                 {/* 資訊視窗標頭 */}
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-color)]">
                   <h3 className="text-xl font-semibold bg-gradient-to-br  from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
-                    {imagePreviewContent.title}
+                    {itemPreviewContent.title}
                   </h3>
                   {/* 關閉資訊視窗按鈕 */}
                   <button
@@ -297,21 +297,21 @@ export const useImagePreview = ({
         <div
           className="max-w-[95vw] max-h-[80vh]"
           style={{
-            width: currentImage.imageMediaMetadata?.width
-              ? `${currentImage.imageMediaMetadata.width}px`
+            width: currentItem.imageMediaMetadata?.width
+              ? `${currentItem.imageMediaMetadata.width}px`
               : "auto",
-            height: currentImage.imageMediaMetadata?.height
-              ? `${currentImage.imageMediaMetadata.height}px`
+            height: currentItem.imageMediaMetadata?.height
+              ? `${currentItem.imageMediaMetadata.height}px`
               : "auto",
           }}
         >
           <MyImage
-            src={currentImage.url}
+            src={currentItem.url}
             className="w-full h-full object-contain"
             alt={title}
             title={title}
-            width={currentImage.imageMediaMetadata?.width}
-            height={currentImage.imageMediaMetadata?.height}
+            width={currentItem.imageMediaMetadata?.width}
+            height={currentItem.imageMediaMetadata?.height}
           />
         </div>
 
@@ -339,7 +339,7 @@ export const useImagePreview = ({
     ...previewModal,
     Container,
     Open: (index: number) => {
-      setImageIndex(index);
+      setItemIndex(index);
       previewModal.Open();
     },
   };

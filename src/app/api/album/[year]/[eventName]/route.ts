@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listAllFiles, toImageItem } from "@/utils/googleapis";
+import { listAllFiles, toItem } from "@/utils/googleapis";
 import { deslugify } from "@/utils/url";
 
 export async function GET(
@@ -26,9 +26,9 @@ export async function GET(
     // 若為「其他」分類（圖片直接放在年份底下）
     if (eventName === "其他") {
       const items = await listAllFiles(
-        `'${yearFolder.id}' in parents and mimeType contains 'image/'`
+        `'${yearFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
       );
-      const result = items.map((f) => toImageItem(f));
+      const result = items.map((f) => toItem(f));
       return NextResponse.json(result);
     }
 
@@ -44,9 +44,9 @@ export async function GET(
 
     // 找該事件底下的圖片
     const items = await listAllFiles(
-      `'${eventFolder.id}' in parents and mimeType contains 'image/'`
+      `'${eventFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
     );
-    const result = items.map((f) => toImageItem(f));
+    const result = items.map((f) => toItem(f));
 
     return NextResponse.json(result);
   } catch (error) {

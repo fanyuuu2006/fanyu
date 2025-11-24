@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
-import { useImagePreview } from "./useImagePreview";
+import { useItemPreview } from "./useItemPreview";
 import { ItemCard } from "./ItemCard";
 import { useRouter } from "next/navigation";
 
@@ -21,7 +21,7 @@ type ItemsContent = Record<
 
 const ITEMS_CONTENT: LanguageContent<ItemsContent> = {
   chinese: {
-    noItems: "沒有內容",
+    noItems: "沒有項目",
     back: "返回",
     totalItems: "共 {count} 張照片",
     imageLoadFailed: "載入圖片失敗",
@@ -40,15 +40,15 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
   const itemsContent = ITEMS_CONTENT[language.Current];
 
-  const imagePreview = useImagePreview({
+  const itemPreview = useItemPreview({
     event,
   });
 
   const handleImageClick = useCallback(
     (index: number) => {
-      imagePreview.Open(index);
+      itemPreview.Open(index);
     },
-    [imagePreview]
+    [itemPreview]
   );
 
   const handleBackClick = useCallback(() => {
@@ -114,8 +114,8 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   onClick={() => handleImageClick(i)}
                 />
               ))}
-              {/* 圖片預覽模態框 */}
-              <imagePreview.Container />
+              {/* 預覽模態框 */}
+              <itemPreview.Container />
             </>
           )}
         </article>
