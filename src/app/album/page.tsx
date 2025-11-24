@@ -11,8 +11,8 @@ export default async function Page() {
 
       const eventData = await Promise.all(
         events.map(async (name) => {
-          const images = await album.images(year, name);
-          return { name, images };
+          const items = await album.items(year, name);
+          return { name, items };
         })
       );
 
