@@ -4,6 +4,7 @@ import { FALLBACK_IMAGE } from "@/libs/album";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
+import { PlayCircleFilled } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import { useState } from "react";
 
@@ -36,7 +37,7 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
   return (
     <figure
       className={cn(
-        "relative aspect-square bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]",
+        "relative aspect-square overflow-hidden bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]",
         className
       )}
       itemScope
@@ -56,26 +57,34 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
       />
 
       {/* 第二張：高解析版本 */}
-      {!isVideo && (
-        <MyImage
-          src={item.url}
-          fallbackSrc={item.thumbnailLink}
-          title={title}
-          alt={title}
-          className={cn(
-            "absolute inset-0 object-cover transition-opacity duration-300",
-            { "opacity-0": !loaded }
-          )}
-          width={width}
-          height={height}
-          itemProp="contentUrl"
-          onLoad={() => setLoaded(true)}
-        />
+      <MyImage
+        src={isVideo ? item.thumbnailLink : item.url}
+        fallbackSrc={item.thumbnailLink}
+        title={title}
+        alt={title}
+        className={cn(
+          "absolute inset-0 object-cover transition-opacity duration-300",
+          { "opacity-0": !loaded }
+        )}
+        width={width}
+        height={height}
+        itemProp="contentUrl"
+        onLoad={() => setLoaded(true)}
+      />
+      {isVideo && (
+        <div className="text-sm absolute top-1 right-1">
+          <div className="flex gap-1">
+            <PlayCircleFilled />
+          </div>
+        </div>
       )}
 
       {/* 結構化數據（SEO 使用） */}
       <meta itemProp="name" content={title} />
-      <meta itemProp="thumbnailUrl" content={item.thumbnailLink || FALLBACK_IMAGE} />
+      <meta
+        itemProp="thumbnailUrl"
+        content={item.thumbnailLink || FALLBACK_IMAGE}
+      />
 
       {item.imageMediaMetadata?.width && (
         <meta itemProp="width" content={String(width)} />
