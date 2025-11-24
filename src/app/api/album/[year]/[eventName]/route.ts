@@ -25,10 +25,10 @@ export async function GET(
 
     // 若為「其他」分類（圖片直接放在年份底下）
     if (eventName === "其他") {
-      const images = await listAllFiles(
+      const items = await listAllFiles(
         `'${yearFolder.id}' in parents and mimeType contains 'image/'`
       );
-      const result = images.map((f) => toImageItem(f));
+      const result = items.map((f) => toImageItem(f));
       return NextResponse.json(result);
     }
 
@@ -43,10 +43,10 @@ export async function GET(
     }
 
     // 找該事件底下的圖片
-    const images = await listAllFiles(
+    const items = await listAllFiles(
       `'${eventFolder.id}' in parents and mimeType contains 'image/'`
     );
-    const result = images.map((f) => toImageItem(f));
+    const result = items.map((f) => toImageItem(f));
 
     return NextResponse.json(result);
   } catch (error) {

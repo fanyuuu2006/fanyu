@@ -19,7 +19,7 @@ const IMAGE_CARD_CONTENT: LanguageContent<Record<"noImages", string>> = {
 export type ImageCardProps = OverrideProps<
   React.HTMLAttributes<HTMLElement>,
   {
-    image: Album[number]["events"][number]["images"][number];
+    image: Album[number]["events"][number]["items"][number];
   }
 >;
 

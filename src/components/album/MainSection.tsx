@@ -43,7 +43,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
         (res, year) => {
           res.events += year.events.length;
           res.images += year.events.reduce(
-            (eventRes, event) => eventRes + event.images.length,
+            (eventRes, event) => eventRes + event.items.length,
             0
           );
           return res;

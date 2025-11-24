@@ -65,7 +65,7 @@ export const useImagePreview = ({
 }) => {
   // 當前預覽的圖片索引，-1 表示未開啟預覽
   const [imageIndex, setImageIndex] = useState<number>(0);
-  const currentImage = event.images[imageIndex];
+  const currentImage = event.items[imageIndex];
 
   // 主要預覽視窗的控制
   const previewModal = useModal({});
@@ -81,16 +81,16 @@ export const useImagePreview = ({
    * 如果目前是第一張，則循環到最後一張
    */
   const handlePrevImage = useCallback(() => {
-    setImageIndex((prev) => (prev === 0 ? event.images.length - 1 : prev - 1));
-  }, [event.images.length]);
+    setImageIndex((prev) => (prev === 0 ? event.items.length - 1 : prev - 1));
+  }, [event.items.length]);
 
   /**
    * 切換到下一張圖片
    * 如果目前是最後一張，則循環到第一張
    */
   const handleNextImage = useCallback(() => {
-    setImageIndex((prev) => (prev === event.images.length - 1 ? 0 : prev + 1));
-  }, [event.images.length]);
+    setImageIndex((prev) => (prev === event.items.length - 1 ? 0 : prev + 1));
+  }, [event.items.length]);
 
   /**
    * 計算圖片資訊欄位
@@ -227,7 +227,7 @@ export const useImagePreview = ({
             </h3>
             {/* 圖片計數 (當前/總數) */}
             <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-              {imageIndex + 1} / {event.images.length}
+              {imageIndex + 1} / {event.items.length}
             </span>
           </div>
           {/* 右側功能按鈕群組 */}

@@ -44,21 +44,21 @@ export const EventLinkCard = ({
     >
       <div className="rounded-3xl overflow-hidden">
         <MyImage
-          src={isInView ? event.images[0].url : event.images[0].thumbnailLink}
+          src={isInView ? event.items[0].url : event.items[0].thumbnailLink}
           alt={`${year} ${event.name} 相簿封面`}
           className="w-full h-full aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
-          width={event.images[0].imageMediaMetadata?.width || 800}
-          height={event.images[0].imageMediaMetadata?.height || 800}
+          width={event.items[0].imageMediaMetadata?.width || 800}
+          height={event.items[0].imageMediaMetadata?.height || 800}
         />
       </div>
       <div className="text-base flex flex-col px-1 py-3">
         <span className="font-semibold leading-tight">{event.name}</span>
         <span className="text-[var(--text-color-muted)] leading-relaxed">
-          {event.images.length}{" "}
+          {event.items.length}{" "}
           {
             {
               chinese: "張照片",
-              english: "images",
+              english: "items",
             }[language.Current]
           }
         </span>

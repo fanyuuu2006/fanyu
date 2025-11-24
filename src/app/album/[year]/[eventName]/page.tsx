@@ -9,13 +9,13 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { year, eventName } = await params;
-  const images = await album.images(deslugify(year), deslugify(eventName));
+  const items = await album.items(deslugify(year), deslugify(eventName));
   return (
     <MainSection
       year={deslugify(year)}
       event={{
         name: deslugify(eventName),
-        images,
+        items,
       }}
     />
   );

@@ -15,7 +15,7 @@ type AlbumEvent = {
   /** 事件名稱 */
   name: string;
   /** 事件包含的圖片列表 */
-  images: AlbumImageItem[];
+  items: AlbumImageItem[];
 };
 
 /**
@@ -37,7 +37,7 @@ type AlbumYear = {
  *     events: [
  *       {
  *         name: "春遊",
- *         images: [...]
+ *         items: [...]
  *       }
  *     ]
  *   }

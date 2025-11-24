@@ -29,7 +29,7 @@ const IMAGES_CONTENT: LanguageContent<ImagesContent> = {
   english: {
     noImages: "No Images",
     back: "Back",
-    totalImages: "Total {count} images",
+    totalImages: "Total {count} items",
     imageLoadFailed: "Image Load Failed",
   },
 };
@@ -86,7 +86,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           <span className="text-[var(--text-color-muted)]">
             {imagesContent.totalImages.replace(
               "{count}",
-              event.images.length.toString()
+              event.items.length.toString()
             )}
           </span>
         </div>
@@ -97,7 +97,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           role="main"
           aria-label={`${year}-${event.name}照片集`}
         >
-          {event.images.length === 0 ? (
+          {event.items.length === 0 ? (
             <div className="col-span-full flex flex-col items-center justify-center">
               <h3 className="text-2xl md:text-3xl font-bold">
                 {imagesContent.noImages}
@@ -105,7 +105,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             </div>
           ) : (
             <>
-              {event.images.map((imgItem, i) => (
+              {event.items.map((imgItem, i) => (
                 <ImageCard
                   id={i.toString()}
                   tabIndex={0}

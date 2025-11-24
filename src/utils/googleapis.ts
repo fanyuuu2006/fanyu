@@ -65,7 +65,7 @@ const _createFileItem = <
 // };
 export const toImageItem = (
   file: MyDriveFile
-): Album[number]["events"][number]["images"][number] => {
+): Album[number]["events"][number]["items"][number] => {
   return _createFileItem({
     thumbnailLink: file.thumbnailLink
       ? proxyUrl(file.thumbnailLink)

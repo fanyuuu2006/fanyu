@@ -18,7 +18,7 @@ export async function generateMetadata({
 
   const title = `${year} - ${eventName}`;
   const description = `查看 ${year} 年 ${eventName} 的完整相片集，記錄美好時刻與珍貴回憶。FanYu 個人相簿中的精選活動照片，展現生活中的精彩瞬間。`;
-  const image = await album.image(year, eventName, 0);
+  const item = await album.item(year, eventName, 0);
   const canonicalUrl = `${profile.url}/album/${slugify(year)}/${slugify(
     eventName
   )}`;
@@ -65,11 +65,11 @@ export async function generateMetadata({
       locale: "zh_TW",
       images: [
         {
-          url: image.url,
+          url: item.url,
           width: 1200,
           height: 630,
           alt: `${year} ${eventName} - FanYu Photo Album`,
-          type: "image/jpeg",
+          type: "item/jpeg",
         },
       ],
     },
@@ -81,9 +81,9 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: image.url,
+          url: item.url,
           alt: `${year} ${eventName} - FanYu Photo Album`,
-          type: "image/jpeg",
+          type: "item/jpeg",
         },
       ],
     },
@@ -115,7 +115,7 @@ function generateAlbumJsonLd({
   year: string;
   event: Album[number]["events"][number];
 }) {
-  if (!year || !event || event.images.length === 0) {
+  if (!year || !event || event.items.length === 0) {
     return null;
   }
   // 如果有年份和事件名稱，生成特定事件的結構化資料
@@ -144,15 +144,15 @@ function generateAlbumJsonLd({
     mainEntity: {
       "@type": "ImageObject",
       contentUrl:
-        `${profile.url}${event.images[0].url}` || `${profile.url}/GameShow.jpg`, // 圖片 URL
+        `${profile.url}${event.items[0].url}` || `${profile.url}/GameShow.jpg`, // 圖片 URL
       name: `${year} ${event.name} 主要照片`, // 圖片名稱
       description: `${year} 年 ${event.name} 活動的主要照片`, // 圖片描述
     },
 
     // 關聯媒體 - 將所有圖片轉換為 ImageObject 陣列
-    associatedMedia: event.images.map((image, index) => ({
+    associatedMedia: event.items.map((item, index) => ({
       "@type": "ImageObject",
-      contentUrl: `${profile.url}${image.url}`, // 圖片 URL
+      contentUrl: `${profile.url}${item.url}`, // 圖片 URL
       name: `${year} ${event.name} 照片 ${index + 1}`, // 圖片名稱 (編號)
       description: `${year} 年 ${event.name} 活動照片`, // 圖片描述
     })),
@@ -179,7 +179,7 @@ async function AlbumJsonLdWrapper({
   const year = deslugify(rawYear);
   const eventName = deslugify(rawEventName);
 
-  const images = await album.images(year, eventName);
+  const items = await album.items(year, eventName);
 
   return (
     <Script
@@ -189,7 +189,7 @@ async function AlbumJsonLdWrapper({
         __html: JSON.stringify(
           generateAlbumJsonLd({
             year,
-            event: { name: eventName, images },
+            event: { name: eventName, items },
           })
         ),
       }}

@@ -16,16 +16,16 @@ export const events = async (year: string) =>
     }
   );
 
-export const images = async (year: string, eventName: string) =>
-  fetcher<Album[number]["events"][number]["images"]>(
+export const items = async (year: string, eventName: string) =>
+  fetcher<Album[number]["events"][number]["items"]>(
     `${profile.url}/api/album/${slugify(year)}/${slugify(eventName)}`,
     {
       cache: "no-store",
     }
   );
 
-export const image = async (year: string, eventName: string, index: number) =>
-  fetcher<Album[number]["events"][number]["images"][number]>(
+export const item = async (year: string, eventName: string, index: number) =>
+  fetcher<Album[number]["events"][number]["items"][number]>(
     `${profile.url}/api/album/${slugify(year)}/${slugify(eventName)}/${index}`,
     { cache: "no-store" }
   );
