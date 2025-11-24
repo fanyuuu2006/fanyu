@@ -15,7 +15,7 @@ export { metadata } from "./metadata";
 const measurementID = "G-3SGK402751";
 
 const notoSansSC = Noto_Sans_SC({
-  subsets: ["latin-ext"],
+  subsets: ["latin"],
   display: "swap",
 });
 

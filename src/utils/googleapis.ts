@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { drive, SEARCH_FIELDS } from "@/libs/googleapis";
 import { Album } from "@/types/album";
 import { GaxiosResponse } from "gaxios";
@@ -30,13 +31,45 @@ export const listAllFiles = async <
   return files;
 };
 
+const _createFileItem = <
+  T extends MyDriveFile,
+  G extends Record<string, any | ((item: T) => any)>
+>(
+  keyGenerators: G
+) => {
+  return (
+    file: T
+  ): T & {
+    [K in keyof G]: G[K] extends (item: T) => infer R ? R : G[K];
+  } => {
+    const result: any = { ...file };
+
+    for (const key in keyGenerators) {
+      const gen = keyGenerators[key];
+      result[key] = typeof gen === "function" ? gen(file) : gen;
+    }
+
+    return result;
+  };
+};
+// export const toEventItem = (
+//   file: MyDriveFile,
+//   images: Album[number]["events"][number]["images"]
+// ): Album[number]["events"][number] => {
+//   return _createFileItem({
+//     thumbnailLink: file.thumbnailLink
+//       ? proxyUrl(file.thumbnailLink)
+//       : undefined,
+//     images: images,
+//   })(file);
+// };
 export const toImageItem = (
   file: MyDriveFile
 ): Album[number]["events"][number]["images"][number] => {
-  return Object.assign(file, {
+  return _createFileItem({
     thumbnailLink: file.thumbnailLink
       ? proxyUrl(file.thumbnailLink)
       : undefined,
     url: `/api/album/image/${file.id}`,
-  });
+  })(file);
 };

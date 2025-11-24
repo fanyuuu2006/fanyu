@@ -3,7 +3,7 @@ import { MyDriveFile } from "./googleapis";
 /**
  * 圖片項目的型別，包含 Google Drive 檔案資訊和相簿 URL
  */
-export type AlbumImageItem = MyDriveFile & {
+type AlbumImageItem = MyDriveFile & {
   /** 圖片的 API URL，用於前端顯示 */
   url: string;
 };
@@ -11,7 +11,7 @@ export type AlbumImageItem = MyDriveFile & {
 /**
  * 相簿事件的型別，代表某個年份下的特定活動
  */
-export type AlbumEvent = {
+type AlbumEvent = {
   /** 事件名稱 */
   name: string;
   /** 事件包含的圖片列表 */
@@ -21,7 +21,7 @@ export type AlbumEvent = {
 /**
  * 相簿年份的型別，包含該年份的所有事件
  */
-export type AlbumYear = {
+type AlbumYear = {
   /** 年份，格式如 "2024" */
   year: string;
   /** 該年份包含的所有事件 */
