@@ -34,7 +34,7 @@ export const EventLinkCard = ({
   });
   const coverItem = useMemo(() => event.items[0], [event.items]);
   const isVideo = coverItem.mimeType?.startsWith("video/");
-
+  const altText = `${year} ${event.name} 相簿封面`;
   return (
     <Link
       draggable={false}
@@ -44,15 +44,29 @@ export const EventLinkCard = ({
       href={`/album/${slugify(year)}/${slugify(event.name || "其他")}`}
       {...rest}
     >
-      <div className="rounded-3xl overflow-hidden">
-        <MyImage
-          src={isInView && !isVideo ? coverItem.url : coverItem.thumbnailLink}
-          fallbackSrc={coverItem.thumbnailLink}
-          alt={`${year} ${event.name} 相簿封面`}
-          className="w-full h-full aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
-          width={coverItem.imageMediaMetadata?.width || 800}
-          height={coverItem.imageMediaMetadata?.height || 800}
-        />
+      <div className="w-full aspect-square bg-[#888] rounded-3xl overflow-hidden">
+        <div className="relative w-full h-full group-hover:scale-125 transition-transform duration-300">
+          <MyImage
+            src={coverItem.thumbnailLink}
+            alt={altText}
+            className="w-full h-full object-cover"
+            width={coverItem.imageMediaMetadata?.width || 800}
+            height={coverItem.imageMediaMetadata?.height || 800}
+          />
+          <MyImage
+            src={isVideo ? coverItem.thumbnailLink : coverItem.url}
+            fallbackSrc={coverItem.thumbnailLink}
+            alt={altText}
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover transition-opacity duration-300",
+              {
+                "opacity-0": !isInView,
+              }
+            )}
+            width={coverItem.imageMediaMetadata?.width || 800}
+            height={coverItem.imageMediaMetadata?.height || 800}
+          />
+        </div>
       </div>
       <div className="text-base flex flex-col px-1 py-3">
         <span className="font-semibold leading-tight">{event.name}</span>
@@ -60,7 +74,7 @@ export const EventLinkCard = ({
           {event.items.length}{" "}
           {
             {
-              chinese: "張照片",
+              chinese: "個項目",
               english: "items",
             }[language.Current]
           }
