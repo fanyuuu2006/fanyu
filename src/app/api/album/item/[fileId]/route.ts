@@ -40,7 +40,7 @@ export async function GET(
       },
     });
   } catch (err) {
-    console.error("🚨 Proxy image error", err);
-    return new Response("Cannot fetch image", { status: 500 });
+    console.error("🚨 Proxy ima error", err);
+    return new Response("Cannot fetch item", { status: 500 });
   }
 }

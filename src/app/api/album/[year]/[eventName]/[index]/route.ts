@@ -40,7 +40,7 @@ export async function GET(
     // 處理 event = "其他"
     if (eventName === "其他") {
       const items = await listAllFiles(
-        `'${yearFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
+        `'${yearFolder.id}' in parents and (mimeType contains 'image/' or mimeType contains 'video/')`
       );
       const item = items[index];
 
@@ -66,7 +66,7 @@ export async function GET(
 
     // 找事件圖片
     const items = await listAllFiles(
-      `'${eventFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
+      `'${eventFolder.id}' in parents and (mimeType contains 'image/' or mimeType contains 'video/')`
     );
     const reversedItems = items;
     const item = reversedItems[index];

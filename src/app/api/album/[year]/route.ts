@@ -30,7 +30,7 @@ export async function GET(
     const events = eventFolders.map(toEvent);
 
     const otheritems = await listAllFiles(
-      `'${yearFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
+      `'${yearFolder.id}' in parents and (mimeType contains 'image/' or mimeType contains 'video/')`
     );
 
     // 加上「其他」類別

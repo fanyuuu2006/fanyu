@@ -26,16 +26,16 @@ export async function GET(
     // 若為「其他」分類（圖片直接放在年份底下）
     if (eventName === "其他") {
       const items = await listAllFiles(
-        `'${yearFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
+        `'${yearFolder.id}' in parents and (mimeType contains 'image/' or mimeType contains 'video/')`
       );
-      const result = items.map((f) => toItem(f));
+      const result = items.map(toItem);
       return NextResponse.json(result);
     }
 
     // 否則找該事件資料夾
     const eventFolders = await listAllFiles(
-      `'${yearFolder.id}' in parents and mimeType = 'application/vnd.google-apps.folder'`
-      , ["id", "name"]
+      `'${yearFolder.id}' in parents and mimeType = 'application/vnd.google-apps.folder'`,
+      ["id", "name", "createdTime"]
     );
     const eventFolder = eventFolders.find((f) => f.name === eventName);
     if (!eventFolder) {
@@ -44,9 +44,9 @@ export async function GET(
 
     // 找該事件底下的圖片
     const items = await listAllFiles(
-      `'${eventFolder.id}' in parents and mimeType contains 'image/' or mimeType contains 'video/'`
+      `'${eventFolder.id}' in parents and (mimeType contains 'image/' or mimeType contains 'video/')`
     );
-    const result = items.map((f) => toItem(f));
+    const result = items.map(toItem);
 
     return NextResponse.json(result);
   } catch (error) {
