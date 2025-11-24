@@ -36,7 +36,6 @@ export const MainSection = ({ data }: MainSectionProps) => {
   const Language = useLanguage();
   const albumContent = ALBUM_CONTENT[Language.Current];
   const timeOrder = useTimeOrderTabs(data, (item) => item.year);
-  console.log(data);
   const totalCounts = useMemo(
     () =>
       data.reduce(

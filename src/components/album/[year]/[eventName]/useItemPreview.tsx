@@ -307,6 +307,7 @@ export const useItemPreview = ({
         >
           <MyImage
             src={currentItem.url}
+            fallbackSrc={currentItem.thumbnailLink}
             className="w-full h-full object-contain"
             alt={title}
             title={title}

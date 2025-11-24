@@ -1,7 +1,7 @@
 import { slugify } from "@/utils/url";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
 import { Album } from "@/types/album";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -32,6 +32,8 @@ export const EventLinkCard = ({
     once: true,
     amount: 0.5,
   });
+  const coverItem = useMemo(() => event.items[0], [event.items]);
+  const isVideo = coverItem.mimeType?.startsWith("video/");
 
   return (
     <Link
@@ -44,11 +46,12 @@ export const EventLinkCard = ({
     >
       <div className="rounded-3xl overflow-hidden">
         <MyImage
-          src={isInView ? event.items[0].url : event.items[0].thumbnailLink}
+          src={isInView && !isVideo ? coverItem.url : coverItem.thumbnailLink}
+          fallbackSrc={coverItem.thumbnailLink}
           alt={`${year} ${event.name} 相簿封面`}
           className="w-full h-full aspect-square bg-[#888] object-cover transition-all duration-300 group-hover:scale-125"
-          width={event.items[0].imageMediaMetadata?.width || 800}
-          height={event.items[0].imageMediaMetadata?.height || 800}
+          width={coverItem.imageMediaMetadata?.width || 800}
+          height={coverItem.imageMediaMetadata?.height || 800}
         />
       </div>
       <div className="text-base flex flex-col px-1 py-3">

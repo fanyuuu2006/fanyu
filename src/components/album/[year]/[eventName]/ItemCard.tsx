@@ -28,6 +28,7 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
   const itemContent = ITEM_CARD_CONTENT[language.Current];
   const title = item.name || itemContent.noItem;
   const [loaded, setLoaded] = useState<boolean>(false);
+  const isVideo = item.mimeType?.startsWith("video/");
 
   return (
     <figure
@@ -36,7 +37,11 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
         className
       )}
       itemScope
-      itemType="https://schema.org/ImageObject"
+      itemType={
+        isVideo
+          ? "http://schema.org/VideoObject"
+          : "http://schema.org/ImageObject"
+      }
       {...rest}
     >
       {/* 縮圖預覽 */}
@@ -46,21 +51,24 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
         alt={title}
         className="h-full w-full object-cover"
       />
-      <MyImage
-        src={item.url}
-        title={title}
-        alt={title}
-        className={cn(
-          "absolute inset-0 w-full h-full object-cover transition-opacity duration-300",
-          {
-            "opacity-0": !loaded,
-          }
-        )}
-        onLoad={() => setLoaded(true)}
-        width={item.imageMediaMetadata?.width || 800}
-        height={item.imageMediaMetadata?.height || 800}
-        itemProp="contentUrl"
-      />
+      {!isVideo && (
+        <MyImage
+          src={item.url}
+          fallbackSrc={item.thumbnailLink}
+          title={title}
+          alt={title}
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300",
+            {
+              "opacity-0": !loaded,
+            }
+          )}
+          onLoad={() => setLoaded(true)}
+          width={item.imageMediaMetadata?.width || 800}
+          height={item.imageMediaMetadata?.height || 800}
+          itemProp="contentUrl"
+        />
+      )}
       {/* 結構化數據 - 隱藏但對 SEO 有幫助 */}
       <meta itemProp="name" content={title} />
       <meta

@@ -13,7 +13,7 @@ export type MyImageProps = OverrideProps<
     /** 圖片的來源 URL，可以是字串、undefined 或 null */
     src: string | undefined | null;
     maxRetryCount?: number;
-    fallbackSrc?: string;
+    fallbackSrc?: string | undefined | null;
   }
 >;
 
