@@ -32,10 +32,13 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     | "uploadTime"
     | "createdTime"
     | "duration"
-    | "aperture"
-    | "shutterSpeed"
-    | "iso"
-    | "focalLength",
+    | "noSupport"
+    | "close"
+    | "previous"
+    | "next"
+    | "details"
+    | "download"
+    | "seconds",
     string
   >
 > = {
@@ -50,10 +53,13 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     widthXheight: "寬 x 高",
     createdTime: "建立時間",
     duration: "影片時長",
-    aperture: "光圈",
-    shutterSpeed: "快門速度",
-    iso: "ISO",
-    focalLength: "焦距",
+    noSupport: "您的瀏覽器不支援此媒體格式。",
+    close: "關閉",
+    previous: "上一個",
+    next: "下一個",
+    details: "詳細資訊",
+    download: "下載項目",
+    seconds: "秒",
   },
   english: {
     title: "Item Information",
@@ -66,10 +72,13 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     widthXheight: "Width x Height",
     createdTime: "Created Time",
     duration: "Duration",
-    aperture: "Aperture",
-    shutterSpeed: "Shutter Speed",
-    iso: "ISO",
-    focalLength: "Focal Length",
+    noSupport: "Your browser does not support this media format.",
+    close: "Close",
+    previous: "Previous",
+    next: "Next",
+    details: "Details",
+    download: "Download Item",
+    seconds: "seconds",
   },
 };
 
@@ -152,7 +161,9 @@ export const useItemPreview = ({
         {
           label: itemPreviewContent.duration,
           value: currentItem.videoMediaMetadata.durationMillis
-            ? `${Math.floor(Number(currentItem.videoMediaMetadata.durationMillis) / 1000)} 秒`
+            ? `${Math.floor(
+                Number(currentItem.videoMediaMetadata.durationMillis) / 1000
+              )} ${itemPreviewContent.seconds}`
             : itemPreviewContent.unknown,
         }
       );
@@ -191,16 +202,16 @@ export const useItemPreview = ({
         icon: LeftOutlined,
         className: "left-4",
         onClick: handlePrevItem,
-        ariaLabel: "上一個",
+        ariaLabel: itemPreviewContent.previous,
       },
       {
         icon: RightOutlined,
         className: "right-4",
         onClick: handleNextItem,
-        ariaLabel: "下一個",
+        ariaLabel: itemPreviewContent.next,
       },
     ],
-    [handlePrevItem, handleNextItem]
+    [handlePrevItem, handleNextItem, itemPreviewContent.previous, itemPreviewContent.next]
   );
 
   /**
@@ -250,7 +261,7 @@ export const useItemPreview = ({
           <button
             className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
             onClick={previewModal.Close}
-            aria-label="關閉"
+            aria-label={itemPreviewContent.close}
           >
             <CloseOutlined />
           </button>
@@ -274,17 +285,16 @@ export const useItemPreview = ({
               className="rounded-full p-2"
               href={currentItem.url || ""}
               download={
-                currentItem.name ||
-                `${itemIndex}.${currentItem.fileExtension}`
+                currentItem.name || `${itemIndex}.${currentItem.fileExtension}`
               }
-              aria-label={`下載項目 ${currentItem.name}`}
+              aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
             >
               <DownloadOutlined />
             </Link>
             {/* 項目資訊按鈕 */}
             <button
               className="rounded-full p-2"
-              aria-label="詳細資訊"
+              aria-label={itemPreviewContent.details}
               onClick={infoModal.Open}
             >
               <InfoCircleOutlined />
@@ -305,7 +315,7 @@ export const useItemPreview = ({
                   <button
                     className="text-xl text-[var(--text-color-muted)] rounded-full p-2"
                     onClick={infoModal.Close}
-                    aria-label="關閉"
+                    aria-label={itemPreviewContent.close}
                   >
                     <CloseOutlined />
                   </button>
@@ -314,16 +324,18 @@ export const useItemPreview = ({
                 {/* 項目資訊內容 */}
                 <div className="space-y-4">
                   {/* 動態渲染所有項目資訊欄位 */}
-                  {mediaInfoFields.map((info: { label: string; value: string }, i: number) => (
-                    <div key={i} className="flex flex-col">
-                      <div className="text-sm text-[var(--text-color-muted)]">
-                        {info.label}
+                  {mediaInfoFields.map(
+                    (info: { label: string; value: string }, i: number) => (
+                      <div key={i} className="flex flex-col">
+                        <div className="text-sm text-[var(--text-color-muted)]">
+                          {info.label}
+                        </div>
+                        <div className="text-base font-medium break-all">
+                          {info.value}
+                        </div>
                       </div>
-                      <div className="text-base font-medium break-all">
-                        {info.value}
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </div>
             </infoModal.Container>
@@ -332,18 +344,20 @@ export const useItemPreview = ({
 
         {/* 主要項目顯示區域 */}
         <div
-          className="max-w-[95vw] max-h-[80vh]"
+          className="max-w-[90vw] max-h-[80vh]"
           style={{
-            width: isVideo && currentItem.videoMediaMetadata?.width
-              ? `${currentItem.videoMediaMetadata.width}px`
-              : currentItem.imageMediaMetadata?.width
-              ? `${currentItem.imageMediaMetadata.width}px`
-              : "auto",
-            height: isVideo && currentItem.videoMediaMetadata?.height
-              ? `${currentItem.videoMediaMetadata.height}px`
-              : currentItem.imageMediaMetadata?.height
-              ? `${currentItem.imageMediaMetadata.height}px`
-              : "auto",
+            width:
+              isVideo && currentItem.videoMediaMetadata?.width
+                ? `${currentItem.videoMediaMetadata.width}px`
+                : currentItem.imageMediaMetadata?.width
+                ? `${currentItem.imageMediaMetadata.width}px`
+                : "auto",
+            height:
+              isVideo && currentItem.videoMediaMetadata?.height
+                ? `${currentItem.videoMediaMetadata.height}px`
+                : currentItem.imageMediaMetadata?.height
+                ? `${currentItem.imageMediaMetadata.height}px`
+                : "auto",
           }}
         >
           {isVideo ? (
@@ -356,7 +370,9 @@ export const useItemPreview = ({
               width={currentItem.videoMediaMetadata?.width}
               height={currentItem.videoMediaMetadata?.height}
             >
-              您的瀏覽器不支援影片播放。
+              {
+                itemPreviewContent.noSupport
+              }
             </video>
           ) : (
             <MyImage
