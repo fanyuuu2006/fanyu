@@ -27,8 +27,11 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
   const language = useLanguage();
   const itemContent = ITEM_CARD_CONTENT[language.Current];
   const title = item.name || itemContent.noItem;
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const isVideo = item.mimeType?.startsWith("video/");
+
+  const [loaded, setLoaded] = useState(false);
+
+  const isVideo = item.mimeType?.startsWith("video/") ?? false;
+  const { width = 800, height = 800 } = item.imageMediaMetadata ?? {};
 
   return (
     <figure
@@ -44,13 +47,15 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
       }
       {...rest}
     >
-      {/* 縮圖預覽 */}
+      {/* 第一張：縮圖預覽 */}
       <MyImage
         src={item.thumbnailLink}
         title={title}
         alt={title}
-        className="h-full w-full object-cover"
+        className="w-full h-full object-cover"
       />
+
+      {/* 第二張：高解析版本 */}
       {!isVideo && (
         <MyImage
           src={item.url}
@@ -58,34 +63,26 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
           title={title}
           alt={title}
           className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300",
-            {
-              "opacity-0": !loaded,
-            }
+            "absolute inset-0 object-cover transition-opacity duration-300",
+            { "opacity-0": !loaded }
           )}
-          onLoad={() => setLoaded(true)}
-          width={item.imageMediaMetadata?.width || 800}
-          height={item.imageMediaMetadata?.height || 800}
+          width={width}
+          height={height}
           itemProp="contentUrl"
+          onLoad={() => setLoaded(true)}
         />
       )}
-      {/* 結構化數據 - 隱藏但對 SEO 有幫助 */}
+
+      {/* 結構化數據（SEO 使用） */}
       <meta itemProp="name" content={title} />
-      <meta
-        itemProp="thumbnailUrl"
-        content={item.thumbnailLink || FALLBACK_IMAGE}
-      />
+      <meta itemProp="thumbnailUrl" content={item.thumbnailLink || FALLBACK_IMAGE} />
+
       {item.imageMediaMetadata?.width && (
-        <meta
-          itemProp="width"
-          content={String(item.imageMediaMetadata.width)}
-        />
+        <meta itemProp="width" content={String(width)} />
       )}
+
       {item.imageMediaMetadata?.height && (
-        <meta
-          itemProp="height"
-          content={String(item.imageMediaMetadata.height)}
-        />
+        <meta itemProp="height" content={String(height)} />
       )}
     </figure>
   );

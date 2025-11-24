@@ -1,6 +1,6 @@
 /**
- * 圖片預覽 Hook
- * 提供相簿圖片的預覽、導航、資訊顯示等功能
+ * 項目預覽 Hook
+ * 提供相簿項目的預覽、導航、資訊顯示等功能
  */
 
 import { MyImage } from "@/components/custom/MyImage";
@@ -30,12 +30,17 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     | "size"
     | "widthXheight"
     | "uploadTime"
-    | "createdTime",
+    | "createdTime"
+    | "duration"
+    | "aperture"
+    | "shutterSpeed"
+    | "iso"
+    | "focalLength",
     string
   >
 > = {
   chinese: {
-    title: "資訊",
+    title: "項目資訊",
     fileName: "檔案名稱",
     fileExtension: "檔案格式",
     uploadTime: "上傳時間",
@@ -44,9 +49,14 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     size: "檔案大小",
     widthXheight: "寬 x 高",
     createdTime: "建立時間",
+    duration: "影片時長",
+    aperture: "光圈",
+    shutterSpeed: "快門速度",
+    iso: "ISO",
+    focalLength: "焦距",
   },
   english: {
-    title: "Information",
+    title: "Item Information",
     fileName: "File Name",
     fileExtension: "File Extension",
     uploadTime: "Upload Time",
@@ -55,6 +65,11 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     size: "File Size",
     widthXheight: "Width x Height",
     createdTime: "Created Time",
+    duration: "Duration",
+    aperture: "Aperture",
+    shutterSpeed: "Shutter Speed",
+    iso: "ISO",
+    focalLength: "Focal Length",
   },
 };
 
@@ -63,9 +78,10 @@ export const useItemPreview = ({
 }: {
   event: Album[number]["events"][number];
 }) => {
-  // 當前預覽的圖片索引，-1 表示未開啟預覽
+  // 當前預覽的項目索引，-1 表示未開啟預覽
   const [itemIndex, setItemIndex] = useState<number>(0);
   const currentItem = event.items[itemIndex];
+  const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
 
   // 主要預覽視窗的控制
   const previewModal = useModal({});
@@ -77,32 +93,32 @@ export const useItemPreview = ({
   const itemPreviewContent = ITEM_PREVIEW_CONTENT[language.Current];
 
   /**
-   * 切換到上一張圖片
-   * 如果目前是第一張，則循環到最後一張
+   * 切換到上一個項目
+   * 如果目前是第一個，則循環到最後一個
    */
   const handlePrevItem = useCallback(() => {
     setItemIndex((prev) => (prev === 0 ? event.items.length - 1 : prev - 1));
   }, [event.items.length]);
 
   /**
-   * 切換到下一張圖片
-   * 如果目前是最後一張，則循環到第一張
+   * 切換到下一個項目
+   * 如果目前是最後一個，則循環到第一個
    */
   const handleNextItem = useCallback(() => {
     setItemIndex((prev) => (prev === event.items.length - 1 ? 0 : prev + 1));
   }, [event.items.length]);
 
   /**
-   * 計算圖片資訊欄位
-   * 根據當前圖片的 metadata 動態生成顯示資訊
-   * 包含:檔案名稱、格式、建立時間、大小、尺寸
+   * 計算項目資訊欄位
+   * 根據當前項目的 metadata 動態生成顯示資訊
+   * 包含:檔案名稱、格式、建立時間、大小、尺寸、影片時長等
    */
-  const imageInfoFields = useMemo(() => {
+  const mediaInfoFields = useMemo(() => {
     if (!currentItem) {
       return [];
     }
 
-    return [
+    const fields = [
       {
         label: itemPreviewContent.fileName,
         value: currentItem.name || itemPreviewContent.untitled,
@@ -120,29 +136,50 @@ export const useItemPreview = ({
       {
         label: itemPreviewContent.size,
         value: currentItem.size
-          ? `${(Number(currentItem.size) / 1024).toFixed(2)} KB`
-          : itemPreviewContent.unknown,
-      },
-      {
-        label: itemPreviewContent.widthXheight,
-        value: currentItem.imageMediaMetadata
-          ? `${currentItem.imageMediaMetadata.width} x ${currentItem.imageMediaMetadata.height}`
-          : itemPreviewContent.unknown,
-      },
-      {
-        label: itemPreviewContent.createdTime,
-        value: currentItem.imageMediaMetadata?.time
-          ? formatDate(
-              currentItem.imageMediaMetadata.time.replace(
-                /^(\d{4}):(\d{2}):(\d{2})/,
-                "$1-$2-$3"
-              ),
-              language.Current
-            )
+          ? `${(Number(currentItem.size) / (1024 * 1024)).toFixed(2)} MB`
           : itemPreviewContent.unknown,
       },
     ];
-  }, [currentItem, itemPreviewContent, language.Current]);
+
+    // 根據媒體類型添加特定資訊
+    if (isVideo && currentItem.videoMediaMetadata) {
+      // 影片特有資訊
+      fields.push(
+        {
+          label: itemPreviewContent.widthXheight,
+          value: `${currentItem.videoMediaMetadata.width} x ${currentItem.videoMediaMetadata.height}`,
+        },
+        {
+          label: itemPreviewContent.duration,
+          value: currentItem.videoMediaMetadata.durationMillis
+            ? `${Math.floor(Number(currentItem.videoMediaMetadata.durationMillis) / 1000)} 秒`
+            : itemPreviewContent.unknown,
+        }
+      );
+    } else if (currentItem.imageMediaMetadata) {
+      // 圖片特有資訊
+      fields.push(
+        {
+          label: itemPreviewContent.widthXheight,
+          value: `${currentItem.imageMediaMetadata.width} x ${currentItem.imageMediaMetadata.height}`,
+        },
+        {
+          label: itemPreviewContent.createdTime,
+          value: currentItem.imageMediaMetadata?.time
+            ? formatDate(
+                currentItem.imageMediaMetadata.time.replace(
+                  /^(\d{4}):(\d{2}):(\d{2})/,
+                  "$1-$2-$3"
+                ),
+                language.Current
+              )
+            : itemPreviewContent.unknown,
+        }
+      );
+    }
+
+    return fields;
+  }, [currentItem, itemPreviewContent, language.Current, isVideo]);
 
   /**
    * 導航按鈕配置
@@ -154,13 +191,13 @@ export const useItemPreview = ({
         icon: LeftOutlined,
         className: "left-4",
         onClick: handlePrevItem,
-        ariaLabel: "上一張",
+        ariaLabel: "上一個",
       },
       {
         icon: RightOutlined,
         className: "right-4",
         onClick: handleNextItem,
-        ariaLabel: "下一張",
+        ariaLabel: "下一個",
       },
     ],
     [handlePrevItem, handleNextItem]
@@ -168,8 +205,8 @@ export const useItemPreview = ({
 
   /**
    * 鍵盤快捷鍵監聽
-   * - 左箭頭：上一張圖片
-   * - 右箭頭：下一張圖片
+   * - 左箭頭：上一個項目
+   * - 右箭頭：下一個項目
    * - ESC：關閉預覽
    */
   useEffect(() => {
@@ -193,11 +230,11 @@ export const useItemPreview = ({
 
   /**
    * 預覽容器元件
-   * 渲染完整的圖片預覽介面,包括:
-   * - 頂部工具列(關閉、圖片名稱、下載、資訊按鈕)
-   * - 中央圖片顯示區域
+   * 渲染完整的項目預覽介面,包括:
+   * - 頂部工具列(關閉、項目名稱、下載、資訊按鈕)
+   * - 中央項目顯示區域
    * - 左右導航按鈕
-   * - 圖片資訊彈出視窗
+   * - 項目資訊彈出視窗
    */
   const Container = () => {
     if (!currentItem) {
@@ -217,7 +254,7 @@ export const useItemPreview = ({
           >
             <CloseOutlined />
           </button>
-          {/* 圖片標題和進度 */}
+          {/* 項目標題和進度 */}
           <div className="flex flex-col min-w-0 ms-2">
             <h3
               title={currentItem.name || itemPreviewContent.untitled}
@@ -225,7 +262,7 @@ export const useItemPreview = ({
             >
               {currentItem.name}
             </h3>
-            {/* 圖片計數 (當前/總數) */}
+            {/* 項目計數 (當前/總數) */}
             <span className="text-sm md:text-base text-[var(--text-color-muted)]">
               {itemIndex + 1} / {event.items.length}
             </span>
@@ -240,11 +277,11 @@ export const useItemPreview = ({
                 currentItem.name ||
                 `${itemIndex}.${currentItem.fileExtension}`
               }
-              aria-label={`下載圖片 ${currentItem.name}`}
+              aria-label={`下載項目 ${currentItem.name}`}
             >
               <DownloadOutlined />
             </Link>
-            {/* 圖片資訊按鈕 */}
+            {/* 項目資訊按鈕 */}
             <button
               className="rounded-full p-2"
               aria-label="詳細資訊"
@@ -252,7 +289,7 @@ export const useItemPreview = ({
             >
               <InfoCircleOutlined />
             </button>
-            {/* 圖片資訊彈出視窗 */}
+            {/* 項目資訊彈出視窗 */}
             <infoModal.Container
               style={{
                 zIndex: 6990,
@@ -274,10 +311,10 @@ export const useItemPreview = ({
                   </button>
                 </div>
 
-                {/* 圖片資訊內容 */}
+                {/* 項目資訊內容 */}
                 <div className="space-y-4">
-                  {/* 動態渲染所有圖片資訊欄位 */}
-                  {imageInfoFields.map((info, i) => (
+                  {/* 動態渲染所有項目資訊欄位 */}
+                  {mediaInfoFields.map((info: { label: string; value: string }, i: number) => (
                     <div key={i} className="flex flex-col">
                       <div className="text-sm text-[var(--text-color-muted)]">
                         {info.label}
@@ -293,27 +330,45 @@ export const useItemPreview = ({
           </div>
         </div>
 
-        {/* 主要圖片顯示區域 */}
+        {/* 主要項目顯示區域 */}
         <div
           className="max-w-[95vw] max-h-[80vh]"
           style={{
-            width: currentItem.imageMediaMetadata?.width
+            width: isVideo && currentItem.videoMediaMetadata?.width
+              ? `${currentItem.videoMediaMetadata.width}px`
+              : currentItem.imageMediaMetadata?.width
               ? `${currentItem.imageMediaMetadata.width}px`
               : "auto",
-            height: currentItem.imageMediaMetadata?.height
+            height: isVideo && currentItem.videoMediaMetadata?.height
+              ? `${currentItem.videoMediaMetadata.height}px`
+              : currentItem.imageMediaMetadata?.height
               ? `${currentItem.imageMediaMetadata.height}px`
               : "auto",
           }}
         >
-          <MyImage
-            src={currentItem.url}
-            fallbackSrc={currentItem.thumbnailLink}
-            className="w-full h-full object-contain"
-            alt={title}
-            title={title}
-            width={currentItem.imageMediaMetadata?.width}
-            height={currentItem.imageMediaMetadata?.height}
-          />
+          {isVideo ? (
+            <video
+              src={currentItem.url}
+              poster={currentItem.thumbnailLink || undefined}
+              className="w-full h-full object-contain"
+              controls
+              preload="metadata"
+              width={currentItem.videoMediaMetadata?.width}
+              height={currentItem.videoMediaMetadata?.height}
+            >
+              您的瀏覽器不支援影片播放。
+            </video>
+          ) : (
+            <MyImage
+              src={currentItem.url}
+              fallbackSrc={currentItem.thumbnailLink}
+              className="w-full h-full object-contain"
+              alt={title}
+              title={title}
+              width={currentItem.imageMediaMetadata?.width}
+              height={currentItem.imageMediaMetadata?.height}
+            />
+          )}
         </div>
 
         {/* 左右導航按鈕 */}
