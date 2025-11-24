@@ -65,7 +65,7 @@ export const EventLinkCard = ({
     >
       <div className="w-full aspect-square bg-[#888] rounded-3xl overflow-hidden">
         <div className="relative w-full h-full group-hover:scale-125 transition-transform duration-300">
-          {/* 前景縮略圖 */}
+          {/* 縮圖預覽 */}
           <MyImage
             src={coverItem?.thumbnailLink}
             alt={eventLinkCardContent.altText}
@@ -73,8 +73,6 @@ export const EventLinkCard = ({
             width={imgWidth}
             height={imgHeight}
           />
-
-          {/* 進場淡入 */}
           <MyImage
             src={isVideo ? coverItem?.thumbnailLink : coverItem?.url}
             fallbackSrc={coverItem?.thumbnailLink}

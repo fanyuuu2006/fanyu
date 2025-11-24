@@ -63,7 +63,7 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
         title={title}
         alt={title}
         className={cn(
-          "absolute inset-0 object-cover transition-opacity duration-300",
+          "absolute w-full h-full inset-0 object-cover transition-opacity duration-300",
           { "opacity-0": !loaded }
         )}
         width={width}
@@ -74,6 +74,9 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
       {isVideo && (
         <div className="text-sm md:text-base lg:text-lg xl:text-xl absolute top-1.5 right-1.5">
           <div className="flex gap-1">
+            <span className="text-[0.8em]">
+              {_formatTime(item.videoMediaMetadata?.durationMillis || "0")}
+            </span>
             <PlayCircleFilled />
           </div>
         </div>
@@ -95,4 +98,14 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
       )}
     </figure>
   );
+};
+
+const _formatTime = (millis: string): string => {
+  const totalSeconds = Math.floor(Number(millis) / 1000);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return [ minutes, seconds]
+    .map((v) => String(v).padStart(2, "0"))
+    .join(":");
 };
