@@ -81,7 +81,7 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: item.url,
+          url: item.mimeType?.startsWith("video") ? item.thumbnailLink || item.url : item.url,
           alt: `${year} ${eventName} - FanYu Photo Album`,
           type: "item/jpeg",
         },

@@ -209,7 +209,12 @@ export const useItemPreview = ({
         ariaLabel: itemPreviewContent.next,
       },
     ],
-    [handlePrevItem, handleNextItem, itemPreviewContent.previous, itemPreviewContent.next]
+    [
+      handlePrevItem,
+      handleNextItem,
+      itemPreviewContent.previous,
+      itemPreviewContent.next,
+    ]
   );
 
   /**
@@ -367,10 +372,11 @@ export const useItemPreview = ({
               preload="metadata"
               width={currentItem.videoMediaMetadata?.width}
               height={currentItem.videoMediaMetadata?.height}
+              title={title}
             >
-              {
-                itemPreviewContent.noSupport
-              }
+              <p className="text-center p-4 text-[var(--text-color-muted)]">
+                {itemPreviewContent.noSupport}
+              </p>
             </video>
           ) : (
             <MyImage
