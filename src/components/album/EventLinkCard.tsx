@@ -39,7 +39,7 @@ export const EventLinkCard = ({
       ref={ref}
       aria-label={`前往 ${year} ${event.name} 相簿`}
       className={cn("group", className)}
-      href={`/album/${slugify(year)}/${slugify(event.name)}`}
+      href={`/album/${slugify(year)}/${slugify(event.name || "其他")}`}
       {...rest}
     >
       <div className="rounded-3xl overflow-hidden">

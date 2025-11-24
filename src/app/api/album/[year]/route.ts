@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listAllFiles } from "@/utils/googleapis";
+import { listAllFiles, toEventItem } from "@/utils/googleapis";
 import { deslugify } from "@/utils/url";
 
 export async function GET(
@@ -25,22 +25,22 @@ export async function GET(
     // 找事件資料夾
     const eventFolders = await listAllFiles(
       `'${yearFolder.id}' in parents and mimeType = 'application/vnd.google-apps.folder'`
-      , ["name"]
-      
+      , ["id", "name", "createdTime"]
     );
-    const eventNames = eventFolders.map((f) => f.name);
+    const events = eventFolders.map(toEventItem);
 
     const otherimages = await listAllFiles(
       `'${yearFolder.id}' in parents and mimeType contains 'image/'`
     );
 
+    // 加上「其他」類別
     if (otherimages.length > 0) {
-      eventNames.push("其他");
+      events.push({
+        name: "其他",
+      });
     }
 
-    // 加上「其他」類別
-
-    return NextResponse.json(eventNames);
+    return NextResponse.json(events);
   } catch (error) {
     console.warn("⚠️ 讀取 Album 資料夾時發生錯誤:", error);
     return NextResponse.json([], { status: 500 });

@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // 活動頁面
       for (const event of events) {
         dynamicRoutes.push({
-          pat: `/album/${slugify(year)}/${slugify(event)}`,
+          pat: `/album/${slugify(year)}/${slugify(event.name || "其他")}`,
           priority: 0.6,
           changeFreq: "monthly",
         });

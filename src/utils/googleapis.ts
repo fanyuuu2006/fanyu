@@ -52,17 +52,15 @@ const _createFileItem = <
     return result;
   };
 };
-// export const toEventItem = (
-//   file: MyDriveFile,
-//   images: Album[number]["events"][number]["images"]
-// ): Album[number]["events"][number] => {
-//   return _createFileItem({
-//     thumbnailLink: file.thumbnailLink
-//       ? proxyUrl(file.thumbnailLink)
-//       : undefined,
-//     images: images,
-//   })(file);
-// };
+export const toEventItem = (
+  file: MyDriveFile,
+): Omit<Album[number]["events"][number], "items">  => {
+  return _createFileItem({
+    thumbnailLink: file.thumbnailLink
+      ? proxyUrl(file.thumbnailLink)
+      : undefined,
+  })(file);
+};
 export const toImageItem = (
   file: MyDriveFile
 ): Album[number]["events"][number]["items"][number] => {

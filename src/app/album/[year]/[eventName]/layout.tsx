@@ -138,7 +138,7 @@ function generateAlbumJsonLd({
     dateModified: new Date().toISOString().split("T")[0], // 最後修改日期
 
     // 相簿頁面 URL
-    url: `${profile.url}/album/${slugify(year)}/${slugify(event.name)}`,
+    url: `${profile.url}/album/${slugify(year)}/${slugify(event.name || "其他")}`,
 
     // 主要圖片實體 - 使用第一張圖片或預設圖片
     mainEntity: {

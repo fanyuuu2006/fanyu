@@ -9,7 +9,7 @@ export const years = async () =>
   });
 
 export const events = async (year: string) =>
-  fetcher<Album[number]["events"][number]["name"][]>(
+  fetcher<Album[number]["events"][number][]>(
     `${profile.url}/api/album/${slugify(year)}`,
     {
       cache: "no-store",

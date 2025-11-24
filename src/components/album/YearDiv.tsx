@@ -68,10 +68,10 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           {item.events.length === 0 ? (
             <div className="text-3xl font-bold">{`${item.year} - ${yearsContent.noEvents}`}</div>
           ) : (
-            item.events.map((event) => (
+            item.events.map((event, index) => (
               <motion.div
                 variants={fadeInItem}
-                key={`${item.year}-${event.name}`}
+                key={`${item.year}-${event.name || event.id || index}`}
               >
                 <EventLinkCard
                   year={item.year}
