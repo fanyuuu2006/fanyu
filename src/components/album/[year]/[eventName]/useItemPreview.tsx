@@ -18,7 +18,7 @@ import {
   RightOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 
 const ITEM_PREVIEW_CONTENT: LanguageContent<
   Record<
@@ -89,7 +89,10 @@ export const useItemPreview = ({
 }) => {
   // 當前預覽的項目索引，-1 表示未開啟預覽
   const [itemIndex, setItemIndex] = useState<number>(0);
-  const currentItem = event.items[itemIndex];
+  const currentItem = useMemo(
+    () => event.items[itemIndex],
+    [itemIndex, event.items]
+  );
   const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
 
   const language = useLanguage();
@@ -237,7 +240,7 @@ export const useItemPreview = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleNextItem, handlePrevItem, previewModal, previewModal.isOpen]);
 
-  const Container = () => {
+  const Container = memo(() => {
     if (!currentItem) {
       return null;
     }
@@ -395,7 +398,7 @@ export const useItemPreview = ({
         </infoModal.Content>
       </>
     );
-  };
+  });
   Container.displayName = "ItemPreviewContainer";
   return {
     ...previewModal,
