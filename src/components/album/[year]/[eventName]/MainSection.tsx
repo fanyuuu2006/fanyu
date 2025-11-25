@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
-import { useItemPreview } from "./useItemPreview";
+import { useItemPreview } from "./_useItemPreview";
 import { ItemCard } from "./ItemCard";
 import { useRouter } from "next/navigation";
 
@@ -53,7 +53,11 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
   const handleBackClick = useCallback(() => {
     // 如果有上一頁 (history 長度大於 1)，則返回；否則導向 /album
-    if (typeof window !== "undefined" && window.history && window.history.length > 1) {
+    if (
+      typeof window !== "undefined" &&
+      window.history &&
+      window.history.length > 1
+    ) {
       router.back();
     } else {
       router.push("/album");
