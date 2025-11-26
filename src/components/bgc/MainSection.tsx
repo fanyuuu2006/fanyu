@@ -135,7 +135,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
       className="h-full"
       style={
         {
-          "--bg": `url("/api/album/image/10YJQZuJ4eBtNStqgj9OdsMbByrtWOoJ3")`,
+          "--bg": `url("/api/album/item/10YJQZuJ4eBtNStqgj9OdsMbByrtWOoJ3")`,
         } as React.CSSProperties
       }
     >

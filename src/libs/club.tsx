@@ -1,5 +1,5 @@
 import { ExperienceItem } from "@/types/experience";
-import { InstagramOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { InstagramOutlined, EnvironmentOutlined, SearchOutlined } from "@ant-design/icons";
 import NTUST from "./education/ntust";
 
 export const NTUST_BGC: ExperienceItem = {
@@ -29,6 +29,11 @@ export const NTUST_BGC: ExperienceItem = {
       icon: <EnvironmentOutlined />,
       href: "https://maps.app.goo.gl/Rzro8g26H8Pb1f1EA",
     },
-    
+    {
+      chinese: "社產查詢",
+      english: "Club Assets Inquiry",
+      icon: <SearchOutlined />,
+      href: "/bgc",
+    }
   ],
 };

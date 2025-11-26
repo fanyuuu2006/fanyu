@@ -51,7 +51,7 @@ export const Header = () => {
           {/* 桌面版導覽列 */}
           <div className="hidden lg:flex text-xl font-bold gap-6">
             {routes.map((item) => {
-              if (item.hidden) return null;
+              if (item.hidden?.header) return null;
               return <DesktopLink key={item.url} item={item} />;
             })}
           </div>
@@ -65,7 +65,7 @@ export const Header = () => {
         >
           <div className="flex flex-col w-full text-xl font-semibold">
             {routes.map((item) => {
-              if (item.hidden) return null;
+              if (item.hidden?.header) return null;
               return (
                 <MobileLink
                   key={item.url}

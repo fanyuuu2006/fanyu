@@ -79,7 +79,7 @@ export const MobileLink = ({
         >
           <div className="flex flex-col text-sm bg-[var(--background-color-tertiary)] border-b border-[var(--border-color)]">
             {item.sub!.map((sub) => {
-              if (sub.hidden) return null;
+              if (sub.hidden?.header) return null;
               return (
                 <Link
                   key={sub.url}

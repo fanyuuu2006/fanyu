@@ -13,7 +13,10 @@ type BaseRoute = MetadataRoute.Sitemap[number] & {
   label: LanguageContent<string>;
   icon?: React.ElementType;
   isActive?: (path: string) => boolean;
-  hidden?: boolean;
+  hidden?: {
+    header?: boolean;
+    footer?: boolean;
+  };
 };
 
 export type Route = BaseRoute & {
@@ -76,7 +79,7 @@ export const routes: Route[] = [
     },
     url: "/projects",
     icon: ProjectOutlined,
-    changeFrequency : "monthly",
+    changeFrequency: "monthly",
     priority: 0.6,
   },
   {
@@ -86,7 +89,7 @@ export const routes: Route[] = [
     },
     url: "/guestbook",
     icon: MessageOutlined,
-    changeFrequency : "weekly",
+    changeFrequency: "weekly",
     priority: 0.5,
   },
   {
@@ -97,7 +100,7 @@ export const routes: Route[] = [
     url: "/album",
     isActive: (path: string) => path.startsWith("/album"),
     icon: PictureOutlined,
-    changeFrequency : "weekly",
+    changeFrequency: "weekly",
     priority: 0.9,
   },
   {
@@ -107,7 +110,9 @@ export const routes: Route[] = [
     },
     url: "/bgc",
     icon: BlockOutlined,
-    hidden: true,
+    hidden: { header: true },
+    changeFrequency: "monthly",
+    priority: 0.4,
   },
   {
     label: {
@@ -116,8 +121,8 @@ export const routes: Route[] = [
     },
     url: "/my",
     icon: StarOutlined,
-    hidden: true,
+    hidden: { header: true, footer: true },
     changeFrequency: "monthly",
     priority: 0.4,
-  }
+  },
 ];

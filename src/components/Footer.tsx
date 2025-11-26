@@ -10,13 +10,11 @@ import {
 import { OutsideLink } from "fanyucomponents";
 import { getGithubBadgeSrcs } from "../utils/github";
 import Link from "next/link";
-import { routes } from "./routes";
+import { Route, routes } from "./routes";
+import { useMemo } from "react";
 
 type FooterContent = Record<
-  | "copyright"
-  | "sourceCode"
-  | "backToTop"
-  | "quickLinks",
+  "copyright" | "sourceCode" | "backToTop" | "quickLinks",
   string
 >;
 
@@ -42,7 +40,20 @@ export const Footer = () => {
   const Language = useLanguage();
   const footerContent = getFooterContent(Language.Current);
   const year = new Date().getFullYear();
-
+  const fastLinks: Route[] = useMemo(
+    () => [
+      {
+        label: {
+          chinese: "返回頂部",
+          english: "Back to top",
+        },
+        url: "#top",
+        icon: RocketOutlined,
+      },
+      ...routes,
+    ],
+    []
+  );
   return (
     <footer className="w-full bg-black border-[var(--border-color)] border-t-1">
       <div className="container px-6 py-12">
@@ -84,27 +95,20 @@ export const Footer = () => {
               {footerContent.quickLinks}
             </h4>
             <ul className="space-y-2">
-              {[
-                {
-                  label: {
-                    chinese: "返回頂部",
-                    english: "Back to top",
-                  },
-                  url: "#top",
-                  icon: RocketOutlined,
-                },
-                ...routes,
-              ].map((link) => (
-                <li key={link.url}>
-                  <Link
-                    href={link.url}
-                    className="w-fit flex items-center gap-2 text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] transition-colors duration-200"
-                  >
-                    {link.icon && <link.icon className="text-sm" />}
-                    {link.label[Language.Current]}
-                  </Link>
-                </li>
-              ))}
+              {fastLinks.map((link) => {
+                if (link.hidden?.footer) return null;
+                return (
+                  <li key={link.url}>
+                    <Link
+                      href={link.url}
+                      className="w-fit flex items-center gap-2 text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] transition-colors duration-200"
+                    >
+                      {link.icon && <link.icon className="text-sm" />}
+                      {link.label[Language.Current]}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

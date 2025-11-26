@@ -48,7 +48,7 @@ export const DesktopLink = ({ item }: DesktopLinkProps) => {
           <div className="bg-[var(--background-color)] border border-[var(--border-color)] rounded-md shadow-lg mt-2 min-w-48">
             <div className="text-[var(--text-color-muted)] flex flex-col text-base font-normal">
               {item.sub!.map((sub) => {
-                if (sub.hidden) return null;
+                if (sub.hidden?.header) return null;
                 return (
                   <Link
                     key={sub.url}
