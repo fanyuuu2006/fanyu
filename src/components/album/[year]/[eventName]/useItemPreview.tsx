@@ -1,14 +1,3 @@
-/**
- * 項目預覽 Hook
- * 提供相簿項目的預覽、導航、資訊顯示等功能
- *
- * 性能優化:
- * - 使用 React.memo 避免不必要的重新渲染
- * - 提取常數到模組頂層
- * - 優化 useMemo 依賴項
- * - 預計算樣式物件
- */
-
 import { MyImage } from "@/components/custom/MyImage";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useModal } from "@/hooks/useModal";
@@ -95,11 +84,7 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
   },
 };
 
-export const useItemPreview = ({
-  event,
-}: {
-  event: Album[number]["events"][number];
-}) => {
+export const useItemPreview = (items: Album[number]["events"][number]["items"]) => {
   const previewModal = useModal({});
   const [itemIndex, setItemIndex] = useState(0);
 
@@ -120,13 +105,13 @@ export const useItemPreview = ({
   const Content = useCallback(
     () => (
       <PreviewContent
-        event={event}
+        items={items}
         itemIndex={itemIndex}
         setItemIndex={setItemIndex}
         close={previewModal.close}
       />
     ),
-    [event, itemIndex, previewModal.close]
+    [items, itemIndex, previewModal.close]
   );
 
   return {
@@ -170,19 +155,19 @@ const NavButton = ({
 );
 
 type PreviewContentProps = {
-  event: Album[number]["events"][number];
+  items: Album[number]["events"][number]["items"];
   itemIndex: number;
   setItemIndex: React.Dispatch<React.SetStateAction<number>>;
   close: () => void;
 };
 
 const PreviewContent = memo(
-  ({ event, itemIndex, close, setItemIndex }: PreviewContentProps) => {
+  ({ items, itemIndex, close, setItemIndex }: PreviewContentProps) => {
     const language = useLanguage();
     const itemPreviewContent = ITEM_PREVIEW_CONTENT[language.Current];
     const currentItem = useMemo(
-      () => event.items[itemIndex],
-      [event.items, itemIndex]
+      () => items[itemIndex],
+      [items, itemIndex]
     );
     const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
     const title = currentItem.name || itemPreviewContent.untitled;
@@ -192,16 +177,16 @@ const PreviewContent = memo(
      * 如果目前是第一個，則循環到最後一個
      */
     const handlePrevItem = useCallback(() => {
-      setItemIndex((prev) => (prev === 0 ? event.items.length - 1 : prev - 1));
-    }, [event.items.length, setItemIndex]);
+      setItemIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
+    }, [items.length, setItemIndex]);
 
     /**
      * 切換到下一個項目
      * 如果目前是最後一個，則循環到第一個
      */
     const handleNextItem = useCallback(() => {
-      setItemIndex((prev) => (prev === event.items.length - 1 ? 0 : prev + 1));
-    }, [event.items.length, setItemIndex]);
+      setItemIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
+    }, [items.length, setItemIndex]);
 
     const infoModal = useModal({});
     /**
@@ -375,7 +360,7 @@ const PreviewContent = memo(
             </h3>
             {/* 項目計數 (當前/總數) */}
             <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-              {itemIndex + 1} / {event.items.length}
+              {itemIndex + 1} / {items.length}
             </span>
           </div>
           {/* 右側功能按鈕群組 */}

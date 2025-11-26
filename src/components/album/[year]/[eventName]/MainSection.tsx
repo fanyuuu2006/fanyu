@@ -8,6 +8,7 @@ import { LanguageContent } from "@/types/language";
 import { useItemPreview } from "./useItemPreview";
 import { ItemCard } from "./ItemCard";
 import { useRouter } from "next/navigation";
+import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
@@ -37,12 +38,14 @@ const ITEMS_CONTENT: LanguageContent<ItemsContent> = {
 export const MainSection = ({ year, event }: MainSectionProps) => {
   const language = useLanguage();
   const router = useRouter();
-
   const itemsContent = ITEMS_CONTENT[language.Current];
 
-  const itemPreview = useItemPreview({
-    event,
-  });
+  const order = useTimeOrderTabs(
+    event.items,
+    (item) => item.createdTime || "0"
+  );
+
+  const itemPreview = useItemPreview(order.data);
 
   const handleImageClick = useCallback(
     (index: number) => {
@@ -87,10 +90,13 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           <h1 className="mb-4 text-3xl md:text-4xl font-bold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
             {event.name}
           </h1>
+        </div>
+        <div className="w-full flex items-center justify-between mb-2">
+          <order.div />
           <span className="text-[var(--text-color-muted)]">
             {itemsContent.totalItems.replace(
               "{count}",
-              event.items.length.toString()
+              order.data.length.toString()
             )}
           </span>
         </div>
@@ -101,7 +107,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           role="main"
           aria-label={`${year}-${event.name} 照片集`}
         >
-          {event.items.length === 0 ? (
+          {order.data.length === 0 ? (
             <div className="col-span-full flex flex-col items-center justify-center">
               <h3 className="text-2xl md:text-3xl font-bold">
                 {itemsContent.noItems}
@@ -109,7 +115,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             </div>
           ) : (
             <>
-              {event.items.map((item, i) => (
+              {order.data.map((item, i) => (
                 <ItemCard
                   id={i.toString()}
                   tabIndex={0}
