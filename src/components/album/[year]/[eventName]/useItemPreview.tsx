@@ -5,7 +5,6 @@
 
 import { MyImage } from "@/components/custom/MyImage";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useModal } from "@/hooks/useModal";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
 import { formatDate, formatTime } from "@/utils";
@@ -17,8 +16,9 @@ import {
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
+import { useModal } from "fanyucomponents";
 import Link from "next/link";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const ITEM_PREVIEW_CONTENT: LanguageContent<
   Record<
@@ -89,16 +89,17 @@ export const useItemPreview = ({
 }) => {
   // 當前預覽的項目索引，-1 表示未開啟預覽
   const [itemIndex, setItemIndex] = useState<number>(0);
-  const currentItem = useMemo(
-    () => event.items[itemIndex],
-    [itemIndex, event.items]
-  );
+  const currentItem = event.items[itemIndex];
   const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
 
+  // 主要預覽視窗的控制
+  const previewModal = useModal({});
+  // 項目資訊視窗的控制
+  const infoModal = useModal({});
+
+  // 取得當前語言設定
   const language = useLanguage();
   const itemPreviewContent = ITEM_PREVIEW_CONTENT[language.Current];
-  const previewModal = useModal({});
-  const infoModal = useModal({});
 
   /**
    * 切換到上一個項目
@@ -189,6 +190,10 @@ export const useItemPreview = ({
     return fields;
   }, [currentItem, itemPreviewContent, language.Current, isVideo]);
 
+  /**
+   * 導航按鈕配置
+   * 定義左右切換按鈕的圖示、位置和點擊事件
+   */
   const navigationButtons = useMemo(
     () => [
       {
@@ -219,11 +224,8 @@ export const useItemPreview = ({
    * - ESC：關閉預覽
    */
   useEffect(() => {
+    if (!previewModal.isShow) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!previewModal.isOpen()) {
-        return;
-      }
-      e.preventDefault();
       switch (e.key) {
         case "ArrowLeft":
           handlePrevItem();
@@ -232,182 +234,189 @@ export const useItemPreview = ({
           handleNextItem();
           break;
         case "Escape":
-          previewModal.close();
+          previewModal.Close();
           break;
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleNextItem, handlePrevItem, previewModal, previewModal.isOpen]);
+  }, [handleNextItem, handlePrevItem, previewModal, previewModal.isShow]);
 
-  const Container = memo(() => {
+  /**
+   * 預覽容器元件
+   * 渲染完整的項目預覽介面,包括:
+   * - 頂部工具列(關閉、項目名稱、下載、資訊按鈕)
+   * - 中央項目顯示區域
+   * - 左右導航按鈕
+   * - 項目資訊彈出視窗
+   */
+  const Container = () => {
     if (!currentItem) {
       return null;
     }
+
     const title = currentItem.name || itemPreviewContent.untitled;
     return (
-      <>
-        <previewModal.Container />
-        <infoModal.Container />
-
-        <previewModal.Content>
-          {/* Header - 頂部工具列 */}
-          <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
-            {/* 關閉按鈕 */}
-            <button
-              className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
-              onClick={previewModal.close}
-              aria-label={itemPreviewContent.close}
-            >
-              <CloseOutlined />
-            </button>
-            {/* 項目標題和進度 */}
-            <div className="flex flex-col min-w-0 ms-2">
-              <h3
-                title={currentItem.name || itemPreviewContent.untitled}
-                className="text-lg md:text-xl font-semibold truncate"
-              >
-                {currentItem.name}
-              </h3>
-              {/* 項目計數 (當前/總數) */}
-              <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-                {itemIndex + 1} / {event.items.length}
-              </span>
-            </div>
-            {/* 右側功能按鈕群組 */}
-            <div className="ms-auto text-3xl flex">
-              {/* 下載按鈕 */}
-              <Link
-                className="rounded-full p-2"
-                href={currentItem.url || ""}
-                download={
-                  currentItem.name ||
-                  `${itemIndex}.${currentItem.fileExtension}`
-                }
-                aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
-              >
-                <DownloadOutlined />
-              </Link>
-              {/* 項目資訊按鈕 */}
-              <button
-                className="rounded-full p-2"
-                aria-label={itemPreviewContent.details}
-                onClick={infoModal.open}
-              >
-                <InfoCircleOutlined />
-              </button>
-            </div>
-          </div>
-          {/* 主要項目顯示區域 */}
-          <div
-            className="max-w-[90vw] max-h-[80vh]"
-            style={{
-              width:
-                isVideo && currentItem.videoMediaMetadata?.width
-                  ? `${currentItem.videoMediaMetadata.width}px`
-                  : currentItem.imageMediaMetadata?.width
-                  ? `${currentItem.imageMediaMetadata.width}px`
-                  : "auto",
-              height:
-                isVideo && currentItem.videoMediaMetadata?.height
-                  ? `${currentItem.videoMediaMetadata.height}px`
-                  : currentItem.imageMediaMetadata?.height
-                  ? `${currentItem.imageMediaMetadata.height}px`
-                  : "auto",
-            }}
+      <previewModal.Container style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+        {/* Header - 頂部工具列 */}
+        <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
+          {/* 關閉按鈕 */}
+          <button
+            className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+            onClick={previewModal.Close}
+            aria-label={itemPreviewContent.close}
           >
-            {isVideo ? (
-              <video
-                src={currentItem.url}
-                poster={currentItem.thumbnailLink || undefined}
-                className="w-full h-full object-contain"
-                controls
-                preload="metadata"
-                width={currentItem.videoMediaMetadata?.width}
-                height={currentItem.videoMediaMetadata?.height}
-                title={title}
-              >
-                <p className="text-center p-4 text-[var(--text-color-muted)]">
-                  {itemPreviewContent.noSupport}
-                </p>
-              </video>
-            ) : (
-              <MyImage
-                src={currentItem.url}
-                fallbackSrc={currentItem.thumbnailLink}
-                className="w-full h-full object-contain"
-                alt={title}
-                title={title}
-                width={currentItem.imageMediaMetadata?.width}
-                height={currentItem.imageMediaMetadata?.height}
-              />
-            )}
-          </div>
-
-          {/* 左右導航按鈕 */}
-          {navigationButtons.map((item, i) => (
-            <button
-              key={i}
-              className={cn(
-                "btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-                item.className
-              )}
-              onClick={item.onClick}
-              aria-label={item.ariaLabel}
+            <CloseOutlined />
+          </button>
+          {/* 項目標題和進度 */}
+          <div className="flex flex-col min-w-0 ms-2">
+            <h3
+              title={currentItem.name || itemPreviewContent.untitled}
+              className="text-lg md:text-xl font-semibold truncate"
             >
-              <item.icon />
-            </button>
-          ))}
-        </previewModal.Content>
-
-        {/* 項目資訊彈出視窗 */}
-        <infoModal.Content>
-          <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
-            {/* 資訊視窗標頭 */}
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-color)]">
-              <h3 className="text-xl font-semibold bg-gradient-to-br  from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
-                {itemPreviewContent.title}
-              </h3>
-              {/* 關閉資訊視窗按鈕 */}
-              <button
-                className="text-xl text-[var(--text-color-muted)] rounded-full p-2"
-                onClick={infoModal.close}
-                aria-label={itemPreviewContent.close}
-              >
-                <CloseOutlined />
-              </button>
-            </div>
-
-            {/* 項目資訊內容 */}
-            <div className="space-y-4">
-              {/* 動態渲染所有項目資訊欄位 */}
-              {mediaInfoFields.map(
-                (info: { label: string; value: string }, i: number) => (
-                  <div key={i} className="flex flex-col">
-                    <div className="text-sm text-[var(--text-color-muted)]">
-                      {info.label}
-                    </div>
-                    <div className="text-base font-medium break-all">
-                      {info.value}
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
+              {currentItem.name}
+            </h3>
+            {/* 項目計數 (當前/總數) */}
+            <span className="text-sm md:text-base text-[var(--text-color-muted)]">
+              {itemIndex + 1} / {event.items.length}
+            </span>
           </div>
-        </infoModal.Content>
-      </>
+          {/* 右側功能按鈕群組 */}
+          <div className="ms-auto text-3xl flex">
+            {/* 下載按鈕 */}
+            <Link
+              className="rounded-full p-2"
+              href={currentItem.url || ""}
+              download={
+                currentItem.name || `${itemIndex}.${currentItem.fileExtension}`
+              }
+              aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
+            >
+              <DownloadOutlined />
+            </Link>
+            {/* 項目資訊按鈕 */}
+            <button
+              className="rounded-full p-2"
+              aria-label={itemPreviewContent.details}
+              onClick={infoModal.Open}
+            >
+              <InfoCircleOutlined />
+            </button>
+            {/* 項目資訊彈出視窗 */}
+            <infoModal.Container
+              style={{
+                zIndex: 6990,
+              }}
+            >
+              <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
+                {/* 資訊視窗標頭 */}
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-color)]">
+                  <h3 className="text-xl font-semibold bg-gradient-to-br  from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
+                    {itemPreviewContent.title}
+                  </h3>
+                  {/* 關閉資訊視窗按鈕 */}
+                  <button
+                    className="text-xl text-[var(--text-color-muted)] rounded-full p-2"
+                    onClick={infoModal.Close}
+                    aria-label={itemPreviewContent.close}
+                  >
+                    <CloseOutlined />
+                  </button>
+                </div>
+
+                {/* 項目資訊內容 */}
+                <div className="space-y-4">
+                  {/* 動態渲染所有項目資訊欄位 */}
+                  {mediaInfoFields.map(
+                    (info: { label: string; value: string }, i: number) => (
+                      <div key={i} className="flex flex-col">
+                        <div className="text-sm text-[var(--text-color-muted)]">
+                          {info.label}
+                        </div>
+                        <div className="text-base font-medium break-all">
+                          {info.value}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </infoModal.Container>
+          </div>
+        </div>
+
+        {/* 主要項目顯示區域 */}
+        <div
+          className="max-w-[90vw] max-h-[80vh]"
+          style={{
+            width:
+              isVideo && currentItem.videoMediaMetadata?.width
+                ? `${currentItem.videoMediaMetadata.width}px`
+                : currentItem.imageMediaMetadata?.width
+                ? `${currentItem.imageMediaMetadata.width}px`
+                : "auto",
+            height:
+              isVideo && currentItem.videoMediaMetadata?.height
+                ? `${currentItem.videoMediaMetadata.height}px`
+                : currentItem.imageMediaMetadata?.height
+                ? `${currentItem.imageMediaMetadata.height}px`
+                : "auto",
+          }}
+        >
+          {isVideo ? (
+            <video
+              src={currentItem.url}
+              poster={currentItem.thumbnailLink || undefined}
+              className="w-full h-full object-contain"
+              controls
+              preload="metadata"
+              width={currentItem.videoMediaMetadata?.width}
+              height={currentItem.videoMediaMetadata?.height}
+              title={title}
+            >
+              <p className="text-center p-4 text-[var(--text-color-muted)]">
+                {itemPreviewContent.noSupport}
+              </p>
+            </video>
+          ) : (
+            <MyImage
+              src={currentItem.url}
+              fallbackSrc={currentItem.thumbnailLink}
+              className="w-full h-full object-contain"
+              alt={title}
+              title={title}
+              width={currentItem.imageMediaMetadata?.width}
+              height={currentItem.imageMediaMetadata?.height}
+            />
+          )}
+        </div>
+
+        {/* 左右導航按鈕 */}
+        {navigationButtons.map((item, i) => (
+          <button
+            key={i}
+            className={cn(
+              "btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
+              item.className
+            )}
+            onClick={item.onClick}
+            aria-label={item.ariaLabel}
+          >
+            <item.icon />
+          </button>
+        ))}
+      </previewModal.Container>
     );
-  });
-  Container.displayName = "ItemPreviewContainer";
+  };
+  Container.displayName = "ImagePreviewContainer";
+
+  // 回傳預覽功能的所有方法和容器元件
   return {
     ...previewModal,
-    index: itemIndex,
-    setIndex: setItemIndex,
     Container,
-    open: (index: number) => {
+    Open: (index: number) => {
       setItemIndex(index);
-      previewModal.open();
+      previewModal.Open();
     },
   };
 };

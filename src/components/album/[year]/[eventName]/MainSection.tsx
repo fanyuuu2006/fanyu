@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { Tooltip } from "antd";
 import { Album } from "@/types/album";
 import { LanguageContent } from "@/types/language";
-import { useItemPreview } from "./_useItemPreview";
+import { useItemPreview } from "./useItemPreview";
 import { ItemCard } from "./ItemCard";
 import { useRouter } from "next/navigation";
 

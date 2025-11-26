@@ -1,124 +1,11 @@
 "use client";
-// import { useMemo } from "react";
-// import { CodeCard } from "../custom/CodeCard";
+import { useModal } from "@/hooks/useModal";
 import { TimerCard } from "./TimerCard";
-// import c063 from "c063";
+import { useState } from "react";
 
 export const MainSection = () => {
-  // // const codeLines = useMemo(() => {
-  //   return [
-  //     [c063.string('"use client"'), c063.default(";")],
-  //     [
-  //       c063.keyword2("import "),
-  //       c063.brackets1("{ "),
-  //       c063.variable("OverrideProps "),
-  //       c063.brackets1("} "),
-  //       c063.keyword2("from "),
-  //       c063.string('"fanyucomponents"'),
-  //       c063.default(";"),
-  //     ],
-  //     [
-  //       c063.keyword2("import "),
-  //       c063.brackets1("{ "),
-  //       c063.variable("LanguageContent"),
-  //       c063.default(", "),
-  //       c063.variable("LanguageOption "),
-  //       c063.brackets1("} "),
-  //       c063.keyword2("from "),
-  //       c063.string('"@/types/language"'),
-  //       c063.default(";"),
-  //     ],
-  //     [
-  //       c063.keyword2("import "),
-  //       c063.brackets1("{ "),
-  //       c063.variable("useLanguage "),
-  //       c063.brackets1("} "),
-  //       c063.keyword2("from "),
-  //       c063.string('"@/context/LanguageContext"'),
-  //       c063.default(";"),
-  //     ],
-  //     [
-  //       c063.keyword2("import "),
-  //       c063.variable("React"),
-  //       c063.default(", "),
-  //       c063.brackets1("{ "),
-  //       c063.variable("useState"),
-  //       c063.default(", "),
-  //       c063.variable("useEffect"),
-  //       c063.default(", "),
-  //       c063.variable("useMemo "),
-  //       c063.brackets1("} "),
-  //       c063.keyword2("from "),
-  //       c063.string('"react"'),
-  //       c063.default(";"),
-  //     ],
-  //     [
-  //       c063.keyword2("import "),
-  //       c063.brackets1("{ "),
-  //       c063.variable("profile "),
-  //       c063.brackets1("} "),
-  //       c063.keyword2("from "),
-  //       c063.string('"@/libs/profile"'),
-  //       c063.default(";"),
-  //     ],
-  //     [
-  //       c063.keyword2("import "),
-  //       c063.brackets1("{ "),
-  //       c063.variable("LoadingOutlined "),
-  //       c063.brackets1("} "),
-  //       c063.keyword2("from "),
-  //       c063.string('"@ant-design/icons"'),
-  //       c063.default(";"),
-  //     ],
-  //     [],
-  //     [
-  //       c063.keyword1("type "),
-  //       c063.type("TimerContent "),
-  //       c063.operator("= "),
-  //       c063.type("Record"),
-  //       c063.brackets1("<"),
-  //     ],
-  //     [
-  //       c063.string('  "birthdayTimer" '),
-  //       c063.operator("| "),
-  //       c063.string('"days" '),
-  //       c063.operator("| "),
-  //       c063.string('"hours" '),
-  //       c063.operator("| "),
-  //       c063.string('"minutes" '),
-  //       c063.operator("| "),
-  //       c063.string('"seconds"'),
-  //       c063.operator(","),
-  //     ],
-  //     [c063.type("  string")],
-  //     [c063.brackets1(">"), c063.default(";")],
-  //     [],
-  //     [
-  //       c063.keyword2("export "),
-  //       c063.keyword1("const "),
-  //       c063.function("getTimerContent "),
-  //       c063.operator("= "),
-  //       c063.brackets1("("),
-  //       c063.variable("language"),
-  //       c063.default(": "),
-  //       c063.type("LanguageOption"),
-  //       c063.brackets1(") "),
-  //       c063.default(": "),
-  //       c063.type("TimerContent "),
-  //       c063.keyword1("=> "),
-  //     ],
-  //     [c063.brackets1("  ("), c063.brackets2("(")],
-  //     [c063.brackets3("    {")],
-  //     [
-  //       c063.variable("      chinese"),
-  //       c063.operator(": "),
-  //       c063.brackets3("{"),
-  //     ],
-  //     [
-  //       c063.comment("/**...待完成 */")
-  //     ]
-  //   ];
-  // }, []);
+  const modal = useModal({});
+  const [count, setCount] = useState(0);
   return (
     <section
       id="hero"
@@ -130,8 +17,33 @@ export const MainSection = () => {
     >
       <div className="container flex flex-col items-center justify-center min-h-154">
         <TimerCard />
-        {/* <CodeCard className="hint" lang="typescript" codeLines={codeLines} /> */}
+        <button
+          className="btn-primary font-bold px-4 py-2 rounded-full"
+          onClick={modal.open}
+        >
+          Test Button
+        </button>
       </div>
+      <modal.Container>
+        <div className="card p-6">
+          <h2 className="text-2xl font-bold mb-4">Modal Title</h2>
+          <p>This is the content of the modal.</p>
+          <div className="flex gap-1">
+            <button
+              className="btn-secondary mt-4 rounded-full px-4 py-2"
+              onClick={() => setCount((prev) => prev + 1)}
+            >
+              Count: {count}
+            </button>
+            <button
+              className="btn-tertiary mt-4 rounded-full px-4 py-2"
+              onClick={modal.close}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </modal.Container>
     </section>
   );
 };
