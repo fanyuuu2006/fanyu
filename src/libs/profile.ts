@@ -1,10 +1,12 @@
 import { ContactData } from "./contact";
 import { experience } from "./education";
+import { keywords } from "./keywords";
 import { projects } from "./projects";
 import { skills } from "./skill";
 
 export const profile = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://fanyu.vercel.app",
+  keywords: keywords,
   description: {
     chinese:
       "飯魚的個人網站，包括個人資料、自我介紹、作品集、學經歷以及聯繫方式。",

@@ -5,19 +5,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "專案 Project",
   description: `${profile.nickname.chinese}的專案作品集，包含React、Next.js、TypeScript等前端開發專案。${profile.nickname.english}'s project portfolio featuring frontend development projects with React, Next.js, TypeScript and more.`,
-  keywords: [
-    "專案作品",
-    "project portfolio",
-    "React projects",
-    "Next.js projects",
-    "TypeScript projects",
-    "前端專案",
-    "網頁開發作品",
-    "programming projects",
-    "coding portfolio",
-    "student developer projects",
-    "Taiwan developer",
-  ],
+  keywords: profile.keywords,
   openGraph: {
     title: `${profile.nickname.chinese} - 專案作品 | ${profile.nickname.english} - Projects`,
     description: `探索${profile.nickname.chinese}的程式開發作品，包含現代網頁應用程式、React專案等。Explore ${profile.nickname.english}'s programming projects including modern web applications and React projects.`,

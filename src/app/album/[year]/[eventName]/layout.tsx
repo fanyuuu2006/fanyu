@@ -26,19 +26,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    keywords: [
-      eventName,
-      year,
-      "FanYu",
-      "飯魚",
-      "相簿",
-      "活動照片",
-      "回憶",
-      "photo album",
-      "memories",
-      "event photos",
-      "personal gallery",
-    ],
+    keywords: [eventName, year, ...profile.keywords],
     authors: [
       { name: profile.nickname.chinese },
       { name: profile.nickname.english },
@@ -81,7 +69,9 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: item.mimeType?.startsWith("video") ? item.thumbnailLink || item.url : item.url,
+          url: item.mimeType?.startsWith("video")
+            ? item.thumbnailLink || item.url
+            : item.url,
           alt: `${year} ${eventName} - FanYu Photo Album`,
           type: "item/jpeg",
         },
@@ -138,7 +128,9 @@ function generateAlbumJsonLd({
     dateModified: new Date().toISOString().split("T")[0], // 最後修改日期
 
     // 相簿頁面 URL
-    url: `${profile.url}/album/${slugify(year)}/${slugify(event.name || "其他")}`,
+    url: `${profile.url}/album/${slugify(year)}/${slugify(
+      event.name || "其他"
+    )}`,
 
     // 主要圖片實體 - 使用第一張圖片或預設圖片
     mainEntity: {
