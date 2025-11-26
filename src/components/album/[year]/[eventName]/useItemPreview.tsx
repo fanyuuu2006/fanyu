@@ -233,7 +233,7 @@ const NavButtons = ({
           <item.icon />
         </button>
       ))}
-      <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-3">
+      <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-2">
         {navigationButtons.map((item, i) => (
           <button
             key={i}
@@ -286,12 +286,6 @@ const PreviewContent = memo(
 
     /**
      * 切換到上一個項目
-     * 
-     * 實現循環導航邏輯：
-     * - 如果目前是第一個項目 (index=0)，則跳到最後一個項目
-     * - 否則索引減 1
-     * 
-     * 使用 useCallback 避免不必要的重新渲染
      */
     const handlePrevItem = useCallback(() => {
       setItemIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
@@ -299,12 +293,6 @@ const PreviewContent = memo(
 
     /**
      * 切換到下一個項目
-     * 
-     * 實現循環導航邏輯：
-     * - 如果目前是最後一個項目，則跳到第一個項目 (index=0)
-     * - 否則索引加 1
-     * 
-     * 使用 useCallback 避免不必要的重新渲染
      */
     const handleNextItem = useCallback(() => {
       setItemIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
@@ -313,24 +301,6 @@ const PreviewContent = memo(
     const infoModal = useModal({});
     /**
      * 計算項目資訊欄位
-     * 
-     * 根據當前項目的 metadata 動態生成顯示資訊，支援不同媒體類型：
-     * 
-     * 📋 基本資訊 (所有檔案類型):
-     * - 檔案名稱 (name)
-     * - 檔案格式 (fileExtension)
-     * - 上傳時間 (createdTime)
-     * - 檔案大小 (size，以 MB 為單位)
-     * 
-     * 🎬 影片特有資訊:
-     * - 影片尺寸 (width x height)
-     * - 影片時長 (duration)
-     * 
-     * 🖼️ 圖片特有資訊:
-     * - 圖片尺寸 (width x height)
-     * - 拍攝時間 (EXIF createdTime)
-     * 
-     * 使用 useMemo 避免不必要的重新計算，提升性能
      */
     const mediaInfoFields = useMemo(() => {
       if (!currentItem) {
@@ -403,13 +373,6 @@ const PreviewContent = memo(
 
     /**
      * 動態計算容器樣式
-     * 
-     * 根據媒體類型和元資料設定容器的寬高：
-     * - 🎬 影片：使用 videoMediaMetadata 中的尺寸資訊
-     * - 🖼️ 圖片：使用 imageMediaMetadata 中的尺寸資訊
-     * - ❓ 未知：使用 "auto" 讓瀏覽器自動調整
-     * 
-     * 使用 useMemo 避免每次重新計算，優化性能
      */
     const containerStyle = useMemo(
       () => ({
