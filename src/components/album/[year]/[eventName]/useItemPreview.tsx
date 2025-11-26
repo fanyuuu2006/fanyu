@@ -95,12 +95,86 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
   },
 };
 
-interface PreviewContentProps {
+export const useItemPreview = ({
+  event,
+}: {
+  event: Album[number]["events"][number];
+}) => {
+  const previewModal = useModal({});
+  const [itemIndex, setItemIndex] = useState(0);
+
+  /**
+   * 打開預覽模態框並設定當前項目索引
+   */
+  const open = useCallback(
+    (index: number) => {
+      setItemIndex(index);
+      previewModal.open();
+    },
+    [previewModal]
+  );
+
+  /**
+   * 預覽內容組件，使用 memo 優化重新渲染
+   */
+  const Content = useCallback(
+    () => (
+      <PreviewContent
+        event={event}
+        itemIndex={itemIndex}
+        setItemIndex={setItemIndex}
+        close={previewModal.close}
+      />
+    ),
+    [event, itemIndex, previewModal.close]
+  );
+
+  return {
+    ...previewModal,
+    open,
+    Content,
+  };
+};
+const NavButton = ({
+  icon: Icon,
+  className,
+  onClick,
+  ariaLabel,
+}: {
+  icon: React.ElementType;
+  className: string;
+  onClick: () => void;
+  ariaLabel: string;
+}) => (
+  <>
+    {/* 大螢幕 */}
+    <button
+      className={cn(
+        "hidden sm:block btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
+        className
+      )}
+      onClick={onClick}
+      aria-label={ariaLabel}
+    >
+      <Icon />
+    </button>
+    {/* 小螢幕 */}
+    <button
+      className="sm:hidden btn w-full rounded-lg p-1"
+      onClick={onClick}
+      aria-label={ariaLabel}
+    >
+      <Icon />
+    </button>
+  </>
+);
+
+type PreviewContentProps = {
   event: Album[number]["events"][number];
   itemIndex: number;
   setItemIndex: React.Dispatch<React.SetStateAction<number>>;
   close: () => void;
-}
+};
 
 const PreviewContent = memo(
   ({ event, itemIndex, close, setItemIndex }: PreviewContentProps) => {
@@ -360,32 +434,17 @@ const PreviewContent = memo(
           )}
         </div>
 
-        {/* 左右導航按鈕 */}
-        {navigationButtons.map((item, i) => (
-          <button
-            key={i}
-            className={cn(
-              "hidden md:block btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-              item.className
-            )}
-            onClick={item.onClick}
-            aria-label={item.ariaLabel}
-          >
-            <item.icon />
-          </button>
-        ))}
-        <div className="fixed md:hidden w-4/5 grid grid-cols-2 bottom-4 gap-3">
+        {/* 手機版按鈕容器 */}
+        <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-3">
           {navigationButtons.map((item, i) => (
-            <button
-              key={i}
-              className={cn("btn w-full rounded-lg p-1")}
-              onClick={item.onClick}
-              aria-label={item.ariaLabel}
-            >
-              <item.icon />
-            </button>
+            <NavButton key={i} {...item} />
           ))}
         </div>
+        {/* 大螢幕按鈕 */}
+        {navigationButtons.map((item, i) => (
+          <NavButton key={i} {...item} />
+        ))}
+
         {/* 項目資訊彈出視窗 */}
         <infoModal.Container>
           <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
@@ -426,44 +485,3 @@ const PreviewContent = memo(
 );
 
 PreviewContent.displayName = "PreviewContent";
-
-export const useItemPreview = ({
-  event,
-}: {
-  event: Album[number]["events"][number];
-}) => {
-  const previewModal = useModal({});
-  const [itemIndex, setItemIndex] = useState(0);
-
-  /**
-   * 打開預覽模態框並設定當前項目索引
-   */
-  const open = useCallback(
-    (index: number) => {
-      setItemIndex(index);
-      previewModal.open();
-    },
-    [previewModal]
-  );
-
-  /**
-   * 預覽內容組件，使用 memo 優化重新渲染
-   */
-  const Content = useCallback(
-    () => (
-      <PreviewContent
-        event={event}
-        itemIndex={itemIndex}
-        setItemIndex={setItemIndex}
-        close={previewModal.close}
-      />
-    ),
-    [event, itemIndex, previewModal.close]
-  );
-
-  return {
-    ...previewModal,
-    open,
-    Content,
-  };
-};
