@@ -15,30 +15,51 @@ import {
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, memo } from "react";
 
-// 常數提取到模組頂層
+// ==================== 常數定義 ====================
+
+/**
+ * 檔案大小計算常數
+ * 用於將 bytes 轉換為 MB (1MB = 1024 * 1024 bytes)
+ */
 const MB_DIVISOR = 1024 * 1024;
+
+/**
+ * 鍵盤快捷鍵常數
+ * 定義支援的鍵盤導航按鍵
+ */
 const KEYBOARD_KEYS = {
+  /** 左箭頭鍵 - 上一個項目 */
   ARROW_LEFT: "ArrowLeft",
+  /** 右箭頭鍵 - 下一個項目 */
   ARROW_RIGHT: "ArrowRight",
 } as const;
 
+/**
+ * 項目預覽介面的多語言文字內容
+ * 
+ * 包含所有預覽功能相關的文字標籤，支援中英文切換。
+ * 涵蓋項目資訊顯示、操作按鈕、錯誤訊息等各種文字內容。
+ * 
+ * @constant
+ * @type {LanguageContent<Record<string, string>>}
+ */
 const ITEM_PREVIEW_CONTENT: LanguageContent<
   Record<
-    | "title"
-    | "fileName"
-    | "fileExtension"
-    | "untitled"
-    | "unknown"
-    | "size"
-    | "widthXheight"
-    | "uploadTime"
-    | "createdTime"
-    | "duration"
-    | "noSupport"
-    | "close"
-    | "details"
-    | "download"
-    | "seconds",
+    | "title"         // 項目資訊標題
+    | "fileName"      // 檔案名稱標籤
+    | "fileExtension" // 檔案格式標籤
+    | "untitled"      // 無標題時的預設文字
+    | "unknown"       // 未知資訊的預設文字
+    | "size"          // 檔案大小標籤
+    | "widthXheight"  // 尺寸資訊標籤
+    | "uploadTime"    // 上傳時間標籤
+    | "createdTime"   // 建立時間標籤
+    | "duration"      // 影片時長標籤
+    | "noSupport"     // 不支援格式的錯誤訊息
+    | "close"         // 關閉按鈕文字
+    | "details"       // 詳細資訊按鈕文字
+    | "download"      // 下載按鈕文字
+    | "seconds",      // 時間單位：秒
     string
   >
 > = {
@@ -78,6 +99,33 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
   },
 };
 
+/**
+ * 相簿項目預覽 Hook
+ * 
+ * 提供相簿項目的預覽功能，包含模態框控制、項目導航、詳細資訊顯示等功能
+ * 
+ * @param items - 相簿項目陣列，包含圖片和影片等媒體檔案
+ * @returns 返回預覽模態框的狀態和操作方法
+ * 
+ * @example
+ * ```tsx
+ * const { open, close, Content, isOpen } = useItemPreview(albumItems);
+ * 
+ * // 開啟第三個項目的預覽
+ * open(2);
+ * 
+ * // 渲染預覽內容
+ * {isOpen && <Content />}
+ * ```
+ * 
+ * @features
+ * - 🖼️ 支援圖片和影片預覽
+ * - ⌨️ 鍵盤快捷鍵導航 (左右箭頭)
+ * - 📱 響應式設計，適配桌面和行動裝置
+ * - 📋 詳細的媒體資訊顯示
+ * - 💾 下載功能
+ * - 🔄 循環導航 (最後一個到第一個)
+ */
 export const useItemPreview = (
   items: Album[number]["events"][number]["items"]
 ) => {
@@ -86,6 +134,17 @@ export const useItemPreview = (
 
   /**
    * 打開預覽模態框並設定當前項目索引
+   * 
+   * @param index - 要預覽的項目索引 (0-based)
+   * 
+   * @example
+   * ```tsx
+   * // 打開第一個項目的預覽
+   * open(0);
+   * 
+   * // 打開最後一個項目的預覽
+   * open(items.length - 1);
+   * ```
    */
   const open = useCallback(
     (index: number) => {
@@ -97,6 +156,14 @@ export const useItemPreview = (
 
   /**
    * 預覽內容組件，使用 memo 優化重新渲染
+   * 
+   * 渲染完整的預覽介面，包含：
+   * - 媒體內容顯示 (圖片/影片)
+   * - 導航控制按鈕
+   * - 項目資訊視窗
+   * - 下載功能
+   * 
+   * 使用 useCallback 避免不必要的重新渲染，提升性能
    */
   const Content = useCallback(
     () => (
@@ -116,6 +183,18 @@ export const useItemPreview = (
     Content,
   };
 };
+
+
+/**
+ * 導航按鈕組件
+ * 
+ * 提供上一個/下一個項目的導航功能，支援響應式佈局：
+ * - 桌面版：固定在左右兩側的圓形按鈕
+ * - 行動版：底部的兩個按鈕
+ * 
+ * @param handlePrev - 切換到上一個項目的回調函數
+ * @param handleNext - 切換到下一個項目的回調函數
+ */
 const NavButtons = ({
   handlePrev,
   handleNext,
@@ -123,16 +202,17 @@ const NavButtons = ({
   handlePrev: () => void;
   handleNext: () => void;
 }) => {
+  // 導航按鈕配置，使用 useMemo 優化性能
   const navigationButtons = useMemo(
     () => [
       {
         icon: LeftOutlined,
-        className: "left-4",
+        className: "left-4", // 左側定位
         onClick: handlePrev,
       },
       {
         icon: RightOutlined,
-        className: "right-4",
+        className: "right-4", // 右側定位
         onClick: handleNext,
       },
     ],
@@ -169,12 +249,33 @@ const NavButtons = ({
 };
 
 type PreviewContentProps = {
+  /** 相簿項目陣列，包含圖片、影片等媒體檔案及其元數據 */
   items: Album[number]["events"][number]["items"];
+  /** 當前正在預覽的項目索引 */
   itemIndex: number;
+  /** 設定項目索引的 React 狀態更新函式 */
   setItemIndex: React.Dispatch<React.SetStateAction<number>>;
+  /** 關閉預覽視窗的回調函式 */
   close: () => void;
 };
 
+/**
+ * 預覽內容主組件
+ * 
+ * 處理單個媒體項目的完整預覽體驗，包含：
+ * - 圖片/影片的顯示和播放
+ * - 項目資訊的詳細展示
+ * - 鍵盤導航支援
+ * - 下載功能
+ * - 響應式佈局適配
+ * 
+ * 使用 React.memo 優化重新渲染性能
+ * 
+ * @param items - 完整的項目陣列
+ * @param itemIndex - 當前顯示項目的索引
+ * @param close - 關閉預覽的回調函數
+ * @param setItemIndex - 設定項目索引的狀態更新函數
+ */
 const PreviewContent = memo(
   ({ items, itemIndex, close, setItemIndex }: PreviewContentProps) => {
     const language = useLanguage();
@@ -185,7 +286,12 @@ const PreviewContent = memo(
 
     /**
      * 切換到上一個項目
-     * 如果目前是第一個，則循環到最後一個
+     * 
+     * 實現循環導航邏輯：
+     * - 如果目前是第一個項目 (index=0)，則跳到最後一個項目
+     * - 否則索引減 1
+     * 
+     * 使用 useCallback 避免不必要的重新渲染
      */
     const handlePrevItem = useCallback(() => {
       setItemIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
@@ -193,7 +299,12 @@ const PreviewContent = memo(
 
     /**
      * 切換到下一個項目
-     * 如果目前是最後一個，則循環到第一個
+     * 
+     * 實現循環導航邏輯：
+     * - 如果目前是最後一個項目，則跳到第一個項目 (index=0)
+     * - 否則索引加 1
+     * 
+     * 使用 useCallback 避免不必要的重新渲染
      */
     const handleNextItem = useCallback(() => {
       setItemIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
@@ -202,8 +313,24 @@ const PreviewContent = memo(
     const infoModal = useModal({});
     /**
      * 計算項目資訊欄位
-     * 根據當前項目的 metadata 動態生成顯示資訊
-     * 包含:檔案名稱、格式、建立時間、大小、尺寸、影片時長等
+     * 
+     * 根據當前項目的 metadata 動態生成顯示資訊，支援不同媒體類型：
+     * 
+     * 📋 基本資訊 (所有檔案類型):
+     * - 檔案名稱 (name)
+     * - 檔案格式 (fileExtension)
+     * - 上傳時間 (createdTime)
+     * - 檔案大小 (size，以 MB 為單位)
+     * 
+     * 🎬 影片特有資訊:
+     * - 影片尺寸 (width x height)
+     * - 影片時長 (duration)
+     * 
+     * 🖼️ 圖片特有資訊:
+     * - 圖片尺寸 (width x height)
+     * - 拍攝時間 (EXIF createdTime)
+     * 
+     * 使用 useMemo 避免不必要的重新計算，提升性能
      */
     const mediaInfoFields = useMemo(() => {
       if (!currentItem) {
@@ -274,7 +401,16 @@ const PreviewContent = memo(
       return [...baseFields, ...mediaSpecificFields];
     }, [currentItem, itemPreviewContent, language.Current, isVideo]);
 
-    // 避免每次重新計算
+    /**
+     * 動態計算容器樣式
+     * 
+     * 根據媒體類型和元資料設定容器的寬高：
+     * - 🎬 影片：使用 videoMediaMetadata 中的尺寸資訊
+     * - 🖼️ 圖片：使用 imageMediaMetadata 中的尺寸資訊
+     * - ❓ 未知：使用 "auto" 讓瀏覽器自動調整
+     * 
+     * 使用 useMemo 避免每次重新計算，優化性能
+     */
     const containerStyle = useMemo(
       () => ({
         width:
@@ -300,27 +436,42 @@ const PreviewContent = memo(
     );
 
     /**
-     * 鍵盤快捷鍵監聽
-     * - 左箭頭：上一個項目
-     * - 右箭頭：下一個項目
+     * 鍵盤快捷鍵監聽器
+     * 
+     * 提供鍵盤導航功能，增強使用者體驗：
+     * - ⬅️ 左箭頭鍵：切換到上一個項目
+     * - ➡️ 右箭頭鍵：切換到下一個項目
+     * 
+     * 🔒 安全檢查：
+     * - 只在有有效 currentItem 時才處理鍵盤事件
+     * - 使用 preventDefault() 防止瀏覽器預設行為
+     * 
+     * 🧹 清理機制：
+     * - 組件卸載時自動移除事件監聽器，防止記憶體洩漏
      */
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
+        // 安全檢查：確保當前有有效的項目
         if (!currentItem) {
           return;
         }
+        
         switch (e.key) {
           case KEYBOARD_KEYS.ARROW_LEFT:
-            e.preventDefault();
+            e.preventDefault(); // 防止頁面滾動
             handlePrevItem();
             break;
           case KEYBOARD_KEYS.ARROW_RIGHT:
-            e.preventDefault();
+            e.preventDefault(); // 防止頁面滾動
             handleNextItem();
             break;
         }
       };
+      
+      // 註冊全域鍵盤事件監聽器
       window.addEventListener("keydown", handleKeyDown);
+      
+      // 清理函數：組件卸載時移除監聽器
       return () => window.removeEventListener("keydown", handleKeyDown);
     }, [currentItem, handleNextItem, handlePrevItem]);
 
