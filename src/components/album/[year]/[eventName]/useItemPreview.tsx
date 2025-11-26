@@ -36,8 +36,6 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     | "duration"
     | "noSupport"
     | "close"
-    | "previous"
-    | "next"
     | "details"
     | "download"
     | "seconds",
@@ -57,8 +55,6 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     duration: "影片時長",
     noSupport: "您的瀏覽器不支援此媒體格式。",
     close: "關閉",
-    previous: "上一個",
-    next: "下一個",
     details: "詳細資訊",
     download: "下載項目",
     seconds: "秒",
@@ -76,15 +72,15 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     duration: "Duration",
     noSupport: "Your browser does not support this media format.",
     close: "Close",
-    previous: "Previous",
-    next: "Next",
     details: "Details",
     download: "Download Item",
     seconds: "seconds",
   },
 };
 
-export const useItemPreview = (items: Album[number]["events"][number]["items"]) => {
+export const useItemPreview = (
+  items: Album[number]["events"][number]["items"]
+) => {
   const previewModal = useModal({});
   const [itemIndex, setItemIndex] = useState(0);
 
@@ -120,39 +116,57 @@ export const useItemPreview = (items: Album[number]["events"][number]["items"]) 
     Content,
   };
 };
-const NavButton = ({
-  icon: Icon,
-  className,
-  onClick,
-  ariaLabel,
+const NavButtons = ({
+  handlePrev,
+  handleNext,
 }: {
-  icon: React.ElementType;
-  className: string;
-  onClick: () => void;
-  ariaLabel: string;
-}) => (
-  <>
-    {/* 大螢幕 */}
-    <button
-      className={cn(
-        "hidden sm:block btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-        className
-      )}
-      onClick={onClick}
-      aria-label={ariaLabel}
-    >
-      <Icon />
-    </button>
-    {/* 小螢幕 */}
-    <button
-      className="sm:hidden btn w-full rounded-lg p-1"
-      onClick={onClick}
-      aria-label={ariaLabel}
-    >
-      <Icon />
-    </button>
-  </>
-);
+  handlePrev: () => void;
+  handleNext: () => void;
+}) => {
+  const navigationButtons = useMemo(
+    () => [
+      {
+        icon: LeftOutlined,
+        className: "left-4",
+        onClick: handlePrev,
+      },
+      {
+        icon: RightOutlined,
+        className: "right-4",
+        onClick: handleNext,
+      },
+    ],
+    [handlePrev, handleNext]
+  );
+  return (
+    <>
+      {/* 左右導航按鈕 */}
+      {navigationButtons.map((item, i) => (
+        <button
+          key={i}
+          className={cn(
+            "hidden sm:block btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
+            item.className
+          )}
+          onClick={item.onClick}
+        >
+          <item.icon />
+        </button>
+      ))}
+      <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-3">
+        {navigationButtons.map((item, i) => (
+          <button
+            key={i}
+            className={cn("btn w-full rounded-lg p-1")}
+            onClick={item.onClick}
+          >
+            <item.icon />
+          </button>
+        ))}
+      </div>
+    </>
+  );
+};
 
 type PreviewContentProps = {
   items: Album[number]["events"][number]["items"];
@@ -165,10 +179,7 @@ const PreviewContent = memo(
   ({ items, itemIndex, close, setItemIndex }: PreviewContentProps) => {
     const language = useLanguage();
     const itemPreviewContent = ITEM_PREVIEW_CONTENT[language.Current];
-    const currentItem = useMemo(
-      () => items[itemIndex],
-      [items, itemIndex]
-    );
+    const currentItem = useMemo(() => items[itemIndex], [items, itemIndex]);
     const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
     const title = currentItem.name || itemPreviewContent.untitled;
 
@@ -288,29 +299,6 @@ const PreviewContent = memo(
       ]
     );
 
-    const navigationButtons = useMemo(
-      () => [
-        {
-          icon: LeftOutlined,
-          className: "left-4",
-          onClick: handlePrevItem,
-          ariaLabel: itemPreviewContent.previous,
-        },
-        {
-          icon: RightOutlined,
-          className: "right-4",
-          onClick: handleNextItem,
-          ariaLabel: itemPreviewContent.next,
-        },
-      ],
-      [
-        handlePrevItem,
-        itemPreviewContent.previous,
-        itemPreviewContent.next,
-        handleNextItem,
-      ]
-    );
-
     /**
      * 鍵盤快捷鍵監聽
      * - 左箭頭：上一個項目
@@ -419,16 +407,7 @@ const PreviewContent = memo(
           )}
         </div>
 
-        {/* 手機版按鈕容器 */}
-        <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-3">
-          {navigationButtons.map((item, i) => (
-            <NavButton key={i} {...item} />
-          ))}
-        </div>
-        {/* 大螢幕按鈕 */}
-        {navigationButtons.map((item, i) => (
-          <NavButton key={i} {...item} />
-        ))}
+        <NavButtons handlePrev={handlePrevItem} handleNext={handleNextItem} />
 
         {/* 項目資訊彈出視窗 */}
         <infoModal.Container>
