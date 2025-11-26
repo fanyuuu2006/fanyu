@@ -328,7 +328,10 @@ const PreviewContent = memo(
           </div>
         </div>
         {/* 主要項目顯示區域 */}
-        <div className="select-none max-w-[90vw] max-h-[80vh]" style={containerStyle}>
+        <div
+          className="select-none max-w-[90vw] max-h-[80vh]"
+          style={containerStyle}
+        >
           {isVideo ? (
             <video
               src={currentItem.url}
@@ -362,7 +365,7 @@ const PreviewContent = memo(
           <button
             key={i}
             className={cn(
-              "btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
+              "hidden md:block btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
               item.className
             )}
             onClick={item.onClick}
@@ -371,6 +374,18 @@ const PreviewContent = memo(
             <item.icon />
           </button>
         ))}
+        <div className="fixed md:hidden w-4/5 grid grid-cols-2 bottom-4 gap-3">
+          {navigationButtons.map((item, i) => (
+            <button
+              key={i}
+              className={cn("btn w-full rounded-lg p-1")}
+              onClick={item.onClick}
+              aria-label={item.ariaLabel}
+            >
+              <item.icon />
+            </button>
+          ))}
+        </div>
         {/* 項目資訊彈出視窗 */}
         <infoModal.Container>
           <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
