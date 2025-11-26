@@ -42,7 +42,13 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
   const order = useTimeOrderTabs(
     event.items,
-    (item) => item.createdTime || "0"
+    (item) =>
+      item.imageMediaMetadata?.time?.replace(
+        /^(\d{4}):(\d{2}):(\d{2})/,
+        "$1-$2-$3"
+      ) ||
+      item.createdTime ||
+      "0"
   );
 
   const itemPreview = useItemPreview(order.data);

@@ -14,6 +14,8 @@ export const useOrder = <T,>(
 ): {
   data: T[];
   div: React.FC<React.HtmlHTMLAttributes<HTMLDivElement>>;
+  curr: string;
+  setCurr: React.Dispatch<React.SetStateAction<string>>;
 } => {
   const entries = useMemo(() => Object.entries(config), [config]);
 
@@ -60,5 +62,7 @@ export const useOrder = <T,>(
   return {
     data: sortedData,
     div: Div,
+    curr: currTag,
+    setCurr: setCurrTag,
   };
 };

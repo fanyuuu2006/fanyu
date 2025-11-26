@@ -17,14 +17,15 @@ const CONTENT: LanguageContent<Content> = {
 
 export const useTimeOrderTabs = <T,>(
   data: T[],
-  getDateAbleString: (item: T) => string = (item) => item as unknown as string
+  getDateAbleString: (item: T) => string = (item) => item as unknown as string,
+  defaultNewest = true
 ) => {
   const language = useLanguage();
 
   return useOrder<T>(data, {
     Newest: {
       label: CONTENT[language.Current].Newest,
-      default: true,
+      default: defaultNewest,
       compareFn: (a, b) => {
         const aDate = new Date(getDateAbleString(a));
         const bDate = new Date(getDateAbleString(b));
