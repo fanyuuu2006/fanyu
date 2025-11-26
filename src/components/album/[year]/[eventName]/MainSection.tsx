@@ -46,7 +46,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
 
   const handleImageClick = useCallback(
     (index: number) => {
-      itemPreview.Open(index);
+      itemPreview.open(index);
     },
     [itemPreview]
   );
@@ -99,7 +99,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
         <article
           className="w-full grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-0.5"
           role="main"
-          aria-label={`${year}-${event.name}照片集`}
+          aria-label={`${year}-${event.name} 照片集`}
         >
           {event.items.length === 0 ? (
             <div className="col-span-full flex flex-col items-center justify-center">
@@ -118,8 +118,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
                   onClick={() => handleImageClick(i)}
                 />
               ))}
-              {/* 預覽模態框 */}
-              <itemPreview.Container />
+              {/* 預覽 Modal */}
+              <itemPreview.Container className="animate-appear">
+                <itemPreview.Content />
+              </itemPreview.Container>
             </>
           )}
         </article>
