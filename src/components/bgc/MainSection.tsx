@@ -111,15 +111,15 @@ export const MainSection = ({ data }: MainSectionProps) => {
     newest: {
       label: bgcContent.newest,
       default: true,
-      compareFn: (a, b) => b.id - a.id,
+      compareFunctions: [(a, b) => b.id - a.id],
     },
     oldest: {
       label: bgcContent.oldest,
-      compareFn: (a, b) => a.id - b.id,
+      compareFunctions: [(a, b) => a.id - b.id],
     },
     recommended: {
       label: bgcContent.recommended,
-      compareFn: (a, b) => b.recommendedCounts - a.recommendedCounts,
+      compareFunctions: [(a, b) => b.recommendedCounts - a.recommendedCounts],
     },
   });
 
@@ -206,9 +206,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
           <>
             <order.div />
             <div className="w-full flex mb-4 px-4">
-                <span className="text-sm sm:text-base">
-                  {totalCountText}
-                </span>
+              <span className="text-sm sm:text-base">{totalCountText}</span>
             </div>
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
               {order.data.map((item) => (

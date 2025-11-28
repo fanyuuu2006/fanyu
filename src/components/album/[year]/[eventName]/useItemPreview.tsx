@@ -12,8 +12,17 @@ import {
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
+import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState, memo } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  memo,
+  useRef,
+  useLayoutEffect,
+} from "react";
 
 // ==================== 常數定義 ====================
 
@@ -36,30 +45,30 @@ const KEYBOARD_KEYS = {
 
 /**
  * 項目預覽介面的多語言文字內容
- * 
+ *
  * 包含所有預覽功能相關的文字標籤，支援中英文切換。
  * 涵蓋項目資訊顯示、操作按鈕、錯誤訊息等各種文字內容。
- * 
+ *
  * @constant
  * @type {LanguageContent<Record<string, string>>}
  */
 const ITEM_PREVIEW_CONTENT: LanguageContent<
   Record<
-    | "title"         // 項目資訊標題
-    | "fileName"      // 檔案名稱標籤
+    | "title" // 項目資訊標題
+    | "fileName" // 檔案名稱標籤
     | "fileExtension" // 檔案格式標籤
-    | "untitled"      // 無標題時的預設文字
-    | "unknown"       // 未知資訊的預設文字
-    | "size"          // 檔案大小標籤
-    | "widthXheight"  // 尺寸資訊標籤
-    | "uploadTime"    // 上傳時間標籤
-    | "createdTime"   // 建立時間標籤
-    | "duration"      // 影片時長標籤
-    | "noSupport"     // 不支援格式的錯誤訊息
-    | "close"         // 關閉按鈕文字
-    | "details"       // 詳細資訊按鈕文字
-    | "download"      // 下載按鈕文字
-    | "seconds",      // 時間單位：秒
+    | "untitled" // 無標題時的預設文字
+    | "unknown" // 未知資訊的預設文字
+    | "size" // 檔案大小標籤
+    | "widthXheight" // 尺寸資訊標籤
+    | "uploadTime" // 上傳時間標籤
+    | "createdTime" // 建立時間標籤
+    | "duration" // 影片時長標籤
+    | "noSupport" // 不支援格式的錯誤訊息
+    | "close" // 關閉按鈕文字
+    | "details" // 詳細資訊按鈕文字
+    | "download" // 下載按鈕文字
+    | "seconds", // 時間單位：秒
     string
   >
 > = {
@@ -101,23 +110,23 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
 
 /**
  * 相簿項目預覽 Hook
- * 
+ *
  * 提供相簿項目的預覽功能，包含模態框控制、項目導航、詳細資訊顯示等功能
- * 
+ *
  * @param items - 相簿項目陣列，包含圖片和影片等媒體檔案
  * @returns 返回預覽模態框的狀態和操作方法
- * 
+ *
  * @example
  * ```tsx
  * const { open, close, Content, isOpen } = useItemPreview(albumItems);
- * 
+ *
  * // 開啟第三個項目的預覽
  * open(2);
- * 
+ *
  * // 渲染預覽內容
  * {isOpen && <Content />}
  * ```
- * 
+ *
  * @features
  * - 🖼️ 支援圖片和影片預覽
  * - ⌨️ 鍵盤快捷鍵導航 (左右箭頭)
@@ -134,14 +143,14 @@ export const useItemPreview = (
 
   /**
    * 打開預覽模態框並設定當前項目索引
-   * 
+   *
    * @param index - 要預覽的項目索引 (0-based)
-   * 
+   *
    * @example
    * ```tsx
    * // 打開第一個項目的預覽
    * open(0);
-   * 
+   *
    * // 打開最後一個項目的預覽
    * open(items.length - 1);
    * ```
@@ -156,13 +165,13 @@ export const useItemPreview = (
 
   /**
    * 預覽內容組件，使用 memo 優化重新渲染
-   * 
+   *
    * 渲染完整的預覽介面，包含：
    * - 媒體內容顯示 (圖片/影片)
    * - 導航控制按鈕
    * - 項目資訊視窗
    * - 下載功能
-   * 
+   *
    * 使用 useCallback 避免不必要的重新渲染，提升性能
    */
   const Content = useCallback(
@@ -184,18 +193,17 @@ export const useItemPreview = (
   };
 };
 
-
 /**
  * 導航按鈕組件
- * 
+ *
  * 提供上一個/下一個項目的導航功能，支援響應式佈局：
  * - 桌面版：固定在左右兩側的圓形按鈕
  * - 行動版：底部的兩個按鈕
- * 
+ *
  * @param handlePrev - 切換到上一個項目的回調函數
  * @param handleNext - 切換到下一個項目的回調函數
  */
-const NavButtons = ({
+const NavgationButtons = ({
   handlePrev,
   handleNext,
 }: {
@@ -261,16 +269,16 @@ type PreviewContentProps = {
 
 /**
  * 預覽內容主組件
- * 
+ *
  * 處理單個媒體項目的完整預覽體驗，包含：
  * - 圖片/影片的顯示和播放
  * - 項目資訊的詳細展示
  * - 鍵盤導航支援
  * - 下載功能
  * - 響應式佈局適配
- * 
+ *
  * 使用 React.memo 優化重新渲染性能
- * 
+ *
  * @param items - 完整的項目陣列
  * @param itemIndex - 當前顯示項目的索引
  * @param close - 關閉預覽的回調函數
@@ -400,15 +408,15 @@ const PreviewContent = memo(
 
     /**
      * 鍵盤快捷鍵監聽器
-     * 
+     *
      * 提供鍵盤導航功能，增強使用者體驗：
      * - ⬅️ 左箭頭鍵：切換到上一個項目
      * - ➡️ 右箭頭鍵：切換到下一個項目
-     * 
+     *
      * 🔒 安全檢查：
      * - 只在有有效 currentItem 時才處理鍵盤事件
      * - 使用 preventDefault() 防止瀏覽器預設行為
-     * 
+     *
      * 🧹 清理機制：
      * - 組件卸載時自動移除事件監聽器，防止記憶體洩漏
      */
@@ -418,7 +426,7 @@ const PreviewContent = memo(
         if (!currentItem) {
           return;
         }
-        
+
         switch (e.key) {
           case KEYBOARD_KEYS.ARROW_LEFT:
             e.preventDefault(); // 防止頁面滾動
@@ -430,10 +438,10 @@ const PreviewContent = memo(
             break;
         }
       };
-      
+
       // 註冊全域鍵盤事件監聽器
       window.addEventListener("keydown", handleKeyDown);
-      
+
       // 清理函數：組件卸載時移除監聽器
       return () => window.removeEventListener("keydown", handleKeyDown);
     }, [currentItem, handleNextItem, handlePrevItem]);
@@ -521,8 +529,11 @@ const PreviewContent = memo(
           )}
         </div>
 
-        <NavButtons handlePrev={handlePrevItem} handleNext={handleNextItem} />
-
+        <NavgationButtons
+          handlePrev={handlePrevItem}
+          handleNext={handleNextItem}
+        />
+ 
         {/* 項目資訊彈出視窗 */}
         <infoModal.Container>
           <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
@@ -563,3 +574,62 @@ const PreviewContent = memo(
 );
 
 PreviewContent.displayName = "PreviewContent";
+
+type ThumbnailsBarProps = OverrideProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  {
+    items: Album[number]["events"][number]["items"];
+    currIndex: number;
+    setCurrIndex: React.Dispatch<React.SetStateAction<number>>;
+    children?: never;
+  }
+>;
+export const ThumbnailsBar = ({
+  items,
+  currIndex,
+  setCurrIndex,
+  ...rest
+}: ThumbnailsBarProps) => {
+  const contaionRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!contaionRef.current) return;
+    const container = contaionRef.current;
+    if (container.children.length > 0) {
+      return;
+    }
+    items.forEach((item, i) => {
+      const button = document.createElement("button");
+      button.innerHTML = `<img src="${
+        item.thumbnailLink || item.url
+      }" alt="${i}-${item.name}" class="w-full h-full object-cover"/>`;
+      button.className =
+        "absolute w-full h-full overflow-hidden top-0 left-0 transition-transform duration-500";
+      button.onclick = () => {
+        setCurrIndex(i);
+      };
+      button.setAttribute("key", i.toString());
+      button.setAttribute("aria-label", `預覽第 ${i + 1} 個項目`);
+      container.appendChild(button);
+    });
+  }, [items, setCurrIndex]);
+  useLayoutEffect(() => {
+    if (!contaionRef.current) return;
+    const container = contaionRef.current;
+    const chidren = Array.from(container.children) as HTMLButtonElement[];
+    requestAnimationFrame(() => {
+      chidren.map((child, i) => {
+        const offset = i - currIndex;
+        child.style.transform = `translateX(${offset * 105}%)`;
+        child.style.opacity = offset === 0 ? "1" : "0.3";
+      });
+    });
+  }, [currIndex, setCurrIndex]);
+  return (
+    <div {...rest}>
+      <div
+        ref={contaionRef}
+        className={"relative h-16 aspect-square mx-auto"}
+      />
+    </div>
+  );
+};

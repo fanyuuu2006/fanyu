@@ -8,7 +8,7 @@ export const useOrder = <T,>(
     {
       label: React.ReactNode;
       default?: boolean;
-      compareFn: (a: T, b: T) => number;
+      compareFunctions: ((a: T, b: T) => number)[];
     }
   >
 ): {
@@ -25,7 +25,11 @@ export const useOrder = <T,>(
   const currConfig = useMemo(() => config[currTag], [config, currTag]);
   const stableData = useMemo(() => data, [data]);
   const sortedData = useMemo(() => {
-    return stableData.toSorted(currConfig.compareFn);
+    const sorted = [...stableData];
+    for (const compareFn of currConfig.compareFunctions.reverse()) {
+      sorted.sort(compareFn);
+    }
+    return sorted;
   }, [currConfig, stableData]);
 
   const Div = useCallback(

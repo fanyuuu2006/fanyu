@@ -8,7 +8,6 @@ import { LanguageContent } from "@/types/language";
 import { useItemPreview } from "./useItemPreview";
 import { ItemCard } from "./ItemCard";
 import { useRouter } from "next/navigation";
-import { useTimeOrderTabs } from "@/hooks/useTimeOrderTabs";
 
 type MainSectionProps = {
   event: Album[number]["events"][number];
@@ -40,18 +39,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   const router = useRouter();
   const itemsContent = ITEMS_CONTENT[language.Current];
 
-  const order = useTimeOrderTabs(
-    event.items,
-    (item) =>
-      item.imageMediaMetadata?.time?.replace(
-        /^(\d{4}):(\d{2}):(\d{2})/,
-        "$1-$2-$3"
-      ) ||
-      item.createdTime ||
-      "0"
-  );
-
-  const itemPreview = useItemPreview(order.data);
+  const itemPreview = useItemPreview(event.items, );
 
   const handleImageClick = useCallback(
     (index: number) => {
@@ -98,11 +86,10 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           </h1>
         </div>
         <div className="w-full flex items-center justify-between mb-2">
-          <order.div />
           <span className="text-[var(--text-color-muted)]">
             {itemsContent.totalItems.replace(
               "{count}",
-              order.data.length.toString()
+              event.items.length.toString()
             )}
           </span>
         </div>
@@ -113,7 +100,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
           role="main"
           aria-label={`${year}-${event.name} 照片集`}
         >
-          {order.data.length === 0 ? (
+          {event.items.length === 0 ? (
             <div className="col-span-full flex flex-col items-center justify-center">
               <h3 className="text-2xl md:text-3xl font-bold">
                 {itemsContent.noItems}
@@ -121,7 +108,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
             </div>
           ) : (
             <>
-              {order.data.map((item, i) => (
+              {event.items.map((item, i) => (
                 <ItemCard
                   id={i.toString()}
                   tabIndex={0}

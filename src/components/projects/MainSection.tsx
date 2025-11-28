@@ -75,11 +75,9 @@ export const MainSection = () => {
   const [categoriesShow, setCategoriesShow] = useState<boolean>(false); // 控制篩選區域的顯示/隱藏
   const [currentTags, setCurrentTags] = useState<Set<ProjectTag> | null>(null); // 當前選中的標籤集合
 
-  // 時間排序功能 hook，提供新舊排序切換
-  const timeOrder = useTimeOrderTabs(
-    profile.portfolio.projects,
-    (item) => item.time
-  );
+  const timeOrder = useTimeOrderTabs(profile.portfolio.projects, [
+    (item) => item.time,
+  ]);
 
   /**
    * 根據選中的標籤篩選專案
