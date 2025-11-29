@@ -9,6 +9,8 @@ import {
   CloseOutlined,
   DownloadOutlined,
   InfoCircleOutlined,
+  DoubleLeftOutlined,
+  DoubleRightOutlined,
 } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
@@ -503,6 +505,23 @@ const PreviewContent = memo(
 
 PreviewContent.displayName = "PreviewContent";
 
+const THUMBNAIL_CONTAINER: LanguageContent<
+  Record<"goToLast" | "goToFirst" | "goToLastShort" | "goToFirstShort", string>
+> = {
+  chinese: {
+    goToLast: "跳至最後",
+    goToFirst: "跳至最前",
+    goToLastShort: "最後",
+    goToFirstShort: "最前",
+  },
+  english: {
+    goToLast: "Go to Last",
+    goToFirst: "Go to First",
+    goToLastShort: "Last",
+    goToFirstShort: "First",
+  },
+};
+
 type ThumbnailsBarProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
   {
@@ -512,93 +531,112 @@ type ThumbnailsBarProps = OverrideProps<
     children?: never;
   }
 >;
-const ThumbnailsBar = ({
-  items,
-  currIndex,
-  setCurrIndex,
-  ...rest
-}: ThumbnailsBarProps) => {
-  const contaionRef = useRef<HTMLDivElement>(null);
-  const langaue = useLanguage();
-  return (
-    <div {...rest}>
-      <div
-        ref={contaionRef}
-        className={
-          "relative h-16 aspect-square mx-auto transition-all duration-500"
+const ThumbnailsBar = memo(
+  ({ items, currIndex, setCurrIndex, ...rest }: ThumbnailsBarProps) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const language = useLanguage();
+
+    const navigationText = THUMBNAIL_CONTAINER[language.Current];
+
+    const handleGoToLast = useCallback(() => {
+      setCurrIndex(items.length - 1);
+    }, [setCurrIndex, items.length]);
+
+    const handleGoToFirst = useCallback(() => {
+      setCurrIndex(0);
+    }, [setCurrIndex]);
+
+    const handleItemClick = useCallback(
+      (index: number) => {
+        if (index !== currIndex) {
+          setCurrIndex(index);
         }
-      >
-        <button
-          className={cn(
-            "absolute top-0 left-0",
-            "w-full h-full bg-[var(--background-color-tertiary)] overflow-hidden rounded-lg",
-            "will-change-transform transition-all duration-500"
-          )}
-          style={{
-            transform: `translateX(${(-1 - currIndex) * 105}%)`,
-          }}
-          onClick={() => {
-            setCurrIndex(items.length - 1);
-          }}
+      },
+      [currIndex, setCurrIndex]
+    );
+
+    // 使用 useMemo 優化通用樣式類，避免重複計算
+    const baseButtonClasses = useMemo(
+      () =>
+        cn(
+          "absolute top-0 left-0",
+          "w-full h-full overflow-hidden rounded-lg",
+          "will-change-transform transition-all duration-500"
+        ),
+      []
+    );
+
+    return (
+      <div {...rest}>
+        <div
+          ref={containerRef}
+          className="relative h-16 aspect-square mx-auto transition-all duration-500"
         >
-          {
-            {
-              chinese: "跳至最後",
-              english: "Go to Last",
-            }[langaue.Current]
-          }
-        </button>
-        {items.map((item, i) => {
-          return (
+          {/* 跳至最後按鈕 */}
+          <button
+            className={cn(
+              baseButtonClasses,
+              "btn flex items-center justify-center"
+            )}
+            style={{
+              transform: `translateX(${(-1 - currIndex) * 105}%)`,
+            }}
+            onClick={handleGoToLast}
+            aria-label={navigationText.goToLast}
+          >
+            <div className="flex flex-col items-center justify-center text-[var(--text-color)]">
+              <DoubleRightOutlined className="text-lg mb-1" />
+              <span className="text-xs font-medium">
+                {navigationText.goToLastShort}
+              </span>
+            </div>
+          </button>
+
+          {/* 項目縮圖 */}
+          {items.map((item, index) => (
             <button
-              key={item.name}
-              className={cn(
-                "absolute top-0 left-0",
-                "w-full h-full bg-[var(--background-color)] overflow-hidden rounded-lg",
-                "will-change-transform transition-all duration-500",
-                {
-                  "opacity-40": i !== currIndex,
-                }
-              )}
-              onClick={() => {
-                if (i !== currIndex) setCurrIndex(i);
-              }}
+              key={`${item.name}-${index}`}
+              className={cn(baseButtonClasses, "bg-[var(--background-color)]", {
+                "opacity-40": index !== currIndex,
+              })}
               style={{
-                transform: `translateX(${(i - currIndex) * 105}%)`,
+                transform: `translateX(${(index - currIndex) * 105}%)`,
               }}
+              onClick={() => handleItemClick(index)}
+              aria-label={`選擇項目 ${index + 1}: ${item.name}`}
             >
               <MyImage
                 draggable={false}
                 className="w-full h-full object-cover"
                 src={item.thumbnailLink || item.url}
-                alt={`${i}-${item.name}`}
+                alt={`縮圖 ${index + 1} - ${item.name}`}
               />
             </button>
-          );
-        })}
-        <button
-          className={cn(
-            "absolute top-0 left-0",
-            "w-full h-full bg-[var(--background-color-tertiary)] overflow-hidden rounded-lg",
-            "will-change-transform transition-all duration-500"
-          )}
-          style={{
-            transform: `translateX(${(items.length - currIndex) * 105}%)`,
-          }}
-          onClick={() => {
-            setCurrIndex(0);
-          }}
-        >
-          <span className="text-sm">
-            {
-              {
-                chinese: "跳至最前",
-                english: "Go to First",
-              }[langaue.Current]
-            }
-          </span>
-        </button>
+          ))}
+
+          {/* 跳至最前按鈕 */}
+          <button
+            className={cn(
+              baseButtonClasses,
+              "btn flex items-center justify-center"
+            )}
+            style={{
+              transform: `translateX(${(items.length - currIndex) * 105}%)`,
+            }}
+            onClick={handleGoToFirst}
+            aria-label={navigationText.goToFirst}
+          >
+            <div className="flex flex-col items-center justify-center text-[var(--text-color)]">
+              <DoubleLeftOutlined className="text-lg mb-1" />
+              <span className="text-xs font-medium">
+                {navigationText.goToFirstShort}
+              </span>
+            </div>
+          </button>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
+
+ThumbnailsBar.displayName = "ThumbnailsBar";
