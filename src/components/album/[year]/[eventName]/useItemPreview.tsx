@@ -427,7 +427,7 @@ const PreviewContent = memo(
         </div>
         {/* 主要項目顯示區域 */}
         <div
-          className="select-none max-w-[90vw] max-h-[80vh]"
+          className="select-none max-w-[80vw] max-h-[80vh]"
           style={containerStyle}
         >
           {isVideo ? (
@@ -461,7 +461,7 @@ const PreviewContent = memo(
           items={items}
           currIndex={itemIndex}
           setCurrIndex={setItemIndex}
-          className="absolute bottom-4 w-full overflow-hidden"
+          className="absolute bottom-4 w-full overflow-x-scroll"
         />
 
         {/* 項目資訊彈出視窗 */}
