@@ -14,15 +14,7 @@ import {
 } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  memo,
-  useRef,
-  useLayoutEffect,
-} from "react";
+import { useCallback, useEffect, useMemo, useState, memo, useRef } from "react";
 
 // ==================== 常數定義 ====================
 
@@ -241,7 +233,7 @@ const NavgationButtons = ({
           <item.icon />
         </button>
       ))}
-      <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-2">
+      {/* <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-2">
         {navigationButtons.map((item, i) => (
           <button
             key={i}
@@ -251,7 +243,7 @@ const NavgationButtons = ({
             <item.icon />
           </button>
         ))}
-      </div>
+      </div> */}
     </>
   );
 };
@@ -533,7 +525,13 @@ const PreviewContent = memo(
           handlePrev={handlePrevItem}
           handleNext={handleNextItem}
         />
- 
+        <ThumbnailsBar
+          items={items}
+          currIndex={itemIndex}
+          setCurrIndex={setItemIndex}
+          className="absolute bottom-4 w-full overflow-hidden"
+        />
+
         {/* 項目資訊彈出視窗 */}
         <infoModal.Container>
           <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
@@ -584,52 +582,50 @@ type ThumbnailsBarProps = OverrideProps<
     children?: never;
   }
 >;
-export const ThumbnailsBar = ({
+const ThumbnailsBar = ({
   items,
   currIndex,
   setCurrIndex,
   ...rest
 }: ThumbnailsBarProps) => {
   const contaionRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!contaionRef.current) return;
-    const container = contaionRef.current;
-    if (container.children.length > 0) {
-      return;
-    }
-    items.forEach((item, i) => {
-      const button = document.createElement("button");
-      button.innerHTML = `<img src="${
-        item.thumbnailLink || item.url
-      }" alt="${i}-${item.name}" class="w-full h-full object-cover"/>`;
-      button.className =
-        "absolute w-full h-full overflow-hidden top-0 left-0 transition-transform duration-500";
-      button.onclick = () => {
-        setCurrIndex(i);
-      };
-      button.setAttribute("key", i.toString());
-      button.setAttribute("aria-label", `預覽第 ${i + 1} 個項目`);
-      container.appendChild(button);
-    });
-  }, [items, setCurrIndex]);
-  useLayoutEffect(() => {
-    if (!contaionRef.current) return;
-    const container = contaionRef.current;
-    const chidren = Array.from(container.children) as HTMLButtonElement[];
-    requestAnimationFrame(() => {
-      chidren.map((child, i) => {
-        const offset = i - currIndex;
-        child.style.transform = `translateX(${offset * 105}%)`;
-        child.style.opacity = offset === 0 ? "1" : "0.3";
-      });
-    });
-  }, [currIndex, setCurrIndex]);
   return (
     <div {...rest}>
       <div
         ref={contaionRef}
-        className={"relative h-16 aspect-square mx-auto"}
-      />
+        className={
+          "relative h-16 aspect-square mx-auto transition-all duration-500"
+        }
+      >
+        {items.map((item, i) => {
+          return (
+            <button
+              key={item.name}
+              className={cn(
+                "absolute top-0 left-0",
+                "w-full h-full bg-[var(--background-color)] overflow-hidden rounded-lg",
+                "will-change-transform transition-all duration-500",
+                {
+                  "opacity-50 scale-95": i !== currIndex,
+                }
+              )}
+              onClick={() => {
+                if (i !== currIndex) setCurrIndex(i);
+              }}
+              style={{
+                transform: `translateX(${(i - currIndex) * 105}%)`,
+              }}
+            >
+              <MyImage
+                draggable={false}
+                className="w-full h-full object-cover"
+                src={item.thumbnailLink || item.url}
+                alt={`${i}-${item.name}`}
+              />
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 };
