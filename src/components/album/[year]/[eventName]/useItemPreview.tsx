@@ -461,7 +461,7 @@ const PreviewContent = memo(
           items={items}
           currIndex={itemIndex}
           setCurrIndex={setItemIndex}
-          className="absolute bottom-4 w-full overflow-x-scroll"
+          className="absolute bottom-4 w-full h-16 md:h-20"
         />
 
         {/* 項目資訊彈出視窗 */}
@@ -570,7 +570,7 @@ const ThumbnailsBar = memo(
       <div {...rest}>
         <div
           ref={containerRef}
-          className="relative h-16 aspect-square mx-auto transition-all duration-500"
+          className="relative h-full aspect-square mx-auto transition-all duration-500"
         >
           {/* 跳至最後按鈕 */}
           <button
