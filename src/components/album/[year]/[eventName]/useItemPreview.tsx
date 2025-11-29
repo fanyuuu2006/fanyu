@@ -461,7 +461,7 @@ const PreviewContent = memo(
           items={items}
           currIndex={itemIndex}
           setCurrIndex={setItemIndex}
-          className="absolute bottom-4 w-full h-16 md:h-20"
+          className="absolute bottom-4 w-full h-16 md:h-20 overflow-hidden"
         />
 
         {/* 項目資訊彈出視窗 */}
