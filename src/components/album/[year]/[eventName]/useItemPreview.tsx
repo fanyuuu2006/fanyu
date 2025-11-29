@@ -9,8 +9,6 @@ import {
   CloseOutlined,
   DownloadOutlined,
   InfoCircleOutlined,
-  LeftOutlined,
-  RightOutlined,
 } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
@@ -183,69 +181,6 @@ export const useItemPreview = (
     open,
     Content,
   };
-};
-
-/**
- * 導航按鈕組件
- *
- * 提供上一個/下一個項目的導航功能，支援響應式佈局：
- * - 桌面版：固定在左右兩側的圓形按鈕
- * - 行動版：底部的兩個按鈕
- *
- * @param handlePrev - 切換到上一個項目的回調函數
- * @param handleNext - 切換到下一個項目的回調函數
- */
-const NavgationButtons = ({
-  handlePrev,
-  handleNext,
-}: {
-  handlePrev: () => void;
-  handleNext: () => void;
-}) => {
-  // 導航按鈕配置，使用 useMemo 優化性能
-  const navigationButtons = useMemo(
-    () => [
-      {
-        icon: LeftOutlined,
-        className: "left-4", // 左側定位
-        onClick: handlePrev,
-      },
-      {
-        icon: RightOutlined,
-        className: "right-4", // 右側定位
-        onClick: handleNext,
-      },
-    ],
-    [handlePrev, handleNext]
-  );
-  return (
-    <>
-      {/* 左右導航按鈕 */}
-      {navigationButtons.map((item, i) => (
-        <button
-          key={i}
-          className={cn(
-            "hidden sm:block btn fixed top-1/2 -translate-y-1/2 w-10 h-10 rounded-full",
-            item.className
-          )}
-          onClick={item.onClick}
-        >
-          <item.icon />
-        </button>
-      ))}
-      {/* <div className="fixed sm:hidden w-4/5 grid grid-cols-2 bottom-4 gap-2">
-        {navigationButtons.map((item, i) => (
-          <button
-            key={i}
-            className={cn("btn w-full rounded-lg p-1")}
-            onClick={item.onClick}
-          >
-            <item.icon />
-          </button>
-        ))}
-      </div> */}
-    </>
-  );
 };
 
 type PreviewContentProps = {
@@ -520,11 +455,6 @@ const PreviewContent = memo(
             />
           )}
         </div>
-
-        <NavgationButtons
-          handlePrev={handlePrevItem}
-          handleNext={handleNextItem}
-        />
         <ThumbnailsBar
           items={items}
           currIndex={itemIndex}
@@ -589,6 +519,7 @@ const ThumbnailsBar = ({
   ...rest
 }: ThumbnailsBarProps) => {
   const contaionRef = useRef<HTMLDivElement>(null);
+  const langaue = useLanguage();
   return (
     <div {...rest}>
       <div
@@ -597,6 +528,26 @@ const ThumbnailsBar = ({
           "relative h-16 aspect-square mx-auto transition-all duration-500"
         }
       >
+        <button
+          className={cn(
+            "absolute top-0 left-0",
+            "w-full h-full bg-[var(--background-color-tertiary)] overflow-hidden rounded-lg",
+            "will-change-transform transition-all duration-500"
+          )}
+          style={{
+            transform: `translateX(${(-1 - currIndex) * 105}%)`,
+          }}
+          onClick={() => {
+            setCurrIndex(items.length - 1);
+          }}
+        >
+          {
+            {
+              chinese: "跳至最後",
+              english: "Go to Last",
+            }[langaue.Current]
+          }
+        </button>
         {items.map((item, i) => {
           return (
             <button
@@ -606,7 +557,7 @@ const ThumbnailsBar = ({
                 "w-full h-full bg-[var(--background-color)] overflow-hidden rounded-lg",
                 "will-change-transform transition-all duration-500",
                 {
-                  "opacity-50 scale-95": i !== currIndex,
+                  "opacity-40": i !== currIndex,
                 }
               )}
               onClick={() => {
@@ -625,6 +576,28 @@ const ThumbnailsBar = ({
             </button>
           );
         })}
+        <button
+          className={cn(
+            "absolute top-0 left-0",
+            "w-full h-full bg-[var(--background-color-tertiary)] overflow-hidden rounded-lg",
+            "will-change-transform transition-all duration-500"
+          )}
+          style={{
+            transform: `translateX(${(items.length - currIndex) * 105}%)`,
+          }}
+          onClick={() => {
+            setCurrIndex(0);
+          }}
+        >
+          <span className="text-sm">
+            {
+              {
+                chinese: "跳至最前",
+                english: "Go to First",
+              }[langaue.Current]
+            }
+          </span>
+        </button>
       </div>
     </div>
   );
