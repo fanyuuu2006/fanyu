@@ -20,6 +20,7 @@ import { getGithubBadgeSrcs } from "@/utils/github";
 import { CustomLink } from "../custom/CustomLink";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
+import { proxyUrl } from "../../utils/url";
 
 type ProjectContent = Record<"skillTag" | "projectFeature", string>;
 const getProjectContent = (language: LanguageOption): ProjectContent =>
@@ -74,10 +75,7 @@ export const ProjectCard = ({
       {...rest}
     >
       <div
-        className={cn(
-          "card w-full p-6 md:p-8 flex flex-col gap-6",
-          className
-        )}
+        className={cn("card w-full p-6 md:p-8 flex flex-col gap-6", className)}
       >
         {/* 標題區域 */}
         <div className="flex items-start flex-col lg:flex-row gap-4 lg:gap-6">
@@ -85,7 +83,7 @@ export const ProjectCard = ({
           <div className="flex-shrink-0 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 rounded-2xl overflow-hidden border-2 border-[var(--border-color)]">
             {/* eslint-disable-next-line @next/next/no-img-element*/}
             <img
-              src={item.imageSrc}
+              src={proxyUrl(item.imageSrc)}
               alt={`${item.title.english} icon`}
               className="w-full h-full object-cover bg-white select-none"
               loading="lazy"
@@ -129,7 +127,6 @@ export const ProjectCard = ({
             ))}
           </div>
 
-          
           {/* 專案特色 */}
           <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-[var(--card-background)] border border-[var(--border-color)]">
             <h4 className="text-[var(--text-color-muted)] text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
