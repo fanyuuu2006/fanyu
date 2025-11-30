@@ -505,7 +505,7 @@ const PreviewContent = memo(
 
 PreviewContent.displayName = "PreviewContent";
 
-const THUMBNAIL_CONTAINER: LanguageContent<
+const THUMBNAIL_CONTENT: LanguageContent<
   Record<"goToLast" | "goToFirst" | "goToLastShort" | "goToFirstShort", string>
 > = {
   chinese: {
@@ -531,12 +531,12 @@ type ThumbnailsBarProps = OverrideProps<
     children?: never;
   }
 >;
+/** 縮圖導航列組件 */
 const ThumbnailsBar = memo(
   ({ items, currIndex, setCurrIndex, ...rest }: ThumbnailsBarProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const language = useLanguage();
-
-    const navigationText = THUMBNAIL_CONTAINER[language.Current];
+    const navigationText = THUMBNAIL_CONTENT[language.Current];
 
     const handleGoToLast = useCallback(() => {
       setCurrIndex(items.length - 1);
@@ -555,32 +555,33 @@ const ThumbnailsBar = memo(
       [currIndex, setCurrIndex]
     );
 
-    // 使用 useMemo 優化通用樣式類，避免重複計算
-    const baseButtonClasses = useMemo(
-      () =>
-        cn(
-          "absolute top-0 left-0",
-          "w-full h-full overflow-hidden rounded-lg",
-          "will-change-transform transition-all duration-500"
-        ),
-      []
-    );
+    // 基礎按鈕樣式類別
+    const baseButtonClasses =
+      "w-auto h-full aspect-square overflow-hidden rounded-lg";
+
+    useEffect(() => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const active = container.children[currIndex + 1]; // 因為 index 0 是跳最後按鈕
+      if (!active) return;
+
+      active.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }, [currIndex]);
 
     return (
       <div {...rest}>
-        <div
-          ref={containerRef}
-          className="relative h-full aspect-square mx-auto transition-all duration-500"
-        >
+        <div ref={containerRef} className="flex w-max h-full gap-1">
           {/* 跳至最後按鈕 */}
           <button
             className={cn(
               baseButtonClasses,
               "btn flex items-center justify-center"
             )}
-            style={{
-              transform: `translateX(${(-1 - currIndex) * 105}%)`,
-            }}
             onClick={handleGoToLast}
             aria-label={navigationText.goToLast}
           >
@@ -599,9 +600,6 @@ const ThumbnailsBar = memo(
               className={cn(baseButtonClasses, "bg-[var(--background-color)]", {
                 "opacity-40": index !== currIndex,
               })}
-              style={{
-                transform: `translateX(${(index - currIndex) * 105}%)`,
-              }}
               onClick={() => handleItemClick(index)}
               aria-label={`選擇項目 ${index + 1}: ${item.name}`}
             >
@@ -620,9 +618,6 @@ const ThumbnailsBar = memo(
               baseButtonClasses,
               "btn flex items-center justify-center"
             )}
-            style={{
-              transform: `translateX(${(items.length - currIndex) * 105}%)`,
-            }}
             onClick={handleGoToFirst}
             aria-label={navigationText.goToFirst}
           >
