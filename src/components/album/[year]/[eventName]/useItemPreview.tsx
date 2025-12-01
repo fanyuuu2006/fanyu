@@ -168,12 +168,20 @@ export const useItemPreview = (
    */
   const Content = useCallback(
     () => (
-      <PreviewContent
-        items={items}
-        itemIndex={itemIndex}
-        setItemIndex={setItemIndex}
-        close={previewModal.close}
-      />
+      <>
+        <PreviewContent
+          items={items}
+          itemIndex={itemIndex}
+          setItemIndex={setItemIndex}
+          close={previewModal.close}
+        />
+        <ThumbnailsBar
+          items={items}
+          currIndex={itemIndex}
+          setCurrIndex={setItemIndex}
+          className="absolute bottom-4 w-full h-16 md:h-20 overflow-hidden"
+        />
+      </>
     ),
     [items, itemIndex, previewModal.close]
   );
@@ -457,12 +465,6 @@ const PreviewContent = memo(
             />
           )}
         </div>
-        <ThumbnailsBar
-          items={items}
-          currIndex={itemIndex}
-          setCurrIndex={setItemIndex}
-          className="absolute bottom-4 w-full h-16 md:h-20 overflow-hidden"
-        />
 
         {/* 項目資訊彈出視窗 */}
         <infoModal.Container>
@@ -509,8 +511,8 @@ const THUMBNAIL_CONTENT: LanguageContent<Record<"last" | "first", string>> = {
   chinese: { last: "最後", first: "最前" },
   english: { last: "Last", first: "First" },
 };
-const THUMBNAIL_CLASSNAME = "absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg will-change-transform transition-all duration-500"
-
+const THUMBNAIL_CLASSNAME =
+  "absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg will-change-transform transition-all duration-500";
 
 type ThumbnailsBarProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -564,9 +566,7 @@ const ThumbnailsBar = memo(
           >
             <div className="flex flex-col items-center justify-center text-[var(--text-color)]">
               <DoubleRightOutlined className="text-lg mb-1" />
-              <span className="text-xs font-medium">
-                {navigationText.last}
-              </span>
+              <span className="text-xs font-medium">{navigationText.last}</span>
             </div>
           </button>
 
@@ -574,9 +574,13 @@ const ThumbnailsBar = memo(
           {items.map((item, index) => (
             <button
               key={`${item.name}-${index}`}
-              className={cn(THUMBNAIL_CLASSNAME, "bg-[var(--background-color)]", {
-                "opacity-40": index !== currIndex,
-              })}
+              className={cn(
+                THUMBNAIL_CLASSNAME,
+                "bg-[var(--background-color)]",
+                {
+                  "opacity-40": index !== currIndex,
+                }
+              )}
               style={{
                 transform: `translateX(${(index - currIndex) * 105}%)`,
               }}
