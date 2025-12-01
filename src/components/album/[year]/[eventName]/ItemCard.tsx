@@ -7,7 +7,6 @@ import { formatTime } from "@/utils";
 import { cn } from "@/utils/className";
 import { PlayCircleFilled } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
-import { useState } from "react";
 
 const ITEM_CARD_CONTENT: LanguageContent<Record<"noItem", string>> = {
   chinese: {
@@ -29,8 +28,6 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
   const language = useLanguage();
   const itemContent = ITEM_CARD_CONTENT[language.Current];
   const title = item.name || itemContent.noItem;
-
-  const [loaded, setLoaded] = useState(false);
 
   const isVideo = item.mimeType?.startsWith("video/") ?? false;
   const { width = 800, height = 800 } = item.imageMediaMetadata ?? {};
@@ -57,21 +54,6 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
         className="w-full h-full object-cover"
       />
 
-      {/* 第二張：高解析版本 */}
-      <MyImage
-        src={isVideo ? item.thumbnailLink : item.url}
-        fallbackSrc={item.thumbnailLink}
-        title={title}
-        alt={title}
-        className={cn(
-          "absolute w-full h-full inset-0 object-cover transition-opacity duration-300",
-          { "opacity-0": !loaded }
-        )}
-        width={width}
-        height={height}
-        itemProp="contentUrl"
-        onLoad={() => setLoaded(true)}
-      />
       {isVideo && (
         <div className="text-sm md:text-base lg:text-lg xl:text-xl absolute top-1.5 right-1.5">
           <div className="flex gap-1 items-center">
