@@ -505,22 +505,11 @@ const PreviewContent = memo(
 
 PreviewContent.displayName = "PreviewContent";
 
-const THUMBNAIL_CONTENT: LanguageContent<
-  Record<"goToLast" | "goToFirst" | "goToLastShort" | "goToFirstShort", string>
-> = {
-  chinese: {
-    goToLast: "跳至最後",
-    goToFirst: "跳至最前",
-    goToLastShort: "最後",
-    goToFirstShort: "最前",
-  },
-  english: {
-    goToLast: "Go to Last",
-    goToFirst: "Go to First",
-    goToLastShort: "Last",
-    goToFirstShort: "First",
-  },
+const THUMBNAIL_CONTENT: LanguageContent<Record<"last" | "first", string>> = {
+  chinese: { last: "最後", first: "最前" },
+  english: { last: "Last", first: "First" },
 };
+
 
 type ThumbnailsBarProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -531,11 +520,11 @@ type ThumbnailsBarProps = OverrideProps<
     children?: never;
   }
 >;
-/** 縮圖導航列組件 */
 const ThumbnailsBar = memo(
   ({ items, currIndex, setCurrIndex, ...rest }: ThumbnailsBarProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const language = useLanguage();
+
     const navigationText = THUMBNAIL_CONTENT[language.Current];
 
     const handleGoToLast = useCallback(() => {
@@ -555,40 +544,39 @@ const ThumbnailsBar = memo(
       [currIndex, setCurrIndex]
     );
 
-    // 基礎按鈕樣式類別
-    const baseButtonClasses =
-      "w-auto h-full aspect-square overflow-hidden rounded-lg";
-
-    useEffect(() => {
-      const container = containerRef.current;
-      if (!container) return;
-
-      const active = container.children[currIndex + 1]; // 因為 index 0 是跳最後按鈕
-      if (!active) return;
-
-      active.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
-      });
-    }, [currIndex]);
+    // 使用 useMemo 優化通用樣式類，避免重複計算
+    const baseButtonClasses = useMemo(
+      () =>
+        cn(
+          "absolute top-0 left-0",
+          "w-full h-full overflow-hidden rounded-lg",
+          "will-change-transform transition-all duration-500"
+        ),
+      []
+    );
 
     return (
       <div {...rest}>
-        <div ref={containerRef} className="flex w-max h-full gap-1">
+        <div
+          ref={containerRef}
+          className="relative h-full aspect-square mx-auto transition-all duration-500"
+        >
           {/* 跳至最後按鈕 */}
           <button
             className={cn(
               baseButtonClasses,
               "btn flex items-center justify-center"
             )}
+            style={{
+              transform: `translateX(${(-1 - currIndex) * 105}%)`,
+            }}
             onClick={handleGoToLast}
-            aria-label={navigationText.goToLast}
+            aria-label={navigationText.last}
           >
             <div className="flex flex-col items-center justify-center text-[var(--text-color)]">
               <DoubleRightOutlined className="text-lg mb-1" />
               <span className="text-xs font-medium">
-                {navigationText.goToLastShort}
+                {navigationText.last}
               </span>
             </div>
           </button>
@@ -600,6 +588,9 @@ const ThumbnailsBar = memo(
               className={cn(baseButtonClasses, "bg-[var(--background-color)]", {
                 "opacity-40": index !== currIndex,
               })}
+              style={{
+                transform: `translateX(${(index - currIndex) * 105}%)`,
+              }}
               onClick={() => handleItemClick(index)}
               aria-label={`選擇項目 ${index + 1}: ${item.name}`}
             >
@@ -618,13 +609,16 @@ const ThumbnailsBar = memo(
               baseButtonClasses,
               "btn flex items-center justify-center"
             )}
+            style={{
+              transform: `translateX(${(items.length - currIndex) * 105}%)`,
+            }}
             onClick={handleGoToFirst}
-            aria-label={navigationText.goToFirst}
+            aria-label={navigationText.first}
           >
             <div className="flex flex-col items-center justify-center text-[var(--text-color)]">
               <DoubleLeftOutlined className="text-lg mb-1" />
               <span className="text-xs font-medium">
-                {navigationText.goToFirstShort}
+                {navigationText.first}
               </span>
             </div>
           </button>
