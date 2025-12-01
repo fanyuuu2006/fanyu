@@ -509,6 +509,7 @@ const THUMBNAIL_CONTENT: LanguageContent<Record<"last" | "first", string>> = {
   chinese: { last: "最後", first: "最前" },
   english: { last: "Last", first: "First" },
 };
+const THUMBNAIL_CLASSNAME = "absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg will-change-transform transition-all duration-500"
 
 
 type ThumbnailsBarProps = OverrideProps<
@@ -543,18 +544,6 @@ const ThumbnailsBar = memo(
       },
       [currIndex, setCurrIndex]
     );
-
-    // 使用 useMemo 優化通用樣式類，避免重複計算
-    const baseButtonClasses = useMemo(
-      () =>
-        cn(
-          "absolute top-0 left-0",
-          "w-full h-full overflow-hidden rounded-lg",
-          "will-change-transform transition-all duration-500"
-        ),
-      []
-    );
-
     return (
       <div {...rest}>
         <div
@@ -564,7 +553,7 @@ const ThumbnailsBar = memo(
           {/* 跳至最後按鈕 */}
           <button
             className={cn(
-              baseButtonClasses,
+              THUMBNAIL_CLASSNAME,
               "btn flex items-center justify-center"
             )}
             style={{
@@ -585,7 +574,7 @@ const ThumbnailsBar = memo(
           {items.map((item, index) => (
             <button
               key={`${item.name}-${index}`}
-              className={cn(baseButtonClasses, "bg-[var(--background-color)]", {
+              className={cn(THUMBNAIL_CLASSNAME, "bg-[var(--background-color)]", {
                 "opacity-40": index !== currIndex,
               })}
               style={{
@@ -606,7 +595,7 @@ const ThumbnailsBar = memo(
           {/* 跳至最前按鈕 */}
           <button
             className={cn(
-              baseButtonClasses,
+              THUMBNAIL_CLASSNAME,
               "btn flex items-center justify-center"
             )}
             style={{
