@@ -130,18 +130,19 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
 export const useItemPreview = (
   items: Album[number]["events"][number]["items"]
 ) => {
+  const handleOpen = useCallback(() => {
+    document.body.style.overflow = "hidden";
+  }, []);
+
+  const handleClose = useCallback(() => {
+    document.body.style.overflow = "";
+  }, []);
+
   const previewModal = useModal({
-    onOpen: () => {
-      if (typeof document !== "undefined") {
-        document.body.style.overflow = "hidden";
-      }
-    },
-    onClose: () => {
-      if (typeof document !== "undefined") {
-        document.body.style.overflow = "";
-      }
-    },
+    onOpen: handleOpen,
+    onClose: handleClose,
   });
+
   const [itemIndex, setItemIndex] = useState(0);
 
   /**
