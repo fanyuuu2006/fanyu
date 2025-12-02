@@ -472,12 +472,15 @@ const PreviewContent = memo(
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 pb-2">
                 {/* 動態渲染所有項目資訊欄位 */}
                 {mediaInfoFields.map((info, i) => (
-                  <div key={i} className="flex flex-col gap-2 p-4 sm:p-5 md:p-6 rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)] transition-all duration-200 hover:shadow-md hover:border-[var(--text-color-muted)] min-h-[80px] sm:min-h-[90px]">
+                  <div
+                    key={i}
+                    className="flex flex-col gap-2 p-4 rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)]"
+                  >
                     <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] uppercase tracking-wide leading-tight">
                       {info.label}
                     </div>
-                    <div className="text-sm sm:text-base md:text-lg font-semibold break-all leading-relaxed flex-1 flex items-center">
-                      {info.value}
+                    <div className="text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
+                      <span>{info.value}</span>
                     </div>
                   </div>
                 ))}
