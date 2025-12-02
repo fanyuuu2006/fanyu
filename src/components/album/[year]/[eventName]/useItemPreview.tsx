@@ -429,7 +429,7 @@ const PreviewContent = memo(
             className="h-auto p-4 flex items-center justify-center overflow-hidden"
             onClick={handleBackgroundClick}
           >
-            <div className="h-full max-h-[80vh] max-w-[80vw] min-h-[50vh] min-w-[50vw] flex items-center justify-center">
+            <div className="h-full max-h-[80vh] max-w-[80vw] flex items-center justify-center">
               {isVideo ? (
                 <video
                   src={currentItem.url}
