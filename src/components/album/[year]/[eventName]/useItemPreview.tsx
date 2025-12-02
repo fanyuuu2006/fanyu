@@ -450,16 +450,16 @@ const PreviewContent = memo(
         </div>
 
         {/* 項目資訊彈出視窗 */}
-        <infoModal.Container>
-          <div className="card flex flex-col p-6 min-w-[280px] max-w-[90vw]">
+        <infoModal.Container className="flex items-center justify-center p-2 sm:p-4">
+          <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[90vw] md:max-w-[600px] mx-2 sm:mx-0 p-4 sm:p-6">
             {/* 資訊視窗標頭 */}
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-color)]">
-              <h3 className="text-xl font-semibold bg-gradient-to-br  from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
+            <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-[var(--border-color)]">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
                 {itemPreviewContent.title}
               </h3>
               {/* 關閉資訊視窗按鈕 */}
               <button
-                className="text-xl text-[var(--text-color-muted)] rounded-full p-2"
+                className="text-lg sm:text-xl text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] rounded-full p-1.5 sm:p-2 transition-colors duration-200 hover:bg-[var(--background-color-secondary)]"
                 onClick={infoModal.close}
                 aria-label={itemPreviewContent.close}
               >
@@ -468,14 +468,14 @@ const PreviewContent = memo(
             </div>
 
             {/* 項目資訊內容 */}
-            <div className="space-y-4">
+            <div className="max-h-80 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 overflow-y-auto">
               {/* 動態渲染所有項目資訊欄位 */}
               {mediaInfoFields.map((info, i) => (
-                <div key={i} className="flex flex-col">
-                  <div className="text-sm text-[var(--text-color-muted)]">
+                <div key={i} className="flex flex-col gap-1 p-3 rounded-lg bg-[var(--background-color-secondary)] border border-[var(--border-color)] transition-all duration-200">
+                  <div className="text-xs sm:text-sm font-medium text-[var(--text-color-muted)] uppercase tracking-wide">
                     {info.label}
                   </div>
-                  <div className="text-base font-medium break-all">
+                  <div className="text-sm sm:text-base font-semibold break-all">
                     {info.value}
                   </div>
                 </div>
