@@ -16,13 +16,13 @@ const baseUrl = profile.url;
 --------------------------------*/
 const getYears = async () =>
   fetcher<Album[number]["year"][]>(`${profile.url}/api/album`, {
-    next: { revalidate: 3600 },
+    next: { revalidate },
   });
 
 const getEvents = async (year: string) =>
   fetcher<Album[number]["events"][number][]>(
     `${profile.url}/api/album/${slugify(year)}`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate } }
   );
 
 /* ------------------------------
@@ -48,7 +48,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // 活動頁面
       for (const event of events) {
         dynamicRoutes.push({
-          url: `${baseUrl}/album/${slugify(year)}/${slugify(event.name || "其他")}`,
+          url: `${baseUrl}/album/${slugify(year)}/${slugify(
+            event.name || "其他"
+          )}`,
           lastModified: new Date(),
           changeFrequency: "monthly",
           priority: 0.6,
