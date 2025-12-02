@@ -403,8 +403,8 @@ const PreviewContent = memo(
           </div>
 
           {/* 主要項目顯示區域 */}
-          <div className="w-full p-4 flex items-center justify-center overflow-hidden">
-            <div className="w-full h-full max-w-[80vw] max-h-[80vh] m-auto flex items-center justify-center">
+          <div className="w-full h-auto p-4 flex items-center justify-center overflow-hidden">
+            <div className="w-full h-full flex items-center justify-center">
               {isVideo ? (
                 <video
                   src={currentItem.url}
@@ -412,7 +412,7 @@ const PreviewContent = memo(
                   controls
                   preload="metadata"
                   title={title}
-                  className="max-w-full max-h-full object-contain"
+                  className="w-full h-full"
                 />
               ) : (
                 <MyImage
@@ -422,7 +422,7 @@ const PreviewContent = memo(
                   title={title}
                   width={currentItem.imageMediaMetadata?.width}
                   height={currentItem.imageMediaMetadata?.height}
-                  className="max-w-full max-h-full object-contain"
+                  className="w-full h-full min-h-[50vh] min-w-[50vw] object-contain"
                 />
               )}
             </div>

@@ -45,6 +45,9 @@ export const asyncPool = async <T, R>(
     if (poolLimit <= items.length) {
       const e: Promise<void> = p.then(() => {
         executing.splice(executing.indexOf(e), 1);
+        console.log(
+          `Async Pool: ${items.indexOf(item) + 1} / ${items.length} completed.`
+        )
       });
       executing.push(e);
       if (executing.length >= poolLimit) {
