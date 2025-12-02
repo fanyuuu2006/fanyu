@@ -5,7 +5,7 @@ import { projects } from "./projects";
 import { skills } from "./skill";
 
 export const profile = {
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://fanyu.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://fanyu.vercel.app",
   keywords: keywords,
   description: {
     chinese:
