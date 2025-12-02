@@ -131,16 +131,16 @@ export const useItemPreview = (
   items: Album[number]["events"][number]["items"]
 ) => {
   const previewModal = useModal({
-    // onOpen: () => {
-    //   if (typeof document !== "undefined") {
-    //     document.body.style.overflow = "hidden";
-    //   }
-    // },
-    // onClose: () => {
-    //   if (typeof document !== "undefined") {
-    //     document.body.style.overflow = "";
-    //   }
-    // },
+    onOpen: () => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "hidden";
+      }
+    },
+    onClose: () => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "";
+      }
+    },
   });
   const [itemIndex, setItemIndex] = useState(0);
 
