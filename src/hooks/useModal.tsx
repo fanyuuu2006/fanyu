@@ -30,7 +30,7 @@ export const useModal = ({
     }
   }, [onClose]);
 
-  const isOpen = useCallback(() => dialogRef.current?.open ?? false, []);
+  const isOpen = useCallback(() => dialogRef.current?.open ?? false, [])();
 
   const Container = useCallback(
     ({ className, ...rest }: ModalContainerProps) => {

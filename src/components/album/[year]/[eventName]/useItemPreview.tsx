@@ -130,7 +130,18 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
 export const useItemPreview = (
   items: Album[number]["events"][number]["items"]
 ) => {
-  const previewModal = useModal({});
+  const previewModal = useModal({
+    onOpen: () => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "hidden";
+      }
+    },
+    onClose: () => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "";
+      }
+    },
+  });
   const [itemIndex, setItemIndex] = useState(0);
 
   /**
@@ -352,9 +363,10 @@ const PreviewContent = memo(
 
       // 註冊全域鍵盤事件監聽器
       window.addEventListener("keydown", handleKeyDown);
-
       // 清理函數：組件卸載時移除監聽器
-      return () => window.removeEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
     }, [currentItem, handleNextItem, handlePrevItem]);
 
     if (!currentItem) {
