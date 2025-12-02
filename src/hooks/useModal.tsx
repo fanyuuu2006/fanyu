@@ -9,8 +9,8 @@ export const useModal = ({
   onOpen,
   clickOutsideToClose = true,
 }: {
-  onClose?: () => void;
-  onOpen?: () => void;
+  onClose?: (el: HTMLDialogElement) => void;
+  onOpen?: (el: HTMLDialogElement) => void;
   clickOutsideToClose?: boolean;
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -19,14 +19,14 @@ export const useModal = ({
   const handleOpen = useCallback(() => {
     if (dialogRef.current && !dialogRef.current.open) {
       requestAnimationFrame(() => dialogRef.current?.showModal());
-      onOpen?.();
+      onOpen?.(dialogRef.current);
     }
   }, [onOpen]);
 
   const handleClose = useCallback(() => {
     if (dialogRef.current?.open) {
       requestAnimationFrame(() => dialogRef.current?.close());
-      onClose?.();
+      onClose?.(dialogRef.current);
     }
   }, [onClose]);
 
@@ -43,10 +43,7 @@ export const useModal = ({
         >
           <div
             ref={contentRef}
-            className={cn(
-              "bg-black/75 w-full h-full",
-              className
-            )}
+            className={cn("bg-black/75 w-full h-full", className)}
             onClick={(e) => {
               if (clickOutsideToClose && e.target === e.currentTarget) {
                 handleClose();
