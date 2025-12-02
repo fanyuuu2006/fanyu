@@ -45,7 +45,7 @@ export const useModal = ({
           <div
             ref={contentRef}
             className={cn(
-              "bg-black/75 flex items-center justify-center w-full h-full",
+              "bg-black/75 w-full h-full",
               className
             )}
             onClick={(e) => {

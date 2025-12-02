@@ -235,6 +235,15 @@ const PreviewContent = memo(
       setItemIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
     }, [items.length, setItemIndex]);
 
+    const handleBackgroundClick = useCallback(
+      (e: React.MouseEvent) => {
+        if (e.target === e.currentTarget) {
+          close();
+        }
+      },
+      [close]
+    );
+
     const infoModal = useModal({});
     /**
      * 計算項目資訊欄位
@@ -403,8 +412,11 @@ const PreviewContent = memo(
           </div>
 
           {/* 主要項目顯示區域 */}
-          <div className="w-full h-auto p-4 flex items-center justify-center overflow-hidden">
-            <div className="w-full h-full flex items-center justify-center">
+          <div
+            className="w-full h-auto p-4 flex items-center justify-center overflow-hidden"
+            onClick={handleBackgroundClick}
+          >
+            <div className="h-full max-h-[80vh] max-w-[80vw] min-h-[50vh] min-w-[50vw] flex items-center justify-center">
               {isVideo ? (
                 <video
                   src={currentItem.url}
@@ -412,7 +424,7 @@ const PreviewContent = memo(
                   controls
                   preload="metadata"
                   title={title}
-                  className="w-full h-full"
+                  className="w-auto h-full"
                 />
               ) : (
                 <MyImage
@@ -422,7 +434,7 @@ const PreviewContent = memo(
                   title={title}
                   width={currentItem.imageMediaMetadata?.width}
                   height={currentItem.imageMediaMetadata?.height}
-                  className="w-full h-full min-h-[50vh] min-w-[50vw] object-contain"
+                  className="h-full w-auto object-contain"
                 />
               )}
             </div>
