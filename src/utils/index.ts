@@ -27,10 +27,30 @@ export const formatTime = (millis: string): string => {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  return [ minutes, seconds]
-    .map((v) => String(v).padStart(2, "0"))
-    .join(":");
+  return [minutes, seconds].map((v) => String(v).padStart(2, "0")).join(":");
 };
 
-
 export const normalize = (str: string) => str.toLowerCase().trim();
+
+export const asyncPool = async <T, R>(
+  poolLimit: number,
+  items: T[],
+  iteratorFn: (item: T, items: T[]) => Promise<R>
+): Promise<R[]> => {
+  const ret: Promise<R>[] = [];
+  const executing: Promise<void>[] = [];
+  for (const item of items) {
+    const p = Promise.resolve().then(() => iteratorFn(item, items));
+    ret.push(p);
+    if (poolLimit <= items.length) {
+      const e: Promise<void> = p.then(() => {
+        executing.splice(executing.indexOf(e), 1);
+      });
+      executing.push(e);
+      if (executing.length >= poolLimit) {
+        await Promise.race(executing);
+      }
+    }
+  }
+  return Promise.all(ret);
+};
