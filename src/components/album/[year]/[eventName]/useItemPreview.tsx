@@ -425,7 +425,7 @@ const PreviewContent = memo(
 
           {/* 主要項目顯示區域 */}
           <div
-            className="w-full h-auto p-4 flex items-center justify-center overflow-hidden"
+            className="h-auto p-4 flex items-center justify-center overflow-hidden"
             onClick={handleBackgroundClick}
           >
             <div className="h-full max-h-[80vh] max-w-[80vw] min-h-[50vh] min-w-[50vw] flex items-center justify-center">
