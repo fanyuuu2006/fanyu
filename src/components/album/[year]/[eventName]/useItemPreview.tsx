@@ -467,7 +467,7 @@ const PreviewContent = memo(
           <div className="card flex flex-col w-full max-w-[calc(100vw-2rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-4rem)] sm:max-h-[calc(100vh-6rem)] mx-3 sm:mx-4 p-5 sm:p-6 md:p-8">
             {/* 資訊視窗標頭 */}
             <div className="flex items-center justify-between mb-5 sm:mb-6 md:mb-8 pb-4 sm:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
-              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
+              <h3 className="uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
                 {itemPreviewContent.title}
               </h3>
               {/* 關閉資訊視窗按鈕 */}
@@ -489,7 +489,7 @@ const PreviewContent = memo(
                     key={i}
                     className="flex flex-col gap-2 p-4 rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)]"
                   >
-                    <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] uppercase tracking-wide leading-tight">
+                    <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] tracking-wide leading-tight">
                       {info.label}
                     </div>
                     <div className="text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
