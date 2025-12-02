@@ -354,7 +354,7 @@ const PreviewContent = memo(
 
     return (
       <>
-        <div className="w-full h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem] lg:grid-rows-[auto_1fr_6rem]">
+        <div className="w-full h-full grid grid-rows-[auto_1fr_3rem] md:grid-rows-[auto_1fr_4rem] lg:grid-rows-[auto_1fr_5rem]">
           {/* 頂部控制列 */}
           <div className="w-full flex items-center py-4 px-8">
             {/* 關閉按鈕 */}
