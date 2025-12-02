@@ -38,8 +38,7 @@ export const useModal = ({
         <dialog
           ref={dialogRef}
           className={cn(
-            "w-full h-full bg-transparent max-w-none max-h-none text-inherit",
-            className
+            "w-full h-full bg-transparent max-w-none max-h-none text-inherit"
           )}
         >
           <div

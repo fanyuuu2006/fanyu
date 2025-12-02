@@ -450,16 +450,16 @@ const PreviewContent = memo(
         </div>
 
         {/* 項目資訊彈出視窗 */}
-        <infoModal.Container className="flex items-center justify-center p-2 sm:p-4">
-          <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[90vw] md:max-w-[600px] mx-2 sm:mx-0 p-4 sm:p-6">
+        <infoModal.Container className="flex items-center justify-center p-3 sm:p-6 md:p-8">
+          <div className="card flex flex-col w-full max-w-[calc(100vw-2rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-4rem)] sm:max-h-[calc(100vh-6rem)] mx-3 sm:mx-4 p-5 sm:p-6 md:p-8">
             {/* 資訊視窗標頭 */}
-            <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-[var(--border-color)]">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
+            <div className="flex items-center justify-between mb-5 sm:mb-6 md:mb-8 pb-4 sm:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
+              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
                 {itemPreviewContent.title}
               </h3>
               {/* 關閉資訊視窗按鈕 */}
               <button
-                className="text-lg sm:text-xl text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] rounded-full p-1.5 sm:p-2 transition-colors duration-200 hover:bg-[var(--background-color-secondary)]"
+                className="text-xl sm:text-2xl md:text-3xl text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] rounded-full p-2 sm:p-2.5 md:p-3 transition-colors duration-200 hover:bg-[var(--background-color-secondary)] flex-shrink-0"
                 onClick={infoModal.close}
                 aria-label={itemPreviewContent.close}
               >
@@ -468,18 +468,20 @@ const PreviewContent = memo(
             </div>
 
             {/* 項目資訊內容 */}
-            <div className="max-h-80 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 overflow-y-auto">
-              {/* 動態渲染所有項目資訊欄位 */}
-              {mediaInfoFields.map((info, i) => (
-                <div key={i} className="flex flex-col gap-1 p-3 rounded-lg bg-[var(--background-color-secondary)] border border-[var(--border-color)] transition-all duration-200">
-                  <div className="text-xs sm:text-sm font-medium text-[var(--text-color-muted)] uppercase tracking-wide">
-                    {info.label}
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 pb-2">
+                {/* 動態渲染所有項目資訊欄位 */}
+                {mediaInfoFields.map((info, i) => (
+                  <div key={i} className="flex flex-col gap-2 p-4 sm:p-5 md:p-6 rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)] transition-all duration-200 hover:shadow-md hover:border-[var(--text-color-muted)] min-h-[80px] sm:min-h-[90px]">
+                    <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] uppercase tracking-wide leading-tight">
+                      {info.label}
+                    </div>
+                    <div className="text-sm sm:text-base md:text-lg font-semibold break-all leading-relaxed flex-1 flex items-center">
+                      {info.value}
+                    </div>
                   </div>
-                  <div className="text-sm sm:text-base font-semibold break-all">
-                    {info.value}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </infoModal.Container>
