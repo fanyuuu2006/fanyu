@@ -168,20 +168,12 @@ export const useItemPreview = (
    */
   const Content = useCallback(
     () => (
-      <>
-        <PreviewContent
-          items={items}
-          itemIndex={itemIndex}
-          setItemIndex={setItemIndex}
-          close={previewModal.close}
-        />
-        <ThumbnailsBar
-          items={items}
-          currIndex={itemIndex}
-          setCurrIndex={setItemIndex}
-          className="absolute bottom-4 w-full h-16 md:h-20 overflow-hidden"
-        />
-      </>
+      <PreviewContent
+        items={items}
+        itemIndex={itemIndex}
+        setItemIndex={setItemIndex}
+        close={previewModal.close}
+      />
     ),
     [items, itemIndex, previewModal.close]
   );
@@ -317,33 +309,6 @@ const PreviewContent = memo(
     }, [currentItem, itemPreviewContent, language.Current, isVideo]);
 
     /**
-     * 動態計算容器樣式
-     */
-    const containerStyle = useMemo(
-      () => ({
-        width:
-          isVideo && currentItem.videoMediaMetadata?.width
-            ? `${currentItem.videoMediaMetadata.width}px`
-            : currentItem.imageMediaMetadata?.width
-            ? `${currentItem.imageMediaMetadata.width}px`
-            : "auto",
-        height:
-          isVideo && currentItem.videoMediaMetadata?.height
-            ? `${currentItem.videoMediaMetadata.height}px`
-            : currentItem.imageMediaMetadata?.height
-            ? `${currentItem.imageMediaMetadata.height}px`
-            : "auto",
-      }),
-      [
-        isVideo,
-        currentItem.videoMediaMetadata?.width,
-        currentItem.videoMediaMetadata?.height,
-        currentItem.imageMediaMetadata?.width,
-        currentItem.imageMediaMetadata?.height,
-      ]
-    );
-
-    /**
      * 鍵盤快捷鍵監聽器
      *
      * 提供鍵盤導航功能，增強使用者體驗：
@@ -389,81 +354,87 @@ const PreviewContent = memo(
 
     return (
       <>
-        <div className="fixed top-0 left-0 w-full flex items-center py-4 px-8">
-          {/* 關閉按鈕 */}
-          <button
-            className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
-            onClick={close}
-          >
-            <CloseOutlined />
-          </button>
-          {/* 項目標題和進度 */}
-          <div className="flex flex-col min-w-0 ms-2">
-            <h3
-              title={currentItem.name || itemPreviewContent.untitled}
-              className="text-lg md:text-xl font-semibold truncate"
-            >
-              {currentItem.name}
-            </h3>
-            {/* 項目計數 (當前/總數) */}
-            <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-              {itemIndex + 1} / {items.length}
-            </span>
-          </div>
-          {/* 右側功能按鈕群組 */}
-          <div className="ms-auto text-3xl flex">
-            {/* 下載按鈕 */}
-            <Link
-              className="rounded-full p-2"
-              href={currentItem.url || ""}
-              download={
-                currentItem.name || `${itemIndex}.${currentItem.fileExtension}`
-              }
-              aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
-            >
-              <DownloadOutlined />
-            </Link>
-            {/* 項目資訊按鈕 */}
+        <div className="w-full h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem] lg:grid-rows-[auto_1fr_6rem]">
+          {/* 頂部控制列 */}
+          <div className="w-full flex items-center py-4 px-8">
+            {/* 關閉按鈕 */}
             <button
-              className="rounded-full p-2"
-              aria-label={itemPreviewContent.details}
-              onClick={infoModal.open}
+              className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+              onClick={close}
             >
-              <InfoCircleOutlined />
+              <CloseOutlined />
             </button>
+            {/* 項目標題和進度 */}
+            <div className="flex flex-col min-w-0 ms-2">
+              <h3
+                title={currentItem.name || itemPreviewContent.untitled}
+                className="text-lg md:text-xl font-semibold truncate"
+              >
+                {currentItem.name}
+              </h3>
+              {/* 項目計數 (當前/總數) */}
+              <span className="text-sm md:text-base text-[var(--text-color-muted)]">
+                {itemIndex + 1} / {items.length}
+              </span>
+            </div>
+            {/* 右側功能按鈕群組 */}
+            <div className="ms-auto text-3xl flex">
+              {/* 下載按鈕 */}
+              <Link
+                className="rounded-full p-2"
+                href={currentItem.url || ""}
+                download={
+                  currentItem.name ||
+                  `${itemIndex}.${currentItem.fileExtension}`
+                }
+                aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
+              >
+                <DownloadOutlined />
+              </Link>
+              {/* 項目資訊按鈕 */}
+              <button
+                className="rounded-full p-2"
+                aria-label={itemPreviewContent.details}
+                onClick={infoModal.open}
+              >
+                <InfoCircleOutlined />
+              </button>
+            </div>
           </div>
-        </div>
-        {/* 主要項目顯示區域 */}
-        <div
-          className="select-none max-w-[80vw] max-h-[80vh]"
-          style={containerStyle}
-        >
-          {isVideo ? (
-            <video
-              src={currentItem.url}
-              poster={currentItem.thumbnailLink || undefined}
-              className="w-full h-full object-contain"
-              controls
-              preload="metadata"
-              width={currentItem.videoMediaMetadata?.width}
-              height={currentItem.videoMediaMetadata?.height}
-              title={title}
-            >
-              <p className="text-center p-4 text-[var(--text-color-muted)]">
-                {itemPreviewContent.noSupport}
-              </p>
-            </video>
-          ) : (
-            <MyImage
-              src={currentItem.url}
-              fallbackSrc={currentItem.thumbnailLink}
-              className="w-full h-full object-contain"
-              alt={title}
-              title={title}
-              width={currentItem.imageMediaMetadata?.width}
-              height={currentItem.imageMediaMetadata?.height}
-            />
-          )}
+
+          {/* 主要項目顯示區域 */}
+          <div className="w-full p-4 flex items-center justify-center overflow-hidden">
+            <div className="w-full h-full max-w-[80vw] max-h-[80vh] m-auto flex items-center justify-center">
+              {isVideo ? (
+                <video
+                  src={currentItem.url}
+                  poster={currentItem.thumbnailLink || undefined}
+                  controls
+                  preload="metadata"
+                  title={title}
+                  className="max-w-full max-h-full object-contain"
+                />
+              ) : (
+                <MyImage
+                  src={currentItem.url}
+                  fallbackSrc={currentItem.thumbnailLink}
+                  alt={title}
+                  title={title}
+                  width={currentItem.imageMediaMetadata?.width}
+                  height={currentItem.imageMediaMetadata?.height}
+                  className="max-w-full max-h-full object-contain"
+                />
+              )}
+            </div>
+          </div>
+
+          {/* 底部縮圖導航列 */}
+          <ThumbnailsBar
+            items={items}
+            currIndex={itemIndex}
+            setCurrIndex={setItemIndex}
+            className="w-full h-full overflow-hidden pb-2"
+          />
         </div>
 
         {/* 項目資訊彈出視窗 */}
@@ -512,7 +483,7 @@ const THUMBNAIL_CONTENT: LanguageContent<Record<"last" | "first", string>> = {
   english: { last: "Last", first: "First" },
 };
 const THUMBNAIL_CLASSNAME =
-  "absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg will-change-transform transition-all duration-500";
+  "absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg border-1 border-[var(--border-color)] will-change-transform transition-all duration-500";
 
 type ThumbnailsBarProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
