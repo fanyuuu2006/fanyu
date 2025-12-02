@@ -21,6 +21,7 @@ import { CustomLink } from "../custom/CustomLink";
 import { LanguageOption, LanguageContent } from "@/types/language";
 import { cn } from "@/utils/className";
 import { proxyUrl } from "../../utils/url";
+import { MyImage } from "../custom/MyImage";
 
 type ProjectContent = Record<"skillTag" | "projectFeature", string>;
 const getProjectContent = (language: LanguageOption): ProjectContent =>
@@ -81,8 +82,7 @@ export const ProjectCard = ({
         <div className="flex items-start flex-col lg:flex-row gap-4 lg:gap-6">
           {/* 專案圖片 */}
           <div className="flex-shrink-0 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 rounded-2xl overflow-hidden border-2 border-[var(--border-color)]">
-            {/* eslint-disable-next-line @next/next/no-img-element*/}
-            <img
+            <MyImage
               src={proxyUrl(item.imageSrc)}
               alt={`${item.title.english} icon`}
               className="w-full h-full object-cover bg-white select-none"

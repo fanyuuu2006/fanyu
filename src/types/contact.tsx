@@ -1,3 +1,4 @@
+import { MyImage } from "@/components/custom/MyImage";
 import { LanguageOption } from "./language";
 
 export type ContactItem = {
@@ -6,7 +7,7 @@ export type ContactItem = {
   href: string;
   backgrounds?: React.CSSProperties["color"][];
   info: {
-    image?: React.ImgHTMLAttributes<HTMLImageElement>;
+    image?: React.ComponentPropsWithRef<typeof MyImage>;
     id: string;
     name: string;
     about?: React.FC<{ language: LanguageOption }>;
