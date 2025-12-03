@@ -376,34 +376,36 @@ const PreviewContent = memo(
 
     return (
       <>
-        <div className="w-full h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
+        <div className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
           {/* 頂部控制列 */}
-          <div className="w-full flex items-center justify-between py-4 px-8">
-            <div className="flex items-center max-w-1/2">
+          <div className="flex items-center py-4 px-8">
+            <div className="flex items-center max-w-[40%] gap-3">
               {/* 關閉按鈕 */}
               <button
-                className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+                className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2 hover:bg-white/10 transition"
                 onClick={close}
               >
                 <CloseOutlined />
               </button>
-              {/* 項目標題和進度 */}
-              <div className="flex flex-col min-w-0 ms-2">
+
+              {/* 標題 + 計數 */}
+              <div className="flex flex-col min-w-0">
                 <h3
                   title={currentItem.name || itemPreviewContent.untitled}
                   className="text-lg md:text-xl font-semibold truncate"
                 >
                   {currentItem.name}
                 </h3>
-                {/* 項目計數 (當前/總數) */}
+
                 <span className="text-sm md:text-base text-[var(--text-color-muted)]">
                   {itemIndex + 1} / {items.length}
                 </span>
+                <div></div>
               </div>
             </div>
 
             {/* 右側功能按鈕群組 */}
-            <div className="text-3xl flex">
+            <div className="text-3xl flex ms-auto">
               {/* 下載按鈕 */}
               <Link
                 className="rounded-full p-2"
@@ -432,7 +434,7 @@ const PreviewContent = memo(
             className="h-auto p-4 flex items-center justify-center overflow-hidden"
             onClick={handleBackgroundClick}
           >
-            <div className="h-full max-h-[80vh] max-w-[80vw] flex items-center justify-center">
+            <div className="h-full w-fit max-h-[80vh] max-w-[80vw]">
               {isVideo ? (
                 <video
                   src={currentItem.url}
@@ -461,7 +463,7 @@ const PreviewContent = memo(
             items={items}
             currIndex={itemIndex}
             setCurrIndex={setItemIndex}
-            className="w-full h-full overflow-hidden pb-2"
+            className="overflow-hidden pb-2"
           />
         </div>
 
