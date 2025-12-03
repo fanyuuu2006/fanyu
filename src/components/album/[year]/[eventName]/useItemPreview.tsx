@@ -378,29 +378,32 @@ const PreviewContent = memo(
       <>
         <div className="w-full h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
           {/* 頂部控制列 */}
-          <div className="w-full flex items-center py-4 px-8">
-            {/* 關閉按鈕 */}
-            <button
-              className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
-              onClick={close}
-            >
-              <CloseOutlined />
-            </button>
-            {/* 項目標題和進度 */}
-            <div className="flex flex-col min-w-0 ms-2">
-              <h3
-                title={currentItem.name || itemPreviewContent.untitled}
-                className="text-lg md:text-xl font-semibold truncate"
+          <div className="w-full flex items-center justify-between py-4 px-8">
+            <div className="flex items-center max-w-1/2">
+              {/* 關閉按鈕 */}
+              <button
+                className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+                onClick={close}
               >
-                {currentItem.name}
-              </h3>
-              {/* 項目計數 (當前/總數) */}
-              <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-                {itemIndex + 1} / {items.length}
-              </span>
+                <CloseOutlined />
+              </button>
+              {/* 項目標題和進度 */}
+              <div className="flex flex-col min-w-0 ms-2">
+                <h3
+                  title={currentItem.name || itemPreviewContent.untitled}
+                  className="text-lg md:text-xl font-semibold truncate"
+                >
+                  {currentItem.name}
+                </h3>
+                {/* 項目計數 (當前/總數) */}
+                <span className="text-sm md:text-base text-[var(--text-color-muted)]">
+                  {itemIndex + 1} / {items.length}
+                </span>
+              </div>
             </div>
+
             {/* 右側功能按鈕群組 */}
-            <div className="ms-auto text-3xl flex">
+            <div className="text-3xl flex">
               {/* 下載按鈕 */}
               <Link
                 className="rounded-full p-2"
