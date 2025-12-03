@@ -466,16 +466,16 @@ const PreviewContent = memo(
         </div>
 
         {/* 項目資訊彈出視窗 */}
-        <infoModal.Container className="flex items-center justify-center p-3 sm:p-6 md:p-8">
-          <div className="card flex flex-col w-full max-w-[calc(100vw-2rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-4rem)] sm:max-h-[calc(100vh-6rem)] mx-3 sm:mx-4 p-5 sm:p-6 md:p-8">
+        <infoModal.Container className="flex items-center justify-center p-2 sm:p-4 md:p-6">
+          <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8">
             {/* 資訊視窗標頭 */}
-            <div className="flex items-center justify-between mb-5 sm:mb-6 md:mb-8 pb-4 sm:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
-              <h3 className="uppercase text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
+            <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 pb-3 sm:pb-4 md:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
+              <h3 className="uppercase text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
                 {itemPreviewContent.title}
               </h3>
               {/* 關閉資訊視窗按鈕 */}
               <button
-                className="text-xl sm:text-2xl md:text-3xl text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] rounded-full p-2 sm:p-2.5 md:p-3 transition-colors duration-200 hover:bg-[var(--background-color-secondary)] flex-shrink-0"
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 transition-colors duration-200 hover:bg-[var(--background-color-secondary)] flex-shrink-0"
                 onClick={infoModal.close}
                 aria-label={itemPreviewContent.close}
               >
@@ -485,17 +485,17 @@ const PreviewContent = memo(
 
             {/* 項目資訊內容 */}
             <div className="flex-1 min-h-0 overflow-y-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 pb-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 pb-2">
                 {/* 動態渲染所有項目資訊欄位 */}
                 {mediaInfoFields.map((info, i) => (
                   <div
                     key={i}
-                    className="flex flex-col gap-2 p-4 rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)]"
+                    className="flex flex-col gap-1.5 sm:gap-2 p-2.5 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)]"
                   >
                     <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] tracking-wide leading-tight">
                       {info.label}
                     </div>
-                    <div className="text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
+                    <div className="break-all text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
                       <span>{info.value}</span>
                     </div>
                   </div>
