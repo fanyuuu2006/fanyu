@@ -167,28 +167,37 @@ export const useItemPreview = (
     [previewModal]
   );
 
+  // 使用 ref 儲存最新狀態，以解決 Content 組件重新建立導致的動畫失效問題
+  const stateRef = useRef({
+    items,
+    itemIndex,
+    setItemIndex,
+    close: previewModal.close,
+  });
+  stateRef.current = {
+    items,
+    itemIndex,
+    setItemIndex,
+    close: previewModal.close,
+  };
+
   /**
-   * 預覽內容組件，使用 memo 優化重新渲染
+   * 預覽內容組件
    *
-   * 渲染完整的預覽介面，包含：
-   * - 媒體內容顯示 (圖片/影片)
-   * - 導航控制按鈕
-   * - 項目資訊視窗
-   * - 下載功能
-   *
-   * 使用 useCallback 避免不必要的重新渲染，提升性能
+   * 使用 useMemo 返回一個穩定的組件函數，避免每次 render 都產生新的組件
+   * 這樣可以防止 PreviewContent 被卸載重掛，確保 CSS transition 動畫正常運作
    */
-  const Content = useCallback(
-    () => (
+  const Content = useCallback(() => {
+    const { items, itemIndex, setItemIndex, close } = stateRef.current;
+    return (
       <PreviewContent
         items={items}
         itemIndex={itemIndex}
         setItemIndex={setItemIndex}
-        close={previewModal.close}
+        close={close}
       />
-    ),
-    [items, itemIndex, previewModal.close]
-  );
+    );
+  }, []);
 
   return {
     ...previewModal,
@@ -377,7 +386,6 @@ const PreviewContent = memo(
     return (
       <>
         <div className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
-
           {/* 頂部控制列 */}
           <div className="py-4 px-8">
             <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
@@ -518,7 +526,7 @@ const THUMBNAIL_CONTENT: LanguageContent<Record<"last" | "first", string>> = {
   english: { last: "Last", first: "First" },
 };
 const THUMBNAIL_CLASSNAME =
-  "absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg border-1 border-[var(--border-color)] will-change-transform transition-all duration-500";
+  "absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg border-1 border-[var(--border-color)] will-change-transform transition-all duration-300";
 
 type ThumbnailsBarProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -556,7 +564,7 @@ const ThumbnailsBar = memo(
       <div {...rest}>
         <div
           ref={containerRef}
-          className="relative h-full aspect-square mx-auto transition-all duration-500"
+          className="relative h-full aspect-square mx-auto"
         >
           {/* 跳至最後按鈕 */}
           <button
