@@ -477,7 +477,7 @@ const PreviewContent = memo(
               </h3>
               {/* 關閉資訊視窗按鈕 */}
               <button
-                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 transition-colors duration-200 hover:bg-[var(--background-color-secondary)] flex-shrink-0"
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-color-muted)] rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 flex-shrink-0"
                 onClick={infoModal.close}
                 aria-label={itemPreviewContent.close}
               >
@@ -498,7 +498,7 @@ const PreviewContent = memo(
                       {info.label}
                     </div>
                     <div className="break-all text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
-                      <span>{info.value}</span>
+                      <span title={info.value}>{info.value}</span>
                     </div>
                   </div>
                 ))}
