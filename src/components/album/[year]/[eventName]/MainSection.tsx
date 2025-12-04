@@ -119,7 +119,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
               ))}
               {/* 預覽 Modal */}
               <itemPreview.Container className="animate-appear">
-                <itemPreview.Content />
+                {itemPreview.Content}
               </itemPreview.Container>
             </>
           )}
