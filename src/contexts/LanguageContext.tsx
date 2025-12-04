@@ -1,13 +1,9 @@
 "use client";
 import { languageOptions } from "@/libs/language";
 import { LanguageOption } from "@/types/language";
-import { DistributiveOmit } from "fanyucomponents";
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
-export type LanguageSwitchProps = DistributiveOmit<
-  React.HTMLAttributes<HTMLButtonElement>,
-  "onClick"
->;
+export type LanguageSwitchProps = React.HTMLAttributes<HTMLButtonElement>;
 
 const LanguageContext = createContext<{
   Switch: React.FC<LanguageSwitchProps>;
@@ -21,22 +17,24 @@ export const LanguageProvider = ({
 }>) => {
   const [Language, setLanguage] = useState<LanguageOption>("chinese");
 
-  const Switch: React.FC<LanguageSwitchProps> = (
-    props: LanguageSwitchProps
-  ) => {
-    return (
-      <button
-        onClick={() => {
-          setLanguage((prev) => {
-            const currIdx = languageOptions.indexOf(prev);
-            const nextIdx = (currIdx + 1) % languageOptions.length;
-            return languageOptions[nextIdx];
-          });
-        }}
-        {...props}
-      />
-    );
-  };
+  const Switch: React.FC<LanguageSwitchProps> = useCallback(
+    ({ onClick, ...rest }: LanguageSwitchProps) => {
+      return (
+        <button
+          onClick={(e) => {
+            setLanguage((prev) => {
+              const currIdx = languageOptions.indexOf(prev);
+              const nextIdx = (currIdx + 1) % languageOptions.length;
+              return languageOptions[nextIdx];
+            });
+            onClick?.(e);
+          }}
+          {...rest}
+        />
+      );
+    },
+    []
+  );
 
   return (
     <LanguageContext.Provider
