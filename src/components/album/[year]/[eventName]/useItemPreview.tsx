@@ -379,7 +379,7 @@ const PreviewContent = memo(
         <div className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
           {/* 頂部控制列 */}
           <div className="flex items-center py-4 px-8">
-            <div className="flex items-center gap-2 truncate max-w-[50%]">
+            <div className="flex items-center gap-2">
               {/* 關閉按鈕 */}
               <div>
                 <button
@@ -394,7 +394,7 @@ const PreviewContent = memo(
               <div className="flex flex-col min-w-0">
                 <h3
                   title={currentItem.name || itemPreviewContent.untitled}
-                  className="text-lg md:text-xl font-semibold"
+                  className="text-lg md:text-xl font-semibold truncate"
                 >
                   {currentItem.name}
                 </h3>
@@ -407,31 +407,27 @@ const PreviewContent = memo(
             </div>
 
             {/* 右側功能按鈕群組 */}
-            <div className="text-3xl flex items-center ms-auto">
+            <div className="text-3xl flex ms-auto">
               {/* 下載按鈕 */}
-              <div>
-                <Link
-                  className="rounded-full p-2"
-                  href={currentItem.url || ""}
-                  download={
-                    currentItem.name ||
-                    `${itemIndex}.${currentItem.fileExtension}`
-                  }
-                  aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
-                >
-                  <DownloadOutlined />
-                </Link>
-              </div>
+              <Link
+                className="rounded-full p-2"
+                href={currentItem.url || ""}
+                download={
+                  currentItem.name ||
+                  `${itemIndex}.${currentItem.fileExtension}`
+                }
+                aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
+              >
+                <DownloadOutlined />
+              </Link>
               {/* 項目資訊按鈕 */}
-              <div>
-                <button
-                  className="rounded-full p-2"
-                  aria-label={itemPreviewContent.details}
-                  onClick={infoModal.open}
-                >
-                  <InfoCircleOutlined />
-                </button>
-              </div>
+              <button
+                className="rounded-full p-2"
+                aria-label={itemPreviewContent.details}
+                onClick={infoModal.open}
+              >
+                <InfoCircleOutlined />
+              </button>
             </div>
           </div>
 
