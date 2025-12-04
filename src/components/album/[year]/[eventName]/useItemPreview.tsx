@@ -379,20 +379,22 @@ const PreviewContent = memo(
         <div className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
           {/* 頂部控制列 */}
           <div className="flex items-center py-4 px-8">
-            <div className="flex items-center max-w-[40%] gap-3">
+            <div className="flex items-center gap-2 truncate max-w-[50%]">
               {/* 關閉按鈕 */}
-              <button
-                className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2 hover:bg-white/10 transition"
-                onClick={close}
-              >
-                <CloseOutlined />
-              </button>
+              <div>
+                <button
+                  className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2 hover:bg-white/10 transition"
+                  onClick={close}
+                >
+                  <CloseOutlined />
+                </button>
+              </div>
 
               {/* 標題 + 計數 */}
               <div className="flex flex-col min-w-0">
                 <h3
                   title={currentItem.name || itemPreviewContent.untitled}
-                  className="text-lg md:text-xl font-semibold truncate"
+                  className="text-lg md:text-xl font-semibold"
                 >
                   {currentItem.name}
                 </h3>
@@ -405,27 +407,31 @@ const PreviewContent = memo(
             </div>
 
             {/* 右側功能按鈕群組 */}
-            <div className="text-3xl flex ms-auto">
+            <div className="text-3xl flex items-center ms-auto">
               {/* 下載按鈕 */}
-              <Link
-                className="rounded-full p-2"
-                href={currentItem.url || ""}
-                download={
-                  currentItem.name ||
-                  `${itemIndex}.${currentItem.fileExtension}`
-                }
-                aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
-              >
-                <DownloadOutlined />
-              </Link>
+              <div>
+                <Link
+                  className="rounded-full p-2"
+                  href={currentItem.url || ""}
+                  download={
+                    currentItem.name ||
+                    `${itemIndex}.${currentItem.fileExtension}`
+                  }
+                  aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
+                >
+                  <DownloadOutlined />
+                </Link>
+              </div>
               {/* 項目資訊按鈕 */}
-              <button
-                className="rounded-full p-2"
-                aria-label={itemPreviewContent.details}
-                onClick={infoModal.open}
-              >
-                <InfoCircleOutlined />
-              </button>
+              <div>
+                <button
+                  className="rounded-full p-2"
+                  aria-label={itemPreviewContent.details}
+                  onClick={infoModal.open}
+                >
+                  <InfoCircleOutlined />
+                </button>
+              </div>
             </div>
           </div>
 
