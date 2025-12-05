@@ -10,7 +10,7 @@ export const MainSection = ({ bg }: { bg: string }) => {
 
   return (
     <section id="hero" style={{ "--bg": `url(${bg})` } as React.CSSProperties}>
-      <div className="container flex flex-col items-center justify-center min-h-154">
+      <div className="container flex flex-col items-center justify-center min-h-screen">
         <TimerCard />
         <button
           className="btn-primary font-bold px-4 py-2 rounded-full"
