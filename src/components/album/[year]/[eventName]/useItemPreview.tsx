@@ -372,12 +372,11 @@ const PreviewContent = memo(
      * - 組件卸載時自動移除事件監聽器，防止記憶體洩漏
      */
     useEffect(() => {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        // 安全檢查：確保當前有有效的項目
-        if (!currentItem) {
-          return;
-        }
+      if (!currentItem) {
+        return;
+      }
 
+      const handleKeyDown = (e: KeyboardEvent) => {
         switch (e.key) {
           case KEYBOARD_KEYS.ARROW_LEFT:
             e.preventDefault(); // 防止頁面滾動
@@ -390,11 +389,22 @@ const PreviewContent = memo(
         }
       };
 
-      // 註冊全域鍵盤事件監聽器
+      const handleScroll = (e: Event) => {
+        e.preventDefault();
+        const delta = (e as WheelEvent).deltaY;
+        if (delta > 0) {
+          handleNextItem();
+        } else if (delta < 0) {
+          handlePrevItem();
+        }
+      };
+
       window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("wheel", handleScroll, { passive: false });
       // 清理函數：組件卸載時移除監聽器
       return () => {
         window.removeEventListener("keydown", handleKeyDown);
+        window.removeEventListener("wheel", handleScroll);
       };
     }, [currentItem, handleNextItem, handlePrevItem]);
 
@@ -474,7 +484,7 @@ const PreviewContent = memo(
               ) : (
                 <div className="relative h-full w-auto flex items-center justify-center">
                   {!isLoaded && (
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center text-3xl">
                       {currentItem.thumbnailLink && (
                         <MyImage
                           src={currentItem.thumbnailLink}
@@ -482,7 +492,7 @@ const PreviewContent = memo(
                           className="absolute inset-0 h-full w-full object-contain blur-sm opacity-50"
                         />
                       )}
-                      <LoadingOutlined/>
+                      <LoadingOutlined />
                     </div>
                   )}
                   <MyImage

@@ -64,7 +64,6 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
           </div>
         </div>
       )}
-
       {/* 結構化數據（SEO 使用） */}
       <meta itemProp="name" content={title} />
       <meta
