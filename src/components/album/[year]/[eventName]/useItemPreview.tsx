@@ -544,7 +544,7 @@ const ThumbnailsBar = memo(
             <button
               key={`${item.name}-${index}`}
               className={cn(
-                "relative h-full aspect-square flex-shrink-0 overflow-hidden rounded-lg border border-[var(--border-color)] transition-all duration-300",
+                "btn h-full aspect-square rounded-xl flex-shrink-0 transition-all duration-300",
                 {
                   "opacity-60 hover:opacity-100": index !== currIndex,
                 }
