@@ -119,7 +119,10 @@ export const MainSection = ({ data }: MainSectionProps) => {
     },
     recommended: {
       label: bgcContent.recommended,
-      compareFunctions: [(a, b) => b.recommendedCounts - a.recommendedCounts],
+      compareFunctions: [
+        (a, b) => b.recommendedCounts - a.recommendedCounts,
+        (a, b) => b.id - a.id,
+      ],
     },
   });
 
