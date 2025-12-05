@@ -26,7 +26,8 @@ export const useOrder = <T,>(
   const stableData = useMemo(() => data, [data]);
   const sortedData = useMemo(() => {
     const sorted = [...stableData];
-    for (const compareFn of currConfig.compareFunctions.reverse()) {
+    // 使用 [...arr] 建立副本，避免 reverse() 修改到原始 config
+    for (const compareFn of [...currConfig.compareFunctions].reverse()) {
       sorted.sort(compareFn);
     }
     return sorted;
@@ -45,9 +46,12 @@ export const useOrder = <T,>(
             return (
               <button
                 key={key}
-                className={`flex-1 basis-auto shrink-0 px-3 py-1 transition-all duration-200 rounded-[inherit] ${
-                  isSelected ? "btn" : ""
-                }`}
+                className={cn(
+                  `flex-1 basis-auto shrink-0 px-3 py-1 transition-all duration-200 rounded-[inherit]`,
+                  {
+                    btn: isSelected,
+                  }
+                )}
                 onClick={() => {
                   if (isSelected) return;
                   setCurrTag(key);
