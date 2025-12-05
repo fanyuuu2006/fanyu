@@ -65,57 +65,68 @@ function sanitizeHeaders(headers: Headers): Record<string, string> {
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const url = searchParams.get("url");
+  const initialUrl = searchParams.get("url");
 
-  if (!url) {
+  if (!initialUrl) {
     return new Response("Missing URL parameter", { status: 400 });
   }
 
   // 驗證 URL 長度
-  if (url.length > 2048) {
+  if (initialUrl.length > 2048) {
     return new Response("URL too long", { status: 400 });
   }
 
-  // 驗證 URL 安全性
-  if (!isUrlSafe(url)) {
-    return new Response("URL not allowed - potential security risk", { status: 403 });
-  }
+  let currentUrl = initialUrl;
 
   try {
     // 建立 AbortController 用於超時控制
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
 
-    const response = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; SecureProxy/1.0)',
-        'Accept': '*/*',
-        'Accept-Encoding': 'gzip, deflate',
-      },
-      signal: controller.signal,
-      // 不跟隨重導向以避免潛在的安全問題
-      redirect: 'manual'
-    });
+    let response: Response | undefined;
+    let redirectCount = 0;
+    const MAX_REDIRECTS = 5;
+
+    while (redirectCount < MAX_REDIRECTS) {
+      // 驗證 URL 安全性
+      if (!isUrlSafe(currentUrl)) {
+        return new Response("URL not allowed - potential security risk", { status: 403 });
+      }
+
+      response = await fetch(currentUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': '*/*',
+          'Accept-Encoding': 'gzip, deflate',
+        },
+        signal: controller.signal,
+        // 手動處理重導向以確保安全
+        redirect: 'manual'
+      });
+
+      if (response.status >= 300 && response.status < 400) {
+        const location = response.headers.get('location');
+        if (location) {
+          currentUrl = new URL(location, currentUrl).toString();
+          redirectCount++;
+          continue;
+        }
+      }
+      
+      break;
+    }
 
     clearTimeout(timeoutId);
 
-    // 處理重導向
-    if (response.status >= 300 && response.status < 400) {
-      const location = response.headers.get('location');
-      if (location && isUrlSafe(location)) {
-        return new Response(null, {
-          status: response.status,
-          headers: {
-            'Location': location,
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-          }
-        });
-      } else {
-        return new Response("Redirect not allowed", { status: 403 });
-      }
+    if (!response) {
+      return new Response("No response from upstream", { status: 502 });
     }
 
     if (!response.ok) {
+      // 嘗試讀取錯誤訊息以便除錯
+      const errorText = await response.text().catch(() => 'No error details');
+      console.error(`Proxy fetch failed for ${currentUrl}: ${response.status} ${errorText.substring(0, 200)}`);
+      
       return new Response(`Proxy fetch failed: ${response.status}`, { 
         status: response.status >= 400 ? response.status : 502 
       });
@@ -162,7 +173,7 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     console.error('Proxy error:', {
-      url: url.substring(0, 100), // 只記錄前100個字符
+      url: initialUrl.substring(0, 100), // 只記錄前100個字符
       error: error instanceof Error ? error.message : 'Unknown error'
     });
     

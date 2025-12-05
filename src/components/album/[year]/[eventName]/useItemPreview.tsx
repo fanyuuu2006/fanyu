@@ -372,7 +372,7 @@ const PreviewContent = memo(
      * - 組件卸載時自動移除事件監聽器，防止記憶體洩漏
      */
     useEffect(() => {
-      if (!currentItem) {
+      if (!isOpen) {
         return;
       }
 
@@ -406,7 +406,7 @@ const PreviewContent = memo(
         window.removeEventListener("keydown", handleKeyDown);
         window.removeEventListener("wheel", handleScroll);
       };
-    }, [currentItem, handleNextItem, handlePrevItem]);
+    }, [currentItem, handleNextItem, handlePrevItem, isOpen]);
 
     if (!currentItem) {
       return null;
