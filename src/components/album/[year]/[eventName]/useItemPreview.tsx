@@ -510,7 +510,7 @@ const THUMBNAIL_CONTENT: LanguageContent<Record<"last" | "first", string>> = {
   english: { last: "Last", first: "First" },
 };
 const THUMBNAIL_CLASSNAME =
-  "select-none absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg border-1 border-[var(--border-color)] will-change-transform transition-all duration-300";
+  "btn select-none absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg border-1 border-[var(--border-color)] will-change-transform transition-all duration-300";
 
 type ThumbnailsBarProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -554,7 +554,7 @@ const ThumbnailsBar = memo(
           <button
             className={cn(
               THUMBNAIL_CLASSNAME,
-              "btn flex items-center justify-center"
+              "flex items-center justify-center"
             )}
             style={{
               transform: `translateX(${(-1 - currIndex) * 105}%)`,
@@ -598,7 +598,7 @@ const ThumbnailsBar = memo(
           <button
             className={cn(
               THUMBNAIL_CLASSNAME,
-              "btn flex items-center justify-center"
+              "flex items-center justify-center"
             )}
             style={{
               transform: `translateX(${(items.length - currIndex) * 105}%)`,
