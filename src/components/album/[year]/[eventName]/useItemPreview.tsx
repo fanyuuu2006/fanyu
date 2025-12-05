@@ -9,8 +9,6 @@ import {
   CloseOutlined,
   DownloadOutlined,
   InfoCircleOutlined,
-  DoubleLeftOutlined,
-  DoubleRightOutlined,
 } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
@@ -505,13 +503,6 @@ const PreviewContent = memo(
 
 PreviewContent.displayName = "PreviewContent";
 
-const THUMBNAIL_CONTENT: LanguageContent<Record<"last" | "first", string>> = {
-  chinese: { last: "最後", first: "最前" },
-  english: { last: "Last", first: "First" },
-};
-const THUMBNAIL_CLASSNAME =
-  "btn select-none absolute top-0 left-0 w-full h-full overflow-hidden rounded-lg border-1 border-[var(--border-color)] will-change-transform transition-all duration-300";
-
 type ThumbnailsBarProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
   {
@@ -521,69 +512,48 @@ type ThumbnailsBarProps = OverrideProps<
     children?: never;
   }
 >;
+
 const ThumbnailsBar = memo(
   ({ items, currIndex, setCurrIndex, ...rest }: ThumbnailsBarProps) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const language = useLanguage();
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    const navigationText = THUMBNAIL_CONTENT[language.Current];
-
-    const handleGoToLast = useCallback(() => {
-      setCurrIndex(items.length - 1);
-    }, [setCurrIndex, items.length]);
-
-    const handleGoToFirst = useCallback(() => {
-      setCurrIndex(0);
-    }, [setCurrIndex]);
-
-    const handleItemClick = useCallback(
-      (index: number) => {
-        if (index !== currIndex) {
-          setCurrIndex(index);
+    // 當 currIndex 改變時，自動捲動到該項目
+    useEffect(() => {
+      if (scrollContainerRef.current) {
+        const activeItem = scrollContainerRef.current.children[
+          currIndex
+        ] as HTMLElement;
+        if (activeItem) {
+          activeItem.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center",
+          });
         }
-      },
-      [currIndex, setCurrIndex]
-    );
+      }
+    }, [currIndex]);
+
     return (
       <div {...rest}>
         <div
-          ref={containerRef}
-          className="relative h-full aspect-square mx-auto"
+          ref={scrollContainerRef}
+          className="flex h-full items-center gap-2 overflow-x-auto px-4 [&::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: "none" }}
         >
-          {/* 跳至最後按鈕 */}
-          <button
-            className={cn(
-              THUMBNAIL_CLASSNAME,
-              "flex items-center justify-center"
-            )}
-            style={{
-              transform: `translateX(${(-1 - currIndex) * 105}%)`,
-            }}
-            onClick={handleGoToLast}
-            aria-label={navigationText.last}
-          >
-            <div className="flex flex-col items-center justify-center text-[var(--text-color)]">
-              <DoubleRightOutlined className="text-lg mb-1" />
-              <span className="text-xs font-medium">{navigationText.last}</span>
-            </div>
-          </button>
-
-          {/* 項目縮圖 */}
           {items.map((item, index) => (
             <button
               key={`${item.name}-${index}`}
               className={cn(
-                THUMBNAIL_CLASSNAME,
-                "bg-[var(--background-color)]",
+                "relative h-full aspect-square flex-shrink-0 overflow-hidden rounded-lg border border-[var(--border-color)] transition-all duration-300",
                 {
-                  "opacity-40": index !== currIndex,
+                  "border-[var(--text-color-primary)] ring-2 ring-[var(--text-color-primary)] ring-offset-2 ring-offset-[var(--background-color)]":
+                    index === currIndex,
+                  "opacity-60 hover:opacity-100": index !== currIndex,
                 }
               )}
-              style={{
-                transform: `translateX(${(index - currIndex) * 105}%)`,
-              }}
-              onClick={() => handleItemClick(index)}
+              onClick={() => setCurrIndex(index)}
               aria-label={`選擇項目 ${index + 1}: ${item.name}`}
+              aria-current={index === currIndex ? "true" : undefined}
             >
               <MyImage
                 draggable={false}
@@ -593,26 +563,6 @@ const ThumbnailsBar = memo(
               />
             </button>
           ))}
-
-          {/* 跳至最前按鈕 */}
-          <button
-            className={cn(
-              THUMBNAIL_CLASSNAME,
-              "flex items-center justify-center"
-            )}
-            style={{
-              transform: `translateX(${(items.length - currIndex) * 105}%)`,
-            }}
-            onClick={handleGoToFirst}
-            aria-label={navigationText.first}
-          >
-            <div className="flex flex-col items-center justify-center text-[var(--text-color)]">
-              <DoubleLeftOutlined className="text-lg mb-1" />
-              <span className="text-xs font-medium">
-                {navigationText.first}
-              </span>
-            </div>
-          </button>
         </div>
       </div>
     );
