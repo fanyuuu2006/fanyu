@@ -18,8 +18,10 @@ export const useModal = ({
 
   const handleOpen = useCallback(() => {
     if (dialogRef.current && !dialogRef.current.open) {
-      requestAnimationFrame(() => dialogRef.current?.showModal());
-      onOpen?.(dialogRef.current);
+      requestAnimationFrame(() => {
+        dialogRef.current?.showModal();
+        onOpen?.(dialogRef.current!);
+      });
     }
   }, [onOpen]);
 

@@ -128,12 +128,16 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
 export const useItemPreview = (
   items: Album[number]["events"][number]["items"]
 ) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleOpen = useCallback(() => {
     document.body.style.overflow = "hidden";
+    setIsModalOpen(true);
   }, []);
 
   const handleClose = useCallback(() => {
     document.body.style.overflow = "";
+    setIsModalOpen(false);
   }, []);
 
   const previewModal = useModal({
@@ -178,6 +182,7 @@ export const useItemPreview = (
       itemIndex={itemIndex}
       setItemIndex={setItemIndex}
       close={previewModal.close}
+      isOpen={isModalOpen}
     />
   );
 
@@ -197,6 +202,8 @@ type PreviewContentProps = {
   setItemIndex: React.Dispatch<React.SetStateAction<number>>;
   /** 關閉預覽視窗的回調函式 */
   close: () => void;
+  /** 模態框是否開啟 */
+  isOpen: boolean;
 };
 
 /**
@@ -217,7 +224,7 @@ type PreviewContentProps = {
  * @param setItemIndex - 設定項目索引的狀態更新函數
  */
 const PreviewContent = memo(
-  ({ items, itemIndex, close, setItemIndex }: PreviewContentProps) => {
+  ({ items, itemIndex, close, setItemIndex, isOpen }: PreviewContentProps) => {
     const language = useLanguage();
     const itemPreviewContent = ITEM_PREVIEW_CONTENT[language.Current];
     const currentItem = useMemo(() => items[itemIndex], [items, itemIndex]);
@@ -454,6 +461,7 @@ const PreviewContent = memo(
             currIndex={itemIndex}
             setCurrIndex={setItemIndex}
             className="overflow-hidden pb-2"
+            isOpen={isOpen}
           />
         </div>
 
@@ -509,17 +517,18 @@ type ThumbnailsBarProps = OverrideProps<
     items: Album[number]["events"][number]["items"];
     currIndex: number;
     setCurrIndex: React.Dispatch<React.SetStateAction<number>>;
+    isOpen: boolean;
     children?: never;
   }
 >;
 
 const ThumbnailsBar = memo(
-  ({ items, currIndex, setCurrIndex, ...rest }: ThumbnailsBarProps) => {
+  ({ items, currIndex, setCurrIndex, isOpen, ...rest }: ThumbnailsBarProps) => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     // 當 currIndex 改變時，自動捲動到該項目
     useEffect(() => {
-      if (scrollContainerRef.current) {
+      if (isOpen && scrollContainerRef.current) {
         const activeItem = scrollContainerRef.current.children[
           currIndex
         ] as HTMLElement;
@@ -531,7 +540,7 @@ const ThumbnailsBar = memo(
           });
         }
       }
-    }, [currIndex]);
+    }, [currIndex, isOpen]);
 
     return (
       <div {...rest}>
