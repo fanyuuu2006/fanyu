@@ -421,7 +421,7 @@ const PreviewContent = memo(
 
           {/* 主要項目顯示區域 */}
           <div
-            className="h-auto p-4 flex items-center justify-center overflow-hidden"
+            className="h-auto p-3 flex items-center justify-center overflow-hidden"
             onClick={handleBackgroundClick}
           >
             <div className="h-full w-fit max-h-[80vh] max-w-[80vw]">
@@ -458,7 +458,7 @@ const PreviewContent = memo(
         </div>
 
         {/* 項目資訊彈出視窗 */}
-        <infoModal.Container className="flex items-center justify-center p-2 sm:p-4 md:p-6">
+        <infoModal.Container className="flex items-center justify-center p-4">
           <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8">
             {/* 資訊視窗標頭 */}
             <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 pb-3 sm:pb-4 md:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
@@ -537,7 +537,7 @@ const ThumbnailsBar = memo(
       <div {...rest}>
         <div
           ref={scrollContainerRef}
-          className="flex h-full items-center gap-2 overflow-x-auto px-4 [&::-webkit-scrollbar]:hidden"
+          className="flex h-full items-center gap-1 overflow-x-auto px-4 [&::-webkit-scrollbar]:hidden"
           style={{ scrollbarWidth: "none" }}
         >
           {items.map((item, index) => (
@@ -546,8 +546,6 @@ const ThumbnailsBar = memo(
               className={cn(
                 "relative h-full aspect-square flex-shrink-0 overflow-hidden rounded-lg border border-[var(--border-color)] transition-all duration-300",
                 {
-                  "border-[var(--text-color-primary)] ring-2 ring-[var(--text-color-primary)] ring-offset-2 ring-offset-[var(--background-color)]":
-                    index === currIndex,
                   "opacity-60 hover:opacity-100": index !== currIndex,
                 }
               )}
