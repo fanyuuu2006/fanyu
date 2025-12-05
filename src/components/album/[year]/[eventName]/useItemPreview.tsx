@@ -9,6 +9,7 @@ import {
   CloseOutlined,
   DownloadOutlined,
   InfoCircleOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
@@ -231,6 +232,35 @@ const PreviewContent = memo(
     const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
     const title = currentItem.name || itemPreviewContent.untitled;
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+      setIsLoaded(false);
+    }, [itemIndex]);
+
+    /**
+     * 預載圖片
+     *
+     * 當前圖片顯示時，預先載入前後幾張圖片，以提升切換時的流暢度
+     */
+    useEffect(() => {
+      if (!items || items.length === 0) return;
+
+      const preloadImage = (index: number) => {
+        const item = items[index];
+        if (item && !isVideo && item.url) {
+          const img = new Image();
+          img.src = item.url;
+        }
+      };
+
+      const len = items.length;
+      // 預載下一張
+      preloadImage((itemIndex + 1) % len);
+      // 預載上一張
+      preloadImage((itemIndex - 1 + len) % len);
+    }, [isVideo, itemIndex, items]);
+
     /**
      * 切換到上一個項目
      */
@@ -442,15 +472,35 @@ const PreviewContent = memo(
                   className="w-auto h-full"
                 />
               ) : (
-                <MyImage
-                  src={currentItem.url}
-                  fallbackSrc={currentItem.thumbnailLink}
-                  alt={title}
-                  title={title}
-                  width={currentItem.imageMediaMetadata?.width}
-                  height={currentItem.imageMediaMetadata?.height}
-                  className="h-full w-auto object-contain"
-                />
+                <div className="relative h-full w-auto flex items-center justify-center">
+                  {!isLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {currentItem.thumbnailLink && (
+                        <MyImage
+                          src={currentItem.thumbnailLink}
+                          alt={title}
+                          className="absolute inset-0 h-full w-full object-contain blur-sm opacity-50"
+                        />
+                      )}
+                      <LoadingOutlined/>
+                    </div>
+                  )}
+                  <MyImage
+                    src={currentItem.url}
+                    fallbackSrc={currentItem.thumbnailLink}
+                    alt={title}
+                    title={title}
+                    width={currentItem.imageMediaMetadata?.width}
+                    height={currentItem.imageMediaMetadata?.height}
+                    className={cn(
+                      "h-full w-auto object-contain transition-opacity duration-300",
+                      {
+                        "opacity-0": !isLoaded,
+                      }
+                    )}
+                    onLoad={() => setIsLoaded(true)}
+                  />
+                </div>
               )}
             </div>
           </div>
