@@ -57,3 +57,12 @@ export const asyncPool = async <T, R>(
   }
   return Promise.all(ret);
 };
+/**
+ * 產生一個介於 min 和 max 之間的隨機整數（包含 min 和 max）
+ * @param min
+ * @param max
+ * @returns
+ */
+export const randomInt = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};

@@ -1,20 +1,15 @@
 "use client";
 import { useModal } from "@/hooks/useModal";
-import { TimerCard } from "./TimerCard";
 import { useState } from "react";
 
-export const MainSection = () => {
+import { TimerCard } from "./TimerCard";
+
+export const MainSection = ({ bg }: { bg: string }) => {
   const modal = useModal({});
   const [count, setCount] = useState(0);
+
   return (
-    <section
-      id="hero"
-      style={
-        {
-          "--bg": 'url("/cbg.jpg")',
-        } as React.CSSProperties
-      }
-    >
+    <section id="hero" style={{ "--bg": `url(${bg})` } as React.CSSProperties}>
       <div className="container flex flex-col items-center justify-center min-h-154">
         <TimerCard />
         <button
@@ -24,11 +19,11 @@ export const MainSection = () => {
           Test Button
         </button>
       </div>
-      <modal.Container>
-        <div className="card p-6">
+      <modal.Container className="flex">
+        <div className="card p-6 m-auto">
           <h2 className="text-2xl font-bold mb-4">Modal Title</h2>
           <p>This is the content of the modal.</p>
-          <div className="flex gap-1">
+          <div className="flex gap-2">
             <button
               className="btn-secondary mt-4 rounded-full px-4 py-2"
               onClick={() => setCount((prev) => prev + 1)}
