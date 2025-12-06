@@ -34,25 +34,27 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
   return (
     <motion.article
       id={item.year}
-      className="w-full flex flex-col gap-4 mb-6"
+      className="w-full flex flex-col gap-6 mb-12"
       variants={fadeInItem}
       {...rest}
     >
       <div
-        className={`flex items-center gap-2 transition-colors ${
-          isCollapseOpen ? "" : "bg-[var(--background-color-primary)]"
-        }`}
+        className="flex items-center gap-4 cursor-pointer group select-none"
+        onClick={() => setIsCollapseOpen((prev) => !prev)}
       >
-        <h2 className="text-4xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
-          {item.year}
+        <h2 className="text-4xl font-bold tracking-tight">
+          <span className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
+            {item.year}
+          </span>
         </h2>
+        <div className="h-px flex-1 bg-[var(--border-color)]/50 group-hover:bg-[var(--border-color)] transition-colors" />
         <button
-          className={cn(`text-3xl ml-auto transition-transform`, {
-            "-rotate-90": isCollapseOpen,
-          })}
-          onClick={() => {
-            setIsCollapseOpen((prev) => !prev);
-          }}
+          className={cn(
+            `text-2xl p-2 rounded-full transition-all duration-300 text-[var(--text-color-muted)] group-hover:text-[var(--text-color-primary)]`,
+            {
+              "-rotate-90": isCollapseOpen,
+            }
+          )}
         >
           <CaretLeftOutlined />
         </button>
@@ -63,10 +65,12 @@ export const YearDiv = ({ item, ...rest }: YearDivProps) => {
           initial="hiddenBottom"
           animate="show"
           viewport={{ once: true, amount: 0.5 }}
-          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3"
+          className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 gap-y-8"
         >
           {item.events.length === 0 ? (
-            <div className="text-3xl font-bold">{`${item.year} - ${yearsContent.noEvents}`}</div>
+            <div className="col-span-full py-12 flex flex-col items-center justify-center text-[var(--text-color-muted)] bg-[var(--background-color-secondary)]/20 rounded-2xl border border-[var(--border-color)]/50 border-dashed">
+              <span className="text-lg italic">{yearsContent.noEvents}</span>
+            </div>
           ) : (
             item.events.map((event, index) => (
               <motion.div
