@@ -39,7 +39,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   const router = useRouter();
   const itemsContent = ITEMS_CONTENT[language.Current];
 
-  const itemPreview = useItemPreview(event.items, );
+  const itemPreview = useItemPreview(event.items);
 
   const handleImageClick = useCallback(
     (index: number) => {
@@ -62,7 +62,15 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   }, [router]);
 
   return (
-    <section className="min-h-screen">
+    <section
+      id="hero"
+      className="min-h-screen"
+      style={
+        {
+          "--bg": `url(${event.items[0].url})`,
+        } as React.CSSProperties
+      }
+    >
       <div className="container">
         {/* 返回按鈕區域 */}
         <div className="w-full mb-6">

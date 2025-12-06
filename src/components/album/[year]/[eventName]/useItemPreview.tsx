@@ -194,6 +194,273 @@ export const useItemPreview = (
   };
 };
 
+/**
+ * 計算項目資訊欄位的 Hook
+ */
+const useMediaInfoFields = (
+  currentItem: Album[number]["events"][number]["items"][number] | undefined
+) => {
+  const language = useLanguage();
+  const content = ITEM_PREVIEW_CONTENT[language.Current];
+  const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
+  return useMemo(() => {
+    if (!currentItem) return [];
+
+    const baseFields = [
+      {
+        label: content.fileName,
+        value: currentItem.name || content.untitled,
+      },
+      {
+        label: content.fileExtension,
+        value: currentItem.fileExtension || content.unknown,
+      },
+      {
+        label: content.uploadTime,
+        value: currentItem.createdTime
+          ? formatDate(currentItem.createdTime, language.Current)
+          : content.unknown,
+      },
+      {
+        label: content.size,
+        value: currentItem.size
+          ? `${(Number(currentItem.size) / MB_DIVISOR).toFixed(2)} MB`
+          : content.unknown,
+      },
+    ];
+
+    const mediaSpecificFields = [];
+
+    if (isVideo && currentItem.videoMediaMetadata) {
+      const { width, height, durationMillis } = currentItem.videoMediaMetadata;
+      mediaSpecificFields.push(
+        {
+          label: content.widthXheight,
+          value: `${width} x ${height}`,
+        },
+        {
+          label: content.duration,
+          value: durationMillis ? formatTime(durationMillis) : content.unknown,
+        }
+      );
+    } else if (currentItem.imageMediaMetadata) {
+      const { width, height, time } = currentItem.imageMediaMetadata;
+      mediaSpecificFields.push(
+        {
+          label: content.widthXheight,
+          value: `${width} x ${height}`,
+        },
+        {
+          label: content.createdTime,
+          value: time
+            ? formatDate(
+                time.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3"),
+                language.Current
+              )
+            : content.unknown,
+        }
+      );
+    }
+
+    return [...baseFields, ...mediaSpecificFields];
+  }, [currentItem, content, language.Current, isVideo]);
+};
+
+const PreviewHeader = memo(
+  ({
+    currentItem,
+    itemIndex,
+    totalItems,
+    close,
+    openInfo,
+  }: {
+    currentItem: Album[number]["events"][number]["items"][number];
+    itemIndex: number;
+    totalItems: number;
+    close: () => void;
+    openInfo: () => void;
+  }) => {
+    const language = useLanguage();
+    const content = ITEM_PREVIEW_CONTENT[language.Current];
+
+    return (
+      <div className="py-4 px-8">
+        <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
+          {/* 關閉按鈕 */}
+          <button
+            className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+            onClick={close}
+          >
+            <CloseOutlined />
+          </button>
+
+          {/* 標題 + 計數 */}
+          <div className="min-w-0 overflow-hidden truncate">
+            <h3
+              title={currentItem.name || content.untitled}
+              className="text-lg md:text-xl font-semibold truncate"
+            >
+              {currentItem.name}
+            </h3>
+
+            <span className="text-sm md:text-base text-[var(--text-color-muted)]">
+              {itemIndex + 1} / {totalItems}
+            </span>
+          </div>
+
+          {/* 右側功能按鈕群組 */}
+          <div className="text-3xl">
+            {/* 下載按鈕 */}
+            <Link
+              className="rounded-full p-2 inline-block"
+              href={currentItem.url || ""}
+              download={
+                currentItem.name || `${itemIndex}.${currentItem.fileExtension}`
+              }
+              aria-label={`${content.download} ${currentItem.name}`}
+            >
+              <DownloadOutlined />
+            </Link>
+            {/* 項目資訊按鈕 */}
+            <button
+              className="rounded-full p-2"
+              aria-label={content.details}
+              onClick={openInfo}
+            >
+              <InfoCircleOutlined />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+);
+PreviewHeader.displayName = "PreviewHeader";
+
+const PreviewMain = memo(
+  ({
+    currentItem,
+    isVideo,
+    isLoaded,
+    setIsLoaded,
+    handleBackgroundClick,
+  }: {
+    currentItem: Album[number]["events"][number]["items"][number];
+    isVideo: boolean;
+    isLoaded: boolean;
+    setIsLoaded: (loaded: boolean) => void;
+    handleBackgroundClick: (e: React.MouseEvent) => void;
+  }) => {
+    const language = useLanguage();
+    const content = ITEM_PREVIEW_CONTENT[language.Current];
+    const title = currentItem.name || content.untitled;
+
+    return (
+      <div
+        className="h-auto p-3 flex items-center justify-center overflow-hidden"
+        onClick={handleBackgroundClick}
+      >
+        <div className="h-full w-fit max-h-[80vh] max-w-[80vw]">
+          {isVideo ? (
+            <video
+              src={currentItem.url}
+              poster={currentItem.thumbnailLink || undefined}
+              controls
+              preload="metadata"
+              title={title}
+              className="w-auto h-full"
+            />
+          ) : (
+            <div className="relative h-full w-auto flex items-center justify-center">
+              {!isLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center text-3xl">
+                  {currentItem.thumbnailLink && (
+                    <MyImage
+                      src={currentItem.thumbnailLink}
+                      alt={title}
+                      className="absolute inset-0 h-full w-full object-contain blur-xs opacity-50"
+                    />
+                  )}
+                  <LoadingOutlined />
+                </div>
+              )}
+              <MyImage
+                src={currentItem.url}
+                fallbackSrc={currentItem.thumbnailLink}
+                alt={title}
+                title={title}
+                width={currentItem.imageMediaMetadata?.width}
+                height={currentItem.imageMediaMetadata?.height}
+                className={cn(
+                  "h-full w-auto object-contain transition-opacity duration-300",
+                  {
+                    "opacity-0": !isLoaded,
+                  }
+                )}
+                onLoad={() => setIsLoaded(true)}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+);
+PreviewMain.displayName = "PreviewMain";
+
+const InfoModalContent = memo(
+  ({
+    mediaInfoFields,
+    close,
+  }: {
+    mediaInfoFields: { label: string; value: string }[];
+    close: () => void;
+  }) => {
+    const language = useLanguage();
+    const content = ITEM_PREVIEW_CONTENT[language.Current];
+
+    return (
+      <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8">
+        {/* 資訊視窗標頭 */}
+        <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 pb-3 sm:pb-4 md:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
+          <h3 className="uppercase text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
+            {content.title}
+          </h3>
+          {/* 關閉資訊視窗按鈕 */}
+          <button
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-color-muted)] rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 flex-shrink-0"
+            onClick={close}
+            aria-label={content.close}
+          >
+            <CloseOutlined />
+          </button>
+        </div>
+
+        {/* 項目資訊內容 */}
+        <div className="flex-1 min-h-0 overflow-y-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 pb-2">
+            {/* 動態渲染所有項目資訊欄位 */}
+            {mediaInfoFields.map((info, i) => (
+              <div
+                key={i}
+                className="flex flex-col gap-1.5 sm:gap-2 p-2.5 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)]"
+              >
+                <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] tracking-wide leading-tight">
+                  {info.label}
+                </div>
+                <div className="break-all text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
+                  <span title={info.value}>{info.value}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+);
+InfoModalContent.displayName = "InfoModalContent";
+
 type PreviewContentProps = {
   /** 相簿項目陣列，包含圖片、影片等媒體檔案及其元數據 */
   items: Album[number]["events"][number]["items"];
@@ -226,11 +493,8 @@ type PreviewContentProps = {
  */
 const PreviewContent = memo(
   ({ items, itemIndex, close, setItemIndex, isOpen }: PreviewContentProps) => {
-    const language = useLanguage();
-    const itemPreviewContent = ITEM_PREVIEW_CONTENT[language.Current];
     const currentItem = useMemo(() => items[itemIndex], [items, itemIndex]);
     const isVideo = currentItem?.mimeType?.startsWith("video/") ?? false;
-    const title = currentItem.name || itemPreviewContent.untitled;
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -285,77 +549,7 @@ const PreviewContent = memo(
     );
 
     const infoModal = useModal({});
-    /**
-     * 計算項目資訊欄位
-     */
-    const mediaInfoFields = useMemo(() => {
-      if (!currentItem) {
-        return [];
-      }
-
-      // 基本資訊欄位
-      const baseFields = [
-        {
-          label: itemPreviewContent.fileName,
-          value: currentItem.name || itemPreviewContent.untitled,
-        },
-        {
-          label: itemPreviewContent.fileExtension,
-          value: currentItem.fileExtension || itemPreviewContent.unknown,
-        },
-        {
-          label: itemPreviewContent.uploadTime,
-          value: currentItem.createdTime
-            ? formatDate(currentItem.createdTime, language.Current)
-            : itemPreviewContent.unknown,
-        },
-        {
-          label: itemPreviewContent.size,
-          value: currentItem.size
-            ? `${(Number(currentItem.size) / MB_DIVISOR).toFixed(2)} MB`
-            : itemPreviewContent.unknown,
-        },
-      ];
-
-      // 根據媒體類型添加特定資訊
-      const mediaSpecificFields = [];
-
-      if (isVideo && currentItem.videoMediaMetadata) {
-        const { width, height, durationMillis } =
-          currentItem.videoMediaMetadata;
-        mediaSpecificFields.push(
-          {
-            label: itemPreviewContent.widthXheight,
-            value: `${width} x ${height}`,
-          },
-          {
-            label: itemPreviewContent.duration,
-            value: durationMillis
-              ? formatTime(durationMillis)
-              : itemPreviewContent.unknown,
-          }
-        );
-      } else if (currentItem.imageMediaMetadata) {
-        const { width, height, time } = currentItem.imageMediaMetadata;
-        mediaSpecificFields.push(
-          {
-            label: itemPreviewContent.widthXheight,
-            value: `${width} x ${height}`,
-          },
-          {
-            label: itemPreviewContent.createdTime,
-            value: time
-              ? formatDate(
-                  time.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3"),
-                  language.Current
-                )
-              : itemPreviewContent.unknown,
-          }
-        );
-      }
-
-      return [...baseFields, ...mediaSpecificFields];
-    }, [currentItem, itemPreviewContent, language.Current, isVideo]);
+    const mediaInfoFields = useMediaInfoFields(currentItem);
 
     /**
      * 鍵盤快捷鍵監聽器
@@ -407,7 +601,7 @@ const PreviewContent = memo(
         window.removeEventListener("keydown", handleKeyDown);
         window.removeEventListener("wheel", handleScroll);
       };
-    }, [currentItem, handleNextItem, handlePrevItem, isOpen]);
+    }, [handleNextItem, handlePrevItem, isOpen]);
 
     if (!currentItem) {
       return null;
@@ -416,105 +610,21 @@ const PreviewContent = memo(
     return (
       <>
         <div className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
-          {/* 頂部控制列 */}
-          <div className="py-4 px-8">
-            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
-              {/* 關閉按鈕 */}
-              <button
-                className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
-                onClick={close}
-              >
-                <CloseOutlined />
-              </button>
+          <PreviewHeader
+            currentItem={currentItem}
+            itemIndex={itemIndex}
+            totalItems={items.length}
+            close={close}
+            openInfo={infoModal.open}
+          />
 
-              {/* 標題 + 計數 */}
-              <div className="min-w-0 overflow-hidden truncate">
-                <h3
-                  title={currentItem.name || itemPreviewContent.untitled}
-                  className="text-lg md:text-xl font-semibold truncate"
-                >
-                  {currentItem.name}
-                </h3>
-
-                <span className="text-sm md:text-base text-[var(--text-color-muted)]">
-                  {itemIndex + 1} / {items.length}
-                </span>
-              </div>
-
-              {/* 右側功能按鈕群組 */}
-              <div className="text-3xl">
-                {/* 下載按鈕 */}
-                <Link
-                  className="rounded-full p-2 inline-block"
-                  href={currentItem.url || ""}
-                  download={
-                    currentItem.name ||
-                    `${itemIndex}.${currentItem.fileExtension}`
-                  }
-                  aria-label={`${itemPreviewContent.download} ${currentItem.name}`}
-                >
-                  <DownloadOutlined />
-                </Link>
-                {/* 項目資訊按鈕 */}
-                <button
-                  className="rounded-full p-2"
-                  aria-label={itemPreviewContent.details}
-                  onClick={infoModal.open}
-                >
-                  <InfoCircleOutlined />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* 主要項目顯示區域 */}
-          <div
-            className="h-auto p-3 flex items-center justify-center overflow-hidden"
-            onClick={handleBackgroundClick}
-          >
-            <div className="h-full w-fit max-h-[80vh] max-w-[80vw]">
-              {isVideo ? (
-                <video
-                  src={currentItem.url}
-                  poster={currentItem.thumbnailLink || undefined}
-                  controls
-                  preload="metadata"
-                  title={title}
-                  className="w-auto h-full"
-                />
-              ) : (
-                <div className="relative h-full w-auto flex items-center justify-center">
-                  {!isLoaded && (
-                    <div className="absolute inset-0 flex items-center justify-center text-3xl">
-                      {currentItem.thumbnailLink && (
-                        <MyImage
-                          src={currentItem.thumbnailLink}
-                          alt={title}
-                          className="absolute inset-0 h-full w-full object-contain blur-xs opacity-50"
-                        />
-                      )}
-                      <LoadingOutlined />
-                    </div>
-                  )}
-                  <MyImage
-                    src={currentItem.url}
-                    fallbackSrc={currentItem.thumbnailLink}
-                    alt={title}
-                    title={title}
-                    width={currentItem.imageMediaMetadata?.width}
-                    height={currentItem.imageMediaMetadata?.height}
-                    className={cn(
-                      "h-full w-auto object-contain transition-opacity duration-300",
-                      {
-                        "opacity-0": !isLoaded,
-                      }
-                    )}
-                    onLoad={() => setIsLoaded(true)}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
+          <PreviewMain
+            currentItem={currentItem}
+            isVideo={isVideo}
+            isLoaded={isLoaded}
+            setIsLoaded={setIsLoaded}
+            handleBackgroundClick={handleBackgroundClick}
+          />
 
           {/* 底部縮圖導航列 */}
           <ThumbnailsBar
@@ -528,42 +638,10 @@ const PreviewContent = memo(
 
         {/* 項目資訊彈出視窗 */}
         <infoModal.Container className="flex items-center justify-center p-4">
-          <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8">
-            {/* 資訊視窗標頭 */}
-            <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 pb-3 sm:pb-4 md:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
-              <h3 className="uppercase text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
-                {itemPreviewContent.title}
-              </h3>
-              {/* 關閉資訊視窗按鈕 */}
-              <button
-                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-color-muted)] rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 flex-shrink-0"
-                onClick={infoModal.close}
-                aria-label={itemPreviewContent.close}
-              >
-                <CloseOutlined />
-              </button>
-            </div>
-
-            {/* 項目資訊內容 */}
-            <div className="flex-1 min-h-0 overflow-y-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 pb-2">
-                {/* 動態渲染所有項目資訊欄位 */}
-                {mediaInfoFields.map((info, i) => (
-                  <div
-                    key={i}
-                    className="flex flex-col gap-1.5 sm:gap-2 p-2.5 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)]"
-                  >
-                    <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] tracking-wide leading-tight">
-                      {info.label}
-                    </div>
-                    <div className="break-all text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
-                      <span title={info.value}>{info.value}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <InfoModalContent
+            mediaInfoFields={mediaInfoFields}
+            close={infoModal.close}
+          />
         </infoModal.Container>
       </>
     );
