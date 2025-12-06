@@ -100,7 +100,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
     const finalSrc =
       hasError || !src
         ? fallbackSrc || FALLBACK_IMAGE
-        : `${src}?retry=${retryCount}`;
+        : `${src}${src.includes("?") ? "&" : "?"}retry=${retryCount}`;
 
     return (
       // eslint-disable-next-line @next/next/no-img-element

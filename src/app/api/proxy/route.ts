@@ -85,25 +85,39 @@ export async function GET(req: Request) {
 
     let response: Response | undefined;
     let redirectCount = 0;
+    let retryCount = 0;
     const MAX_REDIRECTS = 5;
+    const MAX_RETRIES = 3;
 
-    while (redirectCount < MAX_REDIRECTS) {
+    while (redirectCount < MAX_REDIRECTS && retryCount <= MAX_RETRIES) {
       // 驗證 URL 安全性
       if (!isUrlSafe(currentUrl)) {
         return new Response("URL not allowed - potential security risk", { status: 403 });
       }
 
-      response = await fetch(currentUrl, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept': '*/*',
-          'Accept-Encoding': 'gzip, deflate',
-        },
-        signal: controller.signal,
-        // 手動處理重導向以確保安全
-        redirect: 'manual'
-      });
+      try {
+        response = await fetch(currentUrl, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': '*/*',
+            'Accept-Encoding': 'gzip, deflate',
+          },
+          signal: controller.signal,
+          // 手動處理重導向以確保安全
+          redirect: 'manual'
+        });
+      } catch (error) {
+        // 處理網絡錯誤重試 (排除 AbortError)
+        if (retryCount < MAX_RETRIES && error instanceof Error && error.name !== 'AbortError') {
+          retryCount++;
+          const delay = 500 * Math.pow(2, retryCount) + Math.random() * 200;
+          await new Promise(r => setTimeout(r, delay));
+          continue;
+        }
+        throw error;
+      }
 
+      // 處理重導向
       if (response.status >= 300 && response.status < 400) {
         const location = response.headers.get('location');
         if (location) {
@@ -111,6 +125,15 @@ export async function GET(req: Request) {
           redirectCount++;
           continue;
         }
+      }
+
+      // 處理 429 Too Many Requests 和 5xx Server Errors
+      if ((response.status === 429 || response.status >= 500) && retryCount < MAX_RETRIES) {
+        retryCount++;
+        // 指數退避策略 (Exponential Backoff)
+        const delay = 500 * Math.pow(2, retryCount) + Math.random() * 200;
+        await new Promise(r => setTimeout(r, delay));
+        continue;
       }
       
       break;

@@ -378,7 +378,7 @@ const PreviewMain = memo(
                     <MyImage
                       src={currentItem.thumbnailLink}
                       alt={title}
-                      className="absolute inset-0 h-full w-full object-contain blur-xs opacity-50"
+                      className="absolute inset-0 h-full w-full object-contain blur-xs opacity-70"
                     />
                   )}
                   <LoadingOutlined />

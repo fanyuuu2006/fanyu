@@ -9,6 +9,7 @@ import { profile } from "@/libs/profile";
 import { Title } from "@/components/custom/Title";
 import { Tooltip } from "antd";
 import { proxyUrl } from "@/utils/url";
+import { MyImage } from "@/components/custom/MyImage";
 
 const SKILLS_CONTENT: LanguageContent<
   Record<"skills" | SkillCategory, string>
@@ -59,8 +60,7 @@ export const SkillsSection = () => {
                       variants={fadeInItem}
                     >
                       <Tooltip title={skillItem.title} placement="top">
-                        {/* eslint-disable-next-line @next/next/no-img-element*/}
-                        <img
+                        <MyImage
                           alt={skillItem.title}
                           src={proxyUrl(skillItem.src)}
                           width={300}
