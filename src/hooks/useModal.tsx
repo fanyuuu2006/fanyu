@@ -45,7 +45,7 @@ export const useModal = ({
         >
           <div
             ref={contentRef}
-            className={cn("bg-black/75 w-full h-full", className)}
+            className={cn("w-full h-full", className)}
             onClick={(e) => {
               if (clickOutsideToClose && e.target === e.currentTarget) {
                 handleClose();

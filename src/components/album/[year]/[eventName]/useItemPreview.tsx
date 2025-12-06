@@ -637,7 +637,7 @@ const PreviewContent = memo(
         </div>
 
         {/* 項目資訊彈出視窗 */}
-        <infoModal.Container className="flex items-center justify-center p-4">
+        <infoModal.Container className="bg-black/25 flex items-center justify-center p-4">
           <InfoModalContent
             mediaInfoFields={mediaInfoFields}
             close={infoModal.close}
