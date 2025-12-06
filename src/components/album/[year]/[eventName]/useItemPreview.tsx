@@ -614,9 +614,10 @@ const ThumbnailsBar = memo(
             <button
               key={`${item.name}-${index}`}
               className={cn(
-                "btn h-full aspect-square rounded-xl flex-shrink-0 transition-all duration-300",
+                "h-full aspect-square rounded-xl flex-shrink-0 transition-all duration-300",
                 {
-                  "opacity-60 hover:opacity-100": index !== currIndex,
+                  "btn opacity-60 hover:opacity-100": index !== currIndex,
+                  "btn-tertiary": index === currIndex,
                 }
               )}
               onClick={() => setCurrIndex(index)}
