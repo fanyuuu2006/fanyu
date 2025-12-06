@@ -1,3 +1,5 @@
+import { NextRequest, NextResponse } from 'next/server';
+
 // 最大檔案大小 (50MB)
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
@@ -14,7 +16,7 @@ function isUrlSafe(url: string): boolean {
       return false;
     }
     
-    // 阻止內部網路地址以防止 SSRF(erver-Side Request Forgery) 攻擊
+    // 阻止內部網路地址以防止 SSRF (Server-Side Request Forgery) 攻擊
     const hostname = parsedUrl.hostname.toLowerCase();
     
     // 檢查私有 IP 範圍
@@ -39,16 +41,19 @@ function isUrlSafe(url: string): boolean {
   }
 }
 
-// 清理和安全化 HTTP 標頭
-function sanitizeHeaders(headers: Headers): Record<string, string> {
+// 清理和安全化 HTTP 標頭 (回應給客戶端時)
+function sanitizeResponseHeaders(headers: Headers): Record<string, string> {
   const safeHeaders: Record<string, string> = {};
+  // 允許轉發的標頭白名單
   const allowedHeaders = [
     'content-type',
     'content-length',
     'cache-control',
     'expires',
     'last-modified',
-    'etag'
+    'etag',
+    'content-encoding',
+    'content-disposition'
   ];
   
   for (const [key, value] of headers.entries()) {
@@ -63,17 +68,18 @@ function sanitizeHeaders(headers: Headers): Record<string, string> {
   return safeHeaders;
 }
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
+// 處理所有類型的請求
+async function handleProxy(req: NextRequest) {
+  const searchParams = req.nextUrl.searchParams;
   const initialUrl = searchParams.get("url");
 
   if (!initialUrl) {
-    return new Response("Missing URL parameter", { status: 400 });
+    return new NextResponse("缺少 URL 參數", { status: 400 });
   }
 
   // 驗證 URL 長度
   if (initialUrl.length > 2048) {
-    return new Response("URL too long", { status: 400 });
+    return new NextResponse("URL 太長", { status: 400 });
   }
 
   let currentUrl = initialUrl;
@@ -89,23 +95,40 @@ export async function GET(req: Request) {
     const MAX_REDIRECTS = 5;
     const MAX_RETRIES = 3;
 
+    // 準備請求標頭
+    const requestHeaders = new Headers(req.headers);
+    // 移除不應該轉發的標頭
+    requestHeaders.delete('host');
+    requestHeaders.delete('connection');
+    requestHeaders.delete('content-length'); // 讓 fetch 自動計算
+    // 設置默認 User-Agent 如果沒有提供
+    if (!requestHeaders.has('user-agent')) {
+        requestHeaders.set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    }
+
     while (redirectCount < MAX_REDIRECTS && retryCount <= MAX_RETRIES) {
       // 驗證 URL 安全性
       if (!isUrlSafe(currentUrl)) {
-        return new Response("URL not allowed - potential security risk", { status: 403 });
+        return new NextResponse("不允許的 URL - 潛在的安全風險", { status: 403 });
       }
 
       try {
-        response = await fetch(currentUrl, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': '*/*',
-            'Accept-Encoding': 'gzip, deflate',
-          },
-          signal: controller.signal,
-          // 手動處理重導向以確保安全
-          redirect: 'manual'
-        });
+        const fetchOptions: RequestInit = {
+            method: req.method,
+            headers: requestHeaders,
+            signal: controller.signal,
+            redirect: 'manual', // 手動處理重導向
+        };
+
+        // 如果不是 GET 或 HEAD 請求，則轉發請求主體
+        if (req.method !== 'GET' && req.method !== 'HEAD' && req.body) {
+            // 注意: 在某些環境下，傳遞 stream 可能需要 { duplex: 'half' }
+            // @ts-expect-error - duplex is not yet in standard RequestInit types for all envs but needed for node fetch with stream
+            fetchOptions.duplex = 'half'; 
+            fetchOptions.body = req.body;
+        }
+
+        response = await fetch(currentUrl, fetchOptions);
       } catch (error) {
         // 處理網絡錯誤重試 (排除 AbortError)
         if (retryCount < MAX_RETRIES && error instanceof Error && error.name !== 'AbortError') {
@@ -142,68 +165,77 @@ export async function GET(req: Request) {
     clearTimeout(timeoutId);
 
     if (!response) {
-      return new Response("No response from upstream", { status: 502 });
+      return new NextResponse("上游伺服器無回應", { status: 502 });
     }
 
-    if (!response.ok) {
-      // 嘗試讀取錯誤訊息以便除錯
-      const errorText = await response.text().catch(() => 'No error details');
-      console.error(`Proxy fetch failed for ${currentUrl}: ${response.status} ${errorText.substring(0, 200)}`);
-      
-      return new Response(`Proxy fetch failed: ${response.status}`, { 
-        status: response.status >= 400 ? response.status : 502 
-      });
-    }
-
-    // 檢查內容長度
+    // 檢查內容長度 (如果有的話)
     const contentLength = response.headers.get('content-length');
     if (contentLength && parseInt(contentLength) > MAX_FILE_SIZE) {
-      return new Response("Content too large", { status: 413 });
+      return new NextResponse("內容過大", { status: 413 });
     }
 
     // 讀取回應內容
+    // 為了安全檢查大小，我們先讀取到 ArrayBuffer
     const buffer = await response.arrayBuffer();
     
     // 雙重檢查檔案大小
     if (buffer.byteLength > MAX_FILE_SIZE) {
-      return new Response("Content too large", { status: 413 });
+      return new NextResponse("內容過大", { status: 413 });
+    }
+
+    if (!response.ok) {
+        // 嘗試讀取錯誤訊息以便除錯 (這裡 buffer 已經讀取了，可以轉文字)
+        const errorText = new TextDecoder().decode(buffer).substring(0, 200);
+        console.error(`代理請求失敗 ${currentUrl}: ${response.status} ${errorText}`);
+        
+        return new NextResponse(`代理請求失敗: ${response.status}`, { 
+          status: response.status >= 400 ? response.status : 502 
+        });
     }
 
     // 清理原始回應標頭
-    const safeHeaders = sanitizeHeaders(response.headers);
+    const safeHeaders = sanitizeResponseHeaders(response.headers);
     
     // 確保有 Content-Type
     if (!safeHeaders['content-type']) {
       safeHeaders['content-type'] = 'application/octet-stream';
     }
 
-    return new Response(buffer, {
-      status: 200,
+    return new NextResponse(buffer, {
+      status: response.status,
       headers: {
         ...safeHeaders,
         // 安全性標頭
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "X-Content-Type-Options": "nosniff",
         "X-Frame-Options": "SAMEORIGIN",
         "X-XSS-Protection": "1; mode=block",
         "Referrer-Policy": "strict-origin-when-cross-origin",
-        "Cache-Control": safeHeaders['cache-control'] || "public, max-age=3600",
         // 添加代理標識
         "X-Proxied-By": "SecureProxy",
       },
     });
   } catch (error) {
-    console.error('Proxy error:', {
+    console.error('代理錯誤:', {
       url: initialUrl.substring(0, 100), // 只記錄前100個字符
-      error: error instanceof Error ? error.message : 'Unknown error'
+      error: error instanceof Error ? error.message : '未知錯誤'
     });
     
     if (error instanceof Error && error.name === 'AbortError') {
-      return new Response("Request timeout", { status: 408 });
+      return new NextResponse("請求超時", { status: 408 });
     }
     
-    return new Response("Server error", { status: 500 });
+    return new NextResponse("伺服器內部錯誤", { status: 500 });
   }
 }
+
+// 導出所有支援的 HTTP 方法
+export const GET = handleProxy;
+export const POST = handleProxy;
+export const PUT = handleProxy;
+export const DELETE = handleProxy;
+export const PATCH = handleProxy;
+export const HEAD = handleProxy;
+export const OPTIONS = handleProxy;
