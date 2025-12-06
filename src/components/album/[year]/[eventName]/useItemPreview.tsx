@@ -389,9 +389,10 @@ const PreviewContent = memo(
         }
       };
 
-      const handleScroll = (e: Event) => {
+      const handleScroll = (e: WheelEvent) => {
+        if (e.ctrlKey) return; // 允許 Ctrl + 滾輪 用於縮放
         e.preventDefault();
-        const delta = (e as WheelEvent).deltaY;
+        const delta = e.deltaY;
         if (delta > 0) {
           handleNextItem();
         } else if (delta < 0) {
