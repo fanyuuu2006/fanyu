@@ -62,15 +62,7 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
   }, [router]);
 
   return (
-    <section
-      id="hero"
-      className="min-h-screen"
-      style={
-        {
-          "--bg": `url(${event.items[0].url})`,
-        } as React.CSSProperties
-      }
-    >
+    <section>
       <div className="container">
         {/* 返回按鈕區域 */}
         <div className="w-full mb-6">
