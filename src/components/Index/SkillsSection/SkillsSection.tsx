@@ -8,7 +8,6 @@ import { SkillCategory } from "@/types/skill";
 import { profile } from "@/libs/profile";
 import { Title } from "@/components/custom/Title";
 import { Tooltip } from "antd";
-import { proxyUrl } from "@/utils/url";
 import { MyImage } from "@/components/custom/MyImage";
 
 const SKILLS_CONTENT: LanguageContent<
@@ -62,7 +61,7 @@ export const SkillsSection = () => {
                       <Tooltip title={skillItem.title} placement="top">
                         <MyImage
                           alt={skillItem.title}
-                          src={proxyUrl(skillItem.src)}
+                          src={skillItem.src}
                           width={300}
                           height={300}
                           className="object-cover transition-transform"
