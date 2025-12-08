@@ -45,11 +45,11 @@ const GSES: ExperienceItem = {
       ].map((chunk, index) => (
         <div
           key={index}
-          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+          className="flex items-center gap-3 p-3  rounded-2xl border border-(--border-color)"
         >
-          <chunk.icon className="text-xl flex-shrink-0" />
+          <chunk.icon className="text-xl shrink-0" />
           <div className="flex flex-col">
-            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+            <span className="text-sm font-medium text-(--text-color-muted)">
               {chunk.label[language]}
             </span>
             <span className="text-base font-semibold">

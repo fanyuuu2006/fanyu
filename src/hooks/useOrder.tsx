@@ -38,7 +38,7 @@ export const useOrder = <T,>(
       return (
         <div
           role="tablist"
-          className={cn(`flex gap-1 bg-[#000] rounded-xl p-1`, className)}
+          className={cn(`flex gap-1 bg-black rounded-xl p-1`, className)}
           {...rest}
         >
           {entries.map(([key, value]) => {

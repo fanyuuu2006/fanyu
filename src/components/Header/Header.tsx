@@ -16,7 +16,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 z-1080 w-full bg-[var(--background-color)]/90 backdrop-blur-md border-[var(--border-color)] border-b-1">
+    <header className="fixed top-0 z-1080 w-full bg-(--background-color)/90 backdrop-blur-md border-(--border-color) border-b">
       <nav className="flex flex-col" role="navigation" aria-label="主導航">
         {/* 主要導航區域 */}
         <div className="container px-8 py-4 w-full flex flex-nowrap items-center justify-between">

@@ -66,7 +66,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
           <>
             {/* 總項目數和事件數 */}
             <div className="flex items-center gap-1">
-              <span className="text-[var(--text-color-muted)]">
+              <span className="text-(--text-color-muted)">
                 {albumContent.total}
               </span>
               {(
@@ -75,7 +75,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
                   { key: "items", labelKey: "countItems" },
                 ] as const
               ).map((item) => (
-                <span key={item.key} className="text-[var(--text-color-muted)]">
+                <span key={item.key} className="text-(--text-color-muted)">
                   {albumContent[item.labelKey].replace(
                     "{count}",
                     totalCounts[item.key].toString()

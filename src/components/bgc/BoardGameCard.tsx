@@ -73,18 +73,18 @@ export const BoardGameCard = ({
   return (
     <div className={cn("card p-5 flex flex-col gap-3", className)} {...rest}>
       {/* 桌遊 ID */}
-      <div className="text-base text-[var(--text-color-muted)] font-mono tracking-wide">
+      <div className="text-base text-(--text-color-muted) font-mono tracking-wide">
         #{item.id}
       </div>
 
       {/* 桌遊名稱 */}
       <div className="flex flex-col gap-1 -mt-2">
-        <h3 className="text-lg font-bold text-[var(--text-color)] leading-tight">
+        <h3 className="text-lg font-bold text-(--text-color) leading-tight">
           {name.main}
         </h3>
 
         {name.sub && (
-          <h4 className="text-sm font-medium text-[var(--text-color-muted)] leading-tight">
+          <h4 className="text-sm font-medium text-(--text-color-muted) leading-tight">
             {name.sub}
           </h4>
         )}
@@ -142,12 +142,12 @@ export const BoardGameCard = ({
           return (
             <div
               key={info.label}
-              className="flex items-center gap-2 p-2 bg-[var(--background-color-tertiary)] rounded-lg border border-[var(--border-color)]"
+              className="flex items-center gap-2 p-2 bg-(--background-color-tertiary) rounded-lg border border-(--border-color)"
             >
-              <span className="font-medium text-[var(--text-color-muted)] text-xs tracking-wide">
+              <span className="font-medium text-(--text-color-muted) text-xs tracking-wide">
                 {info.label}:
               </span>
-              <span className="text-[var(--text-color)] font-semibold text-sm">
+              <span className="text-(--text-color) font-semibold text-sm">
                 {info.value}
               </span>
             </div>
@@ -156,21 +156,21 @@ export const BoardGameCard = ({
       </div>
 
       {/* 狀態詳情區域 */}
-      <div className="border-t border-[var(--border-color)] pt-3 mt-1">
+      <div className="border-t border-(--border-color) pt-3 mt-1">
         <div className="grid grid-cols-2 gap-3">
           {/* 遍歷桌遊的各種狀態項目 */}
           {["shrinkWrap", "appearance", "missingParts", "sleeves"].map(
             (statusKey) => (
               <div
                 key={statusKey}
-                className="flex flex-col gap-1 px-3 py-2 bg-[var(--background-color-tertiary)]/50 rounded-lg border border-[var(--border-color)]/50 transition-all duration-300 hover:bg-[var(--background-color-tertiary)] hover:border-[var(--border-color)]"
+                className="flex flex-col gap-1 px-3 py-2 bg-(--background-color-tertiary)/50 rounded-lg border border-(--border-color)/50 transition-all duration-300 hover:bg-(--background-color-tertiary) hover:border-(--border-color)"
               >
                 {/* 狀態標題 */}
-                <span className="text-[var(--text-color-muted)] text-xs font-semibold uppercase tracking-wide">
+                <span className="text-(--text-color-muted) text-xs font-semibold uppercase tracking-wide">
                   {bgcContent[statusKey as keyof BgcContent]}
                 </span>
                 {/* 狀態值 */}
-                <span className="text-[var(--text-color)] font-bold text-xs">
+                <span className="text-(--text-color) font-bold text-xs">
                   {item.status[statusKey as keyof typeof item.status]}
                 </span>
               </div>
@@ -181,13 +181,13 @@ export const BoardGameCard = ({
 
       {/* 備註區域（如果有備註的話） */}
       {item.note && (
-        <div className="py-2 px-3 bg-gradient-to-br from-[var(--background-color-tertiary)] to-[var(--background-color-secondary)] border border-[var(--border-color)] rounded-lg shadow-lg">
+        <div className="py-2 px-3 bg-linear-to-br from-(--background-color-tertiary) to-(--background-color-secondary) border border-(--border-color) rounded-lg shadow-lg">
           <div className="flex items-start gap-2">
             <div className="flex-1">
-              <span className="font-semibold text-[var(--text-color-muted)] text-xs tracking-wide block">
+              <span className="font-semibold text-(--text-color-muted) text-xs tracking-wide block">
                 備註：
               </span>
-              <span className="text-[var(--text-color)] font-medium text-sm leading-relaxed">
+              <span className="text-(--text-color) font-medium text-sm leading-relaxed">
                 {item.note}
               </span>
             </div>

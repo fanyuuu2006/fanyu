@@ -55,12 +55,12 @@ export const Footer = () => {
     []
   );
   return (
-    <footer className="w-full bg-black border-[var(--border-color)] border-t-1">
+    <footer className="w-full bg-black border-(--border-color) border-t">
       <div className="container px-6 py-12">
         {/* 左側內容區域 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div>
-            <div className="text-base md:text-lg flex flex-col gap-2 text-[var(--text-color-muted)]">
+            <div className="text-base md:text-lg flex flex-col gap-2 text-(--text-color-muted)">
               <div className="flex gap-2">
                 <CopyrightOutlined /> {year},{" "}
                 {profile.nickname[Language.Current]}
@@ -91,7 +91,7 @@ export const Footer = () => {
 
           {/* 快速連結 */}
           <div>
-            <h4 className="text-lg font-semibold text-[var(--text-color)] mb-4">
+            <h4 className="text-lg font-semibold text-(--text-color) mb-4">
               {footerContent.quickLinks}
             </h4>
             <ul className="space-y-2">
@@ -101,7 +101,7 @@ export const Footer = () => {
                   <li key={link.url}>
                     <Link
                       href={link.url}
-                      className="w-fit flex items-center gap-2 text-[var(--text-color-muted)] hover:text-[var(--text-color-primary)] transition-colors duration-200"
+                      className="w-fit flex items-center gap-2 text-(--text-color-muted) hover:text-(--text-color-primary) transition-colors duration-200"
                     >
                       {link.icon && <link.icon className="text-sm" />}
                       {link.label[Language.Current]}
