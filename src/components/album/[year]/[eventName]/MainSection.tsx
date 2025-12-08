@@ -78,15 +78,15 @@ export const MainSection = ({ year, event }: MainSectionProps) => {
         </div>
 
         <div className="flex flex-col items-center leading-tight mb-6 ">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[var(--text-color-muted)]">
+          <h2 className="text-2xl md:text-3xl font-semibold text-(--text-color-muted)">
             {year}
           </h2>
-          <h1 className="mb-4 text-3xl md:text-4xl font-bold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
+          <h1 className="mb-4 text-3xl md:text-4xl font-bold bg-linear-to-br from-(--text-color-primary) to-(--text-color-secondary) bg-clip-text text-transparent">
             {event.name}
           </h1>
         </div>
         <div className="w-full flex items-center justify-between mb-2">
-          <span className="text-[var(--text-color-muted)]">
+          <span className="text-(--text-color-muted)">
             {itemsContent.totalItems.replace(
               "{count}",
               event.items.length.toString()

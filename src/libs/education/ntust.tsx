@@ -59,11 +59,11 @@ const NTUST: ExperienceItem = {
           ].map((chunk, index) => (
             <div
               key={index}
-              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-2xl border border-[var(--border-color)]"
+              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-2xl border border-(--border-color)"
             >
-              <chunk.icon className="text-lg sm:text-xl flex-shrink-0" />
+              <chunk.icon className="text-lg sm:text-xl shrink-0" />
               <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-medium text-[var(--text-color-muted)]">
+                <span className="text-xs sm:text-sm font-medium text-(--text-color-muted)">
                   {chunk.label[language]}
                 </span>
                 <span className="text-sm sm:text-base font-semibold">
@@ -74,10 +74,10 @@ const NTUST: ExperienceItem = {
           ))}
         </div>
         {/** 學期成績表格 */}
-        <div className="overflow-hidden rounded-xl border border-[var(--border-color)] shadow-lg">
+        <div className="overflow-hidden rounded-xl border border-(--border-color) shadow-lg">
           <div className="overflow-x-auto">
-            <table className="w-full bg-[var(--background-color-primary)] table-auto border-collapse">
-              <thead className="text-xs sm:text-sm md:text-base bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] text-white">
+            <table className="w-full bg-(--background-color-primary) table-auto border-collapse">
+              <thead className="text-xs sm:text-sm md:text-base bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white">
                 <tr>
                   <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
                     {
@@ -121,28 +121,28 @@ const NTUST: ExperienceItem = {
                   return (
                     <React.Fragment key={semester}>
                       <tr
-                        className="hover:backdrop-brightness-125 transition-colors duration-200 cursor-pointer border-b border-[var(--border-color)]"
+                        className="hover:backdrop-brightness-125 transition-colors duration-200 cursor-pointer border-b border-(--border-color)"
                         onClick={modal.Open}
                       >
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">{semester}</td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">{semester}</td>
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
                           {data.classRank ||
                             { chinese: "無資料", english: "No Data" }[language]}
                         </td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
                           {data.departmentRanK ||
                             { chinese: "無資料", english: "No Data" }[language]}
                         </td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
                           {Math.round(gpa * 100) / 100}
                         </td>
                         <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">{totalCredits}</td>
                       </tr>
                       <modal.Container>
-                        <div className="animate-pop rounded-xl overflow-hidden border border-[var(--border-color)] shadow-lg">
+                        <div className="animate-pop rounded-xl overflow-hidden border border-(--border-color) shadow-lg">
                           <div className="overflow-x-auto">
-                            <table className="text-xs sm:text-sm md:text-base w-full bg-[var(--background-color-primary)] table-auto border-collapse">
-                              <thead className="bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] text-white">
+                            <table className="text-xs sm:text-sm md:text-base w-full bg-(--background-color-primary) table-auto border-collapse">
+                              <thead className="bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white">
                                 <tr>
                                   <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
                                     {
@@ -174,13 +174,13 @@ const NTUST: ExperienceItem = {
                               {data.courses.map((course, index) => (
                                 <tr
                                   key={index}
-                                  className="border-b border-[var(--border-color)] last:border-b-0"
+                                  className="border-b border-(--border-color) last:border-b-0"
                                 >
-                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
                                     {course.courseName[language]}
                                   </td>
                                   <td
-                                    className={cn(`text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0`, {
+                                    className={cn(`text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0`, {
                                       "text-green-400": course.grade && ["A+", "A", "A-"].includes(course.grade),
                                       "text-cyan-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
                                       "text-red-400": course.grade && ["C+", "C", "D+", "E", "X"].includes(course.grade),
@@ -198,9 +198,9 @@ const NTUST: ExperienceItem = {
                                 </tr>
                               ))}
                             </tbody>
-                            <tfoot className="text-xs sm:text-sm md:text-base bg-[var(--background-color-secondary)]">
+                            <tfoot className="text-xs sm:text-sm md:text-base bg-(--background-color-secondary)">
                               <tr>
-                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
                                   {
                                     {
                                       chinese: "總計",
@@ -208,7 +208,7 @@ const NTUST: ExperienceItem = {
                                     }[language]
                                   }
                                 </td>
-                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-[var(--border-color)] last:border-r-0"></td>
+                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
                                 <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
                                   {totalCredits}
                                 </td>
@@ -222,9 +222,9 @@ const NTUST: ExperienceItem = {
                   );
                 })}
               </tbody>
-              <tfoot className="text-xs sm:text-sm md:text-base bg-[var(--background-color-secondary)]">
+              <tfoot className="text-xs sm:text-sm md:text-base bg-(--background-color-secondary)">
                 <tr>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0">
                     {
                       {
                         chinese: "總計",
@@ -232,9 +232,9 @@ const NTUST: ExperienceItem = {
                       }[language]
                     }
                   </td>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0"></td>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0"></td>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-[var(--border-color)] last:border-r-0">
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
+                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0">
                     {Math.round(overallGPA.gpa * 100) / 100}
                   </td>
                   <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3">

@@ -32,7 +32,7 @@ export const DesktopLink = ({ item }: DesktopLinkProps) => {
       <Link
         href={item.url}
         className={cn({
-          "text-[var(--text-color-primary)]":
+          "text-(--text-color-primary)":
             item.isActive?.(pathName) || pathName === item.url,
         })}
       >
@@ -45,15 +45,15 @@ export const DesktopLink = ({ item }: DesktopLinkProps) => {
           className="slide-collapse absolute top-full left-1/2 transform -translate-x-1/2 z-50"
           state={subRouteShow}
         >
-          <div className="bg-[var(--background-color)] border border-[var(--border-color)] rounded-md shadow-lg mt-2 min-w-48">
-            <div className="text-[var(--text-color-muted)] flex flex-col text-base font-normal">
+          <div className="bg-(--background-color) border border-(--border-color) rounded-md shadow-lg mt-2 min-w-48">
+            <div className="text-(--text-color-muted) flex flex-col text-base font-normal">
               {item.sub!.map((sub) => {
                 if (sub.hidden?.header) return null;
                 return (
                   <Link
                     key={sub.url}
                     href={`${item.url}${sub.url}`}
-                    className="px-4 py-3 hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
+                    className="px-4 py-3 hover:text-(--text-color) hover:backdrop-brightness-(--brightness-light) transition-all duration-200"
                   >
                     {sub.label[Language.Current]}
                   </Link>

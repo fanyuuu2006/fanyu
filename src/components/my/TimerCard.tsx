@@ -63,13 +63,13 @@ const TimeUnit = ({
     {...rest}
   >
     {/* 時間單位標籤 - 顯示在數值上方 */}
-    <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-[var(--text-color-muted)] font-medium uppercase tracking-wider">
+    <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-(--text-color-muted) font-medium uppercase tracking-wider">
       {label}
     </span>
     {/* 時間數值卡片 - 帶有背景、邊框和陰影效果 */}
-    <div className="bg-[var(--background-color-tertiary)] border border-[var(--border-color)] rounded-xl px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4">
+    <div className="bg-(--background-color-tertiary) border border-(--border-color) rounded-xl px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-4">
       {/* 數值文字 - 使用等寬字體確保對齊，並補零顯示 */}
-      <span className="font-mono font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[var(--text-color)] tabular-nums">
+      <span className="font-mono font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-(--text-color) tabular-nums">
         {value.toString().padStart(maxLength, "0")}
       </span>
     </div>
@@ -145,7 +145,7 @@ export const TimerCard = () => {
       {/* 標題區域 - 顯示倒計時標題 */}
       <div className="text-center">
         {/* 主標題 - 使用漸層文字效果，響應式字體大小 */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) bg-clip-text text-transparent leading-tight">
           {timerContent.birthdayTimer}
         </h1>
       </div>
@@ -162,7 +162,7 @@ export const TimerCard = () => {
           />
 
           {/* 分隔符號 - 在小螢幕隱藏以節省空間 */}
-          <div className="text-[var(--text-color-muted)] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light hidden sm:block">
+          <div className="text-(--text-color-muted) text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light hidden sm:block">
             :
           </div>
 
@@ -174,7 +174,7 @@ export const TimerCard = () => {
           />
 
           {/* 分隔符號 */}
-          <div className="text-[var(--text-color-muted)] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light hidden sm:block">
+          <div className="text-(--text-color-muted) text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light hidden sm:block">
             :
           </div>
 
@@ -186,7 +186,7 @@ export const TimerCard = () => {
           />
 
           {/* 分隔符號 */}
-          <div className="text-[var(--text-color-muted)] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light hidden sm:block">
+          <div className="text-(--text-color-muted) text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light hidden sm:block">
             :
           </div>
 
@@ -201,9 +201,9 @@ export const TimerCard = () => {
         // 載入狀態顯示區域 - 當時間資料尚未載入完成時顯示
         <div className="flex flex-col items-center gap-4">
           {/* 載入動畫圖示 - 使用 Ant Design 的載入圖示，帶有旋轉動畫 */}
-          <LoadingOutlined className="text-4xl md:text-5xl lg:text-6xl text-[var(--text-color-primary)] animate-spin" />
+          <LoadingOutlined className="text-4xl md:text-5xl lg:text-6xl text-(--text-color-primary) animate-spin" />
           {/* 載入提示文字 */}
-          <span className="text-sm md:text-base text-[var(--text-color-muted)] font-medium">
+          <span className="text-sm md:text-base text-(--text-color-muted) font-medium">
             {timerContent.loading}...
           </span>
         </div>

@@ -149,15 +149,15 @@ export const MainSection = ({ data }: MainSectionProps) => {
         <div className="w-full max-w-2xl px-4">
           {/* 搜尋輸入框 */}
           <div className="relative group">
-            <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--text-color-muted)] text-lg pointer-events-none group-focus-within:text-[var(--text-color-primary)] transition-colors duration-200" />
+            <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-(--text-color-muted) text-lg pointer-events-none group-focus-within:text-(--text-color-primary) transition-colors duration-200" />
             <input
               type="text"
               className="
               text-base sm:text-lg w-full px-12 py-3 rounded-xl 
-              outline outline-[var(--border-color)] bg-[#000]
-              placeholder:text-[var(--text-color-muted)] 
-              focus:outline-[var(--text-color-primary)]
-              hover:outline-[var(--border-color-hover)]
+              outline outline-(--border-color) bg-black
+              placeholder:text-(--text-color-muted) 
+              focus:outline-(--text-color-primary)
+              hover:outline-(--border-color-hover)
               transition-all duration-200
               "
               placeholder={bgcContent.inputPlaceholder}
@@ -168,7 +168,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
             {inputValue && (
               <button
                 type="button"
-                className="text-sm absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--text-color-muted)] hover:text-[var(--text-color)] transition-colors duration-200 p-1.5 rounded-full hover:bg-[var(--background-color-tertiary)] active:bg-[var(--background-color-quaternary)]"
+                className="text-sm absolute right-3 top-1/2 transform -translate-y-1/2 text-(--text-color-muted) hover:text-(--text-color) transition-colors duration-200 p-1.5 rounded-full hover:bg-(--background-color-tertiary) active:bg-(--background-color-quaternary)"
                 onClick={handleClearSearch}
                 aria-label={bgcContent.clear}
               >
@@ -182,16 +182,16 @@ export const MainSection = ({ data }: MainSectionProps) => {
           <div className="card max-w-lg flex flex-col gap-4 items-center justify-center text-center p-12">
             {/* 圖示 */}
             <div className="opacity-60">
-              <SearchOutlined className="text-6xl text-[var(--text-color-muted)]" />
+              <SearchOutlined className="text-6xl text-(--text-color-muted)" />
             </div>
 
             {/* 主要訊息 */}
-            <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-color)]">
+            <h3 className="text-2xl sm:text-3xl font-bold text-(--text-color)">
               {bgcContent.noData}
             </h3>
 
             {/* 提示訊息 */}
-            <p className="text-[var(--text-color-muted)] text-lg leading-relaxed">
+            <p className="text-(--text-color-muted) text-lg leading-relaxed">
               {noResultMessage}
             </p>
 

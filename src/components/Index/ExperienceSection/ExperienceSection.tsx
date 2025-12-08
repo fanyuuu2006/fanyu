@@ -66,7 +66,7 @@ export const ExperienceSection = () => {
           {/** 分頁選單 */}
           <div
             role="tablist"
-            className="w-full bg-[#000] rounded-2xl grid grid-cols-4 p-1"
+            className="w-full bg-black rounded-2xl grid grid-cols-4 p-1"
           >
             {experienceTabs.map((key) => (
               <button

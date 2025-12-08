@@ -53,7 +53,7 @@ export const AboutMeSection = () => {
             initial="hiddenLeft"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="flex justify-center items-center flex-shrink-0 w-full lg:w-1/3"
+            className="flex justify-center items-center shrink-0 w-full lg:w-1/3"
           >
             <div className="relative group">
               <Link
@@ -68,7 +68,7 @@ export const AboutMeSection = () => {
                   height={400}
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
             </div>
           </motion.div>
@@ -87,7 +87,7 @@ export const AboutMeSection = () => {
                 variants={fadeInItem}
                 className={`text-base md:text-lg lg:text-base xl:text-lg leading-relaxed text-gray-200 ${
                   index === 0
-                    ? "text-justify indent-8 first-letter:text-2xl first-letter:font-bold first-letter:text-[var(--text-color-primary)]"
+                    ? "text-justify indent-8 first-letter:text-2xl first-letter:font-bold first-letter:text-(--text-color-primary)"
                     : "text-justify indent-8"
                 }`}
               >

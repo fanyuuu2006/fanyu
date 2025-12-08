@@ -61,7 +61,7 @@ export const ExperienceCard = ({
     >
       {/** 標題區域 */}
       <div className="flex items-start flex-col lg:flex-row gap-2 lg:gap-6">
-        <div className="flex-shrink-0 aspect-square h-16 sm:h-18 md:h-20 lg:h-22 xl:h-24 rounded-2xl overflow-hidden border-2 border-[var(--border-color)]">
+        <div className="shrink-0 aspect-square h-16 sm:h-18 md:h-20 lg:h-22 xl:h-24 rounded-2xl overflow-hidden border-2 border-(--border-color)">
           <MyImage
             src={
               item.imageSrc ||
@@ -70,7 +70,7 @@ export const ExperienceCard = ({
               )}`
             }
             alt={item.name.english}
-            className="w-full h-full object-cover bg-[#fff]"
+            className="w-full h-full object-cover bg-white"
             width={600}
             height={600}
           />
@@ -79,22 +79,22 @@ export const ExperienceCard = ({
         {/** 標題與時間 */}
         <div className="flex-1 min-w-0">
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-[var(--text-color)] leading-tight">
+            <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-(--text-color) leading-tight">
               {item.name[Language.Current]}
             </h3>
             {item.organization && (
-              <p className="text-base sm:text-lg md:text-lg lg:text-xl font-semibold text-[var(--text-color-muted)] leading-snug">
+              <p className="text-base sm:text-lg md:text-lg lg:text-xl font-semibold text-(--text-color-muted) leading-snug">
                 {item.organization.name[Language.Current]}
               </p>
             )}
             {item.department && (
-              <p className="text-sm sm:text-base md:text-base lg:text-lg font-medium text-[var(--text-color-muted)] leading-snug">
+              <p className="text-sm sm:text-base md:text-base lg:text-lg font-medium text-(--text-color-muted) leading-snug">
                 {item.department[Language.Current]}
               </p>
             )}
             <div className="flex items-center gap-2 mt-1">
-              <ClockCircleOutlined className="text-[var(--text-color-muted)] flex-shrink-0" />
-              <span className="text-xs sm:text-sm md:text-base text-[var(--text-color-muted)] font-medium">
+              <ClockCircleOutlined className="text-(--text-color-muted) shrink-0" />
+              <span className="text-xs sm:text-sm md:text-base text-(--text-color-muted) font-medium">
                 {typeof item.duration === "string"
                   ? item.duration
                   : `${item.duration.start} ~ ${
@@ -128,11 +128,11 @@ export const ExperienceCard = ({
 
         {/** 角色/職位 */}
         {item.role && (
-          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-[var(--card-background)] border border-[var(--border-color)]">
-            <h4 className="text-[var(--text-color-muted)] text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl font-bold">
+          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-(--card-background) border border-(--border-color)">
+            <h4 className="text-(--text-color-muted) text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl font-bold">
               {experienceContent.role}
             </h4>
-            <p className="text-sm sm:text-base md:text-base lg:text-lg xl:text-lg font-semibold text-[var(--text-color)]">
+            <p className="text-sm sm:text-base md:text-base lg:text-lg xl:text-lg font-semibold text-(--text-color)">
               {item.role[Language.Current]}
             </p>
           </div>
@@ -140,8 +140,8 @@ export const ExperienceCard = ({
 
         {/** 描述 */}
         {item.description && (
-          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-[var(--card-background)] border border-[var(--border-color)]">
-            <h4 className="text-[var(--text-color-muted)] text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl font-bold">
+          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-(--card-background) border border-(--border-color)">
+            <h4 className="text-(--text-color-muted) text-base sm:text-lg md:text-lg lg:text-xl xl:text-xl font-bold">
               {experienceContent.description}
             </h4>
             <div className="text-sm sm:text-base md:text-base lg:text-base xl:text-base leading-relaxed">

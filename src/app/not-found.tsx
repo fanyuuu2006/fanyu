@@ -29,13 +29,13 @@ export default function NotFound() {
     <div className="container flex flex-col items-center justify-center min-h-screen">
       <div className="card p-8 max-w-md w-full flex flex-col items-center text-center gap-6">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="text-8xl font-bold text-[color:var(--text-color-primary)]">
+          <h1 className="text-8xl font-bold text-(--text-color-primary)">
             404
           </h1>
-          <h2 className="text-2xl font-semibold text-[color:var(--text-color)]">
+          <h2 className="text-2xl font-semibold text-(--text-color)">
             {notFoundContent.title}
           </h2>
-          <p className="text-[color:var(--text-color-muted)] leading-relaxed">
+          <p className="text-(--text-color-muted) leading-relaxed">
             {notFoundContent.message}
           </p>
         </div>

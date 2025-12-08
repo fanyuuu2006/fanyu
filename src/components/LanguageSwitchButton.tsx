@@ -17,7 +17,7 @@ export const LanguageSwitchButton = () => {
   if (!mounted) return null; // SSR 時 & CSR 第一輪 hydration 時都不產生 portal
 
   return ReactDOM.createPortal(
-    <Language.Switch className="btn text-lg text-center fixed bottom-4 right-4 z-[9999] w-12 h-12 flex items-center justify-center rounded-full">
+    <Language.Switch className="btn text-lg text-center fixed bottom-4 right-4 z-9999 w-12 h-12 flex items-center justify-center rounded-full">
       <TranslationOutlined />
     </Language.Switch>,
     document.body

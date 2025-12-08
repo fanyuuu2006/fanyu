@@ -35,7 +35,7 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
   return (
     <figure
       className={cn(
-        "relative aspect-square overflow-hidden bg-[#888] cursor-pointer border border-[var(--border-color)] hover:border-[var(--text-color-primary)]",
+        "relative aspect-square overflow-hidden bg-[#888] cursor-pointer border border-(--border-color) hover:border-(--text-color-primary)",
         className
       )}
       itemScope

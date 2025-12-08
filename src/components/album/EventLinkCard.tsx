@@ -89,7 +89,7 @@ export const EventLinkCard = ({
 
       <div className="text-base flex flex-col px-1 py-3">
         <span className="font-semibold leading-tight">{event.name}</span>
-        <span className="text-[var(--text-color-muted)] leading-relaxed">
+        <span className="text-(--text-color-muted) leading-relaxed">
           {event.items.length} {eventLinkCardContent.items}
         </span>
       </div>

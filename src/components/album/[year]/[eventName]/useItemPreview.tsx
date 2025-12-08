@@ -288,7 +288,7 @@ const PreviewHeader = memo(
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
           {/* 關閉按鈕 */}
           <button
-            className="text-2xl md:text-3xl text-[var(--text-color-muted)] rounded-full p-2"
+            className="text-2xl md:text-3xl text-(--text-color-muted) rounded-full p-2"
             onClick={close}
           >
             <CloseOutlined />
@@ -303,7 +303,7 @@ const PreviewHeader = memo(
               {currentItem.name}
             </h3>
 
-            <span className="text-sm md:text-base text-[var(--text-color-muted)]">
+            <span className="text-sm md:text-base text-(--text-color-muted)">
               {itemIndex + 1} / {totalItems}
             </span>
           </div>
@@ -422,13 +422,13 @@ const InfoModalContent = memo(
     return (
       <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8">
         {/* 資訊視窗標頭 */}
-        <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 pb-3 sm:pb-4 md:pb-5 border-b border-[var(--border-color)] flex-shrink-0">
-          <h3 className="uppercase text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent leading-tight">
+        <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 pb-3 sm:pb-4 md:pb-5 border-b border-(--border-color) shrink-0">
+          <h3 className="uppercase text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold bg-linear-to-br from-(--text-color-primary) to-(--text-color-secondary) bg-clip-text text-transparent leading-tight">
             {content.title}
           </h3>
           {/* 關閉資訊視窗按鈕 */}
           <button
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[var(--text-color-muted)] rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 flex-shrink-0"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-(--text-color-muted) rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 shrink-0"
             onClick={close}
             aria-label={content.close}
           >
@@ -443,9 +443,9 @@ const InfoModalContent = memo(
             {mediaInfoFields.map((info, i) => (
               <div
                 key={i}
-                className="flex flex-col gap-1.5 sm:gap-2 p-2.5 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-[var(--background-color-secondary)] border border-[var(--border-color)]"
+                className="flex flex-col gap-1.5 sm:gap-2 p-2.5 sm:p-3 md:p-4 rounded-lg sm:rounded-xl bg-(--background-color-secondary) border border-(--border-color)"
               >
-                <div className="text-xs sm:text-sm md:text-base font-medium text-[var(--text-color-muted)] tracking-wide leading-tight">
+                <div className="text-xs sm:text-sm md:text-base font-medium text-(--text-color-muted) tracking-wide leading-tight">
                   {info.label}
                 </div>
                 <div className="break-all text-sm sm:text-base md:text-lg font-semibold leading-relaxed flex-1">
@@ -692,7 +692,7 @@ const ThumbnailsBar = memo(
             <button
               key={`${item.name}-${index}`}
               className={cn(
-                "h-full aspect-square rounded-xl flex-shrink-0 transition-all duration-300",
+                "h-full aspect-square rounded-xl shrink-0 transition-all duration-300",
                 {
                   "btn opacity-60 hover:opacity-100": index !== currIndex,
                   "btn-tertiary": index === currIndex,

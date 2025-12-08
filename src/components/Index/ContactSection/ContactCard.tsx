@@ -63,11 +63,11 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
       <OutsideLink
         draggable={true} // 允許拖曳
         href={item.href} // 連結地址
-        className="block p-[2px] rounded-full no-underline " // 樣式：區塊顯示、內邊距、圓角、無底線
+        className="block p-0.5 rounded-full no-underline " // 樣式：區塊顯示、內邊距、圓角、無底線
         style={gradientStyle} // 套用漸層樣式
       >
         {/* 內層按鈕內容：圖示 + 標籤文字 */}
-        <span className="text-xl md:text-2xl font-semibold flex items-center justify-center px-4 py-2 gap-2 rounded-[inherit] no-underline bg-[var(--background-color)] transition-all duration-300 group-hover:bg-transparent">
+        <span className="text-xl md:text-2xl font-semibold flex items-center justify-center px-4 py-2 gap-2 rounded-[inherit] no-underline bg-(--background-color) transition-all duration-300 group-hover:bg-transparent">
           <item.icon /> {/* 聯絡方式圖示 */}
           {item.label} {/* 聯絡方式標籤 */}
         </span>
@@ -76,9 +76,9 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
       {/* 懸停時顯示的詳細資訊卡 */}
       <div className="overlay-content">
         {/* 資訊卡外框：套用漸層邊框效果 */}
-        <div className="p-[2px] rounded-2xl" style={gradientStyle}>
+        <div className="p-0.5 rounded-2xl" style={gradientStyle}>
           {/* 資訊卡內容區域：包含頭像、姓名、ID 和其他資訊 */}
-          <div className="bg-[var(--background-color)] rounded-[inherit] flex flex-col gap-2 p-4">
+          <div className="bg-(--background-color) rounded-[inherit] flex flex-col gap-2 p-4">
             {/* 頭像和姓名 ID 區域 */}
             <div className="flex items-center gap-4">
               {/* 頭像區域 */}
@@ -127,7 +127,7 @@ export const ContactCard = ({ className, item, ...rest }: ContactCardProps) => {
                 <div>
                   <CopyButton
                     content={item.info.id} // 要複製的內容
-                    className="text-sm md:text-base text-[var(--text-color-muted)]"
+                    className="text-sm md:text-base text-(--text-color-muted)"
                   >
                     @<span>{item.info.id}</span>
                   </CopyButton>

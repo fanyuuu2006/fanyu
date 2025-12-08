@@ -42,7 +42,7 @@ export const MobileLink = ({
       {/* 主選單項目 */}
       <div
         className={cn(
-          "flex items-center justify-between py-3 px-6 border-b border-[var(--border-color)]"
+          "flex items-center justify-between py-3 px-6 border-b border-(--border-color)"
         )}
       >
         <Link
@@ -77,7 +77,7 @@ export const MobileLink = ({
           className="slide-collapse"
           id={`sub-menu-${item.url.replace("/", "")}`}
         >
-          <div className="flex flex-col text-sm bg-[var(--background-color-tertiary)] border-b border-[var(--border-color)]">
+          <div className="flex flex-col text-sm bg-(--background-color-tertiary) border-b border-(--border-color)">
             {item.sub!.map((sub) => {
               if (sub.hidden?.header) return null;
               return (
@@ -85,7 +85,7 @@ export const MobileLink = ({
                   key={sub.url}
                   href={`${item.url}${sub.url}`}
                   onClick={handleLinkClick}
-                  className="px-8 py-3 text-[var(--text-color-muted)] hover:text-[var(--text-color)] hover:backdrop-brightness-[var(--brightness-light)] transition-all duration-200"
+                  className="px-8 py-3 text-(--text-color-muted) hover:text-(--text-color) hover:backdrop-brightness-(--brightness-light) transition-all duration-200"
                 >
                   {sub.label[Language.Current]}
                 </Link>

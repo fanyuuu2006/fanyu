@@ -149,13 +149,13 @@ export const HeroSection = () => {
               </span>
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold ">
                 {heroContent.iAm}
-                <span className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-secondary)] bg-clip-text text-transparent">
+                <span className="bg-linear-to-br from-(--text-color-primary) to-(--text-color-secondary) bg-clip-text text-transparent">
                   {profile.nickname[Language.Current]}
                 </span>
                 ❗
               </h1>
               <TypeWriterText
-                className="text-base md:text-lg lg:text-xl text-[var(--text-color-muted)]"
+                className="text-base md:text-lg lg:text-xl text-(--text-color-muted)"
                 speed={heroContent.intro.length * 1.5}
               >
                 {heroContent.intro}
