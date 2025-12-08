@@ -43,29 +43,29 @@ export const AboutMeSection = () => {
 
   return (
     <section id="aboutMe">
-      <div className="container flex flex-col items-center gap-8">
+      <div className="container flex flex-col items-center gap-8 md:gap-12">
         <Title>{aboutMeContent.aboutMe}</Title>
 
-        <div className="w-full flex flex-col lg:flex-row gap-6 items-stretch">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* 個人照片卡片 */}
           <motion.div
             variants={fadeInItem}
             initial="hiddenLeft"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="flex justify-center items-center shrink-0 w-full lg:w-1/3"
+            className="lg:col-span-4 xl:col-span-3 flex justify-center"
           >
-            <div className="relative group">
+            <div className="relative group w-full max-w-xs sm:max-w-sm lg:max-w-xs xl:max-w-sm">
               <Link
-                className="block card overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 aspect-square w-80 sm:w-96 md:w-80 lg:w-72 xl:w-80"
+                className="block card overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 aspect-square w-full"
                 href="/#top"
               >
                 <Image
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   alt="個人照片"
                   src="/GameShow.jpg"
-                  width={400}
-                  height={400}
+                  width={600}
+                  height={600}
                   priority
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -79,15 +79,15 @@ export const AboutMeSection = () => {
             initial="hiddenRight"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="card p-8 md:p-10 lg:p-8 xl:p-10 flex flex-col flex-1 xl:w-3/5 lg:w-1/2 space-y-4"
+            className="lg:col-span-8 xl:col-span-9 card p-6 md:p-8 lg:p-10 flex flex-col gap-4"
           >
             {aboutMeContent.article.map((part, index) => (
               <motion.p
                 key={index}
                 variants={fadeInItem}
-                className={`text-base md:text-lg lg:text-base xl:text-lg leading-relaxed text-gray-200 ${
+                className={`text-base md:text-lg leading-relaxed text-gray-200 ${
                   index === 0
-                    ? "text-justify indent-8 first-letter:text-2xl first-letter:font-bold first-letter:text-(--text-color-primary)"
+                    ? "text-justify indent-8 first-letter:text-3xl first-letter:font-bold first-letter:text-(--text-color-primary) first-letter:mr-1"
                     : "text-justify indent-8"
                 }`}
               >
