@@ -81,7 +81,7 @@ export const AboutMeSection = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="lg:col-span-8 xl:col-span-9 card p-6 md:p-8 lg:p-10 flex flex-col gap-4"
           >
-            {aboutMeContent.article.map((part, index) => (
+            {aboutMeContent.article.map((paragraph, index) => (
               <motion.p
                 key={index}
                 variants={fadeInItem}
@@ -91,7 +91,7 @@ export const AboutMeSection = () => {
                     : "text-justify indent-8"
                 }`}
               >
-                {part}
+                {paragraph}
               </motion.p>
             ))}
           </motion.article>

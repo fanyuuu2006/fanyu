@@ -290,6 +290,8 @@ const PreviewHeader = memo(
           <button
             className="text-2xl md:text-3xl text-(--text-color-muted) rounded-full p-2"
             onClick={close}
+            aria-label={content.close}
+            data-action="close-preview"
           >
             <CloseOutlined />
           </button>
@@ -299,11 +301,15 @@ const PreviewHeader = memo(
             <h3
               title={currentItem.name || content.untitled}
               className="text-lg md:text-xl font-semibold truncate"
+              data-testid="preview-title"
             >
               {currentItem.name}
             </h3>
 
-            <span className="text-sm md:text-base text-(--text-color-muted)">
+            <span 
+              className="text-sm md:text-base text-(--text-color-muted)"
+              data-testid="preview-counter"
+            >
               {itemIndex + 1} / {totalItems}
             </span>
           </div>
@@ -318,6 +324,7 @@ const PreviewHeader = memo(
                 currentItem.name || `${itemIndex}.${currentItem.fileExtension}`
               }
               aria-label={`${content.download} ${currentItem.name}`}
+              data-action="download-item"
             >
               <DownloadOutlined />
             </Link>
@@ -326,6 +333,7 @@ const PreviewHeader = memo(
               className="rounded-full p-2"
               aria-label={content.details}
               onClick={openInfo}
+              data-action="open-info"
             >
               <InfoCircleOutlined />
             </button>
@@ -359,6 +367,8 @@ const PreviewMain = memo(
       <div
         className="h-auto p-3 flex items-center justify-center overflow-hidden"
         onClick={handleBackgroundClick}
+        data-testid="preview-main-container"
+        data-media-type={isVideo ? "video" : "image"}
       >
         <div className="h-full w-fit max-h-[80vh] max-w-[80vw]">
           {isVideo ? (
@@ -369,9 +379,14 @@ const PreviewMain = memo(
               preload="metadata"
               title={title}
               className="w-auto h-full"
+              data-testid="preview-video"
             />
           ) : (
-            <div className="relative h-full w-auto flex items-center justify-center">
+            <div 
+              className="relative h-full w-auto flex items-center justify-center"
+              data-loaded={isLoaded}
+              data-testid="preview-image-container"
+            >
               {!isLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center text-3xl">
                   {currentItem.thumbnailLink && (
@@ -420,7 +435,10 @@ const InfoModalContent = memo(
     const content = ITEM_PREVIEW_CONTENT[language.Current];
 
     return (
-      <div className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8">
+      <div 
+        className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8"
+        data-testid="info-modal-content"
+      >
         {/* 資訊視窗標頭 */}
         <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6 lg:mb-8 pb-3 sm:pb-4 md:pb-5 border-b border-(--border-color) shrink-0">
           <h3 className="uppercase text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold bg-linear-to-br from-(--text-color-primary) to-(--text-color-secondary) bg-clip-text text-transparent leading-tight">
@@ -431,6 +449,7 @@ const InfoModalContent = memo(
             className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-(--text-color-muted) rounded-full p-1.5 sm:p-2 md:p-2.5 lg:p-3 shrink-0"
             onClick={close}
             aria-label={content.close}
+            data-action="close-info"
           >
             <CloseOutlined />
           </button>
@@ -609,7 +628,10 @@ const PreviewContent = memo(
 
     return (
       <>
-        <div className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]">
+        <div 
+          className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]"
+          data-testid="preview-content"
+        >
           <PreviewHeader
             currentItem={currentItem}
             itemIndex={itemIndex}
@@ -682,7 +704,7 @@ const ThumbnailsBar = memo(
     }, [currIndex, isOpen]);
 
     return (
-      <div {...rest}>
+      <div {...rest} data-testid="thumbnails-bar">
         <div
           ref={scrollContainerRef}
           className="flex h-full items-center gap-1 overflow-x-auto px-4 [&::-webkit-scrollbar]:hidden"
@@ -701,6 +723,8 @@ const ThumbnailsBar = memo(
               onClick={() => setCurrIndex(index)}
               aria-label={`選擇項目 ${index + 1}: ${item.name}`}
               aria-current={index === currIndex ? "true" : undefined}
+              data-index={index}
+              data-active={index === currIndex}
             >
               <MyImage
                 draggable={false}
