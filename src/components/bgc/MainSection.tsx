@@ -5,11 +5,11 @@ import { Title } from "../custom/Title";
 import { BoardGameResponse } from "@/types/bgc";
 import { BoardGameCard } from "./BoardGameCard";
 import { useOrder } from "@/hooks/useOrder";
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState, useMemo, useEffect, useTransition } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import bgc from "@/utils/bgc";
 import { normalize } from "../../utils/index";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
-import { useDebounce } from "@/hooks/useDebounce";
 
 type BgcContent = Record<
   | "bgc"
@@ -24,6 +24,7 @@ type BgcContent = Record<
   | "noBoardGame",
   string
 >;
+
 const BGC_CONTENT: LanguageContent<BgcContent> = {
   chinese: {
     bgc: "桌上遊戲研究社",
@@ -55,16 +56,32 @@ export type MainSectionProps = {
   data: BoardGameResponse;
 };
 
-// 自定義 debounce hook，確保正確清理
-
 export const MainSection = ({ data }: MainSectionProps) => {
-  const Language = useLanguage();
-  const bgcContent = BGC_CONTENT[Language.Current];
-  const [searchString, setSearchString] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  const { Current: currentLang } = useLanguage();
+  const bgcContent = BGC_CONTENT[currentLang];
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  
+  // 獲取 URL 中的搜尋參數
+  const searchString = searchParams.get("search") || "";
 
+  // 本地輸入狀態
+  const [inputValue, setInputValue] = useState(searchString);
+  
+  // 效能優化：使用 useTransition 確保搜尋導航不會阻塞 UI 渲染
+  const [isPending, startTransition] = useTransition();
+
+  // 當 URL 參數改變時，同步回輸入框 (例如點擊上一頁)
+  useEffect(() => {
+    setInputValue(searchString);
+  }, [searchString]);
+
+  // 效能優化：快取原始資料
   const boardGames = useMemo(() => data.data, [data.data]);
 
+  // 效能優化：預先計算搜尋索引
+  // 避免在每次過濾時都重新執行昂貴的 stringify 和 normalize 操作
   const searchableData = useMemo(
     () =>
       boardGames.map((item) => ({
@@ -74,7 +91,8 @@ export const MainSection = ({ data }: MainSectionProps) => {
     [boardGames]
   );
 
-  // 優化：使用 useMemo 快取過濾結果
+  // 效能優化：快取過濾結果
+  // 僅在搜尋字串或資料改變時重新計算
   const filteredData = useMemo(() => {
     if (!searchString) return boardGames;
     const normalizedSearch = normalize(searchString);
@@ -83,28 +101,55 @@ export const MainSection = ({ data }: MainSectionProps) => {
       .map(({ item }) => item);
   }, [searchableData, searchString, boardGames]);
 
-  const debouncedSearch = useDebounce(setSearchString, 500);
-
-  const handleSearch = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.currentTarget.value;
-      setInputValue(value);
-      debouncedSearch(value);
+  // 邏輯簡化：統一處理 URL 更新
+  const updateSearchParam = useCallback(
+    (term: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (term) {
+        params.set("search", term);
+      } else {
+        params.delete("search");
+      }
+      
+      // 使用 startTransition 標記為非緊急更新
+      startTransition(() => {
+        router.replace(`${pathname}?${params.toString()}`, {
+          scroll: false,
+        });
+      });
     },
-    [debouncedSearch]
+    [searchParams, pathname, router]
+  );
+
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.currentTarget.value);
+  }, []);
+
+  const handleSearchSubmit = useCallback(() => {
+    updateSearchParam(inputValue);
+  }, [updateSearchParam, inputValue]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        handleSearchSubmit();
+      }
+    },
+    [handleSearchSubmit]
   );
 
   const handleClearSearch = useCallback(() => {
-    setSearchString("");
     setInputValue("");
-  }, []);
+    updateSearchParam("");
+  }, [updateSearchParam]);
 
+  // 效能優化：快取無結果訊息
   const noResultMessage = useMemo(
     () =>
       searchString
         ? bgcContent.canNotFind.replace("{string}", searchString)
         : bgcContent.noBoardGame,
-    [bgcContent.canNotFind, bgcContent.noBoardGame, searchString]
+    [bgcContent, searchString]
   );
 
   const order = useOrder(filteredData, {
@@ -126,7 +171,7 @@ export const MainSection = ({ data }: MainSectionProps) => {
     },
   });
 
-  // 優化：快取字串替換邏輯
+  // 效能優化：快取計數文字
   const totalCountText = useMemo(
     () => bgcContent.total.replace("{count}", order.data.length.toString()),
     [bgcContent.total, order.data.length]
@@ -149,7 +194,15 @@ export const MainSection = ({ data }: MainSectionProps) => {
         <div className="w-full max-w-2xl px-4">
           {/* 搜尋輸入框 */}
           <div className="relative group">
-            <SearchOutlined className="absolute left-3 top-1/2 transform -translate-y-1/2 text-(--text-color-muted) text-lg pointer-events-none group-focus-within:text-(--text-color-primary) transition-colors duration-200" />
+            <button
+              type="button"
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-(--text-color-muted) text-lg hover:text-(--text-color-primary) transition-colors duration-200 p-1 cursor-pointer"
+              onClick={handleSearchSubmit}
+              aria-label="Search"
+              disabled={isPending} // 搜尋中禁用
+            >
+              <SearchOutlined className={isPending ? "animate-spin" : ""} />
+            </button>
             <input
               type="text"
               className="
@@ -162,7 +215,8 @@ export const MainSection = ({ data }: MainSectionProps) => {
               "
               placeholder={bgcContent.inputPlaceholder}
               value={inputValue}
-              onChange={handleSearch}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
             />
             {/* 清除按鈕 */}
             {inputValue && (
