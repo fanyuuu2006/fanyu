@@ -101,6 +101,8 @@ async function handleProxy(req: NextRequest) {
     requestHeaders.delete('host');
     requestHeaders.delete('connection');
     requestHeaders.delete('content-length'); // 讓 fetch 自動計算
+    requestHeaders.delete('referer'); // 避免來源檢查導致的 403 錯誤
+    requestHeaders.delete('origin');
     // 設置默認 User-Agent 如果沒有提供
     if (!requestHeaders.has('user-agent')) {
         requestHeaders.set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');

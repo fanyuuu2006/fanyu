@@ -105,6 +105,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
+        draggable={hasError ? false : undefined}
         src={finalSrc}
         ref={ref}
         alt={alt}

@@ -66,11 +66,11 @@ export const PDAO: ExperienceItem = {
       ].map((chunk, index) => (
         <div
           key={index}
-          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+          className="flex items-center gap-3 p-3  rounded-2xl border border-(--border-color)"
         >
-          <chunk.icon className="text-xl flex-shrink-0" />
+          <chunk.icon className="text-xl shrink-0" />
           <div className="flex flex-col">
-            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+            <span className="text-sm font-medium text-(--text-color-muted)">
               {chunk.label[language]}
             </span>
             <span className="text-base font-semibold">
@@ -120,9 +120,9 @@ export const HCCGM: ExperienceItem = {
     },
   ],
   description: ({ language }) => (
-    <div className="bg-gradient-to-br from-[var(--text-color-primary)] to-[var(--text-color-tertiary)] flex items-center justify-center p-3 rounded-xl">
+    <div className="bg-linear-to-br from-(--text-color-primary) to-(--text-color-tertiary) flex items-center justify-center p-3 rounded-xl">
       <div className="text-lg md:text-xl flex items-center gap-2 text-white">
-        <CrownOutlined className=" flex-shrink-0" />
+        <CrownOutlined className=" shrink-0" />
         <span className="font-bold">
           {
             {
@@ -182,11 +182,11 @@ export const SE: ExperienceItem = {
       ].map((chunk, index) => (
         <div
           key={index}
-          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+          className="flex items-center gap-3 p-3  rounded-2xl border border-(--border-color)"
         >
-          <chunk.icon className="text-xl flex-shrink-0" />
+          <chunk.icon className="text-xl shrink-0" />
           <div className="flex flex-col">
-            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+            <span className="text-sm font-medium text-(--text-color-muted)">
               {chunk.label[language]}
             </span>
             <span className="text-base font-semibold">
@@ -241,11 +241,11 @@ export const XLS: ExperienceItem = {
       ].map((chunk, index) => (
         <div
           key={index}
-          className="flex items-center gap-3 p-3  rounded-2xl border border-[var(--border-color)]"
+          className="flex items-center gap-3 p-3  rounded-2xl border border-(--border-color)"
         >
-          <chunk.icon className="text-xl flex-shrink-0" />
+          <chunk.icon className="text-xl shrink-0" />
           <div className="flex flex-col">
-            <span className="text-sm font-medium text-[var(--text-color-muted)]">
+            <span className="text-sm font-medium text-(--text-color-muted)">
               {chunk.label[language]}
             </span>
             <span className="text-base font-semibold">
