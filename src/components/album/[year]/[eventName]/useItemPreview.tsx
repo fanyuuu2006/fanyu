@@ -629,7 +629,7 @@ const PreviewContent = memo(
     return (
       <>
         <div 
-          className="w-screen h-full grid grid-rows-[auto_1fr_4rem] md:grid-rows-[auto_1fr_5rem]"
+          className="w-screen h-full grid grid-rows-[auto_1fr_5rem] md:grid-rows-[auto_1fr_6rem]"
           data-testid="preview-content"
         >
           <PreviewHeader
@@ -653,7 +653,7 @@ const PreviewContent = memo(
             items={items}
             currIndex={itemIndex}
             setCurrIndex={setItemIndex}
-            className="overflow-hidden pb-2"
+            className="overflow-hidden py-2"
             isOpen={isOpen}
           />
         </div>

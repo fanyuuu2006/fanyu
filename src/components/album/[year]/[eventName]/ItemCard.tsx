@@ -7,6 +7,7 @@ import { formatTime } from "@/utils";
 import { cn } from "@/utils/className";
 import { PlayCircleFilled } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
+import { memo } from "react";
 
 const ITEM_CARD_CONTENT: LanguageContent<Record<"noItem", string>> = {
   chinese: {
@@ -24,13 +25,14 @@ export type ImageCardProps = OverrideProps<
   }
 >;
 
-export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
+export const ItemCard = memo(({ item, className, ...rest }: ImageCardProps) => {
   const language = useLanguage();
   const itemContent = ITEM_CARD_CONTENT[language.Current];
   const title = item.name || itemContent.noItem;
 
   const isVideo = item.mimeType?.startsWith("video/") ?? false;
-  const { width = 800, height = 800 } = item.imageMediaMetadata ?? {};
+  const width = item.imageMediaMetadata?.width;
+  const height = item.imageMediaMetadata?.height;
 
   return (
     <figure
@@ -52,6 +54,9 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
         title={title}
         alt={title}
         className="w-full h-full object-cover"
+        width={width}
+        height={height}
+        loading="lazy"
       />
 
       {isVideo && (
@@ -71,13 +76,11 @@ export const ItemCard = ({ item, className, ...rest }: ImageCardProps) => {
         content={item.thumbnailLink || FALLBACK_IMAGE}
       />
 
-      {item.imageMediaMetadata?.width && (
-        <meta itemProp="width" content={String(width)} />
-      )}
+      {width && <meta itemProp="width" content={String(width)} />}
 
-      {item.imageMediaMetadata?.height && (
-        <meta itemProp="height" content={String(height)} />
-      )}
+      {height && <meta itemProp="height" content={String(height)} />}
     </figure>
   );
-};
+});
+
+ItemCard.displayName = "ItemCard";
