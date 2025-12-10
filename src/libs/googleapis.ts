@@ -22,4 +22,5 @@ export const SEARCH_FIELDS = [
   "imageMediaMetadata",
   "videoMediaMetadata",
   "thumbnailLink",
+  "iconLink",
 ] as const satisfies (keyof drive_v3.Schema$File)[];

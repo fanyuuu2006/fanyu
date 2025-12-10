@@ -8,6 +8,7 @@ import { cn } from "@/utils/className";
 import {
   CloseOutlined,
   DownloadOutlined,
+  ExportOutlined,
   InfoCircleOutlined,
   LoadingOutlined,
   MoreOutlined,
@@ -60,7 +61,8 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     | "close" // 關閉按鈕文字
     | "details" // 詳細資訊按鈕文字
     | "download" // 下載按鈕文字
-    | "seconds", // 時間單位：秒
+    | "seconds" // 時間單位：秒
+    | "openInNewTab", // 在新分頁開啟
     string
   >
 > = {
@@ -80,6 +82,7 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     details: "詳細資訊",
     download: "下載項目",
     seconds: "秒",
+    openInNewTab: "在新分頁開啟",
   },
   english: {
     title: "Item Information",
@@ -97,6 +100,7 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
     details: "Details",
     download: "Download Item",
     seconds: "seconds",
+    openInNewTab: "Open in New Tab",
   },
 };
 
@@ -292,29 +296,50 @@ const PreviewHeader = memo(
     const menuItems: MenuItem[] = useMemo(() => {
       return [
         {
+          tag: "button",
+          props: {
+            "aria-label": content.details,
+            onClick: openInfo,
+            "data-action": "open-info",
+            children: (
+              <div className="flex items-center gap-2 text-nowrap">
+                <InfoCircleOutlined /> {content.details}
+              </div>
+            ),
+          },
+        },
+        {
           tag: Link,
           props: {
-            className: "rounded-full p-2",
             href: currentItem.url || "",
             download:
               currentItem.name || `${itemIndex}.${currentItem.fileExtension}`,
             "aria-label": `${content.download} ${currentItem.name}`,
             "data-action": "download-item",
-            children: <><DownloadOutlined /></>,
+            children: (
+              <div className="flex items-center gap-2 text-nowrap">
+                <DownloadOutlined /> {content.download}
+              </div>
+            ),
           },
         },
         {
-          tag: "button",
+          tag: Link,
           props: {
-            className: "rounded-full p-2",
-            "aria-label": content.details,
-            onClick: openInfo,
-            "data-action": "open-info",
-            children: <InfoCircleOutlined />,
+            href: currentItem.url || "",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            "aria-label": `Open ${currentItem.name} in new tab`,
+            "data-action": "open-in-new-tab",
+            children: (
+              <div className="flex items-center gap-2 text-nowrap">
+                <ExportOutlined /> {content.openInNewTab}
+              </div>
+            ),
           },
         },
       ];
-    }, []);
+    }, [currentItem, itemIndex, content, openInfo]);
 
     return (
       <div className="py-4 px-8">
@@ -333,9 +358,10 @@ const PreviewHeader = memo(
           <div className="min-w-0 overflow-hidden truncate">
             <h3
               title={currentItem.name || content.untitled}
-              className="text-lg md:text-xl font-semibold truncate"
+              className="text-lg md:text-xl font-semibold truncate flex items-center gap-2"
               data-testid="preview-title"
             >
+              {currentItem.iconLink && <MyImage src={currentItem.iconLink} />}
               {currentItem.name}
             </h3>
 
@@ -361,14 +387,21 @@ const PreviewHeader = memo(
                 <MoreOutlined />
               </div>
               <div
-                className={cn("absolute top-full right-full", {
+                className={cn("absolute top-full right-1/2 z-9999", {
                   hidden: !menuShow,
                 })}
               >
-                <div className="card p-3">
+                <div className="text-md md:text-lg lg:text-xl card rounded-md p-2 md:p-3 lg:p-4 flex flex-col min-w-[150px]">
                   {menuItems.map((item, index) => {
-                    const Tag = item.tag;
-                    return <Tag key={index} {...item.props} />;
+                    const { tag: Tag = "div", props } = item;
+                    const { className, ...rest } = props;
+                    return (
+                      <Tag
+                        key={index}
+                        className={cn("w-full p-2", className)}
+                        {...rest}
+                      />
+                    );
                   })}
                 </div>
               </div>
