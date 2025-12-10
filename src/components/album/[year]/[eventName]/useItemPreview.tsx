@@ -120,7 +120,7 @@ const ITEM_PREVIEW_CONTENT: LanguageContent<
  * open(2);
  *
  * // 渲染預覽內容
- * {isOpen && <Content />}
+ * <Content />
  * ```
  *
  * @features
@@ -292,7 +292,6 @@ const PreviewHeader = memo(
     const language = useLanguage();
     const content = ITEM_PREVIEW_CONTENT[language.Current];
     const [menuShow, setMenuShow] = useState<boolean>(false);
-
     const menuItems: MenuItem[] = useMemo(() => {
       return [
         {
@@ -341,6 +340,20 @@ const PreviewHeader = memo(
       ];
     }, [currentItem, itemIndex, content, openInfo]);
 
+    useEffect(() => {
+      if (!menuShow) return;
+      const handleClickOutside = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest("[data-action='menu-toggle']")) {
+          setMenuShow(false);
+        }
+      };
+      document.addEventListener("click", handleClickOutside);
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+      };
+    }, []);
+
     return (
       <div className="py-4 px-8">
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2">
@@ -380,17 +393,15 @@ const PreviewHeader = memo(
 
           {/* 右側功能按鈕 */}
           <div>
-            <label htmlFor="menu-toggle" className="relative">
-              <input
-                type="checkbox"
-                id="menu-toggle"
-                className="hidden"
-                checked={menuShow}
-                onChange={() => setMenuShow((prev) => !prev)}
-              />
-              <div className="text-3xl rounded-full p-2 cursor-pointer select-none">
+            <div className="relative">
+              <button
+                data-testid="menu-toggle"
+                data-action="menu-toggle"
+                className="text-3xl rounded-full p-2 cursor-pointer select-none"
+                onClick={() => setMenuShow((prev) => !prev)}
+              >
                 <MoreOutlined />
-              </div>
+              </button>
               <div
                 className={cn("absolute top-full right-1/2 z-9999", {
                   hidden: !menuShow,
@@ -399,18 +410,22 @@ const PreviewHeader = memo(
                 <div className="text-md md:text-lg lg:text-xl card rounded-md p-2 md:p-3 lg:p-4 flex flex-col min-w-[150px]">
                   {menuItems.map((item, index) => {
                     const { tag: Tag = "div", props } = item;
-                    const { className, ...rest } = props;
+                    const { className, onClick, ...rest } = props;
                     return (
                       <Tag
                         key={index}
                         className={cn("w-full p-2", className)}
+                        onClick={(e: React.MouseEvent) => {
+                          onClick && onClick(e);
+                          setMenuShow(false);
+                        }}
                         {...rest}
                       />
                     );
                   })}
                 </div>
               </div>
-            </label>
+            </div>
           </div>
         </div>
       </div>
