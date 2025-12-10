@@ -10,7 +10,6 @@ export const LanguageSwitchButton = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Only run on client
     setMounted(true);
   }, []);
 

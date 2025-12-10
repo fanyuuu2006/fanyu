@@ -10,6 +10,7 @@ import {
   DownloadOutlined,
   InfoCircleOutlined,
   LoadingOutlined,
+  MoreOutlined,
 } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import Link from "next/link";
@@ -266,6 +267,10 @@ const useMediaInfoFields = (
   }, [currentItem, content, language.Current, isVideo]);
 };
 
+type MenuItem<T extends React.ElementType = React.ElementType> = {
+  tag: T;
+  props: React.ComponentPropsWithRef<T>;
+};
 const PreviewHeader = memo(
   ({
     currentItem,
@@ -282,6 +287,34 @@ const PreviewHeader = memo(
   }) => {
     const language = useLanguage();
     const content = ITEM_PREVIEW_CONTENT[language.Current];
+    const [menuShow, setMenuShow] = useState<boolean>(false);
+
+    const menuItems: MenuItem[] = useMemo(() => {
+      return [
+        {
+          tag: Link,
+          props: {
+            className: "rounded-full p-2",
+            href: currentItem.url || "",
+            download:
+              currentItem.name || `${itemIndex}.${currentItem.fileExtension}`,
+            "aria-label": `${content.download} ${currentItem.name}`,
+            "data-action": "download-item",
+            children: <><DownloadOutlined /></>,
+          },
+        },
+        {
+          tag: "button",
+          props: {
+            className: "rounded-full p-2",
+            "aria-label": content.details,
+            onClick: openInfo,
+            "data-action": "open-info",
+            children: <InfoCircleOutlined />,
+          },
+        },
+      ];
+    }, []);
 
     return (
       <div className="py-4 px-8">
@@ -306,7 +339,7 @@ const PreviewHeader = memo(
               {currentItem.name}
             </h3>
 
-            <span 
+            <span
               className="text-sm md:text-base text-(--text-color-muted)"
               data-testid="preview-counter"
             >
@@ -314,29 +347,32 @@ const PreviewHeader = memo(
             </span>
           </div>
 
-          {/* 右側功能按鈕群組 */}
-          <div className="text-3xl">
-            {/* 下載按鈕 */}
-            <Link
-              className="rounded-full p-2 inline-block"
-              href={currentItem.url || ""}
-              download={
-                currentItem.name || `${itemIndex}.${currentItem.fileExtension}`
-              }
-              aria-label={`${content.download} ${currentItem.name}`}
-              data-action="download-item"
-            >
-              <DownloadOutlined />
-            </Link>
-            {/* 項目資訊按鈕 */}
-            <button
-              className="rounded-full p-2"
-              aria-label={content.details}
-              onClick={openInfo}
-              data-action="open-info"
-            >
-              <InfoCircleOutlined />
-            </button>
+          {/* 右側功能按鈕 */}
+          <div>
+            <label htmlFor="menu-toggle" className="relative">
+              <input
+                type="checkbox"
+                id="menu-toggle"
+                className="hidden"
+                checked={menuShow}
+                onChange={() => setMenuShow((prev) => !prev)}
+              />
+              <div className="text-3xl rounded-full p-2 cursor-pointer select-none">
+                <MoreOutlined />
+              </div>
+              <div
+                className={cn("absolute top-full right-full", {
+                  hidden: !menuShow,
+                })}
+              >
+                <div className="card p-3">
+                  {menuItems.map((item, index) => {
+                    const Tag = item.tag;
+                    return <Tag key={index} {...item.props} />;
+                  })}
+                </div>
+              </div>
+            </label>
           </div>
         </div>
       </div>
@@ -382,7 +418,7 @@ const PreviewMain = memo(
               data-testid="preview-video"
             />
           ) : (
-            <div 
+            <div
               className="relative h-full w-auto flex items-center justify-center"
               data-loaded={isLoaded}
               data-testid="preview-image-container"
@@ -435,7 +471,7 @@ const InfoModalContent = memo(
     const content = ITEM_PREVIEW_CONTENT[language.Current];
 
     return (
-      <div 
+      <div
         className="card flex flex-col w-full max-w-[calc(100vw-1rem)] sm:max-w-[85vw] md:max-w-[700px] lg:max-w-[800px] max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] md:max-h-[calc(100vh-6rem)] p-4 md:p-6 lg:p-8"
         data-testid="info-modal-content"
       >
@@ -628,7 +664,7 @@ const PreviewContent = memo(
 
     return (
       <>
-        <div 
+        <div
           className="w-screen h-full grid grid-rows-[auto_1fr_5rem] md:grid-rows-[auto_1fr_6rem]"
           data-testid="preview-content"
         >
