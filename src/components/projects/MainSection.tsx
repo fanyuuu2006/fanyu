@@ -99,7 +99,7 @@ export const MainSection = () => {
 
         <div className="flex flex-col w-full gap-4">
           {/* 控制列：包含篩選按鈕、專案計數、時間排序切換 */}
-          <div className="flex flex-nowrap items-center justify-between px-6 py-4 bg-[var(--background-color-secondary)] rounded-xl border border-[var(--border-color)]">
+          <div className="flex flex-nowrap items-center justify-between px-6 py-4 bg-(--background-color-secondary) rounded-xl border border-(--border-color)">
             <div className="flex items-center gap-4">
               {/* 篩選按鈕：控制標籤區域的顯示/隱藏 */}
               <Tooltip title={projectsContent.filter}>
@@ -126,7 +126,7 @@ export const MainSection = () => {
 
               {/* 專案計數顯示：帶有動態指示燈 */}
               <div className="flex items-center gap-2">
-                <span className="text-lg font-medium text-[var(--text-color-muted)]">
+                <span className="text-lg font-medium text-(--text-color-muted)">
                   {projectsContent.count.replace(
                     "{count}",
                     sortedProject.length.toString()
@@ -161,8 +161,8 @@ export const MainSection = () => {
                       <div key={category} className="space-y-3">
                         {/* 分類標題：帶有視覺指示條 */}
                         <div className="flex items-center gap-3">
-                          <div className="w-1 h-6 bg-gradient-to-b from-[var(--text-color-primary)] to-[var(--text-color-secondary)] rounded-full"></div>
-                          <h3 className="text-xl font-bold text-[var(--text-color-primary)]">
+                          <div className="w-1 h-6 bg-linear-to-b from-(--text-color-primary) to-(--text-color-secondary) rounded-full"></div>
+                          <h3 className="text-xl font-bold text-(--text-color-primary)">
                             {projectsContent[category as keyof ProjectsContent]}
                           </h3>
                         </div>
@@ -195,6 +195,7 @@ export const MainSection = () => {
         ) : (
           // 專案卡片列表：使用 Framer Motion 提供進入動畫
           <motion.div
+            key={currentTags?.size || 0} // 根據標籤數量變化重新渲染以觸發動畫
             variants={staggerContainer} // 容器動畫變體：子元素依序進入
             initial="hiddenLeft" // 初始狀態：從左側隱藏
             animate="show" // 動畫到顯示狀態
@@ -214,7 +215,7 @@ export const MainSection = () => {
 
         {/* 返回連結：回到首頁的 portfolio 區段 */}
         <Link
-          className="text-xl md:text-2xl text-[var(--text-color-muted)] transition-all hover:translate-x-2 group"
+          className="text-xl md:text-2xl text-(--text-color-muted) transition-all hover:translate-x-2 group"
           href="/#portfolio"
         >
           {/* 返回箭頭：hover 時會向左移動並顯示 */}
