@@ -358,10 +358,15 @@ const PreviewHeader = memo(
           <div className="min-w-0 overflow-hidden truncate">
             <h3
               title={currentItem.name || content.untitled}
-              className="text-lg md:text-xl font-semibold truncate flex items-center gap-2"
+              className="text-lg md:text-xl font-semibold truncate"
               data-testid="preview-title"
             >
-              {currentItem.iconLink && <MyImage src={currentItem.iconLink} />}
+              {currentItem.iconLink && (
+                <MyImage
+                  className={"inline mr-2 h-[1em] w-auto object-contain"}
+                  src={currentItem.iconLink}
+                />
+              )}
               {currentItem.name}
             </h3>
 
