@@ -292,6 +292,9 @@ const PreviewHeader = memo(
     const language = useLanguage();
     const content = ITEM_PREVIEW_CONTENT[language.Current];
     const [menuShow, setMenuShow] = useState<boolean>(false);
+    const menuRef = useRef<HTMLDivElement>(null);
+    const btnRef = useRef<HTMLButtonElement>(null);
+
     const menuItems: MenuItem[] = useMemo(() => {
       return [
         {
@@ -343,8 +346,13 @@ const PreviewHeader = memo(
     useEffect(() => {
       if (!menuShow) return;
       const handleClickOutside = (e: MouseEvent) => {
-        const target = e.target as HTMLElement;
-        if (!target.closest("[data-action='menu-toggle']")) {
+        const target = e.target as Node;
+        if (
+          menuRef.current &&
+          !menuRef.current.contains(target) &&
+          btnRef.current &&
+          !btnRef.current.contains(target)
+        ) {
           setMenuShow(false);
         }
       };
@@ -352,7 +360,7 @@ const PreviewHeader = memo(
       return () => {
         document.removeEventListener("click", handleClickOutside);
       };
-    }, []);
+    }, [menuShow]);
 
     return (
       <div className="py-4 px-8">
@@ -395,14 +403,18 @@ const PreviewHeader = memo(
           <div>
             <div className="relative">
               <button
+                ref={btnRef}
                 data-testid="menu-toggle"
                 data-action="menu-toggle"
                 className="text-3xl rounded-full p-2 cursor-pointer select-none"
                 onClick={() => setMenuShow((prev) => !prev)}
+                aria-haspopup="true"
+                aria-expanded={menuShow}
               >
                 <MoreOutlined />
               </button>
               <div
+                ref={menuRef}
                 className={cn("absolute top-full right-1/2 z-9999", {
                   hidden: !menuShow,
                 })}
