@@ -303,10 +303,11 @@ const PreviewHeader = memo(
             "aria-label": content.details,
             onClick: openInfo,
             "data-action": "open-info",
+            className: "flex items-center gap-2 text-nowrap",
             children: (
-              <div className="flex items-center gap-2 text-nowrap">
+              <>
                 <InfoCircleOutlined /> {content.details}
-              </div>
+              </>
             ),
           },
         },
@@ -318,10 +319,11 @@ const PreviewHeader = memo(
               currentItem.name || `${itemIndex}.${currentItem.fileExtension}`,
             "aria-label": `${content.download} ${currentItem.name}`,
             "data-action": "download-item",
+            className: "flex items-center gap-2 text-nowrap",
             children: (
-              <div className="flex items-center gap-2 text-nowrap">
+              <>
                 <DownloadOutlined /> {content.download}
-              </div>
+              </>
             ),
           },
         },
@@ -333,10 +335,11 @@ const PreviewHeader = memo(
             rel: "noopener noreferrer",
             "aria-label": `Open ${currentItem.name} in new tab`,
             "data-action": "open-in-new-tab",
+            className: "flex items-center gap-2 text-nowrap",
             children: (
-              <div className="flex items-center gap-2 text-nowrap">
+              <>
                 <ExportOutlined /> {content.openInNewTab}
-              </div>
+              </>
             ),
           },
         },
