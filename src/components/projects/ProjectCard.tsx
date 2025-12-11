@@ -81,7 +81,7 @@ export const ProjectCard = ({
         {/* 標題區域 */}
         <div className="flex items-start flex-col lg:flex-row gap-4 lg:gap-6">
           {/* 專案圖片 */}
-          <div className="flex-shrink-0 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 rounded-2xl overflow-hidden border-2 border-[var(--border-color)]">
+          <div className="shrink-0 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 rounded-2xl overflow-hidden border-2 border-(--border-color)">
             <MyImage
               src={proxyUrl(item.imageSrc)}
               alt={`${item.title.english} icon`}
@@ -93,15 +93,15 @@ export const ProjectCard = ({
           {/* 標題與時間 */}
           <div className="flex-1 min-w-0">
             <div className="flex flex-col gap-2">
-              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--text-color)] leading-tight">
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-(--text-color) leading-tight">
                 {item.title[Language.Current]}
               </h3>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[var(--text-color-muted)] text-justify leading-relaxed">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-(--text-color-muted) text-justify leading-relaxed">
                 {item.about[Language.Current]}
               </p>
               <div className="flex items-center gap-2">
-                <ClockCircleOutlined className="text-[var(--text-color-muted)] flex-shrink-0" />
-                <span className="text-xs sm:text-sm md:text-base text-[var(--text-color-muted)] font-medium">
+                <ClockCircleOutlined className="text-(--text-color-muted) shrink-0" />
+                <span className="text-xs sm:text-sm md:text-base text-(--text-color-muted) font-medium">
                   {item.time}
                 </span>
               </div>
@@ -128,11 +128,11 @@ export const ProjectCard = ({
           </div>
 
           {/* 專案特色 */}
-          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-[var(--card-background)] border border-[var(--border-color)]">
-            <h4 className="text-[var(--text-color-muted)] text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
+          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-(--card-background) border border-(--border-color)">
+            <h4 className="text-(--text-color-muted) text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
               {projectContent.projectFeature}
             </h4>
-            <ul className="text-sm sm:text-base leading-relaxed list-disc ps-5 space-y-3 text-[var(--text-color)]">
+            <ul className="text-sm sm:text-base leading-relaxed list-disc ps-5 space-y-3 text-(--text-color)">
               {item.description[Language.Current].map((part, index) => (
                 <li key={index} className="leading-relaxed">
                   {part}
@@ -142,8 +142,8 @@ export const ProjectCard = ({
           </div>
 
           {/* 技能標籤 */}
-          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-[var(--card-background)] border border-[var(--border-color)]">
-            <h4 className="text-[var(--text-color-muted)] text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
+          <div className="flex flex-col gap-3 p-4 sm:p-5 md:p-6 rounded-xl bg-(--card-background) border border-(--border-color)">
+            <h4 className="text-(--text-color-muted) text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
               {projectContent.skillTag}
             </h4>
             <div className="text-sm md:text-base lg:text-lg flex flex-wrap gap-1">
