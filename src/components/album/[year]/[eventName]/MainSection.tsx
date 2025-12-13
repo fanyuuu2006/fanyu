@@ -14,23 +14,18 @@ type MainSectionProps = {
   year: Album[number]["year"];
 };
 
-type ItemsContent = Record<
-  "noItems" | "back" | "totalItems" | "imageLoadFailed",
-  string
->;
+type ItemsContent = Record<"noItems" | "back" | "totalItems", string>;
 
 const ITEMS_CONTENT: LanguageContent<ItemsContent> = {
   chinese: {
     noItems: "沒有項目",
     back: "返回",
-    totalItems: "共 {count} 張照片",
-    imageLoadFailed: "載入圖片失敗",
+    totalItems: "共 {count} 個項目",
   },
   english: {
     noItems: "No Items",
     back: "Back",
     totalItems: "Total {count} items",
-    imageLoadFailed: "Image Load Failed",
   },
 };
 
