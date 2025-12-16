@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState } from "react";
+import { forwardRef, useCallback, useEffect, useState } from "react";
 import { FALLBACK_IMAGE } from "@/libs/album";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { OverrideProps } from "fanyucomponents";
@@ -14,6 +14,7 @@ export type MyImageProps = OverrideProps<
     src: string | undefined | null;
     maxRetryCount?: number;
     fallbackSrc?: string | undefined | null;
+    srcArray?: string[] | undefined | null;
   }
 >;
 
@@ -66,6 +67,7 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
   (
     {
       src,
+      srcArray,
       alt,
       onError,
       maxRetryCount = MAX_RETRY_COUNT,
@@ -77,30 +79,63 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
     const language = useLanguage();
     const imageContent = IMAGE_CONTENT[language.Current];
     const [hasError, setHasError] = useState<boolean>(false);
+    const [srcIndex, setSrcIndex] = useState<number>(src ? -1 : 0);
     const [retryCount, setRetryCount] = useState<number>(0);
+
+    useEffect(() => {
+      setSrcIndex(src ? -1 : 0);
+      setRetryCount(0);
+      setHasError(false);
+    }, [src, srcArray]);
 
     const handleImageError: React.ReactEventHandler<HTMLImageElement> =
       useCallback(
         (e) => {
           console.error(imageContent.imageLoadFailed, e);
-          if (retryCount < maxRetryCount && src) {
+          const currentActiveSrc = srcIndex === -1 ? src : srcArray?.[srcIndex];
+
+          if (hasError || !currentActiveSrc) {
+            if (onError) onError(e);
+            return;
+          }
+
+          if (retryCount < maxRetryCount) {
             // 使用帶有重試計數的查詢參數重新載入圖片
             setTimeout(
               () => setRetryCount((prev) => prev + 1),
               500 * (retryCount + 1)
             );
           } else {
-            setHasError(true);
+            const nextIndex = srcIndex + 1;
+            if (srcArray && nextIndex < srcArray.length) {
+              setSrcIndex(nextIndex);
+              setRetryCount(0);
+            } else {
+              setHasError(true);
+            }
           }
 
           if (onError) onError(e);
         },
-        [imageContent.imageLoadFailed, maxRetryCount, onError, retryCount, src]
+        [
+          imageContent.imageLoadFailed,
+          srcIndex,
+          src,
+          srcArray,
+          hasError,
+          onError,
+          retryCount,
+          maxRetryCount,
+        ]
       );
+
+    const activeSrc = srcIndex === -1 ? src : srcArray?.[srcIndex];
     const finalSrc =
-      hasError || !src
+      hasError || !activeSrc
         ? fallbackSrc || FALLBACK_IMAGE
-        : `${src}${src.includes("?") ? "&" : "?"}fanyuRetry=${retryCount}`;
+        : `${activeSrc}${
+            activeSrc.includes("?") ? "&" : "?"
+          }fanyuRetry=${retryCount}`;
 
     return (
       // eslint-disable-next-line @next/next/no-img-element
