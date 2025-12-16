@@ -24,32 +24,47 @@ export const CodeCard = ({
       .map((line) => line.map((token) => extractTokenContent(token)).join(""))
       .join("\n");
   }, [codeLines]);
+
   return (
     <div
-      data-theme={theme}
-      className={cn(`card flex flex-col p-6 gap-2`, className)}
+      className={cn(
+        "card flex flex-col",
+        className
+      )}
       {...rest}
     >
-      <div className="flex items-center">
-        <span className="text-(--text-color-muted)">{lang}</span>
-        <CopyButton
-          content={content}
-          className="ml-auto btn rounded-sm flex items-center justify-center p-1"
-        />
+      <div className="flex items-center justify-between px-4 py-1 bg-(--background-color-tertiary) border-b border-(--border-color)">
+        <span className="text-xs font-mono text-(--text-color-muted)">
+          {lang || "text"}
+        </span>
+        <div className="flex items-center gap-3">
+          <div className="relative flex items-center">
+            <select
+              value={theme}
+              onChange={(e) => setTheme(e.target.value as ThemeType)}
+              className="appearance-none bg-transparent text-xs text-(--text-color-muted) hover:text-(--text-color) cursor-pointer outline-none transition-colors pr-2 text-right"
+              title="Change Theme"
+            >
+              {themes.map((th) => (
+                <option
+                  key={th}
+                  value={th}
+                  className="bg-(--background-color-secondary) text-(--text-color)"
+                >
+                  {th}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-px h-3 bg-(--border-color)" />
+          <CopyButton
+            content={content}
+            className="btn rounded-lg p-1"
+          />
+        </div>
       </div>
-      <CodeBlock theme={theme} tokenLines={codeLines} className="font-mono" />
-      <div>
-        <select
-          value={theme}
-          onChange={(e) => setTheme(e.target.value as ThemeType)}
-          className="bg-(--background-color) border border-(--border-color) rounded-sm p-1"
-        >
-          {themes.map((th) => (
-            <option key={th} value={th}>
-              {th}
-            </option>
-          ))}
-        </select>
+      <div className="p-4 overflow-x-auto text-sm" data-theme={theme}>
+        <CodeBlock theme={theme} tokenLines={codeLines} className="font-mono" />
       </div>
     </div>
   );
