@@ -430,7 +430,7 @@ const PreviewHeader = memo(
                       <Tag
                         key={index}
                         className={cn("w-full p-2", className)}
-                        onClick={(e: React.MouseEvent) => {
+                        onClick={(e: React.MouseEvent<typeof Tag>) => {
                           onClick && onClick(e);
                           setMenuShow(false);
                         }}
@@ -636,7 +636,10 @@ const PreviewContent = memo(
       const preloadImage = (index: number) => {
         const item = items[index];
         if (item && !isVideo && item.url) {
-          const img = new Image();
+          const img = new Image(
+            item.imageMediaMetadata?.width,
+            item.imageMediaMetadata?.height
+          );
           img.src = item.url;
         }
       };
