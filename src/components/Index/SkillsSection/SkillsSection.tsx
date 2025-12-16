@@ -54,14 +54,12 @@ export const SkillsSection = () => {
                   className="text-2xl grid grid-cols-6 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-16 xl:grid-cols-20 gap-3"
                 >
                   {item.list.map((skillItem) => (
-                    <motion.div
-                      key={skillItem.title}
-                      variants={fadeInItem}
-                    >
+                    <motion.div key={skillItem.title} variants={fadeInItem}>
                       <Tooltip title={skillItem.title} placement="top">
                         <MyImage
                           alt={skillItem.title}
                           src={skillItem.src}
+                          srcArray={skillItem.srcArray}
                           width={300}
                           height={300}
                           className="object-cover transition-transform"
