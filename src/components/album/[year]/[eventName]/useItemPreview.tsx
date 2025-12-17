@@ -137,12 +137,10 @@ export const useItemPreview = (
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpen = useCallback(() => {
-    document.body.style.overflow = "hidden";
     setIsModalOpen(true);
   }, []);
 
   const handleClose = useCallback(() => {
-    document.body.style.overflow = "";
     setIsModalOpen(false);
   }, []);
 
@@ -695,6 +693,7 @@ const PreviewContent = memo(
       if (!isOpen) {
         return;
       }
+      document.body.style.overflow = "hidden";
 
       const handleKeyDown = (e: KeyboardEvent) => {
         switch (e.key) {
@@ -726,6 +725,7 @@ const PreviewContent = memo(
       return () => {
         window.removeEventListener("keydown", handleKeyDown);
         window.removeEventListener("wheel", handleScroll);
+        document.body.style.overflow = "";
       };
     }, [handleNextItem, handlePrevItem, isOpen]);
 
