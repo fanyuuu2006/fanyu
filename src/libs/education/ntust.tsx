@@ -103,7 +103,9 @@ const NTUST: ExperienceItem = {
                       }[language]
                     }
                   </th>
-                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">GPA</th>
+                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                    GPA
+                  </th>
                   <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold">
                     {
                       {
@@ -124,7 +126,9 @@ const NTUST: ExperienceItem = {
                         className="hover:backdrop-brightness-125 transition-colors duration-200 cursor-pointer border-b border-(--border-color)"
                         onClick={modal.Open}
                       >
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">{semester}</td>
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                          {semester}
+                        </td>
                         <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
                           {data.classRank ||
                             { chinese: "無資料", english: "No Data" }[language]}
@@ -136,7 +140,9 @@ const NTUST: ExperienceItem = {
                         <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
                           {Math.round(gpa * 100) / 100}
                         </td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">{totalCredits}</td>
+                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
+                          {totalCredits}
+                        </td>
                       </tr>
                       <modal.Container>
                         <div className="animate-pop rounded-xl overflow-hidden border border-(--border-color) shadow-lg">
@@ -149,72 +155,93 @@ const NTUST: ExperienceItem = {
                                       {
                                         chinese: "課程名稱",
                                         english: "Course Name",
-                                    }[language]
-                                  }
-                                </th>
-                                <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
-                                  {
+                                      }[language]
+                                    }
+                                  </th>
+                                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
                                     {
-                                      chinese: "成績",
-                                      english: "Grade",
-                                    }[language]
-                                  }
-                                </th>
-                                <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold">
-                                  {
+                                      {
+                                        chinese: "成績",
+                                        english: "Grade",
+                                      }[language]
+                                    }
+                                  </th>
+                                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold">
                                     {
-                                      chinese: "學分數",
-                                      english: "Credits",
-                                    }[language]
-                                  }
-                                </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {data.courses.map((course, index) => (
-                                <tr
-                                  key={index}
-                                  className="border-b border-(--border-color) last:border-b-0"
-                                >
-                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
-                                    {course.courseName[language]}
-                                  </td>
-                                  <td
-                                    className={cn(`text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0`, {
-                                      "text-green-400": course.grade && ["A+", "A", "A-"].includes(course.grade),
-                                      "text-cyan-400": course.grade && ["B+", "B", "B-"].includes(course.grade),
-                                      "text-red-400": course.grade && ["C+", "C", "D+", "E", "X"].includes(course.grade),
-                                      "text-yellow-400": course.grade === "通過",
-                                    })}
+                                      {
+                                        chinese: "學分數",
+                                        english: "Credits",
+                                      }[language]
+                                    }
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {data.courses.map((course, index) => (
+                                  <tr
+                                    key={index}
+                                    className="border-b border-(--border-color) last:border-b-0"
                                   >
-                                    {course.grade ||
-                                      { chinese: "無資料", english: "No Data" }[
-                                        language
-                                      ]}
+                                    <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                                      {course.courseName[language]}
+                                    </td>
+                                    <td
+                                      className={cn(
+                                        `text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0`,
+                                        {
+                                          "text-green-400":
+                                            course.grade &&
+                                            ["A+", "A", "A-"].includes(
+                                              course.grade
+                                            ),
+                                          "text-cyan-400":
+                                            course.grade &&
+                                            ["B+", "B", "B-"].includes(
+                                              course.grade
+                                            ),
+                                          "text-red-400":
+                                            course.grade &&
+                                            [
+                                              "C+",
+                                              "C",
+                                              "D+",
+                                              "E",
+                                              "X",
+                                            ].includes(course.grade),
+                                          "text-yellow-400":
+                                            course.grade === "通過",
+                                        }
+                                      )}
+                                    >
+                                      {course.grade ||
+                                        {
+                                          chinese: "無資料",
+                                          english: "No Data",
+                                        }[language]}
+                                    </td>
+                                    <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
+                                      {course.credits}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                              <tfoot className="text-xs sm:text-sm md:text-base bg-(--background-color-secondary)">
+                                <tr>
+                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                                    {
+                                      {
+                                        chinese: "總計",
+                                        english: "Total",
+                                      }[language]
+                                    }
                                   </td>
+                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
                                   <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
-                                    {course.credits}
+                                    {totalCredits}
                                   </td>
                                 </tr>
-                              ))}
-                            </tbody>
-                            <tfoot className="text-xs sm:text-sm md:text-base bg-(--background-color-secondary)">
-                              <tr>
-                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
-                                  {
-                                    {
-                                      chinese: "總計",
-                                      english: "Total",
-                                    }[language]
-                                  }
-                                </td>
-                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
-                                <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
-                                  {totalCredits}
-                                </td>
-                              </tr>
-                            </tfoot>
-                          </table>
+                              </tfoot>
+                            </table>
                           </div>
                         </div>
                       </modal.Container>
@@ -431,6 +458,82 @@ export const grades: Record<
         },
         grade: "B-",
         credits: 2,
+      },
+    ],
+  },
+  "114-2": {
+    courses: [
+      {
+        courseName: {
+          chinese: "資料結構",
+          english: "Data Structures",
+        },
+        credits: 3,
+        grade: null,
+      },
+      {
+        courseName: {
+          chinese: "體育(法式滾球)(上)",
+          english: "Physical Education (Petanque) (I)",
+        },
+        grade: null,
+        credits: 0,
+      },
+      {
+        courseName: {
+          chinese: "管理數學",
+          english: "Mathematics for Management",
+        },
+        credits: 3,
+        grade: null,
+      },
+      {
+        courseName: {
+          chinese: "資料庫管理系統",
+          english: "Database Management Systems",
+        },
+        credits: 3,
+        grade: null,
+      },
+      {
+        courseName: {
+          chinese: "統計學(上)",
+          english: "Statistics (I)",
+        },
+        credits: 3,
+        grade: null,
+      },
+      {
+        courseName: {
+          chinese: "色彩與生活",
+          english: "Color and Life",
+        },
+        credits: 2,
+        grade: 'A',
+      },
+      {
+        courseName: {
+          chinese: "大數據與程式設計導論",
+          english: "Introduction of Big Data and Programming",
+        },
+        credits: 2,
+        grade: null,
+      },
+      {
+        courseName: {
+          chinese: "網頁製作",
+          english: "Webpages Development",
+        },
+        credits: 3,
+        grade: null,
+      },
+      {
+        courseName: {
+          chinese: "文法與修辭",
+          english: "Grammar and Rhetoric",
+        },
+        credits: 2,
+        grade: null,
       },
     ],
   },
