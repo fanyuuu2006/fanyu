@@ -77,9 +77,9 @@ const NTUST: ExperienceItem = {
         <div className="overflow-hidden rounded-xl border border-(--border-color) shadow-lg">
           <div className="overflow-x-auto">
             <table className="w-full bg-(--background-color-primary) table-auto border-collapse">
-              <thead className="text-xs sm:text-sm md:text-base bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white">
+              <thead className="text-xs sm:text-sm md:text-base bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white whitespace-nowrap">
                 <tr>
-                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
                     {
                       {
                         chinese: "學期",
@@ -87,7 +87,7 @@ const NTUST: ExperienceItem = {
                       }[language]
                     }
                   </th>
-                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
                     {
                       {
                         chinese: "班級排名",
@@ -95,7 +95,7 @@ const NTUST: ExperienceItem = {
                       }[language]
                     }
                   </th>
-                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
                     {
                       {
                         chinese: "系所排名",
@@ -103,10 +103,10 @@ const NTUST: ExperienceItem = {
                       }[language]
                     }
                   </th>
-                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
                     GPA
                   </th>
-                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 font-semibold">
+                  <th className="text-center py-3 px-4 font-semibold">
                     {
                       {
                         chinese: "學分數",
@@ -126,21 +126,21 @@ const NTUST: ExperienceItem = {
                         className="hover:backdrop-brightness-125 transition-colors duration-200 cursor-pointer border-b border-(--border-color)"
                         onClick={modal.Open}
                       >
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
                           {semester}
                         </td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
                           {data.classRank ||
                             { chinese: "無資料", english: "No Data" }[language]}
                         </td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
                           {data.departmentRanK ||
                             { chinese: "無資料", english: "No Data" }[language]}
                         </td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
                           {Math.round(gpa * 100) / 100}
                         </td>
-                        <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
+                        <td className="text-center py-3 px-4">
                           {totalCredits}
                         </td>
                       </tr>
@@ -148,9 +148,9 @@ const NTUST: ExperienceItem = {
                         <div className="animate-pop rounded-xl overflow-hidden border border-(--border-color) shadow-lg">
                           <div className="overflow-x-auto">
                             <table className="text-xs sm:text-sm md:text-base w-full bg-(--background-color-primary) table-auto border-collapse">
-                              <thead className="bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white">
+                              <thead className="bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white whitespace-nowrap">
                                 <tr>
-                                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                                  <th className="text-left py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
                                     {
                                       {
                                         chinese: "課程名稱",
@@ -158,7 +158,7 @@ const NTUST: ExperienceItem = {
                                       }[language]
                                     }
                                   </th>
-                                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold border-r border-white/20 last:border-r-0">
+                                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
                                     {
                                       {
                                         chinese: "成績",
@@ -166,7 +166,7 @@ const NTUST: ExperienceItem = {
                                       }[language]
                                     }
                                   </th>
-                                  <th className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 font-semibold">
+                                  <th className="text-center py-3 px-4 font-semibold">
                                     {
                                       {
                                         chinese: "學分數",
@@ -180,14 +180,14 @@ const NTUST: ExperienceItem = {
                                 {data.courses.map((course, index) => (
                                   <tr
                                     key={index}
-                                    className="border-b border-(--border-color) last:border-b-0"
+                                    className="border-b border-(--border-color) last:border-b-0 hover:backdrop-brightness-125 transition-colors duration-200"
                                   >
-                                    <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                                    <td className="text-left py-3 px-4 border-r border-(--border-color) last:border-r-0">
                                       {course.courseName[language]}
                                     </td>
                                     <td
                                       className={cn(
-                                        `text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0`,
+                                        `text-center py-3 px-4 border-r border-(--border-color) last:border-r-0`,
                                         {
                                           "text-green-400":
                                             course.grade &&
@@ -219,7 +219,7 @@ const NTUST: ExperienceItem = {
                                           english: "No Data",
                                         }[language]}
                                     </td>
-                                    <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
+                                    <td className="text-center py-3 px-4">
                                       {course.credits}
                                     </td>
                                   </tr>
@@ -227,7 +227,7 @@ const NTUST: ExperienceItem = {
                               </tbody>
                               <tfoot className="text-xs sm:text-sm md:text-base bg-(--background-color-secondary)">
                                 <tr>
-                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0">
+                                  <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
                                     {
                                       {
                                         chinese: "總計",
@@ -235,8 +235,8 @@ const NTUST: ExperienceItem = {
                                       }[language]
                                     }
                                   </td>
-                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
-                                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-3 md:px-3">
+                                  <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0"></td>
+                                  <td className="text-center py-3 px-4">
                                     {totalCredits}
                                   </td>
                                 </tr>
