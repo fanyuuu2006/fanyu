@@ -70,14 +70,14 @@ const NTUST: ExperienceItem = {
           ].map((chunk, index) => (
             <div
               key={index}
-              className="card flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-transparent!"
+              className="flex items-center gap-3 p-3  rounded-2xl border border-(--border-color)"
             >
-              <chunk.icon className="text-lg sm:text-xl shrink-0" />
+              <chunk.icon className="text-xl shrink-0" />
               <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-medium text-(--text-color-muted)">
+                <span className="text-sm font-medium text-(--text-color-muted)">
                   {chunk.label[language]}
                 </span>
-                <span className="text-sm sm:text-base font-semibold">
+                <span className="text-base font-semibold">
                   {chunk.content[language]}
                 </span>
               </div>
