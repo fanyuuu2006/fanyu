@@ -5,6 +5,8 @@ import {
   LinkOutlined,
   EnvironmentOutlined,
   IdcardOutlined,
+  TrophyOutlined,
+  BookOutlined,
 } from "@ant-design/icons";
 import { useModal } from "fanyucomponents";
 import React from "react";
@@ -44,8 +46,17 @@ const NTUST: ExperienceItem = {
     const allCourses = Object.values(grades).flatMap((data) => data.courses);
     const overallGPA = calculateGPA(allCourses);
 
+    const getGradeColor = (grade: string | null) => {
+      if (!grade) return "text-(--text-color-muted)";
+      if (["A+", "A", "A-"].includes(grade)) return "text-green-400";
+      if (["B+", "B", "B-"].includes(grade)) return "text-cyan-400";
+      if (["C+", "C", "D+", "E", "X"].includes(grade)) return "text-red-400";
+      if (grade === "通過") return "text-yellow-400";
+      return "text-(--text-color-primary)";
+    };
+
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           {[
             {
@@ -59,7 +70,7 @@ const NTUST: ExperienceItem = {
           ].map((chunk, index) => (
             <div
               key={index}
-              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-2xl border border-(--border-color)"
+              className="card flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-transparent!"
             >
               <chunk.icon className="text-lg sm:text-xl shrink-0" />
               <div className="flex flex-col">
@@ -73,204 +84,148 @@ const NTUST: ExperienceItem = {
             </div>
           ))}
         </div>
-        {/** 學期成績表格 */}
-        <div className="overflow-hidden rounded-xl border border-(--border-color) shadow-lg">
-          <div className="overflow-x-auto">
-            <table className="w-full bg-(--background-color-primary) table-auto border-collapse">
-              <thead className="text-xs sm:text-sm md:text-base bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white whitespace-nowrap">
-                <tr>
-                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
-                    {
-                      {
-                        chinese: "學期",
-                        english: "Semester",
-                      }[language]
-                    }
-                  </th>
-                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
-                    {
-                      {
-                        chinese: "班級排名",
-                        english: "Class Rank",
-                      }[language]
-                    }
-                  </th>
-                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
-                    {
-                      {
-                        chinese: "系所排名",
-                        english: "Department Rank",
-                      }[language]
-                    }
-                  </th>
-                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
-                    GPA
-                  </th>
-                  <th className="text-center py-3 px-4 font-semibold">
-                    {
-                      {
-                        chinese: "學分數",
-                        english: "Credits",
-                      }[language]
-                    }
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-xs sm:text-sm md:text-base">
-                {Object.entries(grades).map(([semester, data]) => {
-                  const { gpa, totalCredits } = calculateGPA(data.courses);
-                  const modal = useModal();
-                  return (
-                    <React.Fragment key={semester}>
-                      <tr
-                        className="hover:backdrop-brightness-125 transition-colors duration-200 cursor-pointer border-b border-(--border-color)"
-                        onClick={modal.Open}
-                      >
-                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
-                          {semester}
-                        </td>
-                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
-                          {data.classRank ||
-                            { chinese: "無資料", english: "No Data" }[language]}
-                        </td>
-                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
-                          {data.departmentRanK ||
-                            { chinese: "無資料", english: "No Data" }[language]}
-                        </td>
-                        <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
-                          {Math.round(gpa * 100) / 100}
-                        </td>
-                        <td className="text-center py-3 px-4">
-                          {totalCredits}
-                        </td>
-                      </tr>
-                      <modal.Container>
-                        <div className="animate-pop rounded-xl overflow-hidden border border-(--border-color) shadow-lg">
-                          <div className="overflow-x-auto">
-                            <table className="text-xs sm:text-sm md:text-base w-full bg-(--background-color-primary) table-auto border-collapse">
-                              <thead className="bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary) text-white whitespace-nowrap">
-                                <tr>
-                                  <th className="text-left py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
-                                    {
-                                      {
-                                        chinese: "課程名稱",
-                                        english: "Course Name",
-                                      }[language]
-                                    }
-                                  </th>
-                                  <th className="text-center py-3 px-4 font-semibold border-r border-white/20 last:border-r-0">
-                                    {
-                                      {
-                                        chinese: "成績",
-                                        english: "Grade",
-                                      }[language]
-                                    }
-                                  </th>
-                                  <th className="text-center py-3 px-4 font-semibold">
-                                    {
-                                      {
-                                        chinese: "學分數",
-                                        english: "Credits",
-                                      }[language]
-                                    }
-                                  </th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {data.courses.map((course, index) => (
-                                  <tr
-                                    key={index}
-                                    className="border-b border-(--border-color) last:border-b-0 hover:backdrop-brightness-125 transition-colors duration-200"
-                                  >
-                                    <td className="text-left py-3 px-4 border-r border-(--border-color) last:border-r-0">
-                                      {course.courseName[language]}
-                                    </td>
-                                    <td
-                                      className={cn(
-                                        `text-center py-3 px-4 border-r border-(--border-color) last:border-r-0`,
-                                        {
-                                          "text-green-400":
-                                            course.grade &&
-                                            ["A+", "A", "A-"].includes(
-                                              course.grade
-                                            ),
-                                          "text-cyan-400":
-                                            course.grade &&
-                                            ["B+", "B", "B-"].includes(
-                                              course.grade
-                                            ),
-                                          "text-red-400":
-                                            course.grade &&
-                                            [
-                                              "C+",
-                                              "C",
-                                              "D+",
-                                              "E",
-                                              "X",
-                                            ].includes(course.grade),
-                                          "text-yellow-400":
-                                            course.grade === "通過",
-                                        }
-                                      )}
-                                    >
-                                      {course.grade ||
-                                        {
-                                          chinese: "無資料",
-                                          english: "No Data",
-                                        }[language]}
-                                    </td>
-                                    <td className="text-center py-3 px-4">
-                                      {course.credits}
-                                    </td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                              <tfoot className="text-xs sm:text-sm md:text-base bg-(--background-color-secondary)">
-                                <tr>
-                                  <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0">
-                                    {
-                                      {
-                                        chinese: "總計",
-                                        english: "Total",
-                                      }[language]
-                                    }
-                                  </td>
-                                  <td className="text-center py-3 px-4 border-r border-(--border-color) last:border-r-0"></td>
-                                  <td className="text-center py-3 px-4">
-                                    {totalCredits}
-                                  </td>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div>
-                      </modal.Container>
-                    </React.Fragment>
-                  );
-                })}
-              </tbody>
-              <tfoot className="text-xs sm:text-sm md:text-base bg-(--background-color-secondary)">
-                <tr>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0">
-                    {
-                      {
-                        chinese: "總計",
-                        english: "Total",
-                      }[language]
-                    }
-                  </td>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0"></td>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3 border-r border-(--border-color) last:border-r-0">
-                    {Math.round(overallGPA.gpa * 100) / 100}
-                  </td>
-                  <td className="text-center py-2 px-1 sm:py-3 sm:px-2 md:py-4 md:px-3">
-                    {overallGPA.totalCredits}
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
+
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          <div className="card p-4 flex flex-col items-center justify-center gap-1">
+            <span className="text-xs sm:text-sm text-(--text-color-muted)">
+              {
+                {
+                  chinese: "總學分",
+                  english: "Total Credits",
+                }[language]
+              }
+            </span>
+            <span className="text-2xl sm:text-3xl font-bold text-(--text-color-primary)">
+              {overallGPA.totalCredits}
+            </span>
           </div>
+          <div className="card p-4 flex flex-col items-center justify-center gap-1">
+            <span className="text-xs sm:text-sm text-(--text-color-muted)">
+              {
+                {
+                  chinese: "累計 GPA",
+                  english: "Overall GPA",
+                }[language]
+              }
+            </span>
+            <span className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary)">
+              {Math.round(overallGPA.gpa * 100) / 100}
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {Object.entries(grades).map(([semester, data]) => {
+            const { gpa, totalCredits } = calculateGPA(data.courses);
+            const modal = useModal();
+
+            return (
+              <React.Fragment key={semester}>
+                <div
+                  onClick={modal.Open}
+                  className="card group relative p-5 cursor-pointer"
+                >
+                  <div className="absolute -top-4 -right-4 p-4 opacity-5 group-hover:opacity-10 transition-opacity rotate-12">
+                    <BookOutlined className="text-8xl" />
+                  </div>
+
+                  <div className="relative z-10 flex flex-col h-full justify-between gap-4">
+                    <div className="flex justify-between items-start">
+                      <div className="flex flex-col">
+                        <span className="text-xs text-(--text-color-muted) uppercase tracking-wider">
+                          {language === "chinese" ? "學期" : "Semester"}
+                        </span>
+                        <h3 className="text-xl font-bold text-(--text-color-primary)">
+                          {semester}
+                        </h3>
+                      </div>
+                      <div className="px-3 py-1 rounded-full bg-(--background-color-secondary) text-xs font-medium border border-(--border-color)">
+                        {data.courses.length}{" "}
+                        {language === "chinese" ? "門課" : "Courses"}
+                      </div>
+                    </div>
+
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary)">
+                        {Math.round(gpa * 100) / 100}
+                      </span>
+                      <span className="text-sm text-(--text-color-muted) font-medium">
+                        GPA
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-(--border-color)">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] text-(--text-color-muted)">
+                          {language === "chinese" ? "學分" : "Credits"}
+                        </span>
+                        <span className="font-semibold">{totalCredits}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[10px] text-(--text-color-muted) flex items-center gap-1">
+                          <TrophyOutlined />{" "}
+                          {language === "chinese" ? "班排" : "Class Rank"}
+                        </span>
+                        <span className="font-semibold">
+                          {data.classRank || "-"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <modal.Container>
+                  <div className="animate-pop card w-full max-w-2xl bg-(--background-color-primary)! overflow-hidden flex flex-col max-h-[80vh]">
+                    <div className="p-5 border-b border-(--border-color) bg-(--background-color-secondary)/50 backdrop-blur-sm flex justify-between items-center sticky top-0 z-10">
+                      <div>
+                        <h2 className="text-xl font-bold">
+                          {semester}{" "}
+                          {language === "chinese" ? "成績單" : "Transcript"}
+                        </h2>
+                        <div className="flex gap-3 mt-1 text-sm text-(--text-color-muted)">
+                          <span>GPA: {Math.round(gpa * 100) / 100}</span>
+                          <span>•</span>
+                          <span>
+                            {totalCredits}{" "}
+                            {language === "chinese" ? "學分" : "Credits"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="overflow-y-auto p-4">
+                      <div className="grid grid-cols-1 gap-3">
+                        {data.courses.map((course, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between p-4 rounded-xl border border-(--border-color) hover:bg-(--background-color-secondary) transition-colors group"
+                          >
+                            <div className="flex flex-col gap-1">
+                              <h4 className="font-semibold text-base group-hover:text-(--text-color-primary) transition-colors">
+                                {course.courseName[language]}
+                              </h4>
+                              <span className="text-xs text-(--text-color-muted)">
+                                {course.credits}{" "}
+                                {language === "chinese" ? "學分" : "Credits"}
+                              </span>
+                            </div>
+                            <div
+                              className={cn(
+                                "text-xl font-bold tabular-nums",
+                                getGradeColor(course.grade)
+                              )}
+                            >
+                              {course.grade || "-"}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </modal.Container>
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
     );
@@ -509,7 +464,7 @@ export const grades: Record<
           english: "Color and Life",
         },
         credits: 2,
-        grade: 'A',
+        grade: "A",
       },
       {
         courseName: {
