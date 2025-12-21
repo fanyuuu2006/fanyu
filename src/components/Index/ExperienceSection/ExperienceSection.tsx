@@ -60,7 +60,7 @@ export const ExperienceSection = () => {
 
   return (
     <section id="experience">
-      <div className="container flex flex-col gap-8 items-center overflow-x-hidden">
+      <div className="container flex flex-col gap-6 items-center overflow-x-hidden">
         <Title>{experienceContent.experience}</Title>
         <div className="flex flex-col w-full gap-4">
           {/** 分頁選單 */}
@@ -75,7 +75,7 @@ export const ExperienceSection = () => {
                 aria-controls={key}
                 aria-label={experienceContent[key]}
                 key={key}
-                className={`text-base md:text-xl font-semibold rounded-[inherit] flex flex-col md:flex-row w-full items-center justify-center p-2 gap-1 ${
+                className={`text-sm md:text-lg font-semibold rounded-[inherit] flex flex-col md:flex-row w-full items-center justify-center p-1.5 md:p-2 gap-1 ${
                   Tab === key ? "btn" : ""
                 }`}
                 onClick={() => {
