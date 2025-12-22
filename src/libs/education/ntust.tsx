@@ -133,7 +133,7 @@ const NTUST: ExperienceItem = {
                     <div className="flex justify-between items-start">
                       <div className="flex flex-col">
                         <span className="text-xs text-(--text-color-muted) uppercase tracking-wider">
-                          {language === "chinese" ? "學期" : "Semester"}
+                          {{ chinese: "學期", english: "Semester" }[language]}
                         </span>
                         <h3 className="text-xl font-bold text-(--text-color-primary)">
                           {semester}
@@ -141,7 +141,7 @@ const NTUST: ExperienceItem = {
                       </div>
                       <div className="px-3 py-1 rounded-full bg-(--background-color-secondary) text-xs font-medium border border-(--border-color)">
                         {data.courses.length}{" "}
-                        {language === "chinese" ? "門課" : "Courses"}
+                        {{ chinese: "門課", english: "Courses" }[language]}
                       </div>
                     </div>
 
@@ -157,14 +157,14 @@ const NTUST: ExperienceItem = {
                     <div className="grid grid-cols-2 gap-2 pt-2 border-t border-(--border-color)">
                       <div className="flex flex-col">
                         <span className="text-[10px] text-(--text-color-muted)">
-                          {language === "chinese" ? "學分" : "Credits"}
+                          {{ chinese: "學分", english: "Credits" }[language]}
                         </span>
                         <span className="font-semibold">{totalCredits}</span>
                       </div>
                       <div className="flex flex-col">
                         <span className="text-[10px] text-(--text-color-muted) flex items-center gap-1">
                           <TrophyOutlined />{" "}
-                          {language === "chinese" ? "班排" : "Class Rank"}
+                          {{ chinese: "班排", english: "Class Rank" }[language]}
                         </span>
                         <span className="font-semibold">
                           {data.classRank || "-"}
@@ -174,20 +174,25 @@ const NTUST: ExperienceItem = {
                   </div>
                 </div>
 
-                <modal.Container>
+                <modal.Container className="flex items-center justify-center p-4">
                   <div className="animate-pop card w-full max-w-2xl bg-(--background-color-primary)! overflow-hidden flex flex-col max-h-[80vh]">
                     <div className="p-5 border-b border-(--border-color) bg-(--background-color-secondary)/50 backdrop-blur-sm flex justify-between items-center sticky top-0 z-10">
                       <div>
                         <h2 className="text-xl font-bold">
-                          {semester}{" "}
-                          {language === "chinese" ? "成績單" : "Transcript"}
+                          {semester}{' '}
+                          {
+                            {
+                              chinese: "成績單",
+                              english: "Transcript",
+                            }[language]
+                          }
                         </h2>
                         <div className="flex gap-3 mt-1 text-sm text-(--text-color-muted)">
                           <span>GPA: {Math.round(gpa * 100) / 100}</span>
                           <span>•</span>
                           <span>
                             {totalCredits}{" "}
-                            {language === "chinese" ? "學分" : "Credits"}
+                            {{ chinese: "學分", english: "Credits" }[language]}
                           </span>
                         </div>
                       </div>
@@ -206,7 +211,7 @@ const NTUST: ExperienceItem = {
                               </h4>
                               <span className="text-xs text-(--text-color-muted)">
                                 {course.credits}{" "}
-                                {language === "chinese" ? "學分" : "Credits"}
+                                {{ chinese: "學分", english: "Credits" }[language]}
                               </span>
                             </div>
                             <div
@@ -232,7 +237,7 @@ const NTUST: ExperienceItem = {
   },
 };
 
-export const grades: Record<
+const grades: Record<
   Semester,
   { classRank?: number; departmentRanK?: number; courses: Course[] }
 > = {
