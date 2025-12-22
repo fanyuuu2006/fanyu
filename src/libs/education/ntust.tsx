@@ -372,32 +372,42 @@ const SemesterCard = ({
             </div>
           </div>
 
-          <div className="overflow-y-auto p-4">
-            <div className="grid grid-cols-1 gap-3">
-              {data.courses.map((course, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-4 rounded-xl border border-(--border-color) hover:bg-(--background-color-secondary) transition-colors group"
-                >
-                  <div className="flex flex-col gap-1">
-                    <h4 className="font-semibold text-base group-hover:text-(--text-color-primary) transition-colors">
-                      {course.courseName[language]}
-                    </h4>
-                    <span className="text-xs text-(--text-color-muted)">
-                      {course.credits}{" "}
-                      {{ chinese: "學分", english: "Credits" }[language]}
-                    </span>
-                  </div>
-                  <div
-                    className={cn(
-                      "text-xl font-bold tabular-nums",
-                      getGradeColor(course.grade)
-                    )}
-                  >
-                    {course.grade || "-"}
-                  </div>
+          <div className="overflow-y-auto">
+            <div className="flex flex-col min-w-full">
+              <div className="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-2 border-b border-(--border-color) text-xs text-(--text-color-muted) uppercase tracking-wider font-medium sticky top-0 bg-(--background-color-primary) z-10">
+                <div>
+                  {{ chinese: "課程名稱", english: "Course Name" }[language]}
                 </div>
-              ))}
+                <div className="w-16 text-center">
+                  {{ chinese: "學分", english: "Credits" }[language]}
+                </div>
+                <div className="w-16 text-right">
+                  {{ chinese: "成績", english: "Grade" }[language]}
+                </div>
+              </div>
+              <div className="flex flex-col">
+                {data.courses.map((course, index) => (
+                  <div
+                    key={index}
+                    className="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 items-center hover:bg-(--background-color-secondary)/50 transition-colors border-b border-(--border-color) last:border-0 group"
+                  >
+                    <div className="font-medium group-hover:text-(--text-color-primary) transition-colors">
+                      {course.courseName[language]}
+                    </div>
+                    <div className="w-16 text-center text-(--text-color-muted)">
+                      {course.credits}
+                    </div>
+                    <div
+                      className={cn(
+                        "w-16 text-right font-bold tabular-nums",
+                        getGradeColor(course.grade)
+                      )}
+                    >
+                      {course.grade || "-"}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
