@@ -203,7 +203,7 @@ const grades: Record<
           english: "Data Structures",
         },
         credits: 3,
-        grade: null,
+        grade: 'C-',
       },
       {
         courseName: {
