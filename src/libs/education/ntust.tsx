@@ -203,7 +203,7 @@ const grades: Record<
           english: "Data Structures",
         },
         credits: 3,
-        grade: 'C-',
+        grade: 'C+',
       },
       {
         courseName: {
@@ -219,7 +219,7 @@ const grades: Record<
           english: "Mathematics for Management",
         },
         credits: 3,
-        grade: null,
+        grade: "C-",
       },
       {
         courseName: {
@@ -267,7 +267,7 @@ const grades: Record<
           english: "Grammar and Rhetoric",
         },
         credits: 2,
-        grade: null,
+        grade: "A-",
       },
     ],
   },
