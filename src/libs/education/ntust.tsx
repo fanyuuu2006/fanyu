@@ -1,4 +1,4 @@
-import { Semester, Course, ExperienceItem } from "@/types/experience";
+import { Semester, Course, ExperienceItem, Grade } from "@/types/experience";
 import { cn } from "@/utils/className";
 import { calculateGPA } from "@/utils/experience";
 import {
@@ -203,7 +203,7 @@ const grades: Record<
           english: "Data Structures",
         },
         credits: 3,
-        grade: 'C+',
+        grade: "C+",
       },
       {
         courseName: {
@@ -273,11 +273,11 @@ const grades: Record<
   },
 };
 
-const getGradeColor = (grade: string | null) => {
+const getGradeColor = (grade: Grade | null) => {
   if (!grade) return "text-(--text-color-muted)";
   if (["A+", "A", "A-"].includes(grade)) return "text-green-400";
   if (["B+", "B", "B-"].includes(grade)) return "text-cyan-400";
-  if (["C+", "C", "D+", "E", "X"].includes(grade)) return "text-red-400";
+  if (["C+", "C", "C-", "D+", "E", "X"].includes(grade)) return "text-red-400";
   if (grade === "通過") return "text-yellow-400";
   return "text-(--text-color-primary)";
 };
@@ -356,10 +356,12 @@ const SemesterCard = ({
             <div>
               <h2 className="text-xl font-bold">
                 {semester}{" "}
-                {{
-                  chinese: "成績單",
-                  english: "Transcript",
-                }[language]}
+                {
+                  {
+                    chinese: "成績單",
+                    english: "Transcript",
+                  }[language]
+                }
               </h2>
               <div className="flex gap-3 mt-1 text-sm text-(--text-color-muted)">
                 <span>GPA: {Math.round(gpa * 100) / 100}</span>
@@ -481,10 +483,12 @@ const NTUST: ExperienceItem = {
         <div className="grid grid-cols-2 gap-3 sm:gap-4">
           <div className="card p-4 flex flex-col items-center justify-center gap-1">
             <span className="text-xs sm:text-sm text-(--text-color-muted)">
-              {{
-                chinese: "總學分",
-                english: "Total Credits",
-              }[language]}
+              {
+                {
+                  chinese: "總學分",
+                  english: "Total Credits",
+                }[language]
+              }
             </span>
             <span className="text-2xl sm:text-3xl font-bold text-(--text-color-primary)">
               {overallGPA.totalCredits}
@@ -492,10 +496,12 @@ const NTUST: ExperienceItem = {
           </div>
           <div className="card p-4 flex flex-col items-center justify-center gap-1">
             <span className="text-xs sm:text-sm text-(--text-color-muted)">
-              {{
-                chinese: "累計 GPA",
-                english: "Overall GPA",
-              }[language]}
+              {
+                {
+                  chinese: "累計 GPA",
+                  english: "Overall GPA",
+                }[language]
+              }
             </span>
             <span className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-(--text-color-primary) to-(--text-color-secondary)">
               {Math.round(overallGPA.gpa * 100) / 100}
@@ -517,7 +523,5 @@ const NTUST: ExperienceItem = {
     );
   },
 };
-
-
 
 export default NTUST;
