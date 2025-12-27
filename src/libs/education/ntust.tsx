@@ -227,7 +227,7 @@ const grades: Record<
           english: "Database Management Systems",
         },
         credits: 3,
-        grade: null,
+        grade: 'A-',
       },
       {
         courseName: {
@@ -235,7 +235,7 @@ const grades: Record<
           english: "Statistics (I)",
         },
         credits: 3,
-        grade: null,
+        grade: 'C-',
       },
       {
         courseName: {
@@ -259,7 +259,7 @@ const grades: Record<
           english: "Webpages Development",
         },
         credits: 3,
-        grade: null,
+        grade: 'A',
       },
       {
         courseName: {
