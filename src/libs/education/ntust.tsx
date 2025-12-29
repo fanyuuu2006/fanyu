@@ -210,7 +210,7 @@ const grades: Record<
           chinese: "體育(法式滾球)(上)",
           english: "Physical Education (Petanque) (I)",
         },
-        grade: null,
+        grade: 'A-',
         credits: 0,
       },
       {
@@ -251,7 +251,7 @@ const grades: Record<
           english: "Introduction of Big Data and Programming",
         },
         credits: 2,
-        grade: null,
+        grade: 'B+',
       },
       {
         courseName: {
