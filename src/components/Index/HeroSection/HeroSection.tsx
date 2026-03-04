@@ -17,8 +17,8 @@ type HeroContent = Record<
 >;
 
 const getHeroContent = (language: LanguageOption): HeroContent =>
-  ((
-    {
+  (
+    ({
       chinese: {
         hello: "哈囉，",
         iAm: "我是",
@@ -33,8 +33,8 @@ const getHeroContent = (language: LanguageOption): HeroContent =>
         contactMe: "Contact Me",
         portfolio: "Portfolio",
       },
-    } as LanguageContent<HeroContent>
-  )[language]);
+    }) as LanguageContent<HeroContent>
+  )[language];
 
 export const HeroSection = () => {
   const Language = useLanguage();
@@ -78,7 +78,7 @@ export const HeroSection = () => {
               chinese: "可以點ㄛ",
               english: "Could be clicked",
             }[Language.Current]
-          }🤫`
+          }🤫`,
         ),
       ],
       [
@@ -91,7 +91,7 @@ export const HeroSection = () => {
               chinese: "寫程式",
               english: "Coding",
             }[Language.Current]
-          }'`
+          }'`,
         ),
         c063.default(", "),
         c063.string(
@@ -100,7 +100,7 @@ export const HeroSection = () => {
               chinese: "繪畫",
               english: "Drawing",
             }[Language.Current]
-          }'`
+          }'`,
         ),
         c063.brackets2("]"),
         c063.default(","),
@@ -178,7 +178,7 @@ export const HeroSection = () => {
                     href={item.href}
                     className={cn(
                       "w-full md:w-fit flex items-center justify-center px-8 py-3 font-semibold rounded-full",
-                      item.className
+                      item.className,
                     )}
                   >
                     {item.label}

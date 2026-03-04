@@ -41,7 +41,11 @@ const LabaG: ProjectItem = {
     },
     {
       category: "github",
-      href: "https://github.com/fanyuuu2006/LaBaG-Web",
+      href: "https://github.com/fanyuuu2006/labag-web-v2",
+    },
+    {
+      category: "github",
+      href: "https://github.com/fanyuuu2006/labag-backend-v2",
     },
     {
       category: "github",
