@@ -1,8 +1,8 @@
 import { ProjectItem } from "@/types/portfolio";
 
 export const projectTagCategories = {
-  language: ["TypeScript", "Python", "JavaScript", "CSS"],
-  roles: ["Frontend", "Backend", "Full Stack"], // ← 職能/開發角色分類
+  language: ["TypeScript", "Python", "JavaScript", "CSS", "SQL"], // 使用語言
+  roles: ["Frontend", "Backend", "Full Stack", "Database"], // ← 職能/開發角色分類
   domains: ["Crawler", "Restful API"], // 專長領域
   "frameworks/libraries": [
     "React",
@@ -14,7 +14,7 @@ export const projectTagCategories = {
     "Matplotlib",
     "Requests",
   ],
-  tools: ["Git / GitHub", "NPM", "Google Sheets", "Vercel"],
+  tools: ["Git / GitHub", "NPM", "Google Sheets", "Vercel", "Supabase"],
   other: [],
 } as const;
 
@@ -369,6 +369,66 @@ const C063: ProjectItem = {
   },
 };
 
+const BSCAR: ProjectItem = {
+  title: {
+    chinese: "博斯車體美研",
+    english: "BOSS AUTOMOTIVE BEAUTY",
+  },
+  imageSrc:
+    "https://raw.githubusercontent.com/fanyuuu2006/bscar/refs/heads/main/public/images/icons/logo.jpg",
+  links: [
+    {
+      category: "demo",
+      href: "https://bscar.vercel.app",
+    },
+    {
+      category: "github",
+      href: "https://github.com/fanyuuu2006/bscar",
+    },
+    {
+      category: "github",
+      href: "https://github.com/fanyuuu2006/bscar-backend",
+    },
+  ],
+  time: "2026-02",
+  about: {
+    chinese: "一個提供汽車美容服務預約的網站。",
+    english: "A website for booking automotive beauty services.",
+  },
+  description: {
+    chinese: [
+      "前端使用 Next.js 和 React 開發，提供用戶友好的預約界面和流暢的互動體驗。",
+      "後端使用 Express 提供 API 支援，負責處理預約資料和用戶管理。",
+      "使用 TypeScript 提高程式碼的穩定性與可維護性，增進開發效率。",
+      "資料存儲方面，使用 Supabase 作為後端資料庫，提供可靠的資料管理和查詢功能。",
+      "專案前後端皆部署於 Vercel，實現了快速的部署和持續的擴展。",
+    ],
+    english: [
+      "Frontend developed with Next.js and React, offering a user-friendly booking interface and smooth interactions.",
+      "Backend built with Express to provide API support, handling booking data and user management.",
+      "TypeScript was employed to improve code stability and maintainability, enhancing the overall development process.",
+      "For data storage, Supabase was used as the backend database solution, providing reliable data management and querying capabilities.",
+      "The project is deployed on Vercel for both frontend and backend, enabling fast deployments and easy scalability.",
+    ],
+  },
+  tags: [
+    "TypeScript",
+    "Next.js",
+    "React",
+    "CSS",
+    "SQL",
+    "Frontend",
+    "Express",
+    "Node.js",
+    "Database",
+    "Backend",
+    "Restful API",
+    "Supabase",
+    "Git / GitHub",
+    "Vercel",
+  ],
+};
+
 export const projects: ProjectItem[] = [
   LabaG,
   ToolsForMetaInformation,
@@ -376,4 +436,5 @@ export const projects: ProjectItem[] = [
   DoBuJio,
   AoJiao,
   C063,
+  BSCAR,
 ];
