@@ -36,20 +36,12 @@ const LabaG: ProjectItem = {
       href: "https://labag-backend.vercel.app",
     },
     {
-      category: "package",
-      href: "https://www.npmjs.com/package/labag",
-    },
-    {
       category: "github",
       href: "https://github.com/fanyuuu2006/labag-web-v2",
     },
     {
       category: "github",
       href: "https://github.com/fanyuuu2006/labag-backend-v2",
-    },
-    {
-      category: "github",
-      href: "https://github.com/fanyuuu2006/LaBaG-TypeScript",
     },
   ],
   time: "2023-06",
@@ -89,7 +81,6 @@ const LabaG: ProjectItem = {
     "Full Stack",
     "JavaScript",
     "Git / GitHub",
-    "NPM",
     "Vercel",
   ],
   github: {
