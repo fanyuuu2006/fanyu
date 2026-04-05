@@ -31,7 +31,11 @@ export const skills: Record<
         srcArray: [],
         src: "https://www.svgrepo.com/show/373705/js-official.svg",
       },
-
+      {
+        title: "EcmaScript",
+        srcArray: [],
+        src: "https://raw.githubusercontent.com/cw1997/www.changwei.me/main/src/assets/images/logo/frontend/es-ecmascript-logo.png",
+      },
       {
         title: "HTML 5",
         srcArray: [],
@@ -62,11 +66,26 @@ export const skills: Record<
         srcArray: [],
         src: "https://www.svgrepo.com/show/354431/tailwindcss-icon.svg",
       },
+      {
+        title: "Dart",
+        srcArray: [],
+        src: "https://www.svgrepo.com/show/353631/dart.svg",
+      },
+      {
+        title: "Flutter",
+        srcArray: [],
+        src: "https://www.svgrepo.com/show/353751/flutter.svg",
+      },
     ],
   },
   backend: {
     icon: DatabaseOutlined,
     list: [
+      {
+        title: "PostgreSQL",
+        srcArray: [],
+        src: "https://www.svgrepo.com/show/373965/pgsql.svg",
+      },
       {
         title: "Node.js",
         srcArray: [],
