@@ -1,0 +1,29 @@
+import { portfolioItems } from "@/libs/portfolio";
+import { Carousel } from "../Carousel";
+import { IndexSection } from "./IndexSection";
+import { PortfolioCard } from "./PortfolioCard";
+import Link from "next/link";
+
+export const PortfolioSection = () => {
+  return (
+    <IndexSection id="portfolio" title="作品集">
+      <Carousel>
+        {portfolioItems.map((item) => (
+          <PortfolioCard
+            key={item.title}
+            item={item}
+            className="m-2 size-40 sm:size-48 md:size-56 shrink-0"
+          />
+        ))}
+      </Carousel>
+      <div className="w-full flex justify-center mt-4">
+        <Link
+          href="/portfolio"
+          className="btn primary font-bold px-4 py-1.5 text-base sm:text-lg rounded-full text-center"
+        >
+          查看更多
+        </Link>
+      </div>
+    </IndexSection>
+  );
+};
