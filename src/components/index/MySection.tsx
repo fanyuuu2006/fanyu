@@ -1,12 +1,7 @@
 type MySectionProps = React.HTMLAttributes<HTMLElement> & {
   title: string;
 };
-export const MySection = ({
-  title,
-  id,
-  children,
-  ...rest
-}: MySectionProps) => {
+export const MySection = ({ title, id, children, ...rest }: MySectionProps) => {
   return (
     <section id={id} {...rest}>
       <div className="container flex flex-col justify-center items-center gap-4">
@@ -15,7 +10,7 @@ export const MySection = ({
             {title}
           </h2>
         </div>
-        <div className="w-full">{children}</div>
+        {children}
       </div>
     </section>
   );

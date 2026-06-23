@@ -20,6 +20,10 @@ export const routes: Route[] = [
         label: "作品集",
         url: "#portfolio",
       },
+      {
+        label: "經歷",
+        url: "#experience",
+      }
     ],
   },
   {

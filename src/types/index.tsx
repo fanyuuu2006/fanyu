@@ -42,3 +42,16 @@ export type PortfolioItem = {
   };
   tags: PortfolioTag[];
 };
+
+export type EducationItem = {
+  school: string;
+  department?: string;
+  degree: string;
+  duration: {
+    start: DateString;
+    end?: DateString;
+  };
+  description?: React.ElementType;
+  logo?: string;
+  link?: string;
+};
