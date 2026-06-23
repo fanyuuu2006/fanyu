@@ -19,7 +19,7 @@ export const ExperienceSection = () => {
             period: `${item.duration.start} - ${item.duration.end || "至今"}`,
             link: item.link,
             description: item.description,
-            points: item.focus || [],
+            points: item.points || [],
           }))}
         />
         <ExperienceDiv
@@ -32,7 +32,7 @@ export const ExperienceSection = () => {
             period: `${item.duration.start} - ${item.duration.end || "至今"}`,
             link: item.link,
             description: item.description,
-            points: item.focus || [],
+            points: item.points || [],
           }))}
         />
         <ExperienceDiv
@@ -45,7 +45,7 @@ export const ExperienceSection = () => {
             period: `${item.duration.start} - ${item.duration.end || "至今"}`,
             link: item.link,
             description: item.description,
-            points: item.focus || [],
+            points: item.points || [],
           }))}
         />
       </div>

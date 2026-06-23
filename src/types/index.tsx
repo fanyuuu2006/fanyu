@@ -55,7 +55,7 @@ export type EducationItem = {
   logo?: string;
   link?: string;
 
-  focus?: string[];
+  points?: string[];
 };
 
 export type WorkItem = {
@@ -69,7 +69,7 @@ export type WorkItem = {
   logo?: string;
   link?: string;
 
-  focus?: string[];
+  points?: string[];
 };
 
 export type ClubItem = {
@@ -82,5 +82,5 @@ export type ClubItem = {
   description?: React.ElementType;
   logo?: string;
   link?: string;
-  focus?: string[];
+  points?: string[];
 };

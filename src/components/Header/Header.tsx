@@ -30,8 +30,11 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
       {...rest}
     >
       <div className="container flex items-center justify-between">
-        <Link href="/" onClick={closeMenu}>
-          <LogoSvg className="h-16 object-contain hover:drop-shadow-[0_0_1rem_var(--primary)] transition-all duration-300" role="banner" />
+        <Link href="/" onClick={closeMenu} aria-label="回到首頁">
+          <LogoSvg
+            className="h-16 object-contain hover:drop-shadow-[0_0_1rem_var(--primary)] transition-all duration-300"
+            role="banner"
+          />
         </Link>
 
         <div className="text-xl lg:hidden">

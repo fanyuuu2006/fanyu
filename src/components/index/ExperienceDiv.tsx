@@ -38,7 +38,7 @@ export const ExperienceDiv = ({
   return (
     <div {...rest}>
       <h3 className="flex items-center gap-2 text-2xl font-semibold text-(--foreground) mb-8">
-        <span className="mt-2 size-2 shrink-0 rounded-full bg-(--primary) transition-transform" />
+        <span className="size-2 shrink-0 rounded-full bg-(--primary) transition-transform" />
         {title}
       </h3>
       <div className="divide-y divide-white/25">
@@ -71,7 +71,7 @@ export const ExperienceDiv = ({
                           item.title
                         )}
                       </h4>
-                      <p className="text-sm text-(--muted) flex items-center gap-1">
+                      <p className="text-sm text-(--muted) font-mono flex items-center gap-1">
                         <ClockCircleOutlined />
                         <span>{item.period}</span>
                       </p>
@@ -83,7 +83,7 @@ export const ExperienceDiv = ({
                       <ul className="mt-2 space-y-2">
                         {item.points.map((point, index) => (
                           <li key={index} className="flex items-center gap-2">
-                            <span className="mt-2 size-1.5 shrink-0 rounded-full bg-(--primary)" />
+                            <span className="size-1.5 shrink-0 rounded-full bg-(--primary)" />
                             <span className="text-sm text-(--muted)">
                               {point}
                             </span>

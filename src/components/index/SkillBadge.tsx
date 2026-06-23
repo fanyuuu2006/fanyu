@@ -17,7 +17,7 @@ export const SkillBadge = ({ item }: SkillBadgeProps) => {
     <OutsideLink
       href={href}
       key={item.title}
-      className="card primary p-1.5 rounded-2xl tooltip size-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+      className="card primary font-mono p-1.5 rounded-2xl tooltip size-full flex items-center justify-center transition-all duration-300 hover:scale-110"
       data-tooltip={item.title}
     >
       <MyImage

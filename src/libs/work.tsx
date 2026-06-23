@@ -10,7 +10,6 @@ export const work: WorkItem[] = [
     },
     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95Iei_oww6g8XyzyLemSlBJCFx9y8srqeBw&s",
     link: "https://www.leofooresort.com.tw/",
-    focus: [],
   },
   {
     company: "康軒文教集團桃園物流中心",
@@ -21,7 +20,6 @@ export const work: WorkItem[] = [
     },
     logo: "https://www.knsh.com.tw/images/fevicon/fevicon.png",
     link: "https://maps.app.goo.gl/Wbd9PWNWg63kg5kR8",
-    focus: [],
   },
   {
     company: "六福村主題遊樂園",
@@ -32,7 +30,6 @@ export const work: WorkItem[] = [
     },
     logo: "https://alumnus.pccu.edu.tw/var/file/264/1264/img/2537/LINE_ALBUM_2022.4.26_220426_3.jpg",
     link: "https://www.leofoovillage.com.tw/",
-    focus: [],
   },
   {
     company: "豪享來麵店",
@@ -43,6 +40,5 @@ export const work: WorkItem[] = [
     },
     logo: "https://1.bp.blogspot.com/-4JBaaL7IXuo/XjV47f4Rc9I/AAAAAAAEnBU/g4K3C9kZKbM1P5gvuFJ3RQnygfgHAHrWACKgBGAsYHg/s1600/IMG_9510.HEIC",
     link: "https://maps.app.goo.gl/zxyUAibAJtioHXxBA",
-    focus: [],
   },
 ];
