@@ -103,7 +103,7 @@ export const AboutMeSection = () => {
               className={cn(
                 "text-justify indent-8 text-base sm:text-lg md:text-xl text-(--muted) leading-relaxed",
                 {
-                  "first-letter:text-3xl first-letter:font-bold first-letter:text-(--text-color-primary) first-letter:mr-1":
+                  "first-letter:text-3xl first-letter:font-bold first-letter:text-(--primary) first-letter:mr-1":
                     i === 0,
                 },
               )}

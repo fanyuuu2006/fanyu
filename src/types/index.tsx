@@ -54,4 +54,33 @@ export type EducationItem = {
   description?: React.ElementType;
   logo?: string;
   link?: string;
+
+  focus?: string[];
+};
+
+export type WorkItem = {
+  company: string;
+  role: string;
+  duration: {
+    start: DateString;
+    end?: DateString;
+  };
+  description?: React.ElementType;
+  logo?: string;
+  link?: string;
+
+  focus?: string[];
+};
+
+export type ClubItem = {
+  organization: string;
+  role: string;
+  duration: {
+    start: DateString;
+    end?: DateString;
+  };
+  description?: React.ElementType;
+  logo?: string;
+  link?: string;
+  focus?: string[];
 };

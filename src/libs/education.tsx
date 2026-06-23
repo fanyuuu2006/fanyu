@@ -9,8 +9,8 @@ export const education: EducationItem[] = [
       start: "2024-09",
     },
     link: "https://www.ntust.edu.tw/",
-    logo:
-      "https://upload.wikimedia.org/wikipedia/zh/b/b1/Taiwan_Tech_Logo.svg",
+    logo: "https://upload.wikimedia.org/wikipedia/zh/b/b1/Taiwan_Tech_Logo.svg",
+    focus: [],
   },
   {
     school: "私立治平高級中學",
@@ -21,8 +21,8 @@ export const education: EducationItem[] = [
       end: "2024-06",
     },
     link: "https://www.cpshs.tyc.edu.tw/",
-    logo:
-      "https://upload.wikimedia.org/wikipedia/zh/8/80/Chih_Ping_Senior_High_School_Logo.gif",
+    logo: "https://upload.wikimedia.org/wikipedia/zh/8/80/Chih_Ping_Senior_High_School_Logo.gif",
+    focus: [],
   },
   {
     school: "新竹縣立富光國民中學",
@@ -33,6 +33,7 @@ export const education: EducationItem[] = [
     },
     link: "https://fgjh.hcc.edu.tw/",
     logo: "https://fgjh.hcc.edu.tw/var/file/14/1014/img/1/102403877.jpg",
+    focus: [],
   },
   {
     school: "新竹縣立關西國民小學",
@@ -42,7 +43,7 @@ export const education: EducationItem[] = [
       end: "2018-06",
     },
     link: "https://gses.hcc.edu.tw/",
-    logo:
-      "https://gses.hcc.edu.tw/var/file/63/1063/msys_1063_9975114_41652.png",
+    logo: "https://gses.hcc.edu.tw/var/file/63/1063/msys_1063_9975114_41652.png",
+    focus: [],
   },
 ];
