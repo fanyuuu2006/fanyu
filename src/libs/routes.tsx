@@ -23,6 +23,10 @@ export const routes: Route[] = [
       {
         label: "經歷",
         url: "#experience",
+      },
+      {
+        label: "聯絡方式",
+        url: "#contact",
       }
     ],
   },

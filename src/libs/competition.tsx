@@ -18,7 +18,8 @@ export const competition: ExperienceItem[] = [
 
   {
     title: "新竹縣國民中學創新思考金頭腦數學競賽",
-    imgSrc: "https://lh3.googleusercontent.com/sitesv/AA5AbUAF7EruVn4c5RCf293PmkRsJ5ege8bqsA-7y2QbF22SfTXsbdCn1VGAWiO71XbGyzrJAofJPtjC24srFO7VjanRycfaHNI4AQYieASElA543fjGNZu1El5LVBn0_vh1svvZAFPqhRVIg2cIc_HwANciK-bwivJSfD0Kly4COLFXN3yWs-Z0HSVKfTZzxVlrE_hEk97ts5b0hzo3w9zXzXRrtYD2wirbKEFOMAIopF4=w1280",
+    imgSrc:
+      "https://lh3.googleusercontent.com/sitesv/AA5AbUAF7EruVn4c5RCf293PmkRsJ5ege8bqsA-7y2QbF22SfTXsbdCn1VGAWiO71XbGyzrJAofJPtjC24srFO7VjanRycfaHNI4AQYieASElA543fjGNZu1El5LVBn0_vh1svvZAFPqhRVIg2cIc_HwANciK-bwivJSfD0Kly4COLFXN3yWs-Z0HSVKfTZzxVlrE_hEk97ts5b0hzo3w9zXzXRrtYD2wirbKEFOMAIopF4=w1280",
     duration: "2021-01-08",
     link: "https://sites.google.com/view/hccgoldenmind/",
     description: `
@@ -31,10 +32,7 @@ export const competition: ExperienceItem[] = [
     title: "全國高級中等學校小論文寫作比賽",
     subtitle: "1130315梯次 桃園區 商業類",
     imgSrc: "https://www.shs.edu.tw/favicon.ico",
-    duration: {
-      start: "2023-11",
-      end: "2024-03",
-    },
+    duration: "2024-03-15",
     link: "https://www.shs.edu.tw/",
     description: `
 - 研究主題：疫情後消費者對電商平台使用現狀－以蝦皮購物為例

@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { DateString } from "./date";
 import { tagCategories } from "@/libs/portfolio";
+import { MyImage } from "@/components/MyImage";
 
 type BaseRoute = MetadataRoute.Sitemap[number] & {
   label: string;
@@ -41,4 +42,16 @@ export type PortfolioItem = {
     };
   };
   tags: PortfolioTag[];
+};
+export type ContactItem = {
+  label: string;
+  icon: React.ComponentType;
+  url: string;
+  colors?: React.CSSProperties["color"][];
+  info: {
+    image?: React.ComponentPropsWithRef<typeof MyImage>;
+    id: string;
+    name: string;
+    about?: React.ComponentType;
+  };
 };
