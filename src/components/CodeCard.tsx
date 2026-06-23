@@ -28,13 +28,17 @@ export const CodeCard = ({
     >
       <div className="flex items-center">
         <span className="text-(--muted)">{lang}</span>
-       
+
         <CopyButton
           content={content}
           className="ml-auto btn rounded-sm flex items-center justify-center p-1"
         />
       </div>
-      <CodeBlock theme={'default-dark-modern'} tokenLines={codeLines} className="font-mono" />
+      <CodeBlock
+        theme={"default-dark-modern"}
+        tokenLines={codeLines}
+        className="font-mono"
+      />
     </div>
   );
 };

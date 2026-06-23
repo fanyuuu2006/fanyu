@@ -116,7 +116,7 @@ export const AboutMeSection = () => {
           <CodeCard
             codeLines={codeLines}
             lang="typescript"
-            className="w-full"
+            className="w-full text-sm sm:text-base md:text-lg lg:text-xl"
           />
         </div>
       </div>
