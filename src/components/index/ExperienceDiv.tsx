@@ -65,7 +65,7 @@ export const ExperienceDiv = ({
               className="py-7 first:pt-0 last:pb-0"
             >
               <div className="flex items-start gap-4">
-                <div className="shrink-0 size-12 rounded-lg overflow-hidden bg-(--foreground)">
+                <div className="shrink-0 size-10 md:size-12 lg:size-14 rounded-lg overflow-hidden bg-(--foreground)">
                   <MyImage
                     src={item.imgSrc}
                     alt={item.title}
@@ -103,12 +103,13 @@ export const ExperienceDiv = ({
                             li: ({ children, className, ...rest }) => (
                               <li
                                 className={cn(
-                                  "list-disc list-inside marker:text-(--primary)",
+                                  "flex gap-2 items-start",
                                   className,
                                 )}
                                 {...rest}
                               >
-                                {children}
+                                <span className="mt-2 size-1 shrink-0 rounded-full bg-(--primary)" />
+                               <span>{children}</span>
                               </li>
                             ),
                             a: ({ href, children, className, ...rest }) => (
