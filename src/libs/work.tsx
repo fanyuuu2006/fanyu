@@ -8,7 +8,8 @@ export const work: ExperienceItem[] = [
       start: "2022-03",
       end: "2022-03",
     },
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95Iei_oww6g8XyzyLemSlBJCFx9y8srqeBw&s",
+    imgSrc:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT95Iei_oww6g8XyzyLemSlBJCFx9y8srqeBw&s",
     link: "https://www.leofooresort.com.tw/",
   },
   {
@@ -20,6 +21,10 @@ export const work: ExperienceItem[] = [
     },
     imgSrc: "https://www.knsh.com.tw/images/fevicon/fevicon.png",
     link: "https://maps.app.goo.gl/Wbd9PWNWg63kg5kR8",
+    points: [
+      "協助教材與出版品揀貨、包裝及出貨作業",
+      "依訂單內容進行貨物分類與整理",
+    ],
   },
   {
     title: "六福村主題遊樂園",
@@ -28,7 +33,8 @@ export const work: ExperienceItem[] = [
       start: "2024-08",
       end: "2024-08",
     },
-    imgSrc: "https://alumnus.pccu.edu.tw/var/file/264/1264/img/2537/LINE_ALBUM_2022.4.26_220426_3.jpg",
+    imgSrc:
+      "https://alumnus.pccu.edu.tw/var/file/264/1264/img/2537/LINE_ALBUM_2022.4.26_220426_3.jpg",
     link: "https://www.leofoovillage.com.tw/",
   },
   {
@@ -38,7 +44,25 @@ export const work: ExperienceItem[] = [
       start: "2024-10",
       end: "2026-06",
     },
-    imgSrc: "https://1.bp.blogspot.com/-4JBaaL7IXuo/XjV47f4Rc9I/AAAAAAAEnBU/g4K3C9kZKbM1P5gvuFJ3RQnygfgHAHrWACKgBGAsYHg/s1600/IMG_9510.HEIC",
+    imgSrc:
+      "https://1.bp.blogspot.com/-4JBaaL7IXuo/XjV47f4Rc9I/AAAAAAAEnBU/g4K3C9kZKbM1P5gvuFJ3RQnygfgHAHrWACKgBGAsYHg/s1600/IMG_9510.HEIC",
     link: "https://maps.app.goo.gl/zxyUAibAJtioHXxBA",
+    points: ["負責點餐、收銀、環境整理與顧客服務"],
+  },
+  {
+    title: "永和國中桌遊社",
+    subtitle: "桌遊教學助理",
+    duration: {
+      start: "2025-09",
+      end: "2026-01",
+    },
+    points: [
+      "代表台科大桌遊社參與教育部帶動中小學計畫",
+      "協助規劃並執行永和國中桌遊社課程",
+      "負責桌遊規則講解、活動帶領與學生互動",
+      "與教師及團隊成員協調課程內容與教學安排",
+    ],
+    imgSrc:
+      "https://upload.wikimedia.org/wikipedia/zh/f/f1/%E6%96%B0%E5%8C%97%E5%B8%82%E7%AB%8B%E6%B0%B8%E5%92%8C%E5%9C%8B%E6%B0%91%E4%B8%AD%E5%AD%B8_logo.png",
   },
 ];
