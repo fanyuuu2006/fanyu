@@ -4,6 +4,7 @@ import { ExperienceDiv } from "./ExperienceDiv";
 import { MySection } from "./MySection";
 import { work } from "@/libs/work";
 import { club } from "@/libs/club";
+import { competition } from "@/libs/competition";
 
 export const ExperienceSection = () => {
   return (
@@ -12,41 +13,16 @@ export const ExperienceSection = () => {
         <ExperienceDiv
           title="學歷"
           order="desc"
-          items={education.map((item) => ({
-            title: item.school,
-            subtitle: [item.department, item.degree].filter(Boolean).join(" "),
-            imgSrc: item.logo,
-            period: `${item.duration.start} - ${item.duration.end || "至今"}`,
-            link: item.link,
-            description: item.description,
-            points: item.points || [],
-          }))}
+          maxVisible={1}
+          items={education}
         />
+        <ExperienceDiv title="工作" order="desc" items={work} />
+        <ExperienceDiv title="社團" order="asc" items={club} />
         <ExperienceDiv
-          title="工作"
+          title="競賽"
           order="desc"
-          items={work.map((item) => ({
-            title: item.company,
-            subtitle: item.role,
-            imgSrc: item.logo,
-            period: `${item.duration.start} - ${item.duration.end || "至今"}`,
-            link: item.link,
-            description: item.description,
-            points: item.points || [],
-          }))}
-        />
-        <ExperienceDiv
-          title="社團"
-          order="asc"
-          items={club.map((item) => ({
-            title: item.organization,
-            subtitle: item.role,
-            imgSrc: item.logo,
-            period: `${item.duration.start} - ${item.duration.end || "至今"}`,
-            link: item.link,
-            description: item.description,
-            points: item.points || [],
-          }))}
+          maxVisible={3}
+          items={competition}
         />
       </div>
     </MySection>

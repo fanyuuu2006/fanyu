@@ -1,20 +1,24 @@
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { OutsideLink } from "fanyucomponents";
 import { MyImage } from "../MyImage";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { ExperienceItem } from "@/types/experience";
 
+const getStartDate = (duration: ExperienceItem["duration"]) => {
+  return typeof duration === "string" ? duration : duration.start;
+};
+const getPeriod = (duration: ExperienceItem["duration"]) => {
+  if (typeof duration === "string") {
+    return duration;
+  }
+  const { start, end } = duration;
+  return `${start} - ${end || "至今"}`;
+};
 type ExperienceDivProps = React.HTMLAttributes<HTMLElement> & {
   title: string;
   order?: "asc" | "desc";
-  items: {
-    title: string;
-    subtitle?: string;
-    imgSrc?: string;
-    period: string;
-    link?: string;
-    points: React.ReactNode[];
-    description?: React.ElementType;
-  }[];
+  maxVisible?: number;
+  items: ExperienceItem[];
   children?: never;
 };
 
@@ -22,18 +26,27 @@ export const ExperienceDiv = ({
   title,
   items,
   order = "desc",
+  maxVisible = Infinity,
   ...rest
 }: ExperienceDivProps) => {
+  const [expanded, setExpanded] = useState<boolean>(false);
+
   const orderedItems = useMemo(() => {
     return [...items].sort((a, b) => {
-      const aStart = a.period.split(" - ")[0];
-      const bStart = b.period.split(" - ")[0];
+      const aStart = getStartDate(a.duration);
+      const bStart = getStartDate(b.duration);
+
       if (order === "asc") {
         return aStart.localeCompare(bStart);
       }
       return bStart.localeCompare(aStart);
     });
   }, [items, order]);
+
+  const displayItems = useMemo(
+    () => (expanded ? orderedItems : orderedItems.slice(0, maxVisible)),
+    [expanded, orderedItems, maxVisible],
+  );
 
   return (
     <div {...rest}>
@@ -42,13 +55,13 @@ export const ExperienceDiv = ({
         {title}
       </h3>
       <div className="divide-y divide-white/25">
-        {orderedItems.map((item) => {
+        {displayItems.map((item, i) => {
           return (
             <article
-              key={`${item.title}-${item.subtitle}-${item.period}`}
+              key={`${item.title}-${i}`}
               className="py-7 first:pt-0 last:pb-0"
             >
-              <div key={item.title} className="flex items-start gap-4">
+              <div className="flex items-start gap-4">
                 <div className="shrink-0 size-12 rounded-lg overflow-hidden bg-(--foreground)">
                   <MyImage
                     src={item.imgSrc}
@@ -73,15 +86,15 @@ export const ExperienceDiv = ({
                       </h4>
                       <p className="text-sm text-(--muted) font-mono flex items-center gap-1">
                         <ClockCircleOutlined />
-                        <span>{item.period}</span>
+                        <span>{getPeriod(item.duration)}</span>
                       </p>
                     </div>
                     {item.subtitle && (
                       <p className="text-(--muted) text-sm">{item.subtitle}</p>
                     )}
-                    {item.points.length > 0 && (
+                    {(item.points?.length ?? 0) > 0 && (
                       <ul className="mt-2 space-y-2">
-                        {item.points.map((point, index) => (
+                        {item.points!.map((point, index) => (
                           <li key={index} className="flex items-center gap-2">
                             <span className="size-1.5 shrink-0 rounded-full bg-(--primary)" />
                             <span className="text-sm text-(--muted)">
@@ -99,6 +112,20 @@ export const ExperienceDiv = ({
           );
         })}
       </div>
+
+      {orderedItems.length > maxVisible && (
+        <div className="mt-6 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setExpanded((prev) => !prev)}
+            className="btn rounded-full px-4 py-2 text-sm"
+          >
+            {expanded
+              ? "顯示較少"
+              : `查看更多 (${orderedItems.length - maxVisible})`}
+          </button>
+        </div>
+      )}
     </div>
   );
 };
