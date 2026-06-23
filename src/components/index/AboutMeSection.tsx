@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { CodeCard } from "../CodeCard";
 import { cn } from "@/utils/className";
-import { IndexSection } from "./IndexSection";
+import { MySection } from "./MySection";
 
 const PARAGRAPHS = [
   "我的名字是范余振富，對程式設計與軟體開發抱有濃厚興趣。從小喜歡玩 Minecraft，也熱衷於研究各種紅石機關，這些經驗讓我逐漸培養出對邏輯思考與創作的熱情。",
@@ -94,7 +94,7 @@ export const AboutMeSection = () => {
   }, []);
 
   return (
-    <IndexSection id="aboutMe" title="關於我">
+    <MySection id="aboutMe" title="關於我">
       <div className="w-full grid lg:grid-cols-[1fr_auto] gap-4 p-4">
         <article className="flex flex-col gap-4 p-4 md:p-6 lg:p-8">
           {PARAGRAPHS.map((p, i) => (
@@ -116,10 +116,10 @@ export const AboutMeSection = () => {
           <CodeCard
             codeLines={codeLines}
             lang="typescript"
-            className="w-full text-sm sm:text-base md:text-lg lg:text-xl"
+            className="w-full text-[clamp(0.7rem,1.5vw,1rem)]"
           />
         </div>
       </div>
-    </IndexSection>
+    </MySection>
   );
 };

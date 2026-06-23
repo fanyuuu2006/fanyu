@@ -1,12 +1,12 @@
 import { portfolioItems } from "@/libs/portfolio";
 import { Carousel } from "../Carousel";
-import { IndexSection } from "./IndexSection";
+import { MySection } from "./MySection";
 import { PortfolioCard } from "./PortfolioCard";
 import Link from "next/link";
 
 export const PortfolioSection = () => {
   return (
-    <IndexSection id="portfolio" title="作品集">
+    <MySection id="portfolio" title="作品集">
       <Carousel>
         {portfolioItems.map((item) => (
           <PortfolioCard
@@ -24,6 +24,6 @@ export const PortfolioSection = () => {
           查看更多
         </Link>
       </div>
-    </IndexSection>
+    </MySection>
   );
 };

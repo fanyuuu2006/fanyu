@@ -23,7 +23,7 @@ export const CodeCard = ({
   }, [codeLines]);
   return (
     <div
-      className={cn(`card rounded-2xl flex flex-col p-4 gap-2`, className)}
+      className={cn(`card rounded-xl flex flex-col p-4 gap-2`, className)}
       {...rest}
     >
       <div className="flex items-center">

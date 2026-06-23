@@ -1,10 +1,10 @@
 import { skillCategories } from "@/libs/skills";
-import { IndexSection } from "./IndexSection";
+import { MySection } from "./MySection";
 import { SkillBadge } from "./SkillBadge";
 
 export const SkillsSection = () => {
   return (
-    <IndexSection id="skills" title="技能專長">
+    <MySection id="skills" title="技能專長">
       <ul className="text-(--foreground) w-full flex flex-col justify-center items-center gap-6">
         {skillCategories.map((category) => (
           <li key={category.label}>
@@ -20,6 +20,6 @@ export const SkillsSection = () => {
           </li>
         ))}
       </ul>
-    </IndexSection>
+    </MySection>
   );
 };

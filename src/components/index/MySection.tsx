@@ -1,12 +1,12 @@
-type IndexSectionProps = React.HTMLAttributes<HTMLElement> & {
+type MySectionProps = React.HTMLAttributes<HTMLElement> & {
   title: string;
 };
-export const IndexSection = ({
+export const MySection = ({
   title,
   id,
   children,
   ...rest
-}: IndexSectionProps) => {
+}: MySectionProps) => {
   return (
     <section id={id} {...rest}>
       <div className="container flex flex-col justify-center items-center gap-4">

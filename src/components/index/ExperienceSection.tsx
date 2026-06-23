@@ -1,8 +1,8 @@
-import { IndexSection } from "./IndexSection";
+import { MySection } from "./MySection";
 
-export const ExprienceSection = () => {
+export const ExperienceSection = () => {
   return (
-    <IndexSection id="experience" title="經歷">
-    </IndexSection>
+    <MySection id="experience" title="經歷">
+    </MySection>
   );
 };
