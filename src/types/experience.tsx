@@ -11,6 +11,5 @@ export type ExperienceItem = {
       }
     | DateString;
   link?: string;
-  points?: string[];
-  description?: React.ComponentType;
+  description?: string;
 };

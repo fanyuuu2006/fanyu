@@ -3,6 +3,9 @@ import { OutsideLink } from "fanyucomponents";
 import { MyImage } from "../MyImage";
 import { useMemo, useState } from "react";
 import { ExperienceItem } from "@/types/experience";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { cn } from "@/utils/className";
 
 const getStartDate = (duration: ExperienceItem["duration"]) => {
   return typeof duration === "string" ? duration : duration.start;
@@ -92,19 +95,40 @@ export const ExperienceDiv = ({
                     {item.subtitle && (
                       <p className="text-(--muted) text-sm">{item.subtitle}</p>
                     )}
-                    {(item.points?.length ?? 0) > 0 && (
-                      <ul className="mt-2 space-y-2">
-                        {item.points!.map((point, index) => (
-                          <li key={index} className="flex items-center gap-2">
-                            <span className="size-1.5 shrink-0 rounded-full bg-(--primary)" />
-                            <span className="text-sm text-(--muted)">
-                              {point}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
+                    {item.description && (
+                      <div className="text-(--muted) text-sm mt-1">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            li: ({ children, className, ...rest }) => (
+                              <li
+                                className={cn(
+                                  "list-disc list-inside marker:text-(--primary)",
+                                  className,
+                                )}
+                                {...rest}
+                              >
+                                {children}
+                              </li>
+                            ),
+                            a: ({ href, children, className, ...rest }) => (
+                              <OutsideLink
+                                href={href}
+                                className={cn(
+                                  "font-bold hover:underline transition-all duration-300",
+                                  className,
+                                )}
+                                {...rest}
+                              >
+                                {children}
+                              </OutsideLink>
+                            ),
+                          }}
+                        >
+                          {item.description}
+                        </ReactMarkdown>
+                      </div>
                     )}
-                    {item.description && <item.description />}
                   </div>
                 </div>
               </div>
