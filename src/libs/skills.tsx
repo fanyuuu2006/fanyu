@@ -28,6 +28,10 @@ export const skillCategories: {
         url: "https://developer.mozilla.org/zh-TW/docs/Web/CSS",
       },
       {
+        title: "Markdown",
+        url: "https://www.markdownguide.org/",
+      },
+      {
         title: "React",
         url: "https://reactjs.org/",
       },
@@ -49,10 +53,6 @@ export const skillCategories: {
     label: "後端",
     list: [
       {
-        title: "PostgreSQL",
-        url: "https://www.postgresql.org/",
-      },
-      {
         title: "Node.js",
         url: "https://nodejs.org/",
       },
@@ -67,6 +67,10 @@ export const skillCategories: {
       {
         title: "Flask",
         url: "https://flask.palletsprojects.com/",
+      },
+      {
+        title: "PostgreSQL",
+        url: "https://www.postgresql.org/",
       },
     ],
   },

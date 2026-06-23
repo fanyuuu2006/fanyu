@@ -56,6 +56,7 @@ export const ExperienceDiv = ({
       <h3 className="flex items-center gap-2 text-2xl font-semibold text-(--foreground) mb-8">
         <span className="size-2 shrink-0 rounded-full bg-(--primary) transition-transform" />
         {title}
+        <div className="h-px w-12 rounded-full bg-linear-to-r from-(--secondary) to-transparent" />
       </h3>
       <div className="divide-y divide-white/25">
         {displayItems.map((item, i) => {
@@ -109,7 +110,7 @@ export const ExperienceDiv = ({
                                 {...rest}
                               >
                                 <span className="mt-2 size-1 shrink-0 rounded-full bg-(--primary)" />
-                               <span>{children}</span>
+                                <span>{children}</span>
                               </li>
                             ),
                             a: ({ href, children, className, ...rest }) => (
