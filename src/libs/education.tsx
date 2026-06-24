@@ -21,11 +21,9 @@ export const education: ExperienceItem[] = [
     link: "https://www.cpshs.tyc.edu.tw/",
     imgSrc:
       "https://upload.wikimedia.org/wikipedia/zh/8/80/Chih_Ping_Senior_High_School_Logo.gif",
-    description: `
-- 四技二專統測數學、專業科目滿級分
-- 修習電子商務、商業管理、資訊應用與基礎程式設計
-- 取得電腦軟體應用乙級、會計事務（資訊）丙級證照
-    `,
+    description: `- **四技二專統測** 數學、專業科目滿級分
+- 修習電子商務、商業管理、資訊應用及基礎程式設計
+- 取得 **電腦軟體應用乙級**、**會計事務（資訊）丙級** 證照`,
   },
   {
     title: "新竹縣立富光國民中學",
@@ -36,7 +34,7 @@ export const education: ExperienceItem[] = [
     },
     link: "https://fgjh.hcc.edu.tw/",
     imgSrc: "https://fgjh.hcc.edu.tw/var/file/14/1014/img/1/102403877.jpg",
-    description: "- 110 年國中教育會考數學、自然科皆獲 A",
+    description: `- **110 年國中教育會考** 數學、自然科皆獲 **A**`,
   },
   {
     title: "新竹縣立關西國民小學",

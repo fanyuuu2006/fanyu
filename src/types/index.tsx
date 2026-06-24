@@ -28,7 +28,7 @@ export type PortfolioItem = {
   title: string;
   imageUrl: string;
   date: DateString;
-  description: string[];
+  points: string[];
   overview: string;
   links: {
     label: string;

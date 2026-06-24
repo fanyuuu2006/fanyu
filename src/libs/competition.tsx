@@ -2,18 +2,19 @@ import { ExperienceItem } from "@/types/experience";
 
 export const competition: ExperienceItem[] = [
   {
-    title: "PDAO 2025",
-    subtitle: "臺灣大學資訊管理學系主辦",
+    title: "PDAO",
+    subtitle: "程式設計與最佳化競賽",
     imgSrc:
       "https://megapx-assets.dcard.tw/images/e28d73e6-a9b0-4449-854e-2b8b50dbb6b6/orig.jpeg",
     duration: "2025-04-19",
     link: "https://ntu.im/pdao",
-    description: `
-- 隊伍名稱：不知道對不隊
-- 於限時賽制下解決演算法競賽題目
-- 運用資料結構與時間複雜度分析優化解法
-- 最終於全體參賽隊伍中獲得第 59 名
-    `,
+    description: `**臺灣大學資訊管理學系主辦**
+
+- 隊伍名稱：**不知道對不隊**
+- 在限時賽制下完成多道 **演算法** 題目
+- 使用 \`C++\`、\`Python\` 實作並優化解法
+- 運用 **資料結構** 與 **時間複雜度** 提升程式效率
+- 全體參賽隊伍 **第 59 名**`,
   },
 
   {
@@ -22,10 +23,8 @@ export const competition: ExperienceItem[] = [
       "https://lh3.googleusercontent.com/sitesv/AA5AbUAF7EruVn4c5RCf293PmkRsJ5ege8bqsA-7y2QbF22SfTXsbdCn1VGAWiO71XbGyzrJAofJPtjC24srFO7VjanRycfaHNI4AQYieASElA543fjGNZu1El5LVBn0_vh1svvZAFPqhRVIg2cIc_HwANciK-bwivJSfD0Kly4COLFXN3yWs-Z0HSVKfTZzxVlrE_hEk97ts5b0hzo3w9zXzXRrtYD2wirbKEFOMAIopF4=w1280",
     duration: "2021-01-08",
     link: "https://sites.google.com/view/hccgoldenmind/",
-    description: `
-- 代表富光國中參加新竹縣數學競賽
-- 榮獲團體賽（丙組）第二名
-    `,
+    description: `- 代表 **富光國中** 參加新竹縣數學競賽
+- 榮獲團體賽（丙組）**第二名**`,
   },
 
   {
@@ -34,12 +33,10 @@ export const competition: ExperienceItem[] = [
     imgSrc: "https://www.shs.edu.tw/favicon.ico",
     duration: "2024-03-15",
     link: "https://www.shs.edu.tw/",
-    description: `
-- 研究主題：疫情後消費者對電商平台使用現狀－以蝦皮購物為例
-- 收集並整理疫情後電商平台相關研究資料
-- 完成市場資料分析與研究報告撰寫
-- 作品獲得甲等
-    `,
+    description: `- **研究主題：** 疫情後消費者對電商平台使用現況－以蝦皮購物為例
+- 蒐集文獻與市場資料，分析消費者使用行為
+- 撰寫完整研究報告
+- 作品獲得 **甲等**`,
   },
 
   {
@@ -51,13 +48,10 @@ export const competition: ExperienceItem[] = [
       end: "2024-01",
     },
     link: "https://drive.google.com/file/d/1MrXpOsCER-Fn3uTn1RivpJBt3pkLl81g/view",
-    description: `
-- 隊伍名稱：你在偷喵我吼？
-- 與團隊共同設計新零售商業提案
-- 分析目標客群需求與市場定位
-- 規劃產品推廣與營運策略
-- 獲得挑戰完成獎
-    `,
+    description: `- 隊伍名稱：**你在偷喵我吼？**
+- 分析市場需求與目標客群
+- 參與商業模式討論
+- 規劃產品推廣及營運策略`,
   },
 
   {

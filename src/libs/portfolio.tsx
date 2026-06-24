@@ -28,7 +28,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/LaBaG-Web/refs/heads/main/frontend/src/assets/SuperCircle.png",
     date: "2023-06-22",
-    description: [
+    points: [
       "前端使用 Next.js 和 React 開發，實現遊戲介面與動態效果。",
       "後端使用 Express 提供 API 支援，負責與前端進行資料交互，並處理遊戲所需的資料管理。",
       "遊戲邏輯被封裝為 npm 包，供前端與後端共享，簡化了開發與維護過程。",
@@ -73,7 +73,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/Tools-For-Meta-Infomation/refs/heads/main/frontend/public/Logo.webp",
     date: "2025-03",
-    description: [
+    points: [
       "前端使用 Next.js 和 React 開發，提供流暢且直覺的使用者體驗。",
       "採用 TypeScript 強化程式碼可讀性與維護性，提升開發品質。",
       "純前端運作，無需後端支援，所有資料僅在本地端處理，不會傳送或儲存任何使用者資訊，保障隱私安全。",
@@ -109,7 +109,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/NTUST-1132-Software-Programming-Final-Project/refs/heads/main/assets/favicon.jpg",
     date: "2025-04",
-    description: [
+    points: [
       "以 Python 開發，串接 Line Messaging API ，提供即時股票資訊查詢功能。",
       "利用 Requests 爬取台灣證交所公開資料。",
       "使用 Matplotlib 動態生成視覺化圖表。",
@@ -146,7 +146,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/NTUST-BoardGameClub-Bot/refs/heads/main/public/image/icon.jpg",
     date: "2025-03",
-    description: [
+    points: [
       "使用 Express 架設伺服器，處理 Line webhook 請求。",
       "使用 Google Sheets 作為資料儲存與查詢後端。",
       "部署於 Vercel，快速穩定地提供服務。",
@@ -183,7 +183,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/fanyu-components/main/public/icon.png",
     date: "2025-04",
-    description: [
+    points: [
       "使用 React 開發，專注於封裝純邏輯互動元件，無綁定樣式，適用於多樣化 UI 設計。",
       "完整支援 TypeScript，提供嚴謹的型別定義與 IntelliSense 輔助，提高開發效率與穩定性。",
       "支援 `as` props，強化組件彈性與可組合性。",
@@ -218,7 +218,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/c063/refs/heads/main/public/icon.png",
     date: "2025-06",
-    description: [
+    points: [
       "使用 React 和 TypeScript 開發，提供強大的語法高亮功能與高度模組化設計，適用於教學、文件與部落格等場景。",
       "支援多種主題風格（如 GitHub、VS Code 等），可自由切換深淺色模式，提升可讀性。",
       "組件具備可擴充性，提供 `as` 屬性支援自定義渲染方式。",
@@ -253,7 +253,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/bscar/refs/heads/main/public/images/icons/logo.jpg",
     date: "2026-02-16",
-    description: [
+    points: [
       "前端使用 Next.js 和 React 開發，提供用戶友好的預約界面和流暢的互動體驗。",
       "後端使用 Express 提供 API 支援，負責處理預約資料和用戶管理。",
       "使用 TypeScript 提高程式碼的穩定性與可維護性，增進開發效率。",
@@ -296,7 +296,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/FuturixDev/official-web/refs/heads/main/public/favicon.ico",
     date: "2025-08",
-    description: [
+    points: [
       "使用 Next.js 15 與 React 開發，採用 App Router 架構建置現代化企業形象網站。",
       "全站以 TypeScript 撰寫，提升程式碼可維護性與開發效率。",
       "採用 Tailwind CSS 建立響應式介面，支援桌面與行動裝置瀏覽。",

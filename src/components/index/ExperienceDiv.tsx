@@ -3,9 +3,7 @@ import { OutsideLink } from "fanyucomponents";
 import { MyImage } from "../MyImage";
 import { useMemo, useState } from "react";
 import { ExperienceItem } from "@/types/experience";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { cn } from "@/utils/className";
+import { MyMarkDown } from "../MyMarkDown";
 
 const getStartDate = (duration: ExperienceItem["duration"]) => {
   return typeof duration === "string" ? duration : duration.start;
@@ -97,39 +95,7 @@ export const ExperienceDiv = ({
                       <p className="text-(--muted) text-sm">{item.subtitle}</p>
                     )}
                     {item.description && (
-                      <div className="text-(--muted) text-sm mt-1">
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            li: ({ children, className, ...rest }) => (
-                              <li
-                                className={cn(
-                                  "flex gap-2 items-start",
-                                  className,
-                                )}
-                                {...rest}
-                              >
-                                <span className="mt-2 size-1 shrink-0 rounded-full bg-(--primary)" />
-                                <span>{children}</span>
-                              </li>
-                            ),
-                            a: ({ href, children, className, ...rest }) => (
-                              <OutsideLink
-                                href={href}
-                                className={cn(
-                                  "font-bold hover:underline transition-all duration-300",
-                                  className,
-                                )}
-                                {...rest}
-                              >
-                                {children}
-                              </OutsideLink>
-                            ),
-                          }}
-                        >
-                          {item.description}
-                        </ReactMarkdown>
-                      </div>
+                      <MyMarkDown>{item.description}</MyMarkDown>
                     )}
                   </div>
                 </div>

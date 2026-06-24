@@ -120,7 +120,7 @@ export default function RootLayout({
                     "@type": "CreativeWork",
                     headline: project.title,
                     name: project.title,
-                    description: project.description,
+                    description: project.points.join(" "),
                     url:
                       project.links[0]?.url ||
                       project.links[1]?.url ||
