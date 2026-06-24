@@ -27,7 +27,7 @@ export const routes: Route[] = [
       {
         label: "聯絡方式",
         url: "#contact",
-      }
+      },
     ],
   },
   {
@@ -41,12 +41,5 @@ export const routes: Route[] = [
     url: "/guestbook",
     changeFrequency: "weekly",
     priority: 0.5,
-  },
-  {
-    label: "相簿",
-    url: "/album",
-    isActive: (path: string) => path.startsWith("/album"),
-    changeFrequency: "weekly",
-    priority: 0.9,
   },
 ];
