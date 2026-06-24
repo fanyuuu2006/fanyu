@@ -8,6 +8,7 @@ import { MobileLink } from "./MobileLink";
 import { cn } from "@/utils/className";
 import { routes } from "@/libs/routes";
 import { LogoSvg } from "../LogoSvg";
+import { site } from "@/libs/site";
 
 type HeaderProps = React.HTMLAttributes<HTMLElement>;
 export const Header = ({ className, ...rest }: HeaderProps) => {
@@ -30,11 +31,9 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
       {...rest}
     >
       <div className="container flex items-center justify-between">
-        <Link href="/" onClick={closeMenu} aria-label="回到首頁">
-          <LogoSvg
-            className="h-16 object-contain hover:drop-shadow-[0_0_1rem_var(--primary)] transition-all duration-300"
-            role="banner"
-          />
+        <Link href="/" onClick={closeMenu} aria-label="FanYu 首頁">
+          <LogoSvg className="h-16 object-contain hover:drop-shadow-[0_0_1rem_var(--primary)] transition-all duration-300" />
+          <span className="sr-only">{site.title}</span>
         </Link>
 
         <div className="text-xl lg:hidden">
