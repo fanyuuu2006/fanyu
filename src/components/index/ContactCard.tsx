@@ -33,16 +33,18 @@ export const ContactCard = ({ item, className, ...rest }: ContactCardProps) => {
     <div className={cn(`overlay-wrapper group`, className)} {...rest}>
       {/* 主要連結按鈕：點擊後跳轉到外部連結 */}
       <OutsideLink
-        draggable={true} // 允許拖曳
         href={item.url} // 連結地址
-        className="block p-0.5 rounded-full no-underline " // 樣式：區塊顯示、內邊距、圓角、無底線
-        style={gradientStyle} // 套用漸層樣式
       >
-        {/* 內層按鈕內容：圖示 + 標籤文字 */}
-        <span className="text-base md:text-lg font-semibold flex items-center justify-center px-3 py-1.5 gap-2 rounded-[inherit] no-underline bg-(--background) transition-all duration-300 group-hover:bg-transparent">
-          <item.icon /> {/* 聯絡方式圖示 */}
-          {item.label} {/* 聯絡方式標籤 */}
-        </span>
+        <div
+          className="p-0.5 rounded-full  font-mono " // 樣式：區塊顯示、內邊距、圓角、無底線
+          style={gradientStyle} // 套用漸層樣式
+        >
+          {/* 內層按鈕內容：圖示 + 標籤文字 */}
+          <span className="text-sm sm:text-base md:text-lg font-semibold flex items-center justify-center px-3 py-1.5 gap-2 rounded-[inherit] no-underline bg-(--background) transition-all duration-300 group-hover:bg-transparent">
+            <item.icon /> {/* 聯絡方式圖示 */}
+            {item.label} {/* 聯絡方式標籤 */}
+          </span>
+        </div>
       </OutsideLink>
 
       {/* 懸停時顯示的詳細資訊卡 */}
@@ -52,15 +54,13 @@ export const ContactCard = ({ item, className, ...rest }: ContactCardProps) => {
           {/* 資訊卡內容區域：包含頭像、姓名、ID 和其他資訊 */}
           <div className="bg-(--background) rounded-[inherit] flex flex-col gap-2 p-4">
             {/* 頭像和姓名 ID 區域 */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-end gap-2">
               {/* 頭像區域 */}
               <div
-                className="h-12 aspect-square rounded-xl overflow-hidden"
+                className="size-10 rounded-xl overflow-hidden"
                 style={{
                   // 動態邊框顏色：使用項目自訂顏色或預設主要文字顏色
-                  border: `1px solid ${
-                    item.colors?.[0] || "var(--primary)"
-                  }`,
+                  border: `1px solid ${item.colors?.[0] || "var(--primary)"}`,
                 }}
               >
                 {/* 頭像圖片 */}
@@ -81,10 +81,10 @@ export const ContactCard = ({ item, className, ...rest }: ContactCardProps) => {
               </div>
 
               {/* 姓名和 ID 顯示區域 */}
-              <div className="flex flex-col whitespace-nowrap leading-tight">
+              <div className="flex-1 min-w-0 whitespace-nowrap">
                 {/* 姓名顯示 */}
                 <h5
-                  className="text-base md:text-lg font-bold"
+                  className="text-sm md:text-base font-bold"
                   style={{
                     // 動態文字顏色：使用項目自訂顏色或預設主要文字顏色
                     color: item.colors?.[0] || "var(--primary)",
@@ -93,7 +93,7 @@ export const ContactCard = ({ item, className, ...rest }: ContactCardProps) => {
                   {item.info.name}
                 </h5>
                 {/* ID 顯示區域：包含複製功能 */}
-                <div>
+                <div className="flex items-center gap-1">
                   <CopyButton
                     content={item.info.id} // 要複製的內容
                     className="text-xs md:text-sm text-(--muted)"

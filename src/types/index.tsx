@@ -55,3 +55,17 @@ export type ContactItem = {
     about?: React.ComponentType;
   };
 };
+
+export type MyResponse<T> = {
+  data: T | null;
+  error: string | undefined;
+};
+
+type _AnalyticsInfo = {
+  visitors: number;
+  pageViews: number;
+};
+export type AnalyticsInfo = {
+  total: _AnalyticsInfo;
+  monthly: _AnalyticsInfo;
+};

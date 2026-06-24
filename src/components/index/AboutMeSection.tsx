@@ -85,6 +85,7 @@ export const AboutMeSection = () => {
         c063.type("const"),
         c063.default(";"),
       ],
+      [],
       [
         c063.keyword2("export default "),
         c063.constant("FanYu"),

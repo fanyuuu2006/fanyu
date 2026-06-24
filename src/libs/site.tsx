@@ -1,8 +1,8 @@
 
 export const site = {
-  title: "飯魚 Fanyu",
+  title: "飯魚 FanYu | 個人網站",
   description:
-    "飯魚的個人網站，包括個人資料、自我介紹、作品集、學經歷以及聯繫方式。",
+    "飯魚（范余振富）的個人網站，包括個人資料、自我介紹、作品集、學經歷以及聯繫方式。",
   url: "https://fanyu.vercel.app",
   keywords: [
     // 🧑 個人名稱/暱稱

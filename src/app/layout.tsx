@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header/Header";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body className={notoSansSC.className}>
         <Header />
         <main>{children}</main>
+        <Footer />
         <Analytics />
         <SpeedInsights />
       </body>
