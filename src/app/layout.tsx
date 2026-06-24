@@ -1,6 +1,5 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header/Header";
-import { contactCategories } from "@/libs/contact";
 import { education } from "@/libs/education";
 import { portfolioItems } from "@/libs/portfolio";
 import { site } from "@/libs/site";
@@ -53,9 +52,6 @@ export default function RootLayout({
               birthDate: "2006-05-26 UTC+8",
               url: site.url,
               image: `${site.url}/GameShow.jpg`,
-              sameAs: contactCategories.flatMap((category) =>
-                category.items.map((contact) => contact.url),
-              ),
               jobTitle: [
                 "Student Developer",
                 "Frontend Developer",
