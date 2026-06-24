@@ -13,7 +13,6 @@ export const competition: ExperienceItem[] = [
 - 隊伍名稱：**不知道對不隊**
 - 在限時賽制下完成多道 **演算法** 題目
 - 使用 \`C++\`、\`Python\` 實作並優化解法
-- 運用 **資料結構** 與 **時間複雜度** 提升程式效率
 - 全體參賽隊伍 **第 59 名**`,
   },
 
@@ -34,8 +33,7 @@ export const competition: ExperienceItem[] = [
     duration: "2024-03-15",
     link: "https://www.shs.edu.tw/",
     description: `- **研究主題：** 疫情後消費者對電商平台使用現況－以蝦皮購物為例
-- 蒐集文獻與市場資料，分析消費者使用行為
-- 撰寫完整研究報告
+- 蒐集文獻與資料，分析消費者行為並且撰寫完整研究報告
 - 作品獲得 **甲等**`,
   },
 
@@ -50,7 +48,6 @@ export const competition: ExperienceItem[] = [
     link: "https://drive.google.com/file/d/1MrXpOsCER-Fn3uTn1RivpJBt3pkLl81g/view",
     description: `- 隊伍名稱：**你在偷喵我吼？**
 - 分析市場需求與目標客群
-- 參與商業模式討論
 - 規劃產品推廣及營運策略`,
   },
 

@@ -293,8 +293,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     title: "FuturixDev 官網",
-    imageUrl:
-      "https://raw.githubusercontent.com/FuturixDev/official-web/refs/heads/main/public/favicon.ico",
+    imageUrl: "https://avatars.githubusercontent.com/u/221304771",
     date: "2025-08",
     points: [
       "使用 Next.js 15 與 React 開發，採用 App Router 架構建置現代化企業形象網站。",

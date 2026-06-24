@@ -1,10 +1,10 @@
 "use client";
 import { c063 } from "c063";
-import Link from "next/link";
 import { useMemo } from "react";
 import { CodeCard } from "../CodeCard";
 import { cn } from "@/utils/className";
 import { MySection } from "./MySection";
+import { OutsideLink } from "fanyucomponents";
 
 const PARAGRAPHS = [
   "我的名字是范余振富，對程式設計與軟體開發抱有濃厚興趣。從小喜歡玩 Minecraft，也熱衷於研究各種紅石機關，這些經驗讓我逐漸培養出對邏輯思考與創作的熱情。",
@@ -51,8 +51,8 @@ export const AboutMeSection = () => {
         c063.variable(`  age`),
         c063.default(": "),
         c063.number(`${age}`, {
-          as: Link,
-          href: "/#aboutMe",
+          as: OutsideLink,
+          href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         }),
         c063.default(", "),
         c063.comment(`// <-可以點喔🤫`),
@@ -102,7 +102,7 @@ export const AboutMeSection = () => {
             <p
               key={i}
               className={cn(
-                "text-justify indent-8 text-base sm:text-lg md:text-xl text-(--muted) leading-relaxed",
+                "text-justify indent-8 text-base sm:text-lg md:text-xl text-(--muted) leading-7",
                 {
                   "first-letter:text-3xl first-letter:font-bold first-letter:text-(--primary) first-letter:mr-1":
                     i === 0,

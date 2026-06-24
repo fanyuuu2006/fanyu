@@ -60,16 +60,16 @@ export const PortfolioCard = ({
                 className: "btn secondary",
               },
             ].map((link) => (
-              <CustomLink
-                key={link.tooltip}
-                data-tooltip={link.tooltip}
-                className={cn(
-                  `tooltip p-2 rounded-full flex items-center justify-center`,
-                  link.className,
-                )}
-                href={link.href}
-              >
-                <link.icon />
+              <CustomLink key={link.tooltip} href={link.href}>
+                <div
+                  data-tooltip={link.tooltip}
+                  className={cn(
+                    `tooltip p-2 rounded-full flex items-center justify-center`,
+                    link.className,
+                  )}
+                >
+                  <link.icon />
+                </div>
               </CustomLink>
             ))}
           </div>

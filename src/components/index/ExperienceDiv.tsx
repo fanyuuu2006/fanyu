@@ -3,7 +3,7 @@ import { OutsideLink } from "fanyucomponents";
 import { MyImage } from "../MyImage";
 import { useMemo, useState } from "react";
 import { ExperienceItem } from "@/types/experience";
-import { MyMarkDown } from "../MyMarkDown";
+import { MyMarkdown } from "../MyMarkdown";
 
 const getStartDate = (duration: ExperienceItem["duration"]) => {
   return typeof duration === "string" ? duration : duration.start;
@@ -56,7 +56,7 @@ export const ExperienceDiv = ({
         {title}
         <div className="h-px w-12 rounded-full bg-linear-to-r from-(--secondary) to-transparent" />
       </h3>
-      <div className="divide-y divide-white/25">
+      <div className="divide-y divide-(--foreground)/25">
         {displayItems.map((item, i) => {
           return (
             <article
@@ -95,7 +95,9 @@ export const ExperienceDiv = ({
                       <p className="text-(--muted) text-sm">{item.subtitle}</p>
                     )}
                     {item.description && (
-                      <MyMarkDown>{item.description}</MyMarkDown>
+                      <MyMarkdown className="text-(--muted)">
+                        {item.description}
+                      </MyMarkdown>
                     )}
                   </div>
                 </div>

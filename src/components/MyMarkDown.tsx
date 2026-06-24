@@ -3,19 +3,19 @@ import { OutsideLink } from "fanyucomponents";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-type MyMarkDownProps = React.HTMLAttributes<HTMLDivElement> & {
+type MyMarkdownProps = React.HTMLAttributes<HTMLDivElement> & {
   children: string;
 };
 
-export const MyMarkDown = ({
+export const MyMarkdown = ({
   children,
   className,
   ...rest
-}: MyMarkDownProps) => {
+}: MyMarkdownProps) => {
   return (
     <div
       className={cn(
-        "text-base leading-7 text-(--muted) space-y-4",
+        "text-base leading-7 space-y-4",
         className,
       )}
       {...rest}
@@ -62,7 +62,7 @@ export const MyMarkDown = ({
               return (
                 <code
                   className={cn(
-                    "rounded bg-(--primary)/15 px-1.5 py-0.5 font-mono text-[0.9em]",
+                    "rounded-md bg-(--primary)/20 px-1.5 py-0.5 font-mono text-[0.9em]",
                     className,
                   )}
                   {...props}
