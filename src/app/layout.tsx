@@ -1,5 +1,9 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header/Header";
+import { contactCategories } from "@/libs/contact";
+import { education } from "@/libs/education";
+import { portfolioItems } from "@/libs/portfolio";
+import { site } from "@/libs/site";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -36,6 +40,112 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//vercel.app" />
 
+        {/* JSON-LD 結構化資料 */}
+        <Script
+          id="person-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "范余振富",
+              alternateName: ["Fan Yu-Zhen-Fu", "范余振富", "飯魚", "FanYu"],
+              birthDate: "2006-05-26 UTC+8",
+              url: site.url,
+              image: `${site.url}/GameShow.jpg`,
+              sameAs: contactCategories.flatMap((category) =>
+                category.items.map((contact) => contact.url),
+              ),
+              jobTitle: [
+                "Student Developer",
+                "Frontend Developer",
+                "Web Developer",
+              ],
+              description: site.description,
+              nationality: {
+                "@type": "Country",
+                name: "Taiwan",
+              },
+              homeLocation: {
+                "@type": "Place",
+                name: "Taipei, Taiwan",
+              },
+              alumniOf: education.map((edu) => ({
+                "@type": "CollegeOrUniversity",
+                name: edu.title,
+                alternateName: edu.subtitle,
+              })),
+              knowsAbout: [
+                "Web Development",
+                "Frontend Development",
+                "TypeScript",
+                "JavaScript",
+                "React",
+                "Next.js",
+                "Python",
+                "Node.js",
+                "Tailwind CSS",
+                "UI/UX Design",
+                "Responsive Design",
+              ],
+              knowsLanguage: [
+                {
+                  "@type": "Language",
+                  name: "Chinese",
+                  alternateName: "zh-TW",
+                },
+                {
+                  "@type": "Language",
+                  name: "English",
+                  alternateName: "en",
+                },
+              ],
+            }),
+          }}
+        />
+
+        <Script
+          id="webpage-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              name: site.title,
+              description:
+                "Personal portfolio site of Fan-Yu Zhen-Fu showcasing projects and skills.",
+              url: "https://fanyu.vercel.app",
+              mainEntity: {
+                "@type": "ItemList",
+                itemListElement: portfolioItems.map((project, index) => ({
+                  "@type": "ListItem",
+                  position: index + 1,
+                  item: {
+                    "@type": "CreativeWork",
+                    headline: project.title,
+                    name: project.title,
+                    description: project.description,
+                    url:
+                      project.links[0]?.url ||
+                      project.links[1]?.url ||
+                      site.url,
+                    thumbnailUrl: project.imageUrl,
+                    dateCreated: project.date,
+                    inLanguage: "en",
+                    programmingLanguage: project.tags[0],
+                    author: {
+                      "@type": "Person",
+                      "@id": site.url,
+                      name: "范余振富",
+                      url: site.url,
+                    },
+                  },
+                })),
+              },
+            }),
+          }}
+        />
+
         {/* GA Script */}
         <Script
           id="googletagmanager"
@@ -55,9 +165,7 @@ export default function RootLayout({
       </head>
       <body className={notoSansSC.className}>
         <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
         <Analytics />
         <SpeedInsights />
