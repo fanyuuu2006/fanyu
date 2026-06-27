@@ -1,142 +1,186 @@
-# 🧑‍💻 FanYu 個人網站
+# FanYu — 個人作品集網站
 
-這是一個由 FanYu（范余振富）精心打造的個人作品展示平台。網站採用 Next.js 與 TypeScript 構建，不僅是一個靜態的作品集，更整合了 Google Drive 相簿、動態作品篩選、桌遊收藏管理以及 GitHub Discussions 留言板等功能，是一個充滿現代化技術與個人特色的數位名片。
+[Next.js](https://nextjs.org/)
+[React](https://react.dev/)
+[TypeScript](https://www.typescriptlang.org/)
+[Tailwind CSS](https://tailwindcss.com/)
+[Deployed on Vercel](https://fanyu.vercel.app)
 
-## 🔗 線上傳送門
+> 飯魚（范余振富）的個人網站 — 展示自我介紹、技能、作品集、學經歷與聯絡方式。
 
-👉 **[https://fanyu.vercel.app](https://fanyu.vercel.app)**
+🔗 **線上預覽：** [https://fanyu.vercel.app](https://fanyu.vercel.app)
 
-## 🌟 核心特色
+---
 
-### 🏠 豐富的首頁體驗
+## Overview
 
-- 👋 **Hero 區塊**：以動態打字效果呈現的個人介紹，搭配社群連結，讓訪客第一眼就能認識我。
-- 🙋 **關於我**：透過多段落的自我敘述，深入分享我的背景與故事。
-- 🛠 **技能樹**：將技能分為前端、後端與開發工具三大類，以圖示化方式清晰展示。
-- 🎨 **精選作品**：首頁隨機展示精選專案，並提供多條件篩選功能，快速找到感興趣的作品。
-- 🧭 **經歷軌跡**：完整收錄教育、社團、工作與競賽經歷，記錄成長的每一步。
-- 📞 **保持聯繫**：整合各大社群媒體與即時通訊軟體，隨時都能聯繫到我。
+**FanYu** 是一個以 Next.js App Router 建構的現代化個人作品集網站。網站整合首頁單頁導覽、獨立作品集頁面、GitHub README 即時渲染，以及基於 Giscus 的留言互動功能，作為開發者對外展示技術能力與專案成果的入口。
 
-### 🚀 多元的功能專頁
+### 解決的問題
 
-- 📸 **雲端相簿**：深度整合 Google Drive API，將雲端硬碟直接變身為網站相簿。
-  - 支援年份與活動的動態路由 (`/album/[year]/[eventName]`)。
-  - 具備圖片懶載入 (Lazy Loading) 與模態框 (Modal) 預覽，瀏覽體驗流暢。
-  - 自動生成 Sitemap 與 SEO 優化，讓回憶更容易被搜尋。
-- 🎲 **桌遊收藏**：專屬的桌遊管理系統，記錄了我的桌遊收藏狀態。
-  - 詳細列出庫存、借閱狀態、配件狀況等資訊。
-  - 整合搜尋與篩選功能，輕鬆管理個人收藏。
-- 💬 **互動留言板**：基於 Giscus 的評論系統，讓訪客能輕鬆留言互動。
-  - 直接串接 GitHub Discussions，無需傳統後端資料庫。
-  - 支援 Markdown 語法與中英文介面切換，即時更新留言內容。
-- 💼 **作品集專區**：完整的專案展示空間。
-  - 強大的多標籤篩選系統（語言、角色、領域、框架等）。
-  - 支援時間排序與關鍵字搜尋，並整合 GitHub 數據顯示專案熱度。
-- ⏳ **個人時光機**：包含生日倒數計時器等趣味小工具，支援多語言與響應式設計。
+- 將個人資訊、技能、專案與經歷集中於單一平台，取代分散在多個 GitHub README 與社群連結的呈現方式
+- 提供可搜尋、可篩選的作品集瀏覽體驗，方便訪客快速找到感興趣的專案
+- 透過 SEO 結構化資料、sitemap 與分析工具，提升個人品牌的可見度與可追蹤性
 
-### 🌐 現代化系統架構
+### 適合誰使用
 
-- 🌍 **無縫多語言**：內建中英文切換功能，透過 Context API 進行全站狀態管理。
-- 🎞 **流暢動畫**：運用 Framer Motion 打造細膩的轉場與互動效果，提升視覺質感。
-- 📱 **全裝置適配**：精心設計的響應式排版，在手機、平板與桌機上都能完美呈現。
-- 🔍 **SEO 友善**：落實結構化資料、動態 Sitemap 與 Robots.txt 設定，提升搜尋引擎能見度。
-- 🛡️ **安全防護**：內建 API 代理機制，保護外部資源存取，提升網站安全性。
-- ⚡ **極速效能**：結合 Vercel Analytics 與 Speed Insights 監控，並透過 SWR 快取機制優化資料載入速度。
+- 前端 / 全端開發者，需要建立個人品牌與作品集網站
+- 學生開發者，希望以現代化技術棧展示 side project
+- 對 Next.js App Router、Tailwind CSS 4、Giscus 整合有興趣的開發者，作為參考專案
 
-## 🛠 技術堆疊
+---
 
-| 分類 | 技術項目 |
-| :--- | :--- |
-| **核心框架** | Next.js 16.0.7 (App Router) + Turbopack |
-| **開發語言** | TypeScript 5 |
-| **UI 框架** | React 19.2.1 |
-| **樣式系統** | Tailwind CSS 4.1.17 + PostCSS |
-| **動畫效果** | Framer Motion 12.23.25 |
-| **UI 元件庫** | fanyucomponents 2.11.2 + Ant Design 6.0.1 |
-| **圖示資源** | Ant Design Icons 6.1.0 + React Icons 5.5.0 |
-| **資料串接** | Google Drive API (googleapis 167.0.0) + SWR 2.3.7 |
-| **評論系統** | Giscus 3.1.0 (GitHub Discussions) |
-| **程式碼高亮** | c063 1.6.5 (自研元件) |
-| **網站分析** | Vercel Analytics + Speed Insights |
-| **部署平台** | Vercel |
+## Features
 
-## 📁 專案結構概覽
+- **首頁單頁導覽** — Hero、關於我、技能專長、精選作品、學經歷（學歷 / 工作 / 社團 / 競賽）與聯絡方式等區塊
+- **作品集列表與篩選** — 支援關鍵字搜尋、多標籤分類篩選（語言、前端、後端、角色等）與排序
+- **作品詳情頁** — 動態路由展示專案資訊，自動從 GitHub 拉取並渲染 README（支援 GFM、程式碼高亮）
+- **Giscus 留言板** — 全站留言板與各作品獨立討論區，整合 GitHub Discussions
+- **網站分析儀表板** — Footer 顯示 Google Analytics Data API 提供的訪客數與瀏覽量統計
+- **SEO 與效能優化** — JSON-LD 結構化資料、sitemap、robots.txt、Open Graph、Vercel Analytics 與 Speed Insights
+- **響應式導覽列** — 桌面版錨點導覽與行動版漢堡選單，Framer Motion 動畫增強互動體驗
 
-```plaintext
-├── public/                    # 靜態資源 (圖片、圖標、robots.txt)
+---
+
+## Tech Stack
+
+| 類別           | 技術                                                                                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **前端框架**     | [Next.js 16](https://nextjs.org/)（App Router）、[React 19](https://react.dev/)                                                                                                                                       |
+| **語言**       | [TypeScript 5](https://www.typescriptlang.org/)                                                                                                                                                                    |
+| **UI / CSS** | [Tailwind CSS 4](https://tailwindcss.com/)、[Framer Motion](https://www.framer.com/motion/)、[Ant Design Icons](https://ant.design/components/icon)、[fanyucomponents](https://www.npmjs.com/package/fanyucomponents) |
+| **Markdown** | [react-markdown](https://github.com/remarkjs/react-markdown)、remark-gfm、rehype-raw、[c063](https://www.npmjs.com/package/c063)（語法高亮）                                                                                |
+| **API / 資料** | Next.js Route Handlers、[@google-analytics/data](https://www.npmjs.com/package/@google-analytics/data)、GitHub Raw API                                                                                               |
+| **互動 / 分析**  | [@giscus/react](https://giscus.app/)、[@vercel/analytics](https://vercel.com/docs/analytics)、[@vercel/speed-insights](https://vercel.com/docs/speed-insights)                                                       |
+| **部署**       | [Vercel](https://vercel.com/)                                                                                                                                                                                      |
+
+---
+
+## Project Structure
+
+```
+.
+├── public/
+│   └── images/              # 靜態資源（頭像、技能圖示、favicon）
 ├── src/
-│   ├── app/                  # Next.js App Router 核心路由
-│   │   ├── album/            # 相簿系統 (含動態路由)
-│   │   ├── api/              # API Routes (相簿、代理)
-│   │   ├── bgc/              # 桌遊收藏頁面
-│   │   ├── guestbook/        # 留言板頁面
-│   │   ├── my/               # 個人頁面 (倒數計時)
-│   │   ├── projects/         # 作品集專頁
-│   │   └── ...               # 首頁與基礎頁面
-│   ├── components/           # React 元件庫
-│   │   ├── album/            # 相簿相關元件
-│   │   ├── bgc/              # 桌遊相關元件
-│   │   ├── custom/           # 通用自訂元件 (Carousel, CodeCard 等)
-│   │   ├── guestbook/        # 留言板元件
-│   │   ├── Header/           # 導航列元件
-│   │   ├── Index/            # 首頁各區塊元件 (Hero, About, Skills 等)
-│   │   ├── my/               # 個人頁面元件
-│   │   └── projects/         # 作品集元件
-│   ├── contexts/             # 全域狀態 (語言、相簿)
-│   ├── hooks/                # 自訂 Hooks (Debounce, Modal 等)
-│   ├── libs/                 # 靜態資料與設定檔 (經歷、技能、設定)
-│   ├── styles/               # 全域與模組化樣式
-│   ├── types/                # TypeScript 型別定義
-│   └── utils/                # 工具函式庫 (API 封裝、資料處理)
-├── ...                       # 設定檔 (Tailwind, Next.js, ESLint 等)
+│   ├── app/                 # Next.js App Router 路由
+│   │   ├── api/v1/analytics/  # GA Data API 統計端點
+│   │   ├── guestbook/         # 留言板頁面
+│   │   ├── portfolio/         # 作品集列表與 [title] 詳情頁
+│   │   ├── layout.tsx           # 根布局（Header、Footer、SEO、Analytics）
+│   │   ├── page.tsx             # 首頁
+│   │   ├── metadata.tsx         # 全站 Metadata 設定
+│   │   ├── sitemap.ts           # 動態 sitemap 生成
+│   │   └── robots.ts            # robots.txt
+│   ├── components/          # React 元件
+│   │   ├── index/             # 首頁各區塊（Hero、About、Skills 等）
+│   │   ├── portfolio/         # 作品集列表、篩選、卡片、詳情頁元件
+│   │   ├── guestbook/           # Giscus 留言板元件
+│   │   └── Header/              # 導覽列（桌面 / 行動版）
+│   ├── hooks/               # 自訂 Hooks（如作品集 URL 參數）
+│   ├── libs/                # 靜態資料與設定（portfolio、skills、routes、site）
+│   ├── styles/              # 全域 CSS 與模組化樣式
+│   ├── types/               # TypeScript 型別定義
+│   └── utils/               # 工具函式（GitHub API、URL、className）
+├── next.config.ts
+├── postcss.config.mjs
+├── tsconfig.json
+└── package.json
 ```
 
-## 🚀 快速開始
+### 重要目錄說明
 
-### 環境準備
+| 目錄                | 用途                                    |
+| ----------------- | ------------------------------------- |
+| `src/app/`        | App Router 頁面路由、API Routes 與 SEO 相關設定 |
+| `src/components/` | 可重用 UI 元件，依功能分為首頁、作品集、Header 等子目錄     |
+| `src/libs/`       | 作品集、技能、學經歷、聯絡方式等靜態資料來源                |
+| `src/utils/`      | GitHub README 抓取、Badge 生成、URL 工具等     |
+| `public/images/`  | 不需經 bundler 處理的靜態圖片資源                 |
 
-- Node.js 18+
-- npm / yarn / pnpm
+---
+
+## Getting Started
+
+### 前置需求
+
+- [Node.js](https://nodejs.org/) 18.18 或以上
+- npm（或相容的套件管理器）
 
 ### 安裝與啟動
 
 ```bash
-# 1. 克隆專案
+# 克隆專案
 git clone https://github.com/fanyuuu2006/fanyu.git
 cd fanyu
 
-# 2. 安裝依賴
+# 安裝依賴
 npm install
 
-# 3. 啟動開發伺服器 (支援 Turbopack)
+# 設定環境變數（見下方章節，手動建立 .env.local）
+
+# 啟動開發伺服器
 npm run dev
-
-# 4. 開啟瀏覽器訪問 http://localhost:3000
 ```
 
-### 常用指令
+開啟 [http://localhost:3000](http://localhost:3000) 即可預覽。
 
-- `npm run dev`: 啟動開發模式
-- `npm run build`: 建置生產版本
-- `npm start`: 執行生產環境
-- `npm run lint`: 檢查程式碼品質
+### 其他指令
 
-### 環境變數 (.env.local)
+```bash
+# 建置正式版
+npm run build
 
-若需完整執行相簿功能，請設定以下變數：
+# 啟動正式版伺服器（需先 build）
+npm run start
 
-```env
-GOOGLE_CLIENT_EMAIL=your_service_account_email
-GOOGLE_PRIVATE_KEY=your_service_account_private_key
-GOOGLE_DRIVE_ROOT_FOLDER_ID=your_root_folder_id
+# ESLint 檢查
+npm run lint
 ```
-
-## 📜 授權資訊
-
-本專案採用 **MIT License** 開源授權。
 
 ---
 
-**⭐ 如果你喜歡這個專案，歡迎在 GitHub 上給個 Star！**
+## Environment Variables
 
-Made with ❤️ by [FanYu](https://fanyu.vercel.app) in Taiwan
+在專案根目錄建立 `.env.local`，並填入以下變數。這些設定用於 `/api/v1/analytics` 端點，透過 Google Analytics Data API 取得網站統計資料。
+
+```env
+# Google Analytics 4 Property ID（純數字，不含 "properties/" 前綴）
+GA_PROPERTY_ID=123456789
+
+# Google Cloud Service Account 憑證（需具備 GA4 讀取權限）
+GA_CLIENT_EMAIL=your-service-account@your-project.iam.gserviceaccount.com
+
+# Service Account 私鑰（部署時以 \n 表示換行）
+GA_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+```
+
+> **注意：** 若未設定上述變數，網站仍可正常運作，但 Footer 的訪客統計將無法顯示。Giscus 留言板使用公開的 repo 設定，無需額外環境變數。
+
+---
+
+## Deployment
+
+### Vercel（推薦）
+
+1. 將 repository 連結至 [Vercel](https://vercel.com/)
+2. 在 Project Settings → Environment Variables 中設定 `GA_PROPERTY_ID`、`GA_CLIENT_EMAIL`、`GA_PRIVATE_KEY`
+3. 部署完成後，Vercel 會自動執行 `npm run build` 並提供 CDN 加速
+
+### 其他平台
+
+| 平台           | 說明                                                                                  |
+| ------------ | ----------------------------------------------------------------------------------- |
+| **Docker**   | 可建立 multi-stage Dockerfile，以 `npm run build && npm run start` 啟動，預設監聽 `3000` port   |
+| **VPS / 自架** | 需 Node.js 18+ 環境，執行 `npm run build` 後以 `npm run start` 或 PM2 等 process manager 維持服務 |
+| **靜態匯出**     | 本專案含 API Routes 與 Server Components 動態抓取，不建議使用 `output: 'export'`                   |
+
+---
+
+## License
+
+本專案採 **MIT License** 授權。
+
+---
+
+Made with ❤️ by [FanYu](https://github.com/fanyuuu2006)

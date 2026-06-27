@@ -29,7 +29,6 @@ export const fadeInItem: Variants = {
   },
 };
 
-
 export const staggerContainer: Variants = {
   show: {
     transition: {

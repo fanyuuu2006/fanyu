@@ -1,83 +1,69 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import { Burger } from "./Burger";
 import { useState, useCallback } from "react";
 import { Collapse } from "fanyucomponents";
-import { routes } from "../routes";
-import { BurgerMenu } from "./BurgerMenu";
 import { DesktopLink } from "./DesktopLink";
 import { MobileLink } from "./MobileLink";
+import { cn } from "@/utils/className";
+import { routes } from "@/libs/routes";
+import { LogoSvg } from "../LogoSvg";
+import { site } from "@/libs/site";
 
-export const Header = () => {
+type HeaderProps = React.HTMLAttributes<HTMLElement>;
+export const Header = ({ className, ...rest }: HeaderProps) => {
   const [menuShow, setMenuShow] = useState<boolean>(false);
 
   const handleMenuToggle = useCallback(() => {
     setMenuShow((prev) => !prev);
   }, []);
 
+  const closeMenu = useCallback(() => {
+    setMenuShow(false);
+  }, []);
+
   return (
-    <header className="fixed top-0 z-1080 w-full bg-(--background-color)/90 backdrop-blur-md border-(--border-color) border-b">
-      <nav className="flex flex-col" role="navigation" aria-label="主導航">
-        {/* 主要導航區域 */}
-        <div className="container px-8 py-4 w-full flex flex-nowrap items-center justify-between">
-          {/* Logo 區域 */}
-          <Link
-            href="/"
-            onClick={() => {
-              if (menuShow) setMenuShow(false);
-            }}
-          >
-            <Image
-              priority
-              alt="Logo"
-              src="/logo.png"
-              width={1500}
-              height={500}
-              className="h-16 w-auto object-contain"
-            />
-          </Link>
+    <header
+      className={cn(
+        "fixed top-0 w-full z-99999 flex flex-col bg-transparent backdrop-blur-md transition-all",
+        className,
+      )}
+      {...rest}
+    >
+      <div className="container flex items-center justify-between">
+        <Link href="/" onClick={closeMenu} aria-label="FanYu 首頁">
+          <LogoSvg className="h-16 object-contain hover:drop-shadow-[0_0_1rem_var(--primary)] transition-all duration-300" />
+          <span className="sr-only">{site.title}</span>
+        </Link>
 
-          {/* 手機版漢堡選單按鈕 */}
-          <div className="text-2xl lg:hidden">
-            <BurgerMenu
-              checked={menuShow}
-              onChange={handleMenuToggle}
-              aria-label={menuShow ? "關閉選單" : "開啟選單"}
-              aria-expanded={menuShow}
-              aria-controls="mobile-nav"
-            />
-          </div>
-
-          {/* 桌面版導覽列 */}
-          <div className="hidden lg:flex text-xl font-bold gap-6">
-            {routes.map((item) => {
-              if (item.hidden?.header) return null;
-              return <DesktopLink key={item.url} item={item} />;
-            })}
-          </div>
+        <div className="text-xl lg:hidden">
+          <Burger
+            checked={menuShow}
+            onChange={handleMenuToggle}
+            aria-label={menuShow ? "關閉選單" : "開啟選單"}
+            aria-expanded={menuShow}
+            aria-controls="desktop-nav"
+          />
         </div>
 
-        {/* 手機版導覽列 */}
-        <Collapse
-          state={menuShow}
-          className="slide-collapse lg:hidden"
-          id="mobile-nav"
-        >
-          <div className="flex flex-col w-full text-xl font-semibold">
-            {routes.map((item) => {
-              if (item.hidden?.header) return null;
-              return (
-                <MobileLink
-                  key={item.url}
-                  item={item}
-                  menuShow={menuShow}
-                  setMenuShow={setMenuShow}
-                />
-              );
-            })}
-          </div>
-        </Collapse>
-      </nav>
+        <nav className="hidden lg:flex text-2xl items-center gap-2 md:gap-4">
+          {routes.map((route) => (
+            <DesktopLink key={route.url} route={route} />
+          ))}
+        </nav>
+      </div>
+      <Collapse
+        as="nav"
+        state={menuShow}
+        className="slide-collapse lg:hidden"
+        id="mobile-nav"
+      >
+        <div className="flex flex-col w-full text-2xl">
+          {routes.map((route) => (
+            <MobileLink key={route.url} onClick={closeMenu} route={route} />
+          ))}
+        </div>
+      </Collapse>
     </header>
   );
 };

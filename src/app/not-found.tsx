@@ -1,49 +1,14 @@
-"use client";
-import { useLanguage } from "@/contexts/LanguageContext";
-import type { LanguageContent, LanguageOption } from "@/types/language";
-import Link from "next/link";
-
-type NotFoundContent = Record<"title" | "message" | "home", string>;
-
-const getNotFoundContent = (language: LanguageOption): NotFoundContent =>
-  ((
-    {
-      chinese: {
-        title: "頁面未找到",
-        message: "很抱歉，您要尋找的頁面不存在。",
-        home: "返回首頁",
-      },
-      english: {
-        title: "Page Not Found",
-        message: "Sorry, the page you are looking for does not exist.",
-        home: "Back to home",
-      },
-    } as LanguageContent<NotFoundContent>
-  )[language]);
-
 export default function NotFound() {
-  const Language = useLanguage();
-  const notFoundContent = getNotFoundContent(Language.Current);
-
   return (
-    <div className="container flex flex-col items-center justify-center min-h-screen">
-      <div className="card p-8 max-w-md w-full flex flex-col items-center text-center gap-6">
-        <div className="flex flex-col items-center gap-4">
-          <h1 className="text-8xl font-bold text-(--text-color-primary)">
-            404
-          </h1>
-          <h2 className="text-2xl font-semibold text-(--text-color)">
-            {notFoundContent.title}
-          </h2>
-          <p className="text-(--text-color-muted) leading-relaxed">
-            {notFoundContent.message}
-          </p>
-        </div>
-
-        <Link href="/" className="btn-primary rounded-full p-3">
-          {notFoundContent.home}
-        </Link>
+    <section>
+      <div className="container flex flex-col items-center justify-center min-h-screen">
+        <h1 className="drop-shadow-[0_0_1rem_var(--primary)] text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-4">
+          404 - 找不到頁面
+        </h1>
+        <p className="text-lg sm:text-xl md:text-2xl text-(--muted)">
+          抱歉，您所尋找的頁面不存在。
+        </p>
       </div>
-    </div>
+    </section>
   );
 }

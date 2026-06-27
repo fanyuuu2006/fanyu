@@ -1,19 +1,19 @@
-import { AboutMeSection } from "@/components/Index/AboutMeSection/AboutMeSection";
-import { ContactSection } from "@/components/Index/ContactSection/ContactSection";
-import { ExperienceSection } from "@/components/Index/ExperienceSection/ExperienceSection";
-import { HeroSection } from "@/components/Index/HeroSection/HeroSection";
-import { PortfolioSection } from "@/components/Index/PortfolioSection/PortfolioSection";
-import { SkillsSection } from "@/components/Index/SkillsSection/SkillsSection";
+import { AboutMeSection } from "@/components/index/AboutMeSection";
+import { ContactSection } from "@/components/index/ContactSection";
+import { ExperienceSection } from "@/components/index/ExperienceSection";
+import { HeroSection } from "@/components/index/HeroSection";
+import { PortfolioSection } from "@/components/index/PortfolioSection";
+import { SkillsSection } from "@/components/index/SkillsSection";
 
-export default function Page() {
+export default function Home() {
   return (
     <>
       <HeroSection />
       <AboutMeSection />
       <SkillsSection />
       <PortfolioSection />
-      <ContactSection />
       <ExperienceSection />
+      <ContactSection />
     </>
   );
 }

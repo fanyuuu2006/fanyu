@@ -1,118 +1,163 @@
 "use client";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { profile } from "@/libs/profile";
-import { LanguageContent, LanguageOption } from "@/types/language";
-import {
-  CodeOutlined,
-  CopyrightOutlined,
-  RocketOutlined,
-} from "@ant-design/icons";
-import { OutsideLink } from "fanyucomponents";
-import { getGithubBadgeSrcs } from "../utils/github";
 import Link from "next/link";
-import { Route, routes } from "./routes";
-import { useMemo } from "react";
+import { OutsideLink } from "fanyucomponents";
+import { cn } from "@/utils/className";
+import { LogoSvg } from "./LogoSvg";
+import { site } from "@/libs/site";
+import { routes } from "@/libs/routes";
+import { MyImage } from "./MyImage";
+import { getGithubBadgeSrcs } from "@/utils/github";
+import { AnalyticsInfo, MyResponse } from "@/types";
+import { useEffect, useState } from "react";
+import { fetcher } from "@/utils/url";
 
-type FooterContent = Record<
-  "copyright" | "sourceCode" | "backToTop" | "quickLinks",
-  string
->;
+const formatNumber = (value?: number) => {
+  if (value == null) return "--";
+  return value.toLocaleString();
+};
 
-const getFooterContent = (language: LanguageOption): FooterContent =>
-  ((
-    {
-      chinese: {
-        copyright: "版權所有。",
-        sourceCode: "原始碼",
-        backToTop: "返回頂部",
-        quickLinks: "快速連結",
-      },
-      english: {
-        copyright: " All rights reserved.",
-        sourceCode: "Source Code",
-        backToTop: "Back to top",
-        quickLinks: "Quick Links",
-      },
-    } as LanguageContent<FooterContent>
-  )[language]);
+type FooterProps = React.HTMLAttributes<HTMLElement>;
 
-export const Footer = () => {
-  const Language = useLanguage();
-  const footerContent = getFooterContent(Language.Current);
-  const year = new Date().getFullYear();
-  const fastLinks: Route[] = useMemo(
-    () => [
-      {
-        label: {
-          chinese: "返回頂部",
-          english: "Back to top",
-        },
-        url: "#top",
-        icon: RocketOutlined,
-      },
-      ...routes,
-    ],
-    []
-  );
+export const Footer = ({ className, ...rest }: FooterProps) => {
+  const [info, setInfo] = useState<AnalyticsInfo | null>(null);
+  useEffect(() => {
+    fetcher<MyResponse<AnalyticsInfo>>("/api/v1/analytics").then((data) => {
+      if (data.error) {
+        console.error(data.error);
+      } else {
+        setInfo(data.data);
+      }
+    });
+  }, []);
   return (
-    <footer className="w-full bg-black border-(--border-color) border-t">
-      <div className="container px-6 py-12">
-        {/* 左側內容區域 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div>
-            <div className="text-base md:text-lg flex flex-col gap-2 text-(--text-color-muted)">
-              <div className="flex gap-2">
-                <CopyrightOutlined /> {year},{" "}
-                {profile.nickname[Language.Current]}
-                {footerContent.copyright}
-              </div>
-              <div className="flex flex-wrap items-center gap-x-2">
-                <CodeOutlined /> {footerContent.sourceCode}
+    <footer
+      {...rest}
+      className={cn(
+        "text-(--muted) border-t-2 border-(--border) bg-(--background)",
+        className,
+      )}
+    >
+      <div className="container">
+        <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr] py-8">
+          <div className="space-y-5">
+            <LogoSvg role="banner" className="h-16 text-(--foreground)" />
+
+            <div className="space-y-2">
+              <h2 className="text-xl font-bold text-(--foreground)">
+                {site.title}
+              </h2>
+
+              <p className="max-w-lg text-sm leading-6">{site.description}</p>
+            </div>
+
+            <div className="flex flex-col gap-2 text-sm">
+              <span>
+                原始碼：
                 <OutsideLink
-                  className="whitespace-nowrap hover:underline"
                   href="https://github.com/fanyuuu2006/fanyu"
+                  className="hover:underline"
                 />
-              </div>
+              </span>
               <div className="flex flex-wrap gap-2">
-                {getGithubBadgeSrcs("fanyuuu2006/fanyu").map((item) => (
-                  /* eslint-disable-next-line @next/next/no-img-element*/
-                  <img
-                    draggable={false}
-                    key={item.title}
-                    src={item.url}
-                    alt={`GitHub badge: ${item.title}`}
-                    title={item.title}
-                    className="h-[1em] select-none"
+                {getGithubBadgeSrcs("fanyuuu2006/fanyu").map((badge) => (
+                  <MyImage
+                    key={badge.title}
+                    src={badge.url}
+                    alt={badge.title}
+                    className="h-[1.15rem]"
                   />
                 ))}
               </div>
             </div>
           </div>
 
-          {/* 快速連結 */}
           <div>
-            <h4 className="text-lg font-semibold text-(--text-color) mb-4">
-              {footerContent.quickLinks}
-            </h4>
-            <ul className="space-y-2">
-              {fastLinks.map((link) => {
-                if (link.hidden?.footer) return null;
-                return (
-                  <li key={link.url}>
-                    <Link
-                      href={link.url}
-                      className="w-fit flex items-center gap-2 text-(--text-color-muted) hover:text-(--text-color-primary) transition-colors duration-200"
-                    >
-                      {link.icon && <link.icon className="text-sm" />}
-                      {link.label[Language.Current]}
-                    </Link>
-                  </li>
-                );
-              })}
+            <H3>快速連結</H3>
+
+            <ul className="space-y-2 text-xs md:text-sm">
+              {routes.map((item) => (
+                <li key={item.url}>
+                  <Link
+                    href={item.url}
+                    className="
+                      transition-colors
+                      hover:text-(--foreground)
+                    "
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
+
+          <div className="space-y-6">
+            <div>
+              <H3>統計資訊</H3>
+              <div className="text-xs md:text-sm flex flex-col gap-2">
+                {[
+                  {
+                    value: info?.total.visitors,
+                    label: "總訪客數",
+                  },
+                  {
+                    value: info?.monthly.visitors,
+                    label: "本月訪客數",
+                  },
+                  {
+                    value: info?.total.pageViews,
+                    label: "總瀏覽量",
+                  },
+                ].map((item) => (
+                  <div key={item.label} className=" flex items-center gap-2">
+                    <span>{item.label}:</span>
+                    <span>{formatNumber(item.value)}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="
+            mt-10
+            flex
+            flex-col
+            items-center
+            gap-2
+            border-t
+            border-(--border)
+            pt-6
+            text-sm
+           
+            md:flex-row
+            md:justify-between
+          "
+        >
+          <span>© {new Date().getFullYear()} FanYu. All rights reserved.</span>
+
+          <span>Made with Next.js By FanYu</span>
         </div>
       </div>
     </footer>
+  );
+};
+
+const H3 = ({
+  children,
+  className,
+  ...rest
+}: React.HTMLAttributes<HTMLHeadingElement>) => {
+  return (
+    <h3
+      className={cn(
+        `mb-4 text-sm md:text-base font-semibold text-(--foreground)`,
+        className,
+      )}
+      {...rest}
+    >
+      {children}
+    </h3>
   );
 };

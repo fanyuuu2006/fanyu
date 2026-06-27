@@ -1,93 +1,98 @@
-import { Route } from "../routes";
+import { Route } from "@/types";
 import { cn } from "@/utils/className";
-import { Collapse } from "fanyucomponents";
-import Link from "next/link";
-import { useState, useCallback, useEffect } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { CaretLeftOutlined } from "@ant-design/icons";
+import { Collapse, DistributiveOmit, OverrideProps } from "fanyucomponents";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useState } from "react";
 
-type MobileLinkProps = {
-  item: Route;
-  menuShow: boolean; // 新增：接收父選單的狀態
-  setMenuShow: React.Dispatch<React.SetStateAction<boolean>>; // 新增：接收父組件的狀態更新函數
-};
+type MobileLinkProps = OverrideProps<
+  DistributiveOmit<React.ComponentProps<typeof Link>, "href" | "children">,
+  {
+    route: Route;
+  }
+>;
 
 export const MobileLink = ({
-  item,
-  menuShow,
-  setMenuShow,
+  route,
+  className,
+  onClick,
+  ...rest
 }: MobileLinkProps) => {
-  const Language = useLanguage();
-  const hasSubRoute = Boolean(item.sub);
-  const [subRouteShow, setSubRouteShow] = useState<boolean>(false);
+  const pathName = usePathname();
+  const isActive = route.isActive?.(pathName) ?? pathName.startsWith(route.url);
+  const hasSubRoute = route.sub && route.sub.length > 0;
+  const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 
-  // 當父選單關閉時，同時關閉子選單
-  useEffect(() => {
-    if (!menuShow) {
-      setSubRouteShow(false);
-    }
-  }, [menuShow]);
-
-  const handleSubRouteToggle = useCallback(() => {
-    setSubRouteShow((prev) => !prev);
+  const handleToggleSubMenu = useCallback(() => {
+    setIsSubMenuOpen((prev) => !prev);
   }, []);
 
-  const handleLinkClick = useCallback(() => {
-    // 點擊連結時關閉選單
-    setMenuShow(false);
-  }, [setMenuShow]);
+  const handleLinkClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      // 點擊連結時關閉選單
+      setIsSubMenuOpen(false);
+      onClick?.(e);
+    },
+    [onClick],
+  );
 
   return (
-    <div className="flex flex-col">
-      {/* 主選單項目 */}
-      <div
-        className={cn(
-          "flex items-center justify-between py-3 px-6 border-b border-(--border-color)"
-        )}
-      >
+    <div className="flex flex-col w-full">
+      <div className="relative flex w-full items-center justify-center border-b border-(--border) py-4">
         <Link
-          href={item.url}
-          className="flex-1 text-left"
+          href={route.url}
+          className={cn(
+            "flex items-center gap-2 text-nowrap font-semibold text-(--muted) transition-all duration-300 hover:drop-shadow-[0_0_1rem_var(--primary)] hover:text-(--foreground)",
+            {
+              "text-(--foreground)  drop-shadow-[0_0_1rem_var(--primary)]": isActive,
+            },
+            className,
+          )}
           onClick={handleLinkClick}
+          {...rest}
         >
-          {item.label[Language.Current]}
+          <span>{route.label}</span>
         </Link>
-
         {hasSubRoute && (
           <button
-            onClick={handleSubRouteToggle}
-            className={cn("p-1")}
-            aria-label={subRouteShow ? "關閉子選單" : "開啟子選單"}
-            aria-expanded={subRouteShow}
-            aria-controls={`sub-menu-${item.url.replace("/", "")}`}
+            onClick={handleToggleSubMenu}
+            className="absolute right-4 p-2 text-(--muted) transition-all duration-300 hover:drop-shadow-[0_0_1rem_var(--primary)] hover:text-(--foreground)"
+            aria-label={isSubMenuOpen ? "關閉子選單" : "開啟子選單"}
+            aria-expanded={isSubMenuOpen}
+            aria-controls={`sub-menu-${route.url.replace("/", "")}`}
           >
             <CaretLeftOutlined
-              className={cn("transition-transform duration-200", {
-                "-rotate-90": subRouteShow,
+              className={cn("transition-transform duration-300", {
+                "-rotate-90": isSubMenuOpen,
               })}
             />
           </button>
         )}
       </div>
 
-      {/* 子選單區域 */}
       {hasSubRoute && (
         <Collapse
-          state={subRouteShow}
+          state={isSubMenuOpen}
           className="slide-collapse"
-          id={`sub-menu-${item.url.replace("/", "")}`}
+          id={`sub-menu-${route.url.replace("/", "")}`}
         >
-          <div className="flex flex-col text-sm bg-(--background-color-tertiary) border-b border-(--border-color)">
-            {item.sub!.map((sub) => {
-              if (sub.hidden?.header) return null;
+          <div className="flex flex-col bg-black/20 border-b border-(--border)">
+            {route.sub!.map((sub) => {
+              const isSubActive = pathName === `${route.url}${sub.url}`;
               return (
                 <Link
                   key={sub.url}
-                  href={`${item.url}${sub.url}`}
+                  href={`${route.url}${sub.url}`}
                   onClick={handleLinkClick}
-                  className="px-8 py-3 text-(--text-color-muted) hover:text-(--text-color) hover:backdrop-brightness-(--brightness-light) transition-all duration-200"
+                  className={cn(
+                    "flex items-center justify-center gap-2 py-3 text-[0.9em] text-(--muted) transition-all duration-300 hover:drop-shadow-[0_0_1rem_var(--primary)] hover:text-(--foreground)",
+                    {
+                      "text-(--foreground)": isSubActive,
+                    },
+                  )}
                 >
-                  {sub.label[Language.Current]}
+                  {sub.label}
                 </Link>
               );
             })}

@@ -1,67 +1,59 @@
-import { usePathname } from "next/navigation";
-import { Route } from "../routes";
+import { Route } from "@/types";
 import { cn } from "@/utils/className";
-import { Collapse } from "fanyucomponents";
+import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
-import { useState, useCallback } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { usePathname } from "next/navigation";
 
-type DesktopLinkProps = {
-  item: Route;
-};
-export const DesktopLink = ({ item }: DesktopLinkProps) => {
-  const Language = useLanguage();
+type DesktopLinkProps = OverrideProps<
+  DistributiveOmit<React.ComponentProps<typeof Link>, "href" | "children">,
+  {
+    route: Route;
+  }
+>;
+
+export const DesktopLink = ({
+  route,
+  className,
+  ...rest
+}: DesktopLinkProps) => {
   const pathName = usePathname();
-  const hasSubRoute = Boolean(item.sub);
-  const [subRouteShow, setSubRouteShow] = useState<boolean>(false);
-
-  const handleSubRouteEnter = useCallback(() => {
-    setSubRouteShow(true);
-  }, []);
-
-  const handleSubRouteLeave = useCallback(() => {
-    if (subRouteShow) setSubRouteShow(false);
-  }, [subRouteShow]);
+  const isActive =
+    route.isActive?.(pathName) ?? pathName.startsWith(route.url);
+  const isSubActive = route.sub?.some((sub) => pathName === sub.url);
 
   return (
-    <div
-      onPointerEnter={hasSubRoute ? handleSubRouteEnter : undefined}
-      onPointerLeave={hasSubRoute ? handleSubRouteLeave : undefined}
-      className="relative"
-    >
+    <div className="group relative flex items-center justify-center">
       <Link
-        href={item.url}
-        className={cn({
-          "text-(--text-color-primary)":
-            item.isActive?.(pathName) || pathName === item.url,
-        })}
+        href={route.url}
+        className={cn(
+          "text-nowrap font-semibold flex items-center justify-center gap-2 text-(--muted) transition-all duration-300 hover:drop-shadow-[0_0_1rem_var(--primary)] hover:text-(--foreground)",
+          {
+            "text-(--foreground) drop-shadow-[0_0_1rem_var(--primary)]": isActive || isSubActive,
+          },
+          className
+        )}
+        {...rest}
       >
-        {item.label[Language.Current]}
+        <span>{route.label}</span>
       </Link>
-
-      {/* 子選單下拉區域 */}
-      {hasSubRoute && (
-        <Collapse
-          className="slide-collapse absolute top-full left-1/2 transform -translate-x-1/2 z-50"
-          state={subRouteShow}
-        >
-          <div className="bg-(--background-color) border border-(--border-color) rounded-md shadow-lg mt-2 min-w-48">
-            <div className="text-(--text-color-muted) flex flex-col text-base font-normal">
-              {item.sub!.map((sub) => {
-                if (sub.hidden?.header) return null;
-                return (
-                  <Link
-                    key={sub.url}
-                    href={`${item.url}${sub.url}`}
-                    className="px-4 py-3 hover:text-(--text-color) hover:backdrop-brightness-(--brightness-light) transition-all duration-200"
-                  >
-                    {sub.label[Language.Current]}
-                  </Link>
-                );
-              })}
-            </div>
+      {route.sub && (
+        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 hidden group-hover:block w-max z-50">
+          <div className="text-[0.8em] card secondary flex flex-col overflow-hidden p-1">
+            {route.sub.map((subRoute) => {
+              return (
+                <Link
+                  key={subRoute.url}
+                  href={`${route.url}${subRoute.url}`}
+                  className={cn(
+                    "px-4 py-2 text-nowrap flex items-center justify-center gap-2 text-(--muted) hover:drop-shadow-[0_0_1rem_var(--primary)] hover:text-(--foreground) transition-all duration-300"
+                  )}
+                >
+                  {subRoute.label}
+                </Link>
+              );
+            })}
           </div>
-        </Collapse>
+        </div>
       )}
     </div>
   );

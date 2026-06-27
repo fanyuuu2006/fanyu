@@ -3,41 +3,45 @@
 /* ==== Base Layer ==== */
 @layer base {
   :root {
-    /* === 顏色系統 === */
-    --background-color: #0a0a0a;
-    --background-color-primary: #313131;
-    --background-color-secondary: #171717;
-    --background-color-tertiary: #0f0f0f;
+    --foreground: #f8fafc;
+    --muted: #94a3b8;
 
-    --text-color: #ffffff;
-    --text-color-primary: #4aaeff;
-    --text-color-secondary: #a071ff;
-    --text-color-tertiary: #22c55e;
-    --text-color-quaternary: #f59e0b;
-    --text-color-muted: #aaaaaa;
+    --background: #020617;
 
-    --border-color: #333333cc;
-    --border-color-light: #525252;
-    --border-color-focus: var(--text-color-primary);
+    --primary-background: #0f172a;
+    --secondary-background: #111827;
+
+    --primary: #60a5fa;
+    --secondary: #818cf8;
+    --tertiary: #a78bfa;
+
+    --border: rgba(148, 163, 184, 0.15);
+
+    --space-bg-top: #020617;
+    --space-bg-bottom: #0f172a;
 
     /* === 效果參數 === */
-    --brightness-light: 1.2;
     --shadow-base: 0 0 1rem rgba(0, 0, 0, 0.5);
     --shadow-hover: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
     --shadow-card-hover: 0 var(--move-y) 1.5rem rgba(0, 0, 0, 1);
 
-    /* === 動畫時間 === */
+    /* === 動畫時間與曲線 === */
     --transition-fast: 0.15s;
     --transition-normal: 0.3s;
-    --transition-slow: 0.5s;
+    --transition-timing: cubic-bezier(
+      0.25,
+      0.46,
+      0.45,
+      0.94
+    ); /* 優化：統一動畫曲線 */
 
     /* === 尺寸和間距 === */
     --border-radius-sm: 0.5rem;
     --border-radius-md: 1rem;
     --border-radius-lg: 1.5rem;
-    --container-max-width: 1280px;
+    --container-max-width: 1000px;
     --scroll-margin: 6rem;
-    --move-y: 0.5rem;
+    --move-y: 0.25rem;
   }
 
   /* === 全域重置 === */
@@ -50,6 +54,12 @@
   * {
     scroll-behavior: smooth;
     scroll-margin: var(--scroll-margin);
+    cursor: url("/images/cursor.png"), auto !important;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 60%, transparent);
+    color: var(--background);
   }
 
   html {
@@ -57,156 +67,130 @@
   }
 
   body {
-    height: 100%;
-    color: var(--text-color);
-    background: var(--background-color);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-      Arial, sans-serif;
-    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background: var(--background);
+    color: var(--foreground);
+    font-family:
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  /* === Hero 區塊樣式 === */
-  #hero {
-    position: relative;
-    background: var(--bg) center/cover no-repeat;
-    background-attachment: fixed; /* 視差效果 */
-  }
-
-  #hero::before {
+  /* === 科技感網格背景 === */
+  body::before {
     content: "";
-    position: absolute;
-    inset: 0;
-    background-color: var(--background-color);
-    opacity: 0.7;
-    z-index: 0;
-    pointer-events: none; /* 防止 hover 等事件被遮罩擋住 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none; /* 防止背景影響點擊事件 */
+
+    background-image:
+    /* 紫色光暈 */
+      radial-gradient(
+        circle at 72% 18%,
+        color-mix(in oklab, var(--secondary) 20%, transparent),
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 15% 82%,
+        color-mix(in oklab, var(--primary) 12%, transparent),
+        transparent 30%
+      ),
+      /* 網格 */
+        linear-gradient(
+          to right,
+          rgba(255, 255, 255, 0.06) 1px,
+          transparent 1px
+        ),
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.06) 1px,
+        transparent 1px
+      );
+
+    background-size:
+      100% 100%,
+      100% 100%,
+      72px 72px,
+      72px 72px;
+
+    opacity: 1;
   }
 
   /* === 按鈕系統 === */
   button,
-  .btn,
-  .btn-primary,
-  .btn-secondary,
-  .btn-tertiary {
+  .btn {
     cursor: pointer;
     border: none;
     text-decoration: none;
-    transition: all var(--transition-normal)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
-    outline: none;
-    -webkit-tap-highlight-color: transparent; /* 移除移動端點擊高亮 */
+    transition: all var(--transition-normal) var(--transition-timing);
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* 按鈕 ripple 效果 */
-  button::before,
-  .btn::before,
-  .btn-primary::before,
-  .btn-secondary::before,
-  .btn-tertiary::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: translate(-50%, -50%);
-    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-      height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 0;
-    pointer-events: none; /* 防止 ripple 擋住按鈕點擊事件 */
-  }
-
-  button:active::before,
-  .btn:active::before,
-  .btn-primary:active::before,
-  .btn-secondary:active::before,
-  .btn-tertiary:active::before {
-    width: 200px;
-    height: 200px;
-  }
-
-  .btn {
-    background: var(--background-color-secondary);
-    border: 2px solid var(--border-color);
-  }
-
-  .btn-primary {
-    background: linear-gradient(
-      135deg,
-      var(--text-color-primary),
-      var(--text-color-secondary)
-    );
-    box-shadow: var(--shadow-base);
-    color: white;
-    border: none;
-  }
-
-  .btn-secondary {
-    background: linear-gradient(
-      135deg,
-      var(--text-color-primary),
-      var(--text-color-tertiary)
-    );
-    box-shadow: var(--shadow-base);
-  }
-
-  .btn-tertiary {
-    color: var(--text-color-primary);
-    background: var(--background-color-primary);
-    border: 2px solid var(--text-color-primary);
+  /* 整合 active 狀態 */
+  button:active,
+  .btn:active {
+    transform: scale(0.95);
+    transition-duration: var(--transition-fast);
+    filter: brightness(0.9);
   }
 
   button:hover,
-  .btn:hover,
-  .btn-primary:hover,
-  .btn-secondary:hover,
-  .btn-tertiary:hover {
+  .btn:hover {
     text-decoration: none !important;
-  }
-
-  button:active,
-  .btn:active,
-  .btn-primary:active,
-  .btn-secondary:active,
-  .btn-tertiary:active {
-    transition-duration: var(--transition-fast);
-  }
-
-  /* 聚焦狀態 */
-  button:focus-visible,
-  .btn:focus-visible,
-  .btn-primary:focus-visible,
-  .btn-secondary:focus-visible,
-  .btn-tertiary:focus-visible {
-    outline: 2px solid var(--border-color-focus);
-    outline-offset: 2px;
+    filter: brightness(1.1);
   }
 
   /* 禁用狀態 */
   button:disabled,
-  .btn:disabled,
-  .btn-primary:disabled,
-  .btn-secondary:disabled,
-  .btn-tertiary:disabled {
-    opacity: 0.6;
+  .btn:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
-    filter: none;
+    filter: grayscale(0.5);
     transform: none;
-    pointer-events: none;
+    box-shadow: none;
+  }
+
+  .btn {
+    background: var(--primary-background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+  }
+
+  .btn.primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--primary-background);
+    border: none;
+    font-weight: 700;
+  }
+  .btn.secondary {
+    background: var(--secondary-background);
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+  }
+
+  .btn.secondary:hover {
+    background: var(--secondary);
+    color: var(--secondary-background);
   }
 
   /* === 容器系統 === */
   .container {
     position: relative;
     z-index: 1;
-    max-width: var(--container-max-width);
+    max-width: var(--container-max-width) !important;
     margin-inline: auto;
     padding: 1.5rem;
     gap: 1rem;
@@ -220,67 +204,46 @@
 
   /* === 卡片系統 === */
   .card {
-    background: var(--background-color-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-base);
-    transition: all var(--transition-normal)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    overflow: hidden;
+    background: var(--secondary-background);
+    border: 1px solid var(--border);
+    transition: all var(--transition-normal) var(--transition-timing);
   }
 
-  /* .card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.03),
-      transparent
-    );
-    transform: skewX(-15deg);
-    transition: left var(--transition-slow) cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  } */
+  .card.primary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(0.25rem);
+    transition: all var(--transition-normal) var(--transition-timing);
+  }
+  .card.secondary {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-md);
+    backdrop-filter: blur(0.25rem);
+    transition: all var(--transition-normal) var(--transition-timing);
+  }
 
   .card:hover {
-    box-shadow: var(--shadow-hover);
-    border-color: var(--border-color-light);
+    border-color: color-mix(in oklab, var(--primary) 30%, transparent);
   }
-
-  /* .card:hover::before {
-    left: 100%;
-  } */
+  .card.primary:hover {
+    border-color: color-mix(in oklab, var(--primary) 30%, transparent);
+  }
+  .card.secondary:hover {
+    border-color: color-mix(in oklab, var(--primary) 30%, transparent);
+  }
 
   a.card:hover {
     transform: translateY(calc(-1 * var(--move-y)));
-    border-color: var(--text-color-primary);
-    box-shadow: var(--shadow-card-hover);
+    border-color: var(--primary);
     text-decoration: none;
-  }
-
-  /* 聚焦狀態 */
-  a.card:focus-visible {
-    outline: 2px solid var(--border-color-focus);
-    outline-offset: 2px;
   }
 
   /* === 連結樣式 === */
   a {
     color: inherit;
     text-decoration: none;
-    transition: all var(--transition-normal)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  a:focus-visible {
-    outline: 2px solid var(--border-color-focus);
-    outline-offset: 2px;
-    border-radius: 2px;
+    transition: all var(--transition-normal) var(--transition-timing);
   }
 
   /* === 滑動摺疊效果 === */
@@ -292,7 +255,7 @@
 
   /* === 自訂滾動條 === */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
     height: 8px;
   }
 
@@ -302,19 +265,23 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--border-color);
+    background: var(--border);
     border-radius: 4px;
     transition: background var(--transition-normal) ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-color-muted);
+    background: var(--muted);
   }
 
   /* 針對 Firefox 的滾動條樣式 */
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--border-color) transparent;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button {
+    display: none;
   }
 }
 
@@ -333,8 +300,8 @@
     bottom: 70%;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 1000;
+    transition: all 0.3s var(--transition-timing);
+    z-index: 9999;
   }
 
   .tooltip:hover:before,
@@ -346,33 +313,34 @@
 
   .tooltip::before {
     content: attr(data-tooltip);
+    color: var(--foreground);
     width: max-content;
     max-width: 200px;
-    background: var(--background-color-secondary);
-    border: var(--border-color) 1px solid;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
     padding: 0.5rem 0.75rem;
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-md);
     white-space: nowrap;
     font-size: 0.875rem;
     box-shadow: var(--shadow-base);
+    pointer-events: none;
   }
 
   /* === 動畫效果 === */
   .animate-pop {
-    animation: pop var(--transition-fast) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: pop var(--transition-fast) cubic-bezier(0.68, -0.55, 0.68, 1);
   }
 
   .animate-appear {
-    animation: appear var(--transition-normal)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: appear var(--transition-normal) var(--transition-timing) forwards;
   }
 
   .animate-turn {
-    animation: turn var(--transition-normal)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: turn var(--transition-normal) var(--transition-timing) forwards;
   }
 
-  /* 減少動畫效果（針對有偏好的用戶） */
+  /* 減少動畫效果 */
   @media (prefers-reduced-motion: reduce) {
     .animate-pop,
     .animate-turn,
@@ -451,22 +419,66 @@
     transform: translateX(-50%);
     width: 0;
     height: var(--line-height);
-    background: linear-gradient(
-      135deg,
-      var(--text-color-primary),
-      var(--text-color-secondary)
-    );
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: var(--border-radius-md);
-    transition: width var(--transition-normal)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: width var(--transition-normal) var(--transition-timing);
   }
 
   .underline-spread::after {
     animation: underlineSpreadIn var(--transition-normal)
-      cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      var(--transition-timing) forwards;
   }
 
   .hover\:underline-spread:hover::after {
     width: 110%;
+  }
+}
+
+/* === Skeleton / Shimmer Utility === */
+@layer utilities {
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.04);
+    color: transparent;
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.06) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%);
+    animation: shimmer 1.2s linear infinite;
+  }
+
+  /* helper for thin lines */
+  .skeleton-line {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  /* reduce shimmer on reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton::after {
+      animation: none;
+      opacity: 0.6;
+    }
   }
 }

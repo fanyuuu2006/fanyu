@@ -1,4 +1,5 @@
-import { profile } from "@/libs/profile";
+import { routes } from "@/libs/routes";
+import { site } from "@/libs/site";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
@@ -16,16 +17,16 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Googlebot",
-        allow: ["/", "/projects", "/guestbook", "/album", "/my"],
+        allow: routes.map((route) => route.url),
         disallow: ["/api/", "/private/"],
       },
       {
         userAgent: "Bingbot",
-        allow: ["/", "/projects", "/guestbook", "/album", "/my"],
+        allow: routes.map((route) => route.url),
         disallow: ["/api/", "/private/"],
       },
     ],
-    sitemap: `${profile.url}/sitemap.xml`,
-    host: profile.url,
+    sitemap: `${site.url}/sitemap.xml`,
+    host: site.url,
   };
 }

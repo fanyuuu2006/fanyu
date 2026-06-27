@@ -1,35 +1,48 @@
 import type { Metadata } from "next";
-import { profile } from "@/libs/profile";
+import { site } from "@/libs/site";
+
+const title = "留言板";
+const description = "在飯魚的留言板分享您的想法、建議與回饋，歡迎交流網站內容、技術文章與開發心得。";
+
+const image = `${site.url}/images/fanyu.jpg`;
+const url = `${site.url}/guestbook`;
 
 export const metadata: Metadata = {
-  title: "留言板 Guestbook",
-  description: `歡迎在${profile.nickname.chinese}的留言板留下您的訊息！Welcome to leave your message on ${profile.nickname.english}'s guestbook!`,
-  keywords: profile.keywords,
-  openGraph: {
-    title: `${profile.nickname.chinese} - 留言板 | ${profile.nickname.english} - Guestbook`,
-    description: `在${profile.nickname.chinese}的留言板分享您的想法和建議。Share your thoughts and suggestions on ${profile.nickname.english}'s guestbook.`,
-    url: `${profile.url}/guestbook`,
-    images: [
-      {
-        url: `${profile.url}/GameShow.jpg`,
-        alt: "FanYu Guestbook",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${profile.nickname.chinese} - 留言板 | ${profile.nickname.english} - Guestbook`,
-    description: `在${profile.nickname.chinese}的留言板分享您的想法和建議。Share your thoughts and suggestions on ${profile.nickname.english}'s guestbook.`,
-  },
+  title,
+  description,
+  keywords: site.keywords,
+
   alternates: {
     canonical: "/guestbook",
   },
+
+  openGraph: {
+    title: `${site.title}｜${title}`,
+    description,
+    url,
+    type: "website",
+    siteName: site.title,
+    locale: "zh_TW",
+    images: [
+      {
+        url: image,
+        alt: `${site.title} ${title}`,
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.title}｜${title}`,
+    description,
+    images: [image],
+  },
 };
 
-export default function Layout({
-  children,
-}: Readonly<{
+type LayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function Layout({ children }: LayoutProps) {
   return children;
 }

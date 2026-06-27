@@ -1,18 +1,17 @@
-import "@/styles/globals.css";
-import { Header } from "@/components/Header/Header";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import { LanguageSwitchButton } from "@/components/LanguageSwitchButton";
 import { Footer } from "@/components/Footer";
-import Script from "next/script";
+import { Header } from "@/components/Header/Header";
+import { education } from "@/libs/education";
+import { portfolioItems } from "@/libs/portfolio";
+import { site } from "@/libs/site";
+import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Noto_Sans_SC } from "next/font/google";
-import { profile } from "@/libs/profile";
-import { AlbumProvider } from "@/contexts/AlbumContext";
+import Script from "next/script";
 export { metadata } from "./metadata";
 
-// 評估id
-const measurementID = "G-3SGK402751";
+// Google Analytics ID
+const MEASUREMENT_ID = "G-3SGK402751";
 
 const notoSansSC = Noto_Sans_SC({
   subsets: ["latin"],
@@ -40,7 +39,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//vercel.app" />
 
-        {/** 結構化資料 */}
+        {/* JSON-LD 結構化資料 */}
         <Script
           id="person-jsonld"
           type="application/ld+json"
@@ -48,24 +47,17 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: profile.name.english,
-              alternateName: [
-                profile.nickname.english,
-                profile.nickname.chinese,
-                profile.name.chinese,
-              ],
-              birthDate: profile.birthday,
-              url: profile.url,
-              image: `${profile.url}/GameShow.jpg`,
-              sameAs: Object.values(profile.contact)
-                .flat()
-                .map((item) => item.href),
+              name: "范余振富",
+              alternateName: ["Fan Yu-Zhen-Fu", "范余振富", "飯魚", "FanYu"],
+              birthDate: "2006-05-26 UTC+8",
+              url: site.url,
+              image: `${site.url}/GameShow.jpg`,
               jobTitle: [
                 "Student Developer",
                 "Frontend Developer",
                 "Web Developer",
               ],
-              description: profile.description.english,
+              description: site.description,
               nationality: {
                 "@type": "Country",
                 name: "Taiwan",
@@ -74,10 +66,10 @@ export default function RootLayout({
                 "@type": "Place",
                 name: "Taipei, Taiwan",
               },
-              alumniOf: profile.experience.education.map((edu) => ({
+              alumniOf: education.map((edu) => ({
                 "@type": "CollegeOrUniversity",
-                name: edu.name.english,
-                alternateName: edu.name.chinese,
+                name: edu.title,
+                alternateName: edu.subtitle,
               })),
               knowsAbout: [
                 "Web Development",
@@ -115,45 +107,44 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebPage",
-              name: `${profile.nickname.english} Personal Portfolio`,
+              name: site.title,
               description:
                 "Personal portfolio site of Fan-Yu Zhen-Fu showcasing projects and skills.",
               url: "https://fanyu.vercel.app",
               mainEntity: {
                 "@type": "ItemList",
-                itemListElement: profile.portfolio.projects.map(
-                  (project, index) => ({
-                    "@type": "ListItem",
-                    position: index + 1,
-                    item: {
-                      "@type": "CreativeWork",
-                      headline: project.title.english,
-                      name: project.title.english,
-                      description: project.about.english,
-                      url:
-                        project.links.find((l) => l.category === "demo")
-                          ?.href ?? profile.url,
-                      thumbnailUrl: `${profile.url}${project.imageSrc}`,
-                      dateCreated: `${project.time}-01`,
-                      inLanguage: "en",
-                      programmingLanguage: project.tags[0],
-                      author: {
-                        "@type": "Person",
-                        "@id": profile.url,
-                        name: profile.name.english,
-                        url: profile.url,
-                      },
+                itemListElement: portfolioItems.map((project, index) => ({
+                  "@type": "ListItem",
+                  position: index + 1,
+                  item: {
+                    "@type": "CreativeWork",
+                    headline: project.title,
+                    name: project.title,
+                    url:
+                      project.links[0]?.url ||
+                      project.links[1]?.url ||
+                      site.url,
+                    thumbnailUrl: project.imageUrl,
+                    dateCreated: project.date,
+                    inLanguage: "en",
+                    programmingLanguage: project.tags[0],
+                    author: {
+                      "@type": "Person",
+                      "@id": site.url,
+                      name: "范余振富",
+                      url: site.url,
                     },
-                  })
-                ),
+                  },
+                })),
               },
             }),
           }}
         />
+
         {/* GA Script */}
         <Script
           id="googletagmanager"
-          src={`https://www.googletagmanager.com/gtag/js?id=${measurementID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
         <Script id="ga-init" strategy="afterInteractive">
@@ -161,21 +152,16 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${measurementID}', {
+            gtag('config', '${MEASUREMENT_ID}', {
               page_path: window.location.pathname,
             })
           `}
         </Script>
       </head>
-      <body className={`${notoSansSC.className} flex flex-col min-h-screen`}>
-        <LanguageProvider>
-          <AlbumProvider>
-            <Header />
-            <main className="mt-24 flex-1">{children}</main>
-            <LanguageSwitchButton />
-            <Footer />
-          </AlbumProvider>
-        </LanguageProvider>
+      <body className={notoSansSC.className}>
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
         <Analytics />
         <SpeedInsights />
       </body>
