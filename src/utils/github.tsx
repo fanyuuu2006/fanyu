@@ -82,10 +82,48 @@ export function getGithubBadgeSrcs(repo: RepoString) {
   }));
 }
 
-export const getGithubReadMe = async (repo: RepoString) => {
-  const url = `https://raw.githubusercontent.com/${repo}/main/README.md`;
+/**
+ * 嘗試從 GitHub raw 取得 README.md 內容
+ * 自動偵測 BOM 並以正確編碼解碼（UTF-16LE / UTF-16BE / UTF-8）
+ *
+ * @param repo - "owner/repo" 格式的字串
+ * @returns 解碼後的 README 字串，或 null（找不到 / 內容無效）
+ */
+export const getGithubReadMe = async (
+  repo: RepoString,
+): Promise<string | null> => {
+  const BRANCHES = ["main", "master"] as const;
+  const MIN_LENGTH = 10;
 
-  const res = await fetch(url);
+  for (const branch of BRANCHES) {
+    const url = `https://raw.githubusercontent.com/${repo}/${branch}/README.md`;
 
-  return await res.text();
+    try {
+      const res = await fetch(url, {
+        next: { revalidate: 60 * 60 }, // ISR：1 小時快取
+      });
+
+      if (!res.ok) continue;
+
+      const buffer = await res.arrayBuffer();
+      const bytes = new Uint8Array(buffer);
+
+      // BOM 偵測：優先嘗試 UTF-16，fallback 到 UTF-8
+      const encoding =
+        bytes[0] === 0xff && bytes[1] === 0xfe
+          ? "utf-16le"
+          : bytes[0] === 0xfe && bytes[1] === 0xff
+            ? "utf-16be"
+            : "utf-8";
+
+      const text = new TextDecoder(encoding).decode(bytes).trim();
+
+      if (text.length >= MIN_LENGTH) return text;
+    } catch {
+      // 網路錯誤或解碼失敗，嘗試下一個 branch
+      continue;
+    }
+  }
+
+  return null;
 };

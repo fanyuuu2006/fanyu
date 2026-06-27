@@ -15,32 +15,45 @@ export const MyMarkdown = ({
   ...rest
 }: MyMarkdownProps) => {
   return (
-    <article
-      className={cn("text-base leading-7 space-y-4", className)}
-      {...rest}
-    >
+    <article className={cn("text-base leading-7", className)} {...rest}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
-          img: ({ ...props }) => <MyImage {...props} />,
+          p: ({ children }) => (
+            <p dir="auto" className="mb-4">
+              {children}
+            </p>
+          ),
+
+          img: ({ className, ...props }) => (
+            <MyImage className={cn("inline-block", className)} {...props} />
+          ),
+
+          // Headings：層次感 mt 遞減，mb 統一
           h1: ({ children }) => (
-            <h1 className="text-3xl font-bold">{children}</h1>
+            <h1 className="mt-10 mb-4 border-b border-(--border) pb-2 text-3xl font-semibold">
+              {children}
+            </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-2xl font-bold">{children}</h2>
+            <h2 className="mt-8 mb-3 border-b border-(--border) pb-1 text-2xl font-semibold">
+              {children}
+            </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-xl font-bold">{children}</h3>
+            <h3 className="mt-6 mb-2 text-xl font-semibold">{children}</h3>
           ),
           h4: ({ children }) => (
-            <h4 className="text-lg font-bold">{children}</h4>
+            <h4 className="mt-4 mb-2 text-lg font-semibold">{children}</h4>
           ),
           h5: ({ children }) => (
-            <h5 className="text-base font-bold">{children}</h5>
+            <h5 className="mt-3 mb-1 text-base font-semibold">{children}</h5>
           ),
           h6: ({ children }) => (
-            <h6 className="text-sm font-bold">{children}</h6>
+            <h6 className="mt-3 mb-1 text-sm font-semibold opacity-70">
+              {children}
+            </h6>
           ),
 
           strong: ({ children }) => (
@@ -49,16 +62,29 @@ export const MyMarkdown = ({
 
           em: ({ children }) => <em className="italic">{children}</em>,
 
-          ul: ({ children }) => (
-            <ul className="list-disc space-y-1 pl-6">{children}</ul>
+          // Lists：加 mb-4 與段落齊平，巢狀時縮排
+          ul: ({ children, className }) => (
+            <ul
+              className={cn(
+                "mb-4 list-disc space-y-1 pl-6",
+                // 巢狀 ul 不加 mb
+                className,
+              )}
+            >
+              {children}
+            </ul>
           ),
 
-          ol: ({ children }) => (
-            <ol className="list-decimal space-y-1 pl-6 ">{children}</ol>
+          ol: ({ children, className }) => (
+            <ol className={cn("mb-4 list-decimal space-y-1 pl-6", className)}>
+              {children}
+            </ol>
           ),
 
           li: ({ children }) => (
-            <li className="marker:text-(--primary)">{children}</li>
+            <li className="marker:text-(--primary) [&>ul]:mb-0 [&>ol]:mb-0 [&>ul]:mt-1 [&>ol]:mt-1">
+              {children}
+            </li>
           ),
 
           a: ({ href, children, className, ...rest }) => (
@@ -76,44 +102,72 @@ export const MyMarkdown = ({
 
           code: ({ className, children, ...props }) => {
             const isBlock = /language-/.test(className ?? "");
-
-            if (!isBlock) {
+            if (isBlock) {
               return (
                 <code
-                  className={cn(
-                    "rounded-md bg-(--primary)/20 px-1.5 py-0.5 font-mono text-[0.9em]",
-                    className,
-                  )}
+                  className={cn("text-sm leading-6 font-mono", className)}
                   {...props}
                 >
                   {children}
                 </code>
               );
             }
-
             return (
-              <code className={className} {...props}>
+              <code
+                className={cn(
+                  "rounded-md bg-(--primary)/20 px-1.5 py-0.5 font-mono text-[0.85em]",
+                  className,
+                )}
+                {...props}
+              >
                 {children}
               </code>
             );
           },
 
-          pre: ({ children, node }) => {
-            console.log(node);
-            return (
-              <pre className="overflow-x-auto rounded-xl bg-black/10 p-4">
-                {children}
-              </pre>
-            );
-          },
+          pre: ({ children }) => (
+            <pre className="mb-4 overflow-x-auto rounded-xl border border-(--border) bg-(--secondary-background) p-4 text-sm leading-6">
+              {children}
+            </pre>
+          ),
 
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-(--primary) pl-4 italic text-(--foreground)/80">
+            <blockquote className="mb-4 border-l-4 border-(--primary) pl-4 opacity-70">
               {children}
             </blockquote>
           ),
 
           hr: () => <hr className="my-6 border-(--border)" />,
+
+          table: ({ children }) => (
+            <div className="mb-4 overflow-x-auto rounded-xl border border-(--border)">
+              <table className="w-full border-collapse text-sm">
+                {children}
+              </table>
+            </div>
+          ),
+
+          thead: ({ children }) => (
+            <thead className="bg-(--secondary-background)">{children}</thead>
+          ),
+
+          th: ({ children }) => (
+            <th className="border-b border-(--border) px-4 py-2 text-left font-semibold">
+              {children}
+            </th>
+          ),
+
+          td: ({ children }) => (
+            <td className="border-b border-(--border)/40 px-4 py-2 last:border-b-0">
+              {children}
+            </td>
+          ),
+
+          tr: ({ children }) => (
+            <tr className="transition-colors last:border-b-0 hover:bg-(--primary)/5">
+              {children}
+            </tr>
+          ),
         }}
       >
         {children}
