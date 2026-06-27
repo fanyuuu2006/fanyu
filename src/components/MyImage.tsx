@@ -10,8 +10,6 @@ import { OverrideProps } from "fanyucomponents";
 export type MyImageProps = OverrideProps<
   React.ImgHTMLAttributes<HTMLImageElement>,
   {
-    /** 圖片的來源 URL，可以是字串、undefined 或 null。 */
-    src: string | undefined | null;
     /**
      * 圖片載入失敗時的最大重試次數
      * @default 3
@@ -67,11 +65,11 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
       fallbackSrc,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const [hasError, setHasError] = useState<boolean>(false);
     const [retryCount, setRetryCount] = useState<number>(0);
-    const [prevSrc, setPrevSrc] = useState<string | undefined | null>(src);
+    const [prevSrc, setPrevSrc] = useState<string | undefined | Blob>(src);
 
     if (src !== prevSrc) {
       setPrevSrc(src);
@@ -93,20 +91,22 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
             // 使用帶有重試計數的查詢參數重新載入圖片
             setTimeout(
               () => setRetryCount((prev) => prev + 1),
-              500 * (retryCount + 1)
+              500 * (retryCount + 1),
             );
           } else {
             setHasError(true);
           }
         },
-        [src, hasError, onError, retryCount, maxRetryCount]
+        [src, hasError, onError, retryCount, maxRetryCount],
       );
 
     const finalSrc =
       hasError || !src
         ? fallbackSrc || FALLBACK_IMAGE
-        : `${src}${src.includes("?") ? "&" : "?"}fanyuRetry=${retryCount}`;
-
+        : typeof src === "string"
+          ? `${src}${src.includes("?") ? "&" : "?"}fanyuRetry=${retryCount}`
+          : URL.createObjectURL(src);
+          
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
@@ -121,6 +121,6 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
         {...rest}
       />
     );
-  }
+  },
 );
 MyImage.displayName = "MyImage";

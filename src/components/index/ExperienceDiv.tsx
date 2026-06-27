@@ -58,6 +58,7 @@ export const ExperienceDiv = ({
       </h3>
       <div className="divide-y divide-(--foreground)/25">
         {displayItems.map((item, i) => {
+          const period = getPeriod(item.duration);
           return (
             <article
               key={`${item.title}-${i}`}
@@ -88,7 +89,7 @@ export const ExperienceDiv = ({
                       </h4>
                       <p className="text-sm text-(--muted) font-mono flex items-center gap-1">
                         <ClockCircleOutlined />
-                        <span>{getPeriod(item.duration)}</span>
+                        <time dateTime={period}>{period}</time>
                       </p>
                     </div>
                     {item.subtitle && (

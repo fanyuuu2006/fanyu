@@ -1,9 +1,11 @@
 import { cn } from "@/utils/className";
 import { OutsideLink } from "fanyucomponents";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+import { MyImage } from "./MyImage";
 
-type MyMarkdownProps = React.HTMLAttributes<HTMLDivElement> & {
+type MyMarkdownProps = React.HTMLAttributes<HTMLElement> & {
   children: string;
 };
 
@@ -13,16 +15,33 @@ export const MyMarkdown = ({
   ...rest
 }: MyMarkdownProps) => {
   return (
-    <div
-      className={cn(
-        "text-base leading-7 space-y-4",
-        className,
-      )}
+    <article
+      className={cn("text-base leading-7 space-y-4", className)}
       {...rest}
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
         components={{
+          img: ({ ...props }) => <MyImage {...props} />,
+          h1: ({ children }) => (
+            <h1 className="text-3xl font-bold">{children}</h1>
+          ),
+          h2: ({ children }) => (
+            <h2 className="text-2xl font-bold">{children}</h2>
+          ),
+          h3: ({ children }) => (
+            <h3 className="text-xl font-bold">{children}</h3>
+          ),
+          h4: ({ children }) => (
+            <h4 className="text-lg font-bold">{children}</h4>
+          ),
+          h5: ({ children }) => (
+            <h5 className="text-base font-bold">{children}</h5>
+          ),
+          h6: ({ children }) => (
+            <h6 className="text-sm font-bold">{children}</h6>
+          ),
 
           strong: ({ children }) => (
             <strong className="font-semibold">{children}</strong>
@@ -79,11 +98,14 @@ export const MyMarkdown = ({
             );
           },
 
-          pre: ({ children }) => (
-            <pre className="overflow-x-auto rounded-xl bg-black/10 p-4">
-              {children}
-            </pre>
-          ),
+          pre: ({ children, node }) => {
+            console.log(node);
+            return (
+              <pre className="overflow-x-auto rounded-xl bg-black/10 p-4">
+                {children}
+              </pre>
+            );
+          },
 
           blockquote: ({ children }) => (
             <blockquote className="border-l-4 border-(--primary) pl-4 italic text-(--foreground)/80">
@@ -96,6 +118,6 @@ export const MyMarkdown = ({
       >
         {children}
       </ReactMarkdown>
-    </div>
+    </article>
   );
 };

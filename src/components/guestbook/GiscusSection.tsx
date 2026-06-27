@@ -15,11 +15,11 @@ export const GiscusSection = () => {
             reactionsEnabled="1"
             emitMetadata="0"
             inputPosition="top"
-            theme='transparent_dark'
+            theme="transparent_dark"
             lang={"zh-TW"}
             loading="lazy"
           />
-        </div>
+      </div>
     </section>
   );
 };

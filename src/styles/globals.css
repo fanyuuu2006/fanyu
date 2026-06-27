@@ -39,7 +39,7 @@
     --border-radius-sm: 0.5rem;
     --border-radius-md: 1rem;
     --border-radius-lg: 1.5rem;
-    --container-max-width: 1400px;
+    --container-max-width: 1000px;
     --scroll-margin: 6rem;
     --move-y: 0.25rem;
   }
@@ -165,7 +165,7 @@
 
   .btn {
     background: var(--primary-background);
-    border: 2px solid var(--border);
+    border: 1px solid var(--border);
     color: var(--foreground);
   }
 
@@ -178,7 +178,7 @@
   .btn.secondary {
     background: var(--secondary-background);
     color: var(--secondary);
-    border: 2px solid var(--secondary);
+    border: 1px solid var(--secondary);
   }
 
   .btn.secondary:hover {
@@ -224,7 +224,7 @@
   }
 
   .card:hover {
-    border-color: var(--primary);
+    border-color: color-mix(in oklab, var(--primary) 30%, transparent);
   }
   .card.primary:hover {
     border-color: color-mix(in oklab, var(--primary) 30%, transparent);
@@ -278,6 +278,10 @@
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button {
+    display: none;
   }
 }
 

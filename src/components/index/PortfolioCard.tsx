@@ -18,7 +18,7 @@ export const PortfolioCard = ({
   ...rest
 }: PortfolioCardProps) => {
   const viewUrl = item.links[0]?.url;
-  const infoUrl = `/portfolio#${slugify(item.title)}`;
+  const infoUrl = `/portfolio/${slugify(item.title)}`;
 
   return (
     <div className={cn(`card portfolio-card rounded-xl`, className)} {...rest}>
@@ -29,15 +29,18 @@ export const PortfolioCard = ({
         alt={item.title}
       />
       <div className="portfolio-card__content">
-        <div className="relative flex flex-col justify-between w-full h-full p-3 sm:p-4">
+        <div className="relative flex flex-col justify-between w-full h-full p-4">
           {/* 主要內容區域 */}
           <div className="flex flex-col gap-0.5">
-            <div className="text-base sm:text-xl font-extrabold leading-tight">
+            <h3
+              title={item.title}
+              className="text-base sm:text-lg font-extrabold leading-tight truncate"
+            >
               {item.title}
-            </div>
-            <div className="flex items-center gap-1.5 text-xs text-(--muted)">
+            </h3>
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-(--muted)">
               <ClockCircleOutlined />
-              <span>{item.date}</span>
+              <time dateTime={item.date}>{item.date}</time>
             </div>
             <div className="mt-0.5 text-xs sm:text-sm text-gray-200 line-clamp-2 sm:line-clamp-3">
               {item.overview}

@@ -24,18 +24,18 @@ export type SkillItem = {
 export type PortfolioTagCategory = keyof typeof tagCategories;
 export type PortfolioTag = (typeof tagCategories)[PortfolioTagCategory][number];
 
+export type RepoString = `${string}/${string}`;
 export type PortfolioItem = {
   title: string;
   imageUrl: string;
   date: DateString;
-  points: string[];
   overview: string;
   links: {
     label: string;
     url: string;
   }[];
   github?: {
-    repo: `${string}/${string}`;
+    repo: RepoString;
     giscus?: {
       repoId: string;
       categoryId: string;

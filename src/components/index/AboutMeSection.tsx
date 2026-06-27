@@ -96,15 +96,15 @@ export const AboutMeSection = () => {
 
   return (
     <MySection id="aboutMe" title="關於我">
-      <div className="w-full grid lg:grid-cols-[1fr_auto] gap-4 p-4">
-        <article className="flex flex-col gap-4 p-4 md:p-6 lg:p-8">
+      <div className="w-full grid lg:grid-cols-[1fr_auto] gap-8 p-4">
+        <article className="flex flex-col gap-4">
           {PARAGRAPHS.map((p, i) => (
             <p
               key={i}
               className={cn(
-                "text-justify indent-8 text-base sm:text-lg md:text-xl text-(--muted) leading-7",
+                "text-justify indent-8 text-sm md:text-base text-(--muted) leading-7",
                 {
-                  "first-letter:text-3xl first-letter:font-bold first-letter:text-(--primary) first-letter:mr-1":
+                  "first-letter:text-2xl first-letter:font-bold first-letter:text-(--primary) first-letter:mr-1":
                     i === 0,
                 },
               )}

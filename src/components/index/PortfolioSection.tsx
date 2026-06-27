@@ -7,12 +7,12 @@ import Link from "next/link";
 export const PortfolioSection = () => {
   return (
     <MySection id="portfolio" title="作品集">
-      <Carousel>
+      <Carousel duration={portfolioItems.length * 2500}>
         {portfolioItems.map((item) => (
           <PortfolioCard
             key={item.title}
             item={item}
-            className="m-2 size-48 md:size-56 shrink-0"
+            className="m-2 size-50 shrink-0"
           />
         ))}
       </Carousel>

@@ -1,3 +1,5 @@
+import { RepoString } from "@/types";
+
 type BadgeConfig = {
   endpoint: string;
   color?: string;
@@ -60,10 +62,7 @@ export const badgeConfig = {
 
 export type GithubBadge = keyof typeof badgeConfig;
 
-function createBadgeUrl(
-  repo: `${string}/${string}`,
-  config: BadgeConfig,
-): string {
+function createBadgeUrl(repo: RepoString, config: BadgeConfig): string {
   const params = new URLSearchParams({
     ...DEFAULT_BADGE_OPTIONS,
     ...(config.color && { color: config.color }),
@@ -76,9 +75,17 @@ function createBadgeUrl(
   return url;
 }
 
-export function getGithubBadgeSrcs(repo: `${string}/${string}`) {
+export function getGithubBadgeSrcs(repo: RepoString) {
   return Object.entries(badgeConfig).map(([title, config]) => ({
     title: title as GithubBadge,
     url: createBadgeUrl(repo, config),
   }));
 }
+
+export const getGithubReadMe = async (repo: RepoString) => {
+  const url = `https://raw.githubusercontent.com/${repo}/main/README.md`;
+
+  const res = await fetch(url);
+
+  return await res.text();
+};

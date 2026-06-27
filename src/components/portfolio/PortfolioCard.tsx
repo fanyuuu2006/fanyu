@@ -26,7 +26,7 @@ export const PortfolioCard = ({
     >
       <Link href={href} className="w-full">
         <div className="group relative flex items-start gap-4">
-          <div className="shrink-0 size-12 md:size-14 rounded-lg overflow-hidden bg-(--foreground)">
+          <div className="shrink-0 size-12 md:size-14 rounded-lg overflow-hidden">
             <MyImage
               src={item.imageUrl}
               alt={item.title}
@@ -41,7 +41,7 @@ export const PortfolioCard = ({
                 </h4>
                 <p className="text-sm text-(--muted) font-mono flex items-center gap-1">
                   <ClockCircleOutlined />
-                  <span>{item.date}</span>
+                  <time dateTime={item.date}>{item.date}</time>
                 </p>
               </div>
               <p className="text-(--muted) text-sm">{item.overview}</p>
