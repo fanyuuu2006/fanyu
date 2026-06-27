@@ -1,10 +1,10 @@
 import { cn } from "@/utils/className";
-import { OutsideLink } from "fanyucomponents";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { MyImage } from "./MyImage";
 import { MarkdownPre } from "./MarkdownPre";
+import { CustomLink } from "./CustomLink";
 
 type MyMarkdownProps = React.HTMLAttributes<HTMLElement> & {
   children: string;
@@ -94,7 +94,7 @@ export const MyMarkdown = ({
           ),
 
           a: ({ href, children, className, ...rest }) => (
-            <OutsideLink
+            <CustomLink
               href={href}
               className={cn(
                 "font-medium text-(--primary) underline underline-offset-4 hover:opacity-80 transition",
@@ -103,7 +103,7 @@ export const MyMarkdown = ({
               {...rest}
             >
               {children}
-            </OutsideLink>
+            </CustomLink>
           ),
 
           code: ({ node, className, children, ...props }) => {
@@ -139,7 +139,7 @@ export const MyMarkdown = ({
             </blockquote>
           ),
 
-          hr: () => <hr className="my-6 border-(--border)" />,
+          hr: () => <hr className="my-6 border-4 border-(--border)" />,
 
           table: ({ children }) => (
             <div className="my-6 overflow-x-auto">
