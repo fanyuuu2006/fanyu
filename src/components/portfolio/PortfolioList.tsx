@@ -1,63 +1,88 @@
 "use client";
 import { portfolioItems } from "@/libs/portfolio";
+import { usePortfolioParams } from "@/hooks/usePortfolioParams";
 import { PortfolioCard } from "./PortfolioCard";
-import { AnimatePresence, motion } from "framer-motion";
 import { staggerContainer } from "@/libs/motion";
-import { PortfolioFilterBar } from "./PortfolioFilterBar";
-import { useMemo, useState } from "react";
+import { VerticalAlignTopOutlined } from "@ant-design/icons";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMemo } from "react";
 
 export const PortfolioList = () => {
-  const [tags, setTags] = useState<Set<string>>(new Set());
-  const [query, setQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const { params } = usePortfolioParams();
+  const { tags, query, sort } = params;
 
   const filteredItems = useMemo(() => {
-    let items = [...portfolioItems];
+    const q = query.toLowerCase();
+    return portfolioItems
+      .filter((item) => {
+        if (tags.size > 0 && !item.tags.some((t) => tags.has(t))) return false;
+        if (q && !item.title.toLowerCase().includes(q)) return false;
+        return true;
+      })
+      .sort((a, b) => {
+        const diff = new Date(b.date).getTime() - new Date(a.date).getTime();
+        return sort === "newest" ? diff : -diff;
+      });
+  }, [tags, query, sort]);
 
-    if (tags.size > 0) {
-      items = items.filter((item) => item.tags.some((tag) => tags.has(tag)));
-    }
-    if (query.trim() !== "") {
-      const lowerQuery = query.toLowerCase();
-      items = items.filter(
-        (item) =>
-          item.title.toLowerCase().includes(lowerQuery) ||
-          item.overview.toLowerCase().includes(lowerQuery),
-      );
-    }
-    items.sort((a, b) => {
-      if (sortOrder === "newest") {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-      } else {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-      }
-    });
-    return items;
-  }, [tags, query, sortOrder]);
+  const listKey = useMemo(
+    () => [...tags].sort().join(",") + query + sort,
+    [tags, query, sort],
+  );
 
   return (
     <section>
       <div className="container">
-        <PortfolioFilterBar
-          tags={tags}
-          setTags={setTags}
-          setQuery={setQuery}
-          sortOrder={sortOrder}
-          setSortOrder={setSortOrder}
-        />
         <AnimatePresence mode="wait">
-          <motion.div
-            key={`${Array.from(tags).join(",")}-${query}-${sortOrder}`}
-            initial="hiddenLeft"
-            animate="show"
-            exit="hiddenLeft"
-            variants={staggerContainer}
-            className="w-full divide-y divide-(--foreground)/25 py-8"
-          >
-            {filteredItems.map((item) => (
-              <PortfolioCard key={item.title} item={item} />
-            ))}
-          </motion.div>
+          {filteredItems.length > 0 ? (
+            <motion.div
+              key={listKey}
+              initial="hiddenLeft"
+              animate="show"
+              exit="hiddenLeft"
+              variants={staggerContainer}
+            >
+              {/* 數量 */}
+              <p className="mt-4 mb-2 text-sm text-(--muted) text-center">
+                共 {filteredItems.length} 個專案
+              </p>
+
+              {/* 列表 */}
+              <div className="w-full divide-y divide-(--foreground)/25">
+                {filteredItems.map((item) => (
+                  <PortfolioCard
+                    key={item.title}
+                    item={item}
+                    activeTags={tags}
+                  />
+                ))}
+              </div>
+
+              {/* 回到頂部 */}
+              <div className="flex justify-center py-8">
+                <button
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
+                  className="flex items-center gap-1.5 text-sm text-(--muted) hover:text-(--foreground) transition-colors duration-300"
+                  aria-label="回到頂部"
+                >
+                  <VerticalAlignTopOutlined aria-hidden />
+                  <span>回到頂部</span>
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-16 text-center text-(--muted)"
+            >
+              <p>沒有符合條件的專案</p>
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
     </section>

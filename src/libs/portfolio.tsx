@@ -7,7 +7,7 @@ export const tagCategories = {
 
   backend: ["Node.js", "Express.js", "Flask", "Restful API"],
 
-  database: ["Google Sheets", "Supabase"],
+  database: ["Supabase"],
 
   automation: ["Crawler", "Requests"],
 
@@ -148,7 +148,6 @@ export const portfolioItems: PortfolioItem[] = [
       "Backend",
       "Restful API",
       "Line Bot SDK",
-      "Google Sheets",
       "Vercel",
       "Git / GitHub",
     ],
