@@ -1,5 +1,4 @@
 import { ReadMeSection } from "@/components/portfolio/[title]/ReadMeSection";
-import { getGithubReadMe } from "@/utils/github";
 import { HeadingSection } from "@/components/HeadingSection";
 import { portfolioItems } from "@/libs/portfolio";
 import { deslugify } from "@/utils/url";
@@ -24,15 +23,11 @@ export default async function Portfolio(
     );
   }
 
-  const repo = portfolioItem.github?.repo;
-
-  const readMeContent = repo ? await getGithubReadMe(repo) : null;
-
   return (
     <>
       <HeroSection item={portfolioItem} />
-      {readMeContent && <ReadMeSection>{readMeContent}</ReadMeSection>}
-      <GiscusSection github={portfolioItem.github} />
+      <ReadMeSection item={portfolioItem} />
+      <GiscusSection item={portfolioItem} />
     </>
   );
 }

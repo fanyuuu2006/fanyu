@@ -59,7 +59,7 @@ export const PortfolioCard = ({
                   key={tag}
                   className={cn(
                     "card primary text-xs font-mono rounded-full px-2 py-1 transition-colors duration-200",
-                    activeTags?.has(tag) &&
+                    activeTags.has(tag) &&
                       "border-(--primary) text-(--primary)",
                   )}
                 >

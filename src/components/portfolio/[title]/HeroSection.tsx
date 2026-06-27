@@ -3,6 +3,7 @@ import { CustomLink } from "@/components/CustomLink";
 import { MyImage } from "@/components/MyImage";
 import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
+import { getGithubBadgeSrcs } from "@/utils/github";
 import {
   ArrowLeftOutlined,
   ClockCircleOutlined,
@@ -36,27 +37,27 @@ export const HeroSection = ({
           ]
         : []),
     ],
-    [item.links, item.github],
+    [item],
   );
 
   return (
     <section className={cn("mt-24", className)} {...props}>
-      <div className="container">
-        {/** Back */}
-        <div className="px-4 py-2">
+      <div className="container flex flex-col gap-6">
+        {/* Back */}
+        <div className="flex">
           <button
-            className="btn flex items-center justify-center p-2 text-lg rounded-lg"
+            className="btn secondary flex items-center justify-center p-2 text-lg rounded-full"
             onClick={() => router.back()}
             aria-label="返回"
           >
-            <ArrowLeftOutlined />
+            <ArrowLeftOutlined aria-hidden />
           </button>
         </div>
 
-        {/** Info */}
+        {/* Info */}
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-start gap-6 md:gap-8 p-4">
           {/* Image */}
-          <div className="mx-auto md:mx-0 size-48 sm:size-56 md:size-64 shrink-0 rounded-xl overflow-hidden">
+          <div className="border border-(--border) mx-auto md:mx-0 size-48 sm:size-56 md:size-64 shrink-0 rounded-xl overflow-hidden hover:border-(--primary) transition-all duration-300">
             <MyImage
               src={item.imageUrl}
               alt={item.title}
@@ -72,20 +73,16 @@ export const HeroSection = ({
             </h2>
             <div className="flex items-center gap-2 mt-1 text-sm sm:text-base text-(--muted)">
               <ClockCircleOutlined aria-hidden />
-              <time
-                dateTime={item.date}
-              >
-                {item.date}
-              </time>
+              <time dateTime={item.date}>{item.date}</time>
             </div>
             <p className="mt-2 text-sm sm:text-base text-(--muted) leading-relaxed">
               {item.overview}
             </p>
             {item.tags.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
-                {item.tags.map((tag, index) => (
+                {item.tags.map((tag) => (
                   <span
-                    key={index}
+                    key={tag}
                     className="card primary text-xs font-mono rounded-full px-2 py-1"
                   >
                     {tag}
@@ -95,9 +92,9 @@ export const HeroSection = ({
             )}
             {links.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
-                {links.map((link, index) => (
+                {links.map((link) => (
                   <CustomLink
-                    key={index}
+                    key={link.url}
                     href={link.url}
                     className="btn primary flex items-center gap-1.5 px-4 py-1.5 text-sm sm:text-base rounded-full"
                   >
@@ -109,6 +106,14 @@ export const HeroSection = ({
             )}
           </div>
         </div>
+        {/* GitHub Badges */}
+        {item.github?.repo && (
+          <div className="flex flex-wrap gap-2">
+            {getGithubBadgeSrcs(item.github.repo).map(({ title, url }) => (
+              <MyImage key={title} src={url} alt={title} className="h-5" />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
