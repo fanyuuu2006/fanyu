@@ -1,6 +1,6 @@
 import { MyMarkdown } from "@/components/MyMarkdown";
 import { PortfolioItem } from "@/types";
-import { getGithubReadMe } from "@/utils/github";
+import { getGithubReadMe, transformMarkdownLinks } from "@/utils/github";
 import { OutsideLink } from "fanyucomponents";
 import { Suspense } from "react";
 import { ReadMeSvg } from "./ReadMeSvg";
@@ -11,14 +11,18 @@ type ReadMeSectionProps = {
 
 // 內部元件只需要 repo 字串
 type ReadMeContentProps = {
-  repo: NonNullable<PortfolioItem["github"]>["repo"];
+  item: PortfolioItem;
 };
 
-const ReadMeContent = async ({ repo }: ReadMeContentProps) => {
+const ReadMeContent = async ({ item }: ReadMeContentProps) => {
+  const repo = item.github?.repo;
+  if (!repo) return null;
+
   const content = await getGithubReadMe(repo);
   if (!content) return null;
 
-  return <MyMarkdown className="text-(--muted)">{content}</MyMarkdown>;
+  const newContent = transformMarkdownLinks(content, repo);
+  return <MyMarkdown className="text-(--muted)">{newContent}</MyMarkdown>;
 };
 
 const ReadMeSkeleton = () => (
@@ -52,7 +56,7 @@ export const ReadMeSection = ({ item }: ReadMeSectionProps) => {
             </h3>
           </OutsideLink>
           <Suspense fallback={<ReadMeSkeleton />}>
-            <ReadMeContent repo={repo} />
+            <ReadMeContent item={item} />
           </Suspense>
         </div>
       </div>

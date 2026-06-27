@@ -127,3 +127,37 @@ export const getGithubReadMe = async (
 
   return null;
 };
+
+export const isExternal = (url: string) => /^(https?:\/\/|mailto:|#)/.test(url);
+
+export const toGithubUrl = (repo: RepoString, path: string) => {
+  if (isExternal(path)) return path;
+
+  const cleanRepo = repo.replace(/\/$/, "");
+
+  const base = `https://github.com/${cleanRepo}/raw/main/`;
+
+  // 這裡會正確處理 ./ ../ foo/bar
+  return new URL(path, base).toString();
+};
+export const transformMarkdownLinks = (content: string, repo: RepoString) => {
+  // Markdown []()
+  content = content.replace(
+    /(!?\[[^\]]*]\()([^)]+)(\))/g,
+    (_, before, href, after) => `${before}${toGithubUrl(repo, href)}${after}`,
+  );
+
+  // HTML src=""
+  content = content.replace(
+    /(src\s*=\s*["'])([^"']+)(["'])/gi,
+    (_, before, href, after) => `${before}${toGithubUrl(repo, href)}${after}`,
+  );
+
+  // HTML href=""
+  content = content.replace(
+    /(href\s*=\s*["'])([^"']+)(["'])/gi,
+    (_, before, href, after) => `${before}${toGithubUrl(repo, href)}${after}`,
+  );
+
+  return content;
+};
