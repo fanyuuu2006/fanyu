@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { MyImage } from "./MyImage";
+import { MarkdownPre } from "./MarkdownPre";
 
 type MyMarkdownProps = React.HTMLAttributes<HTMLElement> & {
   children: string;
@@ -105,7 +106,7 @@ export const MyMarkdown = ({
             if (isBlock) {
               return (
                 <code
-                  className={cn("text-sm leading-6 font-mono", className)}
+                  className={cn(className, "text-sm leading-6 font-mono")}
                   {...props}
                 >
                   {children}
@@ -115,8 +116,8 @@ export const MyMarkdown = ({
             return (
               <code
                 className={cn(
-                  "rounded-md bg-(--primary)/20 px-1.5 py-0.5 font-mono text-[0.85em]",
                   className,
+                  "rounded-md bg-(--foreground)/10 px-1.5 py-0.5 font-mono text-[0.85em]",
                 )}
                 {...props}
               >
@@ -125,11 +126,7 @@ export const MyMarkdown = ({
             );
           },
 
-          pre: ({ children }) => (
-            <pre className="mb-4 overflow-x-auto rounded-xl border border-(--border) bg-(--secondary-background) p-4 text-sm leading-6">
-              {children}
-            </pre>
-          ),
+          pre: MarkdownPre,
 
           blockquote: ({ children }) => (
             <blockquote className="mb-4 border-l-4 border-(--primary) pl-4 opacity-70">

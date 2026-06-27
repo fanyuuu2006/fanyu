@@ -29,7 +29,7 @@ export const CopyButton = ({
     try {
       await navigator.clipboard.writeText(content);
       setCopied(true);
-      console.log("複製成功");
+      console.log("複製成功:", content);
     } catch (err) {
       console.error("複製失敗", err);
     }
@@ -40,7 +40,7 @@ export const CopyButton = ({
       handleCopy();
       onClick?.(event);
     },
-    [handleCopy, onClick]
+    [handleCopy, onClick],
   );
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export const CopyButton = ({
   const ariaLabel = tooltipTitle;
   const icon = useMemo(
     () => (copied ? <CheckOutlined /> : <CopyOutlined />),
-    [copied]
+    [copied],
   );
 
   return (
