@@ -99,9 +99,7 @@ export const getGithubReadMe = async (
     const url = `https://raw.githubusercontent.com/${repo}/${branch}/README.md`;
 
     try {
-      const res = await fetch(url, {
-        next: { revalidate: 60 * 60 }, // ISR：1 小時快取
-      });
+      const res = await fetch(url);
 
       if (!res.ok) continue;
 
