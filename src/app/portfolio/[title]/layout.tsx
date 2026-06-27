@@ -22,10 +22,10 @@ export async function generateMetadata({
     };
   }
   const title = `${portfolioItem.title} | ${site.title}`;
-  const description = `${title}｜${portfolioItem.overview}`;
+  const description = `${portfolioItem.overview} 使用 ${portfolioItem.tags.join(", ")} 建置。`;
 
   const image = portfolioItem.imageUrl;
-  const url = `/portfolio/${rawTitle}`;
+  const url = `${site.url}/portfolio/${rawTitle}`;
 
   return {
     title,
@@ -45,6 +45,8 @@ export async function generateMetadata({
       locale: "zh_TW",
       images: [
         {
+          width: 1200,
+          height: 630,
           url: image,
           alt: `${title} - ${site.title}`,
         },
@@ -56,6 +58,10 @@ export async function generateMetadata({
       title: `${site.title}｜${title}`,
       description,
       images: [image],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
