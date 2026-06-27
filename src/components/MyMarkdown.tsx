@@ -21,14 +21,19 @@ export const MyMarkdown = ({
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
-          p: ({ children }) => (
-            <p dir="auto" className="mb-4">
+          p: ({ children, ...rest }) => (
+            <p dir="auto" className="mb-4" {...rest}>
               {children}
             </p>
           ),
 
-          img: ({ className, ...props }) => (
-            <MyImage className={cn("inline-block", className)} {...props} />
+          img: ({ className, width, height, ...props }) => (
+            <MyImage
+              {...props}
+              width={width}
+              height={height}
+              className={cn("inline-block max-w-full", className)}
+            />
           ),
 
           // Headings：層次感 mt 遞減，mb 統一
@@ -101,8 +106,8 @@ export const MyMarkdown = ({
             </OutsideLink>
           ),
 
-          code: ({ className, children, ...props }) => {
-            const isBlock = /language-/.test(className ?? "");
+          code: ({ node, className, children, ...props }) => {
+            const isBlock = node?.position?.start.column === 1;
             if (isBlock) {
               return (
                 <code
@@ -137,8 +142,8 @@ export const MyMarkdown = ({
           hr: () => <hr className="my-6 border-(--border)" />,
 
           table: ({ children }) => (
-            <div className="mb-4 overflow-x-auto rounded-xl border border-(--border)">
-              <table className="w-full border-collapse text-sm">
+            <div className="my-6 overflow-x-auto">
+              <table className="border-collapse border border-(--border) min-w-max">
                 {children}
               </table>
             </div>
@@ -148,23 +153,21 @@ export const MyMarkdown = ({
             <thead className="bg-(--secondary-background)">{children}</thead>
           ),
 
+          tbody: ({ children }) => <tbody>{children}</tbody>,
+
           th: ({ children }) => (
-            <th className="border-b border-(--border) px-4 py-2 text-left font-semibold">
+            <th className="border border-(--border) bg-(--secondary-background) px-4 py-2 text-left font-semibold">
               {children}
             </th>
           ),
 
           td: ({ children }) => (
-            <td className="border-b border-(--border)/40 px-4 py-2 last:border-b-0">
+            <td className="border border-(--border) px-4 py-2 align-top">
               {children}
             </td>
           ),
 
-          tr: ({ children }) => (
-            <tr className="transition-colors last:border-b-0 hover:bg-(--primary)/5">
-              {children}
-            </tr>
-          ),
+          tr: ({ children }) => <tr>{children}</tr>,
         }}
       >
         {children}
