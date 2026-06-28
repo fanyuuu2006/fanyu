@@ -1,54 +1,46 @@
 "use client";
 
-import React from "react";
 import { cn } from "@/utils/className";
+import { parseLangAndCode } from "@/utils/highlight";
+import { BundledLanguage, SpecialLanguage, codeToTokens } from "shiki";
 import { CopyButton } from "./CopyButton";
+import { isValidElement, useMemo } from "react";
+import { CodeContainer } from "./CodeContainer";
 
 type CodePreProps = React.HTMLAttributes<HTMLPreElement>;
 
-function getText(node: React.ReactNode): string {
-  if (typeof node === "string" || typeof node === "number") {
-    return String(node);
-  }
+export function CodePre({ className, children, ...preProps }: CodePreProps) {
+  // 從 markdown children 解析語言與原始碼
+  const { lang, code } = useMemo(
+    () => parseLangAndCode(children),
+    [children],
+  );
 
-  if (Array.isArray(node)) {
-    return node.map(getText).join("");
-  }
+  // 同一份 code/lang 只建立一次 highlight Promise
+  const tokensPromise = useMemo(
+    () =>
+      codeToTokens(code, {
+        lang: lang as BundledLanguage | SpecialLanguage,
+        theme: "dark-plus",
+      }).then((result) => result.tokens),
+    [code, lang],
+  );
 
-  if (React.isValidElement<{ children?: React.ReactNode }>(node)) {
-    return getText(node.props.children);
-  }
-
-  return "";
-}
-
-export const CodePre = ({
-  className,
-  children,
-  ...rest
-}: CodePreProps) => {
-  const child = React.Children.toArray(children)[0];
-
-  let lang = "plain text";
-  let code = "";
-
-  if (
-    React.isValidElement<{
-      className?: string;
-      children?: React.ReactNode;
-    }>(child)
-  ) {
-    const match = child.props.className?.match(/language-([\w-]+)/);
-
-    lang = match?.[1] ?? "plain text";
-    code = getText(child.props.children);
-  }
+  // 取出 <code> element 上的 HTML 屬性（如 className、style）
+  // 排除 children 避免將巢狀內容重複傳入 CodeContainer
+  const inheritedCodeProps = useMemo(() => {
+    if (!isValidElement<React.HTMLAttributes<HTMLElement>>(children)) {
+      return {} as React.HTMLAttributes<HTMLElement>;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { children: _, ...attrs } = children.props;
+    return attrs;
+  }, [children]);
 
   return (
     <div
       className={cn(
-        'font-mono',
-        "mb-4 rounded-md",
+        "font-mono mb-4 rounded-md",
         "border border-(--border)",
         "bg-(--foreground)/5",
       )}
@@ -61,16 +53,20 @@ export const CodePre = ({
         )}
       >
         <span className="select-none">{lang}</span>
-
         <CopyButton content={code} />
       </div>
 
-      <pre
-        className={cn("overflow-x-auto p-4 leading-6", className)}
-        {...rest}
-      >
-        {children}
-      </pre>
+      <div className="w-full">
+        <pre
+          className={cn("overflow-x-auto p-4 leading-6", className)}
+          {...preProps}
+        >
+          <CodeContainer
+            tokensPromise={tokensPromise}
+            {...inheritedCodeProps}
+          />
+        </pre>
+      </div>
     </div>
   );
-};
+}

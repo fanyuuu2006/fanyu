@@ -1,8 +1,9 @@
-import { CodeBlock, CodeTokenProps, extractTokenContent } from "c063";
+import { CodeBlock, CodeTokenProps } from "c063";
 import React, { useMemo } from "react";
 import { OverrideProps } from "fanyucomponents";
 import { CopyButton } from "./CopyButton";
 import { cn } from "@/utils/className";
+import { extractReactNode } from "@/utils/highlight";
 
 export type CodeCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -18,7 +19,9 @@ export const CodeCard = ({
 }: CodeCardProps) => {
   const content = useMemo(() => {
     return codeLines
-      .map((line) => line.map((token) => extractTokenContent(token)).join(""))
+      .map((line) =>
+        line.map((token) => extractReactNode(token.children)).join(""),
+      )
       .join("\n");
   }, [codeLines]);
   return (
@@ -43,3 +46,4 @@ export const CodeCard = ({
   );
 };
 CodeCard.displayName = "CodeCard";
+
