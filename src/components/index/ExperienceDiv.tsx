@@ -96,7 +96,7 @@ export const ExperienceDiv = ({
                       <p className="text-(--muted) text-sm">{item.subtitle}</p>
                     )}
                     {item.description && (
-                      <MyMarkdown className="text-(--muted)">
+                      <MyMarkdown className="text-(--muted) text-sm md:text-base">
                         {item.description}
                       </MyMarkdown>
                     )}

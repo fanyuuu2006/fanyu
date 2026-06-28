@@ -16,48 +16,76 @@ export const MyMarkdown = ({
   ...rest
 }: MyMarkdownProps) => {
   return (
-    <article className={cn("text-base leading-7", className)} {...rest}>
+    <article
+      className={cn("text-base leading-normal wrap-break-word", className)}
+      {...rest}
+    >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
+          div: ({ children, ...rest }) => (
+            <div {...rest} style={undefined}>
+              {children}
+            </div>
+          ),
+          picture: ({ children, ...rest }) => (
+            <picture className="" {...rest}>
+              {children}
+            </picture>
+          ),
           p: ({ children, ...rest }) => (
-            <p dir="auto" className="mb-4" {...rest}>
+            <p dir="auto" className="mt-0 mb-4" {...rest}>
               {children}
             </p>
           ),
 
-          img: ({ className, width, height, ...props }) => (
-            <MyImage
-              {...props}
-              width={width}
-              height={height}
-              className={cn("inline-block max-w-full", className)}
-            />
-          ),
+          img: ({ className, style, width, height, ...props }) => {
+            return (
+              <MyImage
+                width={width}
+                height={height}
+                style={{
+                  ...style,
+                  width: width ? `${width}px` : undefined,
+                  height: height ? `${height}px` : undefined,
+                }}
+                className={cn(
+                  "inline max-w-full box-content border-none",
+                  className,
+                )}
+                {...props}
+              />
+            );
+          },
 
-          // Headings：層次感 mt 遞減，mb 統一
           h1: ({ children }) => (
-            <h1 className="mt-10 mb-4 border-b border-(--border) pb-2 text-3xl font-semibold">
+            <h1 className="mt-6 mb-4 pb-[0.3em] text-[2em] font-semibold leading-tight border-b border-(--border)">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="mt-8 mb-3 border-b border-(--border) pb-1 text-2xl font-semibold">
+            <h2 className="mt-6 mb-4 pb-[0.3em] text-[1.5em] font-semibold leading-tight border-b border-(--border)">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="mt-6 mb-2 text-xl font-semibold">{children}</h3>
+            <h3 className="mt-6 mb-4 text-[1.25em] font-semibold leading-tight">
+              {children}
+            </h3>
           ),
           h4: ({ children }) => (
-            <h4 className="mt-4 mb-2 text-lg font-semibold">{children}</h4>
+            <h4 className="mt-6 mb-4 text-[1em] font-semibold leading-tight">
+              {children}
+            </h4>
           ),
           h5: ({ children }) => (
-            <h5 className="mt-3 mb-1 text-base font-semibold">{children}</h5>
+            <h5 className="mt-6 mb-4 text-[0.875em] font-semibold leading-tight">
+              {children}
+            </h5>
           ),
           h6: ({ children }) => (
-            <h6 className="mt-3 mb-1 text-sm font-semibold opacity-70">
+            <h6 className="mt-6 mb-4 text-[0.85em] font-semibold leading-tight text-(--muted)">
               {children}
             </h6>
           ),
@@ -68,12 +96,10 @@ export const MyMarkdown = ({
 
           em: ({ children }) => <em className="italic">{children}</em>,
 
-          // Lists：加 mb-4 與段落齊平，巢狀時縮排
           ul: ({ children, className }) => (
             <ul
               className={cn(
-                "mb-4 list-disc space-y-1 pl-6",
-                // 巢狀 ul 不加 mb
+                "mt-0 mb-4 list-disc pl-[2em] [&_ul]:list-[circle] [&_ul_ul]:list-[square]",
                 className,
               )}
             >
@@ -82,13 +108,13 @@ export const MyMarkdown = ({
           ),
 
           ol: ({ children, className }) => (
-            <ol className={cn("mb-4 list-decimal space-y-1 pl-6", className)}>
+            <ol className={cn("mt-0 mb-4 list-decimal pl-[2em]", className)}>
               {children}
             </ol>
           ),
 
           li: ({ children }) => (
-            <li className="marker:text-(--primary) [&>ul]:mb-0 [&>ol]:mb-0 [&>ul]:mt-1 [&>ol]:mt-1">
+            <li className="mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
               {children}
             </li>
           ),
@@ -97,7 +123,7 @@ export const MyMarkdown = ({
             <CustomLink
               href={href}
               className={cn(
-                "font-medium text-(--primary) underline underline-offset-4 hover:opacity-80 transition",
+                "text-(--primary) underline transition-opacity",
                 className,
               )}
               {...rest}
@@ -111,7 +137,10 @@ export const MyMarkdown = ({
             if (isBlock) {
               return (
                 <code
-                  className={cn(className, "text-sm leading-6 font-mono")}
+                  className={cn(
+                    className,
+                    "font-mono text-[85%] leading-[1.45]",
+                  )}
                   {...props}
                 >
                   {children}
@@ -122,7 +151,7 @@ export const MyMarkdown = ({
               <code
                 className={cn(
                   className,
-                  "rounded-md bg-(--foreground)/10 px-1.5 py-0.5 font-mono text-[0.85em]",
+                  "rounded-md bg-(--secondary-background) px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
                 )}
                 {...props}
               >
@@ -134,40 +163,77 @@ export const MyMarkdown = ({
           pre: MarkdownPre,
 
           blockquote: ({ children }) => (
-            <blockquote className="mb-4 border-l-4 border-(--primary) pl-4 opacity-70">
+            <blockquote className="m-0 mb-4 pl-[1em] border-l-[0.25em] border-(--border) text-(--muted) *:first:mt-0 *:last:mb-0">
               {children}
             </blockquote>
           ),
 
-          hr: () => <hr className="my-6 border-4 border-(--border)" />,
+          hr: () => (
+            <hr className="my-6 h-[0.25em] p-0 bg-(--border) border-0 overflow-hidden" />
+          ),
 
           table: ({ children }) => (
             <div className="my-6 overflow-x-auto">
-              <table className="border-collapse border border-(--border) min-w-max">
+              <table className="border-spacing-0 border-collapse block w-max max-w-full overflow-auto [font-variant:tabular-nums]">
                 {children}
               </table>
             </div>
           ),
 
-          thead: ({ children }) => (
-            <thead className="bg-(--secondary-background)">{children}</thead>
-          ),
-
+          thead: ({ children }) => <thead>{children}</thead>,
           tbody: ({ children }) => <tbody>{children}</tbody>,
 
           th: ({ children }) => (
-            <th className="border border-(--border) bg-(--secondary-background) px-4 py-2 text-left font-semibold">
+            <th className="px-3.25 py-1.5 border border-(--border) font-semibold text-left bg-(--primary-background)">
               {children}
             </th>
           ),
 
           td: ({ children }) => (
-            <td className="border border-(--border) px-4 py-2 align-top">
+            <td className="px-3.25 py-1.5 border border-(--border) align-top *:last:mb-0">
               {children}
             </td>
           ),
 
-          tr: ({ children }) => <tr>{children}</tr>,
+          tr: ({ children, ...props }) => (
+            <tr
+              className="bg-(--primary-background) border-t border-(--border) even:bg-(--secondary-background)"
+              {...props}
+            >
+              {children}
+            </tr>
+          ),
+
+          dl: ({ children }) => <dl className="mt-0 mb-4 p-0">{children}</dl>,
+          dt: ({ children }) => (
+            <dt className="mt-4 p-0 text-[1em] italic font-semibold">
+              {children}
+            </dt>
+          ),
+          dd: ({ children }) => <dd className="mb-4 ml-0 px-4">{children}</dd>,
+
+          mark: ({ children }) => (
+            <mark className="bg-(--primary)/20 text-(--foreground) rounded-sm px-[0.2em]">
+              {children}
+            </mark>
+          ),
+
+          kbd: ({ children }) => (
+            <kbd className="inline-block py-[0.15em] px-[0.4em] font-mono text-[0.8em] leading-normal align-middle bg-(--secondary-background) border border-(--border) rounded-(--border-radius-sm) shadow-[inset_0_-1px_0_var(--border)]">
+              {children}
+            </kbd>
+          ),
+
+          sub: ({ children }) => (
+            <sub className="text-[75%] leading-none relative align-baseline bottom-[-0.25em]">
+              {children}
+            </sub>
+          ),
+          sup: ({ children }) => (
+            <sup className="text-[75%] leading-none relative align-baseline top-[-0.5em]">
+              {children}
+            </sup>
+          ),
         }}
       >
         {children}

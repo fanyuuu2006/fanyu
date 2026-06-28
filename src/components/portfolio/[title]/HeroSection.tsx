@@ -46,7 +46,7 @@ export const HeroSection = ({
         {/* Back */}
         <div className="flex">
           <button
-            className="btn secondary flex items-center justify-center p-2 text-lg rounded-full"
+            className="btn flex items-center justify-center p-2 text-lg rounded-full"
             onClick={() => router.back()}
             aria-label="返回"
           >
@@ -57,7 +57,7 @@ export const HeroSection = ({
         {/* Info */}
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-start gap-6 md:gap-8 p-4">
           {/* Image */}
-          <div className="border border-(--border) mx-auto md:mx-0 size-48 sm:size-56 md:size-64 shrink-0 rounded-xl overflow-hidden hover:border-(--primary) transition-all duration-300">
+          <div className="mx-auto md:mx-0 size-48 sm:size-56 md:size-64 shrink-0 rounded-xl overflow-hidden hover:border-(--primary) transition-all duration-300">
             <MyImage
               src={item.imageUrl}
               alt={item.title}

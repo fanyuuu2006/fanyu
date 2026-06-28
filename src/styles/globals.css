@@ -6,10 +6,9 @@
     --foreground: #f8fafc;
     --muted: #94a3b8;
 
-    --background: #020617;
-
-    --primary-background: #0f172a;
-    --secondary-background: #111827;
+    --background: #020617; /* 最深 */
+    --primary-background: #0f172a; /* Card */
+    --secondary-background: #1e293b; /* Hover / Panel */
 
     --primary: #60a5fa;
     --secondary: #818cf8;
@@ -164,7 +163,7 @@
   }
 
   .btn {
-    background: var(--primary-background);
+    background: var(--secondary-background);
     border: 1px solid var(--border);
     color: var(--foreground);
   }
@@ -204,7 +203,7 @@
 
   /* === 卡片系統 === */
   .card {
-    background: var(--secondary-background);
+    background: var(--primary-background);
     border: 1px solid var(--border);
     transition: all var(--transition-normal) var(--transition-timing);
   }
@@ -280,6 +279,7 @@
     scrollbar-color: var(--border) transparent;
   }
 
+  /* 修復 Safari 搜尋框的取消按鈕 */
   input[type="search"]::-webkit-search-cancel-button {
     display: none;
   }
