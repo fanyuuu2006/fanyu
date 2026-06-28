@@ -22,7 +22,11 @@ const ReadMeContent = async ({ item }: ReadMeContentProps) => {
   if (!content) return null;
 
   const newContent = transformMarkdownLinks(content, repo);
-  return <MyMarkdown className="text-(--muted) text-xs sm:text-sm md:text-base">{newContent}</MyMarkdown>;
+  return (
+    <MyMarkdown className="text-sm md:text-base">
+      {newContent}
+    </MyMarkdown>
+  );
 };
 
 const ReadMeSkeleton = () => (

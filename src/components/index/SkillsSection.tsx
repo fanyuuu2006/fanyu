@@ -13,7 +13,7 @@ export const SkillsSection = () => {
               {category.label}
               <div className="h-px w-12 rounded-full bg-linear-to-r from-(--secondary) to-transparent" />
             </h3>
-            <div className="text-2xl grid grid-cols-6 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-16 gap-3 p-4">
+            <div className="text-2xl grid grid-cols-6 sm:grid-cols-10 md:grid-cols-13 lg:grid-cols-16 xl:grid-cols-19 gap-3 p-4">
               {category.list.map((item) => (
                 <SkillBadge key={item.title} item={item} />
               ))}

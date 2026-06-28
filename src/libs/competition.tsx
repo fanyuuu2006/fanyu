@@ -19,7 +19,7 @@ export const competition: ExperienceItem[] = [
   {
     title: "新竹縣國民中學創新思考金頭腦數學競賽",
     imgSrc:
-      "https://lh3.googleusercontent.com/sitesv/AA5AbUAF7EruVn4c5RCf293PmkRsJ5ege8bqsA-7y2QbF22SfTXsbdCn1VGAWiO71XbGyzrJAofJPtjC24srFO7VjanRycfaHNI4AQYieASElA543fjGNZu1El5LVBn0_vh1svvZAFPqhRVIg2cIc_HwANciK-bwivJSfD0Kly4COLFXN3yWs-Z0HSVKfTZzxVlrE_hEk97ts5b0hzo3w9zXzXRrtYD2wirbKEFOMAIopF4=w1280",
+      "https://doe.hcc.edu.tw/download_file.php?f=_OSL256_ayh6FvoXGYNQrxF3xVIVLx4kzTqGLY4fLYt-WI2hBRzWzq82nYshsyaT2yVk6ue0",
     duration: "2021-01-08",
     link: "https://sites.google.com/view/hccgoldenmind/",
     description: `- 代表 **富光國中** 參加新竹縣數學競賽

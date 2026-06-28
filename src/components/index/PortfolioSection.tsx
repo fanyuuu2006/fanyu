@@ -12,7 +12,7 @@ export const PortfolioSection = () => {
           <PortfolioCard
             key={item.title}
             item={item}
-            className="m-2 size-50 shrink-0"
+            className="m-2 size-50 md:size-56 shrink-0"
           />
         ))}
       </Carousel>

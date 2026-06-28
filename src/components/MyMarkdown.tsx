@@ -114,7 +114,7 @@ export const MyMarkdown = ({
           ),
 
           li: ({ children }) => (
-            <li className="mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
+            <li className="marker:text-(--primary) mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
               {children}
             </li>
           ),
@@ -190,7 +190,7 @@ export const MyMarkdown = ({
           ),
 
           td: ({ children }) => (
-            <td className="px-3.25 py-1.5 border border-(--border) align-top *:last:mb-0">
+            <td className="px-3.25 py-1.5 border border-(--border) align-center *:last:mb-0">
               {children}
             </td>
           ),
