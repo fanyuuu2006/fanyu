@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { MyImage } from "./MyImage";
-import { MarkdownPre } from "./MarkdownPre";
+import { CodePre } from "./CodePre";
 import { CustomLink } from "./CustomLink";
 
 type MyMarkdownProps = React.HTMLAttributes<HTMLElement> & {
@@ -160,7 +160,7 @@ export const MyMarkdown = ({
             );
           },
 
-          pre: MarkdownPre,
+          pre: CodePre,
 
           blockquote: ({ children }) => (
             <blockquote className="m-0 mb-4 pl-[1em] border-l-[0.25em] border-(--border) text-(--muted) *:first:mt-0 *:last:mb-0">

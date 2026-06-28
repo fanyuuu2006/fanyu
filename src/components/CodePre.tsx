@@ -4,7 +4,7 @@ import React from "react";
 import { cn } from "@/utils/className";
 import { CopyButton } from "./CopyButton";
 
-type MarkdownPreProps = React.HTMLAttributes<HTMLPreElement>;
+type CodePreProps = React.HTMLAttributes<HTMLPreElement>;
 
 function getText(node: React.ReactNode): string {
   if (typeof node === "string" || typeof node === "number") {
@@ -22,11 +22,11 @@ function getText(node: React.ReactNode): string {
   return "";
 }
 
-export const MarkdownPre = ({
+export const CodePre = ({
   className,
   children,
   ...rest
-}: MarkdownPreProps) => {
+}: CodePreProps) => {
   const child = React.Children.toArray(children)[0];
 
   let lang = "plain text";
