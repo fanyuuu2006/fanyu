@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/utils/className";
 
 export const HeroSection = () => {
   return (
@@ -26,23 +27,34 @@ export const HeroSection = () => {
             />
           </Link>
         </div>
-        <div className="w-full flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-          <span className="max-w-2xl text-base sm:text-xl md:text-2xl text-(--muted) leading-relaxed">
+        <div className="w-full flex flex-col items-center gap-8 sm:flex-row sm:justify-between">
+          <span className="max-w-2xl text-base md:text-xl lg:text-2xl text-(--muted) leading-relaxed">
             熱愛程式設計與實作開發，專注於前端技術，喜歡將想法透過程式一步步實現，並在學習與創作中持續成長。
           </span>
-          <div className="shrink-0 w-full sm:w-auto flex items-center justify-center gap-4 sm:gap-6">
-            <Link
-              href="/#contact"
-              className="btn primary shrink-0 font-bold px-8 py-3 text-xl sm:text-2xl rounded-full text-center"
-            >
-              聯繫我
-            </Link>
-            <Link
-              href="/portfolio"
-              className="btn secondary shrink-0 font-bold px-8 py-3 text-xl sm:text-2xl rounded-full text-center"
-            >
-              作品集
-            </Link>
+          <div className="shrink-0 w-full sm:w-auto flex items-center justify-center gap-4">
+            {[
+              {
+                href: "/#contact",
+                label: "聯繫我",
+                className: "btn primary",
+              },
+              {
+                href: "/portfolio",
+                label: "作品集",
+                className: "btn secondary",
+              },
+            ].map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className={cn(
+                  `shrink-0 font-bold px-6 py-2 text-xl sm:text-2xl rounded-full text-center`,
+                  link.className,
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

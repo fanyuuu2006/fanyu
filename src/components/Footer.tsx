@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import { OutsideLink } from "fanyucomponents";
 import { cn } from "@/utils/className";
@@ -8,8 +7,9 @@ import { routes } from "@/libs/routes";
 import { MyImage } from "./MyImage";
 import { getGithubBadgeSrcs } from "@/utils/github";
 import { AnalyticsInfo, MyResponse } from "@/types";
-import { useEffect, useState } from "react";
 import { fetcher } from "@/utils/url";
+import { Suspense } from "react";
+import { NEXT_PUBLIC_SITE_URL } from "@/libs/env";
 
 const formatNumber = (value?: number) => {
   if (value == null) return "--";
@@ -19,16 +19,6 @@ const formatNumber = (value?: number) => {
 type FooterProps = React.HTMLAttributes<HTMLElement>;
 
 export const Footer = ({ className, ...rest }: FooterProps) => {
-  const [info, setInfo] = useState<AnalyticsInfo | null>(null);
-  useEffect(() => {
-    fetcher<MyResponse<AnalyticsInfo>>("/api/v1/analytics").then((data) => {
-      if (data.error) {
-        console.error(data.error);
-      } else {
-        setInfo(data.data);
-      }
-    });
-  }, []);
   return (
     <footer
       {...rest}
@@ -95,32 +85,17 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
             <div>
               <H3>統計資訊</H3>
               <div className="text-xs md:text-sm flex flex-col gap-2">
-                {[
-                  {
-                    value: info?.total.visitors,
-                    label: "總訪客數",
-                  },
-                  {
-                    value: info?.monthly.visitors,
-                    label: "本月訪客數",
-                  },
-                  {
-                    value: info?.total.pageViews,
-                    label: "總瀏覽量",
-                  },
-                ].map((item) => (
-                  <div key={item.label} className=" flex items-center gap-2">
-                    <span>{item.label}:</span>
-                    <span>{formatNumber(item.value)}</span>
-                  </div>
-                ))}
+                <Suspense fallback={<AnalyticsItemSkeleton />}>
+                  <AnalyticsItems />
+                </Suspense>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div
-          className="
+      <div
+        className="
             mt-10
             flex
             flex-col
@@ -134,11 +109,10 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
             md:flex-row
             md:justify-between
           "
-        >
-          <span>© {new Date().getFullYear()} FanYu. All rights reserved.</span>
+      >
+        <span>© {new Date().getFullYear()} FanYu. All rights reserved.</span>
 
-          <span>Made with Next.js By FanYu</span>
-        </div>
+        <span>Made with Next.js By FanYu</span>
       </div>
     </footer>
   );
@@ -161,3 +135,40 @@ const H3 = ({
     </h3>
   );
 };
+
+const AnalyticsItems = async () => {
+  const res = await fetcher<MyResponse<AnalyticsInfo>>(
+    `${NEXT_PUBLIC_SITE_URL}/api/v1/analytics`,
+  );
+  if (res.error) {
+    console.error(res.error);
+    return null;
+  }
+  const info = res.data;
+  return [
+    {
+      value: info?.monthly.visitors,
+      label: "本月訪客數",
+    },
+    {
+      value: info?.total.visitors,
+      label: "總訪客數",
+    },
+    {
+      value: info?.total.pageViews,
+      label: "總瀏覽量",
+    },
+  ].map((item) => (
+    <div key={item.label} className=" flex items-center gap-2">
+      <span>{item.label}:</span>
+      <span>{formatNumber(item.value)}</span>
+    </div>
+  ));
+};
+
+const AnalyticsItemSkeleton = () => (
+  <>
+    <span className="skeleton h-3 w-20 rounded" />
+    <span className="skeleton h-3 w-12 rounded" />
+  </>
+);
