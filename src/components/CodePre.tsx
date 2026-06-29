@@ -11,11 +11,8 @@ type CodePreProps = React.HTMLAttributes<HTMLPreElement>;
 
 export function CodePre({ className, children, ...preProps }: CodePreProps) {
   // 從 markdown children 解析語言與原始碼
-  const { lang, code } = useMemo(
-    () => parseLangAndCode(children),
-    [children],
-  );
-
+  const { lang, code } = useMemo(() => parseLangAndCode(children), [children]);
+  console.log("CodePre: lang =", lang, ", code =", code);
   // 同一份 code/lang 只建立一次 highlight Promise
   const tokensPromise = useMemo(
     () =>

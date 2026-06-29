@@ -26,7 +26,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     title: "啦八機",
     imageUrl:
-      "https://raw.githubusercontent.com/fanyuuu2006/LaBaG-Web/refs/heads/main/frontend/src/assets/SuperCircle.png",
+      "https://raw.githubusercontent.com/fanyuuu2006/labag-web-v2/refs/heads/main/public/icons/icon-512x512.png",
     date: "2023-06-22",
     overview: "一款網頁拉霸機遊戲。",
     links: [
