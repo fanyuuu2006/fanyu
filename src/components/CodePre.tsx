@@ -49,7 +49,7 @@ export function CodePre({ className, children, ...preProps }: CodePreProps) {
           "px-4 py-2",
         )}
       >
-        <span className="select-none">{lang}</span>
+        <span className="select-none text-(--muted)">{lang}</span>
         <CopyButton content={code} />
       </div>
 

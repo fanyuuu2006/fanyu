@@ -1,9 +1,8 @@
-import { ReadMeSection } from "@/components/portfolio/[title]/ReadMeSection";
 import { HeadingSection } from "@/components/HeadingSection";
 import { portfolioItems } from "@/libs/portfolio";
 import { deslugify } from "@/utils/url";
-import { GiscusSection } from "@/components/portfolio/[title]/GiscusSection";
 import { HeroSection } from "@/components/portfolio/[title]/HeroSection";
+import { PortfolioContentSection } from "@/components/portfolio/[title]/PortfolioContentSection";
 
 export default async function Portfolio(
   props: PageProps<"/portfolio/[title]">,
@@ -26,8 +25,7 @@ export default async function Portfolio(
   return (
     <>
       <HeroSection item={portfolioItem} />
-      <ReadMeSection item={portfolioItem} />
-      <GiscusSection item={portfolioItem} />
+      <PortfolioContentSection item={portfolioItem} />
     </>
   );
 }

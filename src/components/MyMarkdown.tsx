@@ -17,7 +17,10 @@ export const MyMarkdown = ({
 }: MyMarkdownProps) => {
   return (
     <article
-      className={cn("text-base leading-normal wrap-break-word", className)}
+      className={cn(
+        "text-base leading-normal wrap-break-word [&>*:first-child]:mt-0",
+        className,
+      )}
       {...rest}
     >
       <ReactMarkdown
