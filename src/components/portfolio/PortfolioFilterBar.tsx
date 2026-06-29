@@ -58,6 +58,19 @@ export const PortfolioFilterBar = () => {
                 placeholder="搜尋專案..."
                 className="w-full outline-none bg-transparent"
               />
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchString("");
+                    setQuery("");
+                  }}
+                  aria-label="清除搜尋"
+                  title="清除搜尋"
+                >
+                  <CloseOutlined aria-hidden className="shrink-0" />
+                </button>
+              )}
               <button
                 type="button"
                 onClick={handleSearch}
