@@ -151,7 +151,7 @@ export const MyMarkdown = ({
               <code
                 className={cn(
                   className,
-                  "rounded-md bg-(--secondary-background) px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
+                  "rounded-md bg-(--foreground)/10 px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
                 )}
                 {...props}
               >
