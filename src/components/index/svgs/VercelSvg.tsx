@@ -1,9 +1,8 @@
-const VercelSvg = (props: React.SVGProps<SVGSVGElement>) => (
+const Vercel = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={800}
     height={800}
-    preserveAspectRatio="xMidYMid"
     viewBox="0 -198 512 512"
     {...props}
   >
@@ -13,4 +12,4 @@ const VercelSvg = (props: React.SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export default VercelSvg;
+export default Vercel;

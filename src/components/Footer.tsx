@@ -10,6 +10,8 @@ import { AnalyticsInfo, MyResponse } from "@/types";
 import { fetcher } from "@/utils/url";
 import { Suspense } from "react";
 import { NEXT_PUBLIC_SITE_URL } from "@/libs/env";
+import NextJsSvg from "./index/svgs/NextJsSvg";
+import VercelSvg from "./index/svgs/VercelSvg";
 
 const formatNumber = (value?: number) => {
   if (value == null) return "--";
@@ -111,7 +113,33 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
         >
           <span>© {year} 范余振富，版權所有。</span>
 
-          <span>Made with Next.js By FanYu</span>
+          <div className="flex flex-wrap gap-4">
+            {[
+              {
+                icon: NextJsSvg,
+                label: "Next.js",
+                url: "https://nextjs.org/",
+                desc: "技術支持",
+              },
+              {
+                icon: VercelSvg,
+                label: "Vercel",
+                url: "https://vercel.com/",
+                desc: "部署平台",
+              },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center gap-2">
+                <span>{item.desc}：</span>
+                <OutsideLink
+                  href={item.url}
+                  data-tooltip={item.label}
+                  className="tooltip"
+                >
+                  <item.icon className="h-8 w-auto" />
+                </OutsideLink>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
