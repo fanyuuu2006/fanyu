@@ -5,8 +5,8 @@ import { MyImage } from "../MyImage";
 import { ClockCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import { DemoOutlined } from "../DemoOutlined";
 import "@/styles/portfolio-card.css";
-import { slugify } from "@/utils/url";
 import { CustomLink } from "../CustomLink";
+import { slugify } from "@/utils/url";
 
 type PortfolioCardProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;

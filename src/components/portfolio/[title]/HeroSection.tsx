@@ -7,6 +7,7 @@ import { cn } from "@/utils/className";
 import { ArrowLeftOutlined, GithubOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
+import { GitHubBadgeDiv } from "./GitHubBadgeDiv";
 
 type HeroSectionProps = React.HTMLAttributes<HTMLElement> & {
   item: PortfolioItem;
@@ -113,6 +114,7 @@ export const HeroSection = ({
             )}
           </div>
         </div>
+        <GitHubBadgeDiv className="text-base flex items-center justify-center flex-wrap gap-2 md:text-lg lg:text-xl" item={item} />
       </div>
     </section>
   );

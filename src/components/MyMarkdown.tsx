@@ -135,15 +135,12 @@ export const MyMarkdown = ({
             </CustomLink>
           ),
 
-          code: ({ node, className, children, ...props }) => {
-            const isBlock = node?.position?.start.column === 1;
+          code: ({ className, children, ...props }) => {
+            const isBlock = className?.startsWith("language-");
             if (isBlock) {
               return (
                 <code
-                  className={cn(
-                    className,
-                    "font-mono text-[85%] leading-[1.45]",
-                  )}
+                  className={className}
                   {...props}
                 >
                   {children}

@@ -4,7 +4,7 @@ type DivTitleProps = React.HTMLAttributes<HTMLDivElement>;
 export const DivTitle = ({ className, children, ...rest }: DivTitleProps) => {
   return (
     <div className={cn("flex p-2", className)} {...rest}>
-      <h3 className="text-xs font-semibold tracking-[0.2em] sm:text-sm">
+      <h3 className="text-base font-semibold tracking-[0.2em] sm:text-lg md:text-xl uppercase leading-none">
         {children}
       </h3>
     </div>
