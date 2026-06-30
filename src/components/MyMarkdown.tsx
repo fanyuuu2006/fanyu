@@ -177,7 +177,7 @@ export const MyMarkdown = ({
           ),
 
           li: ({ children }) => (
-            <li className="marker:text-(--primary) mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
+            <li className="mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
               {children}
             </li>
           ),
@@ -208,7 +208,7 @@ export const MyMarkdown = ({
               <code
                 className={cn(
                   className,
-                  "rounded-md bg-(--foreground)/10 px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
+                  "rounded-md bg-(--foreground)/15 px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
                 )}
                 {...props}
               >

@@ -4,6 +4,7 @@ import { OverrideProps } from "fanyucomponents";
 import { CopyButton } from "./CopyButton";
 import { cn } from "@/utils/className";
 import { extractReactNode } from "@/utils/highlight";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export type CodeCardProps = OverrideProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -17,6 +18,7 @@ export const CodeCard = ({
   className,
   ...rest
 }: CodeCardProps) => {
+  const { theme } = useTheme();
   const content = useMemo(() => {
     return codeLines
       .map((line) =>
@@ -38,7 +40,9 @@ export const CodeCard = ({
         />
       </div>
       <CodeBlock
-        theme={"default-dark-modern"}
+        theme={
+          theme === "light" ? "default-light-modern" : "default-dark-modern"
+        }
         tokenLines={codeLines}
         className="font-mono"
       />
@@ -46,4 +50,3 @@ export const CodeCard = ({
   );
 };
 CodeCard.displayName = "CodeCard";
-

@@ -3,6 +3,7 @@ import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
 import Giscus from "@giscus/react";
 import { DivTitle } from "./DivTitle";
+import { useTheme } from "@/contexts/ThemeContext";
 
 type GiscusDivProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
@@ -10,6 +11,7 @@ type GiscusDivProps = React.HTMLAttributes<HTMLDivElement> & {
 
 export const GiscusDiv = ({ item, className, ...rest }: GiscusDivProps) => {
   const { github } = item;
+  const { theme } = useTheme();
   if (!github?.giscus) return null;
 
   return (
@@ -26,7 +28,7 @@ export const GiscusDiv = ({ item, className, ...rest }: GiscusDivProps) => {
           strict="0"
           emitMetadata="0"
           inputPosition="top"
-          theme="dark"
+          theme={theme}
           lang="zh-TW"
           loading="lazy"
         />

@@ -77,7 +77,7 @@ export const HeroSection = ({
 
           {/* Text */}
           <div className="flex flex-col gap-3 min-w-0">
-            <h2 className="drop-shadow-[0_0_1rem_var(--primary)] text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+            <h2 className=" text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
               {item.title}
             </h2>
             <p className="text-(--muted) text-sm sm:text-base lg:text-lg leading-7">

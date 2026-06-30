@@ -26,14 +26,14 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
   return (
     <header
       className={cn(
-        "fixed top-0 w-full z-99999 flex flex-col bg-transparent backdrop-blur-md transition-all",
+        "fixed top-0 w-full z-99999 flex flex-col bg-transparent backdrop-blur-xl transition-all",
         className,
       )}
       {...rest}
     >
       <div className="container flex items-center justify-between">
         <Link href="/" onClick={closeMenu} aria-label="FanYu 首頁">
-          <LogoSvg className="h-16 object-contain hover:drop-shadow-[0_0_1rem_var(--primary)] transition-all duration-300" />
+          <LogoSvg className="h-16 object-contain transition-all duration-300" />
           <span className="sr-only">{site.title}</span>
         </Link>
 
