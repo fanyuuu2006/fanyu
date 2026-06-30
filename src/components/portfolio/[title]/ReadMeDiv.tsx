@@ -56,7 +56,7 @@ export const ReadMeDiv = ({ item, className, ...rest }: ReadMeDivProps) => {
           <span>README</span>
         </OutsideLink>
       </DivTitle>
-      <div className="card flex flex-col p-5 rounded-xl sm:p-6 lg:p-8">
+      <div className="card flex flex-col p-6 rounded-xl lg:p-8">
         <Suspense fallback={<ReadMeSkeleton />}>
           <ReadMeContent item={item} />
         </Suspense>

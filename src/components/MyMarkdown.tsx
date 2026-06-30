@@ -5,6 +5,92 @@ import remarkGfm from "remark-gfm";
 import { MyImage } from "./MyImage";
 import { CodePre } from "./CodePre";
 import { CustomLink } from "./CustomLink";
+import Link from "next/link";
+import { extractReactNode } from "@/utils/highlight";
+import { slugify } from "@/utils/url";
+import { memo, useMemo } from "react";
+
+type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
+const headingStyles: Record<HeadingTag, string> = {
+  h1: "text-[2em] pb-[0.3em] border-b border-(--border)",
+  h2: "text-[1.5em] pb-[0.3em] border-b border-(--border)",
+  h3: "text-[1.25em]",
+  h4: "text-[1em]",
+  h5: "text-[0.875em]",
+  h6: "text-[0.85em] text-(--muted)",
+};
+
+const headingAnchorOffset: Record<HeadingTag, string> = {
+  h1: "translateY(calc(-50% - 0.3em))",
+  h2: "translateY(calc(-50% - 0.3em))",
+  h3: "translateY(-50%)",
+  h4: "translateY(-50%)",
+  h5: "translateY(-50%)",
+  h6: "translateY(-50%)",
+};
+
+const HeadingAnchorIcon = () => (
+  <svg
+    viewBox="0 0 16 16"
+    version="1.1"
+    width="1em"
+    height="1em"
+    aria-hidden="true"
+    fill="currentColor"
+  >
+    <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z" />
+  </svg>
+);
+
+const createHeading = (tag: HeadingTag) => {
+  const Tag = tag;
+  const Heading = memo(
+    ({
+      children,
+      className,
+      ...rest
+    }: React.HTMLAttributes<HTMLHeadingElement>) => {
+      const id = useMemo(
+        () => `README-${slugify(extractReactNode(children))}`,
+        [children],
+      );
+
+      return (
+        <div className="relative group">
+          <Link
+            href={`#${id}`}
+            className={cn(
+              "absolute left-[-1.5em]",
+              "top-1/2",
+              "flex h-[1.5em] w-[1.5em] items-center justify-center",
+              "rounded-md opacity-0 transition-opacity",
+              "group-hover:opacity-100",
+            )}
+            style={{ transform: headingAnchorOffset[tag] }}
+          >
+            <HeadingAnchorIcon />
+          </Link>
+          <Tag
+            id={id}
+            tabIndex={-1}
+            className={cn(
+              "mt-6 mb-4 font-semibold leading-tight",
+              headingStyles[tag],
+              className,
+            )}
+            {...rest}
+          >
+            {children}
+          </Tag>
+        </div>
+      );
+    },
+  );
+
+  Heading.displayName = `Heading${tag.toUpperCase()}`;
+  return Heading;
+};
 
 type MyMarkdownProps = React.HTMLAttributes<HTMLElement> & {
   children: string;
@@ -27,6 +113,13 @@ export const MyMarkdown = ({
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
+          h1: createHeading("h1"),
+          h2: createHeading("h2"),
+          h3: createHeading("h3"),
+          h4: createHeading("h4"),
+          h5: createHeading("h5"),
+          h6: createHeading("h6"),
+
           div: ({ children, ...rest }) => (
             <div {...rest} style={undefined}>
               {children}
@@ -61,38 +154,6 @@ export const MyMarkdown = ({
               />
             );
           },
-
-          h1: ({ children }) => (
-            <h1 className="mt-6 mb-4 pb-[0.3em] text-[2em] font-semibold leading-tight border-b border-(--border)">
-              {children}
-            </h1>
-          ),
-          h2: ({ children }) => (
-            <h2 className="mt-6 mb-4 pb-[0.3em] text-[1.5em] font-semibold leading-tight border-b border-(--border)">
-              {children}
-            </h2>
-          ),
-          h3: ({ children }) => (
-            <h3 className="mt-6 mb-4 text-[1.25em] font-semibold leading-tight">
-              {children}
-            </h3>
-          ),
-          h4: ({ children }) => (
-            <h4 className="mt-6 mb-4 text-[1em] font-semibold leading-tight">
-              {children}
-            </h4>
-          ),
-          h5: ({ children }) => (
-            <h5 className="mt-6 mb-4 text-[0.875em] font-semibold leading-tight">
-              {children}
-            </h5>
-          ),
-          h6: ({ children }) => (
-            <h6 className="mt-6 mb-4 text-[0.85em] font-semibold leading-tight text-(--muted)">
-              {children}
-            </h6>
-          ),
-
           strong: ({ children }) => (
             <strong className="font-semibold">{children}</strong>
           ),
@@ -139,10 +200,7 @@ export const MyMarkdown = ({
             const isBlock = className?.startsWith("language-");
             if (isBlock) {
               return (
-                <code
-                  className={className}
-                  {...props}
-                >
+                <code className={className} {...props}>
                   {children}
                 </code>
               );
