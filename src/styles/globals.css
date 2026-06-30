@@ -6,7 +6,7 @@
     --foreground: #f8fafc;
     --muted: #94a3b8;
 
-    --background: #020617; /* 最深 */
+    --background: #020617;
     --primary-background: #0f172a; /* Card */
     --secondary-background: #1e293b; /* Hover / Panel */
 
@@ -15,9 +15,6 @@
     --tertiary: #a78bfa;
 
     --border: rgba(148, 163, 184, 0.15);
-
-    --space-bg-top: #020617;
-    --space-bg-bottom: #0f172a;
 
     /* === 效果參數 === */
     --shadow-base: 0 0 1rem rgba(0, 0, 0, 0.5);
@@ -41,6 +38,33 @@
     --container-max-width: 1280px;
     --scroll-margin: 8rem;
     --move-y: 0.25rem;
+
+    --grid-line: rgba(255, 255, 255, 0.06); /* 網格線顏色 */
+    --overlay-glass: rgba(255, 255, 255, 0.1); /* 玻璃效果背景 */
+    --overlay-glass-dark: rgba(0, 0, 0, 0.2); /* 深色玻璃效果背景 */
+    --scrollbar-track: transparent; /* 滾動條軌道顏色 */
+    --selection-fg: var(--background); /* 選取文字前景色 */
+  }
+
+  :root[data-theme="light"] {
+    --foreground: #0f172a;
+    --muted: #64748b;
+
+    --background: #f8fafc;
+    --primary-background: #ffffff; /* Card */
+    --secondary-background: #f1f5f9; /* Hover / Panel */
+
+    --border: rgba(15, 23, 42, 0.1);
+
+    --shadow-base: 0 0 1rem rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.12);
+    --shadow-card-hover: 0 var(--move-y) 1.5rem rgba(0, 0, 0, 0.15);
+
+    --grid-line: rgba(15, 23, 42, 0.06); /* 網格線顏色 */
+    --overlay-glass: rgba(255, 255, 255, 0.6); /* 玻璃效果背景 */
+    --overlay-glass-dark: rgba(15, 23, 42, 0.04); /* 深色玻璃效果背景 */
+    --scrollbar-track: transparent; /* 滾動條軌道顏色 */
+    --selection-fg: var(--background); /* 選取文字前景色 */
   }
 
   /* === 全域重置 === */
@@ -58,7 +82,7 @@
 
   ::selection {
     background: color-mix(in oklab, var(--primary) 60%, transparent);
-    color: var(--background);
+    color: var(--selection-fg);
   }
 
   html {
@@ -82,6 +106,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transition:
+      background var(--transition-normal) var(--transition-timing),
+      color var(--transition-normal) var(--transition-timing);
   }
 
   /* === 科技感網格背景 === */
@@ -108,16 +135,8 @@
         transparent 30%
       ),
       /* 網格 */
-        linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0.06) 1px,
-          transparent 1px
-        ),
-      linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.06) 1px,
-        transparent 1px
-      );
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
 
     background-size:
       100% 100%,
@@ -170,7 +189,7 @@
 
   .btn.primary {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: var(--primary-background);
+    color: var(--foreground);
     border: none;
     font-weight: 700;
   }
@@ -209,14 +228,14 @@
   }
 
   .card.primary {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--overlay-glass);
+    border: 1px solid var(--border);
     backdrop-filter: blur(0.25rem);
     transition: all var(--transition-normal) var(--transition-timing);
   }
   .card.secondary {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--overlay-glass-dark);
+    border: 1px solid var(--border);
     border-radius: var(--border-radius-md);
     backdrop-filter: blur(0.25rem);
     transition: all var(--transition-normal) var(--transition-timing);
@@ -316,8 +335,8 @@
     color: var(--foreground);
     width: max-content;
     max-width: 200px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--overlay-glass-dark);
+    border: 1px solid var(--border);
     backdrop-filter: blur(5px);
     padding: 0.5rem 0.75rem;
     border-radius: var(--border-radius-md);

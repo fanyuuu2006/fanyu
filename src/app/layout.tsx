@@ -1,5 +1,7 @@
+import { BackToTopButton } from "@/components/BackToTopButton";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header/Header";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { education } from "@/libs/education";
 import { portfolioItems } from "@/libs/portfolio";
 import { site } from "@/libs/site";
@@ -158,10 +160,14 @@ export default function RootLayout({
           `}
         </Script>
       </head>
+
       <body className={notoSansSC.className}>
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <BackToTopButton className="fixed bottom-4 right-4 z-999" />
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>

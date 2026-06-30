@@ -9,6 +9,7 @@ import { cn } from "@/utils/className";
 import { routes } from "@/libs/routes";
 import { LogoSvg } from "../LogoSvg";
 import { site } from "@/libs/site";
+import { ThemeToggle } from "./ThemeToggle";
 
 type HeaderProps = React.HTMLAttributes<HTMLElement>;
 export const Header = ({ className, ...rest }: HeaderProps) => {
@@ -46,11 +47,18 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
           />
         </div>
 
-        <nav className="hidden lg:flex text-2xl items-center gap-2 md:gap-4">
-          {routes.map((route) => (
-            <DesktopLink key={route.url} route={route} />
-          ))}
-        </nav>
+        <div className="hidden lg:flex lg:items-center lg:gap-4">
+          <nav
+            className="flex text-2xl items-center gap-2 md:gap-4"
+            id="desktop-nav"
+          >
+            {routes.map((route) => (
+              <DesktopLink key={route.url} route={route} />
+            ))}
+          </nav>
+          <div className="h-6 w-px bg-(--foreground)/25" />
+          <ThemeToggle className="btn text-2xl flex items-center justify-center p-2 rounded-full" />
+        </div>
       </div>
       <Collapse
         as="nav"
@@ -62,6 +70,9 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
           {routes.map((route) => (
             <MobileLink key={route.url} onClick={closeMenu} route={route} />
           ))}
+        </div>
+        <div className="flex items-center justify-center py-4">
+          <ThemeToggle className="btn text-2xl flex items-center justify-center p-2 rounded-full" />
         </div>
       </Collapse>
     </header>

@@ -6,13 +6,13 @@ import { BundledLanguage, SpecialLanguage, codeToTokens } from "shiki";
 import { CopyButton } from "./CopyButton";
 import { isValidElement, useMemo } from "react";
 import { CodeContainer } from "./CodeContainer";
+import { CodeOutlined } from "@ant-design/icons";
 
 type CodePreProps = React.HTMLAttributes<HTMLPreElement>;
 
 export function CodePre({ className, children, ...preProps }: CodePreProps) {
   // 從 markdown children 解析語言與原始碼
   const { lang, code } = useMemo(() => parseLangAndCode(children), [children]);
-  console.log("CodePre: lang =", lang, ", code =", code);
   // 同一份 code/lang 只建立一次 highlight Promise
   const tokensPromise = useMemo(
     () =>
@@ -49,8 +49,13 @@ export function CodePre({ className, children, ...preProps }: CodePreProps) {
           "px-4 py-2",
         )}
       >
-        <span className="select-none text-(--muted)">{lang}</span>
-        <CopyButton content={code} />
+        <div className="flex items-center gap-2 select-none text-(--muted)">
+          <CodeOutlined />
+          <span>{lang}</span>
+        </div>
+        <div>
+          <CopyButton content={code} />
+        </div>
       </div>
 
       <div className="w-full">

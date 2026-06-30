@@ -19,6 +19,7 @@ const formatNumber = (value?: number) => {
 type FooterProps = React.HTMLAttributes<HTMLElement>;
 
 export const Footer = ({ className, ...rest }: FooterProps) => {
+  const year = new Date().getFullYear();
   return (
     <footer
       {...rest}
@@ -92,10 +93,8 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div
-        className="
+        <div
+          className="
             mt-10
             flex
             flex-col
@@ -109,10 +108,11 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
             md:flex-row
             md:justify-between
           "
-      >
-        <span>© {new Date().getFullYear()} FanYu. All rights reserved.</span>
+        >
+          <span>© {year} FanYu. All rights reserved.</span>
 
-        <span>Made with Next.js By FanYu</span>
+          <span>Made with Next.js By FanYu</span>
+        </div>
       </div>
     </footer>
   );

@@ -5,7 +5,6 @@ import remarkGfm from "remark-gfm";
 import { MyImage } from "./MyImage";
 import { CodePre } from "./CodePre";
 import { CustomLink } from "./CustomLink";
-import Link from "next/link";
 import { extractReactNode } from "@/utils/highlight";
 import { slugify } from "@/utils/url";
 import { memo, useMemo } from "react";
@@ -58,7 +57,7 @@ const createHeading = (tag: HeadingTag) => {
 
       return (
         <div className="relative group">
-          <Link
+          <a
             href={`#${id}`}
             className={cn(
               "absolute left-[-1.5em]",
@@ -70,7 +69,7 @@ const createHeading = (tag: HeadingTag) => {
             style={{ transform: headingAnchorOffset[tag] }}
           >
             <HeadingAnchorIcon />
-          </Link>
+          </a>
           <Tag
             id={id}
             tabIndex={-1}

@@ -65,7 +65,7 @@ export const ExperienceDiv = ({
               className="py-7 first:pt-0 last:pb-0"
             >
               <div className="flex items-start gap-4">
-                <div className="shrink-0 size-10 md:size-12 lg:size-14 rounded-lg overflow-hidden bg-(--foreground)">
+                <div className="shrink-0 size-10 md:size-12 lg:size-14 rounded-lg overflow-hidden bg-white">
                   <MyImage
                     src={item.imgSrc}
                     alt={item.title}

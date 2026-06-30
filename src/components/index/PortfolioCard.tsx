@@ -29,7 +29,7 @@ export const PortfolioCard = ({
         alt={item.title}
       />
       <div className="portfolio-card__content">
-        <div className="relative flex flex-col justify-between w-full h-full p-4">
+        <div className="text-white relative flex flex-col justify-between w-full h-full p-4">
           {/* 主要內容區域 */}
           <div className="flex flex-col gap-0.5">
             <h3
@@ -42,7 +42,7 @@ export const PortfolioCard = ({
               <ClockCircleOutlined />
               <time dateTime={item.date}>{item.date}</time>
             </div>
-            <div className="mt-0.5 text-xs sm:text-sm text-gray-200 line-clamp-2 sm:line-clamp-3">
+            <div className="mt-0.5 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3">
               {item.overview}
             </div>
           </div>

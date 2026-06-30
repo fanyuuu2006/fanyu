@@ -66,7 +66,7 @@ export const HeroSection = ({
         {/* Info */}
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-center md:items-start gap-6 md:gap-8 px-2 py-4">
           {/* Image */}
-          <div className="card shrink-0 rounded-xl overflow-hidden mx-auto size-44 transition-all duration-300 md:mx-0 sm:size-52 md:size-60 lg:size-64">
+          <div className="card shrink-0 rounded-xl overflow-hidden mx-auto size-40 transition-all duration-300 md:mx-0 sm:size-48 md:size-56 lg:size-60">
             <MyImage
               src={item.imageUrl}
               alt={item.title}
