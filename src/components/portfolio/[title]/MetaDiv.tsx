@@ -34,7 +34,7 @@ export const MetaDiv = ({ className, item, ...rest }: MetaDivProps) => {
   }, [item]);
 
   return (
-    <div className={cn("flex flex-col gap-3", className)} {...rest}>
+    <div className={cn("flex-col gap-3", className)} {...rest}>
       <DivTitle>作品資訊</DivTitle>
       <div className="flex flex-col p-2 gap-2 text-sm sm:text-base text-(--muted)">
         <div className="flex items-center gap-1.5">
