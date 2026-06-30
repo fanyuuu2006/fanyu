@@ -19,6 +19,7 @@ export type Route = BaseRoute & {
 export type SkillItem = {
   title: string;
   url?: string;
+  svg: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
 export type PortfolioTagCategory = keyof typeof tagCategories;
