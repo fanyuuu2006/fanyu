@@ -51,8 +51,8 @@
     --muted: #64748b;
 
     --background: #f8fafc;
-    --primary-background: #ffffff; /* Card */
-    --secondary-background: #f1f5f9; /* Hover / Panel */
+    --primary-background: #ffffff;
+    --secondary-background: #eef2f7;
 
     --border: rgba(15, 23, 42, 0.1);
 
@@ -95,19 +95,12 @@
     min-height: 100%;
     background: var(--background);
     color: var(--foreground);
-    font-family:
-      system-ui,
-      -apple-system,
-      "Segoe UI",
-      Roboto,
-      "Helvetica Neue",
-      Arial,
-      sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+      Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    transition:
-      background var(--transition-normal) var(--transition-timing),
+    transition: background var(--transition-normal) var(--transition-timing),
       color var(--transition-normal) var(--transition-timing);
   }
 
@@ -123,8 +116,7 @@
     pointer-events: none; /* 防止背景影響點擊事件 */
 
     background-image:
-    /* 紫色光暈 */
-      radial-gradient(
+    /* 紫色光暈 */ radial-gradient(
         circle at 72% 18%,
         color-mix(in oklab, var(--secondary) 20%, transparent),
         transparent 35%
@@ -138,11 +130,7 @@
         linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
 
-    background-size:
-      100% 100%,
-      100% 100%,
-      72px 72px,
-      72px 72px;
+    background-size: 100% 100%, 100% 100%, 72px 72px, 72px 72px;
 
     opacity: 1;
   }

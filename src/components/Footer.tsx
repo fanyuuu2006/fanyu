@@ -109,7 +109,7 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
             md:justify-between
           "
         >
-          <span>© {year} FanYu. All rights reserved.</span>
+          <span>© {year} 范余振富，版權所有。</span>
 
           <span>Made with Next.js By FanYu</span>
         </div>

@@ -11,14 +11,17 @@ import React, {
 export type Theme = "light" | "dark";
 
 const STORAGE_KEY = "theme";
+const FALLBACK_THEME: Theme = "dark";
 
-function getPreferredTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
+export function getPreferredTheme(): Theme {
+  if (typeof window === "undefined") return FALLBACK_THEME;
 
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 }
+
+const DEFAULT_THEME_STATE: (() => Theme) | Theme = "dark";
 
 type ThemeContextType = {
   theme: Theme;
@@ -29,13 +32,13 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(getPreferredTheme);
+  const [theme, setTheme] = useState<Theme>(DEFAULT_THEME_STATE);
 
   // 初始化 theme
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
 
-    const initial = stored ?? getPreferredTheme();
+    const initial = stored ?? DEFAULT_THEME_STATE;
 
     Promise.resolve().then(() => setTheme(initial));
   }, []);
