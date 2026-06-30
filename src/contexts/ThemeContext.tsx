@@ -13,7 +13,7 @@ export type Theme = "light" | "dark";
 const STORAGE_KEY = "theme";
 
 function getPreferredTheme(): Theme {
-  if (typeof window === "undefined") return "light";
+  if (typeof window === "undefined") return "dark";
 
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
@@ -29,7 +29,7 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(getPreferredTheme);
 
   // 初始化 theme
   useEffect(() => {
