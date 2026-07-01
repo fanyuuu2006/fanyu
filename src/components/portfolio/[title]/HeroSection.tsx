@@ -50,7 +50,7 @@ export const HeroSection = ({
   );
 
   return (
-    <section className={cn("mt-32", className)} {...props}>
+    <section id="hero" className={cn("mt-32", className)} {...props}>
       <div className="container flex flex-col gap-5">
         {/* Back */}
         <div className="flex">
@@ -88,7 +88,7 @@ export const HeroSection = ({
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="card primary text-xs sm:text-sm font-mono rounded-full px-2 py-1"
+                    className="card rounded-full px-2.5 py-1 text-xs font-mono transition-all duration-200"
                   >
                     {tag}
                   </span>
@@ -114,7 +114,10 @@ export const HeroSection = ({
             )}
           </div>
         </div>
-        <GitHubBadgeDiv className="text-base flex items-center justify-center flex-wrap gap-2 md:text-lg lg:text-xl" item={item} />
+        <GitHubBadgeDiv
+          className="text-base flex items-center justify-center flex-wrap gap-2 md:text-lg lg:text-xl"
+          item={item}
+        />
       </div>
     </section>
   );

@@ -32,32 +32,39 @@ export const PortfolioList = () => {
 
   return (
     <section>
-      <div className="container">
+      <div className="container flex flex-col gap-4">
         <AnimatePresence mode="wait">
           {filteredItems.length > 0 ? (
-            <motion.div
-              key={listKey}
-              initial="hiddenLeft"
-              animate="show"
-              exit="hiddenLeft"
-              variants={staggerContainer}
-            >
-              {/* 數量 */}
-              <p className="mt-4 mb-2 text-sm text-(--muted) text-center">
-                共 {filteredItems.length} 個專案
-              </p>
-
-              {/* 列表 */}
-              <div className="w-full divide-y divide-(--foreground)/25">
-                {filteredItems.map((item) => (
-                  <PortfolioCard
-                    key={item.title}
-                    item={item}
-                    activeTags={tags}
-                  />
-                ))}
+            <>
+              <div className="flex flex-wrap gap-2 text-sm items-center justify-between">
+                <p className="text-(--foreground)">
+                  目前顯示 {filteredItems.length} 個專案
+                </p>
+                <p className="text-(--muted)">
+                  {tags.size > 0
+                    ? `已套用 ${tags.size} 個標籤條件`
+                    : "尚未套用標籤條件"}
+                </p>
               </div>
 
+              <motion.div
+                key={listKey}
+                initial="hiddenLeft"
+                animate="show"
+                exit="hiddenLeft"
+                variants={staggerContainer}
+              >
+                {/* 列表 */}
+                <div className="w-full divide-y divide-(--foreground)/25">
+                  {filteredItems.map((item) => (
+                    <PortfolioCard
+                      key={item.title}
+                      item={item}
+                      activeTags={tags}
+                    />
+                  ))}
+                </div>
+              </motion.div>
               {/* 回到頂部 */}
               <div className="flex justify-center py-8">
                 <button
@@ -71,16 +78,23 @@ export const PortfolioList = () => {
                   <span>回到頂部</span>
                 </button>
               </div>
-            </motion.div>
+            </>
           ) : (
             <motion.div
               key="empty"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="py-16 text-center text-(--muted)"
+              className="py-16 text-center"
             >
-              <p>沒有符合條件的專案</p>
+              <div className="mx-auto max-w-md rounded-2xl border border-(--border)/60 bg-(--secondary-background)/50 px-6 py-8 text-(--muted)">
+                <p className="text-base font-medium text-(--foreground)">
+                  沒有符合條件的專案
+                </p>
+                <p className="mt-2 text-sm leading-7">
+                  試著清除部分標籤，或改用其他關鍵字重新搜尋。
+                </p>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

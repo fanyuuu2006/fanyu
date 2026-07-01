@@ -1,4 +1,5 @@
 import { PortfolioItem } from "@/types";
+import { site } from "./site";
 
 export const tagCategories = {
   languages: ["TypeScript", "JavaScript", "Python", "SQL", "CSS"],
@@ -238,6 +239,7 @@ export const portfolioItems: PortfolioItem[] = [
       "Node.js",
       "Database",
       "Backend",
+      "Full Stack",
       "Restful API",
       "Supabase",
       "Git / GitHub",
@@ -267,6 +269,35 @@ export const portfolioItems: PortfolioItem[] = [
       "JavaScript",
       "Git / GitHub",
       "Vercel",
+    ],
+  },
+  {
+    title: site.title,
+    imageUrl: "/images/fanyu.jpg",
+    date: "2025-04",
+    overview: site.description,
+    links: [
+      {
+        label: "網站連結",
+        url: site.url,
+      },
+    ],
+    github: {
+      repo: "fanyuuu2006/fanyu",
+      giscus: {
+        repoId: "R_kgDOOeftZg",
+        categoryId: "DIC_kwDOOeftZs4CqXwr",
+      },
+    },
+    tags: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "JavaScript",
+      "Frontend",
+      "Git / GitHub",
+      "Vercel",
+      "CSS",
     ],
   },
 ];

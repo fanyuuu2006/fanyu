@@ -41,13 +41,22 @@ export const PortfolioFilterBar = () => {
   return (
     <section>
       <div className="container flex flex-col gap-4">
+        <div className="flex flex-col gap-1 px-1">
+          <p className="text-sm font-medium text-(--foreground)">
+            搜尋與篩選工具
+          </p>
+          <p className="text-sm text-(--muted)">
+            用關鍵字、標籤與排序快速縮小作品範圍。
+          </p>
+        </div>
+
         {/* Toolbar */}
-        <div className="card p-4 rounded-lg">
+        <div className="card rounded-2xl p-4">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center">
             {/* Search */}
             <label
               htmlFor="portfolio-search-input"
-              className="flex items-center gap-2 border border-(--border) rounded-md px-3 py-1.5 hover:border-(--primary) transition-all duration-300"
+              className="flex items-center gap-2 rounded-xl border border-(--border) px-3 py-2 transition-all duration-300 hover:border-(--primary)"
             >
               <input
                 id="portfolio-search-input"
@@ -56,7 +65,7 @@ export const PortfolioFilterBar = () => {
                 onChange={(e) => setSearchString(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="搜尋專案..."
-                className="w-full outline-none bg-transparent"
+                className="w-full bg-transparent outline-none"
               />
               {query && (
                 <button
@@ -85,7 +94,7 @@ export const PortfolioFilterBar = () => {
               {/* Sort */}
               <button
                 onClick={toggleSort}
-                className="btn flex items-center gap-1 rounded-md px-3 py-1.5 text-sm shrink-0"
+                className="btn flex shrink-0 items-center gap-1 rounded-xl px-3 py-2 text-sm"
                 aria-label={
                   sort === "newest" ? "目前：最新優先" : "目前：最舊優先"
                 }
@@ -104,7 +113,7 @@ export const PortfolioFilterBar = () => {
               <button
                 onClick={() => setFilterShow((prev) => !prev)}
                 className={cn(
-                  "btn flex items-center gap-1 rounded-md px-3 py-1.5 text-sm shrink-0",
+                  "btn flex shrink-0 items-center gap-1 rounded-xl px-3 py-2 text-sm",
                   {
                     "border-(--primary) text-(--primary)":
                       filterShow || hasActive,
@@ -127,7 +136,7 @@ export const PortfolioFilterBar = () => {
               {hasActive && (
                 <button
                   onClick={clearTags}
-                  className="flex items-center gap-1 text-sm text-(--muted) hover:text-(--foreground) transition-all duration-300 shrink-0 px-1"
+                  className="flex shrink-0 items-center gap-1 px-1 text-sm text-(--muted) transition-all duration-300 hover:text-(--foreground)"
                 >
                   <CloseOutlined aria-hidden />
                   <span>清除</span>
@@ -144,7 +153,7 @@ export const PortfolioFilterBar = () => {
           className="slide-collapse"
           as="div"
         >
-          <div className="flex flex-col gap-3 rounded-lg p-4">
+          <div className="flex flex-col gap-3 rounded-2xl p-4">
             {Object.entries(tagCategories).map(([category, categoryTags]) => (
               <div key={category} className="flex flex-col gap-2">
                 <span className="shrink-0 text-xs font-semibold text-(--muted)">

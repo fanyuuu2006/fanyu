@@ -40,7 +40,7 @@ export const ContactCard = ({ item, className, ...rest }: ContactCardProps) => {
           style={gradientStyle} // 套用漸層樣式
         >
           {/* 內層按鈕內容：圖示 + 標籤文字 */}
-          <span className="text-sm sm:text-base md:text-lg font-semibold flex items-center justify-center px-3 py-1.5 gap-2 rounded-[inherit] no-underline bg-(--background) transition-all duration-300 group-hover:bg-transparent">
+          <span className="text-sm sm:text-base md:text-lg font-semibold flex items-center justify-center px-3 py-1.5 gap-2 rounded-[inherit] no-underline bg-(--background) transition-all duration-300 group-hover:bg-transparent group-hover:text-white">
             <item.icon /> {/* 聯絡方式圖示 */}
             {item.label} {/* 聯絡方式標籤 */}
           </span>
