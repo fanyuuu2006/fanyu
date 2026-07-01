@@ -33,7 +33,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
     >
       <div className="container flex items-center justify-between">
         <Link href="/" onClick={closeMenu} aria-label="FanYu 首頁">
-          <LogoSvg className="h-16 object-contain transition-all duration-300" />
+          <LogoSvg className="h-16 object-contain hover:text-(--primary) transition-all duration-300" />
           <span className="sr-only">{site.title}</span>
         </Link>
 
@@ -57,7 +57,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
             ))}
           </nav>
           <div className="h-6 w-px bg-(--foreground)/25" />
-          <ThemeToggle className="btn text-2xl flex items-center justify-center p-2 rounded-full" />
+          <ThemeToggle className="btn secondary text-2xl flex items-center justify-center p-2 rounded-full" />
         </div>
       </div>
       <Collapse
@@ -72,7 +72,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
           ))}
         </div>
         <div className="flex items-center justify-center py-4">
-          <ThemeToggle className="btn text-2xl flex items-center justify-center p-2 rounded-full" />
+          <ThemeToggle className="btn secondary text-2xl flex items-center justify-center p-2 rounded-full" />
         </div>
       </Collapse>
     </header>
