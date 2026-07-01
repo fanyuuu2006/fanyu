@@ -322,17 +322,44 @@
     color: var(--foreground);
     width: max-content;
     max-width: 200px;
-    background: var(--overlay-glass-dark);
+    background: var(--secondary-background);
     border: 1px solid var(--border);
-    backdrop-filter: blur(5px);
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--border-radius-md);
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--border-radius-sm);
     white-space: nowrap;
-    font-size: 0.875rem;
-    box-shadow: var(--shadow-base);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    box-shadow: var(--shadow-hover);
+    pointer-events: none;
+    transition: all var(--transition-normal) var(--transition-timing);
+  }
+
+  /* 小箭頭，指向觸發元素 */
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 70%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--secondary-background);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s var(--transition-timing);
+    z-index: 9999;
     pointer-events: none;
   }
 
+  .tooltip:hover::after {
+    bottom: 105%;
+    opacity: 1;
+    visibility: visible;
+  }
+  
   /* === 動畫效果 === */
   .animate-pop {
     animation: pop var(--transition-fast) cubic-bezier(0.68, -0.55, 0.68, 1);

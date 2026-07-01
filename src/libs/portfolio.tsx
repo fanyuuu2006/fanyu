@@ -273,7 +273,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     title: site.title,
-    imageUrl: "/images/fanyu.jpg",
+    imageUrl: "https://fanyu.vercel.app/images/fanyu.jpg",
     date: "2025-04",
     overview: site.description,
     links: [
