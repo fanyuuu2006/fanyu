@@ -1,7 +1,7 @@
 "use client";
 import { MyImage } from "@/components/MyImage";
 import { PortfolioItem } from "@/types";
-import { getGithubBadgeSrcs } from "@/utils/github";
+import { getGithubBadgeItems } from "@/utils/github";
 import { useMemo } from "react";
 
 type GitHubBadgeDivProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -13,7 +13,7 @@ export const GitHubBadgeDiv = ({
   ...rest
 }: GitHubBadgeDivProps) => {
   const badges = useMemo(() => {
-    return item.github?.repo ? getGithubBadgeSrcs(item.github.repo) : [];
+    return item.github?.repo ? getGithubBadgeItems(item.github.repo) : [];
   }, [item]);
   if (badges.length === 0) return null;
 

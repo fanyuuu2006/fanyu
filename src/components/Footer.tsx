@@ -5,7 +5,7 @@ import { LogoSvg } from "./LogoSvg";
 import { site } from "@/libs/site";
 import { routes } from "@/libs/routes";
 import { MyImage } from "./MyImage";
-import { getGithubBadgeSrcs } from "@/utils/github";
+import { getGithubBadgeItems } from "@/utils/github";
 import { AnalyticsInfo, MyResponse } from "@/types";
 import { fetcher } from "@/utils/url";
 import { Suspense } from "react";
@@ -52,7 +52,7 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
                 />
               </span>
               <div className="flex flex-wrap gap-2">
-                {getGithubBadgeSrcs("fanyuuu2006/fanyu").map((badge) => (
+                {getGithubBadgeItems("fanyuuu2006/fanyu").map((badge) => (
                   <MyImage
                     key={badge.title}
                     src={badge.url}

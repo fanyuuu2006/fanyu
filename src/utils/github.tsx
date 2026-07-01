@@ -1,5 +1,5 @@
 import { RepoString } from "@/types";
-
+import { fetcher } from "./url";
 type BadgeConfig = {
   endpoint: string;
   color?: string;
@@ -75,7 +75,7 @@ function createBadgeUrl(repo: RepoString, config: BadgeConfig): string {
   return url;
 }
 
-export function getGithubBadgeSrcs(repo: RepoString) {
+export function getGithubBadgeItems(repo: RepoString) {
   return Object.entries(badgeConfig).map(([title, config]) => ({
     title: title as GithubBadge,
     url: createBadgeUrl(repo, config),
@@ -111,8 +111,8 @@ export const getGithubReadMe = async (
         bytes[0] === 0xff && bytes[1] === 0xfe
           ? "utf-16le"
           : bytes[0] === 0xfe && bytes[1] === 0xff
-            ? "utf-16be"
-            : "utf-8";
+          ? "utf-16be"
+          : "utf-8";
 
       const text = new TextDecoder(encoding).decode(bytes).trim();
 
@@ -158,4 +158,44 @@ export const transformMarkdownLinks = (content: string, repo: RepoString) => {
   );
 
   return content;
+};
+
+export type GithubLanguageColor = {
+  color: string;
+  url: string;
+};
+const getGithubLanguageColors = async (): Promise<
+  Record<string, GithubLanguageColor>
+> => {
+  const url =
+    "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json";
+  return fetcher<Record<string, GithubLanguageColor>>(url);
+};
+
+export type GithubRepoLanguage = {
+  language: string;
+  size: number;
+  percentage: number;
+  color?: string;
+};
+export const getGithubRepoLanguages = async (
+  repo: RepoString,
+): Promise<GithubRepoLanguage[]> => {
+  const [languages, languageColors] = await Promise.all([
+    fetcher<Record<string, number>>(
+      `https://api.github.com/repos/${repo}/languages`,
+    ),
+    getGithubLanguageColors(),
+  ]);
+
+  const total = Object.values(languages).reduce((sum, size) => sum + size, 0);
+
+  return Object.entries(languages)
+    .map(([language, size]) => ({
+      language,
+      size,
+      percentage: total === 0 ? 0 : (size / total) * 100,
+      color: languageColors[language]?.color,
+    }))
+    .sort((a, b) => b.size - a.size);
 };
