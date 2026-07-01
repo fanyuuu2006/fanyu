@@ -16,10 +16,7 @@ export const PortfolioContentSection = ({
         <MetaDiv className="flex md:hidden" item={item} />
 
         <ReadMeDiv item={item} className="w-full flex-1 min-w-0" />
-        <div
-          className="shrink-0 w-full h-fit flex flex-col gap-4 md:w-[minmax(256px,320px)]"
-          style={{ flexBasis: "clamp(256px,25%,320px)" }}
-        >
+        <div className="shrink-0 w-full flex flex-col gap-4 md:w-[clamp(256px,25%,320px)]">
           <MetaDiv className="hidden md:flex" item={item} />
           <GiscusDiv item={item} />
         </div>
