@@ -12,7 +12,6 @@ export default function robots(): MetadataRoute.Robots {
           "/api/",
           "/private/",
           "/_next/",
-          "/.*", // 隱藏文件
         ],
       },
       {

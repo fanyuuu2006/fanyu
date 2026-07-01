@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   keywords: site.keywords,
   title: {
     default: site.title,
-    template: `%s | ${site.title}"`,
+    template: `%s | ${site.title}`,
   },
   icons: {
     icon: [

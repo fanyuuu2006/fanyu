@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-TW">
       <head>
         {/* Preconnect 到外部資源以提升效能 */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -110,9 +110,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebPage",
               name: site.title,
-              description:
-                "Personal portfolio site of Fan-Yu Zhen-Fu showcasing projects and skills.",
-              url: "https://fanyu.vercel.app",
+              description: site.description,
+              url: site.url,
+              inLanguage: "zh-TW",
               mainEntity: {
                 "@type": "ItemList",
                 itemListElement: portfolioItems.map((project, index) => ({
@@ -128,7 +128,7 @@ export default function RootLayout({
                       site.url,
                     thumbnailUrl: project.imageUrl,
                     dateCreated: project.date,
-                    inLanguage: "en",
+                    inLanguage: "zh-TW",
                     programmingLanguage: project.tags[0],
                     author: {
                       "@type": "Person",

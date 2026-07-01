@@ -179,7 +179,6 @@
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--background);
     border: none;
-    font-weight: 700;
   }
   .btn.secondary {
     background: var(--secondary-background);

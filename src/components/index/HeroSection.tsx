@@ -47,7 +47,7 @@ export const HeroSection = () => {
                 key={link.label}
                 href={link.href}
                 className={cn(
-                  `shrink-0 font-bold px-6 py-2 text-xl sm:text-2xl rounded-full text-center`,
+                  `shrink-0 px-8 py-2.5 text-xl sm:text-2xl rounded-full text-center`,
                   link.className,
                 )}
               >

@@ -19,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 專案頁面
   for (const project of portfolioItems) {
     dynamicRoutes.push({
-      url: `${baseUrl}/projects/${slugify(project.title)}`,
+      url: `${baseUrl}/portfolio/${slugify(project.title)}`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

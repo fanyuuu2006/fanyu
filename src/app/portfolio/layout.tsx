@@ -37,6 +37,10 @@ export const metadata: Metadata = {
     description,
     images: [image],
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 type LayoutProps = Readonly<{
