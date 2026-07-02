@@ -33,7 +33,7 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
       <div className="container">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr] py-8">
           <div className="space-y-5">
-            <LogoSvg role="banner" className="h-16 text-(--foreground)" />
+            <LogoSvg role="banner" className="h-16 text-(--primary)" />
 
             <div className="space-y-2">
               <h2 className="text-xl font-bold text-(--foreground)">

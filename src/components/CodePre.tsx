@@ -1,12 +1,10 @@
 "use client";
-
 import { cn } from "@/utils/className";
 import { parseLangAndCode } from "@/utils/highlight";
 import { BundledLanguage, SpecialLanguage, codeToTokens } from "shiki";
 import { CopyButton } from "./CopyButton";
 import { isValidElement, useMemo } from "react";
 import { CodeContainer } from "./CodeContainer";
-import { CodeOutlined } from "@ant-design/icons";
 import { useTheme } from "@/contexts/ThemeContext";
 
 type CodePreProps = React.HTMLAttributes<HTMLPreElement>;
@@ -20,7 +18,7 @@ export function CodePre({ className, children, ...preProps }: CodePreProps) {
     () =>
       codeToTokens(code, {
         lang: lang as BundledLanguage | SpecialLanguage,
-        theme: theme === "light" ? 'github-light-default' : "dark-plus",
+        theme: theme === "light" ? "github-light-default" : "dark-plus",
       }).then((result) => result.tokens),
     [code, lang, theme],
   );
@@ -52,11 +50,10 @@ export function CodePre({ className, children, ...preProps }: CodePreProps) {
         )}
       >
         <div className="flex items-center gap-2 select-none text-(--muted)">
-          <CodeOutlined />
           <span>{lang}</span>
         </div>
         <div>
-          <CopyButton content={code} />
+          <CopyButton content={code} className="btn p-1 rounded-md" />
         </div>
       </div>
 
