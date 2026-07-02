@@ -44,6 +44,8 @@
     --overlay-glass-dark: rgba(0, 0, 0, 0.2); /* 深色玻璃效果背景 */
     --scrollbar-track: transparent; /* 滾動條軌道顏色 */
     --selection-fg: var(--background); /* 選取文字前景色 */
+    --skeleton-bg: rgba(255, 255, 255, 0.05);
+    --skeleton-highlight: rgba(255, 255, 255, 0.08);
   }
 
   :root[data-theme="light"] {
@@ -65,6 +67,8 @@
     --overlay-glass-dark: rgba(15, 23, 42, 0.04); /* 深色玻璃效果背景 */
     --scrollbar-track: transparent; /* 滾動條軌道顏色 */
     --selection-fg: var(--background); /* 選取文字前景色 */
+    --skeleton-bg: rgba(15, 23, 42, 0.08);
+    --skeleton-highlight: rgba(255, 255, 255, 0.8);
   }
 
   /* === 全域重置 === */
@@ -359,7 +363,7 @@
     opacity: 1;
     visibility: visible;
   }
-  
+
   /* === 動畫效果 === */
   .animate-pop {
     animation: pop var(--transition-fast) cubic-bezier(0.68, -0.55, 0.68, 1);
@@ -477,31 +481,26 @@
       transform: translateX(100%);
     }
   }
-
   .skeleton {
     position: relative;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.04);
     color: transparent;
+    background: var(--skeleton-bg);
   }
 
   .skeleton::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+    inset: 0;
     background: linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.06) 50%,
-      rgba(255, 255, 255, 0) 100%
+      transparent,
+      var(--skeleton-highlight),
+      transparent
     );
     transform: translateX(-100%);
     animation: shimmer 1.2s linear infinite;
   }
-
   /* helper for thin lines */
   .skeleton-line {
     background-color: rgba(255, 255, 255, 0.04);
