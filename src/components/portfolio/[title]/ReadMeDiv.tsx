@@ -3,9 +3,9 @@ import { PortfolioItem } from "@/types";
 import { getGithubReadMe, transformMarkdownLinks } from "@/utils/github";
 import { OutsideLink } from "fanyucomponents";
 import { Suspense } from "react";
-import { ReadMeSvg } from "./ReadMeSvg";
 import { cn } from "@/utils/className";
 import { DivTitle } from "./DivTitle";
+import ReadMeSvg from "@/components/svgs/ReadMeSvg";
 
 // 內部元件只需要 repo 字串
 type ReadMeContentProps = {

@@ -1,14 +1,11 @@
-"use client";
 import { CustomLink } from "@/components/CustomLink";
 import { MyImage } from "@/components/MyImage";
 import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
 import { GitHubBadgeDiv } from "./GitHubBadgeDiv";
 import GithubSvg from "@/components/svgs/GithubSvg";
 import { DemoOutlinedSvg } from "@/components/svgs/DemoOutlinedSvg";
+import { BackDiv } from "./BackDiv";
 
 type HeroSectionProps = React.HTMLAttributes<HTMLElement> & {
   item: PortfolioItem;
@@ -19,50 +16,29 @@ export const HeroSection = ({
   className,
   ...props
 }: HeroSectionProps) => {
-  const router = useRouter();
-
-  const handleBackClick = useCallback(() => {
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/portfolio");
-    }
-  }, [router]);
-
-  const links = useMemo(
-    () => [
-      ...item.links.map((link) => ({
-        ...link,
-        className: "btn primary",
-        icon: DemoOutlinedSvg,
-      })),
-      ...(item.github
-        ? [
-            {
-              label: "GitHub",
-              url: `https://github.com/${item.github.repo}`,
-              icon: GithubSvg,
-              className: "btn secondary",
-            },
-          ]
-        : []),
-    ],
-    [item],
-  );
+  const links = [
+    ...item.links.map((link) => ({
+      ...link,
+      className: "btn primary",
+      icon: DemoOutlinedSvg,
+    })),
+    ...(item.github
+      ? [
+          {
+            label: "GitHub",
+            url: `https://github.com/${item.github.repo}`,
+            icon: GithubSvg,
+            className: "btn secondary",
+          },
+        ]
+      : []),
+  ];
 
   return (
     <section id="hero" className={cn("mt-32", className)} {...props}>
       <div className="container flex flex-col gap-5">
         {/* Back */}
-        <div className="flex">
-          <button
-            className="btn flex items-center justify-center p-2.5 text-xl rounded-full"
-            onClick={handleBackClick}
-            aria-label="返回"
-          >
-            <ArrowLeftOutlined aria-hidden />
-          </button>
-        </div>
+        <BackDiv />
 
         {/* Info */}
         <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] items-center md:items-start gap-6 md:gap-8 px-2 py-4">

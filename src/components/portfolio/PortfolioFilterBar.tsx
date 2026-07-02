@@ -2,14 +2,12 @@
 import { tagCategories } from "@/libs/portfolio";
 import { usePortfolioParams } from "@/hooks/usePortfolioParams";
 import { cn } from "@/utils/className";
-import {
-  ArrowUpOutlined,
-  CloseOutlined,
-  FilterOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
 import { Collapse } from "fanyucomponents";
 import { useCallback, useState } from "react";
+import CloseOutlinedSvg from "../svgs/CloseOutlinedSvg";
+import FilterOutlinedSvg from "../svgs/FilterOutlinedSvg";
+import SearchOutlinedSvg from "../svgs/SearchOutlinedSvg";
+import ArrowUpOutlinedSvg from "../svgs/ArrowUpOutlinedSvg";
 
 const CATEGORY_LABELS: Record<keyof typeof tagCategories, string> = {
   languages: "語言",
@@ -77,7 +75,7 @@ export const PortfolioFilterBar = () => {
                   aria-label="清除搜尋"
                   title="清除搜尋"
                 >
-                  <CloseOutlined aria-hidden className="shrink-0" />
+                  <CloseOutlinedSvg aria-hidden className="shrink-0" />
                 </button>
               )}
               <button
@@ -86,7 +84,7 @@ export const PortfolioFilterBar = () => {
                 aria-label="搜尋專案"
                 title="搜尋專案"
               >
-                <SearchOutlined aria-hidden className="shrink-0" />
+                <SearchOutlinedSvg aria-hidden className="shrink-0" />
               </button>
             </label>
 
@@ -100,7 +98,7 @@ export const PortfolioFilterBar = () => {
                 }
                 title={sort === "newest" ? "目前：最新優先" : "目前：最舊優先"}
               >
-                <ArrowUpOutlined
+                <ArrowUpOutlinedSvg
                   aria-hidden
                   className={cn("transition-transform duration-300", {
                     "rotate-180": sort === "oldest",
@@ -123,7 +121,7 @@ export const PortfolioFilterBar = () => {
                 aria-expanded={filterShow}
                 aria-controls="filter-panel"
               >
-                <FilterOutlined aria-hidden />
+                <FilterOutlinedSvg aria-hidden />
                 <span>篩選</span>
                 {hasActive && (
                   <span className="ml-0.5 text-xs opacity-75">
@@ -138,7 +136,7 @@ export const PortfolioFilterBar = () => {
                   onClick={clearTags}
                   className="flex shrink-0 items-center gap-1 px-1 text-sm text-(--muted) transition-all duration-300 hover:text-(--foreground)"
                 >
-                  <CloseOutlined aria-hidden />
+                  <CloseOutlinedSvg aria-hidden />
                   <span>清除</span>
                 </button>
               )}

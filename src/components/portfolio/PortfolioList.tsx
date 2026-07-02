@@ -3,9 +3,9 @@ import { portfolioItems } from "@/libs/portfolio";
 import { usePortfolioParams } from "@/hooks/usePortfolioParams";
 import { PortfolioCard } from "./PortfolioCard";
 import { staggerContainer } from "@/libs/motion";
-import { VerticalAlignTopOutlined } from "@ant-design/icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo } from "react";
+import VerticalAlignTopOutlinedSvg from "../svgs/VerticalAlignTopOutlinedSvg";
 
 export const PortfolioList = () => {
   const { params } = usePortfolioParams();
@@ -74,7 +74,7 @@ export const PortfolioList = () => {
                   className="flex items-center gap-1.5 text-sm text-(--muted) hover:text-(--foreground) transition-colors duration-300"
                   aria-label="回到頂部"
                 >
-                  <VerticalAlignTopOutlined aria-hidden />
+                  <VerticalAlignTopOutlinedSvg aria-hidden />
                   <span>回到頂部</span>
                 </button>
               </div>

@@ -1,7 +1,8 @@
 import { cn } from "@/utils/className";
-import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 import { OverrideProps } from "fanyucomponents";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import CheckOutlinedSvg from "./svgs/CheckOutlinedSvg";
+import CopyOutlinedSvg from "./svgs/CopyOutlinedSvg";
 
 export type CopyButtonProps = OverrideProps<
   React.HTMLAttributes<HTMLButtonElement>,
@@ -68,7 +69,7 @@ export const CopyButton = ({
 
   const ariaLabel = tooltipTitle;
   const icon = useMemo(
-    () => (copied ? <CheckOutlined /> : <CopyOutlined />),
+    () => (copied ? <CheckOutlinedSvg /> : <CopyOutlinedSvg />),
     [copied],
   );
 

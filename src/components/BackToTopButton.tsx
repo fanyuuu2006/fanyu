@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/utils/className";
-import { VerticalAlignTopOutlined } from "@ant-design/icons";
 import { useCallback, useEffect, useState } from "react";
+import VerticalAlignTopOutlinedSvg from "./svgs/VerticalAlignTopOutlinedSvg";
 
 type BackToTopButtonProps = React.HTMLAttributes<HTMLButtonElement>;
 export const BackToTopButton = ({
@@ -42,7 +42,7 @@ export const BackToTopButton = ({
       aria-label="Back to top"
       {...props}
     >
-      <VerticalAlignTopOutlined aria-hidden />
+      <VerticalAlignTopOutlinedSvg aria-hidden />
     </button>
   );
 };

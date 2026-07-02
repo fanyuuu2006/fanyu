@@ -1,46 +1,37 @@
-"use client";
 import { CustomLink } from "@/components/CustomLink";
 import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
 import { formatDate, toISODateTime } from "@/utils/date";
-import {
-  ClockCircleOutlined,
-  GithubOutlined,
-  LinkOutlined,
-} from "@ant-design/icons";
-import { useMemo } from "react";
 import { DivTitle } from "./DivTitle";
 import { GitHubLanguagesDiv } from "./GithubLanguagesDiv";
+import LinkOutlinedSvg from "@/components/svgs/LinkOutlinedSvg";
+import GithubSvg from "@/components/svgs/GithubSvg";
+import ClockOutlinedSvg from "@/components/svgs/ClockOutlinedSvg";
 
 type MetaDivProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
 };
 
 export const MetaDiv = ({ className, item, ...rest }: MetaDivProps) => {
-  const links = useMemo(() => {
-    const githubLink = item.github
+  const links = [
+    ...item.links.map((link) => ({ ...link, icon: LinkOutlinedSvg })),
+    ...(item.github
       ? [
           {
             label: item.github.repo,
             url: `https://github.com/${item.github.repo}`,
-            icon: GithubOutlined,
+            icon: GithubSvg,
           },
         ]
-      : [];
-
-    return [
-      ...item.links.map((link) => ({ ...link, icon: LinkOutlined })),
-      ...githubLink,
-    ];
-  }, [item]);
-
+      : []),
+  ];
   return (
     <div className={cn("flex-col gap-3", className)} {...rest}>
       <div className="flex flex-col gap-2">
         <DivTitle>關於</DivTitle>
         <div className="flex flex-col p-2 gap-2 text-sm sm:text-base text-(--muted)">
           <div className="flex items-center gap-1.5">
-            <ClockCircleOutlined aria-hidden />
+            <ClockOutlinedSvg aria-hidden />
             <time dateTime={toISODateTime(item.date)}>
               {formatDate(item.date)}
             </time>

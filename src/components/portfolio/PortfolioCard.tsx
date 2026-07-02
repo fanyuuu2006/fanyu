@@ -1,12 +1,12 @@
-"use client";
 import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
-import { ClockCircleOutlined, RightOutlined } from "@ant-design/icons";
 import { MyImage } from "../MyImage";
 import { slugify } from "@/utils/url";
 import Link from "next/link";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { fadeInItem } from "@/libs/motion";
+import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
+import RightOutlinedSvg from "../svgs/RightOutlinedSvg";
 
 type PortfolioCardProps = HTMLMotionProps<"article"> & {
   item: PortfolioItem;
@@ -73,7 +73,7 @@ export const PortfolioCard = ({
               {/* 目前只保留最有辨識度的日期資訊，避免卡片塞入過多雜訊。 */}
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-(--muted)">
                 <span className="flex items-center gap-1 font-mono">
-                  <ClockCircleOutlined aria-hidden />
+                  <ClockOutlinedSvg aria-hidden />
                   <time dateTime={item.date}>{item.date}</time>
                 </span>
               </div>
@@ -104,7 +104,7 @@ export const PortfolioCard = ({
 
         {/* 結尾箭頭保留作為點擊暗示，不再額外放文字 CTA。 */}
         <div className="self-center shrink-0 text-base text-(--muted) opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-          <RightOutlined aria-hidden />
+          <RightOutlinedSvg aria-hidden />
         </div>
       </Link>
     </motion.article>

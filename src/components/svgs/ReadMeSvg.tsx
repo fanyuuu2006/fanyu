@@ -1,6 +1,6 @@
 type ReadMeSvgProps = React.SVGProps<SVGSVGElement>;
 
-export const ReadMeSvg = (props: ReadMeSvgProps) => {
+const ReadMeSvg = (props: ReadMeSvgProps) => {
   return (
     <svg
       focusable="false"
@@ -14,3 +14,5 @@ export const ReadMeSvg = (props: ReadMeSvgProps) => {
     </svg>
   );
 };
+
+export default ReadMeSvg;
