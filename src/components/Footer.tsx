@@ -10,8 +10,8 @@ import { AnalyticsInfo, MyResponse } from "@/types";
 import { fetcher } from "@/utils/url";
 import { Suspense } from "react";
 import { NEXT_PUBLIC_SITE_URL } from "@/libs/env";
-import NextJsSvg from "./index/svgs/NextJsSvg";
-import VercelSvg from "./index/svgs/VercelSvg";
+import NextJsSvg from "@/components/svgs/NextJsSvg";
+import VercelSvg from "@/components/svgs/VercelSvg";
 
 const formatNumber = (value?: number) => {
   if (value == null) return "--";

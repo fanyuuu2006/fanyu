@@ -1,11 +1,11 @@
 const HtmlSvg = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={800}
-    height={800}
+    width={'1em'}
+    height={'1em'}
     viewBox="0 0 32 32"
     {...props}
-  >
+    >
     <path
       d="M5.902 27.201 3.655 2h24.69l-2.25 25.197L15.985 30z"
       style={{

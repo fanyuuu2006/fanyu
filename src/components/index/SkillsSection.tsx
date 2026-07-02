@@ -7,7 +7,7 @@ export const SkillsSection = () => {
     <MySection id="skills" title="技能專長">
       <ul className="text-(--foreground) w-full flex flex-col justify-center items-center gap-6">
         {skillCategories.map((category) => (
-          <li key={category.label}>
+          <li className="w-full" key={category.label}>
             <h3 className="flex items-center gap-2 text-2xl font-semibold text-(--foreground) mb-4">
               <span className="size-2 shrink-0 rounded-full bg-(--primary)" />
               {category.label}

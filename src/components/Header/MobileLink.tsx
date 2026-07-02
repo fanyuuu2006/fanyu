@@ -43,7 +43,7 @@ export const MobileLink = ({
         <Link
           href={route.url}
           className={cn(
-            "flex items-center gap-2 text-nowrap font-semibold text-(--muted) transition-all duration-300 hover:text-(--primary)",
+            "flex items-center gap-2 text-nowrap font-semibold transition-all duration-300 hover:text-(--primary)",
             {
               "text-(--primary)": isActive,
             },
@@ -57,7 +57,7 @@ export const MobileLink = ({
         {hasSubRoute && (
           <button
             onClick={handleToggleSubMenu}
-            className="absolute right-4 p-2 text-(--muted) transition-all duration-300 hover:text-(--primary)"
+            className="absolute right-4 p-2 transition-all duration-300 hover:text-(--primary)"
             aria-label={isSubMenuOpen ? "關閉子選單" : "開啟子選單"}
             aria-expanded={isSubMenuOpen}
             aria-controls={`sub-menu-${route.url.replace("/", "")}`}
@@ -86,7 +86,7 @@ export const MobileLink = ({
                   href={`${route.url}${sub.url}`}
                   onClick={handleLinkClick}
                   className={cn(
-                    "flex items-center justify-center gap-2 py-3 text-[0.9em] text-(--muted) transition-all duration-300 hover:text-(--primary)",
+                    "flex items-center justify-center gap-2 py-3 text-[0.9em] transition-all duration-300 hover:text-(--primary)",
                     {
                       "text-(--primary)": isSubActive,
                     },

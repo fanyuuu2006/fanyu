@@ -1,12 +1,12 @@
-"use client";
 import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
 import { MyImage } from "../MyImage";
-import { ClockCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { DemoOutlined } from "../DemoOutlined";
-import "@/styles/portfolio-card.css";
 import { CustomLink } from "../CustomLink";
 import { slugify } from "@/utils/url";
+import { DemoOutlinedSvg } from "../svgs/DemoOutlinedSvg";
+import "@/styles/portfolio-card.css";
+import InfoCircleOutlinedSvg from "../svgs/InfoCircleOutlinedSvg";
+import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
 
 type PortfolioCardProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
@@ -39,7 +39,7 @@ export const PortfolioCard = ({
               {item.title}
             </h3>
             <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-(--muted)">
-              <ClockCircleOutlined />
+              <ClockOutlinedSvg />
               <time dateTime={item.date}>{item.date}</time>
             </div>
             <div className="mt-0.5 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3">
@@ -52,13 +52,13 @@ export const PortfolioCard = ({
             {[
               {
                 tooltip: item.links[0]?.label ?? "查看作品",
-                icon: DemoOutlined,
+                icon: DemoOutlinedSvg,
                 href: viewUrl,
                 className: "btn primary",
               },
               {
                 tooltip: "詳情",
-                icon: InfoCircleOutlined,
+                icon: InfoCircleOutlinedSvg,
                 href: infoUrl,
                 className: "btn secondary",
               },

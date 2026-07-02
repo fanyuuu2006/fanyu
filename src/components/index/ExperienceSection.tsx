@@ -1,4 +1,3 @@
-"use client";
 import { education } from "@/libs/education";
 import { ExperienceDiv } from "./ExperienceDiv";
 import { MySection } from "./MySection";

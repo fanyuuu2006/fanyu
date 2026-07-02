@@ -1,9 +1,10 @@
-import { ClockCircleOutlined } from "@ant-design/icons";
+"use client";
 import { OutsideLink } from "fanyucomponents";
 import { MyImage } from "../MyImage";
 import { useMemo, useState } from "react";
 import { ExperienceItem } from "@/types/experience";
 import { MyMarkdown } from "../MyMarkdown";
+import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
 
 const getStartDate = (duration: ExperienceItem["duration"]) => {
   return typeof duration === "string" ? duration : duration.start;
@@ -88,7 +89,7 @@ export const ExperienceDiv = ({
                         )}
                       </h4>
                       <p className="text-sm text-(--muted) font-mono flex items-center gap-1">
-                        <ClockCircleOutlined />
+                        <ClockOutlinedSvg />
                         <time dateTime={period}>{period}</time>
                       </p>
                     </div>

@@ -1,13 +1,14 @@
 "use client";
 import { CustomLink } from "@/components/CustomLink";
-import { DemoOutlined } from "@/components/DemoOutlined";
 import { MyImage } from "@/components/MyImage";
 import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
-import { ArrowLeftOutlined, GithubOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { GitHubBadgeDiv } from "./GitHubBadgeDiv";
+import GithubSvg from "@/components/svgs/GithubSvg";
+import { DemoOutlinedSvg } from "@/components/svgs/DemoOutlinedSvg";
 
 type HeroSectionProps = React.HTMLAttributes<HTMLElement> & {
   item: PortfolioItem;
@@ -33,14 +34,14 @@ export const HeroSection = ({
       ...item.links.map((link) => ({
         ...link,
         className: "btn primary",
-        icon: DemoOutlined,
+        icon: DemoOutlinedSvg,
       })),
       ...(item.github
         ? [
             {
               label: "GitHub",
               url: `https://github.com/${item.github.repo}`,
-              icon: GithubOutlined,
+              icon: GithubSvg,
               className: "btn secondary",
             },
           ]

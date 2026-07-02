@@ -26,7 +26,7 @@ export const DesktopLink = ({
       <Link
         href={route.url}
         className={cn(
-          "text-nowrap font-semibold flex items-center justify-center gap-2 text-(--muted) transition-all duration-300 hover:text-(--primary)",
+          "text-nowrap font-semibold flex items-center justify-center gap-2 transition-all duration-300 hover:text-(--primary)",
           {
             "text-(--primary)": isActive || isSubActive,
           },
@@ -45,7 +45,7 @@ export const DesktopLink = ({
                   key={subRoute.url}
                   href={`${route.url}${subRoute.url}`}
                   className={cn(
-                    "px-4 py-2 text-nowrap flex items-center justify-center gap-2 text-(--muted) hover:text-(--primary) transition-all duration-300"
+                    "px-4 py-2 text-nowrap flex items-center justify-center gap-2 hover:text-(--primary) transition-all duration-300"
                   )}
                 >
                   {subRoute.label}
