@@ -306,7 +306,7 @@
     bottom: 70%;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s var(--transition-timing);
+    transition: all var(--transition-normal);
     z-index: 9999;
   }
 
@@ -332,7 +332,7 @@
     letter-spacing: 0.01em;
     box-shadow: var(--shadow-hover);
     pointer-events: none;
-    transition: all var(--transition-normal) var(--transition-timing);
+    transition: all var(--transition-normal);
   }
 
   /* 小箭頭，指向觸發元素 */
@@ -349,13 +349,13 @@
     border-top: 5px solid var(--secondary-background);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s var(--transition-timing);
+    transition: all var(--transition-normal);
     z-index: 9999;
     pointer-events: none;
   }
 
   .tooltip:hover::after {
-    bottom: 105%;
+    bottom: 108%;
     opacity: 1;
     visibility: visible;
   }

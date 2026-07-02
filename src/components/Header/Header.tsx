@@ -33,7 +33,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
     >
       <div className="container flex items-center justify-between">
         <Link href="/" onClick={closeMenu} aria-label="FanYu 首頁">
-          <LogoSvg className="h-16 object-contain hover:text-(--primary) transition-all duration-300" />
+          <LogoSvg className="h-16 object-contain text-(--primary) transition-all duration-300" />
           <span className="sr-only">{site.title}</span>
         </Link>
 
