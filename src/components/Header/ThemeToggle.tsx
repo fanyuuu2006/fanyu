@@ -1,7 +1,7 @@
-"use client";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/utils/className";
-import { MoonOutlined, SunOutlined } from "@ant-design/icons";
+import MoonOutlinedSvg from "../svgs/MoonOutlinedSvg";
+import SunOutlinedSvg from "../svgs/SunOutlinedSvg";
 
 type ThemeToggleProps = React.HTMLAttributes<HTMLButtonElement>;
 export const ThemeToggle = ({ className, ...rest }: ThemeToggleProps) => {
@@ -14,7 +14,7 @@ export const ThemeToggle = ({ className, ...rest }: ThemeToggleProps) => {
       onClick={toggleTheme}
       {...rest}
     >
-      {theme === "light" ? <MoonOutlined /> : <SunOutlined />}
+      {theme === "light" ? <MoonOutlinedSvg /> : <SunOutlinedSvg />}
     </button>
   );
 };

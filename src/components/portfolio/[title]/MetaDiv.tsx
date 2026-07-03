@@ -42,7 +42,6 @@ export const MetaDiv = ({ className, item, ...rest }: MetaDivProps) => {
               key={`${link.label}-${link.url}`}
               href={link.url}
               className="flex items-center gap-1.5 truncate text-(--muted) hover:text-(--primary) transition-colors"
-              title={link.label}
             >
               <link.icon aria-hidden className="shrink-0" />
               <span className="truncate">{link.label}</span>

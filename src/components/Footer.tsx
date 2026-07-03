@@ -135,7 +135,7 @@ export const Footer = ({ className, ...rest }: FooterProps) => {
                   data-tooltip={item.label}
                   className="tooltip"
                 >
-                  <item.icon className="h-8 w-auto" />
+                  <item.icon className="h-8 w-auto text-(--foreground)" />
                 </OutsideLink>
               </div>
             ))}
