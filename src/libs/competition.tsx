@@ -3,17 +3,14 @@ import { ExperienceItem } from "@/types/experience";
 export const competition: ExperienceItem[] = [
   {
     title: "PDAO",
-    subtitle: "程式設計與最佳化競賽",
+    subtitle: "Programming Design and Optimization",
     imgSrc:
       "https://megapx-assets.dcard.tw/images/e28d73e6-a9b0-4449-854e-2b8b50dbb6b6/orig.jpeg",
     duration: "2025-04-19",
     link: "https://ntu.im/pdao",
-    description: `**臺灣大學資訊管理學系主辦**
-
-- 隊伍名稱：**不知道對不隊**
-- 在限時賽制下完成多道 **演算法** 題目
-- 使用 \`C++\`、\`Python\` 實作並優化解法
-- 全體參賽隊伍 **第 59 名**`,
+    description: `- 參與臺灣大學資訊管理學系主辦之程式設計競賽
+- 使用 C++ / Python 解決限時演算法問題並進行效能優化
+- 完成多題競賽題目，最終排名第 59 名（全體參賽隊伍）`,
   },
 
   {
@@ -21,7 +18,7 @@ export const competition: ExperienceItem[] = [
     imgSrc:
       "https://doe.hcc.edu.tw/download_file.php?f=_OSL256_ayh6FvoXGYNQrxF3xVIVLx4kzTqGLY4fLYt-WI2hBRzWzq82nYshsyaT2yVk6ue0",
     duration: "2021-01-08",
-    link: "https://sites.google.com/view/hccgoldenmind/",
+    link: "https://fgjh.hcc.edu.tw/p/406-1014-297008,r3.php",
     description: `- 代表 **富光國中** 參加新竹縣數學競賽
 - 榮獲團體賽（丙組）**第二名**`,
   },
@@ -32,9 +29,9 @@ export const competition: ExperienceItem[] = [
     imgSrc: "https://www.shs.edu.tw/favicon.ico",
     duration: "2024-03-15",
     link: "https://www.shs.edu.tw/",
-    description: `- **研究主題：** 疫情後消費者對電商平台使用現況－以蝦皮購物為例
+    description: `- 研究主題: 疫情後消費者對電商平台使用現況－以蝦皮購物為例
 - 蒐集文獻與資料，分析消費者行為並且撰寫完整研究報告
-- 作品獲得 **甲等**`,
+- 作品獲得 **甲等** 成績` ,
   },
 
   {
@@ -46,9 +43,9 @@ export const competition: ExperienceItem[] = [
       end: "2024-01",
     },
     link: "https://drive.google.com/file/d/1MrXpOsCER-Fn3uTn1RivpJBt3pkLl81g/view",
-    description: `- 隊伍名稱：**你在偷喵我吼？**
-- 分析市場需求與目標客群
-- 規劃產品推廣及營運策略`,
+    description: `- 分析市場需求與目標客群，建立產品定位策略
+- 規劃行銷推廣與營運方案，完成競賽提案設計
+- 團隊名稱：你在偷喵我吼？`,
   },
 
   {
@@ -58,6 +55,8 @@ export const competition: ExperienceItem[] = [
       "https://news.idea-show.com/wp-content/uploads/2017/06/GLAD%E5%85%A8%E7%90%83%E5%AD%B8%E7%BF%92%E8%88%87%E6%B8%AC%E8%A9%95%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83.png",
     duration: "2021-11-13",
     link: "https://sites.google.com/view/gladworldcontest/%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87/2021%E5%B9%B4%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87",
+    description: `- 參與商業與管理類英日文詞彙與聽力競賽
+- 提升專業英文與商業領域語言能力`
   },
 
   {
@@ -67,5 +66,7 @@ export const competition: ExperienceItem[] = [
       "https://news.idea-show.com/wp-content/uploads/2017/06/GLAD%E5%85%A8%E7%90%83%E5%AD%B8%E7%BF%92%E8%88%87%E6%B8%AC%E8%A9%95%E7%99%BC%E5%B1%95%E4%B8%AD%E5%BF%83.png",
     duration: "2022-12-03",
     link: "https://sites.google.com/view/gladworldcontest/%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87/2022%E5%B9%B4%E5%A4%A7%E8%B3%BD%E6%B4%BB%E5%8B%95%E7%85%A7%E7%89%87%E8%88%87%E5%BD%B1%E7%89%87",
+   description: `- 參與資訊類英日文詞彙與聽力競賽
+- 強化專業英文與資訊領域術語理解能力`
   },
 ];

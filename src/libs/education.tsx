@@ -21,7 +21,7 @@ export const education: ExperienceItem[] = [
     link: "https://www.cpshs.tyc.edu.tw/",
     imgSrc:
       "https://upload.wikimedia.org/wikipedia/zh/8/80/Chih_Ping_Senior_High_School_Logo.gif",
-    description: `- **四技二專統測** 數學、專業科目滿級分
+    description: `- **113 年四技二專統測** 數學、專業科目滿級分
 - 修習電子商務、商業管理、資訊應用及基礎程式設計
 - 取得 **電腦軟體應用乙級**、**會計事務（資訊）丙級** 證照`,
   },

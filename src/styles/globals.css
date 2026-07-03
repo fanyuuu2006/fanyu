@@ -85,7 +85,7 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--primary) 60%, transparent);
+    background: color-mix(in oklab, var(--primary) 65%, transparent);
     color: var(--selection-fg);
   }
 
