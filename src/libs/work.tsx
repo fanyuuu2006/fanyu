@@ -21,8 +21,8 @@ export const work: ExperienceItem[] = [
     },
     imgSrc: "https://www.knsh.com.tw/images/fevicon/fevicon.png",
     link: "https://maps.app.goo.gl/Wbd9PWNWg63kg5kR8",
-    description: `派遣至 **康軒文教集團 [桃園物流中心](https://maps.app.goo.gl/Wbd9PWNWg63kg5kR8)**
-    
+    description: `派遣至 [康軒文教集團桃園物流中心](https://maps.app.goo.gl/Wbd9PWNWg63kg5kR8)
+
 - 負責教材、書籍之揀貨、理貨及包裝作業
 - 協助商品分類、檢查與出貨流程
 - 配合物流中心訂單處理及出貨時程`,
