@@ -14,6 +14,6 @@ export const club: ExperienceItem[] = [
     description: `- 擔任 **美宣**，設計社團活動海報與社群宣傳素材
 - 擔任 **攝影**，記錄社課及相關社團活動
 - 與幹部共同規劃社課、迎新及其他社團活動
-- 擔任 [115 福和暑假桌遊營](https://sp.cge.ntust.edu.tw/news/groupShow/list/1) 活動總召，統籌營隊規劃、宣傳、招募及執行`,
+- 擔任 [115 福和暑假桌遊營](https://sp.cge.ntust.edu.tw/news/groupShow/view/1142000511) 活動總召，統籌營隊規劃、宣傳、招募及執行`,
   },
 ];
