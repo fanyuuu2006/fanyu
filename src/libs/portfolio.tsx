@@ -2,7 +2,7 @@ import { PortfolioItem } from "@/types";
 import { site } from "./site";
 
 export const tagCategories = {
-  languages: ["TypeScript", "JavaScript", "Python", "SQL", "CSS"],
+  languages: ["TypeScript", "HTML", "JavaScript", "Python", "SQL", "CSS"],
 
   frontend: ["React", "Next.js"],
 
@@ -299,5 +299,27 @@ export const portfolioItems: PortfolioItem[] = [
       "Vercel",
       "CSS",
     ],
+  },
+  {
+    title: "臺科桌遊社抽獎系統",
+    imageUrl:
+      "https://raw.githubusercontent.com/fanyuuu2006/lottery-page/refs/heads/main/assets/images/screenshot.png",
+    date: "2025-03-03",
+    overview:
+      "一個臺灣科技大學桌上遊戲研究社製作的線上抽獎工具，解決傳統抽獎輪盤重複抽取、有限制名單人數等問題。",
+    github: {
+      repo: "fanyuuu2006/lottery-page",
+      giscus: {
+        repoId: "R_kgDOSS51AQ",
+        categoryId: "DIC_kwDOSS51Ac4DAevO",
+      },
+    },
+    links: [
+      {
+        label: "網站連結",
+        url: "https://bgc-lottery.vercel.app",
+      },
+    ],
+    tags: ["HTML", "CSS", "JavaScript", "Frontend", "Git / GitHub"],
   },
 ];
