@@ -22,7 +22,9 @@ export async function generateMetadata({
     };
   }
   const title = `${portfolioItem.title} | ${site.title}`;
-  const description = `${portfolioItem.overview} 使用 ${portfolioItem.tags.join(", ")} 建置。`;
+  const description = `${portfolioItem.overview} 使用 ${portfolioItem.tags.join(
+    ", ",
+  )} 建置。`;
 
   const image = portfolioItem.imageUrl;
   const url = `${site.url}/portfolio/${rawTitle}`;
@@ -48,14 +50,14 @@ export async function generateMetadata({
           width: 1200,
           height: 630,
           url: image,
-          alt: `${title} - ${site.title}`,
+          alt: title,
         },
       ],
     },
 
     twitter: {
       card: "summary_large_image",
-      title: `${site.title}｜${title}`,
+      title: title,
       description,
       images: [image],
     },
