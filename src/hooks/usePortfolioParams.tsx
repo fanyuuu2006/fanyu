@@ -1,4 +1,4 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
 export type SortOrder = "newest" | "oldest";
@@ -21,6 +21,7 @@ const DEFAULT: {
 
 export const usePortfolioParams = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   // ---- 讀取 ----
@@ -69,9 +70,9 @@ export const usePortfolioParams = () => {
           next.set(PARAM.sort, patch.sort!);
         }
       }
-      router.replace(`?${next.toString()}`, { scroll: false });
+      router.replace(`${pathname}?${next.toString()}`, { scroll: false });
     },
-    [router, searchParams],
+    [router, pathname, searchParams],
   );
   // ---- 操作 ----
   const setQuery = useCallback((q: string) => push({ query: q }), [push]);
