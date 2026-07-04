@@ -1,5 +1,6 @@
 import { Route } from "@/types";
 import { cn } from "@/utils/className";
+import { connectSubHref } from "@/utils/url";
 import { DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,20 +18,23 @@ export const DesktopLink = ({
   ...rest
 }: DesktopLinkProps) => {
   const pathName = usePathname();
+  console.log(pathName)
+
   const isActive =
-    route.isActive?.(pathName) ?? pathName.startsWith(route.url);
-  const isSubActive = route.sub?.some((sub) => pathName === sub.url);
+    route.isActive?.(pathName) ??
+    (pathName === route.url || pathName.startsWith(`${route.url}/`));
 
   return (
     <div className="group relative flex items-center justify-center">
       <Link
         href={route.url}
         className={cn(
-          "text-nowrap font-semibold flex items-center justify-center gap-2 transition-all duration-300 hover:text-(--primary)",
+          "text-nowrap font-semibold flex items-center justify-center gap-2 transition-all duration-300",
           {
-            "text-(--primary)": isActive || isSubActive,
+            "text-(--primary)": isActive,
+            "text-(--muted) hover:text-(--foreground)": !isActive,
           },
-          className
+          className,
         )}
         {...rest}
       >
@@ -43,9 +47,9 @@ export const DesktopLink = ({
               return (
                 <Link
                   key={subRoute.url}
-                  href={`${route.url}${subRoute.url}`}
+                  href={connectSubHref(route.url, subRoute.url)}
                   className={cn(
-                    "px-4 py-2 text-nowrap flex items-center justify-center gap-2 hover:text-(--primary) transition-all duration-300"
+                    "text-(--muted) hover:text-(--foreground) px-4 py-2 text-nowrap flex items-center justify-center gap-2 transition-all duration-300",
                   )}
                 >
                   {subRoute.label}

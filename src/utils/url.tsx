@@ -3,6 +3,12 @@ export const fetcher = <T,>(url: string) =>
 export const slugify = (s: string) => encodeURIComponent(s);
 export const deslugify = (s: string) => decodeURIComponent(s);
 
+export const connectSubHref = (baseUrl: string, subUrl: string) => {
+  const normalizedBase = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+  const normalizedSub = subUrl.startsWith("#") ? subUrl : `#${subUrl}`;
+  return `${normalizedBase}${normalizedSub}`;
+};
+
 /**
  * createProxy - 用 Proxy 實作可鏈式存取路徑的 fetch client
  *

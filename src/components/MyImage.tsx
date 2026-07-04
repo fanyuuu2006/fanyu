@@ -67,13 +67,13 @@ export const MyImage = forwardRef<HTMLImageElement, MyImageProps>(
       );
 
     const finalSrc = hasError || !src ? fallbackSrc || FALLBACK_IMAGE : src;
-
+    const finalAlt = alt || "圖片無法顯示";
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
         ref={ref}
         src={finalSrc}
-        alt={alt}
+        alt={finalAlt}
         onError={handleImageError}
         data-origin-src={src ?? undefined}
         data-has-error={hasError}

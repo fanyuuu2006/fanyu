@@ -20,8 +20,11 @@ export const MobileLink = ({
   ...rest
 }: MobileLinkProps) => {
   const pathName = usePathname();
-  const isActive = route.isActive?.(pathName) ?? pathName.startsWith(route.url);
-  const hasSubRoute = route.sub && route.sub.length > 0;
+
+  const isActive =
+    route.isActive?.(pathName) ??
+    (pathName === route.url || pathName.startsWith(`${route.url}/`));
+
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 
   const handleToggleSubMenu = useCallback(() => {
@@ -43,9 +46,10 @@ export const MobileLink = ({
         <Link
           href={route.url}
           className={cn(
-            "flex items-center gap-2 text-nowrap font-semibold transition-all duration-300 hover:text-(--primary)",
+            "flex items-center gap-2 text-nowrap font-semibold transition-all duration-300",
             {
               "text-(--primary)": isActive,
+              "text-(--muted) hover:text-(--foreground)": !isActive,
             },
             className,
           )}
@@ -54,7 +58,7 @@ export const MobileLink = ({
         >
           <span>{route.label}</span>
         </Link>
-        {hasSubRoute && (
+        {route.sub && (
           <button
             onClick={handleToggleSubMenu}
             className="absolute right-4 p-2 transition-all duration-300 hover:text-(--primary)"
@@ -71,25 +75,21 @@ export const MobileLink = ({
         )}
       </div>
 
-      {hasSubRoute && (
+      {route.sub && (
         <Collapse
           state={isSubMenuOpen}
           className="slide-collapse"
           id={`sub-menu-${route.url.replace("/", "")}`}
         >
           <div className="flex flex-col bg-black/10 border-b border-(--border)">
-            {route.sub!.map((sub) => {
-              const isSubActive = pathName === `${route.url}${sub.url}`;
+            {route.sub.map((sub) => {
               return (
                 <Link
                   key={sub.url}
                   href={`${route.url}${sub.url}`}
                   onClick={handleLinkClick}
                   className={cn(
-                    "flex items-center justify-center gap-2 py-3 text-[0.9em] transition-all duration-300 hover:text-(--primary)",
-                    {
-                      "text-(--primary)": isSubActive,
-                    },
+                    "text-(--muted) hover:text-(--foreground) flex items-center justify-center gap-2 py-3 text-[0.9em] transition-all duration-300",
                   )}
                 >
                   {sub.label}
