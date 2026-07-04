@@ -1,7 +1,7 @@
 const GithubCopilotSvg = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     fill="currentColor"
-    fill-rule="evenodd"
+    fillRule="evenodd"
     viewBox="0 0 24 24"
     height="1em"
     width="1em"

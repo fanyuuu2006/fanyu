@@ -1,10 +1,10 @@
 import { Route } from "@/types";
 import { cn } from "@/utils/className";
-import { CaretLeftOutlined } from "@ant-design/icons";
 import { Collapse, DistributiveOmit, OverrideProps } from "fanyucomponents";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useState } from "react";
+import LeftOutlinedSvg from "../svgs/LeftOutlinedSvg";
 
 type MobileLinkProps = OverrideProps<
   DistributiveOmit<React.ComponentProps<typeof Link>, "href" | "children">,
@@ -62,7 +62,7 @@ export const MobileLink = ({
             aria-expanded={isSubMenuOpen}
             aria-controls={`sub-menu-${route.url.replace("/", "")}`}
           >
-            <CaretLeftOutlined
+            <LeftOutlinedSvg
               className={cn("transition-transform duration-300", {
                 "-rotate-90": isSubMenuOpen,
               })}
