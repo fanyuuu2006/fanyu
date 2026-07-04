@@ -304,7 +304,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: "臺科桌遊社抽獎系統",
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/lottery-page/refs/heads/main/assets/images/screenshot.png",
-    date: "2025-03-03",
+    date: "2026-03-03",
     overview:
       "一個臺灣科技大學桌上遊戲研究社製作的線上抽獎工具，解決傳統抽獎輪盤重複抽取、有限制名單人數等問題。",
     github: {

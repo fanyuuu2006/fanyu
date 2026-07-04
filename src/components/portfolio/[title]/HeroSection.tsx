@@ -47,7 +47,6 @@ export const HeroSection = ({
             <MyImage
               src={item.imageUrl}
               alt={item.title}
-              draggable={false}
               className="h-full w-full object-cover"
             />
           </div>
