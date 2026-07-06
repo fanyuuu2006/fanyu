@@ -103,7 +103,6 @@ export const webpageJsonLd = {
         thumbnailUrl: project.imageUrl,
         dateCreated: project.date,
         inLanguage: "zh-TW",
-        programmingLanguage: project.tags[0],
         author: {
           "@id": site.url + "#person",
         },
