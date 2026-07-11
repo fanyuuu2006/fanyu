@@ -17,7 +17,6 @@ export const DesktopLink = ({
   ...rest
 }: DesktopLinkProps) => {
   const pathName = usePathname();
-  console.log(pathName)
 
   const isActive =
     route.isActive?.(pathName) ??

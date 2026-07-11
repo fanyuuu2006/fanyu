@@ -5,7 +5,6 @@ type SkillBadgeProps = OutsideLinkProps & {
   item: SkillItem;
 };
 export const SkillBadge = ({ item }: SkillBadgeProps) => {
-  console.log(item.svg);
   const href = item.url
     ? item.url
     : `https://www.google.com/search?q=${encodeURIComponent(item.title)}`;

@@ -61,7 +61,7 @@ export const MobileLink = ({
         {route.sub && (
           <button
             onClick={handleToggleSubMenu}
-            className="absolute right-4 p-2 transition-all duration-300 hover:text-(--primary)"
+            className="text-(--muted) absolute right-4 p-2 transition-all duration-300"
             aria-label={isSubMenuOpen ? "關閉子選單" : "開啟子選單"}
             aria-expanded={isSubMenuOpen}
             aria-controls={`sub-menu-${route.url.replace("/", "")}`}
