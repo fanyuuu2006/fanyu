@@ -3,7 +3,6 @@ import { PortfolioItem } from "@/types";
 import { getGithubReadMe, transformMarkdownLinks } from "@/utils/github";
 import { OutsideLink } from "fanyucomponents";
 import { cn } from "@/utils/className";
-import { DivTitle } from "./DivTitle";
 import ReadMeSvg from "@/components/svgs/ReadMeSvg";
 import { ReadMeOutline } from "./ReadMeOutline";
 
@@ -26,18 +25,17 @@ export const ReadMeDiv = async ({
 
   return (
     <div {...rest} className={cn("flex flex-col gap-3", className)}>
-      <DivTitle>
-        <OutsideLink href={readMeUrl} className="flex items-center gap-2">
-          <ReadMeSvg />
-          <span>README</span>
-        </OutsideLink>
-      </DivTitle>
-
-      <div className="card relative flex flex-col rounded-xl p-6 lg:p-8">
-        <div className="sticky z-99 top-36 self-start ml-auto">
+      <div className="card relative flex flex-col rounded-xl">
+        <div className="flex items-center justify-between border-b border-(--border) p-4">
+          <h3 className="text-base font-semibold sm:text-lg md:text-xl uppercase leading-none">
+            <OutsideLink href={readMeUrl} className="flex items-center gap-2">
+              <ReadMeSvg />
+              <span>README</span>
+            </OutsideLink>
+          </h3>
           <ReadMeOutline content={content} />
         </div>
-        <MyMarkdown className="text-sm md:text-base">
+        <MyMarkdown className="text-sm md:text-base p-6 lg:p-8">
           {transformMarkdownLinks(content, repo)}
         </MyMarkdown>
       </div>

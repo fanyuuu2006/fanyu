@@ -48,7 +48,6 @@ export const ReadMeOutline = ({
     <div ref={containerRef} className={cn(className)} {...rest}>
       <div className="relative">
         <button
-          className="btn p-1.5 rounded-md"
           aria-label="文件大綱"
           aria-haspopup="true"
           aria-expanded={open}
