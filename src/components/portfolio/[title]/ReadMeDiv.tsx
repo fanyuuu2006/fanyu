@@ -33,11 +33,10 @@ export const ReadMeDiv = async ({
         </OutsideLink>
       </DivTitle>
 
-      <div className="card flex flex-col rounded-xl p-6 lg:p-8">
-        <ReadMeOutline
-          className="sticky top-36 self-end z-99"
-          content={content}
-        />
+      <div className="card relative flex flex-col rounded-xl p-6 lg:p-8">
+        <div className="sticky z-99 top-36 self-start ml-auto">
+          <ReadMeOutline content={content} />
+        </div>
         <MyMarkdown className="text-sm md:text-base">
           {transformMarkdownLinks(content, repo)}
         </MyMarkdown>

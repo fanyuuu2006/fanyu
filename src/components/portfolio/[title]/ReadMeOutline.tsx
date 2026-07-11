@@ -103,7 +103,7 @@ const OutlineCard = ({
                 href={`#${href}`}
                 role="menuitem"
                 title={item.title}
-                className="flex px-2 py-1 font-light truncate"
+                className="flex px-2 py-1 truncate"
                 style={{ paddingLeft: `${(item.level - 1) * 1}rem` }}
                 onClick={onNavigate}
               >
