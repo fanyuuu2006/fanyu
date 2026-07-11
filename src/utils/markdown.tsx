@@ -1,12 +1,19 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
-import type { Root, Heading, Text } from "mdast";
+import type { Root, Heading, Text, RootContent } from "mdast";
 import { extractReactNode } from "./highlight";
 import { slugify } from "./url";
 
 export const headingToAnchor = (title: React.ReactNode) => {
-  return `FANYU-MD-${slugify(extractReactNode(title))}`
-}
+  return `FANYU-MD-${slugify(extractReactNode(title))}`;
+};
+
+const isHeading = (node: RootContent): node is Heading => {
+  return node.type === "heading";
+};
+const isText = (node: RootContent): node is Text => {
+  return node.type === "text";
+};
 
 /**
  * Markdown 標題結構
@@ -36,7 +43,6 @@ export interface MarkdownOutlineItem {
    */
   title: string;
 }
-
 
 /**
  * 取得 Markdown 文件的大綱結構
@@ -70,47 +76,46 @@ export function getMarkdownOutline(markdown: string): MarkdownOutlineItem[] {
    * unified + remark-parse 會將 Markdown
    * 轉換成 mdast (Markdown Abstract Syntax Tree)
    */
-  const tree: Root = unified()
-    .use(remarkParse)
-    .parse(markdown);
+  const tree: Root = unified().use(remarkParse).parse(markdown);
 
-
-  return tree.children
-    /**
-     * 篩選 heading 節點
-     *
-     * RootContent 是聯合型別，
-     * 需要透過 type 判斷縮小成 Heading。
-     */
-    .filter((node): node is Heading => node.type === "heading")
-
-    /**
-     * 將 Heading AST 轉換成自訂格式
-     */
-    .map((node) => ({
+  return (
+    tree.children
       /**
-       * heading.depth 對應 Markdown # 數量
+       * 篩選 heading 節點
+       *
+       * RootContent 是聯合型別，
+       * 需要透過 type 判斷縮小成 Heading。
        */
-      level: node.depth,
+      .filter(isHeading)
 
       /**
-       * Heading.children 可能包含不同 inline node
-       *
-       * 例如:
-       *
-       * ## Hello **World**
-       *
-       * AST:
-       * [
-       *   { type:"text", value:"Hello " },
-       *   { type:"strong", children:[...] }
-       * ]
-       *
-       * 這裡簡化只取文字節點。
+       * 將 Heading AST 轉換成自訂格式
        */
-      title: node.children
-        .filter((child): child is Text => child.type === "text")
-        .map((child) => child.value)
-        .join(""),
-    }));
+      .map((node) => ({
+        /**
+         * heading.depth 對應 Markdown # 數量
+         */
+        level: node.depth,
+
+        /**
+         * Heading.children 可能包含不同 inline node
+         *
+         * 例如:
+         *
+         * ## Hello **World**
+         *
+         * AST:
+         * [
+         *   { type:"text", value:"Hello " },
+         *   { type:"strong", children:[...] }
+         * ]
+         *
+         * 這裡簡化只取文字節點。
+         */
+        title: node.children
+          .filter(isText)
+          .map((child) => child.value)
+          .join(""),
+      }))
+  );
 }

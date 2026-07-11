@@ -99,15 +99,18 @@ const OutlineCard = ({
           return (
             <li
               key={index}
-              style={{ paddingLeft: `${(item.level - 1) * 1}rem` }}
+              data-level={item.level}
+              className="px-2 py-1 rounded-md hover:backdrop-brightness-150 transition-all duration-300"
             >
               <a
                 href={`#${href}`}
                 role="menuitem"
-                className="text-(--muted) hover:text-(--foreground)"
+                className="font-light"
                 onClick={onNavigate}
               >
-                {item.title}
+                <span style={{ marginLeft: `${(item.level - 1) * 1}rem` }}>
+                  {item.title}
+                </span>
               </a>
             </li>
           );
