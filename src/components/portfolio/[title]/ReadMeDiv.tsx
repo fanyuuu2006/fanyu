@@ -5,6 +5,7 @@ import { OutsideLink } from "fanyucomponents";
 import { cn } from "@/utils/className";
 import { DivTitle } from "./DivTitle";
 import ReadMeSvg from "@/components/svgs/ReadMeSvg";
+import { ReadMeOutline } from "./ReadMeOutline";
 
 type ReadMeDivProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
@@ -32,7 +33,11 @@ export const ReadMeDiv = async ({
         </OutsideLink>
       </DivTitle>
 
-      <div className="card flex flex-col rounded-xl p-6 lg:p-8">
+      <div className="relative card flex flex-col rounded-xl p-6 lg:p-8">
+        <ReadMeOutline
+          className="sticky top-36 self-end z-99"
+          content={content}
+        />
         <MyMarkdown className="text-sm md:text-base">
           {transformMarkdownLinks(content, repo)}
         </MyMarkdown>

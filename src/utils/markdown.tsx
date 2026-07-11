@@ -1,6 +1,12 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import type { Root, Heading, Text } from "mdast";
+import { extractReactNode } from "./highlight";
+import { slugify } from "./url";
+
+export const headingToAnchor = (title: React.ReactNode) => {
+  return `FANYU-MD-${slugify(extractReactNode(title))}`
+}
 
 /**
  * Markdown 標題結構
@@ -57,7 +63,7 @@ export interface MarkdownOutlineItem {
  * //   { level: 2, title: "Usage" }
  * // ]
  */
-export function getOutline(markdown: string): MarkdownOutlineItem[] {
+export function getMarkdownOutline(markdown: string): MarkdownOutlineItem[] {
   /**
    * 建立 Markdown Parser
    *

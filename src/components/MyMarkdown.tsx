@@ -5,9 +5,7 @@ import remarkGfm from "remark-gfm";
 import { MyImage } from "./MyImage";
 import { CodePre } from "./CodePre";
 import { CustomLink } from "./CustomLink";
-import { extractReactNode } from "@/utils/highlight";
-import { slugify } from "@/utils/url";
-import { memo, useMemo } from "react";
+import { headingToAnchor } from "@/utils/markdown";
 
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -44,50 +42,44 @@ const HeadingAnchorIcon = () => (
 
 const createHeading = (tag: HeadingTag) => {
   const Tag = tag;
-  const Heading = memo(
-    ({
-      children,
-      className,
-      ...rest
-    }: React.HTMLAttributes<HTMLHeadingElement>) => {
-      const id = useMemo(
-        () => `README-${slugify(extractReactNode(children))}`,
-        [children],
-      );
+  const Heading = ({
+    children,
+    className,
+    ...rest
+  }: React.HTMLAttributes<HTMLHeadingElement>) => {
+    const id = headingToAnchor(children);
 
-      return (
-        <div className="relative group">
-          <a
-            href={`#${id}`}
-            className={cn(
-              "absolute left-[-1.5em]",
-              "top-1/2",
-              "flex h-[1.5em] w-[1.5em] items-center justify-center",
-              "rounded-md opacity-0 transition-opacity",
-              "group-hover:opacity-100",
-            )}
-            style={{ transform: headingAnchorOffset[tag] }}
-          >
-            <HeadingAnchorIcon />
-          </a>
-          <Tag
-            id={id}
-            tabIndex={-1}
-            className={cn(
-              "mt-6 mb-4 font-semibold leading-tight",
-              headingStyles[tag],
-              className,
-            )}
-            {...rest}
-          >
-            {children}
-          </Tag>
-        </div>
-      );
-    },
-  );
+    return (
+      <div className="relative group">
+        <a
+          href={`#${id}`}
+          className={cn(
+            "absolute left-[-1.5em]",
+            "top-1/2",
+            "flex h-[1.5em] w-[1.5em] items-center justify-center",
+            "rounded-md opacity-0 transition-opacity",
+            "group-hover:opacity-100",
+          )}
+          style={{ transform: headingAnchorOffset[tag] }}
+        >
+          <HeadingAnchorIcon />
+        </a>
+        <Tag
+          id={id}
+          tabIndex={-1}
+          className={cn(
+            "mt-6 mb-4 font-semibold leading-tight",
+            headingStyles[tag],
+            className,
+          )}
+          {...rest}
+        >
+          {children}
+        </Tag>
+      </div>
+    );
+  };
 
-  Heading.displayName = `Heading${tag.toUpperCase()}`;
   return Heading;
 };
 
