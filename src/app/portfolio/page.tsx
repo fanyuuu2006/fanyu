@@ -1,5 +1,5 @@
 import { HeadingSection } from "@/components/HeadingSection";
-import { PortfolioPage } from "@/components/portfolio/PortfolioPage";
+import { PortfolioExplorer } from "@/components/portfolio/PortfolioExplorer";
 
 export default function Portfolio() {
   return (
@@ -8,7 +8,7 @@ export default function Portfolio() {
         title="作品集"
         description="展示飯魚（范余振富）參與開發的專案與作品。"
       />
-      <PortfolioPage />
+      <PortfolioExplorer />
     </>
   );
 }

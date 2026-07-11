@@ -6,7 +6,7 @@ import { PortfolioList } from "./PortfolioList";
 import { portfolioItems } from "@/libs/portfolio";
 import { PortfolioPagination } from "./PortfolioPagination";
 
-export const PortfolioPage = () => {
+export const PortfolioExplorer = () => {
   const { params, setQuery, toggleTag, clearTags, toggleSort, setPage } =
     usePortfolioParams();
   const { tags, query, sort, page } = params;
