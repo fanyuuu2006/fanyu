@@ -42,7 +42,7 @@ export const PortfolioCard = ({
     <motion.article
       id={cardId}
       variants={fadeInItem}
-      className={cn("py-5 first:pt-0 last:pb-0", className)}
+      className={cn(className)}
       {...rest}
     >
       <Link
