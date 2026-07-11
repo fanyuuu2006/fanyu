@@ -40,7 +40,7 @@ export const DesktopLink = ({
       </Link>
       {route.sub && (
         <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 hidden group-hover:block w-max z-50">
-          <div className="text-[0.8em] card secondary flex flex-col overflow-hidden p-1">
+          <div className="text-[0.8em] card rounded-md flex flex-col overflow-hidden p-1">
             {route.sub.map((subRoute) => {
               return (
                 <Link

@@ -55,7 +55,6 @@ src/
  hooks/        # 用於路由與作品集狀態的自訂 hooks
  libs/         # 內容資料、網站設定、路由定義與環境變數輔助工具
  styles/       # 全域樣式與特定功能的 CSS
- svgs/          # 可重複使用的 SVG 圖示元件
  types/        # 共用的 TypeScript 型別
  utils/        # 用於格式化與渲染的工具函式
 public/         # 靜態資源，如圖片與圖示

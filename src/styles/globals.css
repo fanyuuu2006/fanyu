@@ -227,7 +227,6 @@
   .card.secondary {
     background: var(--overlay-glass-dark);
     border: 1px solid var(--border);
-    border-radius: var(--border-radius-md);
     backdrop-filter: blur(0.25rem);
     transition: all var(--transition-normal) var(--transition-timing);
   }
