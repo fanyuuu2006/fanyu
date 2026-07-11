@@ -33,7 +33,7 @@ export const ReadMeDiv = async ({
         </OutsideLink>
       </DivTitle>
 
-      <div className="relative card flex flex-col rounded-xl p-6 lg:p-8">
+      <div className="card flex flex-col rounded-xl p-6 lg:p-8">
         <ReadMeOutline
           className="sticky top-36 self-end z-99"
           content={content}

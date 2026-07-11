@@ -97,7 +97,7 @@ const OutlineCard = ({
             <li
               key={index}
               data-level={item.level}
-              className="rounded-md hover:backdrop-brightness-150 transition-all duration-300 min-w-0"
+              className="rounded-md hover:bg-(--foreground)/10 transition-all duration-300 min-w-0"
             >
               <a
                 href={`#${href}`}

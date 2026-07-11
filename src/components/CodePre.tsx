@@ -4,7 +4,7 @@ import { parseLangAndCode } from "@/utils/highlight";
 import { BundledLanguage, SpecialLanguage, codeToTokens } from "shiki";
 import { CopyButton } from "./CopyButton";
 import { isValidElement, useMemo } from "react";
-import { CodeContainer } from "./CodeContainer";
+import { CodePreBody } from "./CodePreBody";
 import { useTheme } from "@/contexts/ThemeContext";
 
 type CodePreProps = React.HTMLAttributes<HTMLPreElement>;
@@ -18,13 +18,13 @@ export function CodePre({ className, children, ...preProps }: CodePreProps) {
     () =>
       codeToTokens(code, {
         lang: lang as BundledLanguage | SpecialLanguage,
-        theme: theme === "light" ? "github-light-default" : "dark-plus",
+        theme: theme === "light" ? 'github-light-default' : "dark-plus",
       }).then((result) => result.tokens),
     [code, lang, theme],
   );
 
   // 取出 <code> element 上的 HTML 屬性（如 className、style）
-  // 排除 children 避免將巢狀內容重複傳入 CodeContainer
+  // 排除 children 避免將巢狀內容重複傳入 CodePreBody
   const inheritedCodeProps = useMemo(() => {
     if (!isValidElement<React.HTMLAttributes<HTMLElement>>(children)) {
       return {} as React.HTMLAttributes<HTMLElement>;
@@ -62,7 +62,7 @@ export function CodePre({ className, children, ...preProps }: CodePreProps) {
           className={cn("overflow-x-auto p-4 leading-6", className)}
           {...preProps}
         >
-          <CodeContainer
+          <CodePreBody
             tokensPromise={tokensPromise}
             {...inheritedCodeProps}
           />

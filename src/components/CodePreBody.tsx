@@ -43,7 +43,7 @@ const TokenLines = ({ tokensPromise }: TokenLinesProps) => {
 };
 
 const SKELETON_WIDTHS = ["72%", "88%", "55%", "80%", "65%"] as const;
-const CodeFallback = () => (
+const CodeSkeleton = () => (
   <div aria-hidden role="presentation" className="flex flex-col gap-2 py-0.5">
     {SKELETON_WIDTHS.map((w, i) => (
       <div key={i} className="skeleton h-[1em] rounded" style={{ width: w }} />
@@ -51,7 +51,7 @@ const CodeFallback = () => (
   </div>
 );
 // ─── 公開元件 ────────────────────────────────────────────────
-type CodeContainerProps = Omit<
+type CodePreBodyProps = Omit<
   React.HTMLAttributes<HTMLElement>,
   "children"
 > & {
@@ -66,17 +66,17 @@ type CodeContainerProps = Omit<
  *
  * @example
  * <pre>
- *   <CodeContainer tokensPromise={highlight(code, lang)} />
+ *   <CodePreBody tokensPromise={highlight(code, lang)} />
  * </pre>
  */
-export const CodeContainer = ({
+export const CodePreBody = ({
   tokensPromise,
   className,
   ...rest
-}: CodeContainerProps) => {
+}: CodePreBodyProps) => {
   return (
     <code {...rest} className={cn("block", className)}>
-      <Suspense fallback={<CodeFallback />}>
+      <Suspense fallback={<CodeSkeleton />}>
         <TokenLines tokensPromise={tokensPromise} />
       </Suspense>
     </code>

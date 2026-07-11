@@ -1,6 +1,6 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
-import type { Root, Heading, Text, RootContent } from "mdast";
+import type { Root, Heading, RootContent } from "mdast";
 import { toString } from "mdast-util-to-string";
 import { extractReactNode } from "./highlight";
 import { slugify } from "./url";
@@ -11,9 +11,6 @@ export const headingToAnchor = (title: React.ReactNode) => {
 
 const isHeading = (node: RootContent): node is Heading => {
   return node.type === "heading";
-};
-const isText = (node: RootContent): node is Text => {
-  return node.type === "text";
 };
 
 /**
