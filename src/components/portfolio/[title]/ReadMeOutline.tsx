@@ -60,7 +60,7 @@ export const ReadMeOutline = ({
         {open && (
           <OutlineCard
             id={outlineId}
-            className="absolute top-full right-0 mt-2"
+            className="absolute z-50 top-full right-0 mt-2 w-64 sm:w-72 max-w-[calc(100vw-2rem)] max-h-[70vh] overflow-y-auto overflow-x-hidden"
             outline={outline}
             onNavigate={() => setOpen(false)}
           />
@@ -87,30 +87,27 @@ const OutlineCard = ({
     <div
       id={id}
       role="menu"
-      className={cn(
-        "card w-64 max-h-96 overflow-y-auto rounded-lg p-4 z-50",
-        className,
-      )}
+      className={cn("card rounded-lg p-4", className)}
       {...rest}
     >
-      <ul className="space-y-1">
+      <ul className="space-y-1 min-w-0">
         {outline.map((item, index) => {
           const href = headingToAnchor(item.title);
           return (
             <li
               key={index}
               data-level={item.level}
-              className="px-2 py-1 rounded-md hover:backdrop-brightness-150 transition-all duration-300"
+              className="rounded-md hover:backdrop-brightness-150 transition-all duration-300 min-w-0"
             >
               <a
                 href={`#${href}`}
                 role="menuitem"
-                className="font-light"
+                title={item.title}
+                className="flex px-2 py-1 font-light truncate"
+                style={{ paddingLeft: `${(item.level - 1) * 1}rem` }}
                 onClick={onNavigate}
               >
-                <span style={{ marginLeft: `${(item.level - 1) * 1}rem` }}>
-                  {item.title}
-                </span>
+                <span className="truncate">{item.title}</span>
               </a>
             </li>
           );

@@ -1,6 +1,7 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import type { Root, Heading, Text, RootContent } from "mdast";
+import { toString } from "mdast-util-to-string";
 import { extractReactNode } from "./highlight";
 import { slugify } from "./url";
 
@@ -110,12 +111,8 @@ export function getMarkdownOutline(markdown: string): MarkdownOutlineItem[] {
          *   { type:"strong", children:[...] }
          * ]
          *
-         * 這裡簡化只取文字節點。
          */
-        title: node.children
-          .filter(isText)
-          .map((child) => child.value)
-          .join(""),
+        title: toString(node),
       }))
   );
 }
