@@ -2,11 +2,12 @@
 import { tagCategories } from "@/libs/portfolio";
 import { SortOrder } from "@/hooks/usePortfolioParams";
 import { cn } from "@/utils/className";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useId, useState } from "react";
 import CloseOutlinedSvg from "../svgs/CloseOutlinedSvg";
 import FilterOutlinedSvg from "../svgs/FilterOutlinedSvg";
 import SearchOutlinedSvg from "../svgs/SearchOutlinedSvg";
 import ArrowUpOutlinedSvg from "../svgs/ArrowUpOutlinedSvg";
+import { useModal } from "@/hooks/useModal";
 
 const CATEGORY_LABELS: Record<keyof typeof tagCategories, string> = {
   languages: "語言",
@@ -21,7 +22,6 @@ const CATEGORY_LABELS: Record<keyof typeof tagCategories, string> = {
   other: "其他",
 };
 
-// 靜態資料，搬到 component 外面只計算一次
 const CATEGORY_ENTRIES = Object.entries(tagCategories) as [
   keyof typeof tagCategories,
   readonly string[],
@@ -47,7 +47,7 @@ export const PortfolioFilterBar = ({
   onSortToggle,
   ...rest
 }: PortfolioFilterBarProps) => {
-  const [filterShow, setFilterShow] = useState(tags.size > 0);
+  const modal = useModal({});
   const [searchString, setSearchString] = useState(query);
   const [previousQuery, setPreviousQuery] = useState(query);
   if (query !== previousQuery) {
@@ -56,40 +56,7 @@ export const PortfolioFilterBar = ({
   }
 
   const searchInputId = useId();
-  const filterPanelId = useId();
-
-  const panelRef = useRef<HTMLDivElement>(null);
-  const filterButtonRef = useRef<HTMLButtonElement>(null);
-
-  // 點擊外部或按 Esc 關閉篩選面板
-  useEffect(() => {
-    if (!filterShow) return;
-
-    const handlePointerDown = (e: PointerEvent) => {
-      const target = e.target as Node;
-      if (
-        panelRef.current?.contains(target) ||
-        filterButtonRef.current?.contains(target)
-      ) {
-        return;
-      }
-      setFilterShow(false);
-    };
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setFilterShow(false);
-        filterButtonRef.current?.focus();
-      }
-    };
-
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [filterShow]);
+  const filterPanelTitleId = useId();
 
   const handleSearch = useCallback(() => {
     onQueryChange(searchString.trim());
@@ -164,19 +131,15 @@ export const PortfolioFilterBar = ({
 
               {/* Filter toggle */}
               <button
-                ref={filterButtonRef}
                 type="button"
-                onClick={() => setFilterShow((prev) => !prev)}
+                onClick={modal.open}
+                aria-haspopup="dialog"
                 className={cn(
                   "btn flex shrink-0 items-center gap-1 rounded-xl px-3 py-2 text-sm",
                   {
-                    "border-(--primary) text-(--primary)":
-                      filterShow || hasActive,
+                    "border-(--primary) text-(--primary)": hasActive,
                   },
                 )}
-                aria-label={filterShow ? "關閉篩選面板" : "開啟篩選面板"}
-                aria-expanded={filterShow}
-                aria-controls={filterPanelId}
               >
                 <FilterOutlinedSvg aria-hidden />
                 <span>篩選</span>
@@ -191,41 +154,44 @@ export const PortfolioFilterBar = ({
         </div>
 
         {/* Filter Panel */}
-        {filterShow && (
-          <div
-            ref={panelRef}
-            id={filterPanelId}
-            role="region"
-            aria-label="標籤篩選面板"
-            className="absolute top-full right-0 z-20 w-full px-4"
-          >
-            <div className="card flex max-h-[70vh] flex-col overflow-hidden rounded-xl sm:max-h-96">
-              {/* Header */}
-              <div className="flex shrink-0 items-center justify-between border-b border-(--border) px-4 py-3">
-                <span className="text-sm font-semibold">
-                  篩選標籤
-                  {hasActive && (
-                    <span className="ml-1.5 font-normal text-(--muted)">
-                      ({tags.size})
-                    </span>
-                  )}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setFilterShow(false)}
-                  aria-label="關閉篩選面板"
-                  title="關閉篩選面板"
-                  className="text-(--muted) transition-colors duration-200 hover:text-(--foreground)"
-                >
-                  <CloseOutlinedSvg aria-hidden />
-                </button>
-              </div>
+        <modal.Container
+          aria-labelledby={filterPanelTitleId}
+          className="flex items-center justify-center p-4"
+        >
+          <div className="card flex max-h-[75vh] w-full max-w-md flex-col overflow-hidden rounded-xl sm:max-w-2xl lg:max-w-3xl">
+            {/* Header */}
+            <div
+              id={filterPanelTitleId}
+              className="flex shrink-0 items-center justify-between bg-(--secondary-background) px-4 py-2"
+            >
+              <h4 className="flex items-center gap-1.5 text-sm font-semibold">
+                <FilterOutlinedSvg aria-hidden className="text-(--muted)" />
+                篩選標籤
+              </h4>
+              <button
+                type="button"
+                onClick={modal.close}
+                aria-label="關閉篩選面板"
+                title="關閉篩選面板"
+              >
+                <CloseOutlinedSvg aria-hidden />
+              </button>
+            </div>
 
-              {/* Body：分類群組 */}
-              <div className="grid flex-1 grid-cols-1 gap-x-6 gap-y-4 overflow-y-auto p-4 sm:grid-cols-2">
-                {CATEGORY_ENTRIES.map(([category, categoryTags]) => (
-                  <div key={category} className="flex flex-col gap-2">
-                    <span className="shrink-0 text-xs font-semibold text-(--muted)">
+            {/* Body：分類群組 */}
+            <div className="grid grid-cols-1 gap-4 overflow-y-auto p-4 sm:grid-cols-2 lg:grid-cols-3">
+              {CATEGORY_ENTRIES.map(([category, categoryTags]) => {
+                if (categoryTags.length === 0) return null;
+                return (
+                  <div
+                    key={category}
+                    className="flex flex-col gap-2 py-2 first:pt-0 last:pb-0 sm:py-0"
+                  >
+                    <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-(--muted)">
+                      <span
+                        className="size-1 rounded-full bg-(--primary)"
+                        aria-hidden
+                      />
                       {CATEGORY_LABELS[category]}
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -237,7 +203,7 @@ export const PortfolioFilterBar = ({
                             type="button"
                             onClick={() => onToggleTag(tag)}
                             className={cn(
-                              "btn rounded-full px-3 py-1 text-xs font-mono sm:text-sm",
+                              "btn rounded-full px-3 py-1 text-xs font-mono transition-transform duration-200 hover:scale-105 sm:text-sm",
                               { primary: isActive },
                             )}
                             aria-pressed={isActive}
@@ -248,25 +214,28 @@ export const PortfolioFilterBar = ({
                       })}
                     </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
+            </div>
 
-              {/* Footer：清除全部 */}
+            {/* Footer */}
+            <div className="flex shrink-0 items-center justify-between border-t border-(--border) px-4 py-2.5">
+              <span className="text-xs text-(--muted)">
+                {hasActive ? `已選取 ${tags.size} 個標籤` : "尚未選取標籤"}
+              </span>
               {hasActive && (
-                <div className="flex shrink-0 justify-end border-t border-(--border) px-4 py-2.5">
-                  <button
-                    type="button"
-                    onClick={onClearTags}
-                    className="flex items-center gap-1 text-sm text-(--muted) transition-colors duration-200 hover:text-(--foreground)"
-                  >
-                    <CloseOutlinedSvg aria-hidden />
-                    <span>清除全部</span>
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={onClearTags}
+                  className="flex items-center gap-1 text-xs text-(--muted) hover:text-(--foreground) transition-all duration-300"
+                >
+                  <CloseOutlinedSvg aria-hidden />
+                  <span>清除全部</span>
+                </button>
               )}
             </div>
           </div>
-        )}
+        </modal.Container>
       </div>
     </section>
   );
