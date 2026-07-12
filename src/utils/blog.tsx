@@ -1,11 +1,82 @@
+import { POSTS_PATH } from "@/libs/blog";
+import { BlogFrontMatter, BlogPost } from "@/types/blog";
+import matter from "gray-matter";
+import fs from "node:fs";
+import path from "node:path";
+
+const ZH_CHAR_REGEX = /[\u4e00-\u9fff]/g;
+
 export const estimateReadingTime = (content: string) => {
-  const zhChars = (content.match(/[\u4e00-\u9fff]/g) ?? []).length;
+  const zhChars = content.match(ZH_CHAR_REGEX)?.length ?? 0;
   const latinWords = content
-    .replace(/[\u4e00-\u9fff]/g, " ")
+    .replace(ZH_CHAR_REGEX, " ")
     .trim()
     .split(/\s+/)
     .filter(Boolean).length;
   const units = zhChars > latinWords ? zhChars / 500 : latinWords / 220;
-  const minutes = Math.max(1, Math.ceil(units));
-  return minutes;
+  return Math.max(1, Math.ceil(units));
+};
+
+let cachedPosts: BlogPost[] | null = null;
+
+export const getPosts = (): BlogPost[] => {
+  // production 才快取；dev 模式每次重讀，方便即時看到檔案異動
+  if (cachedPosts && process.env.NODE_ENV === "production") {
+    return cachedPosts;
+  }
+
+  if (!fs.existsSync(POSTS_PATH)) {
+    console.warn(`[blog] POSTS_PATH not存在: ${POSTS_PATH}`);
+    return [];
+  }
+
+  const files = fs
+    .readdirSync(POSTS_PATH)
+    .filter((file) => file.endsWith(".md"));
+
+  const posts = files
+    .map((file): BlogPost | null => {
+      const slug = file.replace(/\.md$/, "");
+      const fullPath = path.join(POSTS_PATH, file);
+
+      try {
+        const source = fs.readFileSync(fullPath, "utf-8");
+        const { data, content } = matter(source) as {
+          data: BlogFrontMatter;
+          content: string;
+        };
+
+        // 修復:未發布的文章要排除
+        if (!data.published) {
+          return null;
+        }
+
+        // 修復:沒有合法日期就跳過,而不是塞入 new Date()
+        const parsedDate = data.date ? new Date(data.date) : null;
+        if (!parsedDate || Number.isNaN(parsedDate.getTime())) {
+          console.warn(`[blog] "${slug}" 缺少有效的 date,已略過`);
+          return null;
+        }
+
+        return {
+          slug,
+          title: data.title ?? "",
+          overview: data.overview ?? "",
+          description: data.description ?? "",
+          date: parsedDate.toISOString(),
+          tags: data.tags ?? [],
+          readingTime: estimateReadingTime(content),
+          content,
+          image: data.image ?? "",
+        };
+      } catch (err) {
+        console.error(`[blog] 解析 "${file}" 失敗,已略過:`, err);
+        return null;
+      }
+    })
+    .filter((post): post is BlogPost => post !== null)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  cachedPosts = posts;
+  return posts;
 };

@@ -37,6 +37,12 @@ export const routes: Route[] = [
     priority: 0.6,
   },
   {
+    label: "部落格",
+    url: "/blog",
+    changeFrequency: "weekly",
+    priority: 0.8,
+  },
+  {
     label: "留言版",
     url: "/guestbook",
     changeFrequency: "weekly",

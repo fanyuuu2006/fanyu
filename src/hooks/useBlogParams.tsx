@@ -4,20 +4,18 @@ import { useUrlParams } from "./useUrlParams";
 export type SortOrder = "newest" | "oldest";
 
 const PARAM = {
-  tags: "tags",
   query: "query",
   sort: "sort",
   page: "page",
 } as const;
+
 type ParamsPatch = Partial<{
-  tags: Set<string>;
   query: string;
   sort: SortOrder;
   page: number;
 }>;
 
 const DEFAULT = {
-  tags: [] as string[],
   query: "",
   sort: "newest" as SortOrder,
   page: 1,
@@ -26,27 +24,15 @@ const DEFAULT = {
 export const PAGE_SIZE = 8;
 
 /** 会影响筛选/排序结果的欄位；变更時應重置分頁 */
-const FILTER_KEYS: (keyof ParamsPatch)[] = ["tags", "query", "sort"];
+const FILTER_KEYS: (keyof ParamsPatch)[] = ["query", "sort"];
 
 const parsePage = (raw: string | null): number => {
   const n = Number.parseInt(raw ?? "", 10);
   return Number.isFinite(n) && n > 0 ? n : DEFAULT.page;
 };
 
-export const usePortfolioParams = () => {
+export const useBlogParams = () => {
   const { searchParams, updateParams } = useUrlParams();
-
-  // ---- 讀取 ----
-  const tags = useMemo(
-    () =>
-      new Set(
-        searchParams
-          .getAll(PARAM.tags)
-          .flatMap((t) => t.split(","))
-          .filter(Boolean),
-      ),
-    [searchParams],
-  );
 
   const query = searchParams.get(PARAM.query) ?? DEFAULT.query;
 
@@ -59,14 +45,6 @@ export const usePortfolioParams = () => {
   const push = useCallback(
     (patch: ParamsPatch) => {
       updateParams((next) => {
-        if ("tags" in patch) {
-          if (patch.tags!.size > 0) {
-            next.set(PARAM.tags, Array.from(patch.tags!).join(","));
-          } else {
-            next.delete(PARAM.tags);
-          }
-        }
-
         if ("query" in patch) {
           const q = patch.query!.trim();
           if (q) {
@@ -102,21 +80,6 @@ export const usePortfolioParams = () => {
   // ---- 操作 ----
   const setQuery = useCallback((q: string) => push({ query: q }), [push]);
 
-  const toggleTag = useCallback(
-    (tag: string) => {
-      const next = new Set(tags);
-      if (next.has(tag)) {
-        next.delete(tag);
-      } else {
-        next.add(tag);
-      }
-      push({ tags: next });
-    },
-    [tags, push],
-  );
-
-  const clearTags = useCallback(() => push({ tags: new Set() }), [push]);
-
   const setSort = useCallback(
     (next: SortOrder) => push({ sort: next }),
     [push],
@@ -132,18 +95,13 @@ export const usePortfolioParams = () => {
     [push],
   );
 
-  const params = useMemo(
-    () => ({ tags, query, sort, page }),
-    [tags, query, sort, page],
-  );
+  const params = useMemo(() => ({ query, sort, page }), [query, sort, page]);
 
   return {
     // 狀態
     params,
     // 操作
     setQuery,
-    toggleTag,
-    clearTags,
     setSort,
     toggleSort,
     setPage,

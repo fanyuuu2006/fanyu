@@ -1,13 +1,20 @@
 import { CustomLink } from "@/components/CustomLink";
 import { PortfolioItem } from "@/types";
 import { cn } from "@/utils/className";
-import { formatDate, toISODateTime } from "@/utils/date";
+import { toISODateTime } from "@/utils/date";
 import { DivTitle } from "./DivTitle";
 import { GitHubLanguagesDiv } from "./GithubLanguagesDiv";
 import LinkOutlinedSvg from "@/components/svgs/LinkOutlinedSvg";
 import GithubSvg from "@/components/svgs/GithubSvg";
 import ClockOutlinedSvg from "@/components/svgs/ClockOutlinedSvg";
 
+export const formatDate = (date: string) => {
+  const [year, month, day] = date.split("-").map(Number);
+  if (!year) return date;
+  if (!month) return `${year} 年`;
+  if (!day) return `${year} 年 ${month} 月`;
+  return `${year} 年 ${month} 月 ${day} 日`;
+};
 type MetaDivProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
 };
