@@ -114,7 +114,7 @@ export const ExperienceDiv = ({
           <button
             type="button"
             onClick={() => setExpanded((prev) => !prev)}
-            className="btn rounded-full px-4 py-2 text-sm"
+            className="btn secondary rounded-full px-4 py-2 text-sm"
           >
             {expanded
               ? "顯示較少"

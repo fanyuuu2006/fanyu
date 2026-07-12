@@ -7,7 +7,7 @@ import { DesktopLink } from "./DesktopLink";
 import { MobileLink } from "./MobileLink";
 import { cn } from "@/utils/className";
 import { routes } from "@/libs/routes";
-import { LogoSvg } from "../LogoSvg";
+import { LogoSvg } from "../svgs/LogoSvg";
 import { site } from "@/libs/site";
 import { ThemeToggle } from "./ThemeToggle";
 

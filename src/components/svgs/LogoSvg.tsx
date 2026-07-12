@@ -1,6 +1,9 @@
+import { site } from "@/libs/site";
+
 export const LogoSvg = ({ ...rest }: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" {...rest}>
+      <title>{site.title}</title>
       <g
         transform="translate(450.0,220.0) scale(1.040462) translate(-539.00,-282.00) translate(0,556) scale(0.1,-0.1)"
         fill="currentColor"

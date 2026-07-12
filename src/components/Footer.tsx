@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { OutsideLink } from "fanyucomponents";
 import { cn } from "@/utils/className";
-import { LogoSvg } from "./LogoSvg";
+import { LogoSvg } from "./svgs/LogoSvg";
 import { site } from "@/libs/site";
 import { routes } from "@/libs/routes";
 import { MyImage } from "./MyImage";

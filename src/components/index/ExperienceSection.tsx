@@ -10,12 +10,12 @@ export const ExperienceSection = () => {
     <MySection id="experience" title="經歷">
       <div className="w-full flex flex-col gap-8 p-4">
         <ExperienceDiv
-          title="學歷"
+          title="教育"
           order="desc"
           maxVisible={1}
           items={education}
         />
-        <ExperienceDiv title="工作" order="desc" items={work} />
+        <ExperienceDiv title="工作" order="desc" maxVisible={3} items={work} />
         <ExperienceDiv title="社團" order="asc" items={club} />
         <ExperienceDiv
           title="競賽"
