@@ -1,0 +1,21 @@
+export type BlogFrontMatter = Partial<{
+  title: string;
+  overview: string;
+  description: string;
+  date: string;
+  tags: string[];
+  published: string;
+  image: string;
+  readingTime: number;
+}>;
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  overview: string;
+  description: string;
+  date: string;
+  tags: string[];
+  readingTime: number;
+  content: string;
+};

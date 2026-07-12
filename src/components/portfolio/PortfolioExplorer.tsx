@@ -17,7 +17,12 @@ export const PortfolioExplorer = () => {
       .filter((item) => {
         if (tags.size > 0 && !item.tags.some((t) => tags.has(t))) return false;
         if (q) {
-          const searchable = [item.title, item.overview, ...item.tags]
+          const searchable = [
+            item.title,
+            item.overview,
+            item.date,
+            ...item.tags,
+          ]
             .join(" ")
             .toLowerCase();
           if (!searchable.includes(q)) return false;

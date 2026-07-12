@@ -86,7 +86,7 @@ export const PortfolioFilterBar = ({
                 value={searchString}
                 onChange={(e) => setSearchString(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                placeholder="搜尋專案、描述、標籤..."
+                placeholder="搜尋專案、描述、標籤、日期..."
                 className="w-full bg-transparent outline-none"
               />
               {searchString && (
