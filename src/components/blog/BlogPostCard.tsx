@@ -98,7 +98,7 @@ const Tag = ({ tag, className, ...rest }: TagProps) => {
   return (
     <span
       className={cn(
-        "card rounded-full px-2.5 py-1 text-xs font-mono transition-all duration-200",
+        "card rounded-full px-2.5 py-1 text-xs font-mono transition-all duration-300",
         className,
       )}
       {...rest}
