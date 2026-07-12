@@ -21,8 +21,12 @@ export const HeroSection = ({
   });
 
   return (
-    <section id="hero" className={cn("mt-32", className)} {...props}>
-      <div className="container flex flex-col gap-5">
+    <section
+      id="hero"
+      className={cn("mt-20 sm:mt-24 md:mt-32", className)}
+      {...props}
+    >
+      <div className="container flex flex-col gap-4 sm:gap-5">
         {/* Back */}
         <BackDiv />
 
@@ -41,19 +45,19 @@ export const HeroSection = ({
         )}
 
         {/* 標題 */}
-        <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">
+        <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">
           {post.title}
         </h1>
 
         {/* 摘要 */}
         {post.overview && (
-          <p className="max-w-3xl text-base leading-7 text-(--muted) sm:text-lg">
+          <p className="max-w-3xl text-sm leading-6 text-(--muted) sm:text-base sm:leading-7 md:text-lg">
             {post.overview}
           </p>
         )}
 
         {/* Meta：日期 / 閱讀時間 */}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-(--muted)">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-(--muted) sm:gap-x-5 sm:text-sm">
           <span className="flex items-center gap-1.5 font-mono">
             <CalendarOutlinedSvg aria-hidden />
             <time dateTime={post.date}>{formattedDate}</time>
@@ -64,14 +68,11 @@ export const HeroSection = ({
         </div>
 
         {/* 封面圖 */}
-        <div className="relative mt-2 aspect-video w-full max-w-3xl mx-auto overflow-hidden rounded-xl">
-          <MyImage
-            src={post.image}
-            alt={post.title}
-            className="h-full w-full object-cover"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/10" />
-        </div>
+        <MyImage
+          src={post.image}
+          alt={post.title}
+          className="relative mx-auto mt-2 max-h-112 max-w-full rounded-2xl object-contain"
+        />
       </div>
     </section>
   );
