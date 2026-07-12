@@ -6,7 +6,6 @@ export type BlogFrontMatter = Partial<{
   tags: string[];
   published: string;
   image: string;
-  readingTime: number;
 }>;
 
 export type BlogPost = {
