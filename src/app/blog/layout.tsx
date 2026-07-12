@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { site } from "@/libs/site";
 
 const title = "部落格";
-const description = "飯魚（范余振富）在這裡分享程式開發、生活、學習與其他有趣的事物。";
+const description =
+  "飯魚（范余振富）在這裡分享程式開發、生活、學習與其他有趣的事物。";
 
 const image = `${site.url}/images/fanyu.jpg`;
 const url = `${site.url}/blog`;
@@ -48,5 +49,5 @@ type LayoutProps = Readonly<{
 }>;
 
 export default function Layout({ children }: LayoutProps) {
-  return children;
+  return <>{children}</>;
 }

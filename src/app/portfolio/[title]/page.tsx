@@ -3,6 +3,8 @@ import { portfolioItems } from "@/libs/portfolio";
 import { deslugify } from "@/utils/url";
 import { HeroSection } from "@/components/portfolio/[title]/HeroSection";
 import { PortfolioContentSection } from "@/components/portfolio/[title]/PortfolioContentSection";
+import { JsonLd } from "@/components/JsonLd";
+import { createPortfolioDetailJsonLd } from "@/libs/jsonLd/portfolio";
 
 export default async function Portfolio(
   props: PageProps<"/portfolio/[title]">,
@@ -24,6 +26,7 @@ export default async function Portfolio(
 
   return (
     <>
+      <JsonLd data={createPortfolioDetailJsonLd(portfolioItem)} />
       <HeroSection item={portfolioItem} />
       <PortfolioContentSection item={portfolioItem} />
     </>

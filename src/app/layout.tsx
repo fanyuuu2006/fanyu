@@ -8,8 +8,10 @@ import { Noto_Sans_SC } from "next/font/google";
 export { metadata } from "./metadata";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { personJsonLd, webpageJsonLd, websiteJsonLd } from "@/libs/jsonLd";
-const jsonLd = [personJsonLd, websiteJsonLd, webpageJsonLd];
+import { JsonLd } from "@/components/JsonLd";
+import { personJsonLd } from "@/libs/jsonLd/person";
+import { websiteJsonLd } from "@/libs/jsonLd/website";
+const jsonLd = [personJsonLd, websiteJsonLd];
 // Google Analytics ID
 const MEASUREMENT_ID = "G-3SGK402751";
 
@@ -35,13 +37,7 @@ export default function RootLayout({
 
         {/* JSON-LD 結構化資料 */}
         {jsonLd.map((schema, index) => (
-          <script
-            key={index}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(schema),
-            }}
-          />
+          <JsonLd key={index} data={schema} />
         ))}
       </head>
 
