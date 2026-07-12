@@ -3,12 +3,10 @@ import { cn } from "@/utils/className";
 import { MyImage } from "../MyImage";
 import { slugify } from "@/utils/url";
 import Link from "next/link";
-import { HTMLMotionProps, motion } from "framer-motion";
-import { fadeInItem } from "@/libs/motion";
 import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
 import RightOutlinedSvg from "../svgs/RightOutlinedSvg";
 
-type PortfolioCardProps = HTMLMotionProps<"article"> & {
+type PortfolioCardProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
   activeTags: Set<string>;
 };
@@ -39,12 +37,7 @@ export const PortfolioCard = ({
   const extraTagCount = Math.max(0, item.tags.length - highlightTags.length);
 
   return (
-    <motion.article
-      id={cardId}
-      variants={fadeInItem}
-      className={cn(className)}
-      {...rest}
-    >
+    <div id={cardId} className={cn(className)} {...rest}>
       <Link
         href={href}
         // 整張卡片都是可點擊區域，並提供明確的 hover 與 focus 狀態。
@@ -107,7 +100,7 @@ export const PortfolioCard = ({
           <RightOutlinedSvg aria-hidden />
         </div>
       </Link>
-    </motion.article>
+    </div>
   );
 };
 

@@ -45,7 +45,6 @@ export const PortfolioExplorer = () => {
     () => [query, sort, [...tags].sort().join(","), currentPage].join("|"),
     [query, sort, tags, currentPage],
   );
-
   return (
     <>
       <PortfolioFilterBar

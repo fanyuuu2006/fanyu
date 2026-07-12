@@ -1,6 +1,6 @@
 "use client";
 import { PortfolioCard } from "./PortfolioCard";
-import { staggerContainer } from "@/libs/motion";
+import { fadeInItem, staggerContainer } from "@/libs/motion";
 import { AnimatePresence, motion } from "framer-motion";
 import { PortfolioItem } from "@/types";
 
@@ -20,27 +20,25 @@ export const PortfolioList = ({
       <div className="container flex flex-col gap-4">
         <AnimatePresence mode="wait">
           {items.length > 0 ? (
-            <>
-              <motion.div
-                initial="hiddenLeft"
-                animate="show"
-                exit="hiddenLeft"
-                variants={staggerContainer}
-                key={animationKey}
-              >
-                {/* 列表 */}
-                <div className="w-full divide-y divide-(--foreground)/25">
-                  {items.map((item) => (
-                    <PortfolioCard
-                      key={item.title}
-                      item={item}
-                      activeTags={activeTags}
-                      className="py-5 first:pt-0 last:pb-0"
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            </>
+            <motion.div
+              initial="hiddenLeft"
+              animate="show"
+              exit="hiddenRight"
+              variants={staggerContainer}
+              key={animationKey}
+              className="w-full divide-y divide-(--foreground)/25"
+            >
+              {/* 列表 */}
+              {items.map((item) => (
+                <motion.article
+                  key={item.title}
+                  variants={fadeInItem}
+                  className="py-5 first:pt-0 last:pb-0"
+                >
+                  <PortfolioCard item={item} activeTags={activeTags} />
+                </motion.article>
+              ))}
+            </motion.div>
           ) : (
             <motion.div
               key="empty"
