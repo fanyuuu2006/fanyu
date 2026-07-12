@@ -6,11 +6,11 @@ export const tagCategories = {
 
   frontend: ["React", "Next.js"],
 
-  backend: ["Node.js", "Express.js", "Flask", "Restful API"],
+  backend: ["Node.js", "Requests", "Express.js", "Flask", "Restful API"],
 
   database: ["Supabase"],
 
-  automation: ["Crawler", "Requests"],
+  automation: ["Crawler"],
 
   visualization: ["Matplotlib"],
 

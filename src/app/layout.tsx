@@ -47,7 +47,7 @@ export default function RootLayout({
 
       <body className={notoSansSC.className} suppressHydrationWarning>
         <ThemeProvider>
-          <Header />
+          <Header className="fixed top-0 w-full z-99999" />
           <main className="min-h-screen">{children}</main>
           <Footer />
           <BackToTopButton className="fixed bottom-4 right-4 z-999" />

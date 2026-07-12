@@ -26,7 +26,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
   return (
     <header
       className={cn(
-        "fixed top-0 w-full z-99999 flex flex-col bg-transparent backdrop-blur-xl transition-all",
+        "flex flex-col bg-transparent backdrop-blur-xl transition-all",
         className,
       )}
       {...rest}

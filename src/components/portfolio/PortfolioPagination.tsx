@@ -53,7 +53,7 @@ export const PortfolioPagination = ({
     >
       <button
         type="button"
-        className="btn rounded-xl px-4 py-2"
+        className="btn secondary rounded-xl px-4 py-2"
         disabled={page === 1}
         onClick={goToPrevious}
       >
@@ -79,7 +79,7 @@ export const PortfolioPagination = ({
 
       <button
         type="button"
-        className="btn rounded-xl px-4 py-2"
+        className="btn secondary rounded-xl px-4 py-2"
         disabled={page === totalPages}
         onClick={goToNext}
       >

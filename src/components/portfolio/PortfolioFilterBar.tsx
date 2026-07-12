@@ -194,7 +194,7 @@ export const PortfolioFilterBar = ({
                       />
                       {CATEGORY_LABELS[category]}
                     </span>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {categoryTags.map((tag) => {
                         const isActive = tags.has(tag);
                         return (
@@ -203,7 +203,7 @@ export const PortfolioFilterBar = ({
                             type="button"
                             onClick={() => onToggleTag(tag)}
                             className={cn(
-                              "btn rounded-full px-3 py-1 text-xs font-mono transition-transform duration-200 hover:scale-105 sm:text-sm",
+                              "btn rounded-full px-3 py-1 text-xs font-mono sm:text-sm",
                               { primary: isActive },
                             )}
                             aria-pressed={isActive}
