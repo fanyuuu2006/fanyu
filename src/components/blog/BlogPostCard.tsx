@@ -6,6 +6,7 @@ import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
 import RightOutlinedSvg from "../svgs/RightOutlinedSvg";
 import { BlogPost } from "@/types/blog";
 import { formatDate } from "@/utils/date";
+import CalendarOutlinedSvg from "../svgs/CalendarOutlinedSvg";
 
 type BlogPostCardProps = React.HTMLAttributes<HTMLDivElement> & {
   post: BlogPost;
@@ -67,13 +68,14 @@ export const BlogPostCard = ({
           <div className="flex items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-(--muted)">
               <span className="flex items-center gap-1">
-                <ClockOutlinedSvg aria-hidden />
+                <CalendarOutlinedSvg aria-hidden />
                 <time dateTime={String(post.date)}>
-                  {formatDate("YYYY 年 MM 月 DD 日", post.date)}
+                  {formatDate("YYYY年MM月DD日", post.date)}
                 </time>
               </span>
-              <span className="text-(--muted)">•</span>
-              <span>{post.readingTime} 分鐘閱讀</span>
+              <span className="flex items-center gap-1">
+                <ClockOutlinedSvg aria-hidden /> {post.readingTime}分鐘閱讀
+              </span>
             </div>
 
             {/* 箭頭改為 hover 才滑入顯示，與 PortfolioCard 的互動語言一致 */}

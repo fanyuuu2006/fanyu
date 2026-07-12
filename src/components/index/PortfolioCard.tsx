@@ -6,7 +6,7 @@ import { slugify } from "@/utils/url";
 import { DemoOutlinedSvg } from "../svgs/DemoOutlinedSvg";
 import "@/styles/portfolio-card.css";
 import InfoCircleOutlinedSvg from "../svgs/InfoCircleOutlinedSvg";
-import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
+import CalendarOutlinedSvg from "../svgs/CalendarOutlinedSvg";
 
 type PortfolioCardProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
@@ -39,7 +39,7 @@ export const PortfolioCard = ({
               {item.title}
             </h3>
             <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-(--muted)">
-              <ClockOutlinedSvg />
+              <CalendarOutlinedSvg />
               <time dateTime={item.date}>{item.date}</time>
             </div>
             <div className="mt-0.5 text-xs sm:text-sm line-clamp-2 sm:line-clamp-3">

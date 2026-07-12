@@ -17,10 +17,36 @@ export const estimateReadingTime = (content: string) => {
   return Math.max(1, Math.ceil(units));
 };
 
-let cachedPosts: BlogPost[] | null = null;
+const parseFrontMatter = (
+  slug: string,
+  data: BlogFrontMatter,
+  content: string,
+): BlogPost | null => {
+  if (!data.published) {
+    return null;
+  }
 
+  const parsedDate = data.date ? new Date(data.date) : null;
+  if (!parsedDate || Number.isNaN(parsedDate.getTime())) {
+    console.warn(`[blog] "${slug}" 缺少有效的 date,已略過`);
+    return null;
+  }
+
+  return {
+    slug,
+    title: data.title ?? "",
+    overview: data.overview ?? "",
+    description: data.description ?? "",
+    date: parsedDate.toISOString(),
+    tags: data.tags ?? [],
+    readingTime: estimateReadingTime(content),
+    content,
+    image: data.image ?? "",
+  };
+};
+
+let cachedPosts: BlogPost[] | null = null;
 export const getPosts = (): BlogPost[] => {
-  // production 才快取；dev 模式每次重讀，方便即時看到檔案異動
   if (cachedPosts && process.env.NODE_ENV === "production") {
     return cachedPosts;
   }
@@ -45,30 +71,7 @@ export const getPosts = (): BlogPost[] => {
           data: BlogFrontMatter;
           content: string;
         };
-
-        // 修復:未發布的文章要排除
-        if (!data.published) {
-          return null;
-        }
-
-        // 修復:沒有合法日期就跳過,而不是塞入 new Date()
-        const parsedDate = data.date ? new Date(data.date) : null;
-        if (!parsedDate || Number.isNaN(parsedDate.getTime())) {
-          console.warn(`[blog] "${slug}" 缺少有效的 date,已略過`);
-          return null;
-        }
-
-        return {
-          slug,
-          title: data.title ?? "",
-          overview: data.overview ?? "",
-          description: data.description ?? "",
-          date: parsedDate.toISOString(),
-          tags: data.tags ?? [],
-          readingTime: estimateReadingTime(content),
-          content,
-          image: data.image ?? "",
-        };
+        return parseFrontMatter(slug, data, content);
       } catch (err) {
         console.error(`[blog] 解析 "${file}" 失敗,已略過:`, err);
         return null;
@@ -79,4 +82,28 @@ export const getPosts = (): BlogPost[] => {
 
   cachedPosts = posts;
   return posts;
+};
+export const getPost = (slug: string): BlogPost | null => {
+  // production 且已有快取時，直接從快取撈，避免重複讀檔
+  if (cachedPosts && process.env.NODE_ENV === "production") {
+    return cachedPosts.find((post) => post.slug === slug) ?? null;
+  }
+
+  const fullPath = path.join(POSTS_PATH, `${slug}.md`);
+
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+
+  try {
+    const source = fs.readFileSync(fullPath, "utf-8");
+    const { data, content } = matter(source) as {
+      data: BlogFrontMatter;
+      content: string;
+    };
+    return parseFrontMatter(slug, data, content);
+  } catch (err) {
+    console.error(`[blog] 解析 "${slug}.md" 失敗:`, err);
+    return null;
+  }
 };

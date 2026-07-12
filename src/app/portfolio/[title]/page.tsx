@@ -1,10 +1,10 @@
-import { HeadingSection } from "@/components/HeadingSection";
 import { portfolioItems } from "@/libs/portfolio";
 import { deslugify } from "@/utils/url";
 import { HeroSection } from "@/components/portfolio/[title]/HeroSection";
 import { PortfolioContentSection } from "@/components/portfolio/[title]/PortfolioContentSection";
 import { JsonLd } from "@/components/JsonLd";
 import { createPortfolioDetailJsonLd } from "@/libs/jsonLd/portfolio";
+import { notFound } from "next/navigation";
 
 export default async function Portfolio(
   props: PageProps<"/portfolio/[title]">,
@@ -16,12 +16,7 @@ export default async function Portfolio(
   );
 
   if (!portfolioItem) {
-    return (
-      <HeadingSection
-        title="作品不存在"
-        description="找不到對應的作品，請確認網址是否正確。"
-      />
-    );
+    notFound();
   }
 
   return (

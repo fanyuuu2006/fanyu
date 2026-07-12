@@ -20,7 +20,7 @@ export const BackDiv = ({
   return (
     <div className={cn("flex", className)} {...props}>
       <button
-        className="btn flex items-center justify-center p-2.5 text-xl rounded-full"
+        className="btn secondary flex items-center justify-center p-2 text-xl rounded-full"
         onClick={handleBackClick}
         aria-label="返回"
       >

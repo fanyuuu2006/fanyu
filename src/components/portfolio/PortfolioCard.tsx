@@ -3,7 +3,7 @@ import { cn } from "@/utils/className";
 import { MyImage } from "../MyImage";
 import { slugify } from "@/utils/url";
 import Link from "next/link";
-import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
+import CalendarOutlinedSvg from "../svgs/CalendarOutlinedSvg";
 import RightOutlinedSvg from "../svgs/RightOutlinedSvg";
 
 type PortfolioCardProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -66,7 +66,7 @@ export const PortfolioCard = ({
               {/* 目前只保留最有辨識度的日期資訊，避免卡片塞入過多雜訊。 */}
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-(--muted)">
                 <span className="flex items-center gap-1 font-mono">
-                  <ClockOutlinedSvg aria-hidden />
+                  <CalendarOutlinedSvg aria-hidden />
                   <time dateTime={item.date}>{item.date}</time>
                 </span>
               </div>

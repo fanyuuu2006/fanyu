@@ -5,7 +5,7 @@ import { cn } from "@/utils/className";
 import { GitHubBadgeDiv } from "./GitHubBadgeDiv";
 import GithubSvg from "@/components/svgs/GithubSvg";
 import { DemoOutlinedSvg } from "@/components/svgs/DemoOutlinedSvg";
-import { BackDiv } from "./BackDiv";
+import { BackDiv } from "../../BackDiv";
 
 type HeroSectionProps = React.HTMLAttributes<HTMLElement> & {
   item: PortfolioItem;

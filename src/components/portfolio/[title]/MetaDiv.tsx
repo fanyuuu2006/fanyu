@@ -6,7 +6,7 @@ import { DivTitle } from "./DivTitle";
 import { GitHubLanguagesDiv } from "./GithubLanguagesDiv";
 import LinkOutlinedSvg from "@/components/svgs/LinkOutlinedSvg";
 import GithubSvg from "@/components/svgs/GithubSvg";
-import ClockOutlinedSvg from "@/components/svgs/ClockOutlinedSvg";
+import CalendarOutlinedSvg from "@/components/svgs/CalendarOutlinedSvg";
 
 export const formatDate = (date: string) => {
   const [year, month, day] = date.split("-").map(Number);
@@ -38,7 +38,7 @@ export const MetaDiv = ({ className, item, ...rest }: MetaDivProps) => {
         <DivTitle>關於</DivTitle>
         <div className="flex flex-col p-2 gap-2 text-sm sm:text-base text-(--muted)">
           <div className="flex items-center gap-1.5">
-            <ClockOutlinedSvg aria-hidden />
+            <CalendarOutlinedSvg aria-hidden />
             <time dateTime={toISODateTime(item.date)}>
               {formatDate(item.date)}
             </time>
