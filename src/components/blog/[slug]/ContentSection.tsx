@@ -1,5 +1,5 @@
-import { MyMarkdown } from "@/components/MyMarkdown";
 import { cn } from "@/utils/className";
+import { BlogMarkdown } from "./BlogMarkdown";
 
 type ContentSectionProps = React.HTMLAttributes<HTMLElement> & {
   content: string;
@@ -12,7 +12,7 @@ export const ContentSection = ({
   return (
     <section {...rest} className={cn("py-8", className)}>
       <div className="container">
-        <MyMarkdown>{content}</MyMarkdown>
+        <BlogMarkdown>{content}</BlogMarkdown>
       </div>
     </section>
   );

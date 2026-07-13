@@ -1,7 +1,7 @@
 import { CodeBlock, CodeTokenProps } from "c063";
 import React, { useMemo } from "react";
 import { OverrideProps } from "fanyucomponents";
-import { CopyButton } from "./CopyButton";
+import { CopyButton } from "../CopyButton";
 import { cn } from "@/utils/className";
 import { extractReactNode } from "@/utils/highlight";
 import { useTheme } from "@/contexts/ThemeContext";

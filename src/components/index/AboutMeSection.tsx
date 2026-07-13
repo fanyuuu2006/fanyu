@@ -1,7 +1,7 @@
 "use client";
 import { c063 } from "c063";
 import { useMemo } from "react";
-import { CodeCard } from "../CodeCard";
+import { CodeCard } from "./CodeCard";
 import { cn } from "@/utils/className";
 import { MySection } from "./MySection";
 import { OutsideLink } from "fanyucomponents";

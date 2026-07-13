@@ -1,12 +1,11 @@
+import { CodePre } from "@/components/CodePre";
+import { CustomLink } from "@/components/CustomLink";
+import { MyImage } from "@/components/MyImage";
 import { cn } from "@/utils/className";
+import { headingToAnchor } from "@/utils/markdown";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import { MyImage } from "./MyImage";
-import { CodePre } from "./CodePre";
-import { CustomLink } from "./CustomLink";
-import { headingToAnchor } from "@/utils/markdown";
-
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 const headingStyles: Record<HeadingTag, string> = {
@@ -18,28 +17,6 @@ const headingStyles: Record<HeadingTag, string> = {
   h6: "text-[0.85em] text-(--muted)",
 };
 
-const headingAnchorOffset: Record<HeadingTag, string> = {
-  h1: "translateY(calc(-50% - 0.3em))",
-  h2: "translateY(calc(-50% - 0.3em))",
-  h3: "translateY(-50%)",
-  h4: "translateY(-50%)",
-  h5: "translateY(-50%)",
-  h6: "translateY(-50%)",
-};
-
-const HeadingAnchorIcon = () => (
-  <svg
-    viewBox="0 0 16 16"
-    version="1.1"
-    width="1em"
-    height="1em"
-    aria-hidden="true"
-    fill="currentColor"
-  >
-    <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z" />
-  </svg>
-);
-
 const createHeading = (tag: HeadingTag) => {
   const Tag = tag;
   const Heading = ({
@@ -50,48 +27,33 @@ const createHeading = (tag: HeadingTag) => {
     const id = headingToAnchor(children);
 
     return (
-      <div className="relative group">
-        <a
-          href={`#${id}`}
-          className={cn(
-            "absolute left-[-1.5em]",
-            "top-1/2",
-            "flex h-[1.5em] w-[1.5em] items-center justify-center",
-            "rounded-md opacity-0 transition-opacity",
-            "group-hover:opacity-100",
-          )}
-          style={{ transform: headingAnchorOffset[tag] }}
-        >
-          <HeadingAnchorIcon />
-        </a>
-        <Tag
-          id={id}
-          tabIndex={-1}
-          className={cn(
-            "mt-6 mb-4 font-semibold leading-tight",
-            headingStyles[tag],
-            className,
-          )}
-          {...rest}
-        >
-          {children}
-        </Tag>
-      </div>
+      <Tag
+        id={id}
+        tabIndex={-1}
+        className={cn(
+          "mt-6 mb-4 font-semibold leading-tight",
+          headingStyles[tag],
+          className,
+        )}
+        {...rest}
+      >
+        {children}
+      </Tag>
     );
   };
 
   return Heading;
 };
 
-type MyMarkdownProps = React.HTMLAttributes<HTMLElement> & {
+type BlogMarkdownProps = React.HTMLAttributes<HTMLElement> & {
   children: string;
 };
 
-export const MyMarkdown = ({
+export const BlogMarkdown = ({
   children,
   className,
   ...rest
-}: MyMarkdownProps) => {
+}: BlogMarkdownProps) => {
   return (
     <article
       className={cn(
@@ -218,11 +180,11 @@ export const MyMarkdown = ({
           ),
 
           hr: () => (
-            <hr className="my-6 h-[0.25em] p-0 bg-(--border) border-0 overflow-hidden" />
+            <hr className="Blog-6 h-[0.25em] p-0 bg-(--border) border-0 overflow-hidden" />
           ),
 
           table: ({ children }) => (
-            <div className="my-6 overflow-x-auto">
+            <div className="Blog-6 overflow-x-auto">
               <table className="border-spacing-0 border-collapse block w-max max-w-full overflow-auto [font-variant:tabular-nums]">
                 {children}
               </table>

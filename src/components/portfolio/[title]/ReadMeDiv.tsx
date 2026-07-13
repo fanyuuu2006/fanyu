@@ -1,10 +1,10 @@
-import { MyMarkdown } from "@/components/MyMarkdown";
 import { PortfolioItem } from "@/types";
 import { getGithubReadMe, transformMarkdownLinks } from "@/utils/github";
 import { OutsideLink } from "fanyucomponents";
 import { cn } from "@/utils/className";
 import ReadMeSvg from "@/components/svgs/ReadMeSvg";
 import { ReadMeOutline } from "./ReadMeOutline";
+import { ReadMeMarkdown } from "./ReadMeMarkdown";
 
 type ReadMeDivProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
@@ -35,9 +35,9 @@ export const ReadMeDiv = async ({
           </h3>
           <ReadMeOutline content={content} />
         </div>
-        <MyMarkdown className="text-sm md:text-base p-6 lg:p-8">
+        <ReadMeMarkdown className="text-sm md:text-base p-6 lg:p-8">
           {transformMarkdownLinks(content, repo)}
-        </MyMarkdown>
+        </ReadMeMarkdown>
       </div>
     </div>
   );

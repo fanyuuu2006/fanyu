@@ -3,8 +3,8 @@ import { OutsideLink } from "fanyucomponents";
 import { MyImage } from "../MyImage";
 import { useMemo, useState } from "react";
 import { ExperienceItem } from "@/types/experience";
-import { MyMarkdown } from "../MyMarkdown";
 import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
+import { ExperienceMarkdown } from "./ExperienceMarkdown";
 
 const getStartDate = (duration: ExperienceItem["duration"]) => {
   return typeof duration === "string" ? duration : duration.start;
@@ -97,9 +97,9 @@ export const ExperienceDiv = ({
                       <p className="text-(--muted) text-sm">{item.subtitle}</p>
                     )}
                     {item.description && (
-                      <MyMarkdown className="text-(--muted) text-sm md:text-base">
+                      <ExperienceMarkdown className="text-(--muted) text-sm md:text-base">
                         {item.description}
-                      </MyMarkdown>
+                      </ExperienceMarkdown>
                     )}
                   </div>
                 </div>
