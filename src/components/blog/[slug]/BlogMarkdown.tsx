@@ -1,11 +1,9 @@
 import { CodePre } from "@/components/CodePre";
 import { CustomLink } from "@/components/CustomLink";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { MyImage } from "@/components/MyImage";
 import { cn } from "@/utils/className";
 import { headingToAnchor } from "@/utils/markdown";
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 const headingStyles: Record<HeadingTag, string> = {
@@ -55,200 +53,195 @@ export const BlogMarkdown = ({
   ...rest
 }: BlogMarkdownProps) => {
   return (
-    <article
+    <MarkdownRenderer
       className={cn(
         "text-base leading-normal wrap-break-word [&>*:first-child]:mt-0",
         className,
       )}
-      {...rest}
-    >
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={{
-          h1: createHeading("h1"),
-          h2: createHeading("h2"),
-          h3: createHeading("h3"),
-          h4: createHeading("h4"),
-          h5: createHeading("h5"),
-          h6: createHeading("h6"),
+      components={{
+        h1: createHeading("h1"),
+        h2: createHeading("h2"),
+        h3: createHeading("h3"),
+        h4: createHeading("h4"),
+        h5: createHeading("h5"),
+        h6: createHeading("h6"),
 
-          div: ({ children, ...rest }) => (
-            <div {...rest} style={undefined}>
-              {children}
-            </div>
-          ),
-          picture: ({ children, ...rest }) => (
-            <picture className="" {...rest}>
-              {children}
-            </picture>
-          ),
-          p: ({ children, ...rest }) => (
-            <p dir="auto" className="mt-0 mb-4" {...rest}>
-              {children}
-            </p>
-          ),
+        div: ({ children, ...rest }) => (
+          <div {...rest} style={undefined}>
+            {children}
+          </div>
+        ),
+        picture: ({ children, ...rest }) => (
+          <picture className="" {...rest}>
+            {children}
+          </picture>
+        ),
+        p: ({ children, ...rest }) => (
+          <p dir="auto" className="mt-0 mb-4" {...rest}>
+            {children}
+          </p>
+        ),
 
-          img: ({ className, style, width, height, ...props }) => {
-            return (
-              <MyImage
-                width={width}
-                height={height}
-                style={{
-                  ...style,
-                  width: width ? `${width}px` : undefined,
-                  height: height ? `${height}px` : undefined,
-                }}
-                className={cn(
-                  "inline max-w-full box-content border-none",
-                  className,
-                )}
-                {...props}
-              />
-            );
-          },
-          strong: ({ children }) => (
-            <strong className="font-semibold">{children}</strong>
-          ),
-
-          em: ({ children }) => <em className="italic">{children}</em>,
-
-          ul: ({ children, className }) => (
-            <ul
+        img: ({ className, style, width, height, ...props }) => {
+          return (
+            <MyImage
+              width={width}
+              height={height}
+              style={{
+                ...style,
+                width: width ? `${width}px` : undefined,
+                height: height ? `${height}px` : undefined,
+              }}
               className={cn(
-                "mt-0 mb-4 list-disc pl-[2em] [&_ul]:list-[circle] [&_ul_ul]:list-[square]",
+                "inline max-w-full box-content border-none",
                 className,
               )}
-            >
-              {children}
-            </ul>
-          ),
+              {...props}
+            />
+          );
+        },
+        strong: ({ children }) => (
+          <strong className="font-semibold">{children}</strong>
+        ),
 
-          ol: ({ children, className }) => (
-            <ol className={cn("mt-0 mb-4 list-decimal pl-[2em]", className)}>
-              {children}
-            </ol>
-          ),
+        em: ({ children }) => <em className="italic">{children}</em>,
 
-          li: ({ children }) => (
-            <li className="mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
-              {children}
-            </li>
-          ),
+        ul: ({ children, className }) => (
+          <ul
+            className={cn(
+              "mt-0 mb-4 list-disc pl-[2em] [&_ul]:list-[circle] [&_ul_ul]:list-[square]",
+              className,
+            )}
+          >
+            {children}
+          </ul>
+        ),
 
-          a: ({ href, children, className, ...rest }) => (
-            <CustomLink
-              href={href}
-              className={cn(
-                "text-(--primary) underline transition-opacity",
-                className,
-              )}
-              {...rest}
-            >
-              {children}
-            </CustomLink>
-          ),
+        ol: ({ children, className }) => (
+          <ol className={cn("mt-0 mb-4 list-decimal pl-[2em]", className)}>
+            {children}
+          </ol>
+        ),
 
-          code: ({ className, children, ...props }) => {
-            const isBlock = className?.startsWith("language-");
-            if (isBlock) {
-              return (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              );
-            }
+        li: ({ children }) => (
+          <li className="mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
+            {children}
+          </li>
+        ),
+
+        a: ({ href, children, className, ...rest }) => (
+          <CustomLink
+            href={href}
+            className={cn(
+              "text-(--primary) underline transition-opacity",
+              className,
+            )}
+            {...rest}
+          >
+            {children}
+          </CustomLink>
+        ),
+
+        code: ({ className, children, ...props }) => {
+          const isBlock = className?.startsWith("language-");
+          if (isBlock) {
             return (
-              <code
-                className={cn(
-                  className,
-                  "rounded-md bg-(--foreground)/15 px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
-                )}
-                {...props}
-              >
+              <code className={className} {...props}>
                 {children}
               </code>
             );
-          },
-
-          pre: CodePre,
-
-          blockquote: ({ children }) => (
-            <blockquote className="m-0 mb-4 pl-[1em] border-l-[0.25em] border-(--border) text-(--muted) *:first:mt-0 *:last:mb-0">
-              {children}
-            </blockquote>
-          ),
-
-          hr: () => (
-            <hr className="Blog-6 h-[0.25em] p-0 bg-(--border) border-0 overflow-hidden" />
-          ),
-
-          table: ({ children }) => (
-            <div className="Blog-6 overflow-x-auto">
-              <table className="border-spacing-0 border-collapse block w-max max-w-full overflow-auto [font-variant:tabular-nums]">
-                {children}
-              </table>
-            </div>
-          ),
-
-          thead: ({ children }) => <thead>{children}</thead>,
-          tbody: ({ children }) => <tbody>{children}</tbody>,
-
-          th: ({ children }) => (
-            <th className="px-3.25 py-1.5 border border-(--border) font-semibold text-left bg-(--primary-background)">
-              {children}
-            </th>
-          ),
-
-          td: ({ children }) => (
-            <td className="px-3.25 py-1.5 border border-(--border) align-center *:last:mb-0">
-              {children}
-            </td>
-          ),
-
-          tr: ({ children, ...props }) => (
-            <tr
-              className="bg-(--primary-background) border-t border-(--border) even:bg-(--secondary-background)"
+          }
+          return (
+            <code
+              className={cn(
+                className,
+                "rounded-md bg-(--foreground)/15 px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
+              )}
               {...props}
             >
               {children}
-            </tr>
-          ),
+            </code>
+          );
+        },
 
-          dl: ({ children }) => <dl className="mt-0 mb-4 p-0">{children}</dl>,
-          dt: ({ children }) => (
-            <dt className="mt-4 p-0 text-[1em] italic font-semibold">
-              {children}
-            </dt>
-          ),
-          dd: ({ children }) => <dd className="mb-4 ml-0 px-4">{children}</dd>,
+        pre: CodePre,
 
-          mark: ({ children }) => (
-            <mark className="bg-(--primary)/20 text-(--foreground) rounded-sm px-[0.2em]">
-              {children}
-            </mark>
-          ),
+        blockquote: ({ children }) => (
+          <blockquote className="m-0 mb-4 pl-[1em] border-l-[0.25em] border-(--border) text-(--muted) *:first:mt-0 *:last:mb-0">
+            {children}
+          </blockquote>
+        ),
 
-          kbd: ({ children }) => (
-            <kbd className="inline-block py-[0.15em] px-[0.4em] font-mono text-[0.8em] leading-normal align-middle bg-(--secondary-background) border border-(--border) rounded-(--border-radius-sm) shadow-[inset_0_-1px_0_var(--border)]">
-              {children}
-            </kbd>
-          ),
+        hr: () => (
+          <hr className="Blog-6 h-[0.25em] p-0 bg-(--border) border-0 overflow-hidden" />
+        ),
 
-          sub: ({ children }) => (
-            <sub className="text-[75%] leading-none relative align-baseline bottom-[-0.25em]">
+        table: ({ children }) => (
+          <div className="Blog-6 overflow-x-auto">
+            <table className="border-spacing-0 border-collapse block w-max max-w-full overflow-auto [font-variant:tabular-nums]">
               {children}
-            </sub>
-          ),
-          sup: ({ children }) => (
-            <sup className="text-[75%] leading-none relative align-baseline top-[-0.5em]">
-              {children}
-            </sup>
-          ),
-        }}
-      >
-        {children}
-      </ReactMarkdown>
-    </article>
+            </table>
+          </div>
+        ),
+
+        thead: ({ children }) => <thead>{children}</thead>,
+        tbody: ({ children }) => <tbody>{children}</tbody>,
+
+        th: ({ children }) => (
+          <th className="px-3.25 py-1.5 border border-(--border) font-semibold text-left bg-(--primary-background)">
+            {children}
+          </th>
+        ),
+
+        td: ({ children }) => (
+          <td className="px-3.25 py-1.5 border border-(--border) align-center *:last:mb-0">
+            {children}
+          </td>
+        ),
+
+        tr: ({ children, ...props }) => (
+          <tr
+            className="bg-(--primary-background) border-t border-(--border) even:bg-(--secondary-background)"
+            {...props}
+          >
+            {children}
+          </tr>
+        ),
+
+        dl: ({ children }) => <dl className="mt-0 mb-4 p-0">{children}</dl>,
+        dt: ({ children }) => (
+          <dt className="mt-4 p-0 text-[1em] italic font-semibold">
+            {children}
+          </dt>
+        ),
+        dd: ({ children }) => <dd className="mb-4 ml-0 px-4">{children}</dd>,
+
+        mark: ({ children }) => (
+          <mark className="bg-(--primary)/20 text-(--foreground) rounded-sm px-[0.2em]">
+            {children}
+          </mark>
+        ),
+
+        kbd: ({ children }) => (
+          <kbd className="inline-block py-[0.15em] px-[0.4em] font-mono text-[0.8em] leading-normal align-middle bg-(--secondary-background) border border-(--border) rounded-(--border-radius-sm) shadow-[inset_0_-1px_0_var(--border)]">
+            {children}
+          </kbd>
+        ),
+
+        sub: ({ children }) => (
+          <sub className="text-[75%] leading-none relative align-baseline bottom-[-0.25em]">
+            {children}
+          </sub>
+        ),
+        sup: ({ children }) => (
+          <sup className="text-[75%] leading-none relative align-baseline top-[-0.5em]">
+            {children}
+          </sup>
+        ),
+      }}
+      {...rest}
+    >
+      {children}
+    </MarkdownRenderer>
   );
 };
