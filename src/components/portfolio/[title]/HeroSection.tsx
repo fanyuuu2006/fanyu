@@ -35,7 +35,7 @@ export const HeroSection = ({
   ];
 
   return (
-    <section id="hero" className={cn("mt-32", className)} {...props}>
+    <section id="hero" className={cn("mt-24", className)} {...props}>
       <div className="container flex flex-col gap-5">
         {/* Back */}
         <BackDiv />

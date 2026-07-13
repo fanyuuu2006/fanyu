@@ -4,6 +4,7 @@ import { MyImage } from "@/components/MyImage";
 import { BlogPost } from "@/types/blog";
 import ClockOutlinedSvg from "@/components/svgs/ClockOutlinedSvg";
 import CalendarOutlinedSvg from "@/components/svgs/CalendarOutlinedSvg";
+import { formatDate } from "@/utils/date";
 
 type HeroSectionProps = React.HTMLAttributes<HTMLElement> & {
   post: BlogPost;
@@ -14,18 +15,10 @@ export const HeroSection = ({
   className,
   ...props
 }: HeroSectionProps) => {
-  const formattedDate = new Date(post.date).toLocaleDateString("zh-TW", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = formatDate("YYYY年MM月DD日", post.date);
 
   return (
-    <section
-      id="hero"
-      className={cn("mt-20 sm:mt-24 md:mt-32", className)}
-      {...props}
-    >
+    <section id="hero" className={cn("mt-24", className)} {...props}>
       <div className="container flex flex-col gap-4 sm:gap-5">
         {/* Back */}
         <BackDiv />

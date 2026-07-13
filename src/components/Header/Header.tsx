@@ -31,7 +31,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
       )}
       {...rest}
     >
-      <div className="container flex items-center justify-between">
+      <div className="container flex items-center justify-between py-2">
         <Link href="/" onClick={closeMenu} aria-label="FanYu 首頁">
           <LogoSvg className="h-16 object-contain text-(--primary) transition-all duration-300" />
           <span className="sr-only">{site.title}</span>

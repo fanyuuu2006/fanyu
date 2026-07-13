@@ -60,7 +60,7 @@ export const PortfolioExplorer = () => {
         onToggleTag={toggleTag}
         onClearTags={clearTags}
         onSortToggle={toggleSort}
-        className="sticky top-28 z-99"
+        className="sticky top-24 z-99"
       />
       <PortfolioList
         items={pagedItems}
