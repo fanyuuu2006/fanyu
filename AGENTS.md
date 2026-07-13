@@ -96,7 +96,7 @@ This project is mostly route-based and component-based. Content and configuratio
 # Tailwind Rules
 
 - Tailwind 4 is used directly with the CSS-first setup in `src/styles/globals.css`.
-- The codebase uses many arbitrary values and CSS variable-based utilities such as `text-(--muted)`, `rounded-(--border-radius-lg)`, and `bg-linear-to-r`.
+- The codebase uses many arbitrary values and CSS variable-based utilities such as `text-(--muted)`, and `bg-linear-to-r`.
 - Use Tailwind utility classes for layout and spacing before adding extra CSS.
 - Use `cn()` for conditional Tailwind classes.
 - Do not assume a `tailwind.config.*` file exists; this project does not have one.
@@ -122,11 +122,6 @@ This project follows a token-based design system defined in `src/styles/globals.
 - Use values such as `text-(--foreground)`, `text-(--muted)`, `bg-(--background)`, `bg-(--primary-background)`, and `bg-(--secondary-background)`.
 - Never hardcode colors like `#fff`, `#000`, or brand blues when an existing token can express the same intent.
 - Use hardcoded colors only when matching a specific external asset or a literal data-driven value.
-
-## Radius
-
-- Prefer `rounded-(--border-radius-sm)`, `rounded-(--border-radius-md)`, and `rounded-(--border-radius-lg)`.
-- Keep new radius values aligned with the existing token scale.
 
 ## Shadows
 

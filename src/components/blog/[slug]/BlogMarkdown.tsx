@@ -9,7 +9,7 @@ type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 const headingStyles: Record<HeadingTag, string> = {
   h1: "text-[2.25rem] leading-tight mt-0 mb-4",
-  h2: "text-[1.5rem] pb-2 border-b border-(--border) mt-12 mb-4",
+  h2: "text-[1.5rem] pb-2 mt-12 mb-4",
   h3: "text-[1.25rem] mt-8 mb-3",
   h4: "text-[1.1rem] mt-6 mb-2",
   h5: "text-[1rem] mt-6 mb-2",
@@ -42,8 +42,8 @@ const createHeading = (tag: HeadingTag) => {
             "absolute left-[-1.5em]",
             "top-1/2",
             "flex h-[1.5em] w-[1.5em] items-center justify-center",
-            "rounded-sm opacity-0 transition-opacity",
-            "group-hover:opacity-100",
+            "rounded-sm opacity-0 transition-opacity duration-200",
+            "group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100",
           )}
           style={{ transform: headingAnchorOffset[tag] }}
         >
@@ -80,7 +80,7 @@ export const BlogMarkdown = ({
   return (
     <MarkdownRenderer
       className={cn(
-        "text-[18px] leading-[1.8] wrap-break-word [&>*:first-child]:mt-0",
+        "leading-[1.8] wrap-break-word [&>*:first-child]:mt-0",
         className,
       )}
       components={{
@@ -165,7 +165,7 @@ export const BlogMarkdown = ({
           <CustomLink
             href={href}
             className={cn(
-              "text-(--primary) underline underline-offset-2 decoration-(--primary)/40 hover:decoration-(--primary) transition-colors",
+              "text-(--primary) underline underline-offset-2 decoration-(--primary)/40 hover:decoration-(--primary) transition-colors  duration-200",
               className,
             )}
             {...rest}
