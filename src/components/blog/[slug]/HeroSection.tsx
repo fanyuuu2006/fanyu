@@ -30,20 +30,6 @@ export const HeroSection = ({
         {/* Back */}
         <BackDiv />
 
-        {/* 標籤 */}
-        {post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="card rounded-full px-2.5 py-1 text-xs font-mono transition-all duration-300"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-
         {/* 標題 */}
         <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">
           {post.title}
@@ -66,6 +52,19 @@ export const HeroSection = ({
             <ClockOutlinedSvg aria-hidden />約 {post.readingTime} 分鐘閱讀
           </span>
         </div>
+        {/* 標籤 */}
+        {post.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="card rounded-full px-2.5 py-1 text-xs font-mono transition-all duration-300"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* 封面圖 */}
         <MyImage
