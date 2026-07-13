@@ -9,7 +9,7 @@ tags:
   - Next.js
   - 個人網站
 published: true
-image: https://fanyu.vercel.app/images/fanyu.jpg
+image: /images/posts/my-first-post/cover.webp
 ---
 
 ## 大家好，我是飯魚
