@@ -2,17 +2,27 @@ import { CodePre } from "@/components/CodePre";
 import { CustomLink } from "@/components/CustomLink";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import { MyImage } from "@/components/MyImage";
+import LinkOutlinedSvg from "@/components/svgs/LinkOutlinedSvg";
 import { cn } from "@/utils/className";
 import { headingToAnchor } from "@/utils/markdown";
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 const headingStyles: Record<HeadingTag, string> = {
-  h1: "text-[2em] pb-[0.3em] border-b border-(--border)",
-  h2: "text-[1.5em] pb-[0.3em] border-b border-(--border)",
-  h3: "text-[1.25em]",
-  h4: "text-[1em]",
-  h5: "text-[0.875em]",
-  h6: "text-[0.85em] text-(--muted)",
+  h1: "text-[2.25rem] leading-tight mt-0 mb-4",
+  h2: "text-[1.5rem] pb-2 border-b border-(--border) mt-12 mb-4",
+  h3: "text-[1.25rem] mt-8 mb-3",
+  h4: "text-[1.1rem] mt-6 mb-2",
+  h5: "text-[1rem] mt-6 mb-2",
+  h6: "text-[0.9rem] text-(--muted) mt-6 mb-2",
+};
+
+const headingAnchorOffset: Record<HeadingTag, string> = {
+  h1: "translateY(calc(-50% - 0.3em))",
+  h2: "translateY(calc(-50% - 0.3em))",
+  h3: "translateY(-50%)",
+  h4: "translateY(-50%)",
+  h5: "translateY(-50%)",
+  h6: "translateY(-50%)",
 };
 
 const createHeading = (tag: HeadingTag) => {
@@ -25,18 +35,33 @@ const createHeading = (tag: HeadingTag) => {
     const id = headingToAnchor(children);
 
     return (
-      <Tag
-        id={id}
-        tabIndex={-1}
-        className={cn(
-          "mt-6 mb-4 font-semibold leading-tight",
-          headingStyles[tag],
-          className,
-        )}
-        {...rest}
-      >
-        {children}
-      </Tag>
+      <div className="relative group">
+        <a
+          href={`#${id}`}
+          className={cn(
+            "absolute left-[-1.5em]",
+            "top-1/2",
+            "flex h-[1.5em] w-[1.5em] items-center justify-center",
+            "rounded-sm opacity-0 transition-opacity",
+            "group-hover:opacity-100",
+          )}
+          style={{ transform: headingAnchorOffset[tag] }}
+        >
+          <LinkOutlinedSvg />
+        </a>
+        <Tag
+          id={id}
+          tabIndex={-1}
+          className={cn(
+            "font-bold leading-tight scroll-mt-24",
+            headingStyles[tag],
+            className,
+          )}
+          {...rest}
+        >
+          {children}
+        </Tag>
+      </div>
     );
   };
 
@@ -55,7 +80,7 @@ export const BlogMarkdown = ({
   return (
     <MarkdownRenderer
       className={cn(
-        "text-base leading-normal wrap-break-word [&>*:first-child]:mt-0",
+        "text-[18px] leading-[1.8] wrap-break-word [&>*:first-child]:mt-0",
         className,
       )}
       components={{
@@ -77,7 +102,7 @@ export const BlogMarkdown = ({
           </picture>
         ),
         p: ({ children, ...rest }) => (
-          <p dir="auto" className="mt-0 mb-4" {...rest}>
+          <p dir="auto" className="mt-0 mb-5" {...rest}>
             {children}
           </p>
         ),
@@ -93,7 +118,7 @@ export const BlogMarkdown = ({
                 height: height ? `${height}px` : undefined,
               }}
               className={cn(
-                "inline max-w-full box-content border-none",
+                "block mx-auto max-w-full max-h-150 h-auto object-contain rounded-xl my-6",
                 className,
               )}
               {...props}
@@ -101,7 +126,9 @@ export const BlogMarkdown = ({
           );
         },
         strong: ({ children }) => (
-          <strong className="font-semibold">{children}</strong>
+          <strong className="font-semibold text-(--foreground)">
+            {children}
+          </strong>
         ),
 
         em: ({ children }) => <em className="italic">{children}</em>,
@@ -109,7 +136,7 @@ export const BlogMarkdown = ({
         ul: ({ children, className }) => (
           <ul
             className={cn(
-              "mt-0 mb-4 list-disc pl-[2em] [&_ul]:list-[circle] [&_ul_ul]:list-[square]",
+              "mt-0 mb-5 list-disc pl-[1.75em] space-y-1 [&_ul]:list-[circle] [&_ul_ul]:list-[square]",
               className,
             )}
           >
@@ -118,13 +145,18 @@ export const BlogMarkdown = ({
         ),
 
         ol: ({ children, className }) => (
-          <ol className={cn("mt-0 mb-4 list-decimal pl-[2em]", className)}>
+          <ol
+            className={cn(
+              "mt-0 mb-5 list-decimal pl-[1.75em] space-y-1",
+              className,
+            )}
+          >
             {children}
           </ol>
         ),
 
         li: ({ children }) => (
-          <li className="mt-[0.25em] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
+          <li className="mt-1 leading-[1.8] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
             {children}
           </li>
         ),
@@ -133,7 +165,7 @@ export const BlogMarkdown = ({
           <CustomLink
             href={href}
             className={cn(
-              "text-(--primary) underline transition-opacity",
+              "text-(--primary) underline underline-offset-2 decoration-(--primary)/40 hover:decoration-(--primary) transition-colors",
               className,
             )}
             {...rest}
@@ -155,7 +187,7 @@ export const BlogMarkdown = ({
             <code
               className={cn(
                 className,
-                "rounded-md bg-(--foreground)/15 px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
+                "rounded-sm bg-(--foreground)/10 px-[0.4em] py-[0.2em] font-mono text-[85%] whitespace-break-spaces",
               )}
               {...props}
             >
@@ -167,18 +199,18 @@ export const BlogMarkdown = ({
         pre: CodePre,
 
         blockquote: ({ children }) => (
-          <blockquote className="m-0 mb-4 pl-[1em] border-l-[0.25em] border-(--border) text-(--muted) *:first:mt-0 *:last:mb-0">
+          <blockquote className="my-6 py-2 pl-5 pr-4 rounded-tr-md rounded-br-md border-l-4 border-(--primary)/50 bg-(--secondary-background) text-(--muted) *:first:mt-0 *:last:mb-0">
             {children}
           </blockquote>
         ),
 
         hr: () => (
-          <hr className="Blog-6 h-[0.25em] p-0 bg-(--border) border-0 overflow-hidden" />
+          <hr className="my-12 h-px p-0 bg-(--border) border-0 overflow-hidden" />
         ),
 
         table: ({ children }) => (
-          <div className="Blog-6 overflow-x-auto">
-            <table className="border-spacing-0 border-collapse block w-max max-w-full overflow-auto [font-variant:tabular-nums]">
+          <div className="Blog-6 overflow-x-auto my-6">
+            <table className="border-spacing-0 border-collapse block w-max max-w-full overflow-auto text-[0.95em] [font-variant:tabular-nums]">
               {children}
             </table>
           </div>
@@ -208,13 +240,13 @@ export const BlogMarkdown = ({
           </tr>
         ),
 
-        dl: ({ children }) => <dl className="mt-0 mb-4 p-0">{children}</dl>,
+        dl: ({ children }) => <dl className="mt-0 mb-5 p-0">{children}</dl>,
         dt: ({ children }) => (
           <dt className="mt-4 p-0 text-[1em] italic font-semibold">
             {children}
           </dt>
         ),
-        dd: ({ children }) => <dd className="mb-4 ml-0 px-4">{children}</dd>,
+        dd: ({ children }) => <dd className="mb-5 ml-0 px-4">{children}</dd>,
 
         mark: ({ children }) => (
           <mark className="bg-(--primary)/20 text-(--foreground) rounded-sm px-[0.2em]">
@@ -223,7 +255,7 @@ export const BlogMarkdown = ({
         ),
 
         kbd: ({ children }) => (
-          <kbd className="inline-block py-[0.15em] px-[0.4em] font-mono text-[0.8em] leading-normal align-middle bg-(--secondary-background) border border-(--border) rounded-(--border-radius-sm) shadow-[inset_0_-1px_0_var(--border)]">
+          <kbd className="inline-block py-[0.15em] px-[0.4em] font-mono text-[0.8em] leading-normal align-middle bg-(--secondary-background) border border-(--border) rounded-sm shadow-[inset_0_-1px_0_var(--border)]">
             {children}
           </kbd>
         ),

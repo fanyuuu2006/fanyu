@@ -33,7 +33,7 @@ published: true
 
 ## 實際進入物流現場工作後
 
-<!-- ![物流現場](/images/posts/my-first-part-time-job-experience/warehouse.webp) -->
+![物流現場](/images/posts/my-first-part-time-job-experience/warehouse.webp)
 
 實際開始工作後，才發現現場和原本想像中的情況不太一樣。
 

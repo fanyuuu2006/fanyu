@@ -12,7 +12,7 @@ export const ContentSection = ({
   return (
     <section {...rest} className={cn("py-8", className)}>
       <div className="container">
-        <BlogMarkdown>{content}</BlogMarkdown>
+        <BlogMarkdown className="max-w-180 mx-auto">{content}</BlogMarkdown>
       </div>
     </section>
   );
