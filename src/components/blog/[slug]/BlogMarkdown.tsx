@@ -8,12 +8,12 @@ import { headingToAnchor } from "@/utils/markdown";
 type HeadingTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 const headingStyles: Record<HeadingTag, string> = {
-  h1: "text-[2.25rem] leading-tight mt-0 mb-4",
-  h2: "text-[1.5rem] pb-2 mt-12 mb-4",
-  h3: "text-[1.25rem] mt-8 mb-3",
+  h1: "text-[2.25rem] leading-tight mt-0 mb-5", // 2.25rem, mb 加大到 1.25rem 讓與內文分隔更清楚
+  h2: "text-[1.5rem] pb-2 mt-12 mb-4", // font-size 1.5rem, mt 3rem, mb 1rem（符合規格）
+  h3: "text-[1.25rem] mt-8 mb-3", // 比 H2 小，不特別強調
   h4: "text-[1.1rem] mt-6 mb-2",
-  h5: "text-[1rem] mt-6 mb-2",
-  h6: "text-[0.9rem] text-(--muted) mt-6 mb-2",
+  h5: "text-[1rem] mt-5 mb-2", // 字級與內文同大，間距略收
+  h6: "text-[0.9rem] text-(--muted) mt-4 mb-1.5", // 最小標題，間距最緊湊
 };
 
 const headingAnchorOffset: Record<HeadingTag, string> = {
@@ -80,7 +80,7 @@ export const BlogMarkdown = ({
   return (
     <MarkdownRenderer
       className={cn(
-        "leading-[1.8] wrap-break-word [&>*:first-child]:mt-0",
+        "text-base leading-[1.8] wrap-break-word [&>*:first-child]:mt-0",
         className,
       )}
       components={{
@@ -91,11 +91,7 @@ export const BlogMarkdown = ({
         h5: createHeading("h5"),
         h6: createHeading("h6"),
 
-        div: ({ children, ...rest }) => (
-          <div {...rest} style={undefined}>
-            {children}
-          </div>
-        ),
+        div: ({ children, ...rest }) => <div {...rest}>{children}</div>,
         picture: ({ children, ...rest }) => (
           <picture className="" {...rest}>
             {children}
@@ -118,7 +114,7 @@ export const BlogMarkdown = ({
                 height: height ? `${height}px` : undefined,
               }}
               className={cn(
-                "block mx-auto max-w-full max-h-150 h-auto object-contain rounded-xl my-6",
+                "block mx-auto max-w-full max-h-96 h-auto object-contain rounded-xl my-6",
                 className,
               )}
               {...props}
@@ -136,7 +132,7 @@ export const BlogMarkdown = ({
         ul: ({ children, className }) => (
           <ul
             className={cn(
-              "mt-0 mb-5 list-disc pl-[1.75em] space-y-1 [&_ul]:list-[circle] [&_ul_ul]:list-[square]",
+              "mt-0 mb-5 list-disc pl-[1.75em] space-y-2 [&_ul]:list-[circle] [&_ul_ul]:list-[square]",
               className,
             )}
           >
@@ -147,7 +143,7 @@ export const BlogMarkdown = ({
         ol: ({ children, className }) => (
           <ol
             className={cn(
-              "mt-0 mb-5 list-decimal pl-[1.75em] space-y-1",
+              "mt-0 mb-5 list-decimal pl-[1.75em] space-y-2",
               className,
             )}
           >
@@ -156,7 +152,7 @@ export const BlogMarkdown = ({
         ),
 
         li: ({ children }) => (
-          <li className="mt-1 leading-[1.8] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
+          <li className="mt-2 leading-[1.8] [&>p]:mt-4 [&>ul]:mt-0 [&>ul]:mb-0 [&>ol]:mt-0 [&>ol]:mb-0">
             {children}
           </li>
         ),
@@ -165,7 +161,7 @@ export const BlogMarkdown = ({
           <CustomLink
             href={href}
             className={cn(
-              "text-(--primary) underline underline-offset-2 decoration-(--primary)/40 hover:decoration-(--primary) transition-colors  duration-200",
+              "text-(--primary) underline underline-offset-2 decoration-(--primary)/40 hover:decoration-(--primary) transition-colors duration-200",
               className,
             )}
             {...rest}
@@ -199,7 +195,7 @@ export const BlogMarkdown = ({
         pre: CodePre,
 
         blockquote: ({ children }) => (
-          <blockquote className="my-6 py-2 pl-5 pr-4 rounded-tr-md rounded-br-md border-l-4 border-(--primary)/50 bg-(--secondary-background) text-(--muted) *:first:mt-0 *:last:mb-0">
+          <blockquote className="my-6 py-2 pl-4 pr-4 rounded-tr-md rounded-br-md border-l-4 border-(--primary)/50 bg-(--secondary-background) text-(--muted) *:first:mt-0 *:last:mb-0">
             {children}
           </blockquote>
         ),
