@@ -220,7 +220,7 @@ published: true
 
 ## 謝謝你們，讓我的高中變成最珍貴的三年
 
-![文傑、晉維、我](/images/posts/cpshs-business-110b/with-wen-jie-and-jin-wei.webp)
+![商務110B謝師宴合照](/images/posts/cpshs-business-110b/teacher-appreciation-dinner.webp)
 
 回頭看，高中三年真的留下了好多好多第一次。
 
@@ -234,7 +234,7 @@ published: true
 
 看到大家因為我的社牛而笑，我也會跟著很開心。
 
-![商務110B謝師宴合照](/images/posts/cpshs-business-110b/teacher-appreciation-dinner.webp)
+![文傑、晉維、我](/images/posts/cpshs-business-110b/with-wen-jie-and-jin-wei.webp)
 
 這三年的相處，最後也告一段落了。
 
