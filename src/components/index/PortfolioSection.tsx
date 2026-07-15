@@ -19,7 +19,7 @@ export const PortfolioSection = () => {
       <div className="w-full flex justify-center mt-4">
         <Link
           href="/portfolio"
-          className="btn secondary font-bold px-4 py-2 text-sm md:text-base rounded-full text-center"
+          className="btn secondary px-4 py-2 text-sm md:text-base rounded-full text-center"
         >
           查看更多
         </Link>
