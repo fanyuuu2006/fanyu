@@ -1,74 +1,24 @@
 "use client";
-
-import { useEffect, useMemo, useState } from "react";
-
 import TocSvg from "@/components/svgs/TocSvg";
 import { cn } from "@/utils/className";
 import { headingToAnchor, MarkdownOutlineItem } from "@/utils/markdown";
+import { useActiveHeading } from "@/hooks/useActiveHeading";
 
-type TocNavigationProps = React.HTMLAttributes<HTMLElement> & {
+type TocNavigationProps = {
   outline: MarkdownOutlineItem[];
 };
 
-export const TocNavigation = ({ outline, ...rest }: TocNavigationProps) => {
-  const [activeId, setActiveId] = useState<string>();
-
-  const anchorIds = useMemo(
-    () => outline.map((item) => headingToAnchor(item.title)),
-    [outline],
-  );
-
-  useEffect(() => {
-    if (anchorIds.length === 0) return;
-
-    // 取得所有標題元素,若找不到就不觀察。
-    const headingElements = anchorIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    if (headingElements.length === 0) return;
-
-    // IntersectionObserver 的回呼只會帶入「這次狀態有變化」的元素,
-    // 不是目前所有可見的元素。若只用單次 entries 判斷最上方可見項,
-    // 在沒有標題穿越偵測線的捲動過程中,activeId 可能停留在錯誤狀態。
-    // 因此用 Map 累積每個標題「最後一次已知的觀察結果」,
-    // 每次回呼都從累積後的完整狀態中重新篩選可見項。
-    const latestEntries = new Map<string, IntersectionObserverEntry>();
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          latestEntries.set(entry.target.id, entry);
-        });
-
-        const topMostVisible = Array.from(latestEntries.values())
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
-          )[0];
-
-        if (topMostVisible) {
-          setActiveId(topMostVisible.target.id);
-        }
-      },
-      // 只偵測畫面上方 30% 的區域,模擬「捲到標題附近才算作用中」的效果。
-      { rootMargin: "0px 0px -70% 0px" },
-    );
-
-    headingElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, [anchorIds]);
+export const TocNavigation = ({ outline }: TocNavigationProps) => {
+  const activeId = useActiveHeading(outline);
 
   if (outline.length === 0) return null;
 
   return (
-    <aside
-      className="hidden xl:block fixed z-500 top-24 left-[calc(50%+25rem)] max-h-[calc(100vh-6rem)] overflow-y-auto p-4"
-      {...rest}
-    >
-      <TableOfContents outline={outline} activeId={activeId} />
-    </aside>
+    <>
+      <aside className="hidden xl:block fixed z-500 top-24 left-[calc(50%+25rem)] w-72 max-h-[calc(100vh-7rem)] overflow-y-auto p-4">
+        <TableOfContents outline={outline} activeId={activeId} />
+      </aside>
+    </>
   );
 };
 
@@ -91,11 +41,11 @@ const TableOfContents = ({
 
   return (
     <nav aria-label="本文目錄" {...rest}>
-      <h3 className="mb-4 flex items-center gap-1 text-lg font-semibold text-(--foreground)">
+      <h3 className="mb-4 flex items-center gap-2 text-base font-semibold">
         <TocSvg />
         <span>本文目錄</span>
       </h3>
-      <ul className="space-y-2">
+      <ul className="space-y-2 border-l border-(--muted)/40 pr-3">
         {outline.map((item) => (
           <TableOfContentsItem
             key={item.title}
@@ -137,9 +87,11 @@ const TableOfContentsItem = ({
         href={`#${id}`}
         aria-current={isActive ? "location" : undefined}
         className={cn(
-          "text-sm text-(--muted) transition-all hover:text-(--foreground)",
+          "block border-l-2 -ml-px py-1 pl-4 leading-5 text-sm transition-all",
           {
-            "text-(--primary)": isActive,
+            "border-(--primary) text-(--primary)": isActive,
+            " border-transparent text-(--muted) hover:border-(--primary)/40 hover:text-(--foreground)":
+              !isActive,
           },
         )}
       >

@@ -35,7 +35,7 @@ const createHeading = (tag: HeadingTag) => {
     const id = headingToAnchor(children);
 
     return (
-      <div className="relative group">
+      <div className="relative group" data-markdown-content>
         <a
           href={`#${id}`}
           className={cn(
