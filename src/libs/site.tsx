@@ -2,7 +2,7 @@
 export const site = {
   title: "飯魚 FanYu | 個人網站",
   description:
-    "飯魚（范余振富）的個人網站，包括個人資料、自我介紹、作品集、學經歷以及聯繫方式。",
+    "飯魚（范余振富）的個人網站，包括個人資料、自我介紹、作品集、部落格、學經歷以及聯繫方式。",
   url: "https://fanyu.vercel.app",
   keywords: [
     // 🧑 個人名稱/暱稱
@@ -72,7 +72,6 @@ export const site = {
     "styled-components",
     "clsx",
     "tailwind-merge",
-    "SWR",
     "Giscus",
     "GitHub Discussions",
     "SweetAlert2",
@@ -105,7 +104,6 @@ export const site = {
     "國立臺灣科技大學",
     "治平高中",
     "CPSHS",
-    "中和高中",
     "資訊管理系",
     "Information Management",
     "Department of Information Management",
