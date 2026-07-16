@@ -58,7 +58,6 @@ const TableOfContents = ({
     </nav>
   );
 };
-
 type TableOfContentsItemProps = React.LiHTMLAttributes<HTMLLIElement> & {
   item: MarkdownOutlineItem;
   depth: number;
@@ -77,23 +76,29 @@ const TableOfContentsItem = ({
 
   return (
     <li
-      className={cn(className)}
-      // Tailwind 的 arbitrary value class 在 build 時需要靜態字串才能被掃描到,
-      // depth 是執行期才知道的動態數值,無法組出對應的 class name,
+      className={cn(
+        "border-l-2 -ml-px transition-all duration-300",
+        {
+          "border-(--primary) text-(--foreground)": isActive,
+          "border-transparent text-(--muted) hover:border-(--primary)/40 hover:text-(--foreground)":
+            !isActive,
+        },
+        className,
+      )}
       style={{ paddingLeft: depth * 16, ...style }}
       {...rest}
     >
       <a
         href={`#${id}`}
         aria-current={isActive ? "location" : undefined}
-        className={cn(
-          "block border-l-2 -ml-px py-1 pl-4 leading-5 text-sm transition-all",
-          {
-            "border-(--primary) text-(--foreground)": isActive,
-            " border-transparent text-(--muted) hover:border-(--primary)/40 hover:text-(--foreground)":
-              !isActive,
-          },
-        )}
+        className={cn("block py-1 pl-4 leading-5", {
+          // depth 0(最上層標題):字級較大、字重較粗,作為視覺錨點
+          "text-sm font-semibold": depth === 0,
+          // depth 1:中間層級,字級不變但字重降回 normal
+          "text-sm font-medium": depth === 1,
+          // depth 2 以上:視為次要層級,縮小字級並降低不透明度,拉開與上層的距離
+          "text-xs font-normal opacity-80": depth >= 2,
+        })}
       >
         {item.title}
       </a>
