@@ -89,7 +89,7 @@ const TableOfContentsItem = ({
         className={cn(
           "block border-l-2 -ml-px py-1 pl-4 leading-5 text-sm transition-all",
           {
-            "border-(--primary) text-(--primary)": isActive,
+            "border-(--primary) text-(--foreground)": isActive,
             " border-transparent text-(--muted) hover:border-(--primary)/40 hover:text-(--foreground)":
               !isActive,
           },
