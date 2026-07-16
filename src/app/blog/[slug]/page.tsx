@@ -22,16 +22,34 @@ export default async function BlogPost(props: PageProps<"/blog/[slug]">) {
     <>
       <JsonLd data={createBlogPostingJsonLd(post)} />
       <section className="mt-24">
-        <div className="container flex gap-8 justify-center">
+        <div className="container flex flex-col gap-6 lg:flex-row lg:justify-center lg:gap-8">
           <div className="min-w-0 flex-1 max-w-180">
             <HeroSection post={post} />
-            <BlogMarkdown className="py-8">{post.content}</BlogMarkdown>
+
+            {outline.length > 0 && (
+              <details className="group mt-6 card rounded-xl p-4 lg:hidden">
+                <summary
+                  className="cursor-pointer font-medium text-(--foreground)"
+                  aria-expanded="false"
+                  aria-controls="mobile-toc"
+                >
+                  目錄
+                </summary>
+                <TableOfContents
+                  id="mobile-toc"
+                  className="p-2"
+                  outline={outline}
+                />
+              </details>
+            )}
+
+            <BlogMarkdown className="py-6 md:py-8">{post.content}</BlogMarkdown>
           </div>
 
           {outline.length > 0 && (
             <aside className="hidden shrink-0 lg:block lg:w-64">
               <TableOfContents
-                className="sticky z-500 top-24 p-4"
+                className="sticky z-500 top-24 p-4 max-h-[calc(100vh-6rem)] overflow-y-auto"
                 outline={outline}
               />
             </aside>
