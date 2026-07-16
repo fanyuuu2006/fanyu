@@ -4,34 +4,13 @@ import { cn } from "@/utils/className";
 import { headingToAnchor, MarkdownOutlineItem } from "@/utils/markdown";
 import { useActiveHeading } from "@/hooks/useActiveHeading";
 
-type TocNavigationProps = {
-  outline: MarkdownOutlineItem[];
-};
-
-export const TocNavigation = ({ outline }: TocNavigationProps) => {
-  const activeId = useActiveHeading(outline);
-
-  if (outline.length === 0) return null;
-
-  return (
-    <>
-      <aside className="hidden xl:block fixed z-500 top-24 left-[calc(50%+25rem)] w-72 max-h-[calc(100vh-7rem)] overflow-y-auto p-4">
-        <TableOfContents outline={outline} activeId={activeId} />
-      </aside>
-    </>
-  );
-};
-
 type TableOfContentsProps = React.HTMLAttributes<HTMLElement> & {
   outline: MarkdownOutlineItem[];
-  activeId?: string;
 };
 
-const TableOfContents = ({
-  outline,
-  activeId,
-  ...rest
-}: TableOfContentsProps) => {
+export const TableOfContents = ({ outline, ...rest }: TableOfContentsProps) => {
+  const activeId = useActiveHeading(outline);
+
   if (outline.length === 0) return null;
 
   // 文章標題不一定從 h1 開始(常見是從 h2 起跳),
