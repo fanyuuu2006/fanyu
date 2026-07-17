@@ -4,7 +4,7 @@ image: /images/posts/ai-software-internship-interview/cover.webp
 date: 2026-07-17
 published: true
 overview: 一次 AI 軟體開發實習面試，讓我更深入了解 AI Agent 在實際軟體開發流程中的應用方式，也重新思考自己現階段想累積的工程能力與學習方向。
-description： 記錄一次 AI 軟體開發實習面試心得，分享面試過程中了解到的 AI Agent 協作開發流程，以及身為學生的我，對於 AI 工具、軟體工程基礎與未來學習方向的一些思考。
+description: 記錄一次 AI 軟體開發實習面試心得，分享面試過程中了解到的 AI Agent 協作開發流程，以及身為學生的我，對於 AI 工具、軟體工程基礎與未來學習方向的一些思考。
 tags:
   - AI
   - AI Agent
