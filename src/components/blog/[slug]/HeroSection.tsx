@@ -62,7 +62,7 @@ export const HeroSection = ({
         {/* 封面圖 */}
         <MyImage
           src={post.image}
-          alt={post.title}
+          alt={`${post.title} 封面圖`}
           className="relative mx-auto mt-2 max-h-112 max-w-full rounded-2xl object-contain"
         />
       </div>

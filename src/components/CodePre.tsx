@@ -68,9 +68,9 @@ export function CodePre({ className, children, ...preProps }: CodePreProps) {
       <div className="w-full">
         {isMermaid ? (
           // mermaid 圖表：不用 <pre>，避免 monospace/overflow-x 樣式套用在 SVG 上
-          <div className="p-4 flex justify-center">
-            <MermaidRenderer theme={theme}>{code}</MermaidRenderer>
-          </div>
+          <MermaidRenderer className="p-4 flex justify-center" theme={theme}>
+            {code}
+          </MermaidRenderer>
         ) : (
           <pre
             className={cn("overflow-x-auto p-4 leading-6", className)}

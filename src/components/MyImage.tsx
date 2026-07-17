@@ -15,6 +15,7 @@ export type MyImageProps = OverrideProps<
      * @default FALLBACK_IMAGE
      */
     fallbackSrc?: string | undefined;
+    alt: string;
   }
 >;
 

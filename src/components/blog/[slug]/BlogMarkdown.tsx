@@ -103,11 +103,23 @@ export const BlogMarkdown = ({
           </p>
         ),
 
-        img: ({ className, style, width, height, ...props }) => {
+        img: ({ className, style, width, height, alt, ...props }) => {
+          const imageAlt = alt?.trim() || "文章圖片";
+
+          if (!alt) {
+            console.warn(
+              "Image is missing alt attribute. Please provide descriptive alt text for accessibility.",
+            );
+          }
+
           return (
             <MyImage
-              width={width}
-              height={height}
+              {...props}
+              width={width ?? 800}
+              height={height ?? 450}
+              alt={imageAlt}
+              loading="lazy"
+              decoding="async"
               style={{
                 ...style,
                 width: width ? `${width}px` : undefined,
@@ -117,12 +129,11 @@ export const BlogMarkdown = ({
                 "block mx-auto max-w-full max-h-96 h-auto object-contain rounded-xl my-6",
                 className,
               )}
-              {...props}
             />
           );
         },
         strong: ({ children }) => (
-          <strong className="font-semibold text-(--foreground)">
+          <strong className="font-semibold">
             {children}
           </strong>
         ),
@@ -205,7 +216,7 @@ export const BlogMarkdown = ({
         ),
 
         table: ({ children }) => (
-          <div className="Blog-6 overflow-x-auto my-6">
+          <div className="my-6 overflow-x-auto">
             <table className="border-spacing-0 border-collapse block w-max max-w-full overflow-auto text-[0.95em] [font-variant:tabular-nums]">
               {children}
             </table>

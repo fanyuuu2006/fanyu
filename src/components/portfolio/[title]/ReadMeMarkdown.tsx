@@ -108,11 +108,23 @@ export const ReadMeMarkdown = ({
           </p>
         ),
 
-        img: ({ className, style, width, height, ...props }) => {
+        img: ({ className, style, width, height, alt, ...props }) => {
+          const imageAlt = alt?.trim() || "ReadMe image";
+
+          if (!alt) {
+            console.warn(
+              "Image is missing alt attribute. Please provide descriptive alt text for accessibility.",
+            );
+          }
+
           return (
             <MyImage
-              width={width}
-              height={height}
+              {...props}
+              width={width ?? 800}
+              height={height ?? 450}
+              alt={imageAlt}
+              loading="lazy"
+              decoding="async"
               style={{
                 ...style,
                 width: width ? `${width}px` : undefined,

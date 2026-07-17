@@ -47,7 +47,7 @@ export default async function BlogPost(props: PageProps<"/blog/[slug]">) {
           </div>
 
           {outline.length > 0 && (
-            <aside className="hidden shrink-0 lg:block lg:w-64">
+            <aside className="hidden shrink-0 lg:block lg:w-72">
               <TableOfContents
                 className="sticky z-500 top-24 p-4 max-h-[calc(100vh-6rem)] overflow-y-auto"
                 outline={outline}

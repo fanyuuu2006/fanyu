@@ -56,7 +56,7 @@ const TableOfContentsItem = ({
   return (
     <li
       className={cn(
-        "border-l-2 -ml-px transition-all duration-300",
+        "border-l -ml-px transition-all duration-300",
         {
           "border-(--primary) text-(--foreground)": isActive,
           "border-transparent text-(--muted) hover:border-(--primary)/40 hover:text-(--foreground)":
