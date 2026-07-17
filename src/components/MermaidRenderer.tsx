@@ -49,7 +49,6 @@ export function MermaidRenderer({
       if (!containerRef.current) return;
 
       setError(null);
-
       mermaid.initialize({
         startOnLoad: false,
         theme: theme === "dark" ? "dark" : "default",
