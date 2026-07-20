@@ -14,12 +14,13 @@ const CATEGORY_LABELS: Record<keyof typeof tagCategories, string> = {
   frontend: "前端",
   backend: "後端",
   database: "資料庫",
-  automation: "自動化",
   visualization: "視覺化",
   platforms: "平台",
   tools: "工具",
   roles: "角色",
-  other: "其他",
+  api: "API",
+  data: "資料處理",
+  packages: "套件",
 };
 
 const CATEGORY_ENTRIES = Object.entries(tagCategories) as [

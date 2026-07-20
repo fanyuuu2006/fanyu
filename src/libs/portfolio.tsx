@@ -2,30 +2,43 @@ import { PortfolioItem } from "@/types";
 import { site } from "./site";
 
 export const tagCategories = {
-  languages: ["TypeScript", "HTML", "JavaScript", "Python", "SQL", "CSS"],
+  // Programming Languages & Web Fundamentals
+  languages: ["TypeScript", "JavaScript", "Python", "SQL", "HTML", "CSS"],
 
+  // Frontend Development
   frontend: ["React", "Next.js"],
 
-  backend: ["Node.js", "Requests", "Express.js", "Flask", "Restful API"],
+  // Backend Development
+  backend: ["Node.js", "Express.js", "Flask"],
 
+  // Database
   database: ["Supabase"],
 
-  automation: ["Crawler"],
+  // API & System Communication
+  api: ["RESTful API"],
 
+  // Data Collection & Processing
+  data: ["Requests", "Crawler"],
+
+  // Data Visualization
   visualization: ["Matplotlib"],
 
-  platforms: ["Line Bot SDK"],
+  // Platforms & Services
+  platforms: ["Line Bot SDK", "Vercel"],
 
-  tools: ["Git / GitHub", "NPM", "Vercel"],
+  // Package Ecosystem
+  packages: ["NPM"],
 
-  roles: ["Frontend", "Backend", "Full Stack", "Database"],
+  // Development Tools
+  tools: ["Git / GitHub"],
 
-  other: [],
+  // Development Roles
+  roles: ["Frontend", "Backend", "Full Stack"],
 } as const;
 
 export const portfolioItems: PortfolioItem[] = [
   {
-    title: "啦八機",
+    title: "啦八機 LaBaG",
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/labag-web-v2/refs/heads/main/public/icons/icon-512x512.png",
     date: "2023-06-22",
@@ -54,9 +67,8 @@ export const portfolioItems: PortfolioItem[] = [
       "Backend",
       "Full Stack",
       "SQL",
-      "Database",
       "Supabase",
-      "Restful API",
+      "RESTful API",
       "Git / GitHub",
       "Vercel",
     ],
@@ -147,7 +159,7 @@ export const portfolioItems: PortfolioItem[] = [
       "JavaScript",
       "Node.js",
       "Backend",
-      "Restful API",
+      "RESTful API",
       "Line Bot SDK",
       "Vercel",
       "Git / GitHub",
@@ -237,10 +249,9 @@ export const portfolioItems: PortfolioItem[] = [
       "Frontend",
       "Express.js",
       "Node.js",
-      "Database",
       "Backend",
       "Full Stack",
-      "Restful API",
+      "RESTful API",
       "Supabase",
       "Git / GitHub",
       "Vercel",
