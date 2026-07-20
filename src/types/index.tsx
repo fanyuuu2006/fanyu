@@ -50,7 +50,7 @@ export type ContactItem = {
   url: string;
   colors?: React.CSSProperties["color"][];
   info: {
-    image?: React.ComponentPropsWithRef<typeof MyImage>;
+    image?: Omit<React.ComponentPropsWithRef<typeof MyImage>, "alt">;
     id: string;
     name: string;
     about?: React.ComponentType;
