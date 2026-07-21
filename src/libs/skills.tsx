@@ -1,14 +1,9 @@
 import AntDesignSvg from "@/components/svgs/AntDesign";
-import ChatGPTSvg from "@/components/svgs/ChatGPTSvg";
-import ClaudeSvg from "@/components/svgs/ClaudeSvg";
 import CssSvg from "@/components/svgs/CssSvg";
-import CursorSvg from "@/components/svgs/CursorSvg";
 import EcmaScriptSvg from "@/components/svgs/EcmaScriptSvg";
 import EsLintSvg from "@/components/svgs/EsLintSvg";
 import ExpressJsSvg from "@/components/svgs/ExpressJsSvg";
 import FlaskSvg from "@/components/svgs/FlaskSvg";
-import GeminiSvg from "@/components/svgs/GeminiSvg";
-import GithubCopilotSvg from "@/components/svgs/GithubCopilotSvg";
 import GithubSvg from "@/components/svgs/GithubSvg";
 import GitSvg from "@/components/svgs/GitSvg";
 import HtmlSvg from "@/components/svgs/HtmlSvg";
@@ -16,7 +11,6 @@ import JavaScriptSvg from "@/components/svgs/JavaScriptSvg";
 import MarkdownSvg from "@/components/svgs/MarkdownSvg";
 import NextJsSvg from "@/components/svgs/NextJsSvg";
 import NodeJsSvg from "@/components/svgs/NodeJsSvg";
-import NotebookLMSvg from "@/components/svgs/NotebookLMSvg";
 import NpmSvg from "@/components/svgs/NpmSvg";
 import PostgreSqlSvg from "@/components/svgs/PostgreSqlSvg";
 import PythonSvg from "@/components/svgs/PythonSvg";
@@ -161,42 +155,6 @@ export const skillCategories: {
         title: "Vercel",
         url: "https://vercel.com/",
         svg: VercelSvg,
-      },
-    ],
-  },
-
-  {
-    label: "AI 相關",
-    list: [
-      {
-        title: "ChatGPT",
-        url: "https://chatgpt.com/",
-        svg: ChatGPTSvg,
-      },
-      {
-        title: "Claude",
-        url: "https://claude.ai/",
-        svg: ClaudeSvg,
-      },
-      {
-        title: "Gemini",
-        url: "https://gemini.google.com/",
-        svg: GeminiSvg,
-      },
-      {
-        title: "GitHub Copilot",
-        url: "https://github.com/features/copilot/",
-        svg: GithubCopilotSvg,
-      },
-      {
-        title: "Cursor",
-        url: "https://cursor.sh/",
-        svg: CursorSvg,
-      },
-      {
-        title: "NotebookLM",
-        url: "https://notebooklm.google.com/",
-        svg: NotebookLMSvg,
       },
     ],
   },
