@@ -1,4 +1,3 @@
-import AntDesignSvg from "@/components/svgs/AntDesign";
 import CssSvg from "@/components/svgs/CssSvg";
 import EcmaScriptSvg from "@/components/svgs/EcmaScriptSvg";
 import EsLintSvg from "@/components/svgs/EsLintSvg";
@@ -8,18 +7,15 @@ import GithubSvg from "@/components/svgs/GithubSvg";
 import GitSvg from "@/components/svgs/GitSvg";
 import HtmlSvg from "@/components/svgs/HtmlSvg";
 import JavaScriptSvg from "@/components/svgs/JavaScriptSvg";
-import MarkdownSvg from "@/components/svgs/MarkdownSvg";
 import NextJsSvg from "@/components/svgs/NextJsSvg";
 import NodeJsSvg from "@/components/svgs/NodeJsSvg";
 import NpmSvg from "@/components/svgs/NpmSvg";
 import PostgreSqlSvg from "@/components/svgs/PostgreSqlSvg";
 import PythonSvg from "@/components/svgs/PythonSvg";
 import ReactSvg from "@/components/svgs/ReactSvg";
-import SupabaseSvg from "@/components/svgs/SupabaseSvg";
 import TailwindCssSvg from "@/components/svgs/TailwindCssSvg";
 import TypeScriptSvg from "@/components/svgs/TypeScriptSvg";
 import VercelSvg from "@/components/svgs/VercelSvg";
-import VisualStudioCodeSvg from "@/components/svgs/VisualStudioCodeSvg";
 import { SkillItem } from "@/types";
 
 export const skillCategories: {
@@ -55,11 +51,6 @@ export const skillCategories: {
         svg: CssSvg,
       },
       {
-        title: "Markdown",
-        url: "https://www.markdownguide.org/",
-        svg: MarkdownSvg,
-      },
-      {
         title: "React",
         url: "https://reactjs.org/",
         svg: ReactSvg,
@@ -68,11 +59,6 @@ export const skillCategories: {
         title: "Next.js",
         url: "https://nextjs.org/",
         svg: NextJsSvg,
-      },
-      {
-        title: "Ant Design",
-        url: "https://ant.design/",
-        svg: AntDesignSvg,
       },
       {
         title: "Tailwind CSS",
@@ -115,11 +101,6 @@ export const skillCategories: {
         url: "https://www.postgresql.org/",
         svg: PostgreSqlSvg,
       },
-      {
-        title: "Supabase",
-        url: "https://supabase.com/",
-        svg: SupabaseSvg,
-      },
     ],
   },
 
@@ -135,11 +116,6 @@ export const skillCategories: {
         title: "GitHub",
         url: "https://github.com/",
         svg: GithubSvg,
-      },
-      {
-        title: "VS Code",
-        url: "https://code.visualstudio.com/",
-        svg: VisualStudioCodeSvg,
       },
       {
         title: "ESLint",

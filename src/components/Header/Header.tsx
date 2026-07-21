@@ -49,7 +49,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
 
         <div className="hidden lg:flex lg:items-center lg:gap-4">
           <nav
-            className="flex text-2xl items-center gap-2 md:gap-4"
+            className="flex text-xl items-center gap-2 md:gap-4"
             id="desktop-nav"
           >
             {routes.map((route) => (
@@ -57,7 +57,7 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
             ))}
           </nav>
           <div className="h-6 w-px bg-(--foreground)/25" />
-          <ThemeToggle className="btn secondary text-2xl flex items-center justify-center p-2 rounded-full" />
+          <ThemeToggle className="btn secondary text-xl flex items-center justify-center p-1.5 rounded-full" />
         </div>
       </div>
       <Collapse
@@ -66,13 +66,13 @@ export const Header = ({ className, ...rest }: HeaderProps) => {
         className="slide-collapse lg:hidden"
         id="mobile-nav"
       >
-        <div className="flex flex-col w-full text-2xl">
+        <div className="flex flex-col w-full text-xl">
           {routes.map((route) => (
             <MobileLink key={route.url} onClick={closeMenu} route={route} />
           ))}
         </div>
         <div className="flex items-center justify-center py-4">
-          <ThemeToggle className="btn secondary text-2xl flex items-center justify-center p-2 rounded-full" />
+          <ThemeToggle className="btn secondary text-xl flex items-center justify-center p-2 rounded-full" />
         </div>
       </Collapse>
     </header>
