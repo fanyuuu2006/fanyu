@@ -126,16 +126,14 @@ export const BlogMarkdown = ({
                 height: height ? `${height}px` : undefined,
               }}
               className={cn(
-                "block mx-auto max-w-full max-h-96 h-auto object-contain rounded-xl my-6",
+                "block mx-auto max-w-full max-h-96 w-auto h-auto object-contain rounded-xl my-6",
                 className,
               )}
             />
           );
         },
         strong: ({ children }) => (
-          <strong className="font-semibold">
-            {children}
-          </strong>
+          <strong className="font-semibold">{children}</strong>
         ),
 
         em: ({ children }) => <em className="italic">{children}</em>,
