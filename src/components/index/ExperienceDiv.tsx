@@ -1,7 +1,7 @@
 "use client";
 import { OutsideLink } from "fanyucomponents";
 import { MyImage } from "../MyImage";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { ExperienceItem } from "@/types/experience";
 import ClockOutlinedSvg from "../svgs/ClockOutlinedSvg";
 import { ExperienceMarkdown } from "./ExperienceMarkdown";
@@ -32,7 +32,7 @@ export const ExperienceDiv = ({
   ...rest
 }: ExperienceDivProps) => {
   const [expanded, setExpanded] = useState<boolean>(false);
-
+  const listId = useId();
   const orderedItems = useMemo(() => {
     return [...items].sort((a, b) => {
       const aStart = getStartDate(a.duration);
@@ -50,6 +50,11 @@ export const ExperienceDiv = ({
     [expanded, orderedItems, maxVisible],
   );
 
+  const hiddenItems = useMemo(
+    () => orderedItems.slice(maxVisible),
+    [orderedItems, maxVisible],
+  );
+
   return (
     <div {...rest}>
       <h3 className="flex items-center gap-2 text-2xl font-semibold text-(--foreground) mb-8">
@@ -57,7 +62,7 @@ export const ExperienceDiv = ({
         {title}
         <div className="h-px w-12 rounded-full bg-linear-to-r from-(--secondary) to-transparent" />
       </h3>
-      <div className="divide-y divide-(--foreground)/25">
+      <div id={listId} className="divide-y divide-(--foreground)/25">
         {displayItems.map((item, i) => {
           const period = getPeriod(item.duration);
           return (
@@ -112,6 +117,8 @@ export const ExperienceDiv = ({
       {orderedItems.length > maxVisible && (
         <div className="mt-6 flex justify-center">
           <button
+            aria-expanded={expanded}
+            aria-controls={listId}
             type="button"
             onClick={() => setExpanded((prev) => !prev)}
             className="btn secondary rounded-full px-4 py-2 text-sm"
@@ -119,6 +126,12 @@ export const ExperienceDiv = ({
             {expanded
               ? "顯示較少"
               : `查看更多 (${orderedItems.length - maxVisible})`}
+            {!expanded && hiddenItems.length > 0 && (
+              <span className="sr-only">
+                ，尚未顯示：
+                {hiddenItems.map((item) => item.title).join("、")}
+              </span>
+            )}
           </button>
         </div>
       )}

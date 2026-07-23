@@ -64,7 +64,7 @@ export const HeroSection = ({
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="card rounded-full px-2.5 py-1 text-xs font-mono transition-all duration-200"
+                    className="card primary rounded-full px-2.5 py-1 text-xs font-mono"
                   >
                     {tag}
                   </span>
