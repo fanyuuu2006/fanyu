@@ -20,7 +20,7 @@ export type MyImageProps = OverrideProps<
 >;
 
 const FALLBACK_IMAGE =
-  "https://fanyu.vercel.app/api/proxy?url=https://www.kleinpaint.ca/cdn/shop/products/444A50.png?v=1666632521&width=713";
+  "https://www.kleinpaint.ca/cdn/shop/products/444A50.png?v=1666632521&width=713";
 
 /**
  * 自訂圖片組件 (MyImage)
