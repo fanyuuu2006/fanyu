@@ -158,7 +158,7 @@ published: true
 
 ![商務110B與國文老師一起前往花蓮旅行](/images/posts/cpshs-business-110b/hualien-trip.webp)
 
-2023 年 6 月 30 日到 7 月 1 日，我們班和子湜(國文老師)約好一起去花蓮找廖鴻基。
+2023 年 6 月 30 日到 7 月 1 日，我們班和子湜(國文老師)約好一起去花蓮找[廖鴻基](https://zh.wikipedia.org/zh-tw/%E5%BB%96%E9%B4%BB%E5%9F%BA)。
 
 那是我第一次和同學一起出遠門，也是第一次住在外面。
 

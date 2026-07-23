@@ -16,9 +16,10 @@ const PARAGRAPHS = [
   "我仍在學習的路上，但始終保持對新技術的好奇與熱情，希望透過不斷實作與累積經驗，讓自己一步步成長為更成熟的開發者。",
 ];
 
+const birthday = new Date("2006-05-26");
+
 export const AboutMeSection = () => {
   const codeLines = useMemo(() => {
-    const birthday = new Date("2006-05-26");
     const age =
       new Date().getFullYear() -
       birthday.getFullYear() -

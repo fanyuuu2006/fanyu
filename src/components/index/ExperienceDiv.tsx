@@ -128,8 +128,18 @@ export const ExperienceDiv = ({
               : `查看更多 (${orderedItems.length - maxVisible})`}
             {!expanded && hiddenItems.length > 0 && (
               <span className="sr-only">
-                ，尚未顯示：
-                {hiddenItems.map((item) => item.title).join("、")}
+                尚未顯示的項目共 {hiddenItems.length} 項，包含：
+                <ul>
+                  {hiddenItems.map((item, i) => {
+                    const period = getPeriod(item.duration);
+                    return (
+                      <li key={`${item.title}-${i}`}>
+                        {item.title}
+                        {item.subtitle && `，${item.subtitle}`}，{period}
+                      </li>
+                    );
+                  })}
+                </ul>
               </span>
             )}
           </button>
