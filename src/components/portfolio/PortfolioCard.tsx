@@ -8,32 +8,17 @@ import RightOutlinedSvg from "../svgs/RightOutlinedSvg";
 
 type PortfolioCardProps = React.HTMLAttributes<HTMLDivElement> & {
   item: PortfolioItem;
-  activeTags: Set<string>;
 };
 
 export const PortfolioCard = ({
   className,
   item,
-  activeTags,
   ...rest
 }: PortfolioCardProps) => {
   const cardId = slugify(item.title);
   const href = `/portfolio/${cardId}`;
 
-  // 先用單次掃描把符合目前篩選條件的標籤排到最前面，
-  // 再維持原始順序補上其他標籤，避免用排序與反覆 index 查找。
-  const prioritizedTags: string[] = [];
-  const fallbackTags: string[] = [];
-
-  for (const tag of item.tags) {
-    if (activeTags.has(tag)) {
-      prioritizedTags.push(tag);
-    } else {
-      fallbackTags.push(tag);
-    }
-  }
-
-  const highlightTags = [...prioritizedTags, ...fallbackTags].slice(0, 4);
+  const highlightTags = [...item.tags].slice(0, 4);
   const extraTagCount = Math.max(0, item.tags.length - highlightTags.length);
 
   return (
@@ -82,13 +67,12 @@ export const PortfolioCard = ({
           {item.tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5">
               {highlightTags.map((tag) => (
-                <Tag key={tag} tag={tag} isActive={activeTags.has(tag)} />
+                <Tag key={tag} tag={tag} />
               ))}
               {extraTagCount > 0 && (
                 <Tag
                   tag={`+${extraTagCount}`}
                   className="opacity-60"
-                  isActive={false}
                 />
               )}
             </div>
@@ -106,18 +90,14 @@ export const PortfolioCard = ({
 
 type TagProps = React.HTMLAttributes<HTMLSpanElement> & {
   tag: string;
-  isActive: boolean;
 };
 
 // 小型標籤元件，統一處理外觀與 active 狀態。
-const Tag = ({ tag, isActive, className, ...rest }: TagProps) => {
+const Tag = ({ tag, className, ...rest }: TagProps) => {
   return (
     <span
       className={cn(
         "card rounded-full px-2.5 py-1 text-xs font-mono transition-all duration-200",
-        {
-          "border-(--primary) text-(--primary)": isActive,
-        },
         className,
       )}
       {...rest}

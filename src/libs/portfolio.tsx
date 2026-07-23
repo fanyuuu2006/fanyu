@@ -1,41 +1,6 @@
 import { PortfolioItem } from "@/types";
 import { site } from "./site";
 
-export const tagCategories = {
-  // Programming Languages & Web Fundamentals
-  languages: ["TypeScript", "JavaScript", "Python", "SQL", "HTML", "CSS"],
-
-  // Frontend Development
-  frontend: ["React", "Next.js"],
-
-  // Backend Development
-  backend: ["Node.js", "Express.js", "Flask"],
-
-  // Database
-  database: ["Supabase"],
-
-  // API & System Communication
-  api: ["RESTful API"],
-
-  // Data Collection & Processing
-  data: ["Requests", "Crawler"],
-
-  // Data Visualization
-  visualization: ["Matplotlib"],
-
-  // Platforms & Services
-  platforms: ["Line Bot SDK", "Vercel"],
-
-  // Package Ecosystem
-  packages: ["NPM"],
-
-  // Development Tools
-  tools: ["Git / GitHub"],
-
-  // Development Roles
-  roles: ["Frontend", "Backend", "Full Stack"],
-} as const;
-
 export const portfolioItems: PortfolioItem[] = [
   {
     title: "啦八機 LaBaG",
@@ -58,19 +23,13 @@ export const portfolioItems: PortfolioItem[] = [
     },
     tags: [
       "TypeScript",
-      "JavaScript",
       "React",
       "Next.js",
-      "Express.js",
-      "Node.js",
-      "Frontend",
-      "Backend",
       "Full Stack",
-      "SQL",
-      "Supabase",
       "RESTful API",
-      "Git / GitHub",
-      "Vercel",
+      "OAuth",
+      "Supabase",
+      "PWA",
     ],
   },
   {
@@ -94,12 +53,11 @@ export const portfolioItems: PortfolioItem[] = [
     },
     tags: [
       "TypeScript",
-      "Next.js",
       "React",
-      "CSS",
+      "Next.js",
+      "Data Processing",
+      "Data Analysis",
       "Frontend",
-      "JavaScript",
-      "Git / GitHub",
       "Vercel",
     ],
   },
@@ -108,7 +66,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/NTUST-1132-Software-Programming-Final-Project/refs/heads/main/assets/favicon.jpg",
     date: "2025-04",
-    overview: "一款結指令式股票查詢 Line 機器人。",
+    overview: "一款結合 LINE Bot、股市資料爬蟲與資料視覺化的股票查詢工具。",
     links: [
       {
         label: "添加Line好友",
@@ -125,13 +83,11 @@ export const portfolioItems: PortfolioItem[] = [
     tags: [
       "Python",
       "Flask",
-      "Backend",
-      "Requests",
-      "Crawler",
-      "Line Bot SDK",
+      "LINE Messaging API",
+      "RESTful API",
+      "Web Scraping",
+      "Data Visualization",
       "Matplotlib",
-      "Git / GitHub",
-      "Vercel",
     ],
   },
   {
@@ -139,7 +95,7 @@ export const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/NTUST-BoardGameClub-Bot/refs/heads/main/public/image/icon.jpg",
     date: "2025-03",
-    overview: "臺科大桌遊社專屬的 Line Bot",
+    overview: "臺科大桌遊社專屬的 LINE Bot，提供社團資訊與互動功能。",
     links: [
       {
         label: "添加Line好友",
@@ -155,14 +111,10 @@ export const portfolioItems: PortfolioItem[] = [
     },
     tags: [
       "TypeScript",
-      "Express.js",
-      "JavaScript",
       "Node.js",
-      "Backend",
+      "Express.js",
+      "LINE Messaging API",
       "RESTful API",
-      "Line Bot SDK",
-      "Vercel",
-      "Git / GitHub",
     ],
   },
   {
@@ -184,21 +136,14 @@ export const portfolioItems: PortfolioItem[] = [
         categoryId: "DIC_kwDOOWqWZM4Cqjq0",
       },
     },
-    tags: [
-      "TypeScript",
-      "React",
-      "Frontend",
-      "NPM",
-      "JavaScript",
-      "Git / GitHub",
-    ],
+    tags: ["TypeScript", "React", "Component Library", "NPM", "Headless UI"],
   },
   {
     title: "c063",
     imageUrl:
       "https://raw.githubusercontent.com/fanyuuu2006/c063/refs/heads/main/public/icon.png",
     date: "2025-06",
-    overview: "一款用於顯示語法高亮代碼片段的 React 組件庫。",
+    overview: "一款輕量且高度可自訂的 React 語法高亮元件庫。",
     links: [
       {
         label: "npm 連結",
@@ -215,10 +160,10 @@ export const portfolioItems: PortfolioItem[] = [
     tags: [
       "TypeScript",
       "React",
-      "Frontend",
+      "Component Library",
+      "Syntax Highlighting",
       "NPM",
-      "JavaScript",
-      "Git / GitHub",
+      "Zero Dependencies",
     ],
   },
   {
@@ -243,18 +188,11 @@ export const portfolioItems: PortfolioItem[] = [
     tags: [
       "TypeScript",
       "Next.js",
-      "React",
-      "CSS",
-      "SQL",
-      "Frontend",
-      "Express.js",
-      "Node.js",
-      "Backend",
       "Full Stack",
       "RESTful API",
-      "Supabase",
-      "Git / GitHub",
-      "Vercel",
+      "Booking System",
+      "Admin Dashboard",
+      "Authentication",
     ],
   },
   {
@@ -273,13 +211,11 @@ export const portfolioItems: PortfolioItem[] = [
     },
     tags: [
       "TypeScript",
-      "Next.js",
       "React",
-      "CSS",
-      "Frontend",
-      "JavaScript",
-      "Git / GitHub",
-      "Vercel",
+      "Next.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Corporate Website",
     ],
   },
   {
@@ -304,11 +240,11 @@ export const portfolioItems: PortfolioItem[] = [
       "TypeScript",
       "Next.js",
       "React",
-      "JavaScript",
-      "Frontend",
-      "Git / GitHub",
-      "Vercel",
-      "CSS",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Markdown",
+      "SEO",
+      "Analytics",
     ],
   },
   {
@@ -331,6 +267,6 @@ export const portfolioItems: PortfolioItem[] = [
         url: "https://bgc-lottery.vercel.app",
       },
     ],
-    tags: ["HTML", "CSS", "JavaScript", "Frontend", "Git / GitHub"],
+    tags: ["HTML", "CSS", "JavaScript", "Frontend", "Vercel"],
   },
 ];

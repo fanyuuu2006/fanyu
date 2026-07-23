@@ -79,7 +79,8 @@ export const BlogPostCard = ({
             </div>
 
             {/* 箭頭改為 hover 才滑入顯示，與 PortfolioCard 的互動語言一致 */}
-            <div className="shrink-0 -translate-x-1 text-base text-(--muted) opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+            <div className="flex gap-1 items-center shrink-0 -translate-x-1 text-base text-(--muted) opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+              <span>閱讀</span>
               <RightOutlinedSvg aria-hidden />
             </div>
           </div>

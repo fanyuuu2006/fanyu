@@ -131,7 +131,7 @@ export const ReadMeMarkdown = ({
                 height: height ? `${height}px` : undefined,
               }}
               className={cn(
-                "inline max-w-full box-content border-none",
+                "inline max-w-full w-auto box-content border-none",
                 className,
               )}
               {...props}

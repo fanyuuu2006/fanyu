@@ -1,6 +1,5 @@
 import { MetadataRoute } from "next";
 import { DateString } from "./date";
-import { tagCategories } from "@/libs/portfolio";
 import { MyImage } from "@/components/MyImage";
 
 type BaseRoute = MetadataRoute.Sitemap[number] & {
@@ -22,9 +21,6 @@ export type SkillItem = {
   svg: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
-export type PortfolioTagCategory = keyof typeof tagCategories;
-export type PortfolioTag = (typeof tagCategories)[PortfolioTagCategory][number];
-
 export type RepoString = `${string}/${string}`;
 export type PortfolioItem = {
   title: string;
@@ -42,7 +38,7 @@ export type PortfolioItem = {
       categoryId: string;
     };
   };
-  tags: PortfolioTag[];
+  tags: string[];
 };
 export type ContactItem = {
   label: string;

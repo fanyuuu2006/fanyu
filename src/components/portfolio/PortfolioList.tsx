@@ -6,12 +6,10 @@ import { PortfolioItem } from "@/types";
 
 type PortfolioListProps = React.HTMLAttributes<HTMLElement> & {
   items: PortfolioItem[];
-  activeTags: Set<string>;
   animationKey: string;
 };
 export const PortfolioList = ({
   items,
-  activeTags,
   animationKey,
   ...rest
 }: PortfolioListProps) => {
@@ -35,7 +33,7 @@ export const PortfolioList = ({
                   variants={fadeInItem}
                   className="py-5 first:pt-0 last:pb-0"
                 >
-                  <PortfolioCard item={item} activeTags={activeTags} />
+                  <PortfolioCard item={item} />
                 </motion.article>
               ))}
             </motion.div>

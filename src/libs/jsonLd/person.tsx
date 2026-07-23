@@ -1,18 +1,11 @@
 import { education } from "../education";
-import { tagCategories } from "../portfolio";
 import { site } from "../site";
+import { skillCategories } from "../skills";
 
 const knowsAbout = [
-  ...tagCategories.languages,
-  ...tagCategories.frontend,
-  ...tagCategories.backend,
-  ...tagCategories.database,
-  ...tagCategories.visualization,
-  ...tagCategories.platforms,
-  ...tagCategories.tools,
-  ...tagCategories.roles,
-  ...tagCategories.api,
-  ...tagCategories.data,
+  skillCategories
+    .flatMap((category) => category.list)
+    .map((skill) => skill.title),
   "Accessibility",
   "SEO",
   "Responsive Web Design",

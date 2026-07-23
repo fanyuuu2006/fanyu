@@ -7,15 +7,13 @@ import { portfolioItems } from "@/libs/portfolio";
 import { PortfolioPagination } from "./PortfolioPagination";
 
 export const PortfolioExplorer = () => {
-  const { params, setQuery, toggleTag, clearTags, toggleSort, setPage } =
-    usePortfolioParams();
-  const { tags, query, sort, page } = params;
+  const { params, setQuery, toggleSort, setPage } = usePortfolioParams();
+  const { query, sort, page } = params;
 
   const filteredItems = useMemo(() => {
     const q = query.toLowerCase();
     return portfolioItems
       .filter((item) => {
-        if (tags.size > 0 && !item.tags.some((t) => tags.has(t))) return false;
         if (q) {
           const searchable = [
             item.title,
@@ -33,7 +31,7 @@ export const PortfolioExplorer = () => {
         const diff = new Date(b.date).getTime() - new Date(a.date).getTime();
         return sort === "newest" ? diff : -diff;
       });
-  }, [query, tags, sort]);
+  }, [query, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filteredItems.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
@@ -47,24 +45,20 @@ export const PortfolioExplorer = () => {
     [filteredItems, currentPage],
   );
   const animationKey = useMemo(
-    () => [query, sort, [...tags].sort().join(","), currentPage].join("|"),
-    [query, sort, tags, currentPage],
+    () => [query, sort, currentPage].join("|"),
+    [query, sort, currentPage],
   );
   return (
     <>
       <PortfolioFilterBar
         query={query}
-        tags={tags}
         sort={sort}
         onQueryChange={setQuery}
-        onToggleTag={toggleTag}
-        onClearTags={clearTags}
         onSortToggle={toggleSort}
         className="sticky top-20 z-99"
       />
       <PortfolioList
         items={pagedItems}
-        activeTags={tags}
         animationKey={animationKey}
       />
       <PortfolioPagination
