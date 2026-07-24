@@ -107,3 +107,21 @@ export const getPost = (slug: string): BlogPost | null => {
     return null;
   }
 };
+
+export const getAdjacentPosts = (
+  slug: string,
+): {
+  previous: BlogPost | null;
+  next: BlogPost | null;
+} => {
+  const posts = getPosts();
+  const index = posts.findIndex((post) => post.slug === slug);
+
+  if (index === -1) {
+    return { previous: null, next: null };
+  }
+
+  const previous = index < posts.length - 1 ? posts[index + 1] : null;
+  const next = index > 0 ? posts[index - 1] : null;
+  return { previous, next };
+};

@@ -1,11 +1,12 @@
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { createBlogPostingJsonLd } from "@/libs/jsonLd/blog";
-import { getPost } from "@/utils/blog";
+import { getAdjacentPosts, getPost } from "@/utils/blog";
 import { HeroSection } from "@/components/blog/[slug]/HeroSection";
 import { getMarkdownOutline } from "@/utils/markdown";
 import { TableOfContents } from "@/components/blog/[slug]/TableOfContents";
 import { BlogMarkdown } from "@/components/blog/[slug]/BlogMarkdown";
+import { BlogNavigation } from "@/components/blog/[slug]/BlogNavigation";
 
 export default async function BlogPost(props: PageProps<"/blog/[slug]">) {
   const { slug } = await props.params;
@@ -17,6 +18,7 @@ export default async function BlogPost(props: PageProps<"/blog/[slug]">) {
   }
 
   const outline = getMarkdownOutline(post.content);
+  const { next, previous } = getAdjacentPosts(slug);
 
   return (
     <>
@@ -44,6 +46,11 @@ export default async function BlogPost(props: PageProps<"/blog/[slug]">) {
             )}
 
             <BlogMarkdown className="py-6 md:py-8">{post.content}</BlogMarkdown>
+            <BlogNavigation
+              nextPost={next}
+              prevPost={previous}
+              className="mt-12"
+            />
           </div>
 
           {outline.length > 0 && (
