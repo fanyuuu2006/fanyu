@@ -2,6 +2,16 @@ import { ExperienceItem } from "@/types/experience";
 
 export const work: ExperienceItem[] = [
   {
+    title: "臺灣行銷研究",
+    subtitle: "資料科學實習生",
+    duration: {
+      start: "2026-08-19",
+    },
+    imgSrc:
+      "https://tmrmds.co/wp-content/uploads/2020/08/%E5%85%AC%E5%8F%B8logo-03-100x80.png",
+    link: "https://tmrmds.co/",
+  },
+  {
     title: "六福莊生態渡假旅館",
     subtitle: "臨時工讀生",
     duration: {
@@ -42,8 +52,8 @@ export const work: ExperienceItem[] = [
     title: "豪享來麵店",
     subtitle: "前台工讀生",
     duration: {
-      start: "2024-10",
-      end: "2026-06",
+      start: "2024-10-18",
+      end: "2026-06-12",
     },
     imgSrc:
       "https://1.bp.blogspot.com/-4JBaaL7IXuo/XjV47f4Rc9I/AAAAAAAEnBU/g4K3C9kZKbM1P5gvuFJ3RQnygfgHAHrWACKgBGAsYHg/s1600/IMG_9510.HEIC",
@@ -56,8 +66,8 @@ export const work: ExperienceItem[] = [
     title: "永和國中桌遊社",
     subtitle: "桌遊教學助理",
     duration: {
-      start: "2025-09",
-      end: "2026-01",
+      start: "2025-09-19",
+      end: "2026-01-09",
     },
     description: `- 代表 **台科大桌遊社** 參與 [教育部帶動中小學計畫](https://www.edu.tw/News_Content.aspx?n=9E7AC85F1954DDA8&s=CC4F7CDCDB220743)
 - 協助規劃桌遊課程內容及教學流程

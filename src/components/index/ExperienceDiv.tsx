@@ -75,7 +75,7 @@ export const ExperienceDiv = ({
                   <MyImage
                     src={item.imgSrc}
                     alt={item.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="min-w-0 flex-1">
