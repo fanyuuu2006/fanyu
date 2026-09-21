@@ -269,4 +269,34 @@ export const portfolioItems: PortfolioItem[] = [
     ],
     tags: ["HTML", "CSS", "JavaScript", "Frontend", "Vercel"],
   },
+  {
+    title: "臺科大桌上遊戲研究社｜官方網站",
+    imageUrl: "https://ntust-bgc.vercel.app/images/logo.jpg",
+    date: "2026-09-08",
+    overview:
+      "臺科大桌遊社官方網站暨社團管理平台，整合社團公告、桌遊查詢與借用、社員資格、活動簽到及後台管理等功能。",
+    github: {
+      repo: "fanyuuu2006/ntust-bgc-website",
+      giscus: {
+        repoId: "R_kgDOTjczCQ",
+        categoryId: "DIC_kwDOTjczCc4DGD-g",
+      },
+    },
+    links: [
+      {
+        label: "網站連結",
+        url: "https://ntust-bgc.vercel.app",
+      },
+    ],
+    tags: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Supabase",
+      "Full Stack",
+      "Authentication",
+      "Admin Dashboard",
+    ],
+  },
 ];
