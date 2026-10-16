@@ -71,10 +71,6 @@ published: true
 
 也就是現在這支，遊戲紀錄顯示在 **2017 年 9 月 16 日**建立的帳號。
 
-![傳說對決帳號建立日期回顧](/images/posts/aov-10th-anniversary/account-created-2017.webp)
-
-*現在這支帳號的建立日期是 2017 年 9 月 16 日。*
-
 重新創帳號時，我不知道從哪個部位想出來的，把原本的「幽火」改成了「閃火」，於是就有了「《幻滅》閃火」這個名字。
 
 當時只是覺得這個名字滿帥的，根本沒想過後來會一直用下去。
@@ -102,10 +98,6 @@ published: true
 就這樣，在 **2018 年 2 月 19 日**，我發布了一支《傳說對決》勇的擊殺合集。
 
 那支影片現在還看得到：[2018 年的第一支勇擊殺合集](https://youtu.be/uokkanligu0)。現在回去看，剪輯真的很陽春 XD
-
-![2018 年第一支勇擊殺合集的影片畫面](/images/posts/aov-10th-anniversary/first-yorn-video-2018.webp)
-
-*2018 年上傳的勇擊殺合集。*
 
 那時候只是單純想把自己覺得很帥的操作分享出去，完全沒想過後來會有這麼多人看到我的影片。
 
@@ -151,7 +143,7 @@ published: true
 
 雖然說是戰隊，其實也只是遊戲裡的小公會功能而已，但對當時的我們來說，那可是很重要的事情。
 
-為了配合戰隊，我還改過不少遊戲名字，像是 \`€BDk灬閃火\`、\`-<勇神‧閃火>-\`、\`Gôđ_勇‧閃火\`。
+為了配合戰隊，我還改過不少遊戲名字，像是 `€BDk灬閃火`、`-<勇神‧閃火>-`、`Gôđ_勇‧閃火`。
 
 現在看到這些名字，我真的不知道自己以前到底在帥什麼 XD
 
@@ -243,9 +235,6 @@ published: true
 
 所以現在看到我的遊戲名稱和頭像，可能真的會以為帳號主人是女生。但其實名字和頭像是不同時期留下來的東西，背後也沒有什麼特別的意思，就是用著用著懶得改了。
 
-![目前傳說對決遊戲名稱與個人資料](/images/posts/aov-10th-anniversary/current-player-profile.webp)
-
-*現在使用的遊戲名稱和頭像。*
 
 ## 2021 年，我重新回到了傳說
 
@@ -311,9 +300,11 @@ published: true
 
 當然，這些都是歷史最高紀錄，不代表現在還有那些排名。但回頭看，還是覺得自己以前真的花了不少時間在這款遊戲上。
 
-![傳說對決歷史最高英雄稱號](/images/posts/aov-10th-anniversary/historical-hero-titles.webp)
+![傳說對決歷史最高英雄稱號](/images/posts/aov-10th-anniversary/hero-title-history.webp)
 
-*以前拿過的歷史最高英雄稱號。*
+![十週年回顧：榮譽-璀璨傳說](/images/posts/aov-10th-anniversary/retrospective-honor-01.webp)
+
+![十週年回顧：榮譽-五殺紀錄](/images/posts/aov-10th-anniversary/retrospective-honor-02.webp)
 
 ## 高中時期，和文傑、晉維一起打傳說
 
@@ -357,7 +348,7 @@ published: true
 
 關於我和文傑，以及高中三年的故事，我也曾經寫在另一篇文章：
 
-[〈治平高中商務110B，我最珍貴的三年〉](https://fanyu.vercel.app/blog/cpshs-business-110b)
+[〈治平高中商務110B，我最珍貴的三年〉](/blog/cpshs-business-110b)
 
 ## 上了大學，還是有很多人一起玩傳說
 
@@ -417,15 +408,15 @@ published: true
 
 但當我重新打開這款遊戲時，卻還是能看到當年留下的紀錄。
 
+![十週年回顧：緣起01](/images/posts/aov-10th-anniversary/retrospective-beginning-01.webp)
+
 還有一張回顧，寫著我曾經連續 **164 天**在傳說戰場奮戰。
 
 說真的，我自己都快忘記有這回事了。
 
 原來以前的我，真的有那麼認真在玩這款遊戲。
 
-![傳說對決連續 164 天遊玩紀錄](/images/posts/aov-10th-anniversary/anniversary-164-day-streak.webp)
-
-*十週年回顧裡的連續 164 天紀錄。*
+![十週年回顧：緣起02](/images/posts/aov-10th-anniversary/retrospective-beginning-02.webp)
 
 另外還有一張，是我在 **2018 年 3 月 8 日晚上 8 點**，曾經連續傳送 40 條訊息。
 
@@ -437,6 +428,8 @@ published: true
 
 我已經完全不記得了。
 
+![十週年回顧：聊天訊息紀錄](/images/posts/aov-10th-anniversary/retrospective-messages.webp)
+
 但也正因為不記得，看到這些紀錄才覺得特別有趣。
 
 甚至連以前和誰一起打過很久的對局、和誰配合拿下五殺、哪個隊友是自己最默契的搭檔，都被整理了出來。
@@ -444,6 +437,8 @@ published: true
 有些人現在還有聯絡，有些人已經很久沒一起玩了，也有些名字，我可能需要想一下，才會記起來當時是怎麼認識的。
 
 其中一張回顧顯示，十年裡我曾經和 **197 位玩家建立親密羈絆**。
+
+![十週年回顧：結緣-親密關係](/images/posts/aov-10th-anniversary/retrospective-relationship.webp)
 
 不過說真的，我倒不覺得這個數字有很多。
 
@@ -465,15 +460,21 @@ published: true
 
 只能說，這份好友名單真的累積了不少以前留下來的紀錄，只是有些人早就不知道是誰了，哈哈。
 
+![十週年回顧：與英雄們得羈絆值](/images/posts/aov-10th-anniversary/retrospective-hero-bond.webp)
+
+![十週年回顧：過去的精彩時刻](/images/posts/aov-10th-anniversary/retrospective-moments-01.webp)
+
+![十週年回顧：另一段遊戲紀錄](/images/posts/aov-10th-anniversary/retrospective-moments-02.webp)
+
+![十週年回顧：對戰時刻](/images/posts/aov-10th-anniversary/retrospective-moments-03.webp)
+
 ## 13,000 多場對戰，真的玩了好久
 
 這次回顧，我也重新看了自己的遊戲資料。
 
-目前已經累積了超過 **13,000 場對戰**，歷史勝率大約 **52.2%**。
+![目前的傳說對決玩家資料](/images/posts/aov-10th-anniversary/player-profile.webp)
 
-![傳說對決累積對戰場次與歷史勝率](/images/posts/aov-10th-anniversary/lifetime-match-statistics.webp)
-
-*超過 13,000 場對戰的歷史紀錄。*
+目前已經累積了超過 **13,000 場對戰**，歷史勝率 **52.2%**。
 
 看到這個數字時，我第一個反應其實是：
 
@@ -502,6 +503,16 @@ published: true
 可能是因為玩得太習慣了，也可能是因為朋友還在玩。
 
 總之，就這樣斷斷續續玩到了現在。
+
+![十週年回顧：與隊友的對戰紀錄](/images/posts/aov-10th-anniversary/retrospective-teammates-01.webp)
+
+![十週年回顧：並肩作戰的紀錄](/images/posts/aov-10th-anniversary/retrospective-teammates-02.webp)
+
+![十週年回顧：過去的隊友](/images/posts/aov-10th-anniversary/retrospective-teammates-03.webp)
+
+![十週年回顧：對戰夥伴](/images/posts/aov-10th-anniversary/retrospective-teammates-04.webp)
+
+![十週年回顧：遊戲旅程的結尾](/images/posts/aov-10th-anniversary/retrospective-ending-01.webp)
 
 ## 十年過去了，遊戲和我們都變了
 
@@ -628,3 +639,5 @@ published: true
 也謝謝《傳說對決》，讓我留下了這麼多回憶。
 
 ****傳說對決，十週年快樂！****
+
+![十週年回顧活動獎勵](/images/posts/aov-10th-anniversary/anniversary-points.webp)
