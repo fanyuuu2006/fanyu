@@ -70,7 +70,7 @@ const TableOfContentsItem = ({
       <a
         href={`#${id}`}
         aria-current={isActive ? "location" : undefined}
-        className={cn("block py-1 pl-4 leading-5", {
+        className={cn("block py-1 pl-4 leading-5 truncate", {
           // depth 0(最上層標題):字級較大、字重較粗,作為視覺錨點
           "text-sm font-semibold": depth === 0,
           // depth 1:中間層級,字級不變但字重降回 normal

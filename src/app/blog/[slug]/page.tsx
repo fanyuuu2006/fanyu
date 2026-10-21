@@ -45,7 +45,7 @@ export default async function BlogPost(props: PageProps<"/blog/[slug]">) {
               </details>
             )}
 
-            <BlogMarkdown className="py-6 md:py-8">{post.content}</BlogMarkdown>
+            <BlogMarkdown className="py-6 md:py-8 text-justify">{post.content}</BlogMarkdown>
             <BlogNavigation
               nextPost={next}
               prevPost={previous}
